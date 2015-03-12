@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5BE58F7E-3BEB-4C85-9C9B-3331E396E9AD}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Inter</RootNamespace>
+    <AssemblyName>Inter</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Themes\css\bootstrap-theme.css.map" />
+    <Content Include="App_Themes\css\bootstrap.css.map" />
+    <Content Include="App_Themes\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="App_Themes\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="App_Themes\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Banco\inter.sql" />
+    <Content Include="Banco\PI.png" />
+    <Content Include="Banco\PI.xml" />
+    <Content Include="Banco\Projeto_Interdisciplinar.png" />
+    <Content Include="paginas\Usuario\MasterPage.master" />
+    <Content Include="Banco\PI BANCO.docx" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Themes\css\bootstrap-responsive.css" />
+    <Content Include="App_Themes\css\bootstrap-theme.css" />
+    <Content Include="App_Themes\css\bootstrap-theme.min.css" />
+    <Content Include="App_Themes\css\bootstrap.css" />
+    <Content Include="App_Themes\css\bootstrap.min.css" />
+    <Content Include="App_Themes\css\examples.css" />
+    <Content Include="App_Themes\css\jquery-ui.css" />
+    <Content Include="App_Themes\css\jquery.fullPage.css" />
+    <Content Include="App_Themes\css\style.css" />
+    <Content Include="App_Themes\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="App_Themes\images\avalie.png" />
+    <Content Include="App_Themes\images\bloqueioUrl1.png" />
+    <Content Include="App_Themes\images\crie.png" />
+    <Content Include="App_Themes\images\customize.png" />
+    <Content Include="App_Themes\images\escolherDisciplinaBotao.png" />
+    <Content Include="App_Themes\images\fatec_logo.png" />
+    <Content Include="App_Themes\images\grd_alt.png" />
+    <Content Include="App_Themes\images\grd_head1.png" />
+    <Content Include="App_Themes\images\grd_head2.png" />
+    <Content Include="App_Themes\images\grd_head3.png" />
+    <Content Include="App_Themes\images\grd_pgr.png" />
+    <Content Include="App_Themes\images\icone-menu.png" />
+    <Content Include="App_Themes\images\inter_iconizinho.png" />
+    <Content Include="App_Themes\images\logoTopo.png" />
+    <Content Include="App_Themes\images\logo_topo.png" />
+    <Content Include="Global.asax" />
+    <Content Include="paginas\Administrador\admin.aspx" />
+    <Content Include="paginas\Login\bloqueioUrl.aspx" />
+    <Content Include="paginas\Login\login.aspx" />
+    <Content Include="paginas\Usuario\avaliarGrupo.aspx" />
+    <Content Include="paginas\Usuario\cadastrarPi.aspx" />
+    <Content Include="paginas\Usuario\consultarPi.aspx" />
+    <Content Include="paginas\Usuario\escolherDisciplina.aspx" />
+    <Content Include="paginas\Usuario\finalizarGrupo.aspx" />
+    <Content Include="paginas\Usuario\home.aspx" />
+    <Content Include="paginas\Usuario\notificacoes.aspx" />
+    <Content Include="paginas\Usuario\piFinalizado.aspx" />
+    <Content Include="paginas\Usuario\user.aspx" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\examples.js" />
+    <Content Include="scripts\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="scripts\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="scripts\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="scripts\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="scripts\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="scripts\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="scripts\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="scripts\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="scripts\images\ui-icons_222222_256x240.png" />
+    <Content Include="scripts\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\images\ui-icons_454545_256x240.png" />
+    <Content Include="scripts\images\ui-icons_888888_256x240.png" />
+    <Content Include="scripts\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="scripts\inter.js" />
+    <Content Include="scripts\interUser.js" />
+    <Content Include="scripts\jquery-2.1.1.min.js" />
+    <Content Include="scripts\jquery-ui.css" />
+    <Content Include="scripts\jquery-ui.js" />
+    <Content Include="scripts\jquery-ui.min.css" />
+    <Content Include="scripts\jquery.easing.1.3.js" />
+    <Content Include="scripts\jquery.fullPage.js" />
+    <Content Include="scripts\jquery.skitter.js" />
+    <Content Include="scripts\jquery.skitter.min.js" />
+    <Content Include="scripts\Sortable\jquery-1.10.2.js" />
+    <Content Include="scripts\Sortable\jquery-ui.js" />
+    <Content Include="scripts\Sortable\jquery-ui.min.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\admin.aspx.cs">
+      <DependentUpon>admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\admin.aspx.designer.cs">
+      <DependentUpon>admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Login\bloqueioUrl.aspx.cs">
+      <DependentUpon>bloqueioUrl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Login\bloqueioUrl.aspx.designer.cs">
+      <DependentUpon>bloqueioUrl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Login\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Login\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Usuario\avaliarGrupo.aspx.cs">
+      <DependentUpon>avaliarGrupo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Usuario\avaliarGrupo.aspx.designer.cs">
+      <DependentUpon>avaliarGrupo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Usuario\cadastrarPi.aspx.cs">
+      <DependentUpon>cadastrarPi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Usuario\cadastrarPi.aspx.designer.cs">
+      <DependentUpon>cadastrarPi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Usuario\consultarPi.aspx.cs">
+      <DependentUpon>consultarPi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Usuario\consultarPi.aspx.designer.cs">
+      <DependentUpon>consultarPi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Usuario\escolherDisciplina.aspx.cs">
+      <DependentUpon>escolherDisciplina.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Usuario\escolherDisciplina.aspx.designer.cs">
+      <DependentUpon>escolherDisciplina.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Usuario\finalizarGrupo.aspx.cs">
+      <DependentUpon>finalizarGrupo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Usuario\finalizarGrupo.aspx.designer.cs">
+      <DependentUpon>finalizarGrupo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Usuario\home.aspx.cs">
+      <DependentUpon>home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Usuario\home.aspx.designer.cs">
+      <DependentUpon>home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Usuario\MasterPage.master.cs">
+      <DependentUpon>MasterPage.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Usuario\MasterPage.master.designer.cs">
+      <DependentUpon>MasterPage.master</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Usuario\notificacoes.aspx.cs">
+      <DependentUpon>notificacoes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Usuario\notificacoes.aspx.designer.cs">
+      <DependentUpon>notificacoes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Usuario\piFinalizado.aspx.cs">
+      <DependentUpon>piFinalizado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Usuario\piFinalizado.aspx.designer.cs">
+      <DependentUpon>piFinalizado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Usuario\user.aspx.cs">
+      <DependentUpon>user.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Usuario\user.aspx.designer.cs">
+      <DependentUpon>user.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppCode\AppCode.csproj">
+      <Project>{14b88d59-a837-4f4e-8c0b-e62529305e59}</Project>
+      <Name>AppCode</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

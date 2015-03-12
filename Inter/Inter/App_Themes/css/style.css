@@ -1,0 +1,480 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+/*------------------------------
+=BASIC SETUP
+------------------------------*/
+/* Makeshift CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+}
+/* Tell the browser to render HTML 5 elements as block */
+header, footer, section, aside, nav, article {
+    display: block;
+}
+
+
+
+body {
+    margin: 0 auto;
+    width: 100%;
+    padding: 0px;
+    font: 13px/22px Helvetica, Arial, sans-serif;
+
+    background: #FFF;
+}
+
+header {
+    font-family:  Arial; 
+    font-size: 20px;
+    text-align:left;
+    font-weight: bold;
+
+}
+
+
+/*------------------------------
+CONTEUDO
+------------------------------*/
+#conteudo {
+    width: 82%;	
+    margin-top: 20px;
+    text-align: justify;
+    float: right;
+    padding: 40px;
+
+}
+.first {
+    display: none;	
+}
+
+
+/*------------------------------
+MENUS
+------------------------------*/
+
+ul {
+    list-style: none;
+}	
+
+#menu li {
+    font-size: 14px;
+    margin: 10px 0 10px 5px;     
+}
+
+#menu li:active {
+   /* background-color: ;*/
+    color: #fff;
+}
+
+#menu li:first-child {
+    margin-top: 25px;
+}
+
+#menu li a {
+    text-decoration: none;
+    color:#777;
+    display:block;
+    width: 155px;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+#menu li a:hover {
+    text-decoration: none;
+    color:#000;
+    background-color: #DEDEDE;
+}
+
+/*Mudar cor ícone*/    
+#menu li a.corIcone {
+    width: 155px;  
+    color: white;    
+    background-color: #960d10; 
+    /*transition: background-color 1.5s;*/    
+    padding: 5px;
+    border-radius: 4px;
+}
+
+#menu h3 {
+    padding-right: 50px;
+}
+
+#lateral {
+
+    padding:50px 50px 0 10px;
+    margin-right: 50px;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    font-size:1.2em;
+    background:rgb(44,62,80);
+    background-image: -moz-linear-gradient( 45deg, rgb(255,255,255), rgb(242,242,242) );
+    background-image: -webkit-linear-gradient( 45deg, rgb(255,255,255), rgb(242,242,242) );
+    background-image: -o-linear-gradient( 45deg, rgb(255,255,255), rgb(242,242,242) );
+    background-image: -ms-linear-gradient( 45deg, rgb(255,255,255), rgb(242,242,242) );
+    background-image: linear-gradient( 45deg, rgb(255,255,255), rgb(242,242,242) );
+    height:100%;
+    overflow:hidden;
+    width:200px; 
+    float: left;
+    position:fixed;
+    top:0;
+    border: 1px solid;
+    border-color: #e7e7e7;
+
+}
+/* Menu que se esconde
+#lateral:before {
+z-index:1000;
+content: url(../images/icone-menu.png);
+font-size:4em;
+color:white;
+position:fixed;
+left:8px;
+top:60px;
+
+
+}
+#lateral:hover:before, #lateral:focus:before {
+left:-500px
+}
+#lateral:hover, #lateral:focus,  #lateral:active  {
+overflow: hidden;
+-moz-transform: translate(200px, 0);
+-webkit-transform: translate(200px, 0);
+-o-transform: translate(200px, 0);
+transform: translate(200px, 0);
+padding-right:0;
+}		
+*/	
+
+/*Tabelas*/
+
+table thead {
+    color: black;
+    font-weight: bolder;
+    font-size: 14px;
+    font: Helvetica, Arial, sans-serif;
+}
+
+.tabelaAvaliar td:first-child {
+    color: black;
+    font-weight: bolder;
+    font-size: 14px;
+    font: Helvetica, Arial, sans-serif;
+    text-align: center;
+}
+
+.tabelaEscolherDis{
+    font-size: 14px;
+    color: black;
+    font-weight: bolder;    
+    text-align: center;
+}
+
+
+
+/* SORTABLE */
+    
+#sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6 {
+    border: 1px solid #ebebeb;
+    width: 142px;
+    min-height: 230px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+    float: left;
+    margin-left: 20%;
+}
+
+
+
+#sortable1 li, #sortable2 li, #sortable3 li, #sortable4 li, #sortable5 li, #sortable6 li {
+    margin: 0 5px 5px 10px;
+    padding: 5px;
+    font-size: 12px;
+    width: 120px;
+    cursor:pointer;
+}
+    
+  
+
+/*------------------------------
+=FOOTER
+------------------------------*/
+footer {
+    position:absolute;
+    bottom: 0;
+    width: 100%;	
+    margin: 0 auto;
+    margin-top: 50px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    background-color: #eaeaea;
+    float:left;
+    text-align: center;
+    color: #000;
+    z-index: -1;
+
+}
+#clearfooter {
+    clear:both;
+}
+footer p {	
+    font-size: 15px;	
+    color: #000;
+}
+
+/*Cadastrar PI*/
+.text {
+    width: 50px;    
+    /*height:30px;*/
+    border-radius: 3px;
+    font-family: Arial;
+    font-size: 14px;
+    text-align: left;
+    color: #000;
+    font-weight: bold;
+    padding: 4px;
+    box-shadow: #000 0px 0px 2px 0px inset;
+    border: 0px solid #ccc;
+    margin-left: 5px;
+    margin-top: 8px;
+}
+
+
+.label {
+    width: 100px;
+    height: 30px;
+    font-size: 14px;
+    text-align: left;
+    color: #000;
+    font-weight: bolder;
+    padding: 7px;
+    margin-left: 5px;
+}
+
+/*Cadastrar Data*/
+.textData, .textCriterio, .textPesquisa {
+    width: 100%;    
+    height:30px;
+    border-radius: 3px;
+    font-family: Arial;
+    font-size: 14px;
+    text-align: left;
+    color: #000;
+    /*font-weight: bold;*/
+    padding: 4px;
+    box-shadow: #000 0px 0px 2px 0px inset;
+    border: 0px solid #ccc;
+    margin-left: 5px;
+    
+}
+
+.dropDown  {
+    width: 80%;    
+    height:30px;
+    border-radius: 3px;
+    font-family: Arial;
+    font-size: 14px;
+    text-align: left;
+    color: #000;
+    font-weight: bold;
+    padding: 4px;
+    box-shadow: #000 0px 0px 2px 0px inset;
+    border: 0px solid #ccc;
+    margin-left: 5px;
+}
+
+div #containerDatas{
+    min-height: 10px;
+    max-height: 135px;
+    width: 370px;    
+    overflow-y: auto; 
+    margin: 5px 0 20px 0;     
+}
+
+.data{
+     width: 100%; 
+     margin:3px auto;
+     padding: 5px;
+     background-color: rgba(242,242,242, 0.6); 
+     border-radius: 4px; 
+     text-align: center;
+     
+}
+
+
+
+/*DIVs HOME*/
+#conteudoHome {
+    width: 80%;
+    margin:auto;    
+}
+
+#crie {
+    height: 110px;
+    width: 20%;    
+    color: white;    
+    float: left; 
+    background-image:url(../images/crie.png); 
+    background-size: 86%;
+    background-repeat:no-repeat;        
+}
+
+#customize {
+    background-image:url(../images/customize.png); 
+    background-size: 86%;
+    background-repeat:no-repeat;
+    height: 110px;
+    width: 20%;    
+    color: white;    
+    float: left;     
+}
+
+#avalie {
+    background-image:url(../images/avalie.png);
+    background-size: 86%;
+    background-repeat:no-repeat;
+    height: 110px;
+    width: 20%;    
+    color: white;    
+    float: left;     
+}
+
+
+#imgBloqueio {    
+    height: 600px;
+    width: 50%;  
+    background-image:url(../../App_Themes/images/bloqueioUrl1.png);
+    background-size: 100%;
+    background-repeat:no-repeat;
+    margin: auto;
+    /*margin-top: 120px;    */
+}
+
+.texto {
+    height: 110px;
+    width: 80%;    
+    float: left;
+    text-align: justify;
+    /*border: 1px solid black;*/
+    padding: 5px 0px;
+    margin-bottom: 10px;
+}
+
+
+/*tabela Home1 */
+tabelaHome1 {
+    width: 100%;
+    float: left;     
+}
+
+/*tabela Home2 */
+tabelaHome2 {
+    width: 100%;
+    float: left;     
+}
+
+/*tabela Home3 */
+tabelaHome3 {
+    width: 100%;
+    float: left;     
+}
+
+
+.colunaHome1 {
+    width: 30%;   
+    padding: 5px 10px 0 10px; 
+    text-align: justify;   
+}
+
+
+.txtAnotacao {
+    margin-top: 20px;
+    margin-left: 2px;
+    width: 96%;
+    height: 300px;
+    font-size: 14px;
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 410px;
+}
+
+
+
+/*Botões Cadastrar*/
+.tableBotoes {
+    width: 100%;
+}
+
+.colunaBotoes {
+    width: 30%;    
+    text-align: right;
+    padding-right: 3%;
+
+}
+
+
+
+/*GRID VIEW*/
+.gridView {
+    width: 100%;
+    background-color: #fff;   
+    margin: 5px 0 10px 0;   
+    /*border: solid 1px #525252;*/   
+    border-collapse:collapse; 
+}
+
+.gridView td {   
+    padding: 2px;   
+    border: solid 1px #c1c1c1;   
+    color: #717171;  
+    padding-left:25px;  
+} 
+
+.gridView th {   
+    padding: 4px 2px;   
+    color: #fff;   
+    background: #424242 url(../images/grd_head2.png) repeat-x top;   /*7E2D2D*/ 
+    border-left: solid 1px #525252;   
+    font-size: 1em; 
+    padding-left:15px;  
+} 
+
+.gridView .alt { background: #fcfcfc url(../images/grd_alt.png) repeat-x top; }  
+.gridView .pgr { background: #424242 url(../images/grd_pgr.png) repeat-x top; }  
+.gridView .pgr table { margin: 5px 0; }  
+.gridView .pgr td {   
+    border-width: 0;   
+    padding: 0 6px;   
+    border-left: solid 1px #666;   
+    font-weight: bold;   
+    color: #fff;   
+    line-height: 12px;   
+ }     
+.gridView .pgr a { color: #666; text-decoration: none; }  
+.gridView .pgr a:hover { color: #000; text-decoration: none; }
+
+
+.btnExcluir, .btnEditar {    
+    padding: 3px 7px;
+    float: right;
+    margin-right: 7px;
+    margin-top: -2px;
+} 
+
+#ContentPlaceHolder1_lblDescDataMsgErro, #ContentPlaceHolder1_lblDataMsgErro {
+    color: red;
+    font-weight: bolder;
+}
+
+#tabelaCadastrarPi {
+    width: 90%;
+    max-width: 100%;
+    margin: auto;
+    margin-bottom: 20px;
+}
