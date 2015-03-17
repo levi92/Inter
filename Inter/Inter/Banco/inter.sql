@@ -37,10 +37,10 @@ CREATE TABLE `adi_atribuicao_disciplina` (
   KEY `TRM_CODIGO` (`TRM_CODIGO`),
   KEY `PRO_MATRICULA` (`PRO_MATRICULA`),
   KEY `DGE_CODIGO` (`DGE_CODIGO`),
-  CONSTRAINT `adi_atribuicao_disciplina_ibfk_1` FOREIGN KEY (`TRM_CODIGO`) REFERENCES `trm_turma` (`TRM_CODIGO`),
-  CONSTRAINT `adi_atribuicao_disciplina_ibfk_2` FOREIGN KEY (`PRO_MATRICULA`) REFERENCES `pro_professor` (`PRO_MATRICULA`),
-  CONSTRAINT `adi_atribuicao_disciplina_ibfk_3` FOREIGN KEY (`DGE_CODIGO`) REFERENCES `dge_disciplinas_gerais` (`DGE_CODIGO`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  CONSTRAINT `adi_atribuicao_disciplina_ibfk_3` FOREIGN KEY (`DGE_CODIGO`) REFERENCES `dge_disciplinas_gerais` (`DGE_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `adi_atribuicao_disciplina_ibfk_1` FOREIGN KEY (`TRM_CODIGO`) REFERENCES `trm_turma` (`TRM_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `adi_atribuicao_disciplina_ibfk_2` FOREIGN KEY (`PRO_MATRICULA`) REFERENCES `pro_professor` (`PRO_MATRICULA`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `adi_atribuicao_disciplina`
@@ -51,7 +51,7 @@ INSERT INTO `adi_atribuicao_disciplina` (`ADI_CODIGO`,`ADI_SEMESTRE_ANO`,`ADI_MA
  (1,'2014-2',1,1,4,1),
  (2,'2014-2',1,1,5,3),
  (3,'2014-2',1,2,6,5),
-(4, '2014-2', 0, 1, 6, 4);
+ (4,'2014-2',0,1,6,4);
 /*!40000 ALTER TABLE `adi_atribuicao_disciplina` ENABLE KEYS */;
 
 
@@ -65,7 +65,7 @@ CREATE TABLE `alu_aluno` (
   `PES_CODIGO` int(11) NOT NULL,
   PRIMARY KEY (`ALU_MATRICULA`),
   KEY `PES_CODIGO` (`PES_CODIGO`),
-  CONSTRAINT `alu_aluno_ibfk_1` FOREIGN KEY (`PES_CODIGO`) REFERENCES `pes_pessoas` (`PES_CODIGO`)
+  CONSTRAINT `alu_aluno_ibfk_1` FOREIGN KEY (`PES_CODIGO`) REFERENCES `pes_pessoas` (`PES_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
@@ -122,9 +122,9 @@ CREATE TABLE `cpi_criterio_pi` (
   KEY `PRI_CODIGO` (`PRI_CODIGO`),
   KEY `ADI_CODIGO` (`ADI_CODIGO`),
   KEY `CGE_CODIGO` (`CGE_CODIGO`),
-  CONSTRAINT `cpi_criterio_pi_ibfk_1` FOREIGN KEY (`PRI_CODIGO`) REFERENCES `pri_projeto_inter` (`PRI_CODIGO`),
-  CONSTRAINT `cpi_criterio_pi_ibfk_2` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `pri_projeto_inter` (`ADI_CODIGO`),
-  CONSTRAINT `cpi_criterio_pi_ibfk_3` FOREIGN KEY (`CGE_CODIGO`) REFERENCES `cge_criterios_gerais` (`CGE_CODIGO`)
+  CONSTRAINT `cpi_criterio_pi_ibfk_1` FOREIGN KEY (`PRI_CODIGO`) REFERENCES `pri_projeto_inter` (`PRI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `cpi_criterio_pi_ibfk_2` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `pri_projeto_inter` (`ADI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `cpi_criterio_pi_ibfk_3` FOREIGN KEY (`CGE_CODIGO`) REFERENCES `cge_criterios_gerais` (`CGE_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -172,8 +172,8 @@ CREATE TABLE `dal_disciplina_aluno` (
   `DAL_SEMESTRE_ANO` varchar(10) NOT NULL,
   PRIMARY KEY (`ALU_MATRICULA`,`ADI_CODIGO`),
   KEY `ADI_CODIGO` (`ADI_CODIGO`),
-  CONSTRAINT `dal_disciplina_aluno_ibfk_1` FOREIGN KEY (`ALU_MATRICULA`) REFERENCES `alu_aluno` (`ALU_MATRICULA`),
-  CONSTRAINT `dal_disciplina_aluno_ibfk_2` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `adi_atribuicao_disciplina` (`ADI_CODIGO`)
+  CONSTRAINT `dal_disciplina_aluno_ibfk_1` FOREIGN KEY (`ALU_MATRICULA`) REFERENCES `alu_aluno` (`ALU_MATRICULA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `dal_disciplina_aluno_ibfk_2` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `adi_atribuicao_disciplina` (`ADI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -228,8 +228,8 @@ CREATE TABLE `eve_eventos` (
   PRIMARY KEY (`EVE_CODIGO`),
   KEY `PRI_CODIGO` (`PRI_CODIGO`),
   KEY `ADI_CODIGO` (`ADI_CODIGO`),
-  CONSTRAINT `eve_eventos_ibfk_1` FOREIGN KEY (`PRI_CODIGO`) REFERENCES `pri_projeto_inter` (`PRI_CODIGO`),
-  CONSTRAINT `eve_eventos_ibfk_2` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `pri_projeto_inter` (`ADI_CODIGO`)
+  CONSTRAINT `eve_eventos_ibfk_1` FOREIGN KEY (`PRI_CODIGO`) REFERENCES `pri_projeto_inter` (`PRI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `eve_eventos_ibfk_2` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `pri_projeto_inter` (`ADI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -250,8 +250,8 @@ CREATE TABLE `gal_grupo_aluno` (
   `ALU_MATRICULA` int(11) NOT NULL,
   KEY `GRU_CODIGO` (`GRU_CODIGO`),
   KEY `ALU_MATRICULA` (`ALU_MATRICULA`),
-  CONSTRAINT `gal_grupo_aluno_ibfk_1` FOREIGN KEY (`GRU_CODIGO`) REFERENCES `gru_grupo` (`GRU_CODIGO`),
-  CONSTRAINT `gal_grupo_aluno_ibfk_2` FOREIGN KEY (`ALU_MATRICULA`) REFERENCES `dal_disciplina_aluno` (`ALU_MATRICULA`)
+  CONSTRAINT `gal_grupo_aluno_ibfk_1` FOREIGN KEY (`GRU_CODIGO`) REFERENCES `gru_grupo` (`GRU_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gal_grupo_aluno_ibfk_2` FOREIGN KEY (`ALU_MATRICULA`) REFERENCES `dal_disciplina_aluno` (`ALU_MATRICULA`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -277,8 +277,8 @@ CREATE TABLE `gru_grupo` (
   PRIMARY KEY (`GRU_CODIGO`),
   KEY `PRI_CODIGO` (`PRI_CODIGO`),
   KEY `ADI_CODIGO` (`ADI_CODIGO`),
-  CONSTRAINT `gru_grupo_ibfk_1` FOREIGN KEY (`PRI_CODIGO`) REFERENCES `pri_projeto_inter` (`PRI_CODIGO`),
-  CONSTRAINT `gru_grupo_ibfk_2` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `pri_projeto_inter` (`ADI_CODIGO`)
+  CONSTRAINT `gru_grupo_ibfk_1` FOREIGN KEY (`PRI_CODIGO`) REFERENCES `pri_projeto_inter` (`PRI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gru_grupo_ibfk_2` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `pri_projeto_inter` (`ADI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -304,9 +304,9 @@ CREATE TABLE `his_historico_disciplina` (
   KEY `CPI_CODIGO` (`CPI_CODIGO`),
   KEY `ADI_CODIGO` (`ADI_CODIGO`),
   KEY `ALU_MATRICULA` (`ALU_MATRICULA`),
-  CONSTRAINT `his_historico_disciplina_ibfk_1` FOREIGN KEY (`CPI_CODIGO`) REFERENCES `cpi_criterio_pi` (`CPI_CODIGO`),
-  CONSTRAINT `his_historico_disciplina_ibfk_2` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `pri_projeto_inter` (`ADI_CODIGO`),
-  CONSTRAINT `his_historico_disciplina_ibfk_3` FOREIGN KEY (`ALU_MATRICULA`) REFERENCES `gal_grupo_aluno` (`ALU_MATRICULA`)
+  CONSTRAINT `his_historico_disciplina_ibfk_1` FOREIGN KEY (`CPI_CODIGO`) REFERENCES `cpi_criterio_pi` (`CPI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `his_historico_disciplina_ibfk_2` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `pri_projeto_inter` (`ADI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `his_historico_disciplina_ibfk_3` FOREIGN KEY (`ALU_MATRICULA`) REFERENCES `gal_grupo_aluno` (`ALU_MATRICULA`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -330,8 +330,8 @@ CREATE TABLE `mdd_media_disciplina` (
   PRIMARY KEY (`MDD_CODIGO`),
   KEY `PRI_CODIGO` (`PRI_CODIGO`),
   KEY `ADI_CODIGO` (`ADI_CODIGO`),
-  CONSTRAINT `mdd_media_disciplina_ibfk_1` FOREIGN KEY (`PRI_CODIGO`) REFERENCES `pri_projeto_inter` (`PRI_CODIGO`),
-  CONSTRAINT `mdd_media_disciplina_ibfk_2` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `pri_projeto_inter` (`ADI_CODIGO`)
+  CONSTRAINT `mdd_media_disciplina_ibfk_1` FOREIGN KEY (`PRI_CODIGO`) REFERENCES `pri_projeto_inter` (`PRI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `mdd_media_disciplina_ibfk_2` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `pri_projeto_inter` (`ADI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -384,7 +384,7 @@ CREATE TABLE `pri_projeto_inter` (
   `ADI_CODIGO` int(11) NOT NULL,
   PRIMARY KEY (`PRI_CODIGO`,`ADI_CODIGO`),
   KEY `ADI_CODIGO` (`ADI_CODIGO`),
-  CONSTRAINT `pri_projeto_inter_ibfk_1` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `adi_atribuicao_disciplina` (`ADI_CODIGO`)
+  CONSTRAINT `pri_projeto_inter_ibfk_1` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `adi_atribuicao_disciplina` (`ADI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -408,7 +408,7 @@ CREATE TABLE `pro_professor` (
   `PES_CODIGO` int(11) NOT NULL,
   PRIMARY KEY (`PRO_MATRICULA`),
   KEY `PES_CODIGO` (`PES_CODIGO`),
-  CONSTRAINT `pro_professor_ibfk_1` FOREIGN KEY (`PES_CODIGO`) REFERENCES `pes_pessoas` (`PES_CODIGO`)
+  CONSTRAINT `pro_professor_ibfk_1` FOREIGN KEY (`PES_CODIGO`) REFERENCES `pes_pessoas` (`PES_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
@@ -436,9 +436,12 @@ CREATE TABLE `req_requerimento` (
   `REQ_DATA_FINAL` datetime DEFAULT NULL,
   `REQ_RESOLVIDO` tinyint(1) DEFAULT NULL,
   `PRO_MATRICULA` int(11) NOT NULL,
+  `GRU_CODIGO` int(11) NOT NULL,
   PRIMARY KEY (`REQ_CODIGO`),
   KEY `PRO_MATRICULA` (`PRO_MATRICULA`),
-  CONSTRAINT `req_requerimento_ibfk_1` FOREIGN KEY (`PRO_MATRICULA`) REFERENCES `pro_professor` (`PRO_MATRICULA`)
+  KEY `req_requerimento_ibfk_2` (`GRU_CODIGO`),
+  CONSTRAINT `req_requerimento_ibfk_2` FOREIGN KEY (`GRU_CODIGO`) REFERENCES `gru_grupo` (`GRU_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `req_requerimento_ibfk_1` FOREIGN KEY (`PRO_MATRICULA`) REFERENCES `pro_professor` (`PRO_MATRICULA`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -462,8 +465,8 @@ CREATE TABLE `trm_turma` (
   PRIMARY KEY (`TRM_CODIGO`),
   KEY `TUR_CODIGO` (`TUR_CODIGO`),
   KEY `CUR_CODIGO` (`CUR_CODIGO`),
-  CONSTRAINT `trm_turma_ibfk_1` FOREIGN KEY (`TUR_CODIGO`) REFERENCES `tur_turno` (`TUR_CODIGO`),
-  CONSTRAINT `trm_turma_ibfk_2` FOREIGN KEY (`CUR_CODIGO`) REFERENCES `cur_curso` (`CUR_CODIGO`)
+  CONSTRAINT `trm_turma_ibfk_1` FOREIGN KEY (`TUR_CODIGO`) REFERENCES `tur_turno` (`TUR_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `trm_turma_ibfk_2` FOREIGN KEY (`CUR_CODIGO`) REFERENCES `cur_curso` (`CUR_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
