@@ -68,6 +68,9 @@
     <Content Include="Banco\Projeto_Interdisciplinar.png" />
     <Content Include="paginas\Usuario\MasterPage.master" />
     <Content Include="Banco\PI BANCO.docx" />
+    <Content Include="paginas\Usuario\MasterPageMenuPadrao.master" />
+    <Content Include="paginas\Usuario\MasterPageMenuMae.master" />
+    <Content Include="paginas\Usuario\MasterPageMenuFilha.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -218,6 +221,27 @@
     </Compile>
     <Compile Include="paginas\Usuario\MasterPage.master.designer.cs">
       <DependentUpon>MasterPage.master</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Usuario\MasterPageMenuFilha.master.cs">
+      <DependentUpon>MasterPageMenuFilha.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Usuario\MasterPageMenuFilha.master.designer.cs">
+      <DependentUpon>MasterPageMenuFilha.master</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Usuario\MasterPageMenuMae.master.cs">
+      <DependentUpon>MasterPageMenuMae.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Usuario\MasterPageMenuMae.master.designer.cs">
+      <DependentUpon>MasterPageMenuMae.master</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Usuario\MasterPageMenuPadrao.master.cs">
+      <DependentUpon>MasterPageMenuPadrao.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Usuario\MasterPageMenuPadrao.master.designer.cs">
+      <DependentUpon>MasterPageMenuPadrao.master</DependentUpon>
     </Compile>
     <Compile Include="paginas\Usuario\notificacoes.aspx.cs">
       <DependentUpon>notificacoes.aspx</DependentUpon>

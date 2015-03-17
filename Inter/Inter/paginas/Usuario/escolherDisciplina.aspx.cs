@@ -5,40 +5,44 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.Services;
-//using System.Web.Script.Serialization;
-//using System.Runtime.Serialization.Json;
 
 public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
 {
 
+    protected void Page_PreInit(object sender, EventArgs e)
+    {
+        //VERIFICAR SESSAO LOGIN
+        if (Session["login"] == null)
+        {
+            Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+        }
+        
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+
         if (!IsPostBack)
         {
             Pessoas pes = new Pessoas();
-            
+
             string NomeUser = Session["login"].ToString(); //recebe email do professor logado
             pes = Pessoas_DB.Select(NomeUser); //cria um obj pessoa do professor, decorrente de um select utilizando seu email como parametro
             Session["nomeProf"] = pes.Pes_nome;
 
             int codProf = Professor_DB.SelectPes(pes.Pes_codigo);
-            
-            
+
+
             CarregarGrid(codProf); //carrega a grid utilizando o cod do Prof
             auxRb = -1;
         }
-
-        
     }
 
-    
+
 
     public void CarregarGrid(int proMatricula)
     {
         //DataSet ds = new DataSet();
-
 
         DataSet ds = Funcoes_DB.SelectDisciplina(proMatricula);
         int qtd = ds.Tables[0].Rows.Count;
@@ -52,6 +56,27 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
 
     }
 
+    // CRIAR ÍCONE DISCIPLINA MÃE
+    protected void gdv_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            // SEMESTRE COMO ORDINAL
+            //string semestre = e.Row.Cells[2].Text;
+            //e.Row.Cells[2].Text = semestre + "º";
+
+
+            if (e.Row.Cells[4].Text.ToLower().Equals("true"))
+            {
+                e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-star'></span>";
+            }
+            else
+            {
+                e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-minus'></span>";
+            }
+
+        }
+    }
 
     protected void btnConfirmar_Click(object sender, EventArgs e)
     {
@@ -80,44 +105,24 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             Session["curso"] = curso;
             Session["semestre"] = semestre;
             Session["disciplina"] = disciplina;
-            Session["mae"] = mae;
+            if (mae == "<span class='glyphicon glyphicon-star'></span>")
+            {
+                Session["mae"] = "True";
+            }
+            else
+            {
+                Session["mae"] = "False";
+            }
 
-            //MANDANDO DADOS PARA A MASTER PAGE       
-            //((paginas_Usuario_MasterPage)this.Master).dadosDisciplina(curso, semestre, disciplina, mae);
-                   
-                        
             Response.Redirect("home.aspx");
         }
         else
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEscolherDis", "modalEscolherDis();", true);  
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEscolherDis", "modalEscolherDis();", true);
         }
     }
 
 
-    // CRIAR ÍCONE DISCIPLINA MÃE
-    protected void gdv_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            // SEMESTRE COMO ORDINAL
-            string semestre = e.Row.Cells[2].Text;
-            e.Row.Cells[2].Text = semestre + "º";
-
-
-            if (e.Row.Cells[4].Text.ToLower().Equals("true"))
-            {
-                e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-star'></span>";
-            }
-            else
-            {
-                e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-minus'></span>";
-            }
-
-        }
-    }
-
-    
 
 
     //SELECIONAR APENAS UM RADIO
@@ -129,10 +134,9 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
         {
             RadioButton rb = (RadioButton)grid.FindControl("rb");
 
-            if (grid.RowIndex == auxRb) //deselecionar radio que estava selecionado
+            if (grid.RowIndex == auxRb) //deseleciona radio que estava selecionado
             {
                 rb.Checked = false;
-                //gdv.Rows[auxRb].Style.Clear();
                 break;
             }
         }
@@ -144,26 +148,12 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
 
             if (rb.Checked)
             {
-                auxRb = grid.RowIndex; //guarda radio atual selecionado
-                //gdv.Rows[auxRb].Style.Add("border", "2px solid gray");
+                auxRb = grid.RowIndex; //guarda radio atual selecionado                
                 break;
             }
         }
 
     }
-
-
-//gdv.Style.Add("background-color", "#FCD85C;");
-    //gdv.Rows[i].BackColor = System.Drawing.Color.FromArgb(123, 152, 121);
-
-    //foreach (GridViewRow GVR in grifview.Rows)
-    //{
-    //    if (GVR.RowIndex == intSelectedRowIndex)
-    //        GVR.Style.Add("background-color", "#FCD85C;");
-    //    else
-    //        GVR.Style.Clear();
-    //}
-
 
 
 }

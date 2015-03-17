@@ -1,12 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPage.master" AutoEventWireup="true" Inherits="paginas_Usuario_escolherDisciplina" Codebehind="escolherDisciplina.aspx.cs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_escolherDisciplina" Codebehind="escolherDisciplina.aspx.cs" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-
-</asp:Content>
-
-
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
     <script type="text/javascript">
+
         function modalEscolherDis() {
             $(function () {
                 $("#boxSelecioneDisc").dialog({
@@ -71,7 +67,7 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
 
-                <asp:Label ID="lblQtdRegistro" runat="server" Text="Label"></asp:Label>
+                <asp:Label ID="lblQtdRegistro" runat="server"></asp:Label>
                 <br />
                 <br />
 
@@ -90,14 +86,13 @@
         </div>
     </div>
 
-
+    
     <!-- dialogs -->
     <div id="boxSelecioneDisc" title="Selecione uma disciplina!" style="display: none;">
         <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&nbsp Para prosseguir você deve selecionar uma disciplina! </p>
     </div>
 
-
+    
 
 
 </asp:Content>
-

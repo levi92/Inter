@@ -1,0 +1,70 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/paginas/Usuario/MasterPage.master" AutoEventWireup="true" CodeBehind="MasterPageMenuPadrao.master.cs" Inherits="Inter.paginas.Usuario.MasterPageMenuPadrao" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="cphConteudo" Runat="Server">
+     
+        <!-- Menu Lateral  -->
+
+        <div id="lateral">
+             
+             <div id="menu">
+                <h1>
+                    <asp:Label ID="hora" runat="server" ClientIDMode="Static"></asp:Label></h1>
+                <h5>
+                    <asp:Label ID="dia" runat="server" ClientIDMode="Static"></asp:Label></h5>
+                <hr />
+                 <ul>                
+                    <li><a id="icone10" onclick="Mostra('p15');" href="#"><span class="glyphicon glyphicon-question-sign"></span>&nbsp Ajuda</a></li>
+                    <li><a id="icone11" data-toggle="modal" data-target="#myModalDesejaSair" href="#" title="Sair do sistema e voltar para o login"><span class="glyphicon glyphicon-off"></span>&nbsp Sair</a></li>                   
+                                        
+                </ul>
+                <!-- mais seções -->
+
+            </div>
+            
+            <!-- /#menu -->
+        </div>
+
+
+
+        <!-- /# Fim menu lateral lateral -->
+
+
+        <div class="container">
+            <div id="conteudo">
+
+                <asp:ContentPlaceHolder ID="cphConteudoCentral" runat="server">
+                </asp:ContentPlaceHolder>
+
+            </div>
+        </div>
+
+   
+       
+
+        <!-- MODAL DESEJA SAIR? -->
+
+        <div class="modal fade" id="myModalDesejaSair" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    </div>
+                    <div class="modal-body">
+                        <h3 style="font-weight: bolder; text-align: center; color: #1f1f1f">
+                            <span style="color: #960d10" class="glyphicon glyphicon-question-sign"></span>&nbsp Deseja Sair do sistema?</h3>
+                    </div>
+
+                    <div class="modal-footer">
+                        
+                        <asp:Button ID="btnSair" class="btn btn-default" runat="server" Text="Sim" OnClick="btnSair_Click"
+                            ToolTip="Sair do sistema e voltar para o login" />
+                        <button type="button" class="btn btn-default" id="" data-dismiss="modal">Não</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</asp:Content>

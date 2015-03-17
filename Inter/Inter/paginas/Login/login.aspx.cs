@@ -14,29 +14,40 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 
     protected void enviar_Click(object sender, EventArgs e)
     {
-        lblTeste.Text = "";
+
+        lblMsgErro.Text = "";
 
         string user = txtLogin.Text.ToString();
         string senha = txtSenha.Text.ToString();
 
-        switch (Funcoes_DB.ValidarLogin(user, senha))
+        if (!String.IsNullOrEmpty(user) && !String.IsNullOrEmpty(senha))
         {
-            case 0:
-                Session["login"] = user;
-                Session["curso"] = "";
-                Session["semestre"] = "";
-                Session["disciplina"] = "";
-                Session["mae"] = "";
-                Response.Redirect("~/Paginas/Usuario/escolherDisciplina.aspx");
-                break;
-            case 1:
-                Session["login"] = user;
-                Response.Redirect("~/Paginas/Administrador/admin.aspx");
-                break;
-            case -2:
-                lblTeste.Text = "E-mail ou Senha incorretos";
-                break;
-        }
 
+            switch (Funcoes_DB.ValidarLogin(user, senha))
+            {
+                case 0:
+                    Session["login"] = user;
+                    Session["curso"] = "";
+                    Session["semestre"] = "";
+                    Session["disciplina"] = "";
+                    Session["mae"] = "";
+                    Response.Redirect("~/Paginas/Usuario/escolherDisciplina.aspx");
+                    break;
+                case 1:
+                    Session["login"] = user;
+                    Response.Redirect("~/Paginas/Administrador/admin.aspx");
+                    break;
+                case -2:
+                    lblMsgErro.Text = "E-mail ou Senha incorretos.";
+                    break;
+            }
+
+        }
+        else
+        {
+            lblMsgErro.Text = "Preencha os campos.";
+        }
     }
+
+
 }
