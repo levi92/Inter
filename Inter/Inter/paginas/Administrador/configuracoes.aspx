@@ -9,9 +9,8 @@
         });
     </script>
 
-    <div class="container">
-        <div id="conteudo">
-    <div id="p6" class="first">
+    
+    <div id="p1" class="first">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Configurações</h3>
@@ -96,8 +95,7 @@
                     </div>
                 </div>
             </div>
-            </div>
-            </div>
+         
 
 
 </asp:Content>
