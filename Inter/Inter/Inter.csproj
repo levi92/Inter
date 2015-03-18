@@ -39,6 +39,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=5.1.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -66,8 +70,13 @@
     <Content Include="Banco\PI.png" />
     <Content Include="Banco\PI.xml" />
     <Content Include="Banco\Projeto_Interdisciplinar.png" />
+    <Content Include="paginas\Administrador\configuracoes.aspx" />
+    <Content Include="paginas\Administrador\criterios.aspx" />
+    <Content Include="paginas\Administrador\projetos.aspx" />
+    <Content Include="paginas\Administrador\solicitacoes.aspx" />
     <Content Include="paginas\Usuario\MasterPage.master" />
     <Content Include="Banco\PI BANCO.docx" />
+    <Content Include="paginas\Administrador\MasterPage.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -155,6 +164,41 @@
     </Compile>
     <Compile Include="paginas\Administrador\admin.aspx.designer.cs">
       <DependentUpon>admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\configuracoes.aspx.cs">
+      <DependentUpon>configuracoes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\configuracoes.aspx.designer.cs">
+      <DependentUpon>configuracoes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\criterios.aspx.cs">
+      <DependentUpon>criterios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\criterios.aspx.designer.cs">
+      <DependentUpon>criterios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\MasterPage.Master.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\MasterPage.Master.designer.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\projetos.aspx.cs">
+      <DependentUpon>projetos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\projetos.aspx.designer.cs">
+      <DependentUpon>projetos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\solicitacoes.aspx.cs">
+      <DependentUpon>solicitacoes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\solicitacoes.aspx.designer.cs">
+      <DependentUpon>solicitacoes.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\Login\bloqueioUrl.aspx.cs">
       <DependentUpon>bloqueioUrl.aspx</DependentUpon>
