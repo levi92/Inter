@@ -1,15 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPage.master" AutoEventWireup="true" Inherits="paginas_Usuario_finalizarGrupo" Codebehind="finalizarGrupo.aspx.cs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_finalizarGrupo" Codebehind="finalizarGrupo.aspx.cs" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-</asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
 
     <script type="text/javascript">
         $(document).ready(function () {
 
             // ALTERAR COR DO ÍCONE NO MENU LATERAL 
-            $('#icone9').addClass('corIcone');
+            $('#cphConteudo_icone9').addClass('corIcone');
         });
     </script>
 

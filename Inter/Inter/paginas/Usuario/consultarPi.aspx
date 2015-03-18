@@ -1,14 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPage.master" AutoEventWireup="true" Inherits="paginas_Usuario_consultarPi" Codebehind="consultarPi.aspx.cs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_consultarPi" Codebehind="consultarPi.aspx.cs" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
 
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
-    <!-- Alterar cor do ícone no menu lateral -->
+    <!-- ALTERAR COR DO ÍCONE NO MENU LATERAL -->
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#icone6').addClass('corIcone');
+            $('#cphConteudo_icone6').addClass('corIcone');
         });
     </script>
 
@@ -41,8 +38,7 @@
                         </td>
 
                         <td>
-                            <asp:Label ID="Label5" CssClass="label" runat="server" Text="Semestre: "></asp:Label>
-                            <!-- CONQUISTA DESBLOQUEADA! Parabéns, seu sistema possui mais de 1000 linhas - 50G -->
+                            <asp:Label ID="Label5" CssClass="label" runat="server" Text="Semestre: "></asp:Label>                            
                         </td>
 
                         <td>

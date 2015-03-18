@@ -42,6 +42,17 @@ function etapa3() {
     Mostra('p12');
 }
 
+function etapa4() {
+    controlarMostra = true;
+    $("#" + global).hide();
+    $("#c" + global).css("visibility", "hidden");
+    global = "p13";
+    $("#p13").show();
+    $("#conteudo").slideDown(500);
+}
+
+
+
 //FUNCTION QUE PEGA A HORA DO SERVIDOR E RETORNA COM ELA TRABALHADA
 
 function myFunction() {

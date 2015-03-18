@@ -6,7 +6,7 @@
      <!-- Alterar cor do ícone no menu lateral -->
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#icone8').addClass('corIcone');
+            $('#cphConteudo_icone8').addClass('corIcone');
         });
     </script>
 

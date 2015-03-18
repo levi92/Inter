@@ -22,6 +22,9 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session["disciplina"] == "")
+        {
+            Response.Redirect("escolherDisciplina.aspx");
+        }
     }
 }
