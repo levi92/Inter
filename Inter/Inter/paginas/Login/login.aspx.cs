@@ -35,7 +35,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                     break;
                 case 1:
                     Session["login"] = user;
-                    Response.Redirect("~/Paginas/Administrador/admin.aspx");
+                    Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
                     break;
                 case -2:
                     lblMsgErro.Text = "E-mail ou Senha incorretos.";

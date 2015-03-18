@@ -77,7 +77,7 @@
     <Content Include="paginas\Administrador\ajuda.aspx" />
     <Content Include="paginas\Usuario\MasterPage.master" />
     <Content Include="Banco\PI BANCO.docx" />
-	<Content Include="paginas\Administrador\MasterPage.Master"
+	<Content Include="paginas\Administrador\MasterPage.Master" />
     <Content Include="paginas\Usuario\MasterPageMenuPadrao.master" />
     <Content Include="paginas\Usuario\MasterPageMenuMae.master" />
     <Content Include="paginas\Usuario\MasterPageMenuFilha.master" />
