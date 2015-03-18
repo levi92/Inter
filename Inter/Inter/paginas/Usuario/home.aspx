@@ -1,17 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPage.master" AutoEventWireup="true" Inherits="paginas_Usuario_home" Codebehind="home.aspx.cs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_home" Codebehind="home.aspx.cs" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-</asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
 
     <!-- Alterar cor do ícone no menu lateral -->
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#icone2').addClass('corIcone');
+            $('#cphConteudo_icone2').addClass('corIcone');
+
         });
     </script>
-
 
     <!-- HOME (P2) -->
 
@@ -23,7 +20,8 @@
 
             <div class="panel-body-usuarios">
 
-                <h2 style="color: #960d10;">Bem-vindo <asp:Label id="lblNomeProf" runat="server"></asp:Label>!</h2>
+                <h2 style="color: #960d10;">Bem-vindo
+                    <asp:Label ID="lblNomeProf" runat="server"></asp:Label>!</h2>
                 <p style="text-align: justify;">
                     O INTER. é um sistema de avaliaçao de trabalhos interdisciplinares que foi desenvolvido pela 7ª turma de 
                                     Análise e Desenvolvimento de Sistemas da FATEC de Guaratinguetá-SP. Esse sistema serve para auxiliar os professores e coordenadores a atribuirem notas aos projetos interdisciplinares (PIs).
@@ -52,13 +50,13 @@
                                         avaliação definidos, fazer anotações das apresentações e estabelecer as médias dos alunos. Podendo assim, gerar relatórios das avaliações.
                     </div>
 
-                    
+
 
                 </div>
                 <%--conteudoHome--%>
 
                 <hr style="width: 60%; margin: auto;" />
-                    <br />
+                <br />
 
                 <h3 style="color: #960d10;">Conheça o Sistema INTER.</h3>
                 <p style="text-align: center;">
@@ -189,4 +187,3 @@
     </div>
     <%--first--%>
 </asp:Content>
-

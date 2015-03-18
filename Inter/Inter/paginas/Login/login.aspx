@@ -51,7 +51,7 @@
 					   <center><asp:TextBox ID="txtLogin" class="form-control"  placeholder="Login" style="width:250px;" runat="server"></asp:TextBox></center><br>
 					   <center><asp:TextBox ID="txtSenha" class="form-control"  placeholder="Senha" style="width:250px;" runat="server" TextMode="Password"></asp:TextBox></center><br>
                        <asp:Button id="enviar" class="btn btn-default" style="width:250px;" runat="server" Text="Entrar" OnClick="enviar_Click" /><br />
-					    <asp:Label ID="lblTeste" runat="server" Text="" style="color:#960d10"></asp:Label>
+					    <asp:Label ID="lblMsgErro" runat="server" style="color:#960d10"></asp:Label>
 					   <center><a href="#" style="font-size:13px" data-toggle="modal" data-target="#myModal">Problemas com o Login?</a></div>	
 					
 				</ul>

@@ -1,162 +1,28 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPage.master" AutoEventWireup="true" Inherits="paginas_Usuario_cadastrarPi" Codebehind="cadastrarPi.aspx.cs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_cadastrarPi" Codebehind="cadastrarPi.aspx.cs" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-</asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
+<script type="text/javascript">
+    function pegarCriterio() {
+        var dadosCrit = "";
 
+        $('#sortable4 > li').each(function () {
+            dadosCrit += "|" + $(this).html();
+        });
+
+        $('#hidden').val(dadosCrit);
+    }
+
+
+    </script>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
 
             // ALTERAR COR DO ÍCONE NO MENU LATERAL 
-            $('#icone5').addClass('corIcone');
+            $('#cphConteudo_icone5').addClass('corIcone');
 
-            // ZERAR VALORES DATAS DE EVENTOS
-            $("#btnAdicionarDatas").click(function () {
-                $("#ContentPlaceHolder1_txtDescricaoData").val("");
-                $("#ContentPlaceHolder1_txtData").val("");
-                contr = false;
-                $("#btnConfirmarData").removeAttr("data-dismiss");
-            });
-
-
-            // DATAS DE EVENTOS
-            var i = 0;
-            var dadosDatas = "";
-            var contr = false; //PARA SABER SE IRÁ ATUALIZAR OU CRIAR UMA DATA
-            var indiceId;
-
-
-            $("#btnConfirmarData").click(function () {
-                var descricaoData = $("#ContentPlaceHolder1_txtDescricaoData").val();
-                var data = $("#ContentPlaceHolder1_txtData").val().split('-');
-                
-                //MENSAGENS DE ERRO
-                if (descricaoData == "" && data == "") {
-                    //$("#btnConfirmarData").removeAttr("data-dismiss");
-                    $("#ContentPlaceHolder1_lblDescDataMsgErro").html("&nbsp &nbsp  Preenchimento obrigatório!");
-                    $("#ContentPlaceHolder1_lblDataMsgErro").html("&nbsp &nbsp  Preenchimento obrigatório!");
-
-                } else
-                    if (descricaoData == "") {  //MENSAGEM DE ERRO
-                        //$("#btnConfirmarData").removeAttr("data-dismiss");
-                        $("#ContentPlaceHolder1_lblDescDataMsgErro").html("&nbsp &nbsp  Preenchimento obrigatório!");
-                        $("#ContentPlaceHolder1_lblDataMsgErro").html("");
-                    } else
-                        if (data == "") { //MENSAGEM DE ERRO
-                            //$("#btnConfirmarData").removeAttr("data-dismiss");
-                            $("#ContentPlaceHolder1_lblDataMsgErro").html("&nbsp &nbsp  Preenchimento obrigatório!");
-                            $("#ContentPlaceHolder1_lblDescDataMsgErro").html("");
-                        } else {
-                            //$("#btnConfirmarData").attr("data-dismiss", "modal");
-
-                            var formatDate = data[2] + '/' + data[1] + '/' + data[0];
-
-                            var btnExcluir = $('<button/>', {
-                                type: 'button',
-                                id: 'btnExcluir' + i,
-                                value: 'Excluir',                                
-                                title: 'Excluir',
-                                class: 'btn btn-default btnExcluir',
-                                click: function () {
-                                    var parentBotao = $(this).parent();
-
-                                    $(function () {
-                                        $("#boxDesejaExcluir").dialog({
-                                            width: 400,
-                                            height: 200,
-                                            modal: true,
-                                            resizable: false,
-                                            draggable: false,
-                                            buttons: {
-                                                "Sim": function () {
-                                                    parentBotao.remove();
-                                                    $(this).dialog("close");
-                                                },
-                                                "Não": function () {
-                                                    $(this).dialog("close");
-                                                }
-                                            }
-
-                                        });
-                                   });
-
-                                }
-                            });
-
-                            var div = '<div class="data" id="div' + i + '"> <b> <label id="descData' + i + '">' + descricaoData + '</label></b>' +
-                                ': <label id="data' + i + '">' + formatDate + '</label>  </div> ';
-                                                         
-                            
-                            var btnEditar = $('<button/>', {
-                                type: 'button',
-                                id: 'btnEditar-' + i,
-                                value: 'Editar',
-                                title: 'Editar',
-                                class: 'btn btn-default btnEditar',                                 
-                                click: function () {
-                                    //$("#ContentPlaceHolder1_txtDescricaoData").val("");
-                                    $("#ContentPlaceHolder1_txtData").val("");
-                                    indiceId = $(this).attr('id').split('-');
-                                    
-                                    $("#ContentPlaceHolder1_txtDescricaoData").val($('#descData' + indiceId[1]).html());
-                                    dtUSA = $('#data' + indiceId[1]).html().split('/');
-                                    dtUSA = dtUSA[2] + '-' + dtUSA[1] + '-' + dtUSA[0];
-                                    $("#ContentPlaceHolder1_txtData").val(dtUSA);
-                                    contr = true;
-                                    $("#btnConfirmarData").attr("data-dismiss", "modal");
-                                }
-                            });
-
-                            btnEditar.attr({'data-toggle': 'modal', 'data-target': '#myModal1'});                                                                                                           
-
-                            if (contr == false) {
-                                $("#containerDatas").append(div);
-                                $("#div" + i).append(btnExcluir);
-                                $("#div" + i).append(btnEditar);
-
-                                var ed = document.getElementById('btnEditar-' + i);
-                                ed.insertAdjacentHTML('afterbegin', '<span class="glyphicon glyphicon-pencil"></span>');
-
-                                var ex = document.getElementById('btnExcluir' + i);
-                                ex.insertAdjacentHTML('afterbegin', '<span class="glyphicon glyphicon-trash"></span>');
-
-                                i++;
-                            } else { //SOMENTE EDITAR
-                                $('#descData' + indiceId[1]).html($("#ContentPlaceHolder1_txtDescricaoData").val());
-                                data = $("#ContentPlaceHolder1_txtData").val().split('-');
-                                formatDate = data[2] + '/' + data[1] + '/' + data[0];
-                                $('#data' + indiceId[1]).html(formatDate);
-                            }
-
-                            $("#ContentPlaceHolder1_lblDescDataMsgErro").html("");
-                            $("#ContentPlaceHolder1_lblDataMsgErro").html("");
-                            $("#ContentPlaceHolder1_txtDescricaoData").val("");
-                            $("#ContentPlaceHolder1_txtData").val("");
-                        }
-
-            });
-
-            //CONTINUAR ETAPA 2 - PEGAR DADOS DATAS
-            $("#ContentPlaceHolder1_btnContinuarEtapa2").click(function () {
-                var auxData = "";
-                dadosDatas = "";
-
-                for (var index = 0; index < i; index++) {
-                    auxData = "";
-                    auxData = $('#descData' + index).html();
-
-                    if (typeof (auxData) != "undefined") {
-                        dadosDatas += $('#descData' + index).html() + "-" + $('#data' + index).html() + "|";
-                    }
-
-                }
-
-                alert(dadosDatas);
-
-            });
 
 
         });
@@ -170,20 +36,6 @@
                 $("#sortable6 > li").each(function () {
                     dadosUl += "|" + $(this).html();
                 });
-
-                //$.ajax({
-                //    type: 'POST',
-                //    url: 'cadastrarPi.aspx/GetUsuario',
-                //    data: "{usuario:" + JSON.stringify(dadosUl) + "}",
-                //    contentType: 'application/json; charset=utf-8',
-                //    dataType: 'json',
-                //    success: function (r) {
-                //        for (var key in r) {
-                //            var value = r[key];
-                //            alert(value);
-                //        }
-                //    }
-                //});
 
             });
         });
@@ -200,7 +52,7 @@
         //             alert($(this).html());
         //     });      
         //}        
-        
+
     </script>
 
     <!--SORTABLE-->
@@ -217,6 +69,7 @@
             }).disableSelection();
         });
     </script>
+
 
     
     <!-- CADASTRAR PI (P5) -->

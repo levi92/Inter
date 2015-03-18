@@ -1,0 +1,85 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/paginas/Usuario/MasterPage.master" AutoEventWireup="true" CodeBehind="MasterPageMenuFilha.master.cs" Inherits="Inter.paginas.Usuario.MasterPageMenuFilha" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="cphConteudo" runat="Server">
+
+    <!-- Menu Lateral  -->
+
+    <div id="lateral">
+        <div id="menu">
+            <h1>
+                <asp:Label ID="hora" runat="server" ClientIDMode="Static"></asp:Label></h1>
+            <h5>
+                <asp:Label ID="dia" runat="server" ClientIDMode="Static"></asp:Label></h5>
+            <hr />
+
+            <ul class="menu">
+                <li>
+                    <asp:HyperLink ID="icone2" runat="server" NavigateUrl="~/paginas/Usuario/home.aspx" Enabled="True">
+                        <span class="glyphicon glyphicon-home"></span>&nbsp Home</asp:HyperLink></li>
+                <li>
+                    <asp:HyperLink ID="icone3" runat="server" NavigateUrl="~/paginas/Usuario/notificacoes.aspx" Enabled="True">
+                        <span class="glyphicon glyphicon-bell"></span>&nbsp Notificações</asp:HyperLink></li>
+                <li>
+                    <asp:HyperLink ID="icone4" runat="server" NavigateUrl="~/paginas/Usuario/piFinalizado.aspx" Enabled="True">
+                        <span class="glyphicon glyphicon-folder-open"></span>&nbsp PIs Finalizados</asp:HyperLink></li>                
+                <li>
+                    <asp:HyperLink ID="icone6" runat="server" NavigateUrl="~/paginas/Usuario/consultarPi.aspx" Enabled="True">
+                        <span class="glyphicon glyphicon-search"></span>&nbsp Consultar PI</asp:HyperLink></li>
+                <li>
+                    <asp:HyperLink ID="icone8" runat="server" NavigateUrl="~/paginas/Usuario/avaliarGrupo.aspx" Enabled="True">
+                        <span class="glyphicon glyphicon-check"></span>&nbsp Avaliar Grupos</asp:HyperLink></li>                
+                <hr />
+                <li><a id="icone10" onclick="Mostra('p15');" href="#"><span class="glyphicon glyphicon-question-sign"></span>&nbsp Ajuda</a></li>
+                <li><a id="icone11" data-toggle="modal" data-target="#myModalDesejaSair" href="#" title="Sair do sistema e voltar para o login"><span class="glyphicon glyphicon-off"></span>&nbsp Sair</a></li>
+
+
+
+            </ul>
+            <!-- mais seções -->
+        </div>
+    </div>
+
+
+    <!-- /# Fim menu lateral lateral -->
+
+
+    <div class="container">
+        <div id="conteudo">
+
+            <asp:ContentPlaceHolder ID="cphConteudoCentral" runat="server">
+            </asp:ContentPlaceHolder>
+
+        </div>
+    </div>
+
+
+    <!-- MODAL DESEJA SAIR? -->
+
+        <div class="modal fade" id="myModalDesejaSair" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    </div>
+                    <div class="modal-body">
+                        <h3 style="font-weight: bolder; text-align: center; color: #1f1f1f">
+                            <span style="color: #960d10" class="glyphicon glyphicon-question-sign"></span>&nbsp Deseja Sair do sistema?</h3>
+                    </div>
+
+                    <div class="modal-footer">
+                        
+                        <asp:Button ID="btnSair" class="btn btn-default" runat="server" Text="Sim" OnClick="btnSair_Click"
+                            ToolTip="Sair do sistema e voltar para o login" />
+                        <button type="button" class="btn btn-default" id="" data-dismiss="modal">Não</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</asp:Content>
+
+
