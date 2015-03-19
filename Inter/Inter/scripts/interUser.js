@@ -37,6 +37,15 @@ function Mostra(idDiv) {
 
 }
 
+function etapa2() {
+    controlarMostra = true;
+    $("#" + global).hide();
+    $("#c" + global).css("visibility", "hidden");
+    global = "p10";
+    $("#p10").show();
+    $("#conteudo").slideDown(500);
+}
+
 function etapa3() {
     controlarMostra = true;
     Mostra('p12');

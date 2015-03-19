@@ -12,6 +12,15 @@
 public partial class paginas_Usuario_cadastrarPi {
     
     /// <summary>
+    /// ScriptManager1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.ScriptManager ScriptManager1;
+    
+    /// <summary>
     /// hidden control.
     /// </summary>
     /// <remarks>
@@ -156,13 +165,22 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.Label lblCriterioPi;
     
     /// <summary>
-    /// lblCriGerais control.
+    /// listaCritGeral control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Literal lblCriGerais;
+    protected global::System.Web.UI.WebControls.ListBox listaCritGeral;
+    
+    /// <summary>
+    /// listaCritPi control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ListBox listaCritPi;
     
     /// <summary>
     /// btnContinuarEtapa3 control.
@@ -174,22 +192,22 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.Button btnContinuarEtapa3;
     
     /// <summary>
-    /// Panel1 control.
+    /// UpdatePanel2 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Panel Panel1;
+    protected global::System.Web.UI.UpdatePanel UpdatePanel2;
     
     /// <summary>
-    /// ScriptManager1 control.
+    /// PanelCriterios control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.ScriptManager ScriptManager1;
+    protected global::System.Web.UI.WebControls.Panel PanelCriterios;
     
     /// <summary>
     /// UpdatePanel1 control.

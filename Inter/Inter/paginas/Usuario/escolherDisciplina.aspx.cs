@@ -135,7 +135,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
         {
             RadioButton rb = (RadioButton)grid.FindControl("rb");//procurando um rb
 
-            if (grid.RowIndex == auxRb) 
+            if (grid.RowIndex == auxRb) //se a linha atual da grid for igual a linha que existe um radio selecionado
             {
                 rb.Checked = false; //desseleciona radio que estava selecionado
                 break;

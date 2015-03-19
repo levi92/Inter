@@ -33,7 +33,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         {
             CarregaCriGerais();
             PegarAnoeSemestreAno();
-            criterios = "";
+            
         }
     }
 
@@ -62,7 +62,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         lblAnoAut.Text = ano;
     }
 
-    
+
 
     private void CarregaCriGerais()
     {
@@ -71,47 +71,45 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
         if (qtd > 0)
         {
-            lblCriGerais.Text = "";
+            
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-
-                lblCriGerais.Text += "<li class=\"ui-state-default\">" + dr["cge_nome"].ToString() + "</li>";
+                listaCritGeral.Items.Add(dr["cge_nome"].ToString());                
 
             }
         }
     }
 
-    public static string criterios;
-
+    
     public void CriarCriterio()
-    {
-        criterios = Request.Form[hidden.UniqueID];
+    {        
+        int tamanho = (Int32) listaCritPi.Items.Count;
 
-        string[] dadosCrit = criterios.Split('|');
+        Label[] lblCriterios = new Label[tamanho];
+        TextBox[] txtCriterios = new TextBox[tamanho];
+        Label[] lblLinha = new Label[tamanho];
 
-        Label[] lblCriterios = new Label[dadosCrit.Length];
-        TextBox[] txtCriterios = new TextBox[dadosCrit.Length];
-        Label[] lblLinha = new Label[dadosCrit.Length];
-
-        for (int i = 1; i < dadosCrit.Length; i++)
+        for (int i = 0; i < tamanho; i++)
         {
+
             lblCriterios[i] = new Label();
             lblCriterios[i].ID = "lblCriterio" + (i);
             lblCriterios[i].CssClass = "label";
-            lblCriterios[i].Text = dadosCrit[i] + ": ";
+            lblCriterios[i].Text = listaCritPi.Items[i].ToString() + ": ";
 
             txtCriterios[i] = new TextBox();
             txtCriterios[i].ID = "txtCriterio" + (i);
             txtCriterios[i].CssClass = "text";
+            txtCriterios[i].Attributes["type"] = "Number";
 
             lblLinha[i] = new Label();
             lblLinha[i].ID = "lblL" + (i);
             lblLinha[i].Text = String.Format("<br/><br/>");
 
 
-            Panel1.Controls.Add(lblCriterios[i]);
-            Panel1.Controls.Add(txtCriterios[i]);
-            Panel1.Controls.Add(lblLinha[i]);
+            PanelCriterios.Controls.Add(lblCriterios[i]);
+            PanelCriterios.Controls.Add(txtCriterios[i]);
+            PanelCriterios.Controls.Add(lblLinha[i]);
 
         }
 
@@ -145,6 +143,26 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         listaAlunosGrupo.ClearSelection();
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
+    }
+
+    protected void listaCritGeral_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        listaCritPi.Items.Add(listaCritGeral.SelectedItem);
+        listaCritGeral.Items.RemoveAt(listaCritGeral.SelectedIndex);
+        listaCritGeral.ClearSelection();
+        listaCritPi.ClearSelection();
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
+    }
+
+    protected void listaCritPi_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        listaCritGeral.Items.Add(listaCritPi.SelectedItem);
+        listaCritPi.Items.RemoveAt(listaCritPi.SelectedIndex);
+        listaCritGeral.ClearSelection();
+        listaCritPi.ClearSelection();
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
     }
 
 

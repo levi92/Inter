@@ -186,7 +186,7 @@ table thead {
     margin-left: 20%;
 }
 
-#listaAlunoGeral, #listaAlunosGrupo {
+#listaAlunoGeral, #listaAlunosGrupo, #listaCritPi, #listaCritGeral {
     border: 1px solid #ebebeb;
     width: 160px;
     min-height: 230px;
@@ -250,7 +250,7 @@ footer p {
 }
 
 /*Cadastrar PI*/
-div#ContentPlaceHolder1_Panel1 {
+div#PanelCriterios {
     text-align: right;
     width: 25%;
 }

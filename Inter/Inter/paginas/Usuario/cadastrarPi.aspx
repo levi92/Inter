@@ -2,38 +2,12 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
-    
-    <script type="text/javascript">
-        function pegarCriterio() {
-            var dadosCrit = "";
-
-            $('#sortable4 > li').each(function () {
-                dadosCrit += "|" + $(this).html();
-            });
-            $('#hidden').val(dadosCrit);
-        }
-    </script>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
-
             // ALTERAR COR DO ÍCONE NO MENU LATERAL 
             $('#cphConteudo_icone5').addClass('corIcone');
-
-        });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $("#finalizarCriarPi").click(function () {
-                //ALUNOS DE UM GRUPO
-                var dadosUl = "";
-                $("#sortable6 > li").each(function () {
-                    dadosUl += "|" + $(this).html();
-                });
-
-            });
         });
     </script>
 
@@ -43,30 +17,10 @@
             var nome = $("#ContentPlaceHolder1_txtNomeCriterio").val();
             $("#sortable4").append("<li class=\"ui-state-default\">" + nome + "</li>");
         }
-        // function finalizarCadastroPI() {
-        //     $("#sortable6 > li").each(function () {
-        //             alert($(this).html());
-        //     });      
-        //}        
 
     </script>
 
-    <!--SORTABLE-->
-    <script>
-        $(function () {
-            $("#sortable3, #sortable4").sortable({
-                connectWith: ".connectedSortable",
-            }).disableSelection();
-        });
-
-        $(function () {
-            $("#sortable5, #sortable6").sortable({
-                connectWith: ".connectedSortable",
-            }).disableSelection();
-        });
-    </script>
-
-
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <!-- CADASTRAR PI -->
 
@@ -209,16 +163,15 @@
                     <tr>
                         <td>
                             <div style="width: 200px; height: 230px; overflow-y: auto;">
-                                <ul id="sortable3" class="connectedSortable">
-                                    <asp:Literal runat="server" ID="lblCriGerais"></asp:Literal>
-                                </ul>
+                                <asp:ListBox ID="listaCritGeral" runat="server" AutoPostBack="true"
+                                    OnSelectedIndexChanged="listaCritGeral_SelectedIndexChanged" ClientIDMode="Static"></asp:ListBox>
                             </div>
                         </td>
 
                         <td>
                             <div style="width: 200px; height: 230px; overflow-y: auto;">
-                                <ul id="sortable4" class="connectedSortable">
-                                </ul>
+                                <asp:ListBox ID="listaCritPi" runat="server" AutoPostBack="true"
+                                    OnSelectedIndexChanged="listaCritPi_SelectedIndexChanged" ClientIDMode="Static"></asp:ListBox>
                             </div>
                         </td>
 
@@ -242,8 +195,7 @@
                         </td>
                         <td>
                             <asp:Button ID="btnContinuarEtapa3" runat="server" Text="Continuar" CssClass="btn btn-default"
-                                ToolTip="Ir para adicionar peso aos critérios"
-                                OnClientClick="pegarCriterio();" OnClick="btnContinuarEtapa3_Click" />
+                                ToolTip="Ir para adicionar peso aos critérios" OnClick="btnContinuarEtapa3_Click" />
                         </td>
                     </tr>
                 </table>
@@ -255,45 +207,47 @@
 
     <!-- Adicionar peso aos critérios (p12) -->
 
+    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+        <ContentTemplate>
+            <div id="p12" class="first">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Adicionar Peso aos Critérios</h3>
+                    </div>
+                    <div class="panel-body-usuarios">
+                        <table style="width: 30%; margin-left: 5%;">
+                            <tr>
+                                <asp:Panel ID="PanelCriterios" runat="server" ClientIDMode="Static"></asp:Panel>
+                            </tr>
 
-    <div id="p12" class="first">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Adicionar Peso aos Critérios</h3>
+                            <tr>
+                                <td colspan="2">
+                                    <br />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-default" id="" onclick="Mostra('p10');" title="Voltar para Adicionar Critérios">
+                                        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
+                                <td>
+                                    <%--<asp:Button ID="ContinuarEtapa4" OnClientClick="openModal(); return false;" OnClick="ContinuarEtapa4_Click" CssClass="btn btn-default" runat="server" Text="Continuar" title="" />--%>
+                                    <button type="button" class="btn btn-default" id="ContinuarEtapa4" onclick="Mostra('p13');" title="Ir para Criar Grupos">Continuar</button>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                        <p style="text-align: right; font-weight: bold;">Passo 3 de 4</p>
+                    </div>
+                </div>
             </div>
-            <div class="panel-body-usuarios">
-                <table style="width: 30%; margin-left: 5%;">
-                    <tr>
-                        <asp:Panel ID="Panel1" runat="server"></asp:Panel>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2">
-                            <br />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <button type="button" class="btn btn-default" id="" onclick="Mostra('p10');" title="Voltar para Adicionar Critérios">
-                                <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
-                        <td>
-                            <%--<asp:Button ID="ContinuarEtapa4" OnClientClick="openModal(); return false;" OnClick="ContinuarEtapa4_Click" CssClass="btn btn-default" runat="server" Text="Continuar" title="" />--%>
-                            <button type="button" class="btn btn-default" id="ContinuarEtapa4" onclick="Mostra('p13');" title="Ir para Criar Grupos">Continuar</button>
-                        </td>
-                    </tr>
-                </table>
-
-
-                <p style="text-align: right; font-weight: bold;">Passo 3 de 4</p>
-            </div>
-        </div>
-    </div>
-
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
     <!-- Criar Grupos (p13) -->
 
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
 
@@ -331,7 +285,7 @@
 
                             <tr>
 
-                                <td>                                    
+                                <td>
 
                                     <div style="width: 230px; height: 230px; overflow-y: auto;">
                                         <asp:ListBox ID="listaAlunoGeral" runat="server"
@@ -383,7 +337,7 @@
     </asp:UpdatePanel>
 
 
-    <!-- Modal Cadastrar Datas de  Eventos -->    
+    <!-- Modal Cadastrar Datas de  Eventos -->
     <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
