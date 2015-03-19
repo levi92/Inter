@@ -2,6 +2,7 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
+    
     <script type="text/javascript">
         function pegarCriterio() {
             var dadosCrit = "";
@@ -9,11 +10,8 @@
             $('#sortable4 > li').each(function () {
                 dadosCrit += "|" + $(this).html();
             });
-
             $('#hidden').val(dadosCrit);
         }
-
-
     </script>
 
     <script type="text/javascript">
@@ -22,8 +20,6 @@
 
             // ALTERAR COR DO ÍCONE NO MENU LATERAL 
             $('#cphConteudo_icone5').addClass('corIcone');
-
-
 
         });
     </script>
@@ -72,7 +68,7 @@
 
 
 
-    <!-- CADASTRAR PI (P5) -->
+    <!-- CADASTRAR PI -->
 
     <div id="p1" class="first">
         <div class="panel panel-default">
