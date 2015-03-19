@@ -17,6 +17,7 @@
 
             <ul class="menu">
                 <li>
+                    <%-- Links do menu lateral equivalentes a disciplina Filha --%>
                     <asp:HyperLink ID="icone2" runat="server" NavigateUrl="~/paginas/Usuario/home.aspx" Enabled="True">
                         <span class="glyphicon glyphicon-home"></span>&nbsp Home</asp:HyperLink></li>
                 <li>
@@ -38,17 +39,13 @@
 
 
             </ul>
-            <!-- mais seções -->
         </div>
     </div>
 
 
-    <!-- /# Fim menu lateral lateral -->
-
-
     <div class="container">
         <div id="conteudo">
-
+            <%-- Content que mostra primeiramente a Home, depois pode mostrar outros --%>
             <asp:ContentPlaceHolder ID="cphConteudoCentral" runat="server">
             </asp:ContentPlaceHolder>
 

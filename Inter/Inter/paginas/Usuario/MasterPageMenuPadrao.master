@@ -3,7 +3,10 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphConteudo" Runat="Server">
-     
+
+          <%-- ClientIDMode: transforma um id fixo válido para qualquer caso
+          OBS: Por causa da master page, pois fica um id grandão --%>
+
         <!-- Menu Lateral  -->
 
         <div id="lateral">
@@ -14,26 +17,22 @@
                 <h5>
                     <asp:Label ID="dia" runat="server" ClientIDMode="Static"></asp:Label></h5>
                 <hr />
-                 <ul>                
+                 <ul>      
+                     <%-- Eventos do onclick estão no arquivo javascript interUser --%>          
                     <li><a id="icone10" onclick="Mostra('p15');" href="#"><span class="glyphicon glyphicon-question-sign"></span>&nbsp Ajuda</a></li>
                     <li><a id="icone11" data-toggle="modal" data-target="#myModalDesejaSair" href="#" title="Sair do sistema e voltar para o login"><span class="glyphicon glyphicon-off"></span>&nbsp Sair</a></li>                   
                                         
                 </ul>
-                <!-- mais seções -->
-
-            </div>
-            
+            </div> 
             <!-- /#menu -->
+
         </div>
-
-
-
-        <!-- /# Fim menu lateral lateral -->
+        <!-- /#lateral -->
 
 
         <div class="container">
             <div id="conteudo">
-
+                <%-- Content que mostra primeiramente o escolher disciplina // Depois vai ter mais --%>
                 <asp:ContentPlaceHolder ID="cphConteudoCentral" runat="server">
                 </asp:ContentPlaceHolder>
 

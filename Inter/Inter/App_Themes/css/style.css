@@ -21,16 +21,14 @@ body {
     width: 100%;
     padding: 0px;
     font: 13px/22px Helvetica, Arial, sans-serif;
-
     background: #FFF;
 }
 
 header {
-    font-family:  Arial; 
+    font-family: Arial;
     font-size: 20px;
-    text-align:left;
+    text-align: left;
     font-weight: bold;
-
 }
 
 
@@ -38,15 +36,15 @@ header {
 CONTEUDO
 ------------------------------*/
 #conteudo {
-    width: 82%;	
+    width: 82%;
     margin-top: 20px;
     text-align: justify;
     float: right;
     padding: 40px;
-
 }
+
 .first {
-    display: none;	
+    display: none;
 }
 
 
@@ -56,75 +54,73 @@ MENUS
 
 ul {
     list-style: none;
-}	
+}
 
 #menu li {
     font-size: 14px;
-    margin: 10px 0 10px 5px;     
+    margin: 10px 0 10px 5px;
 }
 
-#menu li:active {
-   /* background-color: ;*/
-    color: #fff;
-}
+    #menu li:active {
+        /* background-color: ;*/
+        color: #fff;
+    }
 
-#menu li:first-child {
-    margin-top: 25px;
-}
+    #menu li:first-child {
+        margin-top: 25px;
+    }
 
-#menu li a {
-    text-decoration: none;
-    color:#777;
-    display:block;
-    width: 155px;
-    padding: 5px;
-    border-radius: 4px;
-}
+    #menu li a {
+        text-decoration: none;
+        color: #777;
+        display: block;
+        width: 155px;
+        padding: 5px;
+        border-radius: 4px;
+    }
 
-#menu li a:hover {
-    text-decoration: none;
-    color:#000;
-    background-color: #DEDEDE;
-}
+        #menu li a:hover {
+            text-decoration: none;
+            color: #000;
+            background-color: #DEDEDE;
+        }
 
-/*Mudar cor ícone*/    
-#menu li a.corIcone {
-    width: 155px;  
-    color: white;    
-    background-color: #960d10; 
-    /*transition: background-color 1.5s;*/    
-    padding: 5px;
-    border-radius: 4px;
-}
+        /*Mudar cor ícone*/
+        #menu li a.corIcone {
+            width: 155px;
+            color: white;
+            background-color: #960d10;
+            /*transition: background-color 1.5s;*/
+            padding: 5px;
+            border-radius: 4px;
+        }
 
 #menu h3 {
     padding-right: 50px;
 }
 
 #lateral {
-
-    padding:50px 50px 0 10px;
+    padding: 50px 50px 0 10px;
     margin-right: 50px;
     -moz-transition: all 0.5s ease;
     -webkit-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    font-size:1.2em;
-    background:rgb(44,62,80);
+    font-size: 1.2em;
+    background: rgb(44,62,80);
     background-image: -moz-linear-gradient( 45deg, rgb(255,255,255), rgb(242,242,242) );
     background-image: -webkit-linear-gradient( 45deg, rgb(255,255,255), rgb(242,242,242) );
     background-image: -o-linear-gradient( 45deg, rgb(255,255,255), rgb(242,242,242) );
     background-image: -ms-linear-gradient( 45deg, rgb(255,255,255), rgb(242,242,242) );
     background-image: linear-gradient( 45deg, rgb(255,255,255), rgb(242,242,242) );
-    height:100%;
-    overflow:hidden;
-    width:200px; 
+    height: 100%;
+    overflow: hidden;
+    width: 200px;
     float: left;
-    position:fixed;
-    top:0;
+    position: fixed;
+    top: 0;
     border: 1px solid;
     border-color: #e7e7e7;
-
 }
 /* Menu que se esconde
 #lateral:before {
@@ -149,7 +145,7 @@ overflow: hidden;
 transform: translate(200px, 0);
 padding-right:0;
 }		
-*/	
+*/
 
 /*Tabelas*/
 
@@ -168,26 +164,50 @@ table thead {
     text-align: center;
 }
 
-.tabelaEscolherDis{
+.tabelaEscolherDis {
     font-size: 14px;
     color: black;
-    font-weight: bolder;    
+    font-weight: bolder;
     text-align: center;
 }
 
 
 
 /* SORTABLE */
-    
-#sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6 {
+
+#sortable3, #sortable4 {
     border: 1px solid #ebebeb;
-    width: 142px;
+    width: 145px;
     min-height: 230px;
     list-style-type: none;
     margin: 0;
     padding: 5px 0 0 0;
     float: left;
     margin-left: 20%;
+}
+
+#listaAlunoGeral, #listaAlunosGrupo {
+    border: 1px solid #ebebeb;
+    width: 160px;
+    min-height: 230px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+    float: left;
+    margin-left: 20%;
+}
+
+option {
+    margin: 5px 5px 5px 10px;
+    padding: 7px 5px;
+    font-size: 12px;
+    width: 120px;
+    cursor: pointer;
+    border: 1px solid #d3d3d3;
+    background: #e6e6e6 url("../../scripts/images/ui-bg_glass_75_e6e6e6_1x400.png") 50% 50% repeat-x;
+    font-weight: normal;
+    color: #555555;
+    text-align: center;
 }
 
 
@@ -197,40 +217,46 @@ table thead {
     padding: 5px;
     font-size: 12px;
     width: 120px;
-    cursor:pointer;
+    cursor: pointer;
 }
-    
-  
+
+
 
 /*------------------------------
 =FOOTER
 ------------------------------*/
 footer {
-    position:absolute;
+    position: absolute;
     bottom: 0;
-    width: 100%;	
+    width: 100%;
     margin: 0 auto;
     margin-top: 50px;
     padding-top: 10px;
     padding-bottom: 30px;
     background-color: #eaeaea;
-    float:left;
+    float: left;
     text-align: center;
     color: #000;
     z-index: -1;
+}
 
-}
 #clearfooter {
-    clear:both;
+    clear: both;
 }
-footer p {	
-    font-size: 15px;	
+
+footer p {
+    font-size: 15px;
     color: #000;
 }
 
 /*Cadastrar PI*/
+div#ContentPlaceHolder1_Panel1 {
+    text-align: right;
+    width: 25%;
+}
+
 .text {
-    width: 50px;    
+    width: 50px;
     /*height:30px;*/
     border-radius: 3px;
     font-family: Arial;
@@ -259,8 +285,8 @@ footer p {
 
 /*Cadastrar Data*/
 .textData, .textCriterio, .textPesquisa {
-    width: 100%;    
-    height:30px;
+    width: 100%;
+    height: 30px;
     border-radius: 3px;
     font-family: Arial;
     font-size: 14px;
@@ -271,12 +297,11 @@ footer p {
     box-shadow: #000 0px 0px 2px 0px inset;
     border: 0px solid #ccc;
     margin-left: 5px;
-    
 }
 
-.dropDown  {
-    width: 80%;    
-    height:30px;
+.dropDown {
+    width: 80%;
+    height: 30px;
     border-radius: 3px;
     font-family: Arial;
     font-size: 14px;
@@ -289,22 +314,21 @@ footer p {
     margin-left: 5px;
 }
 
-div #containerDatas{
+div #containerDatas {
     min-height: 10px;
     max-height: 135px;
-    width: 370px;    
-    overflow-y: auto; 
-    margin: 5px 0 20px 0;     
+    width: 370px;
+    overflow-y: auto;
+    margin: 5px 0 20px 0;
 }
 
-.data{
-     width: 100%; 
-     margin:3px auto;
-     padding: 5px;
-     background-color: rgba(242,242,242, 0.6); 
-     border-radius: 4px; 
-     text-align: center;
-     
+.data {
+    width: 100%;
+    margin: 3px auto;
+    padding: 5px;
+    background-color: rgba(242,242,242, 0.6);
+    border-radius: 4px;
+    text-align: center;
 }
 
 
@@ -312,53 +336,53 @@ div #containerDatas{
 /*DIVs HOME*/
 #conteudoHome {
     width: 80%;
-    margin:auto;    
+    margin: auto;
 }
 
 #crie {
     height: 110px;
-    width: 20%;    
-    color: white;    
-    float: left; 
-    background-image:url(../images/crie.png); 
+    width: 20%;
+    color: white;
+    float: left;
+    background-image: url(../images/crie.png);
     background-size: 86%;
-    background-repeat:no-repeat;        
+    background-repeat: no-repeat;
 }
 
 #customize {
-    background-image:url(../images/customize.png); 
+    background-image: url(../images/customize.png);
     background-size: 86%;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     height: 110px;
-    width: 20%;    
-    color: white;    
-    float: left;     
+    width: 20%;
+    color: white;
+    float: left;
 }
 
 #avalie {
-    background-image:url(../images/avalie.png);
+    background-image: url(../images/avalie.png);
     background-size: 86%;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     height: 110px;
-    width: 20%;    
-    color: white;    
-    float: left;     
+    width: 20%;
+    color: white;
+    float: left;
 }
 
 
-#imgBloqueio {    
+#imgBloqueio {
     height: 550px;
-    width: 50%;  
-    background-image:url(../../App_Themes/images/bloqueioUrl1.png);
+    width: 50%;
+    background-image: url(../../App_Themes/images/bloqueioUrl1.png);
     background-size: 100%;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     margin: auto;
     /*margin-top: 120px;    */
 }
 
 .texto {
     height: 110px;
-    width: 80%;    
+    width: 80%;
     float: left;
     text-align: justify;
     /*border: 1px solid black;*/
@@ -370,26 +394,26 @@ div #containerDatas{
 /*tabela Home1 */
 tabelaHome1 {
     width: 100%;
-    float: left;     
+    float: left;
 }
 
 /*tabela Home2 */
 tabelaHome2 {
     width: 100%;
-    float: left;     
+    float: left;
 }
 
 /*tabela Home3 */
 tabelaHome3 {
     width: 100%;
-    float: left;     
+    float: left;
 }
 
 
 .colunaHome1 {
-    width: 30%;   
-    padding: 5px 10px 0 10px; 
-    text-align: justify;   
+    width: 30%;
+    padding: 5px 10px 0 10px;
+    text-align: justify;
 }
 
 
@@ -412,10 +436,9 @@ tabelaHome3 {
 }
 
 .colunaBotoes {
-    width: 30%;    
+    width: 30%;
     text-align: right;
     padding-right: 3%;
-
 }
 
 
@@ -423,51 +446,68 @@ tabelaHome3 {
 /*GRID VIEW*/
 .gridView {
     width: 100%;
-    background-color: #fff;   
-    margin: 5px 0 10px 0;   
-    /*border: solid 1px #525252;*/   
-    border-collapse:collapse; 
+    background-color: #fff;
+    margin: 5px 0 10px 0;
+    /*border: solid 1px #525252;*/
+    border-collapse: collapse;
 }
 
-.gridView td {   
-    padding: 2px;   
-    border: solid 1px #c1c1c1;   
-    color: #717171;  
-    padding-left:25px;  
-} 
+    .gridView td {
+        padding: 2px;
+        border: solid 1px #c1c1c1;
+        color: #717171;
+        padding-left: 25px;
+    }
 
-.gridView th {   
-    padding: 4px 2px;   
-    color: #fff;   
-    background: #424242 url(../images/grd_head2.png) repeat-x top;   /*7E2D2D*/ 
-    border-left: solid 1px #525252;   
-    font-size: 1em; 
-    padding-left:15px;  
-} 
+    .gridView th {
+        padding: 4px 2px;
+        color: #fff;
+        background: #424242 url(../images/grd_head2.png) repeat-x top; /*7E2D2D*/
+        border-left: solid 1px #525252;
+        font-size: 1em;
+        padding-left: 15px;
+    }
 
-.gridView .alt { background: #fcfcfc url(../images/grd_alt.png) repeat-x top; }  
-.gridView .pgr { background: #424242 url(../images/grd_pgr.png) repeat-x top; }  
-.gridView .pgr table { margin: 5px 0; }  
-.gridView .pgr td {   
-    border-width: 0;   
-    padding: 0 6px;   
-    border-left: solid 1px #666;   
-    font-weight: bold;   
-    color: #fff;   
-    line-height: 12px;   
- }     
-.gridView .pgr a { color: #666; text-decoration: none; }  
-.gridView .pgr a:hover { color: #000; text-decoration: none; }
+    .gridView .alt {
+        background: #fcfcfc url(../images/grd_alt.png) repeat-x top;
+    }
+
+    .gridView .pgr {
+        background: #424242 url(../images/grd_pgr.png) repeat-x top;
+    }
+
+        .gridView .pgr table {
+            margin: 5px 0;
+        }
+
+        .gridView .pgr td {
+            border-width: 0;
+            padding: 0 6px;
+            border-left: solid 1px #666;
+            font-weight: bold;
+            color: #fff;
+            line-height: 12px;
+        }
+
+        .gridView .pgr a {
+            color: #666;
+            text-decoration: none;
+        }
+
+            .gridView .pgr a:hover {
+                color: #000;
+                text-decoration: none;
+            }
 
 
-.btnExcluir, .btnEditar {    
+.btnExcluir, .btnEditar {
     padding: 3px 7px;
     float: right;
     margin-right: 7px;
     margin-top: -2px;
-} 
+}
 
-#ContentPlaceHolder1_lblDescDataMsgErro, #ContentPlaceHolder1_lblDataMsgErro {
+#lblDescDataMsgErro, #lblDataMsgErro {
     color: red;
     font-weight: bolder;
 }

@@ -1,17 +1,17 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_cadastrarPi" Codebehind="cadastrarPi.aspx.cs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_cadastrarPi" CodeBehind="cadastrarPi.aspx.cs" %>
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
-<script type="text/javascript">
-    function pegarCriterio() {
-        var dadosCrit = "";
+    <script type="text/javascript">
+        function pegarCriterio() {
+            var dadosCrit = "";
 
-        $('#sortable4 > li').each(function () {
-            dadosCrit += "|" + $(this).html();
-        });
+            $('#sortable4 > li').each(function () {
+                dadosCrit += "|" + $(this).html();
+            });
 
-        $('#hidden').val(dadosCrit);
-    }
+            $('#hidden').val(dadosCrit);
+        }
 
 
     </script>
@@ -71,15 +71,16 @@
     </script>
 
 
-    
+
     <!-- CADASTRAR PI (P5) -->
-    
+
     <div id="p1" class="first">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Cadastrar PI</h3>
             </div>
             <div class="panel-body-usuarios">
+                <asp:HiddenField ID="hidden" runat="server" ClientIDMode="Static" />
 
                 <table id="tabelaCadastrarPi" class="table">
 
@@ -106,9 +107,9 @@
 
                         <td>
                             <asp:Label ID="lblSemestreAut" runat="server" Text=""></asp:Label>
-                            
+
                         </td>
-                        
+
 
                     </tr>
 
@@ -178,7 +179,8 @@
                         <td class="colunaBotoes"></td>
                         <td class="colunaBotoes"></td>
                         <td class="colunaBotoes">
-                            <asp:Button ID="btnContinuarEtapa2" OnClientClick="Mostra('p10'); return false;" CssClass="btn btn-default" runat="server" Text="Continuar" title="Ir para adicionar critérios" />
+                            <asp:Button ID="btnContinuarEtapa2" OnClientClick="Mostra('p10'); return false;" ClientIDMode="Static"
+                                CssClass="btn btn-default" runat="server" Text="Continuar" title="Ir para adicionar critérios" />
                         </td>
                     </tr>
                 </table>
@@ -212,11 +214,6 @@
                         <td>
                             <div style="width: 200px; height: 230px; overflow-y: auto;">
                                 <ul id="sortable3" class="connectedSortable">
-                                    <%-- <li class="ui-state-default">Postura</li>
-                                                <li class="ui-state-default">Vestimeta</li>
-                                                <li class="ui-state-default">Fala</li>
-                                                <li class="ui-state-default">Conhecimento</li>
-                                                <li class="ui-state-default">Sistema</li>--%>
                                     <asp:Literal runat="server" ID="lblCriGerais"></asp:Literal>
                                 </ul>
                             </div>
@@ -248,8 +245,9 @@
                             </button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-default" id="btnContinuarEtapa3" title="Ir para adicionar peso aos critérios">Continuar</button>
-
+                            <asp:Button ID="btnContinuarEtapa3" runat="server" Text="Continuar" CssClass="btn btn-default"
+                                ToolTip="Ir para adicionar peso aos critérios"
+                                OnClientClick="pegarCriterio();" OnClick="btnContinuarEtapa3_Click" />
                         </td>
                     </tr>
                 </table>
@@ -261,6 +259,7 @@
 
     <!-- Adicionar peso aos critérios (p12) -->
 
+
     <div id="p12" class="first">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -268,32 +267,8 @@
             </div>
             <div class="panel-body-usuarios">
                 <table style="width: 30%; margin-left: 5%;">
-                    <tr style="text-align: left;">
-                        <td>
-                            <asp:Label ID="lblP" runat="server" Text="Postura: "></asp:Label></td>
-                        <td>
-                            <asp:TextBox ID="txtP" CssClass="text" runat="server"></asp:TextBox></td>
-                    </tr>
-
-                    <tr style="text-align: left;">
-                        <td>
-                            <asp:Label ID="lblV" runat="server" Text="Vestimenta: "></asp:Label></td>
-                        <td>
-                            <asp:TextBox ID="txtV" CssClass="text" runat="server"></asp:TextBox></td>
-                    </tr>
-
-                    <tr style="text-align: left;">
-                        <td>
-                            <asp:Label ID="lblF" runat="server" Text="Fala: "></asp:Label></td>
-                        <td>
-                            <asp:TextBox ID="txtF" CssClass="text" runat="server"></asp:TextBox></td>
-                    </tr>
-
-                    <tr style="text-align: left;">
-                        <td>
-                            <asp:Label ID="lblC" runat="server" Text="Conhecimento: "></asp:Label></td>
-                        <td>
-                            <asp:TextBox ID="txtC" CssClass="text" runat="server"></asp:TextBox></td>
+                    <tr>
+                        <asp:Panel ID="Panel1" runat="server"></asp:Panel>
                     </tr>
 
                     <tr>
@@ -322,82 +297,97 @@
 
     <!-- Criar Grupos (p13) -->
 
-    <div id="p13" class="first">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Criar Grupos</h3>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+
+
+            <div id="p13" class="first">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Criar Grupos</h3>
+                    </div>
+                    <div class="panel-body-usuarios">
+
+                        <table style="width: 70%; margin-left: -10px">
+                            <tr>
+                                <td>
+                                    <asp:Label ID="lblNomeGrupo" CssClass="label" runat="server" Text="Nome do Grupo: "></asp:Label></td>
+                                <td colspan="2" style="text-align: start;">
+                                    <asp:TextBox ID="txtNomeGrupo" CssClass="text" Width="95%" runat="server"></asp:TextBox></td>
+
+                            </tr>
+
+                            <tr>
+                                <td colspan="3">
+                                    <br />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <asp:Label ID="lblAlunoDisciplina" CssClass="label" runat="server" Text="Alunos da Disciplina"></asp:Label></td>
+                                <td>
+                                    <asp:Label ID="lblAlunoGrupo" CssClass="label" runat="server" Text="Alunos do Grupo"></asp:Label></td>
+                                <td></td>
+                            </tr>
+
+
+                            <tr>
+
+                                <td>                                    
+
+                                    <div style="width: 230px; height: 230px; overflow-y: auto;">
+                                        <asp:ListBox ID="listaAlunoGeral" runat="server"
+                                            AutoPostBack="true" OnSelectedIndexChanged="listaAlunoGeral_SelectedIndexChanged" ClientIDMode="Static">
+                                            <asp:ListItem>Bruno</asp:ListItem>
+                                            <asp:ListItem>Mariazinha</asp:ListItem>
+                                        </asp:ListBox>
+
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div style="width: 230px; height: 230px; overflow-y: auto;">
+                                        <asp:ListBox ID="listaAlunosGrupo" runat="server" OnSelectedIndexChanged="listaAlunosGrupo_SelectedIndexChanged" AutoPostBack="true"
+                                            ClientIDMode="Static"></asp:ListBox>
+                                    </div>
+
+                                </td>
+                                <td></td>
+
+                            </tr>
+
+                            <tr>
+                                <td colspan="3">
+                                    <br />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+
+                                    <button type="button" class="btn btn-default" id="btnVoltarEtapa3" onclick="Mostra('p12');" title="Voltar para adicionar peso aos critérios ">
+                                        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
+                                <td>
+                                    <button type="button" class="btn btn-default" id="btnAdicionarGrupo" title="Criar outro grupo">
+                                        <span class="glyphicon glyphicon-plus"></span>&nbsp Adicionar Grupo</button></td>
+                                <td>
+                                    <button type="button" class="btn btn-default" id="finalizarCriarPi" onclick="finalizarCadastroPI();" data-toggle="modal" data-target="#myModalPiCadastrado" title="Finalizar criação de PI">
+                                        <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</button></td>
+                            </tr>
+
+                        </table>
+
+                        <p style="text-align: right; font-weight: bold; margin-top: 5px;">Passo 4 de 4</p>
+                    </div>
+                </div>
             </div>
-            <div class="panel-body-usuarios">
-                <table style="width: 70%; margin-left: -10px">
-                    <tr>
-                        <td>
-                            <asp:Label ID="lblNomeGrupo" CssClass="label" runat="server" Text="Nome do Grupo: "></asp:Label></td>
-                        <td colspan="2" style="text-align: start;">
-                            <asp:TextBox ID="txtNomeGrupo" CssClass="text" Width="95%" runat="server"></asp:TextBox></td>
-
-                    </tr>
-
-                    <tr>
-                        <td colspan="3">
-                            <br />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <asp:Label ID="lblAlunoDisciplina" CssClass="label" runat="server" Text="Alunos da Disciplina"></asp:Label></td>
-                        <td>
-                            <asp:Label ID="lblAlunoGrupo" CssClass="label" runat="server" Text="Alunos do Grupo"></asp:Label></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div style="width: 200px; height: 230px; overflow-y: auto;">
-                                <ul id="sortable5" class="connectedSortable">
-                                    <li class="ui-state-default">Bruno Eduardo</li>
-                                    <li class="ui-state-default">Dayane Ferraz</li>
-                                    <li class="ui-state-default">Felipe Ayres</li>
-                                    <li class="ui-state-default">Higor Gomes</li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>
-                            <div style="width: 200px; height: 230px; overflow-y: auto;">
-                                <ul id="sortable6" class="connectedSortable">
-                                </ul>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="3">
-                            <br />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <button type="button" class="btn btn-default" id="btnVoltarEtapa3" onclick="Mostra('p12');" title="Voltar para adicionar peso aos critérios ">
-                                <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
-                        <td>
-                            <button type="button" class="btn btn-default" id="btnAdicionarGrupo" title="Criar outro grupo">
-                                <span class="glyphicon glyphicon-plus"></span>&nbsp Adicionar Grupo</button></td>
-                        <td>
-                            <button type="button" class="btn btn-default" id="finalizarCriarPi" onclick="finalizarCadastroPI();" data-toggle="modal" data-target="#myModalPiCadastrado" title="Finalizar criação de PI">
-                                <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</button></td>
-                    </tr>
-                </table>
-
-                <p style="text-align: right; font-weight: bold; margin-top: 5px;">Passo 4 de 4</p>
-            </div>
-        </div>
-    </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
 
-
-    <!-- Modal Cadastrar Datas de  Eventos -->
+    <!-- Modal Cadastrar Datas de  Eventos -->    
     <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -413,11 +403,11 @@
                             </td>
 
                             <td>
-                                <asp:TextBox ID="txtDescricaoData" CssClass="textData" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtDescricaoData" CssClass="textData" runat="server" ClientIDMode="Static"></asp:TextBox>
 
                             </td>
                             <td>
-                                <asp:Label ID="lblDescDataMsgErro" runat="server" Text=""></asp:Label></td>
+                                <asp:Label ID="lblDescDataMsgErro" runat="server" ClientIDMode="Static"></asp:Label></td>
                         </tr>
 
                         <tr>
@@ -430,23 +420,23 @@
                             <td>
                                 <asp:Label ID="lblData" runat="server" CssClass="label" Text="Data: "></asp:Label></td>
                             <td>
-                                <asp:TextBox ID="txtData" CssClass="textData" TextMode="Date" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtData" CssClass="textData" TextMode="Date" runat="server" ClientIDMode="Static"></asp:TextBox>
 
                             </td>
                             <td>
-                                <asp:Label ID="lblDataMsgErro" runat="server" Text=""></asp:Label></td>
+                                <asp:Label ID="lblDataMsgErro" runat="server" ClientIDMode="Static"></asp:Label></td>
                         </tr>
                     </table>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" id="btnCancelarData" data-dismiss="modal" title="Cancelar Inserção de Datas">
-                        <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</button>                    
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</button>
 
                     <button type="button" class="btn btn-default" id="btnConfirmarData" title="Confirmar Inserção">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar</button>
 
-                   
+
                 </div>
             </div>
         </div>
@@ -576,12 +566,9 @@
     </div>
 
 
-     <!-- dialogs -->
+    <!-- dialogs -->
     <div id="boxDesejaExcluir" title="Excluir Evento!" style="display: none;">
         <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&nbsp Tem certeza que deseja excluir o evento? </p>
     </div>
-
-
-
 </asp:Content>
 

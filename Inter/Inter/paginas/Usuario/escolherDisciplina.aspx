@@ -3,6 +3,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
     <script type="text/javascript">
 
+        // Modal Dialog - solicita a escolha de uma disciplina se o usuário não escolher nenhuma
+        // Criando as configurações da modal
         function modalEscolherDis() {
             $(function () {
                 $("#boxSelecioneDisc").dialog({
@@ -13,7 +15,6 @@
                     draggable: false,
                     buttons: {
                         "OK": function () {
-                            //alert("Tem certeza?");                                    
                             $(this).dialog("close");
                         }
                     }
@@ -24,7 +25,7 @@
         }
     </script>
 
-    <!-- ESCOLHER DISCIPLINA (P1) -->
+    <!-- ESCOLHER DISCIPLINA -->
     <div id="p1" class="first">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -40,12 +41,8 @@
                             OnRowDataBound="gdv_RowDataBound">
 
                             <AlternatingRowStyle CssClass="alt" />
-                            <HeaderStyle />
-                            <FooterStyle />
-                            <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
-                            <RowStyle />
-                            <SelectedRowStyle BackColor="Orange" Font-Bold="True" ForeColor="Navy" />
 
+                            <%-- Configurar colunas do Grid --%>
                             <Columns>
 
                                 <asp:TemplateField>
@@ -67,14 +64,17 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
 
+                <%-- Label com quantidade de registros --%>
                 <asp:Label ID="lblQtdRegistro" runat="server"></asp:Label>
                 <br />
                 <br />
 
+                <%-- Botão para confirmar --%>
                 <asp:LinkButton ID="btnConfirmar" runat="server" CssClass="btn btn-default" OnClick="btnConfirmar_Click">
                       <i aria-hidden="true" class="glyphicon glyphicon-ok"></i>&nbsp Confirmar
                 </asp:LinkButton>
 
+                <%-- Legenda --%>
                 <section style="float: right; margin-right: 20px; border: 1px solid #CCC; padding: 15px; border-radius: 5px;">
                     <h4 style="margin-top: -7px;">Legenda</h4>
                     <span class="glyphicon glyphicon-star"></span>&nbsp- Disciplina Mãe
@@ -87,7 +87,7 @@
     </div>
 
     
-    <!-- dialogs -->
+    <!-- Modal dialog - configurando o texto que vai aparecer -->
     <div id="boxSelecioneDisc" title="Selecione uma disciplina!" style="display: none;">
         <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&nbsp Para prosseguir você deve selecionar uma disciplina! </p>
     </div>

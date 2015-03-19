@@ -12,7 +12,11 @@ namespace Inter.Funcoes
     public class Funcoes
     {
 
-        // CHAMAR A MASTER PAGE  
+        /// <summary>
+        /// Função para verificar e retornar o caminho da master page correspondent a mãe ou filha.
+        /// </summary>
+        /// <param name="mae"> Recebe o que está na sessão mãe (True/False) </param>
+        /// <returns> Retorna o caminho da masterpage</returns>
         public static string chamarMasterPage(string mae)
         {
             if (mae == "True")

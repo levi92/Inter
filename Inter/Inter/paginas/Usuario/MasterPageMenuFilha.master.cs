@@ -14,6 +14,7 @@ namespace Inter.paginas.Usuario
 
         }
 
+        // Evento do botão sair: Remove todas sessões e redireciona para a página login
         protected void btnSair_Click(object sender, EventArgs e)
         {
             Session.RemoveAll();

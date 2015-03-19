@@ -12,6 +12,15 @@
 public partial class paginas_Usuario_cadastrarPi {
     
     /// <summary>
+    /// hidden control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField hidden;
+    
+    /// <summary>
     /// lblCodigoPi control.
     /// </summary>
     /// <remarks>
@@ -156,76 +165,40 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.Literal lblCriGerais;
     
     /// <summary>
-    /// lblP control.
+    /// btnContinuarEtapa3 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblP;
+    protected global::System.Web.UI.WebControls.Button btnContinuarEtapa3;
     
     /// <summary>
-    /// txtP control.
+    /// Panel1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtP;
+    protected global::System.Web.UI.WebControls.Panel Panel1;
     
     /// <summary>
-    /// lblV control.
+    /// ScriptManager1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblV;
+    protected global::System.Web.UI.ScriptManager ScriptManager1;
     
     /// <summary>
-    /// txtV control.
+    /// UpdatePanel1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtV;
-    
-    /// <summary>
-    /// lblF control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblF;
-    
-    /// <summary>
-    /// txtF control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtF;
-    
-    /// <summary>
-    /// lblC control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblC;
-    
-    /// <summary>
-    /// txtC control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtC;
+    protected global::System.Web.UI.UpdatePanel UpdatePanel1;
     
     /// <summary>
     /// lblNomeGrupo control.
@@ -262,6 +235,24 @@ public partial class paginas_Usuario_cadastrarPi {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblAlunoGrupo;
+    
+    /// <summary>
+    /// listaAlunoGeral control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ListBox listaAlunoGeral;
+    
+    /// <summary>
+    /// listaAlunosGrupo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ListBox listaAlunosGrupo;
     
     /// <summary>
     /// lblDescricaoData control.
