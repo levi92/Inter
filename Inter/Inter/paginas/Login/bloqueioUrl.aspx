@@ -14,6 +14,9 @@
 </head>
 <body style="background-color: #ededed;">
     <form id="form1" runat="server">
+
+        <%--Tela de bloqueio para sessão expirada ou usuário tentar acessar pela url sem estar logado--%>
+
         <div id="imgBloqueio">
         </div>
         <center><asp:LinkButton ID="btnVoltar" CssClass="btn btn-default" runat="server" OnClick="btnVoltar_Click">

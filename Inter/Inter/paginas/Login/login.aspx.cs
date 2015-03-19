@@ -17,14 +17,18 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 
         lblMsgErro.Text = "";
 
+        // pegar valor dos textbox do login
         string user = txtLogin.Text.ToString();
         string senha = txtSenha.Text.ToString();
 
+        //Verificar se os campos não estão vazios
         if (!String.IsNullOrEmpty(user) && !String.IsNullOrEmpty(senha))
         {
 
-            switch (Funcoes_DB.ValidarLogin(user, senha))
+            // Verifica os parametros na função ValidarLogin
+            switch (Funcoes_DB.ValidarLogin(user, senha)) 
             {
+                // Professor
                 case 0:
                     Session["login"] = user;
                     Session["curso"] = "";
@@ -33,10 +37,14 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                     Session["mae"] = "";
                     Response.Redirect("~/Paginas/Usuario/escolherDisciplina.aspx");
                     break;
+
+                // Administrador
                 case 1:
                     Session["login"] = user;
-                    Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
+                    Response.Redirect("~/Paginas/Administrador/admin.aspx");
                     break;
+
+                // Erro
                 case -2:
                     lblMsgErro.Text = "E-mail ou Senha incorretos.";
                     break;
@@ -45,6 +53,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
         }
         else
         {
+            // Campos estão vazios
             lblMsgErro.Text = "Preencha os campos.";
         }
     }

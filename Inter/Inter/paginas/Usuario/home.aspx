@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
 
-    <!-- Alterar cor do ícone no menu lateral -->
+    <!-- Alterar cor do ícone no menu lateral do current -->
     <script type="text/javascript">
         $(document).ready(function () {
             $('#cphConteudo_icone2').addClass('corIcone');
@@ -10,7 +10,7 @@
         });
     </script>
 
-    <!-- HOME (P2) -->
+    <!-- HOME -->
 
     <div id="p1" class="first">
         <div class="panel panel-default">
@@ -64,6 +64,8 @@
                                         Conheça um pouco mais:
                 </p>
                 <br />
+
+                <%-- Links para a página Ajuda --%>
 
                 <table id="tabelaHome1">
                     <tr>
@@ -141,8 +143,7 @@
                 <hr style="width: 50%; margin: auto;" />
                 <br />
 
-
-                <table id="tabelaHome3">
+                <table id="tabelaHome3"> 
                     <tr>
                         <td><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp Finalizar Grupo</td>
                         <td style="border-left: 2px solid #ccc; border-right: 2px solid #ccc;"><span class="glyphicon glyphicon-question-sign"></span>&nbsp Ajuda</td>

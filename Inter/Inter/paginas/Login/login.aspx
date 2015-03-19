@@ -22,7 +22,7 @@
       <div class="container-fluid">
         
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Collect the nav links, forms, and other content for toggling // Revisar -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li>
@@ -47,7 +47,7 @@
 		  </div>
 			  <div class="panel-body">
 			  	<ul class="pager">
-			  			<!--- (Digite professor / administrador)	<br>	 !---->
+			  			<!--- Login de professor / administrador) !--->
 					   <center><asp:TextBox ID="txtLogin" class="form-control"  placeholder="Login" style="width:250px;" runat="server"></asp:TextBox></center><br>
 					   <center><asp:TextBox ID="txtSenha" class="form-control"  placeholder="Senha" style="width:250px;" runat="server" TextMode="Password"></asp:TextBox></center><br>
                        <asp:Button id="enviar" class="btn btn-default" style="width:250px;" runat="server" Text="Entrar" OnClick="enviar_Click" /><br />
@@ -59,7 +59,8 @@
 		</div>	
 	  </div>
 	 	<div class="col-xs-6 col-md-4"></div>
-	  <!-- Button trigger modal -->
+	  <!-- Modal de professor / professor administrador !-->
+        <!-- Vai vir aqui um dia !-->
 
 	<script type="text/javascript" src="../../Scripts/inter.js"></script>
 </form>

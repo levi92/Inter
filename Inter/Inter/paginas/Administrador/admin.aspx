@@ -22,7 +22,19 @@
     <script src="../../Scripts/bootstrap.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery-ui.js"></script>
     
-  
+    <script>
+    //Cadastrar novo Critério
+        function ul() {
+            var nome = $("#txtNomeCriterio").val();
+            $("#sortable3").append("<li class=\"ui-state-default\">" + nome + "</li>");
+        }
+        // function finalizarCadastroPI() {
+        //     $("#sortable6 > li").each(function () {
+        //             alert($(this).html());
+        //     });      
+        //}
+    </script>
+
     
 </head>
 <body>

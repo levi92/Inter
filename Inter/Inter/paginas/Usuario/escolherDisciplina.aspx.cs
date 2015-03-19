@@ -11,7 +11,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
 
     protected void Page_PreInit(object sender, EventArgs e)
     {
-        //VERIFICAR SESSAO LOGIN
+        // Se sessão estiver nula redireciona para o bloqueio Url
         if (Session["login"] == null)
         {
             Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
@@ -22,6 +22,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
+        // Se não for postback 
         if (!IsPostBack)
         {
             Pessoas pes = new Pessoas();
@@ -30,8 +31,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             pes = Pessoas_DB.Select(NomeUser); //cria um obj pessoa do professor, decorrente de um select utilizando seu email como parametro
             Session["nomeProf"] = pes.Pes_nome;
 
-            int codProf = Professor_DB.SelectPes(pes.Pes_codigo);
-
+            int codProf = Professor_DB.SelectPes(pes.Pes_codigo); //seleciona o código pessoa para verificar qual o cod do Prof
 
             CarregarGrid(codProf); //carrega a grid utilizando o cod do Prof
             auxRb = -1;
