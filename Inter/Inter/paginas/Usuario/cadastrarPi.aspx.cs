@@ -33,7 +33,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         {
             CarregaCriGerais();
             PegarAnoeSemestreAno();
-            
+
         }
     }
 
@@ -71,19 +71,19 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
         if (qtd > 0)
         {
-            
+
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                listaCritGeral.Items.Add(dr["cge_nome"].ToString());                
+                listaCritGeral.Items.Add(dr["cge_nome"].ToString());
 
             }
         }
     }
 
-    
+
     public void CriarCriterio()
-    {        
-        int tamanho = (Int32) listaCritPi.Items.Count;
+    {
+        int tamanho = (Int32)listaCritPi.Items.Count;
 
         Label[] lblCriterios = new Label[tamanho];
         TextBox[] txtCriterios = new TextBox[tamanho];
@@ -165,8 +165,9 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
     }
 
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void LkbVoltarEtapa3_Click(object sender, EventArgs e)
     {
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
         CriarCriterio();
     }
 

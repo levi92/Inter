@@ -138,15 +138,6 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.Button btnContinuarEtapa2;
     
     /// <summary>
-    /// UpdatePanel3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.UpdatePanel UpdatePanel3;
-    
-    /// <summary>
     /// lblCriterioGeral control.
     /// </summary>
     /// <remarks>
@@ -273,22 +264,13 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.ListBox listaAlunosGrupo;
     
     /// <summary>
-    /// Button1 control.
+    /// LkbVoltarEtapa3 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button Button1;
-    
-    /// <summary>
-    /// btnVoltarEtapa3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlButton btnVoltarEtapa3;
+    protected global::System.Web.UI.WebControls.LinkButton LkbVoltarEtapa3;
     
     /// <summary>
     /// lblDescricaoData control.
