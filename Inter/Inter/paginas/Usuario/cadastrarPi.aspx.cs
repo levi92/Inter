@@ -117,7 +117,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     protected void btnContinuarEtapa3_Click(object sender, EventArgs e)
     {
-        //NO BUTTON ONCLIENTCLICK ESTÁ PEGANDO OS VALORES DO HIDDEN 
+        //UpdatePanel2.Update();
         CriarCriterio();
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
     }
@@ -163,6 +163,11 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         listaCritPi.ClearSelection();
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
+    }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        CriarCriterio();
     }
 
 

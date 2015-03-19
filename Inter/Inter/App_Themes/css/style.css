@@ -518,3 +518,7 @@ tabelaHome3 {
     margin: auto;
     margin-bottom: 20px;
 }
+
+.botaoInvisivel {
+    visibility:hidden;
+}

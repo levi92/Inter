@@ -25,6 +25,7 @@ $(document).ready(function () {
 
 //FUNCTION QUE EXIBE O CONTEUDO DAS DIV'S CONFORME O PARAMETRO UTILIZADO NELA
 function Mostra(idDiv) {
+    $('#Button1').click();
 
     $("#conteudo").slideUp(500, function () {
         $("#" + global).hide();

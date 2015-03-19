@@ -30,7 +30,6 @@
                 <h3 class="panel-title">Cadastrar PI</h3>
             </div>
             <div class="panel-body-usuarios">
-                <asp:HiddenField ID="hidden" runat="server" ClientIDMode="Static" />
 
                 <table id="tabelaCadastrarPi" class="table">
 
@@ -143,68 +142,70 @@
 
 
     <!-- Adicionar critérios (p10) -->
+    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+        <ContentTemplate>
+            <div id="p10" class="first">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Adicionar Critérios</h3>
+                    </div>
+                    <div class="panel-body-usuarios">
 
-    <div id="p10" class="first">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Adicionar Critérios</h3>
+                        <table style="width: 60%; margin-left: -10px;">
+                            <tr>
+                                <td>
+                                    <asp:Label ID="lblCriterioGeral" CssClass="label" runat="server" Text="Critérios Gerais"></asp:Label></td>
+                                <td>
+                                    <asp:Label ID="lblCriterioPi" CssClass="label" runat="server" Text="Critérios PI"></asp:Label></td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div style="width: 200px; height: 230px; overflow-y: auto;">
+                                        <asp:ListBox ID="listaCritGeral" runat="server" AutoPostBack="true"
+                                            OnSelectedIndexChanged="listaCritGeral_SelectedIndexChanged" ClientIDMode="Static"></asp:ListBox>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div style="width: 200px; height: 230px; overflow-y: auto;">
+                                        <asp:ListBox ID="listaCritPi" runat="server" AutoPostBack="true"
+                                            OnSelectedIndexChanged="listaCritPi_SelectedIndexChanged" ClientIDMode="Static"></asp:ListBox>
+                                    </div>
+                                </td>
+
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3">
+                                    <br />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-default" id="btnVoltarEtapa2" onclick="Mostra('p1');" title="Voltar ao cadastro de PI">
+                                        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
+                                <td>
+                                    <button type="button" class="btn btn-default" id="" data-toggle="modal" data-target="#myModalCadastrarCri" title="Ir para cadastro de critérios">
+                                        <span class="glyphicon glyphicon-plus"></span>&nbsp Cadastrar Critérios
+                                    </button>
+                                </td>
+                                <td>
+                                    <asp:Button ID="btnContinuarEtapa3" runat="server" Text="Continuar" CssClass="btn btn-default"
+                                        ToolTip="Ir para adicionar peso aos critérios" OnClick="btnContinuarEtapa3_Click" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p style="text-align: right; font-weight: bold; margin-top: 5px;">Passo 2 de 4</p>
+                    </div>
+                </div>
             </div>
-            <div class="panel-body-usuarios">
-
-                <table style="width: 60%; margin-left: -10px;">
-                    <tr>
-                        <td>
-                            <asp:Label ID="lblCriterioGeral" CssClass="label" runat="server" Text="Critérios Gerais"></asp:Label></td>
-                        <td>
-                            <asp:Label ID="lblCriterioPi" CssClass="label" runat="server" Text="Critérios PI"></asp:Label></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div style="width: 200px; height: 230px; overflow-y: auto;">
-                                <asp:ListBox ID="listaCritGeral" runat="server" AutoPostBack="true"
-                                    OnSelectedIndexChanged="listaCritGeral_SelectedIndexChanged" ClientIDMode="Static"></asp:ListBox>
-                            </div>
-                        </td>
-
-                        <td>
-                            <div style="width: 200px; height: 230px; overflow-y: auto;">
-                                <asp:ListBox ID="listaCritPi" runat="server" AutoPostBack="true"
-                                    OnSelectedIndexChanged="listaCritPi_SelectedIndexChanged" ClientIDMode="Static"></asp:ListBox>
-                            </div>
-                        </td>
-
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="3">
-                            <br />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <button type="button" class="btn btn-default" id="btnVoltarEtapa2" onclick="Mostra('p1');" title="Voltar ao cadastro de PI">
-                                <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
-                        <td>
-                            <button type="button" class="btn btn-default" id="" data-toggle="modal" data-target="#myModalCadastrarCri" title="Ir para cadastro de critérios">
-                                <span class="glyphicon glyphicon-plus"></span>&nbsp Cadastrar Critérios
-                            </button>
-                        </td>
-                        <td>
-                            <asp:Button ID="btnContinuarEtapa3" runat="server" Text="Continuar" CssClass="btn btn-default"
-                                ToolTip="Ir para adicionar peso aos critérios" OnClick="btnContinuarEtapa3_Click" />
-                        </td>
-                    </tr>
-                </table>
-
-                <p style="text-align: right; font-weight: bold; margin-top: 5px;">Passo 2 de 4</p>
-            </div>
-        </div>
-    </div>
-
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <!-- Adicionar peso aos critérios (p12) -->
 
     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
@@ -248,7 +249,7 @@
     <!-- Criar Grupos (p13) -->
 
 
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
 
 
@@ -316,8 +317,10 @@
 
                             <tr>
                                 <td>
-
-                                    <button type="button" class="btn btn-default" id="btnVoltarEtapa3" onclick="Mostra('p12');" title="Voltar para adicionar peso aos critérios ">
+                                    <asp:Button ID="Button1" CssClass="botaoInvisivel" ClientIDMode="Static" runat="server" Text="Button" OnClick="Button1_Click"
+                                        />
+                                    <button type="button" class="btn btn-default" id="btnVoltarEtapa3" runat="server"
+                                        onclick="Mostra('p12');" title="Voltar para adicionar peso aos critérios ">
                                         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
                                 <td>
                                     <button type="button" class="btn btn-default" id="btnAdicionarGrupo" title="Criar outro grupo">
