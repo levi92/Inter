@@ -117,8 +117,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     protected void btnContinuarEtapa3_Click(object sender, EventArgs e)
     {
-        //UpdatePanel2.Update();
         CriarCriterio();
+        updPanelPeso.Update();
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
     }
 
@@ -167,8 +167,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     protected void LkbVoltarEtapa3_Click(object sender, EventArgs e)
     {
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
-        CriarCriterio();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);        
     }
 
 

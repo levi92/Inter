@@ -138,6 +138,15 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.Button btnContinuarEtapa2;
     
     /// <summary>
+    /// updPanelCriterio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel updPanelCriterio;
+    
+    /// <summary>
     /// lblCriterioGeral control.
     /// </summary>
     /// <remarks>
@@ -183,13 +192,13 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.Button btnContinuarEtapa3;
     
     /// <summary>
-    /// UpdatePanel2 control.
+    /// updPanelPeso control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+    protected global::System.Web.UI.UpdatePanel updPanelPeso;
     
     /// <summary>
     /// PanelCriterios control.
@@ -201,13 +210,13 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.Panel PanelCriterios;
     
     /// <summary>
-    /// UpdatePanel1 control.
+    /// updPanelGrupos control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+    protected global::System.Web.UI.UpdatePanel updPanelGrupos;
     
     /// <summary>
     /// lblNomeGrupo control.

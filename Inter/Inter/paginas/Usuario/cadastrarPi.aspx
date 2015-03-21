@@ -9,16 +9,7 @@
             // ALTERAR COR DO ÍCONE NO MENU LATERAL 
             $('#cphConteudo_icone5').addClass('corIcone');
         });
-    </script>
-
-    <script>
-        //CADASTRAR NOVO CRITÉRIO   
-        function ul() {
-            var nome = $("#ContentPlaceHolder1_txtNomeCriterio").val();
-            $("#sortable4").append("<li class=\"ui-state-default\">" + nome + "</li>");
-        }
-
-    </script>
+    </script>    
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
@@ -143,70 +134,78 @@
 
     <!-- Adicionar critérios (p10) -->
 
-    <div id="p10" class="first">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Adicionar Critérios</h3>
+    <asp:UpdatePanel ID="updPanelCriterio" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div id="p10" class="first">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Adicionar Critérios</h3>
+                    </div>
+                    <div class="panel-body-usuarios">
+
+                        <table style="width: 60%; margin-left: -10px;">
+                            <tr>
+                                <td>
+                                    <asp:Label ID="lblCriterioGeral" CssClass="label" runat="server" Text="Critérios Gerais"></asp:Label></td>
+                                <td>
+                                    <asp:Label ID="lblCriterioPi" CssClass="label" runat="server" Text="Critérios PI"></asp:Label></td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div style="width: 200px; height: 230px; overflow-y: auto;">
+                                        <asp:ListBox ID="listaCritGeral" runat="server" AutoPostBack="true"
+                                            OnSelectedIndexChanged="listaCritGeral_SelectedIndexChanged" ClientIDMode="Static"></asp:ListBox>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div style="width: 200px; height: 230px; overflow-y: auto;">
+                                        <asp:ListBox ID="listaCritPi" runat="server" AutoPostBack="true"
+                                            OnSelectedIndexChanged="listaCritPi_SelectedIndexChanged" ClientIDMode="Static"></asp:ListBox>
+                                    </div>
+                                </td>
+
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3">
+                                    <br />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-default" id="btnVoltarEtapa2" onclick="Mostra('p1');" title="Voltar ao cadastro de PI">
+                                        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
+                                <td>
+                                    <button type="button" class="btn btn-default" id="" data-toggle="modal" data-target="#myModalCadastrarCri" title="Ir para cadastro de critérios">
+                                        <span class="glyphicon glyphicon-plus"></span>&nbsp Cadastrar Critérios
+                                    </button>
+                                </td>
+                                <td>
+                                    <asp:Button ID="btnContinuarEtapa3" runat="server" Text="Continuar" CssClass="btn btn-default"
+                                        ToolTip="Ir para adicionar peso aos critérios" OnClick="btnContinuarEtapa3_Click" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p style="text-align: right; font-weight: bold; margin-top: 5px;">Passo 2 de 4</p>
+                    </div>
+                </div>
             </div>
-            <div class="panel-body-usuarios">
-
-                <table style="width: 60%; margin-left: -10px;">
-                    <tr>
-                        <td>
-                            <asp:Label ID="lblCriterioGeral" CssClass="label" runat="server" Text="Critérios Gerais"></asp:Label></td>
-                        <td>
-                            <asp:Label ID="lblCriterioPi" CssClass="label" runat="server" Text="Critérios PI"></asp:Label></td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div style="width: 200px; height: 230px; overflow-y: auto;">
-                                <asp:ListBox ID="listaCritGeral" runat="server" AutoPostBack="true"
-                                    OnSelectedIndexChanged="listaCritGeral_SelectedIndexChanged" ClientIDMode="Static"></asp:ListBox>
-                            </div>
-                        </td>
-
-                        <td>
-                            <div style="width: 200px; height: 230px; overflow-y: auto;">
-                                <asp:ListBox ID="listaCritPi" runat="server" AutoPostBack="true"
-                                    OnSelectedIndexChanged="listaCritPi_SelectedIndexChanged" ClientIDMode="Static"></asp:ListBox>
-                            </div>
-                        </td>
-
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="3">
-                            <br />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <button type="button" class="btn btn-default" id="btnVoltarEtapa2" onclick="Mostra('p1');" title="Voltar ao cadastro de PI">
-                                <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
-                        <td>
-                            <button type="button" class="btn btn-default" id="" data-toggle="modal" data-target="#myModalCadastrarCri" title="Ir para cadastro de critérios">
-                                <span class="glyphicon glyphicon-plus"></span>&nbsp Cadastrar Critérios
-                            </button>
-                        </td>
-                        <td>
-                            <asp:Button ID="btnContinuarEtapa3" runat="server" Text="Continuar" CssClass="btn btn-default"
-                                ToolTip="Ir para adicionar peso aos critérios" OnClick="btnContinuarEtapa3_Click" />
-                        </td>
-                    </tr>
-                </table>
-
-                <p style="text-align: right; font-weight: bold; margin-top: 5px;">Passo 2 de 4</p>
-            </div>
-        </div>
-    </div>
+        </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="listaCritGeral" EventName="SelectedIndexChanged" />
+            <asp:AsyncPostBackTrigger ControlID="listaCritPi" EventName="SelectedIndexChanged" />
+        </Triggers>
+        
+    </asp:UpdatePanel>
 
     <!-- Adicionar peso aos critérios (p12) -->
-
-    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+    <asp:UpdatePanel ID="updPanelPeso" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <div id="p12" class="first">
                 <div class="panel panel-default">
@@ -215,6 +214,7 @@
                     </div>
                     <div class="panel-body-usuarios">
                         <table style="width: 30%; margin-left: 5%;">
+
                             <tr>
                                 <asp:Panel ID="PanelCriterios" runat="server" ClientIDMode="Static"></asp:Panel>
                             </tr>
@@ -234,6 +234,7 @@
                                     <button type="button" class="btn btn-default" id="ContinuarEtapa4" onclick="Mostra('p13');" title="Ir para Criar Grupos">Continuar</button>
                                 </td>
                             </tr>
+
                         </table>
 
 
@@ -246,10 +247,8 @@
 
     <!-- Criar Grupos (p13) -->
 
-
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <asp:UpdatePanel ID="updPanelGrupos" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-
 
             <div id="p13" class="first">
                 <div class="panel panel-default">
@@ -263,8 +262,8 @@
                                 <td>
                                     <asp:Label ID="lblNomeGrupo" CssClass="label" runat="server" Text="Nome do Grupo: "></asp:Label></td>
                                 <td colspan="2" style="text-align: start;">
-                                    <asp:TextBox ID="txtNomeGrupo" CssClass="text" Width="95%" runat="server"></asp:TextBox></td>
-
+                                    <asp:TextBox ID="txtNomeGrupo" CssClass="text" Width="95%" runat="server"></asp:TextBox>
+                                </td>
                             </tr>
 
                             <tr>
@@ -278,31 +277,32 @@
                                     <asp:Label ID="lblAlunoDisciplina" CssClass="label" runat="server" Text="Alunos da Disciplina"></asp:Label></td>
                                 <td>
                                     <asp:Label ID="lblAlunoGrupo" CssClass="label" runat="server" Text="Alunos do Grupo"></asp:Label></td>
+
                                 <td></td>
                             </tr>
 
-
                             <tr>
-
                                 <td>
-
                                     <div style="width: 230px; height: 230px; overflow-y: auto;">
                                         <asp:ListBox ID="listaAlunoGeral" runat="server"
                                             AutoPostBack="true" OnSelectedIndexChanged="listaAlunoGeral_SelectedIndexChanged" ClientIDMode="Static">
                                             <asp:ListItem>Bruno</asp:ListItem>
-                                            <asp:ListItem>Mariazinha</asp:ListItem>
+                                            <asp:ListItem>Felipe</asp:ListItem>
+                                            <asp:ListItem>Higor</asp:ListItem>
+                                            <asp:ListItem>Dayane</asp:ListItem>
+                                            <asp:ListItem>Gabriel</asp:ListItem>
                                         </asp:ListBox>
-
                                     </div>
+
                                 </td>
 
                                 <td>
                                     <div style="width: 230px; height: 230px; overflow-y: auto;">
-                                        <asp:ListBox ID="listaAlunosGrupo" runat="server" OnSelectedIndexChanged="listaAlunosGrupo_SelectedIndexChanged" AutoPostBack="true"
-                                            ClientIDMode="Static"></asp:ListBox>
+                                        <asp:ListBox ID="listaAlunosGrupo" runat="server" OnSelectedIndexChanged="listaAlunosGrupo_SelectedIndexChanged"
+                                            AutoPostBack="true" ClientIDMode="Static"></asp:ListBox>
                                     </div>
-
                                 </td>
+
                                 <td></td>
 
                             </tr>
@@ -333,6 +333,10 @@
                 </div>
             </div>
         </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="listaAlunoGeral" EventName="SelectedIndexChanged" />
+            <asp:AsyncPostBackTrigger ControlID="listaAlunosGrupo" EventName="SelectedIndexChanged" />
+        </Triggers>
     </asp:UpdatePanel>
 
 
