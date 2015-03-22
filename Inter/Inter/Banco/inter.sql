@@ -37,9 +37,9 @@ CREATE TABLE `adi_atribuicao_disciplina` (
   KEY `TRM_CODIGO` (`TRM_CODIGO`),
   KEY `PRO_MATRICULA` (`PRO_MATRICULA`),
   KEY `DGE_CODIGO` (`DGE_CODIGO`),
-  CONSTRAINT `adi_atribuicao_disciplina_ibfk_3` FOREIGN KEY (`DGE_CODIGO`) REFERENCES `dge_disciplinas_gerais` (`DGE_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `adi_atribuicao_disciplina_ibfk_1` FOREIGN KEY (`TRM_CODIGO`) REFERENCES `trm_turma` (`TRM_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `adi_atribuicao_disciplina_ibfk_2` FOREIGN KEY (`PRO_MATRICULA`) REFERENCES `pro_professor` (`PRO_MATRICULA`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `adi_atribuicao_disciplina_ibfk_2` FOREIGN KEY (`PRO_MATRICULA`) REFERENCES `pro_professor` (`PRO_MATRICULA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `adi_atribuicao_disciplina_ibfk_3` FOREIGN KEY (`DGE_CODIGO`) REFERENCES `dge_disciplinas_gerais` (`DGE_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
@@ -377,21 +377,26 @@ INSERT INTO `pes_pessoas` (`PES_CODIGO`,`PES_NOME`,`PES_EMAIL`,`PES_TEL`,`PES_CE
 
 DROP TABLE IF EXISTS `pri_projeto_inter`;
 CREATE TABLE `pri_projeto_inter` (
-  `PRI_CODIGO` int(11) NOT NULL,
-  `PRI_SEMESTRE_ANO` int(11) NOT NULL,
+  `PRI_CODIGO` int(11) NOT NULL AUTO_INCREMENT,
+  `SAN_SEMESTRE_ANO` int(11) NOT NULL,
   `PRI_DESCRICAO` varchar(100) NOT NULL,
   `PRI_EMENTA` text NOT NULL,
   `ADI_CODIGO` int(11) NOT NULL,
   PRIMARY KEY (`PRI_CODIGO`,`ADI_CODIGO`),
   KEY `ADI_CODIGO` (`ADI_CODIGO`),
-  CONSTRAINT `pri_projeto_inter_ibfk_1` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `adi_atribuicao_disciplina` (`ADI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `pri_projeto_inter_ibfk_2` (`SAN_SEMESTRE_ANO`),
+  CONSTRAINT `pri_projeto_inter_ibfk_1` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `adi_atribuicao_disciplina` (`ADI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `pri_projeto_inter_ibfk_2` FOREIGN KEY (`SAN_SEMESTRE_ANO`) REFERENCES `san_semestre_ano` (`san_codigo`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pri_projeto_inter`
 --
 
 /*!40000 ALTER TABLE `pri_projeto_inter` DISABLE KEYS */;
+INSERT INTO `pri_projeto_inter` (`PRI_CODIGO`,`SAN_SEMESTRE_ANO`,`PRI_DESCRICAO`,`PRI_EMENTA`,`ADI_CODIGO`) VALUES 
+ (1,3,'PI','Teste',3),
+ (3,2,'Outro PI','Teste2',2);
 /*!40000 ALTER TABLE `pri_projeto_inter` ENABLE KEYS */;
 
 
@@ -440,8 +445,8 @@ CREATE TABLE `req_requerimento` (
   PRIMARY KEY (`REQ_CODIGO`),
   KEY `PRO_MATRICULA` (`PRO_MATRICULA`),
   KEY `req_requerimento_ibfk_2` (`GRU_CODIGO`),
-  CONSTRAINT `req_requerimento_ibfk_2` FOREIGN KEY (`GRU_CODIGO`) REFERENCES `gru_grupo` (`GRU_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `req_requerimento_ibfk_1` FOREIGN KEY (`PRO_MATRICULA`) REFERENCES `pro_professor` (`PRO_MATRICULA`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `req_requerimento_ibfk_1` FOREIGN KEY (`PRO_MATRICULA`) REFERENCES `pro_professor` (`PRO_MATRICULA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `req_requerimento_ibfk_2` FOREIGN KEY (`GRU_CODIGO`) REFERENCES `gru_grupo` (`GRU_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -450,6 +455,32 @@ CREATE TABLE `req_requerimento` (
 
 /*!40000 ALTER TABLE `req_requerimento` DISABLE KEYS */;
 /*!40000 ALTER TABLE `req_requerimento` ENABLE KEYS */;
+
+
+--
+-- Definition of table `san_semestre_ano`
+--
+
+DROP TABLE IF EXISTS `san_semestre_ano`;
+CREATE TABLE `san_semestre_ano` (
+  `san_codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `san_ano` int(11) NOT NULL,
+  `san_semestre` int(11) NOT NULL,
+  `san_ativo` tinyint(1) NOT NULL,
+  PRIMARY KEY (`san_codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `san_semestre_ano`
+--
+
+/*!40000 ALTER TABLE `san_semestre_ano` DISABLE KEYS */;
+INSERT INTO `san_semestre_ano` (`san_codigo`,`san_ano`,`san_semestre`,`san_ativo`) VALUES 
+ (1,2014,1,0),
+ (2,2014,2,0),
+ (3,2015,1,1),
+ (4,2015,2,0);
+/*!40000 ALTER TABLE `san_semestre_ano` ENABLE KEYS */;
 
 
 --
