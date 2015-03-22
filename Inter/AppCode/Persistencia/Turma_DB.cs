@@ -5,7 +5,7 @@ using System.Web;
 using System.Data;
 
 public class Turma_DB{
-	
+	//INSERT
      public static int Insert(Turma turma){
         int retorno = 0;
         try{

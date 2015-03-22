@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Inter.Funcoes;
+using AppCode.Persistencia;
 
 public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 {
@@ -33,6 +34,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         {
             CarregaCriGerais();
             PegarAnoeSemestreAno();
+            PegarUltimoCodPI();
 
         }
     }
@@ -43,23 +45,21 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         lblSemestreAut.Text = Session["semestre"].ToString();
     }
 
+    private void PegarUltimoCodPI()
+    {
+        // PEGAR ULTIMO CODIGO DE PI E ACRESCENTAR 1
+        int cod = Projeto_Inter_DB.SelectUltimoCod();
+        int codMais = cod + 1;
+        lblCodigoPiAut.Text = codMais.ToString();
+    }
 
     private void PegarAnoeSemestreAno()
     {
-        // PEGAR ANO E SEMESTRE DO ANO
-        string ano = DateTime.Now.Year.ToString();
-        int mes = DateTime.Now.Month;
-
-        if (mes <= 6)
-        {
-            lblSemestreAnoAut.Text = "1";
-        }
-        else
-        {
-            lblSemestreAnoAut.Text = "2";
-        }
-
-        lblAnoAut.Text = ano;
+        // PEGAR ANO E SEMESTRE DO ANO DO BANCO
+        Semestre_Ano objSemAno = new Semestre_Ano();
+        objSemAno = Semestre_Ano_DB.Select();
+        lblSemestreAnoAut.Text = objSemAno.San_semestre.ToString();
+        lblAnoAut.Text = objSemAno.San_ano.ToString();        
     }
 
 

@@ -30,7 +30,7 @@
                         </td>
 
                         <td>
-                            <asp:Label ID="lblCodigoPiAut" runat="server" Text="01"></asp:Label>
+                            <asp:Label ID="lblCodigoPiAut" runat="server" Text=""></asp:Label>
                         </td>
 
                         <td>

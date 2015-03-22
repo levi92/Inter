@@ -6,7 +6,7 @@ using System.Data;
 
 public class Disciplina_Aluno_DB{
 
-	    public static int Insert(Disciplina_Aluno disciplina_aluno){
+	   public static int Insert(Disciplina_Aluno disciplina_aluno){
         int retorno = 0;
         try
         {
