@@ -9,7 +9,7 @@
             // ALTERAR COR DO ÍCONE NO MENU LATERAL 
             $('#cphConteudo_icone5').addClass('corIcone');
         });
-    </script>    
+    </script>
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
@@ -100,13 +100,13 @@
                         <td>
                             <asp:Label ID="lblDatas" CssClass="label" runat="server" Text="Data de Eventos: "></asp:Label>
                         </td>
-                        <td>                          
+                        <td>
                             <button type="button" class="btn btn-default" id="btnAdicionarDatas" data-toggle="modal" data-target="#myModal1" title="Adicionar evento ao PI">
                                 <span class="glyphicon glyphicon-plus"></span>&nbsp Datas</button>
                         </td>
                     </tr>
                 </table>
-                
+
                 <%--Div que recebem as datas inseridas pelo professor mãe--%>
                 <div id="containerDatas">
                 </div>
@@ -195,12 +195,12 @@
                 </div>
             </div>
         </ContentTemplate>
-        <%--Triggers usadas para atualizar somente os métodos que estiverem contidas nelas--%> 
+        <%--Triggers usadas para atualizar somente os métodos que estiverem contidas nelas--%>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="listaCritGeral" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="listaCritPi" EventName="SelectedIndexChanged" />
         </Triggers>
-        
+
     </asp:UpdatePanel>
 
     <!-- Adicionar peso aos critérios (p12) -->
@@ -229,7 +229,7 @@
                                 <td>
                                     <button type="button" class="btn btn-default" id="" onclick="Mostra('p10');" title="Voltar para Adicionar Critérios">
                                         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
-                                <td>                                  
+                                <td>
                                     <button type="button" class="btn btn-default" id="ContinuarEtapa4" onclick="Mostra('p13');" title="Ir para Criar Grupos">Continuar</button>
                                 </td>
                             </tr>
@@ -418,22 +418,27 @@
                     </table>
                 </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" id="" data-dismiss="modal" title="Cancelar Inserção">
-                        <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</button>
+                <asp:UpdatePanel ID="updPanelNovoCri" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="" data-dismiss="modal" title="Cancelar Inserção">
+                                <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</button>
 
-                    <button type="button" class="btn btn-default" id="AdicionarCriterios" title="Adicionar mais Critérios">
-                        <span class="glyphicon glyphicon-plus"></span>&nbsp Critérios
-                    </button>
+                            <button type="button" class="btn btn-default" id="AdicionarCriterios" title="Adicionar mais Critérios">
+                                <span class="glyphicon glyphicon-plus"></span>&nbsp Critérios
+                            </button>
 
-                    <button type="button" class="btn btn-default" id="btnInserirCriterio" data-dismiss="modal" onclick="ul();" title="Confirmar Inserção">
-                        <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar</button>
+                            <asp:LinkButton ID="btnCriarNovoCriterio" runat="server" CssClass="btn btn-default"
+                                OnClick="btnCriarNovoCriterio_Click" ToolTip="Confirmar Inserção">
+                                   <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar </asp:LinkButton>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
 
-
-                </div>
             </div>
         </div>
     </div>
+
 
 
     <!-- MODAL ADICIONAR PESO 1 -->
@@ -466,8 +471,7 @@
     <div class="modal fade" data-backdrop="static" id="myModalPiCadastrado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">                  
-
+                <div class="modal-header">
                 </div>
                 <div class="modal-body">
                     <h1 style="font-size: 30px; font-weight: bolder; text-align: center; color: #1f1f1f">
@@ -478,11 +482,11 @@
                     <asp:LinkButton CssClass="btn btn-default" ID="btnVoltarHome2" runat="server" OnClick="btnVoltarHome2_Click" ToolTip="Voltar para a home do sistema">
                         <span class="glyphicon glyphicon-home"></span>&nbsp Voltar para a home</asp:LinkButton>
                     <asp:LinkButton CssClass="btn btn-default" ID="btnVoltarAvaliar" runat="server" OnClick="btnVoltarAvaliar_Click" ToolTip="Ir para a avaliação dos grupos do PI">
-                        <span class="glyphicon glyphicon-check"></span>&nbsp Avaliar grupos </asp:LinkButton>     
+                        <span class="glyphicon glyphicon-check"></span>&nbsp Avaliar grupos </asp:LinkButton>
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 
     <div id="boxCampoVazio" title="Preencha todos os campos!" style="display: none;">
         <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&nbsp Todos os campos devem ser preenchidos </p>

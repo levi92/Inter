@@ -182,6 +182,15 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         Response.Redirect("home.aspx");
     }
 
+    //EVENTO DO BOTÃO CRIAR NOVO CRITERIO: CRIA UM NOVO CRITÉRIO E MOVE PARA O LISTBOX CRITÉRIOS DO PI
+    protected void btnCriarNovoCriterio_Click(object sender, EventArgs e)
+    {
+        //VALUE = -1
+        listaCritPi.Items.Add(txtNomeCriterio.Text);  
+        updPanelCriterio.Update();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
+    }
+
 
 
 
