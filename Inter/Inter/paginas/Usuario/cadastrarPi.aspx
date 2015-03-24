@@ -21,7 +21,7 @@
                 <h3 class="panel-title">Cadastrar PI</h3>
             </div>
             <div class="panel-body-usuarios">
-
+                <%--Labels com ID Aut receberam os valores automático do Banco de Dados--%>
                 <table id="tabelaCadastrarPi" class="table">
 
                     <tr>
@@ -95,21 +95,19 @@
                 <br />
 
 
-
-
                 <table>
                     <tr>
                         <td>
                             <asp:Label ID="lblDatas" CssClass="label" runat="server" Text="Data de Eventos: "></asp:Label>
                         </td>
-                        <td>
-                            <%--<asp:Button ID="Button2" CssClass="btn btn-default" runat="server" data-toggle="modal" data-target="#myModal1" Text="Button" />--%>
+                        <td>                          
                             <button type="button" class="btn btn-default" id="btnAdicionarDatas" data-toggle="modal" data-target="#myModal1" title="Adicionar evento ao PI">
                                 <span class="glyphicon glyphicon-plus"></span>&nbsp Datas</button>
                         </td>
                     </tr>
                 </table>
-
+                
+                <%--Div que recebem as datas inseridas pelo professor mãe--%>
                 <div id="containerDatas">
                 </div>
 
@@ -197,6 +195,7 @@
                 </div>
             </div>
         </ContentTemplate>
+        <%--Triggers usadas para atualizar somente os métodos que estiverem contidas nelas--%> 
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="listaCritGeral" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="listaCritPi" EventName="SelectedIndexChanged" />
@@ -216,6 +215,7 @@
                         <table style="width: 30%; margin-left: 5%;">
 
                             <tr>
+                                <%--Painel que vai receber os critérios para inserção dos pesos--%>
                                 <asp:Panel ID="PanelCriterios" runat="server" ClientIDMode="Static"></asp:Panel>
                             </tr>
 
@@ -229,15 +229,12 @@
                                 <td>
                                     <button type="button" class="btn btn-default" id="" onclick="Mostra('p10');" title="Voltar para Adicionar Critérios">
                                         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
-                                <td>
-                                    <%--<asp:Button ID="ContinuarEtapa4" OnClientClick="openModal(); return false;" OnClick="ContinuarEtapa4_Click" CssClass="btn btn-default" runat="server" Text="Continuar" title="" />--%>
+                                <td>                                  
                                     <button type="button" class="btn btn-default" id="ContinuarEtapa4" onclick="Mostra('p13');" title="Ir para Criar Grupos">Continuar</button>
                                 </td>
                             </tr>
 
                         </table>
-
-
                         <p style="text-align: right; font-weight: bold;">Passo 3 de 4</p>
                     </div>
                 </div>
@@ -293,26 +290,20 @@
                                             <asp:ListItem>Gabriel</asp:ListItem>
                                         </asp:ListBox>
                                     </div>
-
                                 </td>
-
                                 <td>
                                     <div style="width: 230px; height: 230px; overflow-y: auto;">
                                         <asp:ListBox ID="listaAlunosGrupo" runat="server" OnSelectedIndexChanged="listaAlunosGrupo_SelectedIndexChanged"
                                             AutoPostBack="true" ClientIDMode="Static"></asp:ListBox>
                                     </div>
                                 </td>
-
                                 <td></td>
-
                             </tr>
-
                             <tr>
                                 <td colspan="3">
                                     <br />
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>
                                     <asp:LinkButton CssClass="btn btn-default" ID="LkbVoltarEtapa3" runat="server" OnClick="LkbVoltarEtapa3_Click"
@@ -333,6 +324,7 @@
                 </div>
             </div>
         </ContentTemplate>
+        <%--Triggers usadas para atualizar somento os métodos que estiverem contidas nelas--%>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="listaAlunoGeral" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="listaAlunosGrupo" EventName="SelectedIndexChanged" />
@@ -389,7 +381,6 @@
                     <button type="button" class="btn btn-default" id="btnConfirmarData" title="Confirmar Inserção">
                         <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar</button>
 
-
                 </div>
             </div>
         </div>
@@ -410,15 +401,12 @@
                                 <asp:Label ID="lblNomeCriterio" runat="server" CssClass="label" Text="Nome Critério: "></asp:Label></td>
                             <td>
                                 <asp:TextBox ID="txtNomeCriterio" CssClass="textCriterio" runat="server"></asp:TextBox></td>
-
                         </tr>
-
                         <tr>
                             <td colspan="2">
                                 <br />
                             </td>
                         </tr>
-
                         <tr style="text-align: left;">
                             <td>
                                 <asp:Label ID="lblDescricaoCriterio" runat="server" CssClass="label" Text="Descrição do Critério: "></asp:Label></td>
@@ -426,7 +414,6 @@
                                 <asp:TextBox ID="txtDescricaoCriterio" CssClass="textCriterio" runat="server"></asp:TextBox></td>
 
                         </tr>
-
 
                     </table>
                 </div>
@@ -479,8 +466,7 @@
     <div class="modal fade" data-backdrop="static" id="myModalPiCadastrado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <!--   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+                <div class="modal-header">                  
 
                 </div>
                 <div class="modal-body">
@@ -489,30 +475,14 @@
                 </div>
 
                 <div class="modal-footer">
-
-                    <button type="button" class="btn btn-default" id="btnVoltarHome2" data-dismiss="modal" title="Voltar para a Home do sistema">Voltar para Home</button>
-
-                    <button type="button" class="btn btn-default" id="btnVoltarAvaliar" data-dismiss="modal" title="Ir para a avaliação dos grupos do PI">Avaliar grupos</button>
-
+                    <asp:LinkButton CssClass="btn btn-default" ID="btnVoltarHome2" runat="server" OnClick="btnVoltarHome2_Click" ToolTip="Voltar para a home do sistema">
+                        <span class="glyphicon glyphicon-home"></span>&nbsp Voltar para a home</asp:LinkButton>
+                    <asp:LinkButton CssClass="btn btn-default" ID="btnVoltarAvaliar" runat="server" OnClick="btnVoltarAvaliar_Click" ToolTip="Ir para a avaliação dos grupos do PI">
+                        <span class="glyphicon glyphicon-check"></span>&nbsp Avaliar grupos </asp:LinkButton>     
                 </div>
             </div>
         </div>
-    </div>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('#btnVoltarHome2').click(function () {
-                window.location = "home.aspx";
-
-            });
-
-            $('#btnVoltarAvaliar').click(function () {
-                window.location = "avaliarGrupo.aspx";
-
-            });
-        });
-    </script>
+    </div>    
 
     <div id="boxCampoVazio" title="Preencha todos os campos!" style="display: none;">
         <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&nbsp Todos os campos devem ser preenchidos </p>
