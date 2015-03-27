@@ -1,9 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_avaliarGrupo" Codebehind="avaliarGrupo.aspx.cs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_avaliarGrupo" CodeBehind="avaliarGrupo.aspx.cs" %>
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
 
-     <!-- Alterar cor do ícone no menu lateral -->
+    <!-- Alterar cor do ícone no menu lateral -->
     <script type="text/javascript">
         $(document).ready(function () {
             $('#cphConteudo_icone8').addClass('corIcone');
@@ -31,82 +31,33 @@
                     <div role="tabpanel" class="tab-pane fade in active" id="avaliacao">
                         <table class="tabelaAvaliar table ">
                             <tr>
-                                <td>Grupo</td>
+                                <td><asp:Label ID="lblGrupo" runat="server" Text="Grupo: "></asp:Label> </td>
                                 <td colspan="4">
-                                    <select name="projeto" id="" class="dropDown">
-                                        <option>Sistema de Avaliação de interdisciplinar-Usuário</option>
-                                        <option>Sistema de Avaliação de interdisciplinar-Admin</option>
-                                    </select>
+                                    <asp:DropDownList ID="ddlGrupos" runat="server" CssClass="dropDown">
+                                        <asp:ListItem>Sistema de Avaliação de interdisciplinar-Usuário</asp:ListItem>
+                                        <asp:ListItem>Sistema de Avaliação de interdisciplinar-Admin</asp:ListItem>
+                                    </asp:DropDownList>
+
                                 </td>
                             </tr>
+                        </table>
+
+                        <asp:GridView ID="gdvAvaliarGrupo" runat="server" CellPadding="4" GridLines="None" CssClass="gridView"
+                            AutoGenerateColumns="false">
+
+                            <AlternatingRowStyle CssClass="alt" />
+                            
+                            <Columns>                              
 
 
-
-                            <tr>
-                                <td>
-                                    <label>&nbsp</label></td>
-                                <td>
-                                    <label>Bruno</label></td>
-                                <td>
-                                    <label>Dayane</label></td>
-                                <td>
-                                    <label>Felipe</label></td>
-                                <td>
-                                    <label>Higor</label></td>
-
-                            </tr>
-                            <tr>
-                                <td>Postura </td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioPostura" name="" value="" maxlength="3" style="width: 50px;" /></td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioVestimenta" name="" value="" maxlength="3" style="width: 50px;" /></td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioFala" name="" value="" maxlength="3" style="width: 50px;" /></td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioConhecimento" name="" value="" maxlength="3" style="width: 50px;" /></td>
-
-                            </tr>
-
-                            <tr>
-                                <td>Vestimenta</td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioPostura2" name="" value="" maxlength="3" style="width: 50px;" /></td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioVestimenta2" name="" value="" maxlength="3" style="width: 50px;" /></td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioFala2" name="" value="" maxlength="3" style="width: 50px;" /></td>
-                                <td>                                    
-                                    <input class="textCriterio" type="text" id="criterioConhecimento2" name="" value="" maxlength="3" style="width: 50px;" /></td>
+                                <asp:BoundField DataField="cur_sigla" HeaderText="Curso" />
                                 
-                            </tr>
 
-                            <tr>
-                                <td>Fala </td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioPostura3" name="" value="" maxlength="3" style="width: 50px;" /></td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioVestimenta3" name="" value="" maxlength="3" style="width: 50px;" /></td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioFala3" name="" value="" maxlength="3" style="width: 50px;" /></td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioConhecimento3" name="" value="" maxlength="3" style="width: 50px;" /></td>
-
-                            </tr>
-
-                            <tr>
-                                <td>Conhecimento </td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioPostura4" name="" value="" maxlength="3" style="width: 50px;" /></td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioVestimenta4" name="" value="" maxlength="3" style="width: 50px;" /></td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioFala4" name="" value="" maxlength="3" style="width: 50px;" /></td>
-                                <td>
-                                    <input class="textCriterio" type="text" id="criterioConhecimento4" name="" value="" maxlength="3" style="width: 50px;" /></td>
-
-                            </tr>
-
+                            </Columns>
+                            
+                        </asp:GridView>
+                        
+                        <table class="tabelaAvaliar table">
                             <tr>
                                 <td>
                                     <button type="button" class="btn btn-default" id="" disabled="disabled">

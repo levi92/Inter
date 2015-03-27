@@ -25,7 +25,7 @@ $(document).ready(function () {
 
 //FUNCTION QUE EXIBE O CONTEUDO DAS DIV'S CONFORME O PARAMETRO UTILIZADO NELA
 function Mostra(idDiv) {
-    
+
     $("#conteudo").slideUp(500, function () {
         $("#" + global).hide();
         $("#c" + global).css("visibility", "hidden");
@@ -124,12 +124,34 @@ function Atualiza() {
 
 $(document).ready(function () {
 
+
+    $('#txtData').datepicker({
+        dateFormat: 'dd/mm/yy',
+        dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+        dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        nextText: 'Próximo',
+        prevText: 'Anterior',
+        showOn: "button",
+        buttonImage: "../../App_Themes/images/calendar.png",
+        buttonImageOnly: true,
+        buttonText: "Abrir Calendário"
+
+    });
+
+
+
     // ZERAR VALORES DATAS DE EVENTOS
-    $("#btnAdicionarDatas").click(function () {
-        $("#txtDescricaoData").val("");
+    $("#btnAdicionarDatas").click(function () { //quando clicar no adicionar datas
+        $("#txtDescricaoData").val(""); 
         $("#txtData").val("");
-        contr = false;
+        contr = false; //PARA SABER SE IRÁ ATUALIZAR OU CRIAR UMA DATA
         $("#btnConfirmarData").removeAttr("data-dismiss");
+        $("#campoObrigatorio").css('visibility', 'hidden');
+        $("#lblDataMsgErro").html("&nbsp &nbsp");
+        $("#lblDescDataMsgErro").html("");
     });
 
 
@@ -142,29 +164,29 @@ $(document).ready(function () {
 
     $("#btnConfirmarData").click(function () {
         var descricaoData = $("#txtDescricaoData").val();
-        var data = $("#txtData").val().split('-');
+        var data = $("#txtData").val();
 
         //MENSAGENS DE ERRO
         if (descricaoData == "" && data == "") {
-            //$("#btnConfirmarData").removeAttr("data-dismiss");
-            $("#lblDescDataMsgErro").html("&nbsp &nbsp  Preenchimento obrigatório!");
-            $("#lblDataMsgErro").html("&nbsp &nbsp  Preenchimento obrigatório!");
+            
+            $("#lblDescDataMsgErro").html("&nbsp &nbsp  *");
+            $("#lblDataMsgErro").html("&nbsp &nbsp  *");
+            $("#campoObrigatorio").css('visibility', 'visible');
 
         } else
             if (descricaoData == "") {  //MENSAGEM DE ERRO
-                //$("#btnConfirmarData").removeAttr("data-dismiss");
-                $("#lblDescDataMsgErro").html("&nbsp &nbsp  Preenchimento obrigatório!");
+                
+                $("#lblDescDataMsgErro").html("&nbsp &nbsp *");
                 $("#lblDataMsgErro").html("");
+                $("#campoObrigatorio").css('visibility', 'visible');
             } else
                 if (data == "") { //MENSAGEM DE ERRO
-                    //$("#btnConfirmarData").removeAttr("data-dismiss");
-                    $("#lblDataMsgErro").html("&nbsp &nbsp  Preenchimento obrigatório!");
+                    
+                    $("#lblDataMsgErro").html("&nbsp &nbsp *");
                     $("#lblDescDataMsgErro").html("");
+                    $("#campoObrigatorio").css('visibility', 'visible');
                 } else {
-                    //$("#btnConfirmarData").attr("data-dismiss", "modal");
-
-                    var formatDate = data[2] + '/' + data[1] + '/' + data[0];
-
+                    
                     var btnExcluir = $('<button/>', {
                         type: 'button',
                         id: 'btnExcluir' + i,
@@ -198,7 +220,7 @@ $(document).ready(function () {
                     });
 
                     var div = '<div class="data" id="div' + i + '"> <b> <label id="descData' + i + '">' + descricaoData + '</label></b>' +
-                        ': <label id="data' + i + '">' + formatDate + '</label>  </div> ';
+                        ': <label id="data' + i + '">' + data + '</label>  </div> ';
 
 
                     var btnEditar = $('<button/>', {
@@ -208,20 +230,21 @@ $(document).ready(function () {
                         title: 'Editar',
                         class: 'btn btn-default btnEditar',
                         click: function () {
-                            //$("#ContentPlaceHolder1_txtDescricaoData").val("");
+                            $("#lblDataMsgErro").html("&nbsp &nbsp");
+                            $("#lblDescDataMsgErro").html("");
+
                             $("#txtData").val("");
                             indiceId = $(this).attr('id').split('-');
 
                             $("#txtDescricaoData").val($('#descData' + indiceId[1]).html());
-                            dtUSA = $('#data' + indiceId[1]).html().split('/');
-                            dtUSA = dtUSA[2] + '-' + dtUSA[1] + '-' + dtUSA[0];
-                            $("#txtData").val(dtUSA);
+                            //ex: data1                            
+                            $("#txtData").val($('#data' + indiceId[1]).html());
                             contr = true;
                             $("#btnConfirmarData").attr("data-dismiss", "modal");
                         }
                     });
 
-                    btnEditar.attr({ 'data-toggle': 'modal', 'data-target': '#myModal1' });
+                    btnEditar.attr({ 'data-toggle': 'modal', 'data-target': '#myModal1' }); //para abrir a modal cadastrar datas
 
                     if (contr == false) {
                         $("#containerDatas").append(div);
@@ -237,15 +260,15 @@ $(document).ready(function () {
                         i++;
                     } else { //SOMENTE EDITAR
                         $('#descData' + indiceId[1]).html($("#txtDescricaoData").val());
-                        data = $("#txtData").val().split('-');
-                        formatDate = data[2] + '/' + data[1] + '/' + data[0];
-                        $('#data' + indiceId[1]).html(formatDate);
+                        data = $("#txtData").val();                        
+                        $('#data' + indiceId[1]).html(data);
                     }
 
                     $("#lblDescDataMsgErro").html("");
                     $("#lblDataMsgErro").html("");
                     $("#txtDescricaoData").val("");
                     $("#txtData").val("");
+                    $("#campoObrigatorio").css('visibility', 'hidden');
                 }
 
     });
@@ -265,7 +288,20 @@ $(document).ready(function () {
 
         }
 
-        alert(dadosDatas);
+        $.ajax({
+            type: 'POST',
+            url: 'cadastrarPi.aspx/GetEventos',
+            data: "{dadosEventos:" + JSON.stringify(dadosDatas) + "}",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (r) {
+                for (var key in r) {
+                    var value = r[key];
+                    alert(dadosDatas);
+                }
+            }
+        });
+        
 
     });
 

@@ -7,6 +7,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Inter.Funcoes;
 using AppCode.Persistencia;
+using System.Web.Services;
+using System.Web.Script.Serialization;
+//using System.Runtime.Serialization.Json;
+
 
 public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 {
@@ -189,6 +193,43 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         listaCritPi.Items.Add(txtNomeCriterio.Text);  
         updPanelCriterio.Update();
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
+    }
+
+
+    [System.Web.Services.WebMethod]
+    public static string GetEventos(string dadosEventos)
+    {
+
+        string[] eventos = dadosEventos.Split('|'); //divide quando achar o pipe('|') 
+
+        List<string> descricao = new List<string>(); //cria uma List, porque não tem um tamanho definido
+        List<string> data = new List<string>();
+
+
+        for (int i = 0; i < eventos.Length - 1; i++)
+        {
+            if (i % 2 == 0) //se for par
+            {
+                descricao.Add(eventos[i]);
+            }
+            else //se for impar
+            {
+                data.Add(eventos[i]);
+            }
+
+        }
+
+        string[] desc = descricao.ToArray(); //toArray converte a List em Array
+        string[] dat = data.ToArray();
+
+
+        for (int i = 0; i < desc.Length; i++)
+        {
+            //Response.Write(desc[i] + " - " + dat[i] + "<br/>");
+        }
+
+        return dadosEventos;
+
     }
 
 

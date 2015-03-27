@@ -510,6 +510,7 @@ tabelaHome3 {
 #lblDescDataMsgErro, #lblDataMsgErro {
     color: red;
     font-weight: bolder;
+    font-size: 20px;
 }
 
 #tabelaCadastrarPi {

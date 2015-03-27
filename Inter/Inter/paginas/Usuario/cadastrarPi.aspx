@@ -365,13 +365,16 @@
                             <td>
                                 <asp:Label ID="lblData" runat="server" CssClass="label" Text="Data: "></asp:Label></td>
                             <td>
-                                <asp:TextBox ID="txtData" CssClass="textData" TextMode="Date" runat="server" ClientIDMode="Static"></asp:TextBox>
+                                <input id="txtData" type="text" />
+<%--                                <input type="text" id="txtData" class="textData" runat="server"/></input>--%>
 
                             </td>
                             <td>
                                 <asp:Label ID="lblDataMsgErro" runat="server" ClientIDMode="Static"></asp:Label></td>
                         </tr>
                     </table>
+                    <br />
+                    <span id="campoObrigatorio" style="font-size: 18px; color: red;">* Campo Obrigatório</span>
                 </div>
 
                 <div class="modal-footer">

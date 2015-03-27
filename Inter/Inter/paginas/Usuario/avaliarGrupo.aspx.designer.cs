@@ -12,6 +12,33 @@
 public partial class paginas_Usuario_avaliarGrupo {
     
     /// <summary>
+    /// lblGrupo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblGrupo;
+    
+    /// <summary>
+    /// ddlGrupos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList ddlGrupos;
+    
+    /// <summary>
+    /// gdvAvaliarGrupo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvAvaliarGrupo;
+    
+    /// <summary>
     /// txtAnotacao control.
     /// </summary>
     /// <remarks>
