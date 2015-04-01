@@ -62,6 +62,7 @@
     <Compile Include="Classes\Requerimento.cs" />
     <Compile Include="Classes\Turma.cs" />
     <Compile Include="Classes\Turno.cs" />
+    <Compile Include="Comuns\Funcoes.cs" />
     <Compile Include="Mapped.cs" />
     <Compile Include="Persistencia\Aluno_DB.cs" />
     <Compile Include="Persistencia\Atribuicao_Disciplina_DB.cs" />

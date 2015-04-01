@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Paginas_Login_bloqueioUrl" Codebehind="bloqueioUrl.aspx.cs" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Paginas_Login_bloqueioUrl" CodeBehind="bloqueioUrl.aspx.cs" %>
 
 <!DOCTYPE html>
 
@@ -12,12 +12,16 @@
     <link href="../../Scripts/jquery-ui.css" rel="stylesheet" />
     <link href="../../App_Themes/css/style.css" rel="stylesheet" type="text/css" />
 </head>
-<body style="background-color:#ededed;">
+<body style="background-color: #ededed;">
     <form id="form1" runat="server">
-    <div id="imgBloqueio">
-        
-    </div>
-        <center><asp:Button ID="btnVoltar" CssClass="btn btn-default" runat="server" Text="Ir Para Login" OnClick="btnVoltar_Click" /></center>
+
+        <%--Tela de bloqueio para sessão expirada ou usuário tentar acessar pela url sem estar logado--%>
+
+        <div id="imgBloqueio">
+        </div>
+        <center><asp:LinkButton ID="btnVoltar" CssClass="btn btn-default" runat="server" OnClick="btnVoltar_Click">
+            <i aria-hidden="true" class="glyphicon glyphicon-arrow-left"></i>&nbsp Ir Para Login
+                </asp:LinkButton></center>
     </form>
 </body>
 </html>

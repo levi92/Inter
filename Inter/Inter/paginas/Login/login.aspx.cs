@@ -14,29 +14,49 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 
     protected void enviar_Click(object sender, EventArgs e)
     {
-        lblTeste.Text = "";
 
+        lblMsgErro.Text = "";
+
+        // pegar valor dos textbox do login
         string user = txtLogin.Text.ToString();
         string senha = txtSenha.Text.ToString();
 
-        switch (Funcoes_DB.ValidarLogin(user, senha))
+        //Verificar se os campos não estão vazios
+        if (!String.IsNullOrEmpty(user) && !String.IsNullOrEmpty(senha))
         {
-            case 0:
-                Session["login"] = user;
-                Session["curso"] = "";
-                Session["semestre"] = "";
-                Session["disciplina"] = "";
-                Session["mae"] = "";
-                Response.Redirect("~/Paginas/Usuario/escolherDisciplina.aspx");
-                break;
-            case 1:
-                Session["login"] = user;
-                Response.Redirect("~/Paginas/Administrador/admin.aspx");
-                break;
-            case -2:
-                lblTeste.Text = "E-mail ou Senha incorretos";
-                break;
-        }
 
+            // Verifica os parametros na função ValidarLogin
+            switch (Funcoes_DB.ValidarLogin(user, senha)) 
+            {
+                // Professor
+                case 0:
+                    Session["login"] = user;
+                    Session["curso"] = "";
+                    Session["semestre"] = "";
+                    Session["disciplina"] = "";
+                    Session["mae"] = "";
+                    Response.Redirect("~/Paginas/Usuario/escolherDisciplina.aspx");
+                    break;
+
+                // Administrador
+                case 1:
+                    Session["login"] = user;
+                    Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
+                    break;
+
+                // Erro
+                case -2:
+                    lblMsgErro.Text = "E-mail ou Senha incorretos.";
+                    break;
+            }
+
+        }
+        else
+        {
+            // Campos estão vazios
+            lblMsgErro.Text = "Preencha os campos.";
+        }
     }
+
+
 }
