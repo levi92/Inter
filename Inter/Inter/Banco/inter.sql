@@ -370,7 +370,16 @@ INSERT INTO `pes_pessoas` (`PES_CODIGO`,`PES_NOME`,`PES_EMAIL`,`PES_TEL`,`PES_CE
  (9,'Felipe','felipe@fatecguaratingueta.edu.br','3131-3232','997998778');
 /*!40000 ALTER TABLE `pes_pessoas` ENABLE KEYS */;
 
-
+DROP TABLE IF EXISTS adm_admininistrador;
+CREATE TABLE IF NOT EXISTS `adm_administrador` (
+  `adm_codigo` INT(11) NOT NULL,
+  `adm_nome` VARCHAR(45) NOT NULL,
+  `adm_email` VARCHAR(45) NOT NULL,
+  `adm_tel` VARCHAR(45) NOT NULL,
+  `adm_cel` VARCHAR(45) NOT NULL,
+  `adm_senha` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`adm_codigo`))
+ENGINE = InnoDB;
 --
 -- Definition of table `pri_projeto_inter`
 --
