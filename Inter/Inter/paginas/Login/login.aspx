@@ -22,7 +22,7 @@
       <div class="container-fluid">
         
 
-        <!-- Collect the nav links, forms, and other content for toggling // Revisar -->
+        <!-- Barra de cima onde fica o logo e depois as informações da sessão do usuário // Revisado(?) -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li>
