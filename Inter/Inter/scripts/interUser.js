@@ -142,27 +142,27 @@ $(document).ready(function () {
     });
 
 
-
-    // ZERAR VALORES DATAS DE EVENTOS
-    $("#btnAdicionarDatas").click(function () { //quando clicar no adicionar datas
+    // DATAS DE EVENTOS
+    $("#btnAdicionarDatas").click(function () { //QUANDO CLICAR NO ADICIONAR DATAS
+        // ZERAR VALORES DATAS DE EVENTOS
         $("#txtDescricaoData").val(""); 
         $("#txtData").val("");
-        contr = false; //PARA SABER SE IRÁ ATUALIZAR OU CRIAR UMA DATA
-        $("#btnConfirmarData").removeAttr("data-dismiss");
+        contr = false; //PARA SABER SE IRÁ ATUALIZAR OU CRIAR UMA DATA, USADA NO BTN_EDITAR PARA ATUALIZAR O VALOR
+
+        $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
         $("#campoObrigatorio").css('visibility', 'hidden');
         $("#lblDataMsgErro").html("&nbsp &nbsp");
-        $("#lblDescDataMsgErro").html("");
+        $("#lblDescDataMsgErro").html("&nbsp &nbsp");
     });
-
-
-    // DATAS DE EVENTOS
+    
     var i = 0;
     var dadosDatas = "";
     var contr = false; //PARA SABER SE IRÁ ATUALIZAR OU CRIAR UMA DATA
-    var indiceId;
+    var indiceId; //PARA SABER O INDICE DA LINHA DOS COMPONENTES QUE FOI CLICADO, EX: descData1, data1. USADO NO EDITAR 
 
 
     $("#btnConfirmarData").click(function () {
+        //PEGANDO OS VALORES DOS INPUTS
         var descricaoData = $("#txtDescricaoData").val();
         var data = $("#txtData").val();
 
@@ -172,6 +172,7 @@ $(document).ready(function () {
             $("#lblDescDataMsgErro").html("&nbsp &nbsp  *");
             $("#lblDataMsgErro").html("&nbsp &nbsp  *");
             $("#campoObrigatorio").css('visibility', 'visible');
+            $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
 
         } else
             if (descricaoData == "") {  //MENSAGEM DE ERRO
@@ -179,14 +180,17 @@ $(document).ready(function () {
                 $("#lblDescDataMsgErro").html("&nbsp &nbsp *");
                 $("#lblDataMsgErro").html("");
                 $("#campoObrigatorio").css('visibility', 'visible');
+                $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
             } else
                 if (data == "") { //MENSAGEM DE ERRO
                     
                     $("#lblDataMsgErro").html("&nbsp &nbsp *");
                     $("#lblDescDataMsgErro").html("");
                     $("#campoObrigatorio").css('visibility', 'visible');
-                } else {
+                    $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
+                } else { //SE ESTIVER TUDO CERTO 
                     
+                    //CRIANDO BOTÃO EXCLUIR
                     var btnExcluir = $('<button/>', {
                         type: 'button',
                         id: 'btnExcluir' + i,
@@ -194,8 +198,9 @@ $(document).ready(function () {
                         title: 'Excluir',
                         class: 'btn btn-default btnExcluir',
                         click: function () {
-                            var parentBotao = $(this).parent();
+                            var parentBotao = $(this).parent(); //PEGA A DIV DA LINHA QUE FOI CLICADA
 
+                            //CHAMA A MODAL EXCLUIR
                             $(function () {
                                 $("#boxDesejaExcluir").dialog({
                                     width: 400,
@@ -205,7 +210,7 @@ $(document).ready(function () {
                                     draggable: false,
                                     buttons: {
                                         "Sim": function () {
-                                            parentBotao.remove();
+                                            parentBotao.remove(); //REMOVE A DIV QUE CONTÉM O EVENTO
                                             $(this).dialog("close");
                                         },
                                         "Não": function () {
@@ -219,10 +224,11 @@ $(document).ready(function () {
                         }
                     });
 
+                    //CRIANDO A DIV COM O EVENTO: LABEL DESCRICAO DATA E LABEL DATA
                     var div = '<div class="data" id="div' + i + '"> <b> <label id="descData' + i + '">' + descricaoData + '</label></b>' +
                         ': <label id="data' + i + '">' + data + '</label>  </div> ';
 
-
+                    //CRIANDO BOTÃO EDITAR 
                     var btnEditar = $('<button/>', {
                         type: 'button',
                         id: 'btnEditar-' + i,
@@ -230,38 +236,45 @@ $(document).ready(function () {
                         title: 'Editar',
                         class: 'btn btn-default btnEditar',
                         click: function () {
+                            //REMOVE AS MENSAGENS DE ERRO 
                             $("#lblDataMsgErro").html("&nbsp &nbsp");
                             $("#lblDescDataMsgErro").html("");
+                            $("#campoObrigatorio").css('visibility', 'hidden');
 
                             $("#txtData").val("");
-                            indiceId = $(this).attr('id').split('-');
+                            indiceId = $(this).attr('id').split('-'); //PEGA O ID DO BTN_EDITAR E CORTA ONDE ACHAR O "-" 
+                            //EX: btnEditar1 - indiceId[0] = "btnEditar";  indiceId[1] = "1"; 
 
-                            $("#txtDescricaoData").val($('#descData' + indiceId[1]).html());
-                            //ex: data1                            
+                            $("#txtDescricaoData").val($('#descData' + indiceId[1]).html());//RECEBE O QUE ESTÁ NA DIV COM OS EVENTOS   
+                            //ex: data + indiceId[1] =  "data" + "1" = data1                            
                             $("#txtData").val($('#data' + indiceId[1]).html());
-                            contr = true;
+                            contr = true; //QUER DIZER QUE VAI SOMENTE ATUALIZAR
                             $("#btnConfirmarData").attr("data-dismiss", "modal");
                         }
                     });
 
-                    btnEditar.attr({ 'data-toggle': 'modal', 'data-target': '#myModal1' }); //para abrir a modal cadastrar datas
+                    btnEditar.attr({ 'data-toggle': 'modal', 'data-target': '#myModal1' }); 
+                    //RECEBE O ATRIBUTO PARA PODER ABRIR A MODAL CADASTRAR DATAS
 
-                    if (contr == false) {
-                        $("#containerDatas").append(div);
-                        $("#div" + i).append(btnExcluir);
+                    if (contr == false) { //QUER DIZER QUE VAI CRIAR UMA NOVA DATA DE EVENTO
+
+                        $("#containerDatas").append(div); //DIV COM AS DATAS DE EVENTOS
+                        $("#div" + i).append(btnExcluir); 
                         $("#div" + i).append(btnEditar);
 
-                        var ed = document.getElementById('btnEditar-' + i);
+                        var ed = document.getElementById('btnEditar-' + i); //PARA COLOCAR O ICONE NOS BOTÕES
                         ed.insertAdjacentHTML('afterbegin', '<span class="glyphicon glyphicon-pencil"></span>');
 
                         var ex = document.getElementById('btnExcluir' + i);
                         ex.insertAdjacentHTML('afterbegin', '<span class="glyphicon glyphicon-trash"></span>');
 
-                        i++;
+                        i++; //INDICE DOS COMPONENTES
                     } else { //SOMENTE EDITAR
-                        $('#descData' + indiceId[1]).html($("#txtDescricaoData").val());
+                        //ATUALZANDO OS VALORES NA DIV QUE CONTÉM AS DATAS DE EVENTOS
+                        $('#descData' + indiceId[1]).html($("#txtDescricaoData").val()); 
                         data = $("#txtData").val();                        
                         $('#data' + indiceId[1]).html(data);
+                        $("#btnConfirmarData").attr("data-dismiss", "modal");
                     }
 
                     $("#lblDescDataMsgErro").html("");
