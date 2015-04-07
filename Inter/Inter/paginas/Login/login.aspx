@@ -55,12 +55,35 @@
 					   <center><a href="#" style="font-size:13px" data-toggle="modal" data-target="#myModal">Problemas com o Login?</a></div>	
 					
 				</ul>
+
 			  </div>
 		</div>	
 	  </div>
 	 	<div class="col-xs-6 col-md-4"></div>
+
 	  <!-- Modal de professor / professor administrador !-->
-        <!-- Vai vir aqui um dia !-->
+        <!-- Vai vir aqui um dia !(Esse dia é hoje!(06/04/2015)kkk) -->
+
+  <div class="modal fade" id="MyModalEscolha" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fechar</span></button>
+        <h4 class="modal-title" id="myModalLabel">Escolha o seu perfil:</h4>
+      </div>
+      <div class="modal-body">
+       <a href="../Usuario/escolherDisciplina.aspx"><button type="button" class="btn btn-default">Professor</button></a>
+       <a href="../Administrador/admin.aspx"><button type="button" class="btn btn-default">Administrador</button></a>
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 	<script type="text/javascript" src="../../Scripts/inter.js"></script>
 </form>
