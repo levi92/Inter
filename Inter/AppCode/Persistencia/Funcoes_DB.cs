@@ -21,8 +21,8 @@ public class Funcoes_DB
         IDataReader objDataReader;
         //string sql = "SELECT P.PES_EMAIL, PR.PRO_ADMINISTRADOR FROM PES_PESSOAS P, PRO_PROFESSOR PR WHERE P.PES_EMAIL=?LOGIN AND PR.PRO_SENHA=sha1(?SENHA)";
         //string sql = "SELECT P.PES_EMAIL, PR.ADM_CODIGO FROM PES_PESSOAS P, PRO_PROFESSOR PR WHERE P.PES_EMAIL=?LOGIN AND PR.PRO_SENHA=sha1(?SENHA)";
-        string sql = "select P.pes_email, A.adm_codigo, Pro.PRO_MATRICULA from pes_pessoas P left outer join pro_professor Pro using(pes_codigo) left outer join adm_administrador A using(pes_codigo)" +
-" left outer join alu_aluno AL using(pes_codigo) where (AL.ALU_MATRICULA is null) AND P.PES_EMAIL=?LOGIN AND Pro.PRO_SENHA=sha1(?SENHA) OR A.ADM_SENHA=sha1(?SENHA) ";
+        string sql = "select P.pes_email, A.adm_codigo, Pro.PRO_MATRICULA from pes_pessoas P left join pro_professor Pro using(pes_codigo) left join adm_administrador A using(pes_codigo)" +
+" left join alu_aluno AL using(pes_codigo) where (AL.ALU_MATRICULA is null) AND P.PES_EMAIL=?LOGIN AND Pro.PRO_SENHA=sha1(?SENHA) OR A.ADM_SENHA=sha1(?SENHA) ";
         
 
         objconexao = Mapped.Connection();
