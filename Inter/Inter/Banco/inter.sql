@@ -42,7 +42,6 @@ UNIQUE_CHECKS=0 */;
 
 SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-
 --
 -- Create schema inter
 --
@@ -50,12 +49,6 @@ SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 CREATE DATABASE IF NOT EXISTS inter;
 USE inter;
 
-select P.*, A.* from pes_pessoas P inner join adm_administrador A using(pes_codigo);
-select P.*, Pro.* from pes_pessoas P inner join pro_professor Pro using(pes_codigo);
-select P.*, A.* from pes_pessoas P inner join alu_aluno A using(pes_codigo);
-select * from cur_curso;
-select * from adi_atribuicao_disciplina;
-select * from dge_disciplinas_gerais;
 --
 -- Definition of table 
 
