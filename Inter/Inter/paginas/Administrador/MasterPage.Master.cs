@@ -23,7 +23,7 @@ namespace Inter.paginas.Administrador
 
             Session.RemoveAll();
 
-            Response.Redirect("~/paginas/Login/login.aspx");
+            Response.Redirect("~/Paginas/Login/login.aspx");
         }
     }
 }

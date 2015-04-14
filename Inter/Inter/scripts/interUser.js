@@ -135,7 +135,7 @@ $(document).ready(function () {
         nextText: 'Próximo',
         prevText: 'Anterior',
         showOn: "button",
-        buttonImage: "../../App_Themes/images/calendar.png",
+        buttonImage: "../../App_Themes/images/Calendar-Add-128x128.png",
         buttonImageOnly: true,
         buttonText: "Abrir Calendário"
 

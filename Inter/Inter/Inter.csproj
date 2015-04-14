@@ -62,6 +62,7 @@
     <Content Include="App_Themes\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="App_Themes\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="App_Themes\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="App_Themes\images\Calendar-Add-128x128.png" />
     <Content Include="Banco\inter.sql" />
     <Content Include="Banco\PI.png" />
     <Content Include="Banco\PI.xml" />
