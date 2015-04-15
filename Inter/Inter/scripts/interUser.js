@@ -310,7 +310,7 @@ $(document).ready(function () {
             success: function (r) {
                 for (var key in r) {
                     var value = r[key];
-                    alert(dadosDatas);
+                    //alert(dadosDatas);
                 }
             }
         });

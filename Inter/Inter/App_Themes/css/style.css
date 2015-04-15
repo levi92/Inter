@@ -520,3 +520,7 @@ tabelaHome3 {
     margin-bottom: 20px;
 }
 
+img.ui-datepicker-trigger {
+  width: 40px;
+  margin-left: 7px;
+}

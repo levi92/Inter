@@ -40,6 +40,94 @@
 
                                 </td>
                             </tr>
+
+                            
+                            <tr>
+                                <td>
+                                    <label>&nbsp</label></td>
+                                <td>
+                                    <label>Bruno</label></td>
+                                <td>
+                                    <label>Dayane</label></td>
+                                <td>
+                                    <label>Felipe</label></td>
+                                <td>
+                                    <label>Higor</label></td>
+
+                            </tr>
+                            <tr>
+                                <td>Postura </td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioPostura" name="" value="" maxlength="3" style="width: 50px;" /></td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioVestimenta" name="" value="" maxlength="3" style="width: 50px;" /></td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioFala" name="" value="" maxlength="3" style="width: 50px;" /></td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioConhecimento" name="" value="" maxlength="3" style="width: 50px;" /></td>
+
+                            </tr>
+
+                            <tr>
+                                <td>Vestimenta</td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioPostura2" name="" value="" maxlength="3" style="width: 50px;" /></td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioVestimenta2" name="" value="" maxlength="3" style="width: 50px;" /></td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioFala2" name="" value="" maxlength="3" style="width: 50px;" /></td>
+                                <td>                                    
+                                    <input class="textCriterio" type="text" id="criterioConhecimento2" name="" value="" maxlength="3" style="width: 50px;" /></td>
+                                
+                            </tr>
+
+                            <tr>
+                                <td>Fala </td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioPostura3" name="" value="" maxlength="3" style="width: 50px;" /></td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioVestimenta3" name="" value="" maxlength="3" style="width: 50px;" /></td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioFala3" name="" value="" maxlength="3" style="width: 50px;" /></td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioConhecimento3" name="" value="" maxlength="3" style="width: 50px;" /></td>
+
+                            </tr>
+
+                            <tr>
+                                <td>Conhecimento </td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioPostura4" name="" value="" maxlength="3" style="width: 50px;" /></td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioVestimenta4" name="" value="" maxlength="3" style="width: 50px;" /></td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioFala4" name="" value="" maxlength="3" style="width: 50px;" /></td>
+                                <td>
+                                    <input class="textCriterio" type="text" id="criterioConhecimento4" name="" value="" maxlength="3" style="width: 50px;" /></td>
+
+                            </tr>
+
+                           <%-- <tr>
+                                <td>
+                                    <button type="button" class="btn btn-default" id="" disabled="disabled">
+                                        <span class="glyphicon glyphicon-pencil"></span>&nbsp Editar</button></td>
+
+                                <td>
+                                    <button type="button" class="btn btn-default" id="">
+                                        <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp Salvar</button></td>
+
+
+
+                                <td>
+                                    <button type="button" class="btn btn-default" id="">
+                                        <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</button></td>
+                                <td></td>
+
+                                <td>
+                                    <button type="button" class="btn btn-default" id="btnImprimirAvaliacao" title="Imprimir a tabela de atribuição de notas acima">
+                                        <span class="glyphicon glyphicon-print"></span>&nbsp Imprimir</button>
+                                </td>
+                            </tr>--%>
                         </table>
 
                         <asp:GridView ID="gdvAvaliarGrupo" runat="server" CellPadding="4" GridLines="None" CssClass="gridView"
