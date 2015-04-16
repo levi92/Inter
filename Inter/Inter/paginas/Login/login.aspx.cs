@@ -46,7 +46,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 
                 
                 case 1:
-                    //Administrador Coordenador
+                    //Administrador
                     Session["login"] = user;
                     Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
                     break;

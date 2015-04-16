@@ -6,7 +6,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#icone5').addClass('corIcone');
+            $('#icone6').addClass('corIcone');
         });
     </script>
 

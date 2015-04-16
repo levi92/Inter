@@ -72,6 +72,7 @@
     <Content Include="paginas\Administrador\criterios.aspx" />
     <Content Include="paginas\Administrador\projetos.aspx" />
     <Content Include="paginas\Administrador\solicitacoes.aspx" />
+    <Content Include="paginas\Administrador\usuarios.aspx" />
     <Content Include="paginas\Usuario\MasterPage.master" />
     <Content Include="Banco\PI BANCO.docx" />
     <Content Include="paginas\Usuario\MasterPageMenuPadrao.master" />
@@ -168,39 +169,52 @@
     </Compile>
     <Compile Include="paginas\Administrador\ajuda.aspx.cs">
       <DependentUpon>ajuda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="paginas\Administrador\ajuda.aspx.designer.cs">
       <DependentUpon>ajuda.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\Administrador\configuracoes.aspx.cs">
       <DependentUpon>configuracoes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="paginas\Administrador\configuracoes.aspx.designer.cs">
       <DependentUpon>configuracoes.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\Administrador\criterios.aspx.cs">
       <DependentUpon>criterios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="paginas\Administrador\criterios.aspx.designer.cs">
       <DependentUpon>criterios.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\Administrador\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="paginas\Administrador\MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="paginas\Administrador\projetos.aspx.cs">
       <DependentUpon>projetos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="paginas\Administrador\projetos.aspx.designer.cs">
       <DependentUpon>projetos.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\Administrador\solicitacoes.aspx.cs">
       <DependentUpon>solicitacoes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="paginas\Administrador\solicitacoes.aspx.designer.cs">
       <DependentUpon>solicitacoes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\usuarios.aspx.cs">
+      <DependentUpon>usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\usuarios.aspx.designer.cs">
+      <DependentUpon>usuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\Login\bloqueioUrl.aspx.cs">
       <DependentUpon>bloqueioUrl.aspx</DependentUpon>
