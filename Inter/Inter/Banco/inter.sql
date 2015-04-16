@@ -1,4 +1,4 @@
--- MySQL Administrator dump 1.4
+﻿-- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
 -- Server version	5.1.35-community
@@ -423,10 +423,10 @@ CREATE TABLE `pro_professor` (
   `PRO_MATRICULA` int(11) NOT NULL AUTO_INCREMENT,
   `PRO_SENHA` varchar(200) NOT NULL,
   `PES_CODIGO` int(11) NOT NULL,
-  adm_codigo int,
+  `adm_codigo` int,
   PRIMARY KEY (`PRO_MATRICULA`),
   KEY `PES_CODIGO` (`PES_CODIGO`),
-  CONSTRAINT `pro_professor_ibfk_1` FOREIGN KEY (`PES_CODIGO`) REFERENCES `pes_pessoas` (`PES_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`PES_CODIGO`) REFERENCES `pes_pessoas` (`PES_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
   foreign key(adm_codigo) references adm_administrador(adm_codigo) on delete cascade on update cascade
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
@@ -435,7 +435,7 @@ CREATE TABLE `pro_professor` (
 --
 
 /*!40000 ALTER TABLE `pro_professor` DISABLE KEYS */;
-INSERT INTO `pro_professor` (`PRO_MATRICULA`,`PRO_ADMINISTRADOR`,`PRO_SENHA`,`PRO_CHAVE_SENHA`,`PES_CODIGO`) VALUES 
+INSERT INTO `pro_professor` (`PRO_MATRICULA`,`PRO_SENHA`,`PES_CODIGO`,`adm_codigo`) VALUES
  (4,'b19df6c68faafd4c9925f0dfaf9b1eae4ad13525',4,null),
  (5,'1ac3cf657b0c16fc280e910c6bcbaaa39e243656',5,null),
  (6,'959c8d10fe2052757c4645650eff4825bbf206b0',6,null),
