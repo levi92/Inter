@@ -11,7 +11,10 @@ namespace Inter.paginas.Administrador
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["login"] == null)
+            {
+                Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+            }
         }
     }
 }
