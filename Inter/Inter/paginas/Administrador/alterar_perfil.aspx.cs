@@ -7,14 +7,16 @@ using System.Web.UI.WebControls;
 
 namespace Inter.paginas.Administrador
 {
-    public partial class usuarios : System.Web.UI.Page
+    public partial class AlterarPerfil : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["login"] == null)
-            {
-                Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
-            }
+
+        }
+
+        protected void btnConfirmar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

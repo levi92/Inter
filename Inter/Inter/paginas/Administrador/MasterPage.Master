@@ -86,7 +86,7 @@
 
                 <ul class="menu">
                     <li><asp:HyperLink ID="icone2" runat="server" NavigateUrl="~/paginas/Administrador/solicitacoes.aspx" Enabled="True">
-                        <span class="glyphicon glyphicon-bullhorn"></span>&nbsp Requerimentos</asp:HyperLink></li>
+                        <span class="glyphicon glyphicon-bullhorn"></span>&nbsp Solicitações</asp:HyperLink></li>
                     <li><asp:HyperLink ID="icone3" runat="server" NavigateUrl="~/paginas/Administrador/criterios.aspx" Enabled="True">
                         <span class="glyphicon glyphicon-list"></span>&nbsp Critérios</asp:HyperLink></li>
                     <li><asp:HyperLink ID="icone4" runat="server" NavigateUrl="~/paginas/Administrador/usuarios.aspx" Enabled="True">

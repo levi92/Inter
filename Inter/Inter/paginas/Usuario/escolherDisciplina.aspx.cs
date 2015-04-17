@@ -29,7 +29,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
 
             string NomeUser = Session["login"].ToString(); //recebe email do professor logado
             pes = Pessoas_DB.Select(NomeUser); //cria um obj pessoa do professor, decorrente de um select utilizando seu email como parametro
-            Session["nomeProf"] = pes.Pes_nome;
+            Session["nomeProf"] = pes.Pes_nome; //!! Criar sessão separado para admin
 
             int codProf = Professor_DB.SelectPes(pes.Pes_codigo); //seleciona o código pessoa para verificar qual o cod do Prof
 

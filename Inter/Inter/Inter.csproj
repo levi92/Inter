@@ -62,12 +62,14 @@
     <Content Include="App_Themes\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="App_Themes\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="App_Themes\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="App_Themes\fonts\icomoon.svg" />
     <Content Include="App_Themes\images\Calendar-Add-128x128.png" />
     <Content Include="Banco\inter.sql" />
     <Content Include="Banco\PI.png" />
     <Content Include="Banco\PI.xml" />
     <Content Include="Banco\Projeto_Interdisciplinar.png" />
     <Content Include="paginas\Administrador\ajuda.aspx" />
+    <Content Include="paginas\Administrador\alterar_perfil.aspx" />
     <Content Include="paginas\Administrador\configuracoes.aspx" />
     <Content Include="paginas\Administrador\criterios.aspx" />
     <Content Include="paginas\Administrador\projetos.aspx" />
@@ -79,6 +81,10 @@
     <Content Include="paginas\Usuario\MasterPageMenuMae.master" />
     <Content Include="paginas\Usuario\MasterPageMenuFilha.master" />
     <Content Include="paginas\Administrador\MasterPage.Master" />
+    <Content Include="paginas\Administrador\MasterPage_AlterarPerfil.Master" />
+    <Content Include="App_Themes\fonts\icomoon.eot" />
+    <Content Include="App_Themes\fonts\icomoon.ttf" />
+    <Content Include="App_Themes\fonts\icomoon.woff" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -174,6 +180,13 @@
     <Compile Include="paginas\Administrador\ajuda.aspx.designer.cs">
       <DependentUpon>ajuda.aspx</DependentUpon>
     </Compile>
+    <Compile Include="paginas\Administrador\alterar_perfil.aspx.cs">
+      <DependentUpon>alterar_perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\alterar_perfil.aspx.designer.cs">
+      <DependentUpon>alterar_perfil.aspx</DependentUpon>
+    </Compile>
     <Compile Include="paginas\Administrador\configuracoes.aspx.cs">
       <DependentUpon>configuracoes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -194,6 +207,13 @@
     </Compile>
     <Compile Include="paginas\Administrador\MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\MasterPage_AlterarPerfil.Master.cs">
+      <DependentUpon>MasterPage_AlterarPerfil.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\MasterPage_AlterarPerfil.Master.designer.cs">
+      <DependentUpon>MasterPage_AlterarPerfil.Master</DependentUpon>
     </Compile>
     <Compile Include="paginas\Administrador\projetos.aspx.cs">
       <DependentUpon>projetos.aspx</DependentUpon>

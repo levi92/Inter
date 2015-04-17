@@ -10,7 +10,7 @@
         });
     </script>
      
-    <div id="p1" class="first">
+    <div id="p1">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Ajuda</h3>
