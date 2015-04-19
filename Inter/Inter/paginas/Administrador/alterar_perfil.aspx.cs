@@ -11,12 +11,28 @@ namespace Inter.paginas.Administrador
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["login"] == null)
+            {
+                Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+            }
         }
 
-        protected void btnConfirmar_Click(object sender, EventArgs e)
+        protected void Btn_Admin(object sender, EventArgs e)
         {
-
+            Session["perfil"] = "admin";
+            Response.Redirect("~/paginas/Administrador/solicitacoes.aspx");
         }
+
+        protected void Btn_Prof(object sender, EventArgs e)
+        {
+            Session["perfil"] = "prof";
+            Session["curso"] = "";
+            Session["semestre"] = "";
+            Session["disciplina"] = "";
+            Session["mae"] = "";
+            Response.Redirect("../Usuario/escolherDisciplina.aspx");
+        }
+
+       
     }
 }

@@ -1,0 +1,49 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage.Master" AutoEventWireup="true" CodeBehind="MasterPage_MenuAlterarPerfil.master.cs" Inherits="Inter.paginas.Administrador.MasterPage_MenuAlterarPerfil" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ConteudoMenu" runat="server">
+
+
+    
+        <!-- Menu Lateral  -->
+
+        <div id="lateral">
+             
+             <div id="menu">
+                <h1>
+                    <asp:Label ID="hora" runat="server" ClientIDMode="Static"></asp:Label></h1>
+                <h5>
+                    <asp:Label ID="dia" runat="server" ClientIDMode="Static"></asp:Label></h5>
+                <hr />
+                 <ul>      
+                     <%-- Itens do menu --%>          
+                      <li><asp:HyperLink ID="icone1" runat="server" NavigateUrl="~/paginas/Administrador/alterar_perfil.aspx" Enabled="True">
+                      <span class="icon icon-users"></span>&nbsp Alterar Perfil</asp:HyperLink></li>
+                    <li><asp:HyperLink ID="icone6" runat="server" NavigateUrl="~/paginas/Administrador/ajuda.aspx" Enabled="True">
+                      <span class="glyphicon glyphicon-question-sign"></span>&nbsp Ajuda</asp:HyperLink></li>
+                    <li><a id="icone11" data-toggle="modal" data-target="#myModalDesejaSair" href="#" title="Sair do sistema e voltar para o login"><span class="glyphicon glyphicon-off"></span>&nbsp Sair</a></li>                   
+                                        
+                </ul>
+            </div> 
+            <!-- /#menu -->
+
+        </div>
+        <!-- /#lateral -->
+
+
+        <div class="container">
+            <div id="conteudo">
+            
+        <asp:ContentPlaceHolder ID="ConteudoCentral" runat="server">
+        
+        </asp:ContentPlaceHolder>
+
+            </div>
+        </div>
+
+
+       
+
+     
+
+</asp:Content>

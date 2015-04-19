@@ -53,10 +53,10 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 
                 case 2:
                     //Administrador e professor
-                    //chama modal
-                    
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "EscolherPerfil", "EscolherPerfil();", true);
-                    controleModal = true;
+                    //chama a página de escolher o perfil
+
+                    Session["login"] = user;
+                    Response.Redirect("~/Paginas/Administrador/alterar_perfil.aspx");
                     break;
 
                 case 3:

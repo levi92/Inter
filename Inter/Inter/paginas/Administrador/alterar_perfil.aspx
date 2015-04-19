@@ -1,7 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage_AlterarPerfil.Master" AutoEventWireup="true" CodeBehind="alterar_perfil.aspx.cs" Inherits="Inter.paginas.Administrador.AlterarPerfil" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage_MenuAlterarPerfil.Master" AutoEventWireup="true" CodeBehind="alterar_perfil.aspx.cs" Inherits="Inter.paginas.Administrador.AlterarPerfil" %>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ConteudoCentral" runat="server">
 
         <script type="text/javascript">
         $(document).ready(function () {
@@ -19,11 +18,11 @@
                         <table class="table" style="border-top: hidden; width:80%; margin:auto;">
                             <tr style="border-bottom: hidden;" >
                                 
-                                <td align="center" class="icon icon-tux" style="font-size:100px;"></td>
-                                <td align="center" class="icon icon-library" style="font-size:100px;"></td>
+                                <td align="center" class="icon icon-eye" style="font-size:100px;"></td>
+                                <td align="center" class="icon icon-books" style="font-size:100px;"></td>
                             </tr>
-                            <tr><td align="center"><asp:HyperLink CssClass="btn btn-default" runat="server" >Entrar como Admin</asp:HyperLink></td>
-                                <td align="center"><asp:HyperLink CssClass="btn btn-default" runat="server">Entrar como Professor</asp:HyperLink></td>
+                            <tr><td align="center"><asp:Button CssClass="btn btn-default" runat="server"  Text="Entrar como Admin" OnClick="Btn_Admin"></asp:Button></td>
+                                <td align="center"><asp:Button CssClass="btn btn-default" runat="server" Text="Entrar como Professor" OnClick="Btn_Prof"></asp:Button></td>
                             </tr>
                         </table>
                       

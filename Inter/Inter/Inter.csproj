@@ -80,11 +80,13 @@
     <Content Include="paginas\Usuario\MasterPageMenuPadrao.master" />
     <Content Include="paginas\Usuario\MasterPageMenuMae.master" />
     <Content Include="paginas\Usuario\MasterPageMenuFilha.master" />
-    <Content Include="paginas\Administrador\MasterPage.Master" />
-    <Content Include="paginas\Administrador\MasterPage_AlterarPerfil.Master" />
     <Content Include="App_Themes\fonts\icomoon.eot" />
     <Content Include="App_Themes\fonts\icomoon.ttf" />
     <Content Include="App_Themes\fonts\icomoon.woff" />
+    <Content Include="paginas\Administrador\MasterPage_MenuMaster.Master" />
+    <Content Include="paginas\Administrador\MasterPage_MenuAlterarPerfil.master" />
+    <Content Include="paginas\Administrador\MasterPage_MenuCoord.master" />
+    <Content Include="paginas\Administrador\MasterPage.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -208,12 +210,26 @@
     <Compile Include="paginas\Administrador\MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
-    <Compile Include="paginas\Administrador\MasterPage_AlterarPerfil.Master.cs">
-      <DependentUpon>MasterPage_AlterarPerfil.Master</DependentUpon>
+    <Compile Include="paginas\Administrador\MasterPage_MenuAlterarPerfil.master.cs">
+      <DependentUpon>MasterPage_MenuAlterarPerfil.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="paginas\Administrador\MasterPage_AlterarPerfil.Master.designer.cs">
-      <DependentUpon>MasterPage_AlterarPerfil.Master</DependentUpon>
+    <Compile Include="paginas\Administrador\MasterPage_MenuAlterarPerfil.master.designer.cs">
+      <DependentUpon>MasterPage_MenuAlterarPerfil.master</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\MasterPage_MenuCoord.master.cs">
+      <DependentUpon>MasterPage_MenuCoord.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\MasterPage_MenuCoord.master.designer.cs">
+      <DependentUpon>MasterPage_MenuCoord.master</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\MasterPage_MenuMaster.Master.cs">
+      <DependentUpon>MasterPage_MenuMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\MasterPage_MenuMaster.Master.designer.cs">
+      <DependentUpon>MasterPage_MenuMaster.Master</DependentUpon>
     </Compile>
     <Compile Include="paginas\Administrador\projetos.aspx.cs">
       <DependentUpon>projetos.aspx</DependentUpon>
