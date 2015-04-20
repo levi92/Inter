@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage.Master" AutoEventWireup="true" CodeBehind="MasterPage_MenuAlterarPerfil.master.cs" Inherits="Inter.paginas.Administrador.MasterPage_MenuAlterarPerfil" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage.Master" AutoEventWireup="true" CodeBehind="MasterPage_MenuAlterarPerfil.master.cs" Inherits="paginas_Admin_MenuAlterarPerfil" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ConteudoMenu" runat="server">

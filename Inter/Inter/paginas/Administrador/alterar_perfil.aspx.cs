@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace Inter.paginas.Administrador
 {
     public partial class AlterarPerfil : System.Web.UI.Page
@@ -19,13 +20,13 @@ namespace Inter.paginas.Administrador
 
         protected void Btn_Admin(object sender, EventArgs e)
         {
-            Session["perfil"] = "admin";
+            Session["coord"] = "True";
             Response.Redirect("~/paginas/Administrador/solicitacoes.aspx");
         }
 
         protected void Btn_Prof(object sender, EventArgs e)
         {
-            Session["perfil"] = "prof";
+
             Session["curso"] = "";
             Session["semestre"] = "";
             Session["disciplina"] = "";

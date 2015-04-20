@@ -47,12 +47,13 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                 
                 case 1:
                     //Administrador
+                    Session["coord"] = "True";
                     Session["login"] = user;
                     Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
                     break;
 
                 case 2:
-                    //Administrador e professor
+                    //Administrador Coordenador e professor
                     //chama a página de escolher o perfil
 
                     Session["login"] = user;
@@ -60,8 +61,9 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                     break;
 
                 case 3:
-                    //Administrador master
+                    //Administrador master                 
                     Session["login"] = user;
+                    Session["coord"] = "False";
                     Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
                     break;
 

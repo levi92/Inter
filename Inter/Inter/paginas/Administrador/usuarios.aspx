@@ -1,7 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage.Master" AutoEventWireup="true" CodeBehind="usuarios.aspx.cs" Inherits="Inter.paginas.Administrador.usuarios" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage_MenuAlterarPerfil.Master" AutoEventWireup="true" CodeBehind="usuarios.aspx.cs" Inherits="paginas_Admin_usuarios" %>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ConteudoCentral" runat="server">
 
     <script type="text/javascript">
         $(document).ready(function () {

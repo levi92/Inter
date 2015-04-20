@@ -28,6 +28,19 @@ namespace Inter.Funcoes
 
         }
 
+        public static string chamarMasterPage_Admin(string coord)
+        {
+            
+            if (coord == "True")
+            {
+                return "~/paginas/Administrador/MasterPage_MenuCoord.master";
+            }
+            else
+            {
+                return "~/paginas/Administrador/MasterPage_MenuMaster.master";
+            }
+        }
+
 
     }
 }

@@ -5,9 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Inter.paginas.Administrador
-{
-    public partial class MasterPage1 : System.Web.UI.MasterPage
+
+    public partial class paginas_Admin_MasterPage : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,4 +23,3 @@ namespace Inter.paginas.Administrador
         }
         
     }
-}
