@@ -45,12 +45,12 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                     break;
 
                 
-                case 1:
-                    //Administrador
-                    Session["coord"] = "True";
-                    Session["login"] = user;
-                    Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
-                    break;
+                //case 1:
+                //    //Administrador
+                //    Session["coord"] = "True";
+                //    Session["login"] = user;
+                //    Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
+                //    break;
 
                 case 2:
                     //Administrador Coordenador e professor

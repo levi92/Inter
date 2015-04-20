@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using Inter.Funcoes;
 
 
-public partial class configuracoes : System.Web.UI.Page
+public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 {
     protected void Page_PreInit(object sender, EventArgs e)
     {
