@@ -9,7 +9,7 @@
 
 
 
-public partial class paginas_Admin_MenuAlterarPerfil_Copia {
+public partial class paginas_Admin_MenuAlterarPerfil {
     
     /// <summary>
     /// hora control.
@@ -30,40 +30,13 @@ public partial class paginas_Admin_MenuAlterarPerfil_Copia {
     protected global::System.Web.UI.WebControls.Label dia;
     
     /// <summary>
-    /// icone2 control.
+    /// icone1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink icone2;
-    
-    /// <summary>
-    /// icone3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink icone3;
-    
-    /// <summary>
-    /// icone4 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink icone4;
-    
-    /// <summary>
-    /// icone5 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink icone5;
+    protected global::System.Web.UI.WebControls.HyperLink icone1;
     
     /// <summary>
     /// icone7 control.

@@ -69,6 +69,7 @@
     <Content Include="Banco\PI.xml" />
     <Content Include="Banco\Projeto_Interdisciplinar.png" />
     <Content Include="paginas\Administrador\ajuda.aspx" />
+    <Content Include="paginas\Administrador\ajuda_alterar_perfil.aspx" />
     <Content Include="paginas\Administrador\alterar_perfil.aspx" />
     <Content Include="paginas\Administrador\configuracoes.aspx" />
     <Content Include="paginas\Administrador\criterios.aspx" />
@@ -181,6 +182,13 @@
     </Compile>
     <Compile Include="paginas\Administrador\ajuda.aspx.designer.cs">
       <DependentUpon>ajuda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\ajuda_alterar_perfil.aspx.cs">
+      <DependentUpon>ajuda_alterar_perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\ajuda_alterar_perfil.aspx.designer.cs">
+      <DependentUpon>ajuda_alterar_perfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\Administrador\alterar_perfil.aspx.cs">
       <DependentUpon>alterar_perfil.aspx</DependentUpon>

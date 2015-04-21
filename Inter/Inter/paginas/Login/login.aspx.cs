@@ -55,7 +55,8 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                 case 2:
                     //Administrador Coordenador e professor
                     //chama a página de escolher o perfil
-
+                    Session["coord"] = "True";
+                    Session["perfil"] = "";
                     Session["login"] = user;
                     Response.Redirect("~/Paginas/Administrador/alterar_perfil.aspx");
                     break;

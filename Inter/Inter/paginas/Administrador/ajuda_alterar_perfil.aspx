@@ -1,11 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage_MenuCoord.Master" AutoEventWireup="true" CodeBehind="ajuda.aspx.cs" Inherits="paginas_Admin_ajuda" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage_MenuAlterarPerfil.master" AutoEventWireup="true" CodeBehind="ajuda_alterar_perfil.aspx.cs" Inherits="Inter.paginas.Administrador.ajuda_alterar_perfil" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ConteudoCentral" runat="server">
 
-<asp:Content ID="Content2" ContentPlaceHolderID="ConteudoCentral" runat="server">
-    
-    
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#icone7').addClass('corIcone');
+            $('#icone6').addClass('corIcone');
         });
     </script>
      
