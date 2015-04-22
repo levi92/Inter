@@ -15,33 +15,42 @@
                     </div>
                     <div class="panel-body">
 
+                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <asp:GridView ID="gdv" runat="server" CellPadding="4" GridLines="None" CssClass="gridView"
+                            AutoGenerateColumns="false"
+                            AutoGenerateEditButton="false"
+                            OnRowDataBound="gdv_RowDataBound"
+                            onRowEditing="gdv_RowEditing">
 
-                        <table class="table">
-                            <tr>
-                                <td>Critério</td>
-                                <td>Descricao</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Fala</td>
-                                <td>Eloquência na apresentação</td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                            </tr>
-                            <tr>
-                                <td>Vestimenta</td>
-                                <td>Roupas adequadas para a apresentação</td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                            </tr>
-                            <tr>
-                                <td>Postura</td>
-                                <td>Linguagem e atitudes formais</td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                            </tr>
+                            <AlternatingRowStyle CssClass="alt" />
 
-                        </table>
-                       <button type="button" class="btn btn-default" id="" data-toggle="modal" data-target="#ModalCadastrarCri" title="Adicionar Novo Critério">
-                            <span class="glyphicon glyphicon-plus"></span>&nbsp Novo Critério
-                        </button>
+                            <%-- Configurar colunas do Grid --%>
+                            <Columns>
+
+                              <%--<asp:TemplateField>
+                                  <asp:ItemTemplate>
+
+                                  </asp:ItemTemplate>
+                              </asp:TemplateField>--%>
+
+
+
+                                <asp:BoundField DataField="cge_nome" HeaderText="Nome do Critério" />
+                                <asp:BoundField DataField="cge_descricao" HeaderText="Descrição" />
+                                
+
+                            </Columns>
+
+                        </asp:GridView>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
+                <%-- Label com quantidade de registros --%>
+                <asp:Label ID="lblQtdRegistro" runat="server"></asp:Label>
+                <br />
+                <br />
 
                     </div>
                 </div>

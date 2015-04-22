@@ -18,7 +18,7 @@
                  <ul>      
                      <%-- Itens do menu --%>          
                       <li><asp:HyperLink ID="icone1" runat="server" NavigateUrl="~/paginas/Administrador/alterar_perfil.aspx" ClientIDMode="Static" Enabled="True">
-                      <span class="icon icon-users"></span>&nbsp Alterar Perfil</asp:HyperLink></li>
+                      <span class="icon icon-users"></span>&nbsp Escolher Perfil</asp:HyperLink></li>
                     <li><asp:HyperLink ID="icone7" runat="server" NavigateUrl="~/paginas/Administrador/ajuda.aspx" ClientIDMode="Static" Enabled="True">
                       <span class="glyphicon glyphicon-question-sign"></span>&nbsp Ajuda</asp:HyperLink></li>
                     <li><a id="icone11" data-toggle="modal" data-target="#myModalDesejaSair" href="#" title="Sair do sistema e voltar para o login"><span class="glyphicon glyphicon-off"></span>&nbsp Sair</a></li>                   

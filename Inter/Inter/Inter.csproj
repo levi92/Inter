@@ -122,7 +122,6 @@
     <Content Include="App_Themes\images\logoTopo.png" />
     <Content Include="App_Themes\images\logo_topo.png" />
     <Content Include="Global.asax" />
-    <Content Include="paginas\Administrador\admin.aspx" />
     <Content Include="paginas\Login\bloqueioUrl.aspx" />
     <Content Include="paginas\Login\login.aspx" />
     <Content Include="paginas\Usuario\avaliarGrupo.aspx" />
@@ -168,13 +167,6 @@
   <ItemGroup>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="paginas\Administrador\admin.aspx.cs">
-      <DependentUpon>admin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="paginas\Administrador\admin.aspx.designer.cs">
-      <DependentUpon>admin.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\Administrador\ajuda.aspx.cs">
       <DependentUpon>ajuda.aspx</DependentUpon>
