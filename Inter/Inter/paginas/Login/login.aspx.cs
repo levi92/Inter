@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using Inter.Funcoes;
 public partial class Paginas_Login_login : System.Web.UI.Page
 {
     static bool controleModal = false;
@@ -23,6 +23,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 
         // pegar valor dos textbox do login
         string user = txtLogin.Text.ToString();
+        //string senha = Funcoes.Criptografar(txtSenha.Text.ToString(), "SHA1"); ->>> não lê a senha correta do banco por algum motivo
         string senha = txtSenha.Text.ToString();
 
         //Verificar se os campos não estão vazios

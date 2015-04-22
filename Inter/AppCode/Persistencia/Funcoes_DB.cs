@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
-
+using Inter.Funcoes;
 public class Funcoes_DB
 {
 
@@ -28,6 +28,7 @@ public class Funcoes_DB
         objconexao = Mapped.Connection();
         objCommand = Mapped.Command(sql, objconexao);
 
+        //string criptografada = Funcoes.Criptografar(senha, "SHA1");
         objCommand.Parameters.Add(Mapped.Parameter("?LOGIN", login));
         objCommand.Parameters.Add(Mapped.Parameter("?SENHA", senha));
         objDataReader = objCommand.ExecuteReader();
