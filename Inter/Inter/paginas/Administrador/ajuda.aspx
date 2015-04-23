@@ -1,16 +1,15 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage.Master" AutoEventWireup="true" CodeBehind="ajuda.aspx.cs" Inherits="Inter.paginas.ajuda" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage_MenuCoord.Master" AutoEventWireup="true" CodeBehind="ajuda.aspx.cs" Inherits="paginas_Admin_ajuda" %>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ConteudoCentral" runat="server">
     
     
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#icone6').addClass('corIcone');
+            $('#icone7').addClass('corIcone');
         });
     </script>
      
-    <div id="p1" class="first">
+    <div id="p1">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Ajuda</h3>

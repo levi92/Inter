@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 
 /// <summary>
@@ -28,6 +30,54 @@ namespace Inter.Funcoes
 
         }
 
+        public static string chamarMasterPage_Admin(string coord)
+        {
+            
+            if (coord == "True")
+            {
+                return "~/paginas/Administrador/MasterPage_MenuCoord.master";
+            }
+            else
+            {
+                return "~/paginas/Administrador/MasterPage_MenuMaster.master";
+            }
+        }
+
+        public static string Criptografar(string texto, string nomeHash)
+        {
+            //instancia a hash conforme indicado pelo método
+            HashAlgorithm algoritmo = HashAlgorithm.Create(nomeHash);
+
+            //se a hash não for inicializada, crio a excessao e retorno a msg para o usuario (throw retorn automatico)
+            if(algoritmo == null)
+            {
+                //return "Erro ao criptografar";
+                throw new ArgumentException("Nome da hash informada não é válida");
+
+            }
+            else {
+                //divisão da hash em partes para a cirptografia
+                //alocação, buffer
+                //computehash... geração da criptografia
+                byte[] hash = algoritmo.ComputeHash(Encoding.UTF8.GetBytes(texto));
+
+                //conversão da hash(byte[]) para base64, texto legível para o usuário(soft)...
+                return Convert.ToBase64String(hash);
+            }
+        }
+
+        //public static MandarEmail(){
+        //    MailAdress para = ne MailAdress(emailDestinatario);
+        //    MailMessage mensagem = new MailMessage(de, para);
+        //    mensagem.IsBodyHtml = true;
+        //    mensagem.Subject = assunto;
+        //    mensagem.Body = corpomsg;
+        //    mensagem.Priority = MailPriority.Normal;
+
+        //    //Cria o objeto que envia o e-mail
+        //    SmtpClient cliente = new SmtpClient();
+
+        //}
 
     }
 }

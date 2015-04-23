@@ -10,7 +10,7 @@
         });
     </script>
 
-    <!-- NOTIFICAÇÕES (P3) -->
+    <!-- NOTIFICAÇÕES -->
 
     <div id="p1" class="first">
         <div class="panel panel-default">
@@ -139,9 +139,6 @@
 
                             </tr>
 
-
-
-
                             <tr>
                                 <td colspan="2">
                                     <br />
@@ -166,8 +163,6 @@
 
                         </table>
 
-
-
                     </div>
 
                     <div class="modal-footer">
@@ -177,10 +172,7 @@
                         <button type="button" class="btn btn-default" id="btnEnviarSolicita" data-dismiss="modal" title="Confirmar Inserção">
                             <span class="glyphicon glyphicon-envelope"></span>&nbsp Enviar</button>
 
-
                     </div>
-
-
 
                 </div>
             </div>

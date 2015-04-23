@@ -1,4 +1,4 @@
--- MySQL Administrator dump 1.4
+﻿-- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
 -- Server version	5.1.35-community
@@ -37,9 +37,9 @@ CREATE TABLE `adi_atribuicao_disciplina` (
   KEY `TRM_CODIGO` (`TRM_CODIGO`),
   KEY `PRO_MATRICULA` (`PRO_MATRICULA`),
   KEY `DGE_CODIGO` (`DGE_CODIGO`),
-  CONSTRAINT `adi_atribuicao_disciplina_ibfk_3` FOREIGN KEY (`DGE_CODIGO`) REFERENCES `dge_disciplinas_gerais` (`DGE_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `adi_atribuicao_disciplina_ibfk_1` FOREIGN KEY (`TRM_CODIGO`) REFERENCES `trm_turma` (`TRM_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `adi_atribuicao_disciplina_ibfk_2` FOREIGN KEY (`PRO_MATRICULA`) REFERENCES `pro_professor` (`PRO_MATRICULA`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `adi_atribuicao_disciplina_ibfk_2` FOREIGN KEY (`PRO_MATRICULA`) REFERENCES `pro_professor` (`PRO_MATRICULA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `adi_atribuicao_disciplina_ibfk_3` FOREIGN KEY (`DGE_CODIGO`) REFERENCES `dge_disciplinas_gerais` (`DGE_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
@@ -362,6 +362,9 @@ CREATE TABLE `pes_pessoas` (
 
 /*!40000 ALTER TABLE `pes_pessoas` DISABLE KEYS */;
 INSERT INTO `pes_pessoas` (`PES_CODIGO`,`PES_NOME`,`PES_EMAIL`,`PES_TEL`,`PES_CEL`) VALUES 
+ (1,'Vitorio','vitorio@fatecguaratingueta.edu.br','3131-3232','997998778'),
+ (2,'Bruno','bruno@fatecguaratingueta.edu.br','3131-3232','997998778'),
+ (3,'Albert','albert@fatecguaratingueta.edu.br','3131-3232','997998778'),
  (4,'Camila','camila@fatecguaratingueta.edu.br','3131-3232','997998778'),
  (5,'Rodrigo','rodrigo@fatecguaratingueta.edu.br','3131-3232','997998778'),
  (6,'Claudemir','claudemir@fatecguaratingueta.edu.br','3131-3232','997998778'),
@@ -370,37 +373,32 @@ INSERT INTO `pes_pessoas` (`PES_CODIGO`,`PES_NOME`,`PES_EMAIL`,`PES_TEL`,`PES_CE
  (9,'Felipe','felipe@fatecguaratingueta.edu.br','3131-3232','997998778');
 /*!40000 ALTER TABLE `pes_pessoas` ENABLE KEYS */;
 
-DROP TABLE IF EXISTS adm_admininistrador;
-CREATE TABLE IF NOT EXISTS `adm_administrador` (
-  `adm_codigo` INT(11) NOT NULL,
-  `adm_nome` VARCHAR(45) NOT NULL,
-  `adm_email` VARCHAR(45) NOT NULL,
-  `adm_tel` VARCHAR(45) NOT NULL,
-  `adm_cel` VARCHAR(45) NOT NULL,
-  `adm_senha` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`adm_codigo`))
-ENGINE = InnoDB;
 --
 -- Definition of table `pri_projeto_inter`
 --
 
 DROP TABLE IF EXISTS `pri_projeto_inter`;
 CREATE TABLE `pri_projeto_inter` (
-  `PRI_CODIGO` int(11) NOT NULL,
-  `PRI_SEMESTRE_ANO` int(11) NOT NULL,
+  `PRI_CODIGO` int(11) NOT NULL AUTO_INCREMENT,
+  `SAN_SEMESTRE_ANO` int(11) NOT NULL,
   `PRI_DESCRICAO` varchar(100) NOT NULL,
   `PRI_EMENTA` text NOT NULL,
   `ADI_CODIGO` int(11) NOT NULL,
   PRIMARY KEY (`PRI_CODIGO`,`ADI_CODIGO`),
   KEY `ADI_CODIGO` (`ADI_CODIGO`),
-  CONSTRAINT `pri_projeto_inter_ibfk_1` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `adi_atribuicao_disciplina` (`ADI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `pri_projeto_inter_ibfk_2` (`SAN_SEMESTRE_ANO`),
+  CONSTRAINT `pri_projeto_inter_ibfk_1` FOREIGN KEY (`ADI_CODIGO`) REFERENCES `adi_atribuicao_disciplina` (`ADI_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `pri_projeto_inter_ibfk_2` FOREIGN KEY (`SAN_SEMESTRE_ANO`) REFERENCES `san_semestre_ano` (`san_codigo`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pri_projeto_inter`
 --
 
 /*!40000 ALTER TABLE `pri_projeto_inter` DISABLE KEYS */;
+INSERT INTO `pri_projeto_inter` (`PRI_CODIGO`,`SAN_SEMESTRE_ANO`,`PRI_DESCRICAO`,`PRI_EMENTA`,`ADI_CODIGO`) VALUES 
+ (1,3,'PI','Teste',3),
+ (3,2,'Outro PI','Teste2',2);
 /*!40000 ALTER TABLE `pri_projeto_inter` ENABLE KEYS */;
 
 
@@ -408,16 +406,28 @@ CREATE TABLE `pri_projeto_inter` (
 -- Definition of table `pro_professor`
 --
 
+drop table if exists adm_administrador;
+create table adm_administrador(
+adm_codigo int primary key auto_increment not null,
+adm_senha varchar(50) not null,
+pes_codigo int not null,
+foreign key(pes_codigo) references pes_pessoas(pes_codigo) on delete cascade on update cascade);
+
+insert into adm_administrador values
+(1,'e56ae0f09aac66e1d00ce6c0b3c1cd622746380d',1),
+(2,'04556b581f269b79f4ed5801f8532331c7cffaf5',2),
+(3,'7679357857a838cae279d6123d61d629d38f32b7',3);
+
 DROP TABLE IF EXISTS `pro_professor`;
 CREATE TABLE `pro_professor` (
   `PRO_MATRICULA` int(11) NOT NULL AUTO_INCREMENT,
-  `PRO_ADMINISTRADOR` tinyint(1) NOT NULL,
   `PRO_SENHA` varchar(200) NOT NULL,
-  `PRO_CHAVE_SENHA` varchar(10) DEFAULT NULL,
   `PES_CODIGO` int(11) NOT NULL,
+  `adm_codigo` int,
   PRIMARY KEY (`PRO_MATRICULA`),
   KEY `PES_CODIGO` (`PES_CODIGO`),
-  CONSTRAINT `pro_professor_ibfk_1` FOREIGN KEY (`PES_CODIGO`) REFERENCES `pes_pessoas` (`PES_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`PES_CODIGO`) REFERENCES `pes_pessoas` (`PES_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  foreign key(adm_codigo) references adm_administrador(adm_codigo) on delete cascade on update cascade
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
@@ -425,12 +435,12 @@ CREATE TABLE `pro_professor` (
 --
 
 /*!40000 ALTER TABLE `pro_professor` DISABLE KEYS */;
-INSERT INTO `pro_professor` (`PRO_MATRICULA`,`PRO_ADMINISTRADOR`,`PRO_SENHA`,`PRO_CHAVE_SENHA`,`PES_CODIGO`) VALUES 
- (4,1,'b19df6c68faafd4c9925f0dfaf9b1eae4ad13525','chavesenha',4),
- (5,0,'1ac3cf657b0c16fc280e910c6bcbaaa39e243656','chavesenha',5),
- (6,0,'959c8d10fe2052757c4645650eff4825bbf206b0','chavesenha',6);
+INSERT INTO `pro_professor` (`PRO_MATRICULA`,`PRO_SENHA`,`PES_CODIGO`,`adm_codigo`) VALUES
+ (4,'b19df6c68faafd4c9925f0dfaf9b1eae4ad13525',4,null),
+ (5,'1ac3cf657b0c16fc280e910c6bcbaaa39e243656',5,null),
+ (6,'959c8d10fe2052757c4645650eff4825bbf206b0',6,null),
+ (7,'04556b581f269b79f4ed5801f8532331c7cffaf5',2,2);
 /*!40000 ALTER TABLE `pro_professor` ENABLE KEYS */;
-
 
 --
 -- Definition of table `req_requerimento`
@@ -449,8 +459,8 @@ CREATE TABLE `req_requerimento` (
   PRIMARY KEY (`REQ_CODIGO`),
   KEY `PRO_MATRICULA` (`PRO_MATRICULA`),
   KEY `req_requerimento_ibfk_2` (`GRU_CODIGO`),
-  CONSTRAINT `req_requerimento_ibfk_2` FOREIGN KEY (`GRU_CODIGO`) REFERENCES `gru_grupo` (`GRU_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `req_requerimento_ibfk_1` FOREIGN KEY (`PRO_MATRICULA`) REFERENCES `pro_professor` (`PRO_MATRICULA`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `req_requerimento_ibfk_1` FOREIGN KEY (`PRO_MATRICULA`) REFERENCES `pro_professor` (`PRO_MATRICULA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `req_requerimento_ibfk_2` FOREIGN KEY (`GRU_CODIGO`) REFERENCES `gru_grupo` (`GRU_CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -459,6 +469,32 @@ CREATE TABLE `req_requerimento` (
 
 /*!40000 ALTER TABLE `req_requerimento` DISABLE KEYS */;
 /*!40000 ALTER TABLE `req_requerimento` ENABLE KEYS */;
+
+
+--
+-- Definition of table `san_semestre_ano`
+--
+
+DROP TABLE IF EXISTS `san_semestre_ano`;
+CREATE TABLE `san_semestre_ano` (
+  `san_codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `san_ano` int(11) NOT NULL,
+  `san_semestre` int(11) NOT NULL,
+  `san_ativo` tinyint(1) NOT NULL,
+  PRIMARY KEY (`san_codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `san_semestre_ano`
+--
+
+/*!40000 ALTER TABLE `san_semestre_ano` DISABLE KEYS */;
+INSERT INTO `san_semestre_ano` (`san_codigo`,`san_ano`,`san_semestre`,`san_ativo`) VALUES 
+ (1,2014,1,0),
+ (2,2014,2,0),
+ (3,2015,1,1),
+ (4,2015,2,0);
+/*!40000 ALTER TABLE `san_semestre_ano` ENABLE KEYS */;
 
 
 --

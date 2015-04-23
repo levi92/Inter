@@ -9,68 +9,86 @@
 
 
 
-public partial class Páginas_Administrador_admin {
+public partial class paginas_Admin_MenuMaster {
     
     /// <summary>
-    /// txtEndereco control.
+    /// hora control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtEndereco;
+    protected global::System.Web.UI.WebControls.Label hora;
     
     /// <summary>
-    /// btAdmTrocarSenha control.
+    /// dia control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlButton btAdmTrocarSenha;
+    protected global::System.Web.UI.WebControls.Label dia;
     
     /// <summary>
-    /// formCadastrarCri control.
+    /// icone2 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlForm formCadastrarCri;
+    protected global::System.Web.UI.WebControls.HyperLink icone2;
     
     /// <summary>
-    /// lblNomeCriterio control.
+    /// icone3 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblNomeCriterio;
+    protected global::System.Web.UI.WebControls.HyperLink icone3;
     
     /// <summary>
-    /// txtNomeCriterio control.
+    /// icone4 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtNomeCriterio;
+    protected global::System.Web.UI.WebControls.HyperLink icone4;
     
     /// <summary>
-    /// lblDescricaoCriterio control.
+    /// icone5 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblDescricaoCriterio;
+    protected global::System.Web.UI.WebControls.HyperLink icone5;
     
     /// <summary>
-    /// txtDescricaoCriterio control.
+    /// icone6 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtDescricaoCriterio;
+    protected global::System.Web.UI.WebControls.HyperLink icone6;
+    
+    /// <summary>
+    /// icone7 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HyperLink icone7;
+    
+    /// <summary>
+    /// ConteudoCentral control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ContentPlaceHolder ConteudoCentral;
 }
