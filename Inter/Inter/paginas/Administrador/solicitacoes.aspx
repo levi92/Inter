@@ -20,20 +20,27 @@
                     <h4 class="modal-title" id="myModalLabel1" style="float: left;">Mudança de nota no Projeto</h4>
                     
                  
-                    <button type="button" runat="server" onclick="javascript:void(0)" style="  float: right;border: none;background: none;margin-top: -2px;" ><span class="mdi mdi-dots-vertical hoverAll" style="font-size: 25px;"></span></button>
+                    <button type="button" runat="server" id="butMostraMenu" onclick="mostraDiv('subMenu')" style="  float: right;border: none;background: none;margin-top: -2px;" ><span class="mdi mdi-dots-vertical hoverAll" style="font-size: 25px;"></span></button>
                 
-                    <h4 style="float:right;margin-top: 0;padding-right: 10px;"> Profesor Claudemir</h4>
+                    <h4 style="float:right;margin-top: 0;padding-right: 10px;"> Claudemir</h4>
 
 
 
 
 
                 </div>
+                <div class="subMenu" id="subMenu">
+                    <div>Finalizar Favorável</div>
+                    <div>Finalizar Desfavorável</div>
+                    <div>PI Finalizado</div>
+                    <div onclick="fechaDiv('subMenu')">Fechar</div>
+                </div>
                 <div class="modal-body" style="background-color: whitesmoke;">
                     <table style="width: 95%;">  
                     
-                    <div style="height: 400px;float: left;overflow: auto;margin-top: 50px;padding-right: 10px;">
+                    <div class="insideBox">
                       <div class="txtCard" style="float:left">Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, </div>
+                      <div class="txtCard" style="float:right">Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, </div>
                       <div class="txtCard" style="float:right">Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, Lorem ipsum dolor sit a met, </div>
                      </div>                     
 
@@ -43,7 +50,7 @@
                 <div class="modal-footer" style="text-align: left;background-color:whitesmoke;border-top:none">                    
                     
                     <asp:TextBox runat="server" ID="txtResponder" TextMode="MultiLine" CssClass="minimalScrollbar"></asp:TextBox>
-                    <div style="float: right;width: 60px;text-align: center;height: 50px;"><span class="mdi mdi-send" style="color: #960D10;font-size: 49px;"></span></div>
+                    <div style="float: right;width: 50px;text-align: center;height: 50px;border-radius: 100px;background-color: #960D10;  box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.16);"><span class="mdi mdi-send" style="color: #fff;padding-top: 7px;padding-left: 5px;font-size: 35px;"></span></div>
                 </div>
             </div>
         </div>

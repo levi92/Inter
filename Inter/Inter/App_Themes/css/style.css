@@ -945,6 +945,7 @@ img.ui-datepicker-trigger {
   padding: 10px;
   height: 50px;
 -webkit-overflow-scrolling:touch;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.16);
 
 }
 
@@ -958,6 +959,67 @@ img.ui-datepicker-trigger {
   border-radius: 15px;
   padding: 13px;
   color: #424242;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.16);
+  margin-left: 3px;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.16);
   background-color: rgb(255, 255, 255);
+}
+
+.insideBox {
+    height: 400px;
+    float: left;
+    overflow: auto;
+    margin-top: 50px;
+    padding-right: 10px;
+    scrollbar-face-color: #000000;
+    scrollbar-shadow-color: #2D2C4D;
+    scrollbar-highlight-color:#7D7E94;
+    scrollbar-3dlight-color: #7D7E94;
+    scrollbar-darkshadow-color: #2D2C4D;
+    scrollbar-track-color: #7D7E94;
+    scrollbar-arrow-color: #C1C1D1; 
+}
+.subMenu {
+  margin-top: 15px;
+  position: absolute;
+  margin-right: 12px;
+  z-index: 999;
+  right: 0;
+  height: 168px;
+  width: 175px;
+  background-color: #FFFFFF;
+  display: none;
+  box-shadow: 0px 3px 10px 2px rgba(0, 0, 0, 0.26);
+
+
+}
+.subMenu div{
+   width: 100%;
+  padding: 10px;
+  padding-left: 15px;
+  cursor:pointer;
+  
+}
+.subMenu div:hover{
+    background-color:#e0e0e0;
+}
+.subMenu span{
+    padding-right: 5px;
+    font-size: 15px;
+}
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    display: none;
+    background-color: #ccc;
+    border-left: 1px solid #ccc;
+
+}
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius:30px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(204, 204, 204, 0.62);
+    border-radius:30px;
 }

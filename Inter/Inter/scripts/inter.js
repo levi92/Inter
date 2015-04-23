@@ -20,6 +20,18 @@ $(document).ready(function () {
     });
 });
 
+//Function para exibir o subMenu ao clicar no botão
+function mostraDiv(idDiv) {
+    document.getElementById(idDiv).style.display = "block";
+}
+
+function fechaDiv(idDiv) {
+    document.getElementById(idDiv).style.display = "none";
+}
+
+
+
+
 //Function que exibe o conteudo das Div's conforme o parametro utilizado nela
 function Mostra(idDiv) {
 
