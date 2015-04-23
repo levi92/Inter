@@ -7,18 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Inter.paginas.Administrador {
+
+
+public partial class paginas_Admin_solicitacoes {
     
-    
-    public partial class solicitacoes {
-        
-        /// <summary>
-        /// txtResponder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtResponder;
-    }
+    /// <summary>
+    /// txtResponder control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtResponder;
 }
