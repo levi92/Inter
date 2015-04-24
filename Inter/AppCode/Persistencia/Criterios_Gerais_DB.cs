@@ -113,6 +113,37 @@ public class Criterios_Gerais_DB{
             return null;
         }
     }
+
+
+    //SELECT ULTIMO CODIGO
+    public static int SelectUltimoCod()
+    {
+        try
+        {
+            int ultimoCod = 0;
+            IDbConnection objConnection;
+            IDbCommand objCommnad;
+            IDataReader objDataReader;
+            objConnection = Mapped.Connection();
+            objCommnad = Mapped.Command("SELECT MAX(CGE_CODIGO) FROM CGE_CRITERIOS_GERAIS", objConnection);
+            objDataReader = objCommnad.ExecuteReader();
+            while (objDataReader.Read())
+            {
+                ultimoCod = Convert.ToInt32(objDataReader["Max(CGE_CODIGO)"]);
+            }
+            objDataReader.Close();
+            objConnection.Close();
+            objConnection.Dispose();
+            objCommnad.Dispose();
+            objDataReader.Dispose();
+            return ultimoCod;
+        }
+        catch (Exception e)
+        {
+            return -2;
+        }
+    }
+
     //SELECT ALL
     public static DataSet SelectAll()
     {

@@ -9,6 +9,8 @@
             // ALTERAR COR DO ÍCONE NO MENU LATERAL 
             $('#cphConteudo_icone5').addClass('corIcone');
         });
+
+
     </script>
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -118,7 +120,7 @@
                         <td class="colunaBotoes"></td>
                         <td class="colunaBotoes">
                             <asp:Button ID="btnContinuarEtapa2" OnClientClick="Mostra('p10'); return false;" ClientIDMode="Static"
-                                CssClass="btn btn-default" runat="server" Text="Continuar" title="Ir para adicionar critérios" />
+                                CssClass="btn btn-default" runat="server" Text="Continuar" ToolTip="Ir para adicionar critérios" />
                         </td>
                     </tr>
                 </table>
@@ -227,7 +229,7 @@
 
                             <tr>
                                 <td>
-                                    <button type="button" class="btn btn-default" id="" onclick="Mostra('p10');" title="Voltar para Adicionar Critérios">
+                                    <button type="button" class="btn btn-default" id="voltarEtapa2" onclick="Mostra('p10');" title="Voltar para Adicionar Critérios">
                                         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
                                 <td>
                                     <button type="button" class="btn btn-default" id="ContinuarEtapa4" onclick="Mostra('p13');" title="Ir para Criar Grupos">Continuar</button>
@@ -254,68 +256,101 @@
                     </div>
                     <div class="panel-body-usuarios">
 
-                        <table style="width: 70%; margin-left: -10px">
+                        <table style="width: 70%; margin: auto">
                             <tr>
                                 <td>
                                     <asp:Label ID="lblNomeGrupo" CssClass="label" runat="server" Text="Nome do Grupo: "></asp:Label></td>
-                                <td colspan="2" style="text-align: start;">
-                                    <asp:TextBox ID="txtNomeGrupo" CssClass="text" Width="95%" runat="server"></asp:TextBox>
+                                <td>
+                                    <asp:TextBox ID="txtNomeGrupo" CssClass="text" Width="98%" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
 
                             <tr>
-                                <td colspan="3">
+                                <td colspan="2">
                                     <br />
                                 </td>
                             </tr>
+                        </table>
+
+                        <table style="width: 70%; margin: auto">
 
                             <tr>
                                 <td>
                                     <asp:Label ID="lblAlunoDisciplina" CssClass="label" runat="server" Text="Alunos da Disciplina"></asp:Label></td>
                                 <td>
                                     <asp:Label ID="lblAlunoGrupo" CssClass="label" runat="server" Text="Alunos do Grupo"></asp:Label></td>
-
-                                <td></td>
                             </tr>
 
                             <tr>
                                 <td>
-                                    <div style="width: 230px; height: 230px; overflow-y: auto;">
+                                    <div style="width: 100%; height: 230px;">
                                         <asp:ListBox ID="listaAlunoGeral" runat="server"
                                             AutoPostBack="true" OnSelectedIndexChanged="listaAlunoGeral_SelectedIndexChanged" ClientIDMode="Static">
-                                            <asp:ListItem>Bruno</asp:ListItem>
-                                            <asp:ListItem>Felipe</asp:ListItem>
-                                            <asp:ListItem>Higor</asp:ListItem>
-                                            <asp:ListItem>Dayane</asp:ListItem>
-                                            <asp:ListItem>Gabriel</asp:ListItem>
+                                            <asp:ListItem Value="1">Bruno</asp:ListItem>
+                                            <asp:ListItem Value="2">Felipe</asp:ListItem>
+                                            <asp:ListItem Value="3">Higor</asp:ListItem>
+                                            <asp:ListItem Value="4">Dayane</asp:ListItem>
+                                            <asp:ListItem Value="5">Gabriel</asp:ListItem>
                                         </asp:ListBox>
                                     </div>
                                 </td>
+
                                 <td>
-                                    <div style="width: 230px; height: 230px; overflow-y: auto;">
+                                    <div style="width: 100%; height: 230px;">
                                         <asp:ListBox ID="listaAlunosGrupo" runat="server" OnSelectedIndexChanged="listaAlunosGrupo_SelectedIndexChanged"
                                             AutoPostBack="true" ClientIDMode="Static"></asp:ListBox>
                                     </div>
                                 </td>
-                                <td></td>
                             </tr>
+
                             <tr>
-                                <td colspan="3">
+                                <td colspan="2">
                                     <br />
                                 </td>
                             </tr>
+
+                            <tr>
+                                <td colspan="2">
+                                    <asp:Label ID="lblGrupos" runat="server" CssClass="label" Text="Grupos: "></asp:Label>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">
+                                    <asp:ListBox ID="listaGrupos" runat="server" OnSelectedIndexChanged="listaGrupos_SelectedIndexChanged" AutoPostBack="true" ClientIDMode="Static"></asp:ListBox>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">
+                                    <br />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table style="width: 100%;">
                             <tr>
                                 <td>
                                     <asp:LinkButton CssClass="btn btn-default" ID="LkbVoltarEtapa3" runat="server" OnClick="LkbVoltarEtapa3_Click"
                                         ToolTip="Voltar para adicionar peso aos critérios"> <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</asp:LinkButton>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-default" id="btnAdicionarGrupo" title="Criar outro grupo">
-                                        <span class="glyphicon glyphicon-plus"></span>&nbsp Adicionar Grupo</button></td>
+                                    <asp:LinkButton ID="btnExcluirGrupo" Enabled="false" runat="server" OnClick="btnExcluirGrupo_Click" CssClass="btn btn-default" OnClientClick="Disable();" ToolTip="Excluir grupo selecionado">
+                                        <span class="glyphicon glyphicon-trash"></span>&nbsp Excluir</asp:LinkButton></td>
+                                <td>
+                                    <asp:LinkButton ID="btnCancelarEdicao" Enabled="false" runat="server" OnClick="btnCancelarEdicao_Click" CssClass="btn btn-default" ToolTip="Cancelar a Edição do grupo selecionado">
+                                        <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar Edição</asp:LinkButton></td>
+                                <td>
+                                    <asp:LinkButton ID="btnConfirmarEdicao" Enabled="false" runat="server" OnClick="btnConfirmarEdicao_Click" CssClass="btn btn-default" ToolTip="Confirmar a Edição do grupo selecionado e Criar outro grupo">
+                                        <span class="glyphicon glyphicon-edit"></span>&nbsp Confirmar Edição</asp:LinkButton></td>
+                                <td>
+                                    <asp:LinkButton ID="btnConfirmarGrupo" runat="server" OnClick="btnConfirmarGrupo_Click" CssClass="btn btn-default" ToolTip="Confirmar o grupo atual e Criar outro grupo">
+                                        <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar Grupo</asp:LinkButton></td>
                                 <td>
                                     <button type="button" class="btn btn-default" id="finalizarCriarPi" onclick="finalizarCadastroPI();" data-toggle="modal" data-target="#myModalPiCadastrado" title="Finalizar criação de PI">
                                         <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</button></td>
                             </tr>
+
 
                         </table>
 
@@ -328,6 +363,7 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="listaAlunoGeral" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="listaAlunosGrupo" EventName="SelectedIndexChanged" />
+            <asp:AsyncPostBackTrigger ControlID="listaGrupos" EventName="SelectedIndexChanged" />
         </Triggers>
     </asp:UpdatePanel>
 
@@ -366,8 +402,6 @@
                                 <asp:Label ID="lblData" runat="server" CssClass="label" Text="Data: "></asp:Label></td>
                             <td>
                                 <input id="txtData" type="text" />
-<%--                                <input type="text" id="txtData" class="textData" runat="server"/></input>--%>
-
                             </td>
                             <td>
                                 <asp:Label ID="lblDataMsgErro" runat="server" ClientIDMode="Static"></asp:Label></td>
