@@ -39,7 +39,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
         //SE NÃO FOR POSTBACK VAI CARREGAR OS MÉTODOS ABAIXO DESCRITOS
         if (!IsPostBack)
-        {
+        {            
             CarregaCriGerais();
             PegarAnoeSemestreAno();
             PegarUltimoCodPI();
@@ -177,37 +177,80 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     }
 
     //VERIFICAR SE OS TEXTBOXS DOS PESOS ESTÃO EM BRANCO 
-    protected void verificarPesoVazio()
-    {
+    protected int verificarPesoVazio()
+    {        
+        int retorno = 0;
+
         foreach (Control txt in PanelCriterios.Controls)
         {
             if (txt is TextBox)
             {
                 TextBox txtCri = (TextBox)txt;
-                //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Entrou!');", true);
-                if (txtCri.Text == "")
-                {
-                    txtCri.Text = "1";
-                }               
+                
+                if (String.IsNullOrEmpty(txtCri.Text))
+                {                                       
+                    retorno = 1;                    
+                }
 
             }
         }
 
-        
+        return retorno;
+
     }
 
-    //protected void ContinuarEtapa4_Click(object sender, EventArgs e)
-    //{
-    //    verificarPesoVazio();
-    //    ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);        
-    //}
+    //VERIFICAR SE OS TEXTBOXS DOS PESOS ESTÃO EM BRANCO E ACRESCENTA 1 AO PESO
+    protected void PreencherPesoVazio()
+    {
+
+        foreach (Control txt in PanelCriterios.Controls)
+        {
+            if (txt is TextBox)
+            {
+                TextBox txtCri = (TextBox)txt;
+                
+                if (String.IsNullOrEmpty(txtCri.Text))
+                {
+                    txtCri.Text = "1";                    
+                }
+
+            }
+        }       
+
+    }
+
+    protected void ContinuarEtapa4_Click(object sender, EventArgs e)
+    {
+        if (verificarPesoVazio() == 1)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
+            //CHAMA A MODAL PESO VAZIO
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "MostraModalPesoUm", "MostraModalPesoUm();", true); 
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "Modaletapa4('p13');", true);
+
+        }
+    }
+
+    //Adiciona Peso 1 as textboxs vazias  
+    protected void btnAdicionarPesoUm_Click(object sender, EventArgs e)
+    {
+        PreencherPesoVazio();
+        updPanelPeso.Update();
+        CarregaTip();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "Modaletapa4('p13');", true);
+    }
+
 
     //EVENTO DO BOTÃO CONTINUAR(ETAPA 3 CRITÉRIOS(PESOS)) : CRIA OS CRITÉRIOS, ATUALIZA O PAINEL E REDIRECIONA PARA PRÓXIMA ETAPA
     protected void btnContinuarEtapa3_Click(object sender, EventArgs e)
     {
         //CriarCriterio();
-        CarregaTip();
         //updPanelPeso.Update();
+        CarregaTip();
+        
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
     }
 
@@ -523,6 +566,10 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
     }
+
+    
+
+
 
 
 

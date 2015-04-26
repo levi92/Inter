@@ -210,6 +210,15 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.Panel PanelCriterios;
     
     /// <summary>
+    /// ContinuarEtapa4 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button ContinuarEtapa4;
+    
+    /// <summary>
     /// updPanelGrupos control.
     /// </summary>
     /// <remarks>
@@ -433,6 +442,15 @@ public partial class paginas_Usuario_cadastrarPi {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.LinkButton btnCriarNovoCriterio;
+    
+    /// <summary>
+    /// btnAdicionarPesoUm control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnAdicionarPesoUm;
     
     /// <summary>
     /// btnVoltarHome2 control.

@@ -225,7 +225,7 @@ select#listaGrupos {
 }
 
 #listaGrupos option {
-    margin: 5px 5px auto;
+    margin: 5px auto;
     padding: 7px 5px;
     font-size: 12px;
     width: 92%;
@@ -540,6 +540,7 @@ tabelaHome3 {
 img.ui-datepicker-trigger {
   width: 40px;
   margin-left: 7px;
+  cursor: pointer;
 }
 
 

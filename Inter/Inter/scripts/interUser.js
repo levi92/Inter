@@ -36,7 +36,7 @@ function Mostra(idDiv) {
     });
 
 }
-
+//SEM O EFEITO SLIDE
 function etapa2() {
     controlarMostra = true;
     $("#" + global).hide();
@@ -45,12 +45,12 @@ function etapa2() {
     $("#p10").show();
     $("#conteudo").slideDown(500);
 }
-
+//SEM O EFEITO SLIDE
 function etapa3() {
     controlarMostra = true;
     Mostra('p12');
 }
-
+//SEM O EFEITO SLIDE
 function etapa4() {
     controlarMostra = true;
     $("#" + global).hide();
@@ -58,6 +58,21 @@ function etapa4() {
     global = "p13";
     $("#p13").show();
     $("#conteudo").slideDown(500);
+}
+
+//PARA FAZER O EFEITO SLIDE
+function Modaletapa4(idDiv) {
+    controlarMostra = true;
+
+    $("#conteudo").slideUp(500, function () {
+        $("#" + global).hide();
+        $("#c" + global).css("visibility", "hidden");
+        global = idDiv;
+        $("#" + idDiv).show();
+        $("#conteudo").slideDown(500);
+
+    });
+
 }
 
 

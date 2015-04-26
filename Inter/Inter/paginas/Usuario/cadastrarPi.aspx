@@ -10,8 +10,14 @@
             $('#cphConteudo_icone5').addClass('corIcone');
         });
 
+        function MostraModalPesoUm() {
+            $('#btnModalPesoUm').click();
+        }
+
 
     </script>
+
+    <button style="display: none" type="button" id="btnModalPesoUm" data-toggle="modal" data-target="#myModalPesoUm"></button>
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
@@ -232,7 +238,9 @@
                                     <button type="button" class="btn btn-default" id="voltarEtapa2" onclick="Mostra('p10');" title="Voltar para Adicionar Critérios">
                                         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
                                 <td>
-                                    <button type="button" class="btn btn-default" id="ContinuarEtapa4" onclick="Mostra('p13');" title="Ir para Criar Grupos">Continuar</button>
+                                    <asp:Button ID="ContinuarEtapa4" runat="server" CssClass="btn btn-default" Text="Continuar" OnClick="ContinuarEtapa4_Click"
+                                        ToolTip="Ir para Criar Grupos" />
+                                    <%--<button type="button" class="btn btn-default" id="ContinuarEtapa4" onclick="Mostra('p13');" title="Ir para Criar Grupos">Continuar</button>--%>
                                 </td>
                             </tr>
 
@@ -401,7 +409,7 @@
                             <td>
                                 <asp:Label ID="lblData" runat="server" CssClass="label" Text="Data: "></asp:Label></td>
                             <td>
-                                <input id="txtData" type="text" />
+                                <input id="txtData" class="textData" style="width: 50%" type="text" />
                             </td>
                             <td>
                                 <asp:Label ID="lblDataMsgErro" runat="server" ClientIDMode="Static"></asp:Label></td>
@@ -492,8 +500,9 @@
 
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-default" id="" data-dismiss="modal" onclick="Mostra('p13');" title="O sistema atribuirá peso 1 aos campos vazios">Sim</button>
-
+                    <%--                    <button type="button" class="btn btn-default" id="" data-dismiss="modal" onclick="Mostra('p13');" title="O sistema atribuirá peso 1 aos campos vazios">Sim</button>--%>
+                    <asp:Button ID="btnAdicionarPesoUm" runat="server" OnClick="btnAdicionarPesoUm_Click" CssClass="btn btn-default"
+                        Text="Sim" ToolTip="O sistema atribuirá peso 1 aos campos vazios" />
                     <button type="button" class="btn btn-default" id="" data-dismiss="modal">Não</button>
 
                 </div>
