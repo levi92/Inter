@@ -409,7 +409,7 @@
                             <td>
                                 <asp:Label ID="lblData" runat="server" CssClass="label" Text="Data: "></asp:Label></td>
                             <td>
-                                <input id="txtData" class="textData" style="width: 50%" type="text" />
+                                <asp:TextBox ID="txtData" runat="server" CssClass="textData" Enabled="false" ClientIDMode="Static" style="width: 50%"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:Label ID="lblDataMsgErro" runat="server" ClientIDMode="Static"></asp:Label></td>

@@ -152,6 +152,7 @@ $(document).ready(function () {
         showOn: "button",
         buttonImage: "../../App_Themes/images/Calendar-Add-128x128.png",
         buttonImageOnly: true,
+        minDate: 0,
         buttonText: "Abrir Calendário"
 
     });
