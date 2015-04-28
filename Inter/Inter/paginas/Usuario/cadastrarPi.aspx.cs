@@ -176,26 +176,33 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     }
 
-    //VERIFICAR SE OS TEXTBOXS DOS PESOS ESTÃO EM BRANCO 
+    //VERIFICAR SE OS TEXTBOXS DOS PESOS ESTÃO EM BRANCO OU INVÁLIDOS
     protected int verificarPesoVazio()
-    {        
-        int retorno = 0;
-
+    {
+        int peso = 0;
+        int ret = 0;
         foreach (Control txt in PanelCriterios.Controls)
         {
             if (txt is TextBox)
             {
                 TextBox txtCri = (TextBox)txt;
-                
+                txtCri.Style.Clear();
                 if (String.IsNullOrEmpty(txtCri.Text))
                 {                                       
-                    retorno = 1;                    
+                    return 1;
+                }
+
+                peso = Convert.ToInt32(txtCri.Text);
+                if ((peso < 1) || (peso > 10))
+                {
+                    txtCri.Style.Add("border","1px solid red");
+                    ret = 2;
                 }
 
             }
         }
-
-        return retorno;
+        
+        return ret;
 
     }
 
@@ -226,6 +233,9 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
             //CHAMA A MODAL PESO VAZIO
             ScriptManager.RegisterStartupScript(this, this.GetType(), "MostraModalPesoUm", "MostraModalPesoUm();", true); 
+        }else if(verificarPesoVazio() == 2){
+            
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
         }
         else
         {
@@ -240,7 +250,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         PreencherPesoVazio();
         updPanelPeso.Update();
         CarregaTip();
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "Modaletapa4('p13');", true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
     }
 
 
@@ -376,33 +386,43 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     public static int index = 1; //É UMA CONTROLADORA DO VIEWSTATE (EX: VIEWSTATE["ALUNOS1"]) OBS: PELO INDEX COMEÇAR NO VALOR "1" NÃO HAVERÁ "GRUPO0"
     protected void btnConfirmarGrupo_Click(object sender, EventArgs e)
     {
-        string listItem = ""; //GUARDA OS ALUNOS ESCOLHIDOS EM UM GRUPO 
-        string listItemValue = "";
-
-        foreach (ListItem item in listaAlunosGrupo.Items)
+        if (txtNomeGrupo.Text != "")
         {
-            listItem += item.Text + "|"; //GUARDANDO TODOS OS ALUNOS NA MESMA VARIÁVEL E DETERMINANDO UM CARACTER DE "QUEBRA"("|") PARA SEPARAR OS NOMES
-            listItemValue += item.Value + "|"; // GUARDANDO TODOS OS CÓDIGOS DOS ALUNOS
+            txtNomeGrupo.Style.Clear();
+            string listItem = ""; //GUARDA OS ALUNOS ESCOLHIDOS EM UM GRUPO 
+            string listItemValue = "";
+
+            foreach (ListItem item in listaAlunosGrupo.Items)
+            {
+                listItem += item.Text + "|"; //GUARDANDO TODOS OS ALUNOS NA MESMA VARIÁVEL E DETERMINANDO UM CARACTER DE "QUEBRA"("|") PARA SEPARAR OS NOMES
+                listItemValue += item.Value + "|"; // GUARDANDO TODOS OS CÓDIGOS DOS ALUNOS
+            }
+
+            ViewState["NomeGrupo" + index.ToString()] = txtNomeGrupo.Text;
+            ViewState["Alunos" + index.ToString()] = listItem;
+            ViewState["CodAlunos" + index.ToString()] = listItemValue;
+
+            //ADICIONANDO AO LISTBOX DE GRUPOS, ADICIONA O NOME DO GRUPO AO LISITEM E NO VALUE RECEBE UM INDEX ÚNICO PARA CADA LISTITEM
+            listaGrupos.Items.Add(new ListItem("Grupo: " + txtNomeGrupo.Text, index.ToString()));
+            //"Clique para Editar o grupo" -> vamos inserir um texto de ajuda fixo na lateral!
+            index++;
+            listaAlunosGrupo.Items.Clear();
+            txtNomeGrupo.Text = "";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
         }
-
-        ViewState["NomeGrupo" + index.ToString()] = txtNomeGrupo.Text;
-        ViewState["Alunos" + index.ToString()] = listItem;
-        ViewState["CodAlunos" + index.ToString()] = listItemValue;
-
-        //ADICIONANDO AO LISTBOX DE GRUPOS, ADICIONA O NOME DO GRUPO AO LISITEM E NO VALUE RECEBE UM INDEX ÚNICO PARA CADA LISTITEM
-        listaGrupos.Items.Add(new ListItem("Grupo: " + txtNomeGrupo.Text, index.ToString()));
-        //"Clique para Editar o grupo" -> vamos inserir um texto de ajuda fixo na lateral!
-        index++;
-        listaAlunosGrupo.Items.Clear();
-        txtNomeGrupo.Text = "";
-
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
+        else
+        {
+            txtNomeGrupo.Style.Add("border","1px solid red");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
+        }
     }
 
     //EDIÇÃO: QUANDO CLICAR NO LISTBOX DOS GRUPOS CRIADOS(AO CLICAR EM UM DOS GRUPOS INSERIDOS ELE JÁ VAI PARA O MODO DE EDIÇÃO)
     protected void listaGrupos_SelectedIndexChanged(object sender, EventArgs e)
     {
         listaAlunosGrupo.Items.Clear();
+        listaGrupos.Enabled = false;
 
         // ** CASO VENHA A CANCELAR, IRÁ RETORNAR AO ESTADO ANTERIOR
         string listItemGeral = "";
@@ -446,6 +466,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     //CONFIRMAR EDIÇÃO
     protected void btnConfirmarEdicao_Click(object sender, EventArgs e)
     {
+        listaGrupos.Enabled = true;
         int indice = Convert.ToInt32(listaGrupos.SelectedValue); //PEGA O INDICE DO GRUPO QUE IRÁ SER EDITADO 
 
         string listItem = "";
@@ -533,7 +554,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     //CANCELAR
     protected void btnCancelarEdicao_Click(object sender, EventArgs e)
     {
-
+        listaGrupos.Enabled = true;
         listaAlunosGrupo.Items.Clear();
         listaAlunoGeral.Items.Clear();
 

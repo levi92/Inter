@@ -226,10 +226,13 @@
                                 <%--Painel que vai receber os critérios para inserção dos pesos--%>
                                 <asp:Panel ID="PanelCriterios" runat="server" ClientIDMode="Static"></asp:Panel>
                             </tr>
-
+                            
                             <tr>
-                                <td colspan="2">
+                                <asp:Label ID="lblMsg" CssClass="label" runat="server" style="color:red; text-align:center" Text="Pesos válidos entre os valores 1 e 10."></asp:Label>
+                                <td colspan="2">                                 
+                                    
                                     <br />
+                                    <br />  
                                 </td>
                             </tr>
 
@@ -269,7 +272,7 @@
                                 <td>
                                     <asp:Label ID="lblNomeGrupo" CssClass="label" runat="server" Text="Nome do Grupo: "></asp:Label></td>
                                 <td>
-                                    <asp:TextBox ID="txtNomeGrupo" CssClass="text" Width="98%" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtNomeGrupo" CssClass="text" Width="98%" placeholder="Preenchimento obrigatório" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
 
