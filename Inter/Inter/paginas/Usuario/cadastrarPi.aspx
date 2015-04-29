@@ -7,12 +7,27 @@
 
         $(document).ready(function () {
             // ALTERAR COR DO ÍCONE NO MENU LATERAL 
-            $('#cphConteudo_icone5').addClass('corIcone');
+            $('#cphConteudo_icone5').addClass('corIcone');            
+            
         });
+
+       
+        function fechaModalCri() {
+            $('#txtNomeCriterio').val(" ");
+            $('#txtDescricaoCriterio').val(" ");
+            $('#lblMsgCriterio').html(" ");
+
+        }
 
         function MostraModalPesoUm() {
             $('#btnModalPesoUm').click();
         }
+
+        function FechaModalCriacaoCriterio() {
+            $('#fecharModal').click();
+        }
+
+
 
 
     </script>
@@ -187,7 +202,7 @@
                                     <button type="button" class="btn btn-default" id="btnVoltarEtapa2" onclick="Mostra('p1');" title="Voltar ao cadastro de PI">
                                         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
                                 <td>
-                                    <button type="button" class="btn btn-default" id="" data-toggle="modal" data-target="#myModalCadastrarCri" title="Ir para cadastro de critérios">
+                                    <button type="button" class="btn btn-default" id="btnCadastrarCriterio" runat="server" data-toggle="modal" data-target="#myModalCadastrarCri" title="Ir para cadastro de critérios">
                                         <span class="glyphicon glyphicon-plus"></span>&nbsp Cadastrar Critérios
                                     </button>
                                 </td>
@@ -221,22 +236,23 @@
                     </div>
                     <div class="panel-body-usuarios">
                         <table style="width: 30%; margin-left: 5%;">
-
                             <tr>
                                 <%--Painel que vai receber os critérios para inserção dos pesos--%>
                                 <asp:Panel ID="PanelCriterios" runat="server" ClientIDMode="Static"></asp:Panel>
                             </tr>
-                            
-                            <tr>
-                                <asp:Label ID="lblMsg" CssClass="label" runat="server" style="color:red; text-align:center" Text="Pesos válidos entre os valores 1 e 10."></asp:Label>
-                                <td colspan="2">                                 
-                                    
-                                    <br />
-                                    <br />  
-                                </td>
-                            </tr>
+                        </table>
 
-                            <tr>
+                        <table style="width:75%; margin-left:5%">
+                            <tr>                                
+                                <td colspan="2" style="color:red; text-align:left;font-size:16px;">
+                                    <span class="glyphicon glyphicon-exclamation-sign" ></span> &nbsp Pesos válidos entre os valores 1 e 10.
+                                    <br />
+                                    <br />
+                                </td>
+                            </tr> 
+                         </table>
+                         <table style="width:30%; margin-left:5%">  
+                             <tr>
                                 <td>
                                     <button type="button" class="btn btn-default" id="voltarEtapa2" onclick="Mostra('p10');" title="Voltar para Adicionar Critérios">
                                         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
@@ -412,7 +428,7 @@
                             <td>
                                 <asp:Label ID="lblData" runat="server" CssClass="label" Text="Data: "></asp:Label></td>
                             <td>
-                                <asp:TextBox ID="txtData" runat="server" CssClass="textData" Enabled="false" ClientIDMode="Static" style="width: 50%"></asp:TextBox>
+                                <asp:TextBox ID="txtData" runat="server" CssClass="textData" Enabled="false" ClientIDMode="Static" Style="width: 50%"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:Label ID="lblDataMsgErro" runat="server" ClientIDMode="Static"></asp:Label></td>
@@ -436,55 +452,60 @@
 
     <!-- Modal Cadastrar Critérios -->
     <div class="modal fade" data-backdrop="static" id="myModalCadastrarCri" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="font-size: 35px;">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel3">Cadastrar Critérios</h4>
-                </div>
-                <div class="modal-body">
-                    <table style="width: 70%; margin-left: 5%;">
-                        <tr style="text-align: left;">
-                            <td>
-                                <asp:Label ID="lblNomeCriterio" runat="server" CssClass="label" Text="Nome Critério: "></asp:Label></td>
-                            <td>
-                                <asp:TextBox ID="txtNomeCriterio" CssClass="textCriterio" runat="server"></asp:TextBox></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <br />
-                            </td>
-                        </tr>
-                        <tr style="text-align: left;">
-                            <td>
-                                <asp:Label ID="lblDescricaoCriterio" runat="server" CssClass="label" Text="Descrição do Critério: "></asp:Label></td>
-                            <td>
-                                <asp:TextBox ID="txtDescricaoCriterio" CssClass="textCriterio" runat="server"></asp:TextBox></td>
+        <asp:UpdatePanel ID="updPanelNovoCri" runat="server">
+            <ContentTemplate>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" id="fecharModal" onclick="fechaModalCri();" class="close" data-dismiss="modal"><span aria-hidden="true" style="font-size: 35px;">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel3">Cadastrar Critérios</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table style="width: 70%; margin-left: 5%;">
+                                <tr style="text-align: left;">
+                                    <td>
+                                        <asp:Label ID="lblNomeCriterio" runat="server" CssClass="label" Text="Nome Critério: "></asp:Label></td>
+                                    <td>
+                                        <asp:TextBox ID="txtNomeCriterio" ClientIDMode="Static" CssClass="textCriterio" runat="server"></asp:TextBox></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <br />
+                                    </td>
+                                </tr>
+                                <tr style="text-align: left;">
+                                    <td>
+                                        <asp:Label ID="lblDescricaoCriterio" runat="server" CssClass="label" Text="Descrição do Critério: "></asp:Label></td>
+                                    <td>
+                                        <asp:TextBox ID="txtDescricaoCriterio" ClientIDMode="Static" CssClass="textCriterio" runat="server"></asp:TextBox></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <br />
+                                        <asp:Label ID="lblMsgCriterio" ClientIDMode="Static" runat="server" style="font-size:18px"></asp:Label>
+                                    </td>
+                                </tr>
 
-                        </tr>
+                            </table>
+                        </div>
 
-                    </table>
-                </div>
 
-                <asp:UpdatePanel ID="updPanelNovoCri" runat="server">
-                    <ContentTemplate>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" id="" data-dismiss="modal" title="Cancelar Inserção">
-                                <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</button>
-
-                            <button type="button" class="btn btn-default" id="AdicionarCriterios" title="Adicionar mais Critérios">
-                                <span class="glyphicon glyphicon-plus"></span>&nbsp Critérios
-                            </button>
+                            <%--<button type="button" id="btnCancelarCriterio" class="btn btn-default" id="" data-dismiss="modal" title="Cancelar Inserção">
+                                <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</button>--%>                            
+                            <asp:LinkButton ID="btnCancelarCriterio" CssClass="btn btn-default" ToolTip="Cancelar inserção" runat="server" OnClick="btnCancelarCriterio_Click">
+                            <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</asp:LinkButton>
 
                             <asp:LinkButton ID="btnCriarNovoCriterio" runat="server" CssClass="btn btn-default"
                                 OnClick="btnCriarNovoCriterio_Click" ToolTip="Confirmar Inserção">
                                    <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar </asp:LinkButton>
                         </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
 
-            </div>
-        </div>
+
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </div>
 
 

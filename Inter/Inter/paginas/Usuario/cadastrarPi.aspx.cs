@@ -332,18 +332,51 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     //EVENTO DO BOTÃO CRIAR NOVO CRITERIO: CRIA UM NOVO CRITÉRIO E MOVE PARA O LISTBOX CRITÉRIOS DO PI
     protected void btnCriarNovoCriterio_Click(object sender, EventArgs e)
     {
-        //ADICIONA OS NOVOS CRITÉRIOS NAS LISTAS
-        ListItem li = new ListItem();
-        li.Value = (UltCodCrit + 1).ToString();
-        li.Text = txtNomeCriterio.Text;
-        li.Attributes.Add("title", txtDescricaoCriterio.Text);
-        liCritTip.Add(txtDescricaoCriterio.Text);
-        liCritCod.Add(li.Value);
-        //ADICIONANDO CÓDIGO E NOME DO CRITÉRIO AOS CRITÉRIOS ENCONTRADOS NO DATASET
-        listaCritPi.Items.Add(li);
-        updPanelCriterio.Update();
-        UltCodCrit += 1;
-        CarregaTip();
+        txtNomeCriterio.Style.Clear();
+        txtDescricaoCriterio.Style.Clear();
+
+        if (!String.IsNullOrEmpty(txtNomeCriterio.Text) && !String.IsNullOrEmpty(txtDescricaoCriterio.Text))
+        {
+            //ADICIONA OS NOVOS CRITÉRIOS NAS LISTAS
+            ListItem li = new ListItem();
+            li.Value = (UltCodCrit + 1).ToString();
+            li.Text = txtNomeCriterio.Text;
+            li.Attributes.Add("title", txtDescricaoCriterio.Text);
+            liCritTip.Add(txtDescricaoCriterio.Text);
+            liCritCod.Add(li.Value);
+            //ADICIONANDO CÓDIGO E NOME DO CRITÉRIO AOS CRITÉRIOS ENCONTRADOS NO DATASET
+            listaCritPi.Items.Add(li);
+            updPanelCriterio.Update();
+            UltCodCrit += 1;
+            CarregaTip();
+            lblMsgCriterio.Text = "<span class='glyphicon glyphicon-ok-circle'></span> &nbsp Cadastrado com sucesso.";
+            lblMsgCriterio.Style.Add("color", "green");
+
+            txtNomeCriterio.Text = "";
+            txtDescricaoCriterio.Text = ""; 
+        }
+        else if (String.IsNullOrEmpty(txtNomeCriterio.Text) && String.IsNullOrEmpty(txtDescricaoCriterio.Text))
+        {
+            lblMsgCriterio.Text = "<span class='glyphicon glyphicon-remove-circle'></span>&nbsp Campo obrigatório.";
+            lblMsgCriterio.Style.Add("color", "red");
+
+            txtNomeCriterio.Style.Add("border", "solid 1px red");
+            txtDescricaoCriterio.Style.Add("border", "solid 1px red");
+        }
+        else if (String.IsNullOrEmpty(txtNomeCriterio.Text))
+        {
+            lblMsgCriterio.Text = "<span class='glyphicon glyphicon-remove-circle'></span>&nbsp Campo obrigatório.";
+            lblMsgCriterio.Style.Add("color", "red");
+
+            txtNomeCriterio.Style.Add("border", "solid 1px red");
+        }
+        else
+        {
+            lblMsgCriterio.Text = "<span class='glyphicon glyphicon-remove-circle'></span>&nbsp Campo obrigatório.";
+            lblMsgCriterio.Style.Add("color", "red");
+
+            txtDescricaoCriterio.Style.Add("border", "solid 1px red");
+        }        
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
     }
 
@@ -650,6 +683,17 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         btnConfirmarGrupo.Style.Clear();
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
+    }
+
+    protected void btnCancelarCriterio_Click(object sender, EventArgs e)
+    {
+        txtNomeCriterio.Text = "";
+        txtDescricaoCriterio.Text = "";
+        lblMsgCriterio.Text = "";
+
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalCriacaoCriterio", "FechaModalCriacaoCriterio();", true);
+
     }
 
 
