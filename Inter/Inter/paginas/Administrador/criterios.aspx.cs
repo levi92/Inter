@@ -23,7 +23,10 @@ using System.Data;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            CarregarGrid();
+            if (!IsPostBack)
+            {
+                CarregarGrid();
+            }
         }
 
         public void CarregarGrid()
@@ -34,22 +37,35 @@ using System.Data;
             //se qtd for maior que zero, ou seja, se tiver dados no data set
             if (qtd > 0)
             {
-                gdv.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
-                gdv.DataBind(); //preenche o grid view com os dados
+                gdvCriterios.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+                gdvCriterios.DataBind(); //preenche o grid view com os dados
                 lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
+            }
+            else
+            {
+                lblQtdRegistro.Text = "Nenhum critério foi cadastrado.";
             }
 
         }
 
 
 
-        protected void gdv_RowDataBound(object sender, GridViewRowEventArgs e)
+       
+
+        protected void gdvCriterios_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
 
         }
 
-        protected void gdv_RowEditing(object sender, GridViewEditEventArgs e)
+        protected void gdvCriterios_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
 
         }
+
+        protected void gdvCriterios_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+
+        }
+
+       
     }
