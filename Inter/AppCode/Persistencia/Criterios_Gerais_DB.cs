@@ -161,4 +161,47 @@ public class Criterios_Gerais_DB{
         return ds;
     }
 
+
+    //SELECT TODOS CRITERIOS ATIVOS
+    public static DataSet SelectAtivos()
+    {
+        DataSet ds = new DataSet();
+        IDbConnection objConnection;
+        IDbCommand objCommand;
+        IDataAdapter objDataAdapter;
+        objConnection = Mapped.Connection();
+        objCommand = Mapped.Command("SELECT * FROM cge_criterios_gerais WHERE cge_ativo=1 ORDER BY cge_nome", objConnection);
+        objDataAdapter = Mapped.Adapter(objCommand);
+        objDataAdapter.Fill(ds);
+        objConnection.Close();
+        objCommand.Dispose();
+        objConnection.Dispose();
+        return ds;
+    }
+
+    //DESATIVAR CRITERIO
+
+    public static int Desativar(int codigo)
+    {
+        int retorno = 0;
+        try
+        {
+            IDbConnection conexao;
+            IDbCommand objCommand;
+            string sql = "UPDATE cge_criterios_gerais SET cge_ativo = 0 WHERE cge_codigo = ?cge_codigo ";
+            conexao = Mapped.Connection();
+            objCommand = Mapped.Command(sql, conexao);
+            objCommand.Parameters.Add(Mapped.Parameter("?cge_codigo", codigo));
+            objCommand.ExecuteNonQuery();
+            conexao.Close();
+            objCommand.Dispose();
+            conexao.Dispose();
+        }
+        catch (Exception e)
+        {
+            retorno = -2;
+        }
+        return retorno;
+    }
+
 }
