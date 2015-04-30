@@ -1,7 +1,6 @@
 ﻿//Variavel Global - Usada para acessar todas variaveis
 var global = "";
 
-var contador = -1;
 var controlarMostra = false;
 
 //FUNCTION INICIA APÓS CAREGAR A PÁGINA
@@ -125,7 +124,7 @@ function Dia() {
     NomeMes[10] = "Novembro"
     NomeMes[11] = "Dezembro"
 
-    //Imprime a varivel currentDay na tag dia
+    //IMPRIME A VARIVEL CURRENTDAY NA TAG DIA
     var currentDay = Data + " de " + NomeMes[Mes] + " " + Ano;
     document.getElementById("dia").innerHTML = currentDay;
 }
@@ -166,7 +165,9 @@ $(document).ready(function () {
         contr = false; //PARA SABER SE IRÁ ATUALIZAR OU CRIAR UMA DATA, USADA NO BTN_EDITAR PARA ATUALIZAR O VALOR
 
         $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
-        $("#campoObrigatorio").css('visibility', 'hidden');
+        $("#campoObrigatorio").css('visibility', 'hidden');        
+        $("#textoCampObrig").css('visibility', 'hidden');
+        
         $("#lblDataMsgErro").html("&nbsp &nbsp");
         $("#lblDescDataMsgErro").html("&nbsp &nbsp");
     });
@@ -187,7 +188,11 @@ $(document).ready(function () {
             
             $("#lblDescDataMsgErro").html("&nbsp &nbsp  *");
             $("#lblDataMsgErro").html("&nbsp &nbsp  *");
-            $("#campoObrigatorio").css('visibility', 'visible');
+            $("#campoObrigatorio").css({'visibility': 'visible', 'color': 'red'});
+            $("#campoObrigatorio").attr('class', 'glyphicon glyphicon-remove-circle');
+            $("#textoCampObrig").html("&nbsp Campo obrigatório.");
+            $("#textoCampObrig").css({ 'visibility': 'visible', 'color': 'red' });
+
             $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
 
         } else
@@ -195,14 +200,22 @@ $(document).ready(function () {
                 
                 $("#lblDescDataMsgErro").html("&nbsp &nbsp *");
                 $("#lblDataMsgErro").html("");
-                $("#campoObrigatorio").css('visibility', 'visible');
+                $("#campoObrigatorio").css({ 'visibility': 'visible', 'color': 'red' });
+                $("#campoObrigatorio").attr('class', 'glyphicon glyphicon-remove-circle');
+                $("#textoCampObrig").html("&nbsp Campo obrigatório.");
+                $("#textoCampObrig").css({ 'visibility': 'visible', 'color': 'red' });
+
                 $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
             } else
                 if (data == "") { //MENSAGEM DE ERRO
                     
                     $("#lblDataMsgErro").html("&nbsp &nbsp *");
                     $("#lblDescDataMsgErro").html("");
-                    $("#campoObrigatorio").css('visibility', 'visible');
+                    $("#campoObrigatorio").css({ 'visibility': 'visible', 'color': 'red' });
+                    $("#campoObrigatorio").attr('class', 'glyphicon glyphicon-remove-circle');
+                    $("#textoCampObrig").html("&nbsp Campo obrigatório.");
+                    $("#textoCampObrig").css({ 'visibility': 'visible', 'color': 'red' });
+
                     $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
                 } else { //SE ESTIVER TUDO CERTO 
                     
@@ -256,6 +269,7 @@ $(document).ready(function () {
                             $("#lblDataMsgErro").html("&nbsp &nbsp");
                             $("#lblDescDataMsgErro").html("");
                             $("#campoObrigatorio").css('visibility', 'hidden');
+                            $("#textoCampObrig").css('visibility', 'hidden');
 
                             $("#txtData").val("");
                             indiceId = $(this).attr('id').split('-'); //PEGA O ID DO BTN_EDITAR E CORTA ONDE ACHAR O "-" 
@@ -297,7 +311,11 @@ $(document).ready(function () {
                     $("#lblDataMsgErro").html("");
                     $("#txtDescricaoData").val("");
                     $("#txtData").val("");
-                    $("#campoObrigatorio").css('visibility', 'hidden');
+                    $("#campoObrigatorio").css({ 'visibility': 'visible', 'color': 'green' });                  
+                    $("#campoObrigatorio").attr('class', 'glyphicon glyphicon-ok-circle');
+                    $("#textoCampObrig").html("&nbsp Cadastrado com sucesso.");
+                    $("#textoCampObrig").css({ 'visibility': 'visible', 'color': 'green' });
+
                 }
 
     });
@@ -335,44 +353,7 @@ $(document).ready(function () {
     });
 
 
-    $("#ContinuarEtapa4").click(function () {
-        var msgErro = false;
-        txtPostura = $('#txtP').val();
-        txtVestimenta = $('#txtV').val();
-        txtfala = $('#txtF').val();
-        txtConhecimento = $('#txtC').val();
-
-        if ($.trim(txtPostura) == '' || $.trim(txtVestimenta) == '' || $.trim(txtfala) == '' || $.trim(txtConhecimento) == '') {
-            $(function () {
-                $("#boxPesoBranco").dialog({
-                    width: 400,
-                    height: 200,
-                    modal: true,
-                    resizable: false,
-                    draggable: false,
-                    buttons: {
-                        "Sim": function () {
-                            Mostra('p13'); //criar Grupo
-                            $(this).dialog("close");
-
-                        },
-                        "Não": function () {
-                            $(this).dialog("close");
-                        }
-                    }
-
-
-                });
-            });
-        } else {
-            Mostra('p13'); //criar Grupo
-        }
-    });
-
-
-
-
-
+  
 
     ////sortable mover com duplo clique
     //$("ul#sortable3 li").dblclick(function () {
