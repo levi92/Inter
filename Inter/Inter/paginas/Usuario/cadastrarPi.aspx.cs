@@ -28,13 +28,18 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //BLOQUEIO URL SE NÃO TIVER ESCOLHIDO ALGUMA DISCIPLINA
+        //BLOQUEIO URL SE NÃO TIVER ESCOLHIDO ALGUMA DISCIPLINA 
         if (Session["disciplina"] == "")
         {
             Response.Redirect("escolherDisciplina.aspx");
         }
 
-        //BLOQUEIO URL SE NÃO TIVER ESCOLHIDO ALGUMA DISCIPLINA-MÃE
+        //BLOQUEIO SE NÃO FOR DISCIPLINA-MÃE
+
+        if (Session["mae"] == "False")
+        {
+            Response.Redirect("home.aspx");
+        }     
 
 
         //SE NÃO FOR POSTBACK VAI CARREGAR OS MÉTODOS ABAIXO DESCRITOS
@@ -197,11 +202,11 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 {
                     txtCri.Style.Add("border", "1px solid red");
                     ret = 2;
+                    lblMsgPesosCriterios.Visible = true;
                 }
 
             }
         }
-
         return ret;
 
     }
@@ -241,6 +246,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         }
         else
         {
+            lblMsgPesosCriterios.Visible = false;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "Modaletapa4('p13');", true);
 
         }
@@ -262,8 +268,15 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         //CriarCriterio();
         //updPanelPeso.Update();
         CarregaTip();
-
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
+        if (listaCritPi.Items.Count >= 1) {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
+            lblMsgErroAdicionarCriterio.Visible = false;
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
+            lblMsgErroAdicionarCriterio.Visible = true;
+        }
     }
 
     //EVENTO QUE MOVE OS ALUNOS DA LISTA GERAL PARA A LISTA ESPECÍFICA DE ALUNOS DAQUELE GRUPO 

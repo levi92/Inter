@@ -192,8 +192,10 @@
                             </tr>
 
                             <tr>
-                                <td colspan="3">
+                                <td colspan="3" style="color:red; text-align:left;font-size:16px;">
                                     <br />
+                                    <asp:Label ID="lblMsgErroAdicionarCriterio" runat="server" Visible="false" Text="<span class='glyphicon glyphicon-exclamation-sign' ></span> &nbsp Adicione pelo menos 1 critério ao PI." style="margin-left:7%;font-weight:bold"></asp:Label>
+                                    <br /><br /><br />
                                 </td>
                             </tr>
 
@@ -244,13 +246,13 @@
 
                         <table style="width:75%; margin-left:5%">
                             <tr>                                
-                                <td colspan="2" style="color:red; text-align:left;font-size:16px;">
-                                    <span class="glyphicon glyphicon-exclamation-sign" ></span> &nbsp Pesos válidos entre os valores 1 e 10.
+                                <td colspan="2" style="color:red; text-align:left;font-size:16px;font-weight:bold">
+                                    <asp:Label  ID="lblMsgPesosCriterios" runat="server" Visible="false" Text="<span class='glyphicon glyphicon-exclamation-sign' ></span> &nbsp Pesos válidos entre os valores 1 e 10." ></asp:Label>
                                     <br />
                                     <br />
                                 </td>
                             </tr> 
-                         </table>
+                         </table> 
                          <table style="width:30%; margin-left:5%">  
                              <tr>
                                 <td>
@@ -258,8 +260,7 @@
                                         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar</button></td>
                                 <td>
                                     <asp:Button ID="ContinuarEtapa4" runat="server" CssClass="btn btn-default" Text="Continuar" OnClick="ContinuarEtapa4_Click"
-                                        ToolTip="Ir para Criar Grupos" />
-                                    <%--<button type="button" class="btn btn-default" id="ContinuarEtapa4" onclick="Mostra('p13');" title="Ir para Criar Grupos">Continuar</button>--%>
+                                        ToolTip="Ir para Criar Grupos" />                                   
                                 </td>
                             </tr>
 
@@ -490,9 +491,7 @@
                         </div>
 
 
-                        <div class="modal-footer">
-                            <%--<button type="button" id="btnCancelarCriterio" class="btn btn-default" id="" data-dismiss="modal" title="Cancelar Inserção">
-                                <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</button>--%>                            
+                        <div class="modal-footer">                                                      
                             <asp:LinkButton ID="btnCancelarCriterio" CssClass="btn btn-default" ToolTip="Cancelar inserção" runat="server" OnClick="btnCancelarCriterio_Click">
                             <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</asp:LinkButton>
 
