@@ -66,7 +66,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     }
 
-    // *********  ETAPA 1 - CADASTRO PI, CADASTRO DE DATAS *********
+    // ******************  ETAPA 1 - CADASTRO PI, CADASTRO DE DATAS ******************
+    // *******************************************************************************
     private void PegarUltimoCodPI()
     {
         // PEGAR ULTIMO CODIGO DE PI E ACRESCENTAR 1
@@ -121,7 +122,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     }
 
 
-    // ********* ETAPA 2 - CADASTRO DE CRITÉRIOS *********
+    // ****************** ETAPA 2 - CADASTRO DE CRITÉRIOS ******************
+    //**********************************************************************
 
     //EVENTO QUE MOVE OS CRITÉRIOS GERAIS PARA A LISTBOX DE CRITÉRIOS ESCOLHIDOS PARA O PI
     protected void listaCritGeral_SelectedIndexChanged(object sender, EventArgs e)
@@ -282,7 +284,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     }
 
-    // ********** ETAPA 3 - ADICIONAR PESO AOS CRITÉRIOS ***********
+    // ******************* ETAPA 3 - ADICIONAR PESO AOS CRITÉRIOS ********************
+    // *******************************************************************************
 
     //MÉTODO PARA CRIAR OS COMPONENTES LABELS E TEXTBOX PARA COLOCAR OS PESOS NOS CRITÉRIOS
     public void CriarCriterio()
@@ -317,6 +320,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             PanelCriterios.Controls.Add(lblCriterios[i]);
             PanelCriterios.Controls.Add(txtCriterios[i]);
             PanelCriterios.Controls.Add(lblLinha[i]);
+
 
         }
 
@@ -400,12 +404,14 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         PreencherPesoVazio();
         updPanelPeso.Update();
         CarregaTip();
+        lblMsgPesosCriterios.Visible = false;
         ScriptManager.RegisterStartupScript(this, this.GetType(), "fechaModalPeso1", "fechaModalPeso1();", true);
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
     }
 
 
-    // *********** ETAPA 4 - CRIAR GRUPO *********
+    // ******************** ETAPA 4 - CRIAR GRUPO ******************
+    // *************************************************************
     
 
     //EVENTO QUE MOVE OS ALUNOS DA LISTA GERAL PARA A LISTA ESPECÍFICA DE ALUNOS DAQUELE GRUPO 

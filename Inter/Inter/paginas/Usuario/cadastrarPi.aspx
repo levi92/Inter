@@ -31,7 +31,7 @@
         function fechaModalPeso1() {
             $('#fecharModalPeso1').click();
         }
-        
+
     </script>
 
     <button style="display: none" type="button" id="btnModalPesoUm" data-toggle="modal" data-target="#myModalPesoUm"></button>
@@ -246,8 +246,7 @@
                                 <%--PAINEL QUE VAI RECEBER OS CRITÉRIOS PARA INSERÇÃO DOS PESOS--%>
                                 <asp:Panel ID="PanelCriterios" runat="server" ClientIDMode="Static"></asp:Panel>
                             </tr>
-                        </table>
-
+                        </table>                                               
                         <table style="width: 75%; margin-left: 5%">
                             <tr>
                                 <td colspan="2" style="color: red; text-align: left; font-size: 16px; font-weight: bold">
@@ -335,12 +334,7 @@
                                 </td>
                             </tr>
 
-                            <tr>
-                                <td colspan="2">
-                                    <br />
-                                </td>
-                            </tr>
-
+                            
                             <tr>
                                 <td colspan="2">
                                     <asp:Label ID="lblGrupos" runat="server" CssClass="label" Text="Grupos: "></asp:Label>
@@ -522,13 +516,15 @@
 
 
     <!-- MODAL ADICIONAR PESO 1 -->
-    <asp:UpdatePanel ID="updPeso1" runat="server">
-        <ContentTemplate>
-            <div class="modal fade" data-backdrop="static" id="myModalPesoUm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal fade" data-backdrop="static" id="myModalPesoUm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <asp:UpdatePanel ID="updPeso1" runat="server">
+            <ContentTemplate>
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" id="fecharModalPeso1" onclick="fechaModalPeso1();" class="close" data-dismiss="modal"><span aria-hidden="true" style="font-size: 35px;">&times;</span><span class="sr-only">Close</span></button>
+                            <button type="button" id="fecharModalPeso1" class="close" data-dismiss="modal">
+                                <span aria-hidden="true" style="font-size: 35px;">&times;</span><span class="sr-only">Close</span></button>
 
                         </div>
                         <div class="modal-body">
@@ -546,9 +542,10 @@
 
                     </div>
                 </div>
-            </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
+
 
 
     <!-- MODAL PI CADASTRADO -->
