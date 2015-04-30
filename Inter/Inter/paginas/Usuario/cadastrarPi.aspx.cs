@@ -22,19 +22,24 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         {
             Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
         }
-        // CHAMAR A MASTER PAGE  -      OBS: MASTERPAGEFILE É O CAMINHO DO ARQUIVO MASTERPAGE QUE VOCÊ DESEJA CHAMAR        
+        // CHAMAR A MASTER PAGE - OBS: MASTERPAGEFILE É O CAMINHO DO ARQUIVO MASTERPAGE QUE VOCÊ DESEJA CHAMAR        
         this.Page.MasterPageFile = Funcoes.chamarMasterPage(Session["mae"].ToString());
     }
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //BLOQUEIO URL SE NÃO TIVER ESCOLHIDO ALGUMA DISCIPLINA
+        //BLOQUEIO URL SE NÃO TIVER ESCOLHIDO ALGUMA DISCIPLINA 
         if (Session["disciplina"] == "")
         {
             Response.Redirect("escolherDisciplina.aspx");
         }
 
-        //BLOQUEIO URL SE NÃO TIVER ESCOLHIDO ALGUMA DISCIPLINA-MÃE
+        //BLOQUEIO SE NÃO FOR DISCIPLINA-MÃE
+
+        if (Session["mae"] == "False")
+        {
+            Response.Redirect("home.aspx");
+        }     
 
 
         //SE NÃO FOR POSTBACK VAI CARREGAR OS MÉTODOS ABAIXO DESCRITOS
@@ -61,6 +66,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     }
 
+    // *********  ETAPA 1 - CADASTRO PI, CADASTRO DE DATAS *********
     private void PegarUltimoCodPI()
     {
         // PEGAR ULTIMO CODIGO DE PI E ACRESCENTAR 1
@@ -76,6 +82,67 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         objSemAno = Semestre_Ano_DB.Select();
         lblSemestreAnoAut.Text = objSemAno.San_semestre.ToString();
         lblAnoAut.Text = objSemAno.San_ano.ToString();
+    }
+
+    [System.Web.Services.WebMethod]
+    public static string GetEventos(string dadosEventos)
+    {
+
+        string[] eventos = dadosEventos.Split('|'); //divide quando achar o pipe('|') 
+
+        List<string> descricao = new List<string>(); //cria uma List, porque não tem um tamanho definido
+        List<string> data = new List<string>();
+
+
+        for (int i = 0; i < eventos.Length - 1; i++)
+        {
+            if (i % 2 == 0) //se for par
+            {
+                descricao.Add(eventos[i]);
+            }
+            else //se for impar
+            {
+                data.Add(eventos[i]);
+            }
+
+        }
+
+        string[] desc = descricao.ToArray(); //toArray converte a List em Array
+        string[] dat = data.ToArray();
+
+
+        for (int i = 0; i < desc.Length; i++)
+        {
+            //Response.Write(desc[i] + " - " + dat[i] + "<br/>");
+        }
+
+        return dadosEventos;
+
+    }
+
+
+    // ********* ETAPA 2 - CADASTRO DE CRITÉRIOS *********
+
+    //EVENTO QUE MOVE OS CRITÉRIOS GERAIS PARA A LISTBOX DE CRITÉRIOS ESCOLHIDOS PARA O PI
+    protected void listaCritGeral_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        listaCritPi.Items.Add(listaCritGeral.SelectedItem);
+        listaCritGeral.Items.RemoveAt(listaCritGeral.SelectedIndex);
+        listaCritGeral.ClearSelection();
+        listaCritPi.ClearSelection();
+        CarregaTip();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
+    }
+
+    //EVENTO QUE MOVE OS CRITÉRIOS ESCOLHIDOS PARA O PI PARA A LISTBOX DE CRITÉRIOS GERAIS
+    protected void listaCritPi_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        listaCritGeral.Items.Add(listaCritPi.SelectedItem);
+        listaCritPi.Items.RemoveAt(listaCritPi.SelectedIndex);
+        listaCritGeral.ClearSelection();
+        listaCritPi.ClearSelection();
+        CarregaTip();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
     }
 
     private void CarregaTip()
@@ -138,6 +205,85 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         }
     }
 
+    //EVENTO DO BOTÃO CRIAR NOVO CRITERIO: CRIA UM NOVO CRITÉRIO E MOVE PARA O LISTBOX CRITÉRIOS DO PI
+    protected void btnCriarNovoCriterio_Click(object sender, EventArgs e)
+    {
+        txtNomeCriterio.Style.Clear();
+        txtDescricaoCriterio.Style.Clear();
+
+        if (!String.IsNullOrEmpty(txtNomeCriterio.Text) && !String.IsNullOrEmpty(txtDescricaoCriterio.Text))
+        {
+            //ADICIONA OS NOVOS CRITÉRIOS NAS LISTAS
+            ListItem li = new ListItem();
+            li.Value = (UltCodCrit + 1).ToString();
+            li.Text = txtNomeCriterio.Text;
+            li.Attributes.Add("title", txtDescricaoCriterio.Text);
+            liCritTip.Add(txtDescricaoCriterio.Text);
+            liCritCod.Add(li.Value);
+            //ADICIONANDO CÓDIGO E NOME DO CRITÉRIO AOS CRITÉRIOS ENCONTRADOS NO DATASET
+            listaCritPi.Items.Add(li);
+            updPanelCriterio.Update();
+            UltCodCrit += 1;
+            CarregaTip();
+            lblMsgCriterio.Text = "<span class='glyphicon glyphicon-ok-circle'></span> &nbsp Cadastrado com sucesso.";
+            lblMsgCriterio.Style.Add("color", "green");
+
+            txtNomeCriterio.Text = "";
+            txtDescricaoCriterio.Text = "";
+        }
+        else if (String.IsNullOrEmpty(txtNomeCriterio.Text) && String.IsNullOrEmpty(txtDescricaoCriterio.Text))
+        {
+            lblMsgCriterio.Text = "<span class='glyphicon glyphicon-remove-circle'></span>&nbsp Campo obrigatório.";
+            lblMsgCriterio.Style.Add("color", "red");
+
+            txtNomeCriterio.Style.Add("border", "solid 1px red");
+            txtDescricaoCriterio.Style.Add("border", "solid 1px red");
+        }
+        else if (String.IsNullOrEmpty(txtNomeCriterio.Text))
+        {
+            lblMsgCriterio.Text = "<span class='glyphicon glyphicon-remove-circle'></span>&nbsp Campo obrigatório.";
+            lblMsgCriterio.Style.Add("color", "red");
+
+            txtNomeCriterio.Style.Add("border", "solid 1px red");
+        }
+        else
+        {
+            lblMsgCriterio.Text = "<span class='glyphicon glyphicon-remove-circle'></span>&nbsp Campo obrigatório.";
+            lblMsgCriterio.Style.Add("color", "red");
+
+            txtDescricaoCriterio.Style.Add("border", "solid 1px red");
+        }
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
+    }
+
+    //EVENTO DO BOTÃO CONTINUAR(ETAPA 3 CRITÉRIOS(PESOS)) : CRIA OS CRITÉRIOS, ATUALIZA O PAINEL E REDIRECIONA PARA PRÓXIMA ETAPA
+    protected void btnContinuarEtapa3_Click(object sender, EventArgs e)
+    {
+        CarregaTip();
+        if (listaCritPi.Items.Count >= 1)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
+            lblMsgErroAdicionarCriterio.Visible = false;
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
+            lblMsgErroAdicionarCriterio.Visible = true;
+        }
+    }
+
+    protected void btnCancelarCriterio_Click(object sender, EventArgs e)
+    {
+        txtNomeCriterio.Text = "";
+        txtDescricaoCriterio.Text = "";
+        lblMsgCriterio.Text = "";
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalCriacaoCriterio", "FechaModalCriacaoCriterio();", true);
+
+    }
+
+    // ********** ETAPA 3 - ADICIONAR PESO AOS CRITÉRIOS ***********
+
     //MÉTODO PARA CRIAR OS COMPONENTES LABELS E TEXTBOX PARA COLOCAR OS PESOS NOS CRITÉRIOS
     public void CriarCriterio()
     {
@@ -175,6 +321,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         }
 
     }
+   
 
     //VERIFICAR SE OS TEXTBOXS DOS PESOS ESTÃO EM BRANCO OU INVÁLIDOS
     protected int verificarPesoVazio()
@@ -197,11 +344,11 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 {
                     txtCri.Style.Add("border", "1px solid red");
                     ret = 2;
+                    lblMsgPesosCriterios.Visible = true;
                 }
 
             }
         }
-
         return ret;
 
     }
@@ -241,30 +388,25 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         }
         else
         {
+            lblMsgPesosCriterios.Visible = false;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "Modaletapa4('p13');", true);
 
         }
     }
 
-    //Adiciona Peso 1 as textboxs vazias  
+    //ADICIONA PESO 1 AS TEXTBOXS VAZIAS  
     protected void btnAdicionarPesoUm_Click(object sender, EventArgs e)
     {
         PreencherPesoVazio();
         updPanelPeso.Update();
         CarregaTip();
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "fechaModalPeso1", "fechaModalPeso1();", true);
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
     }
 
 
-    //EVENTO DO BOTÃO CONTINUAR(ETAPA 3 CRITÉRIOS(PESOS)) : CRIA OS CRITÉRIOS, ATUALIZA O PAINEL E REDIRECIONA PARA PRÓXIMA ETAPA
-    protected void btnContinuarEtapa3_Click(object sender, EventArgs e)
-    {
-        //CriarCriterio();
-        //updPanelPeso.Update();
-        CarregaTip();
-
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
-    }
+    // *********** ETAPA 4 - CRIAR GRUPO *********
+    
 
     //EVENTO QUE MOVE OS ALUNOS DA LISTA GERAL PARA A LISTA ESPECÍFICA DE ALUNOS DAQUELE GRUPO 
     protected void listaAlunoGeral_SelectedIndexChanged(object sender, EventArgs e)
@@ -287,29 +429,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         listaAlunosGrupo.ClearSelection();
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
-    }
-
-    //EVENTO QUE MOVE OS CRITÉRIOS GERAIS PARA A LISTBOX DE CRITÉRIOS ESCOLHIDOS PARA O PI
-    protected void listaCritGeral_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        listaCritPi.Items.Add(listaCritGeral.SelectedItem);
-        listaCritGeral.Items.RemoveAt(listaCritGeral.SelectedIndex);
-        listaCritGeral.ClearSelection();
-        listaCritPi.ClearSelection();
-        CarregaTip();
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
-    }
-
-    //EVENTO QUE MOVE OS CRITÉRIOS ESCOLHIDOS PARA O PI PARA A LISTBOX DE CRITÉRIOS GERAIS
-    protected void listaCritPi_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        listaCritGeral.Items.Add(listaCritPi.SelectedItem);
-        listaCritPi.Items.RemoveAt(listaCritPi.SelectedIndex);
-        listaCritGeral.ClearSelection();
-        listaCritPi.ClearSelection();
-        CarregaTip();
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
-    }
+    }  
 
     //EVENTO DO BOTÃO VOLTAR: REDIRECIONA PARA A ETAPA ANTERIOR
     protected void LkbVoltarEtapa3_Click(object sender, EventArgs e)
@@ -328,61 +448,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     {
         Response.Redirect("home.aspx");
     }
-
-    //EVENTO DO BOTÃO CRIAR NOVO CRITERIO: CRIA UM NOVO CRITÉRIO E MOVE PARA O LISTBOX CRITÉRIOS DO PI
-    protected void btnCriarNovoCriterio_Click(object sender, EventArgs e)
-    {
-        //ADICIONA OS NOVOS CRITÉRIOS NAS LISTAS
-        ListItem li = new ListItem();
-        li.Value = (UltCodCrit + 1).ToString();
-        li.Text = txtNomeCriterio.Text;
-        li.Attributes.Add("title", txtDescricaoCriterio.Text);
-        liCritTip.Add(txtDescricaoCriterio.Text);
-        liCritCod.Add(li.Value);
-        //ADICIONANDO CÓDIGO E NOME DO CRITÉRIO AOS CRITÉRIOS ENCONTRADOS NO DATASET
-        listaCritPi.Items.Add(li);
-        updPanelCriterio.Update();
-        UltCodCrit += 1;
-        CarregaTip();
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa2", "etapa2();", true);
-    }
-
-
-    [System.Web.Services.WebMethod]
-    public static string GetEventos(string dadosEventos)
-    {
-
-        string[] eventos = dadosEventos.Split('|'); //divide quando achar o pipe('|') 
-
-        List<string> descricao = new List<string>(); //cria uma List, porque não tem um tamanho definido
-        List<string> data = new List<string>();
-
-
-        for (int i = 0; i < eventos.Length - 1; i++)
-        {
-            if (i % 2 == 0) //se for par
-            {
-                descricao.Add(eventos[i]);
-            }
-            else //se for impar
-            {
-                data.Add(eventos[i]);
-            }
-
-        }
-
-        string[] desc = descricao.ToArray(); //toArray converte a List em Array
-        string[] dat = data.ToArray();
-
-
-        for (int i = 0; i < desc.Length; i++)
-        {
-            //Response.Write(desc[i] + " - " + dat[i] + "<br/>");
-        }
-
-        return dadosEventos;
-
-    }
+    
 
     //EVENTO DO BOTÃO CONFIRMAR GRUPO: GUARDA O GRUPO ATUAL(COM OS ALUNOS QUE FORAM ESCOLHIDOS) E SUCESSIVAMENTE CRIA NOVO GRUPO
     public static int index = 1; //É UMA CONTROLADORA DO VIEWSTATE (EX: VIEWSTATE["ALUNOS1"]) OBS: PELO INDEX COMEÇAR NO VALOR "1" NÃO HAVERÁ "GRUPO0"
@@ -651,6 +717,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
     }
+
+
 
 
 

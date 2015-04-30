@@ -21,10 +21,18 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //BLOQUEIO URL SE NÃO TIVER ESCOLHIDO ALGUMA DISCIPLINA 
         if (Session["disciplina"] == "")
         {
             Response.Redirect("escolherDisciplina.aspx");
         }
+
+        //BLOQUEIO SE NÃO FOR DISCIPLINA-MÃE
+
+        if (Session["mae"] == "False")
+        {
+            Response.Redirect("home.aspx");
+        }     
 
         
     }
