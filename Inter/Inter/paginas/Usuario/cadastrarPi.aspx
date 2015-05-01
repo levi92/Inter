@@ -352,7 +352,7 @@
                             <tr>
                                 <td colspan="2">
                                     <br />
-                                    <p style="font-size: 15px; font-weight: bold;">
+                                    <p style="font-size: 15px; font-weight: bold; color: #960d10;">
                                         <span class="glyphicon glyphicon-edit"></span>&nbsp Clique em um grupo para poder Editá-lo
                                     </p>
                                     <br />

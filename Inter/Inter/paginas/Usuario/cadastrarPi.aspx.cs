@@ -311,6 +311,10 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             txtCriterios[i].ID = "txtCriterio" + (i);
             txtCriterios[i].CssClass = "text";
             txtCriterios[i].Attributes["type"] = "Number";
+            txtCriterios[i].Attributes["min"] = "1";
+            txtCriterios[i].Attributes["max"] = "10";
+            txtCriterios[i].ClientIDMode = System.Web.UI.ClientIDMode.Static;
+            txtCriterios[i].Attributes["onkeyup"] = "funcaoImpedirValor(this.id);";
 
             lblLinha[i] = new Label();
             lblLinha[i].ID = "lblL" + (i);

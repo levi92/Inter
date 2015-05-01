@@ -353,7 +353,14 @@ $(document).ready(function () {
     });
 
 
-  
+    funcaoImpedirValor = function (id) {        
+        var valor = document.getElementById(id).value;
+
+        if (valor <= 0 || valor > 10) {                   
+            $("#"+id).val("");
+        }
+
+    }
 
     ////sortable mover com duplo clique
     //$("ul#sortable3 li").dblclick(function () {
