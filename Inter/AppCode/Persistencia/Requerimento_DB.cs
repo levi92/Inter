@@ -23,7 +23,7 @@ public class Requerimento_DB{
             objCommand.Parameters.Add(Mapped.Parameter("?req_data_inicial", requerimento.Req_data_inicial));
             objCommand.Parameters.Add(Mapped.Parameter("?req_data_final", requerimento.Req_data_final));
             objCommand.Parameters.Add(Mapped.Parameter("?req_resolvido", requerimento.Req_resolvido));
-            objCommand.Parameters.Add(Mapped.Parameter("?pro_matricula", requerimento.Pro_matricula.Pro_matricula));
+            //objCommand.Parameters.Add(Mapped.Parameter("?pro_matricula", requerimento.Pro_matricula.Pro_matricula));
             conexao.Close();
             objCommand.Dispose();
             conexao.Dispose();
@@ -50,7 +50,7 @@ public class Requerimento_DB{
             objCommand.Parameters.Add(Mapped.Parameter("?req_data_inicial", requerimento.Req_data_inicial));
             objCommand.Parameters.Add(Mapped.Parameter("?req_data_final", requerimento.Req_data_final));
             objCommand.Parameters.Add(Mapped.Parameter("?req_resolvido", requerimento.Req_resolvido));
-            objCommand.Parameters.Add(Mapped.Parameter("?pro_matricula", requerimento.Pro_matricula.Pro_matricula));
+            //objCommand.Parameters.Add(Mapped.Parameter("?pro_matricula", requerimento.Pro_matricula.Pro_matricula));
             objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
@@ -102,7 +102,7 @@ public class Requerimento_DB{
                 objRequerimento.Req_data_inicial = Convert.ToDateTime(objDataReader["req_data_inicial"]);
                 objRequerimento.Req_data_final = Convert.ToDateTime(objDataReader["req_data_final"]);
                 objRequerimento.Req_resolvido = Convert.ToBoolean(objDataReader["req_resolvido"]);
-                objRequerimento.Pro_matricula.Pro_matricula = Convert.ToInt32(objDataReader["pro_matricula"]);               
+                //objRequerimento.Pro_matricula.Pro_matricula = Convert.ToInt32(objDataReader["pro_matricula"]);               
             }
             objDataReader.Close();
             objConnection.Close();

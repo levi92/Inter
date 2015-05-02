@@ -5,9 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Inter.Funcoes;
+using Interdisciplinar;
+
 public partial class Paginas_Login_login : System.Web.UI.Page
 {
-    static bool controleModal = false;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (IsPostBack)
@@ -26,55 +27,67 @@ public partial class Paginas_Login_login : System.Web.UI.Page
         //string senha = Funcoes.Criptografar(txtSenha.Text.ToString(), "SHA1"); ->>> não lê a senha correta do banco por algum motivo
         string senha = txtSenha.Text.ToString();
 
+        Professor prof = new Professor();
+        prof = Professor.Validar(user, senha);
+        
         //Verificar se os campos não estão vazios
         if (!String.IsNullOrEmpty(user) && !String.IsNullOrEmpty(senha))
         {
+            if (prof != null)
+            {
+                Session["Professor"] = prof;
+                Response.Redirect("~/Paginas/Usuario/escolherDisciplina.aspx");
+            }
+            else
+            {
+                lblMsgErro.Text = "E-mail ou Senha incorretos.";
+            }
 
             // Verifica os parametros na função ValidarLogin
            
-            switch (Funcoes_DB.ValidarLogin(user, senha))
-            {
+            //switch (Funcoes_DB.ValidarLogin(user, senha))
+            //{
                 
-                case 0:
-                    // Professor
-                    Session["login"] = user;
-                    Session["curso"] = "";
-                    Session["semestre"] = "";
-                    Session["disciplina"] = "";
-                    Session["mae"] = "";
-                    Response.Redirect("~/Paginas/Usuario/escolherDisciplina.aspx");
-                    break;
-
-                
-                //case 1:
-                //    //Administrador
-                //    Session["coord"] = "True";
-                //    Session["login"] = user;
-                //    Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
-                //    break;
-
-                case 2:
-                    //Administrador Coordenador e professor
-                    //chama a página de escolher o perfil
-                    Session["coord"] = "True";
-                    Session["perfil"] = "";
-                    Session["login"] = user;
-                    Response.Redirect("~/Paginas/Administrador/alterar_perfil.aspx");
-                    break;
-
-                case 3:
-                    //Administrador master                 
-                    Session["login"] = user;
-                    Session["coord"] = "False";
-                    Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
-                    break;
+            //    case 0:
+            //        // Professor
+            //        Session["login"] = user;
+            //        Session["curso"] = "";
+            //        Session["semestre"] = "";
+            //        Session["disciplina"] = "";
+            //        Session["mae"] = "";
+            //        Response.Redirect("~/Paginas/Usuario/escolherDisciplina.aspx");
+            //        break;
 
                 
-                case -2:
-                    // Erro
-                    lblMsgErro.Text = "E-mail ou Senha incorretos.";
-                    break;
-            }
+            //    //case 1:
+            //    //    //Administrador
+            //    //    Session["coord"] = "True";
+            //    //    Session["login"] = user;
+            //    //    Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
+            //    //    break;
+
+            //    case 2:
+            //        //Administrador Coordenador e professor
+            //        //chama a página de escolher o perfil
+            //        Session["coord"] = "True";
+            //        Session["perfil"] = "";
+            //        Session["login"] = user;
+            //        Response.Redirect("~/Paginas/Administrador/alterar_perfil.aspx");
+            //        break;
+
+            //    case 3:
+            //        //Administrador master                 
+            //        Session["login"] = user;
+            //        Session["coord"] = "False";
+            //        Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
+            //        break;
+
+                
+            //    case -2:
+            //        // Erro
+            //        lblMsgErro.Text = "E-mail ou Senha incorretos.";
+            //        break;
+            //}
 
         }
         else
@@ -86,35 +99,13 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 
     protected void btnProfessor_Click1(object sender, EventArgs e)
     {
-        if (controleModal == true)
-        {
-            string user = txtLogin.Text.ToString();
-            string senha = txtSenha.Text.ToString();
-
-            Session["login"] = user;
-            Session["curso"] = "";
-            Session["semestre"] = "";
-            Session["disciplina"] = "";
-            Session["mae"] = "";
-            controleModal = false;
-            //this.Page.Response.Redirect(this.Page.Request.Url.AbsoluteUri);
-            Response.Redirect("~/Paginas/Usuario/escolherDisciplina.aspx");
-        }
+        
         
         
     }
 
     protected void btnAdministrador_Click(object sender, EventArgs e)
     {
-        
-        if (controleModal == true)
-        {
-            Session["login"] = "";
-            controleModal = false;
-            Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
-            
-            
-        }
         
   
     }

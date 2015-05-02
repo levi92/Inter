@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interdisciplinar;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,7 +13,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     protected void Page_PreInit(object sender, EventArgs e)
     {
         // Se sessão estiver nula redireciona para o bloqueio Url
-        if (Session["login"] == null)
+        if (Session["Professor"] == null)
         {
             Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
         }
@@ -25,34 +26,33 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
         // Se não for postback 
         if (!IsPostBack)
         {
-            Pessoas pes = new Pessoas();
 
-            string NomeUser = Session["login"].ToString(); //recebe email do professor logado
-            pes = Pessoas_DB.Select(NomeUser); //cria um obj pessoa do professor, decorrente de um select utilizando seu email como parametro
-            Session["nomeProf"] = pes.Pes_nome; //!! Criar sessão separado para admin
+            Professor prof = new Professor();
+            prof = (Professor) Session["Professor"];
+            //int codProf = Professor_DB.SelectPes(pes.Pes_codigo); //seleciona o código pessoa para verificar qual o cod do Prof
 
-            int codProf = Professor_DB.SelectPes(pes.Pes_codigo); //seleciona o código pessoa para verificar qual o cod do Prof
-
-            CarregarGrid(codProf); //carrega a grid utilizando o cod do Prof
+            //CarregarGrid(); //carrega a grid utilizando o cod do Prof
             auxRb = -1; //selecionar qual linha ta selecionada do rb
         }
     }
 
 
 
-    public void CarregarGrid(int proMatricula)
+    public void CarregarGrid()
     {
-        DataSet ds = Funcoes_DB.SelectDisciplina(proMatricula); //criando um data set oriundo de um select contendo as disciplinas relacionadas ao professor
-        int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
+        //Professor prof = new Professor();
+        //prof = (Professor)Session["Professor"];
+        //DataSet ds = Professor.SelectAllPIsbyCalendarioAndProfessor(12015, 1, prof.Matricula);
+        ////DataSet ds = Funcoes_DB.SelectDisciplina(proMatricula); //criando um data set oriundo de um select contendo as disciplinas relacionadas ao professor
+        //int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
 
-        //se qtd for maior que zero, ou seja, se tiver dados no data set
-        if (qtd > 0)
-        {
-            gdv.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
-            gdv.DataBind(); //preenche o grid view com os dados
-            lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
-        }
-
+        ////se qtd for maior que zero, ou seja, se tiver dados no data set
+        //if (qtd > 0)
+        //{
+        //    gdv.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+        //    gdv.DataBind(); //preenche o grid view com os dados
+        //}
+        //lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
     }
 
     // CRIAR ÍCONE DISCIPLINA MÃE

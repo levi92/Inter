@@ -10,7 +10,7 @@ using System.Web;
         private int pri_codigo;
         private Semestre_Ano san_semestre_ano;
         private string pri_descricao, pri_ementa;
-        private Atribuicao_Disciplina adi_codigo;
+        //private Atribuicao_Disciplina adi_codigo;
 
         public global::Semestre_Ano San_semestre_ano
         {
@@ -18,11 +18,11 @@ using System.Web;
             set { san_semestre_ano = value; }
         }
 
-        public global::Atribuicao_Disciplina Adi_codigo
-        {
-            get { return adi_codigo; }
-            set { adi_codigo = value; }
-        }
+        //public global::Atribuicao_Disciplina Adi_codigo
+        //{
+        //    get { return adi_codigo; }
+        //    set { adi_codigo = value; }
+        //}
 
         public string Pri_ementa
         {

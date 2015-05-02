@@ -10,7 +10,7 @@ public class Requerimento{
     private string req_descricao;
     private DateTime? req_data_requisicao, req_data_inicial, req_data_final;
     private bool req_resolvido;
-    private Professor pro_matricula;
+    //private Professor pro_matricula;
     
 
     public int Req_codigo{
@@ -41,10 +41,10 @@ public class Requerimento{
         get { return req_resolvido; }
         set { req_resolvido = value; }
     }
+    //public global::Professor Pro_matricula{
+    //    get { return pro_matricula; }
+    //    set { pro_matricula = value; }
+    //}
 
-    public global::Professor Pro_matricula{
-        get { return pro_matricula; }
-        set { pro_matricula = value; }
-    }
 
 }

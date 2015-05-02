@@ -33,20 +33,20 @@ using System.Data;
 
         public void CarregarGrid()
         {
-            DataSet ds = Criterios_Gerais_DB.SelectAtivos(); //criando um data set com todos os critérios gerais
-            int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
+            //DataSet ds = Criterios_Gerais_DB.SelectAtivos(); //criando um data set com todos os critérios gerais
+            //int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
 
-            //se qtd for maior que zero, ou seja, se tiver dados no data set
-            if (qtd > 0)
-            {
-                gdvCriterios.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
-                gdvCriterios.DataBind(); //preenche o grid view com os dados
-                lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
-            }
-            else
-            {
-                lblQtdRegistro.Text = "Nenhum critério foi cadastrado.";
-            }
+            ////se qtd for maior que zero, ou seja, se tiver dados no data set
+            //if (qtd > 0)
+            //{
+            //    gdvCriterios.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+            //    gdvCriterios.DataBind(); //preenche o grid view com os dados
+            //    lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
+            //}
+            //else
+            //{
+            //    lblQtdRegistro.Text = "Nenhum critério foi cadastrado.";
+            //}
 
         }
 
@@ -108,13 +108,13 @@ using System.Data;
 
         protected void gdvCriterios_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            Label lblCodigo = (Label)gdvCriterios.Rows[e.RowIndex].FindControl("lblCodigo");
-            if (Criterios_Gerais_DB.Desativar(Convert.ToInt32(lblCodigo.Text)) == 0)
-            {
-                lblMsg.Text = "Critério desativado com sucesso!";
-                gdvCriterios.EditIndex = -1;
-                CarregarGrid();
-            }
+            //Label lblCodigo = (Label)gdvCriterios.Rows[e.RowIndex].FindControl("lblCodigo");
+            //if (Criterios_Gerais_DB.Desativar(Convert.ToInt32(lblCodigo.Text)) == 0)
+            //{
+            //    lblMsg.Text = "Critério desativado com sucesso!";
+            //    gdvCriterios.EditIndex = -1;
+            //    CarregarGrid();
+            //}
         }
 
        
