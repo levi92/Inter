@@ -9,68 +9,86 @@
 
 
 
-public partial class Paginas_Login_login {
+public partial class paginas_Admin_MenuMaster {
     
     /// <summary>
-    /// form1 control.
+    /// hora control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+    protected global::System.Web.UI.WebControls.Label hora;
     
     /// <summary>
-    /// txtLogin control.
+    /// dia control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtLogin;
+    protected global::System.Web.UI.WebControls.Label dia;
     
     /// <summary>
-    /// txtSenha control.
+    /// icone2 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtSenha;
+    protected global::System.Web.UI.WebControls.HyperLink icone2;
     
     /// <summary>
-    /// enviar control.
+    /// icone3 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button enviar;
+    protected global::System.Web.UI.WebControls.HyperLink icone3;
     
     /// <summary>
-    /// lblMsgErro control.
+    /// icone4 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMsgErro;
+    protected global::System.Web.UI.WebControls.HyperLink icone4;
     
     /// <summary>
-    /// btnAdministrador control.
+    /// icone5 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnAdministrador;
+    protected global::System.Web.UI.WebControls.HyperLink icone5;
     
     /// <summary>
-    /// btnProfessor control.
+    /// icone6 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnProfessor;
+    protected global::System.Web.UI.WebControls.HyperLink icone6;
+    
+    /// <summary>
+    /// icone7 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HyperLink icone7;
+    
+    /// <summary>
+    /// ConteudoCentral control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ContentPlaceHolder ConteudoCentral;
 }

@@ -39,10 +39,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MySql.Data, Version=5.1.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\MySql.Data.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -66,21 +62,32 @@
     <Content Include="App_Themes\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="App_Themes\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="App_Themes\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="App_Themes\fonts\icomoon.svg" />
+    <Content Include="App_Themes\images\Calendar-Add-128x128.png" />
     <Content Include="Banco\inter.sql" />
     <Content Include="Banco\PI.png" />
     <Content Include="Banco\PI.xml" />
     <Content Include="Banco\Projeto_Interdisciplinar.png" />
+    <Content Include="paginas\Administrador\ajuda.aspx" />
+    <Content Include="paginas\Administrador\ajuda_alterar_perfil.aspx" />
+    <Content Include="paginas\Administrador\alterar_perfil.aspx" />
     <Content Include="paginas\Administrador\configuracoes.aspx" />
     <Content Include="paginas\Administrador\criterios.aspx" />
     <Content Include="paginas\Administrador\projetos.aspx" />
     <Content Include="paginas\Administrador\solicitacoes.aspx" />
-    <Content Include="paginas\Administrador\ajuda.aspx" />
+    <Content Include="paginas\Administrador\usuarios.aspx" />
     <Content Include="paginas\Usuario\MasterPage.master" />
     <Content Include="Banco\PI BANCO.docx" />
-	<Content Include="paginas\Administrador\MasterPage.Master" />
     <Content Include="paginas\Usuario\MasterPageMenuPadrao.master" />
     <Content Include="paginas\Usuario\MasterPageMenuMae.master" />
     <Content Include="paginas\Usuario\MasterPageMenuFilha.master" />
+    <Content Include="App_Themes\fonts\icomoon.eot" />
+    <Content Include="App_Themes\fonts\icomoon.ttf" />
+    <Content Include="App_Themes\fonts\icomoon.woff" />
+    <Content Include="paginas\Administrador\MasterPage_MenuAlterarPerfil.master" />
+    <Content Include="paginas\Administrador\MasterPage.Master" />
+    <Content Include="paginas\Administrador\MasterPage_MenuCoord.master" />
+    <Content Include="paginas\Administrador\MasterPage_MenuMaster.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -115,7 +122,6 @@
     <Content Include="App_Themes\images\logoTopo.png" />
     <Content Include="App_Themes\images\logo_topo.png" />
     <Content Include="Global.asax" />
-    <Content Include="paginas\Administrador\admin.aspx" />
     <Content Include="paginas\Login\bloqueioUrl.aspx" />
     <Content Include="paginas\Login\login.aspx" />
     <Content Include="paginas\Usuario\avaliarGrupo.aspx" />
@@ -162,12 +168,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="paginas\Administrador\admin.aspx.cs">
-      <DependentUpon>admin.aspx</DependentUpon>
+    <Compile Include="paginas\Administrador\ajuda.aspx.cs">
+      <DependentUpon>ajuda.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="paginas\Administrador\admin.aspx.designer.cs">
-      <DependentUpon>admin.aspx</DependentUpon>
+    <Compile Include="paginas\Administrador\ajuda.aspx.designer.cs">
+      <DependentUpon>ajuda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\ajuda_alterar_perfil.aspx.cs">
+      <DependentUpon>ajuda_alterar_perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\ajuda_alterar_perfil.aspx.designer.cs">
+      <DependentUpon>ajuda_alterar_perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\alterar_perfil.aspx.cs">
+      <DependentUpon>alterar_perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\alterar_perfil.aspx.designer.cs">
+      <DependentUpon>alterar_perfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\Administrador\configuracoes.aspx.cs">
       <DependentUpon>configuracoes.aspx</DependentUpon>
@@ -190,6 +210,27 @@
     <Compile Include="paginas\Administrador\MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
+    <Compile Include="paginas\Administrador\MasterPage_MenuMaster.master.cs">
+      <DependentUpon>MasterPage_MenuMaster.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\MasterPage_MenuMaster.master.designer.cs">
+      <DependentUpon>MasterPage_MenuMaster.master</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\MasterPage_MenuCoord.master.cs">
+      <DependentUpon>MasterPage_MenuCoord.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\MasterPage_MenuCoord.master.designer.cs">
+      <DependentUpon>MasterPage_MenuCoord.master</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\MasterPage_MenuAlterarPerfil.master.cs">
+      <DependentUpon>MasterPage_MenuAlterarPerfil.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\MasterPage_MenuAlterarPerfil.master.designer.cs">
+      <DependentUpon>MasterPage_MenuAlterarPerfil.master</DependentUpon>
+    </Compile>
     <Compile Include="paginas\Administrador\projetos.aspx.cs">
       <DependentUpon>projetos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -204,12 +245,12 @@
     <Compile Include="paginas\Administrador\solicitacoes.aspx.designer.cs">
       <DependentUpon>solicitacoes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="paginas\Administrador\ajuda.aspx.cs">
-      <DependentUpon>ajuda.aspx</DependentUpon>
+    <Compile Include="paginas\Administrador\usuarios.aspx.cs">
+      <DependentUpon>usuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="paginas\Administrador\ajuda.aspx.designer.cs">
-      <DependentUpon>ajuda.aspx</DependentUpon>
+    <Compile Include="paginas\Administrador\usuarios.aspx.designer.cs">
+      <DependentUpon>usuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\Login\bloqueioUrl.aspx.cs">
       <DependentUpon>bloqueioUrl.aspx</DependentUpon>

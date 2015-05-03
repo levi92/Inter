@@ -12,13 +12,13 @@
 public partial class paginas_Usuario_cadastrarPi {
     
     /// <summary>
-    /// hidden control.
+    /// ScriptManager1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.HiddenField hidden;
+    protected global::System.Web.UI.ScriptManager ScriptManager1;
     
     /// <summary>
     /// lblCodigoPi control.
@@ -138,6 +138,15 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.Button btnContinuarEtapa2;
     
     /// <summary>
+    /// updPanelCriterio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel updPanelCriterio;
+    
+    /// <summary>
     /// lblCriterioGeral control.
     /// </summary>
     /// <remarks>
@@ -156,13 +165,40 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.Label lblCriterioPi;
     
     /// <summary>
-    /// lblCriGerais control.
+    /// listaCritGeral control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Literal lblCriGerais;
+    protected global::System.Web.UI.WebControls.ListBox listaCritGeral;
+    
+    /// <summary>
+    /// listaCritPi control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ListBox listaCritPi;
+    
+    /// <summary>
+    /// lblMsgErroAdicionarCriterio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgErroAdicionarCriterio;
+    
+    /// <summary>
+    /// btnCadastrarCriterio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlButton btnCadastrarCriterio;
     
     /// <summary>
     /// btnContinuarEtapa3 control.
@@ -174,31 +210,49 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.Button btnContinuarEtapa3;
     
     /// <summary>
-    /// Panel1 control.
+    /// updPanelPeso control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Panel Panel1;
+    protected global::System.Web.UI.UpdatePanel updPanelPeso;
     
     /// <summary>
-    /// ScriptManager1 control.
+    /// PanelCriterios control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.ScriptManager ScriptManager1;
+    protected global::System.Web.UI.WebControls.Panel PanelCriterios;
     
     /// <summary>
-    /// UpdatePanel1 control.
+    /// lblMsgPesosCriterios control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+    protected global::System.Web.UI.WebControls.Label lblMsgPesosCriterios;
+    
+    /// <summary>
+    /// ContinuarEtapa4 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button ContinuarEtapa4;
+    
+    /// <summary>
+    /// updPanelGrupos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel updPanelGrupos;
     
     /// <summary>
     /// lblNomeGrupo control.
@@ -255,6 +309,69 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.ListBox listaAlunosGrupo;
     
     /// <summary>
+    /// lblGrupos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblGrupos;
+    
+    /// <summary>
+    /// listaGrupos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ListBox listaGrupos;
+    
+    /// <summary>
+    /// LkbVoltarEtapa3 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton LkbVoltarEtapa3;
+    
+    /// <summary>
+    /// btnExcluirGrupo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnExcluirGrupo;
+    
+    /// <summary>
+    /// btnCancelarEdicao control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnCancelarEdicao;
+    
+    /// <summary>
+    /// btnConfirmarEdicao control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnConfirmarEdicao;
+    
+    /// <summary>
+    /// btnConfirmarGrupo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnConfirmarGrupo;
+    
+    /// <summary>
     /// lblDescricaoData control.
     /// </summary>
     /// <remarks>
@@ -309,6 +426,15 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.Label lblDataMsgErro;
     
     /// <summary>
+    /// updPanelNovoCri control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel updPanelNovoCri;
+    
+    /// <summary>
     /// lblNomeCriterio control.
     /// </summary>
     /// <remarks>
@@ -343,4 +469,67 @@ public partial class paginas_Usuario_cadastrarPi {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtDescricaoCriterio;
+    
+    /// <summary>
+    /// lblMsgCriterio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgCriterio;
+    
+    /// <summary>
+    /// btnCancelarCriterio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnCancelarCriterio;
+    
+    /// <summary>
+    /// btnCriarNovoCriterio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnCriarNovoCriterio;
+    
+    /// <summary>
+    /// updPeso1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel updPeso1;
+    
+    /// <summary>
+    /// btnAdicionarPesoUm control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnAdicionarPesoUm;
+    
+    /// <summary>
+    /// btnVoltarHome2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnVoltarHome2;
+    
+    /// <summary>
+    /// btnVoltarAvaliar control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnVoltarAvaliar;
 }

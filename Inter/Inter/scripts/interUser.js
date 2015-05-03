@@ -1,7 +1,6 @@
 ﻿//Variavel Global - Usada para acessar todas variaveis
 var global = "";
 
-var contador = -1;
 var controlarMostra = false;
 
 //FUNCTION INICIA APÓS CAREGAR A PÁGINA
@@ -36,12 +35,21 @@ function Mostra(idDiv) {
     });
 
 }
-
+//SEM O EFEITO SLIDE
+function etapa2() {
+    controlarMostra = true;
+    $("#" + global).hide();
+    $("#c" + global).css("visibility", "hidden");
+    global = "p10";
+    $("#p10").show();
+    $("#conteudo").slideDown(500);
+}
+//SEM O EFEITO SLIDE
 function etapa3() {
     controlarMostra = true;
     Mostra('p12');
 }
-
+//SEM O EFEITO SLIDE
 function etapa4() {
     controlarMostra = true;
     $("#" + global).hide();
@@ -49,6 +57,21 @@ function etapa4() {
     global = "p13";
     $("#p13").show();
     $("#conteudo").slideDown(500);
+}
+
+//PARA FAZER O EFEITO SLIDE
+function Modaletapa4(idDiv) {
+    controlarMostra = true;
+
+    $("#conteudo").slideUp(500, function () {
+        $("#" + global).hide();
+        $("#c" + global).css("visibility", "hidden");
+        global = idDiv;
+        $("#" + idDiv).show();
+        $("#conteudo").slideDown(500);
+
+    });
+
 }
 
 
@@ -101,7 +124,7 @@ function Dia() {
     NomeMes[10] = "Novembro"
     NomeMes[11] = "Dezembro"
 
-    //Imprime a varivel currentDay na tag dia
+    //IMPRIME A VARIVEL CURRENTDAY NA TAG DIA
     var currentDay = Data + " de " + NomeMes[Mes] + " " + Ano;
     document.getElementById("dia").innerHTML = currentDay;
 }
@@ -115,47 +138,88 @@ function Atualiza() {
 
 $(document).ready(function () {
 
-    // ZERAR VALORES DATAS DE EVENTOS
-    $("#btnAdicionarDatas").click(function () {
-        $("#txtDescricaoData").val("");
-        $("#txtData").val("");
-        contr = false;
-        $("#btnConfirmarData").removeAttr("data-dismiss");
+
+    $('#txtData').datepicker({
+        dateFormat: 'dd/mm/yy',
+        dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+        dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        nextText: 'Próximo',
+        prevText: 'Anterior',
+        showOn: "button",
+        buttonImage: "../../App_Themes/images/Calendar-Add-128x128.png",
+        buttonImageOnly: true,
+        minDate: 0,
+        buttonText: "Abrir Calendário"
+
     });
 
 
     // DATAS DE EVENTOS
+    $("#btnAdicionarDatas").click(function () { //QUANDO CLICAR NO ADICIONAR DATAS
+        // ZERAR VALORES DATAS DE EVENTOS
+        $("#txtDescricaoData").val(""); 
+        $("#txtData").val("");
+        contr = false; //PARA SABER SE IRÁ ATUALIZAR OU CRIAR UMA DATA, USADA NO BTN_EDITAR PARA ATUALIZAR O VALOR
+
+        $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
+        $("#campoObrigatorio").css('visibility', 'hidden');        
+        $("#textoCampObrig").css('visibility', 'hidden');
+        
+        $("#lblDataMsgErro").html("&nbsp &nbsp");
+        $("#lblDescDataMsgErro").html("&nbsp &nbsp");
+    });
+    
     var i = 0;
     var dadosDatas = "";
     var contr = false; //PARA SABER SE IRÁ ATUALIZAR OU CRIAR UMA DATA
-    var indiceId;
+    var indiceId; //PARA SABER O INDICE DA LINHA DOS COMPONENTES QUE FOI CLICADO, EX: descData1, data1. USADO NO EDITAR 
 
 
     $("#btnConfirmarData").click(function () {
+        //PEGANDO OS VALORES DOS INPUTS
         var descricaoData = $("#txtDescricaoData").val();
-        var data = $("#txtData").val().split('-');
+        var data = $("#txtData").val();
 
         //MENSAGENS DE ERRO
         if (descricaoData == "" && data == "") {
-            //$("#btnConfirmarData").removeAttr("data-dismiss");
-            $("#lblDescDataMsgErro").html("&nbsp &nbsp  Preenchimento obrigatório!");
-            $("#lblDataMsgErro").html("&nbsp &nbsp  Preenchimento obrigatório!");
+            
+            $("#lblDescDataMsgErro").html("&nbsp &nbsp  *");
+            $("#lblDataMsgErro").html("&nbsp &nbsp  *");
+            $("#campoObrigatorio").css({'visibility': 'visible', 'color': 'red'});
+            $("#campoObrigatorio").attr('class', 'glyphicon glyphicon-remove-circle');
+            $("#textoCampObrig").html("&nbsp Campo obrigatório.");
+            $("#textoCampObrig").css({ 'visibility': 'visible', 'color': 'red' });
+
+            $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
 
         } else
             if (descricaoData == "") {  //MENSAGEM DE ERRO
-                //$("#btnConfirmarData").removeAttr("data-dismiss");
-                $("#lblDescDataMsgErro").html("&nbsp &nbsp  Preenchimento obrigatório!");
+                
+                $("#lblDescDataMsgErro").html("&nbsp &nbsp *");
                 $("#lblDataMsgErro").html("");
+                $("#campoObrigatorio").css({ 'visibility': 'visible', 'color': 'red' });
+                $("#campoObrigatorio").attr('class', 'glyphicon glyphicon-remove-circle');
+                $("#textoCampObrig").html("&nbsp Campo obrigatório.");
+                $("#textoCampObrig").css({ 'visibility': 'visible', 'color': 'red' });
+
+                $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
             } else
                 if (data == "") { //MENSAGEM DE ERRO
-                    //$("#btnConfirmarData").removeAttr("data-dismiss");
-                    $("#lblDataMsgErro").html("&nbsp &nbsp  Preenchimento obrigatório!");
+                    
+                    $("#lblDataMsgErro").html("&nbsp &nbsp *");
                     $("#lblDescDataMsgErro").html("");
-                } else {
-                    //$("#btnConfirmarData").attr("data-dismiss", "modal");
+                    $("#campoObrigatorio").css({ 'visibility': 'visible', 'color': 'red' });
+                    $("#campoObrigatorio").attr('class', 'glyphicon glyphicon-remove-circle');
+                    $("#textoCampObrig").html("&nbsp Campo obrigatório.");
+                    $("#textoCampObrig").css({ 'visibility': 'visible', 'color': 'red' });
 
-                    var formatDate = data[2] + '/' + data[1] + '/' + data[0];
-
+                    $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
+                } else { //SE ESTIVER TUDO CERTO 
+                    
+                    //CRIANDO BOTÃO EXCLUIR
                     var btnExcluir = $('<button/>', {
                         type: 'button',
                         id: 'btnExcluir' + i,
@@ -163,8 +227,9 @@ $(document).ready(function () {
                         title: 'Excluir',
                         class: 'btn btn-default btnExcluir',
                         click: function () {
-                            var parentBotao = $(this).parent();
+                            var parentBotao = $(this).parent(); //PEGA A DIV DA LINHA QUE FOI CLICADA
 
+                            //CHAMA A MODAL EXCLUIR
                             $(function () {
                                 $("#boxDesejaExcluir").dialog({
                                     width: 400,
@@ -174,7 +239,7 @@ $(document).ready(function () {
                                     draggable: false,
                                     buttons: {
                                         "Sim": function () {
-                                            parentBotao.remove();
+                                            parentBotao.remove(); //REMOVE A DIV QUE CONTÉM O EVENTO
                                             $(this).dialog("close");
                                         },
                                         "Não": function () {
@@ -188,10 +253,11 @@ $(document).ready(function () {
                         }
                     });
 
+                    //CRIANDO A DIV COM O EVENTO: LABEL DESCRICAO DATA E LABEL DATA
                     var div = '<div class="data" id="div' + i + '"> <b> <label id="descData' + i + '">' + descricaoData + '</label></b>' +
-                        ': <label id="data' + i + '">' + formatDate + '</label>  </div> ';
+                        ': <label id="data' + i + '">' + data + '</label>  </div> ';
 
-
+                    //CRIANDO BOTÃO EDITAR 
                     var btnEditar = $('<button/>', {
                         type: 'button',
                         id: 'btnEditar-' + i,
@@ -199,44 +265,57 @@ $(document).ready(function () {
                         title: 'Editar',
                         class: 'btn btn-default btnEditar',
                         click: function () {
-                            //$("#ContentPlaceHolder1_txtDescricaoData").val("");
-                            $("#txtData").val("");
-                            indiceId = $(this).attr('id').split('-');
+                            //REMOVE AS MENSAGENS DE ERRO 
+                            $("#lblDataMsgErro").html("&nbsp &nbsp");
+                            $("#lblDescDataMsgErro").html("");
+                            $("#campoObrigatorio").css('visibility', 'hidden');
+                            $("#textoCampObrig").css('visibility', 'hidden');
 
-                            $("#txtDescricaoData").val($('#descData' + indiceId[1]).html());
-                            dtUSA = $('#data' + indiceId[1]).html().split('/');
-                            dtUSA = dtUSA[2] + '-' + dtUSA[1] + '-' + dtUSA[0];
-                            $("#txtData").val(dtUSA);
-                            contr = true;
+                            $("#txtData").val("");
+                            indiceId = $(this).attr('id').split('-'); //PEGA O ID DO BTN_EDITAR E CORTA ONDE ACHAR O "-" 
+                            //EX: btnEditar1 - indiceId[0] = "btnEditar";  indiceId[1] = "1"; 
+
+                            $("#txtDescricaoData").val($('#descData' + indiceId[1]).html());//RECEBE O QUE ESTÁ NA DIV COM OS EVENTOS   
+                            //ex: data + indiceId[1] =  "data" + "1" = data1                            
+                            $("#txtData").val($('#data' + indiceId[1]).html());
+                            contr = true; //QUER DIZER QUE VAI SOMENTE ATUALIZAR
                             $("#btnConfirmarData").attr("data-dismiss", "modal");
                         }
                     });
 
-                    btnEditar.attr({ 'data-toggle': 'modal', 'data-target': '#myModal1' });
+                    btnEditar.attr({ 'data-toggle': 'modal', 'data-target': '#myModal1' }); 
+                    //RECEBE O ATRIBUTO PARA PODER ABRIR A MODAL CADASTRAR DATAS
 
-                    if (contr == false) {
-                        $("#containerDatas").append(div);
-                        $("#div" + i).append(btnExcluir);
+                    if (contr == false) { //QUER DIZER QUE VAI CRIAR UMA NOVA DATA DE EVENTO
+
+                        $("#containerDatas").append(div); //DIV COM AS DATAS DE EVENTOS
+                        $("#div" + i).append(btnExcluir); 
                         $("#div" + i).append(btnEditar);
 
-                        var ed = document.getElementById('btnEditar-' + i);
+                        var ed = document.getElementById('btnEditar-' + i); //PARA COLOCAR O ICONE NOS BOTÕES
                         ed.insertAdjacentHTML('afterbegin', '<span class="glyphicon glyphicon-pencil"></span>');
 
                         var ex = document.getElementById('btnExcluir' + i);
                         ex.insertAdjacentHTML('afterbegin', '<span class="glyphicon glyphicon-trash"></span>');
 
-                        i++;
+                        i++; //INDICE DOS COMPONENTES
                     } else { //SOMENTE EDITAR
-                        $('#descData' + indiceId[1]).html($("#txtDescricaoData").val());
-                        data = $("#txtData").val().split('-');
-                        formatDate = data[2] + '/' + data[1] + '/' + data[0];
-                        $('#data' + indiceId[1]).html(formatDate);
+                        //ATUALZANDO OS VALORES NA DIV QUE CONTÉM AS DATAS DE EVENTOS
+                        $('#descData' + indiceId[1]).html($("#txtDescricaoData").val()); 
+                        data = $("#txtData").val();                        
+                        $('#data' + indiceId[1]).html(data);
+                        $("#btnConfirmarData").attr("data-dismiss", "modal");
                     }
 
                     $("#lblDescDataMsgErro").html("");
                     $("#lblDataMsgErro").html("");
                     $("#txtDescricaoData").val("");
                     $("#txtData").val("");
+                    $("#campoObrigatorio").css({ 'visibility': 'visible', 'color': 'green' });                  
+                    $("#campoObrigatorio").attr('class', 'glyphicon glyphicon-ok-circle');
+                    $("#textoCampObrig").html("&nbsp Cadastrado com sucesso.");
+                    $("#textoCampObrig").css({ 'visibility': 'visible', 'color': 'green' });
+
                 }
 
     });
@@ -256,49 +335,32 @@ $(document).ready(function () {
 
         }
 
-        alert(dadosDatas);
+        $.ajax({
+            type: 'POST',
+            url: 'cadastrarPi.aspx/GetEventos',
+            data: "{dadosEventos:" + JSON.stringify(dadosDatas) + "}",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (r) {
+                for (var key in r) {
+                    var value = r[key];
+                    //alert(dadosDatas);
+                }
+            }
+        });
+        
 
     });
 
 
-    $("#ContinuarEtapa4").click(function () {
-        var msgErro = false;
-        txtPostura = $('#txtP').val();
-        txtVestimenta = $('#txtV').val();
-        txtfala = $('#txtF').val();
-        txtConhecimento = $('#txtC').val();
+    funcaoImpedirValor = function (id) {        
+        var valor = document.getElementById(id).value;
 
-        if ($.trim(txtPostura) == '' || $.trim(txtVestimenta) == '' || $.trim(txtfala) == '' || $.trim(txtConhecimento) == '') {
-            $(function () {
-                $("#boxPesoBranco").dialog({
-                    width: 400,
-                    height: 200,
-                    modal: true,
-                    resizable: false,
-                    draggable: false,
-                    buttons: {
-                        "Sim": function () {
-                            Mostra('p13'); //criar Grupo
-                            $(this).dialog("close");
-
-                        },
-                        "Não": function () {
-                            $(this).dialog("close");
-                        }
-                    }
-
-
-                });
-            });
-        } else {
-            Mostra('p13'); //criar Grupo
+        if (valor <= 0 || valor > 10) {                   
+            $("#"+id).val("");
         }
-    });
 
-
-
-
-
+    }
 
     ////sortable mover com duplo clique
     //$("ul#sortable3 li").dblclick(function () {

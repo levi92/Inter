@@ -29,12 +29,12 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
 
             string NomeUser = Session["login"].ToString(); //recebe email do professor logado
             pes = Pessoas_DB.Select(NomeUser); //cria um obj pessoa do professor, decorrente de um select utilizando seu email como parametro
-            Session["nomeProf"] = pes.Pes_nome;
+            Session["nomeProf"] = pes.Pes_nome; //!! Criar sessão separado para admin
 
             int codProf = Professor_DB.SelectPes(pes.Pes_codigo); //seleciona o código pessoa para verificar qual o cod do Prof
 
             CarregarGrid(codProf); //carrega a grid utilizando o cod do Prof
-            auxRb = -1;
+            auxRb = -1; //selecionar qual linha ta selecionada do rb
         }
     }
 
@@ -42,15 +42,14 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
 
     public void CarregarGrid(int proMatricula)
     {
-        //DataSet ds = new DataSet();
+        DataSet ds = Funcoes_DB.SelectDisciplina(proMatricula); //criando um data set oriundo de um select contendo as disciplinas relacionadas ao professor
+        int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
 
-        DataSet ds = Funcoes_DB.SelectDisciplina(proMatricula);
-        int qtd = ds.Tables[0].Rows.Count;
-
+        //se qtd for maior que zero, ou seja, se tiver dados no data set
         if (qtd > 0)
         {
-            gdv.DataSource = ds.Tables[0].DefaultView;
-            gdv.DataBind();
+            gdv.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+            gdv.DataBind(); //preenche o grid view com os dados
             lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
         }
 
@@ -59,49 +58,49 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     // CRIAR ÍCONE DISCIPLINA MÃE
     protected void gdv_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+        //e = tdos eventos relacionados a um componente, pega a linha e verifica se é do tipo dados
         if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            // SEMESTRE COMO ORDINAL
-            //string semestre = e.Row.Cells[2].Text;
-            //e.Row.Cells[2].Text = semestre + "º";
-
-
+        {    
+            //se for mãe
             if (e.Row.Cells[4].Text.ToLower().Equals("true"))
             {
+                //ícone da estrelinha
                 e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-star'></span>";
             }
             else
             {
+                //ícone de tracinho
                 e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-minus'></span>";
             }
 
         }
     }
 
+    //evento do botão confirmar: pega linha selecionada e armazena os dados da mesma
     protected void btnConfirmar_Click(object sender, EventArgs e)
     {
-
+        //linha não selecionada
         int linhaSelecionada = -1;
 
-        foreach (GridViewRow grid in gdv.Rows)
+        foreach (GridViewRow grid in gdv.Rows)//percorrer toda a grid
         {
-            RadioButton rb = (RadioButton)grid.FindControl("rb");
+            RadioButton rb = (RadioButton)grid.FindControl("rb");//procurando um rb
 
 
             if (rb.Checked)
             {
-                linhaSelecionada = grid.RowIndex;
+                linhaSelecionada = grid.RowIndex;//recebe a linha selecionada
                 break;
             }
         }
 
-        if (linhaSelecionada != -1)
+        if (linhaSelecionada != -1)//caso tenha rb selecionado
         {
             string curso = gdv.Rows[linhaSelecionada].Cells[1].Text;
             string semestre = gdv.Rows[linhaSelecionada].Cells[2].Text;
             string disciplina = gdv.Rows[linhaSelecionada].Cells[3].Text;
             string mae = gdv.Rows[linhaSelecionada].Cells[4].Text;
-            // SESSÕES
+            // sessões com os dados da linha selecionada
             Session["curso"] = curso;
             Session["semestre"] = semestre;
             Session["disciplina"] = disciplina;
@@ -113,11 +112,13 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             {
                 Session["mae"] = "False";
             }
-
+            //redireciona pra home
             Response.Redirect("home.aspx");
         }
         else
         {
+            //se nenhum rb for selecionado, uma modal de aviso é exibida
+            //ScriptManager serve para chamar um javascript via c#
             ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEscolherDis", "modalEscolherDis();", true);
         }
     }
@@ -130,21 +131,21 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     protected void rb_CheckedChanged(object sender, EventArgs e)
     {
 
-        foreach (GridViewRow grid in gdv.Rows)
+        foreach (GridViewRow grid in gdv.Rows)//percorrer toda a grid
         {
-            RadioButton rb = (RadioButton)grid.FindControl("rb");
+            RadioButton rb = (RadioButton)grid.FindControl("rb");//procurando um rb
 
-            if (grid.RowIndex == auxRb) //deseleciona radio que estava selecionado
+            if (grid.RowIndex == auxRb) //se a linha atual da grid for igual a linha que existe um radio selecionado
             {
-                rb.Checked = false;
+                rb.Checked = false; //desseleciona radio que estava selecionado
                 break;
             }
         }
 
 
-        foreach (GridViewRow grid in gdv.Rows)
+        foreach (GridViewRow grid in gdv.Rows)//percorrer toda a grid
         {
-            RadioButton rb = (RadioButton)grid.FindControl("rb");
+            RadioButton rb = (RadioButton)grid.FindControl("rb");//procurando um rb
 
             if (rb.Checked)
             {

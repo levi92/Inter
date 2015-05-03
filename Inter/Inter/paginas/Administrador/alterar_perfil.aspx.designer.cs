@@ -7,7 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
-
-public partial class paginas_Admin_projetos {
+namespace Inter.paginas.Administrador {
+    
+    
+    public partial class AlterarPerfil {
+    }
 }

@@ -60,6 +60,7 @@
     <Compile Include="Classes\Professor.cs" />
     <Compile Include="Classes\Projeto_Inter.cs" />
     <Compile Include="Classes\Requerimento.cs" />
+    <Compile Include="Classes\Semestre_Ano.cs" />
     <Compile Include="Classes\Turma.cs" />
     <Compile Include="Classes\Turno.cs" />
     <Compile Include="Comuns\Funcoes.cs" />
@@ -73,7 +74,9 @@
     <Compile Include="Persistencia\Funcoes_DB.cs" />
     <Compile Include="Persistencia\Pessoas_DB.cs" />
     <Compile Include="Persistencia\Professor_DB.cs" />
+    <Compile Include="Persistencia\Projeto_Inter_DB.cs" />
     <Compile Include="Persistencia\Requerimento_DB.cs" />
+    <Compile Include="Persistencia\Semestre_Ano_DB.cs" />
     <Compile Include="Persistencia\Turma_DB.cs" />
     <Compile Include="Persistencia\Turno_DB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

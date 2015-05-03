@@ -1,16 +1,14 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="paginas_Admin_MasterPage" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage_AlterarPerfil.Master.cs" Inherits="Inter.paginas.Administrador.MasterPage_AlterarfPerfil" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-
-    <!-- Iconezinho do sistema -->
+       <!-- Iconezinho do sistema -->
     <link rel="shortcut icon" type="image/x-icon" href="../../App_Themes/images/inter_iconizinho.png" />
 
     <meta charset="utf-8" />
 
-    <link href="../../App_Themes/css/materialdesignicons.min.css" rel="stylesheet" />
     <link href="../../App_Themes/css/bootstrap.css" rel="stylesheet" />
     <link href="../../App_Themes/css/bootstrap-theme.css" rel="stylesheet" />
     <link href="../../App_Themes/css/jquery-ui.css" rel="stylesheet" />
@@ -33,21 +31,17 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-
+            
         });
 
-
+        
     </script>
-
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-
-
-
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="container-fluid">
                 </div>
@@ -64,22 +58,55 @@
                         </li>
 
                     </ul>
-
+                   
                 </div>
 
                 <!-- /.navbar-collapse -->
-            </div>
+         
             <!-- /.container-fluid -->
-
+                </div>
 
         </nav>
 
 
-        <%--Aqui é a área do menu que ficará na outra MasterPage (exemplo: Master_MenuAlterarPerfil ou Master_MenuMaster--%>
-        <asp:ContentPlaceHolder ID="ConteudoMenu" runat="server">
+
+           <!-- Menu Lateral  -->
+
+        <div id="lateral">
+             
+             <div id="menu">
+                <h1>
+                    <asp:Label ID="hora" runat="server" ClientIDMode="Static"></asp:Label></h1>
+                <h5>
+                    <asp:Label ID="dia" runat="server" ClientIDMode="Static"></asp:Label></h5>
+                <hr />
+                 <ul>      
+                     <%-- Eventos do onclick estão no arquivo javascript interUser --%>          
+                      <li><asp:HyperLink ID="icone1" runat="server" NavigateUrl="~/paginas/Administrador/alterar_perfil.aspx" Enabled="True">
+                      <span class="icon icon-users"></span>&nbsp Alterar Perfil</asp:HyperLink></li>
+                    <li><asp:HyperLink ID="icone6" runat="server" NavigateUrl="~/paginas/Administrador/ajuda.aspx" Enabled="True">
+                      <span class="glyphicon glyphicon-question-sign"></span>&nbsp Ajuda</asp:HyperLink></li>
+                    <li><a id="icone11" data-toggle="modal" data-target="#myModalDesejaSair" href="#" title="Sair do sistema e voltar para o login"><span class="glyphicon glyphicon-off"></span>&nbsp Sair</a></li>                   
+                                        
+                </ul>
+            </div> 
+            <!-- /#menu -->
+
+        </div>
+        <!-- /#lateral -->
+
+
+        <div class="container">
+            <div id="conteudo">
+            
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
         </asp:ContentPlaceHolder>
 
+            </div>
+        </div>
 
+   <script src="../../Scripts/inter.js" type="text/javascript"></script>
        
 
         <!-- MODAL DESEJA SAIR? -->
@@ -96,18 +123,19 @@
                     </div>
 
                     <div class="modal-footer">
-
-
-                        <asp:Button ID="btnSair" class="btn btn-default" runat="server" Text="Sim" OnClick="btnSair_Click" />
+                        
+                        <asp:Button ID="btnSair" class="btn btn-default" runat="server" Text="Sim" OnClick="btnSair_Click"
+                            ToolTip="Sair do sistema e voltar para o login" />
                         <button type="button" class="btn btn-default" id="" data-dismiss="modal">Não</button>
 
                     </div>
                 </div>
+                </div>
             </div>
-        </div>
+         
 
-           <script src="../../Scripts/inter.js" type="text/javascript"></script>
+    
     </form>
-  
+    
 </body>
 </html>

@@ -2,8 +2,9 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
     <script type="text/javascript">
-
+        
         // Modal Dialog - solicita a escolha de uma disciplina se o usuário não escolher nenhuma
+        // Chamando essa modal e configurando 
         // Criando as configurações da modal
         function modalEscolherDis() {
             $(function () {
@@ -18,8 +19,6 @@
                             $(this).dialog("close");
                         }
                     }
-
-
                 });
             });
         }
@@ -34,6 +33,7 @@
 
             <div class="panel-body">
                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                <%-- UpdatePanel utilizado por causa do radio button que estava atualizando a página --%>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <asp:GridView ID="gdv" runat="server" CellPadding="4" GridLines="None" CssClass="gridView"

@@ -4,12 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using Inter.Funcoes;
 public partial class Paginas_Login_login : System.Web.UI.Page
 {
+    static bool controleModal = false;
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (IsPostBack)
+        {
 
+        }
     }
 
     protected void enviar_Click(object sender, EventArgs e)
@@ -19,6 +23,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 
         // pegar valor dos textbox do login
         string user = txtLogin.Text.ToString();
+        //string senha = Funcoes.Criptografar(txtSenha.Text.ToString(), "SHA1"); ->>> não lê a senha correta do banco por algum motivo
         string senha = txtSenha.Text.ToString();
 
         //Verificar se os campos não estão vazios
@@ -26,10 +31,12 @@ public partial class Paginas_Login_login : System.Web.UI.Page
         {
 
             // Verifica os parametros na função ValidarLogin
-            switch (Funcoes_DB.ValidarLogin(user, senha)) 
+           
+            switch (Funcoes_DB.ValidarLogin(user, senha))
             {
-                // Professor
+                
                 case 0:
+                    // Professor
                     Session["login"] = user;
                     Session["curso"] = "";
                     Session["semestre"] = "";
@@ -38,14 +45,33 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                     Response.Redirect("~/Paginas/Usuario/escolherDisciplina.aspx");
                     break;
 
-                // Administrador
-                case 1:
+                
+                //case 1:
+                //    //Administrador
+                //    Session["coord"] = "True";
+                //    Session["login"] = user;
+                //    Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
+                //    break;
+
+                case 2:
+                    //Administrador Coordenador e professor
+                    //chama a página de escolher o perfil
+                    Session["coord"] = "True";
+                    Session["perfil"] = "";
                     Session["login"] = user;
+                    Response.Redirect("~/Paginas/Administrador/alterar_perfil.aspx");
+                    break;
+
+                case 3:
+                    //Administrador master                 
+                    Session["login"] = user;
+                    Session["coord"] = "False";
                     Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
                     break;
 
-                // Erro
+                
                 case -2:
+                    // Erro
                     lblMsgErro.Text = "E-mail ou Senha incorretos.";
                     break;
             }
@@ -56,6 +82,41 @@ public partial class Paginas_Login_login : System.Web.UI.Page
             // Campos estão vazios
             lblMsgErro.Text = "Preencha os campos.";
         }
+    }
+
+    protected void btnProfessor_Click1(object sender, EventArgs e)
+    {
+        if (controleModal == true)
+        {
+            string user = txtLogin.Text.ToString();
+            string senha = txtSenha.Text.ToString();
+
+            Session["login"] = user;
+            Session["curso"] = "";
+            Session["semestre"] = "";
+            Session["disciplina"] = "";
+            Session["mae"] = "";
+            controleModal = false;
+            //this.Page.Response.Redirect(this.Page.Request.Url.AbsoluteUri);
+            Response.Redirect("~/Paginas/Usuario/escolherDisciplina.aspx");
+        }
+        
+        
+    }
+
+    protected void btnAdministrador_Click(object sender, EventArgs e)
+    {
+        
+        if (controleModal == true)
+        {
+            Session["login"] = "";
+            controleModal = false;
+            Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
+            
+            
+        }
+        
+  
     }
 
 

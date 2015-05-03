@@ -1,11 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage.Master" AutoEventWireup="true" CodeBehind="projetos.aspx.cs" Inherits="Inter.paginas.Administrador.projetos" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage_MenuCoord.Master" AutoEventWireup="true" CodeBehind="projetos.aspx.cs" Inherits="paginas_Admin_projetos" %>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ConteudoCentral" runat="server">
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#icone4').addClass('corIcone');
+            $('#icone5').addClass('corIcone');
         });
     </script>
   
