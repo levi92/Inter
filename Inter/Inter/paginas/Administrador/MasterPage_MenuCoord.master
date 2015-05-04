@@ -1,8 +1,9 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage.Master" AutoEventWireup="true" CodeBehind="MasterPage_MenuCoord.master.cs" Inherits="paginas_Admin_MenuCoord" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ConteudoMenu" runat="server">
 
+<asp:Content ID="Content2" ContentPlaceHolderID="ConteudoMenu" runat="server">
+    <form id="formMenuCoord">
 
     
         <!-- Menu Lateral  -->
@@ -32,7 +33,7 @@
                       <li><asp:HyperLink ID="icone1" runat="server" NavigateUrl="~/paginas/Administrador/alterar_perfil.aspx" ClientIDMode="Static" Enabled="True">
                       <span class="icon icon-users"></span>&nbsp Escolher Perfil</asp:HyperLink></li>
                    
-                    <li><a id="icone11" data-toggle="modal" data-target="#myModalDesejaSair" href="#" title="Sair do sistema e voltar para o login"><span class="glyphicon glyphicon-off"></span>&nbsp Sair</a></li>
+                    <li><a id="icone11" data-toggle="modal" data-target="#myModalDesejaSair" href="#" title="Sair do sistema e voltar para o login"><span class="icon icon-exit"></span>&nbsp Sair</a></li>
                                         
                 </ul>
             </div> 
@@ -55,6 +56,7 @@
 
        
 
-     
+      </form>
 
 </asp:Content>
+   

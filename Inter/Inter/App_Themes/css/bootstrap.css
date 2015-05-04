@@ -279,6 +279,15 @@ th {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.glyphicon-education:before {
+  content: "\e233";
+}
+
+.glyphicon-king:before {
+  content: "\e211";
+}
+
 .glyphicon-asterisk:before {
   content: "\2a";
 }
