@@ -12,6 +12,15 @@
 public partial class paginas_Admin_criterios {
     
     /// <summary>
+    /// lblMsg control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsg;
+    
+    /// <summary>
     /// ScriptManager1 control.
     /// </summary>
     /// <remarks>
@@ -21,22 +30,22 @@ public partial class paginas_Admin_criterios {
     protected global::System.Web.UI.ScriptManager ScriptManager1;
     
     /// <summary>
-    /// UpdatePanel1 control.
+    /// UpdatePanelAtivados control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+    protected global::System.Web.UI.UpdatePanel UpdatePanelAtivados;
     
     /// <summary>
-    /// gdvCriterios control.
+    /// gdvCriteriosAtivos control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.GridView gdvCriterios;
+    protected global::System.Web.UI.WebControls.GridView gdvCriteriosAtivos;
     
     /// <summary>
     /// lblQtdRegistro control.
@@ -48,13 +57,49 @@ public partial class paginas_Admin_criterios {
     protected global::System.Web.UI.WebControls.Label lblQtdRegistro;
     
     /// <summary>
-    /// lblMsg control.
+    /// UpdatePanelDesativados control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMsg;
+    protected global::System.Web.UI.UpdatePanel UpdatePanelDesativados;
+    
+    /// <summary>
+    /// gdvCriteriosDesativados control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvCriteriosDesativados;
+    
+    /// <summary>
+    /// lblMsg2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsg2;
+    
+    /// <summary>
+    /// lblQtdRegistro2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblQtdRegistro2;
+    
+    /// <summary>
+    /// UpdatePanelModalNovoCriterio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel UpdatePanelModalNovoCriterio;
     
     /// <summary>
     /// lblNomeNovoCriterio control.
@@ -75,6 +120,15 @@ public partial class paginas_Admin_criterios {
     protected global::System.Web.UI.WebControls.TextBox txtNomeNovoCriterio;
     
     /// <summary>
+    /// rfvNomeNovoCriterio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNomeNovoCriterio;
+    
+    /// <summary>
     /// lblDescricaoNovoCriterio control.
     /// </summary>
     /// <remarks>
@@ -93,13 +147,22 @@ public partial class paginas_Admin_criterios {
     protected global::System.Web.UI.WebControls.TextBox txtDescricaoNovoCriterio;
     
     /// <summary>
-    /// updPanelNovoCri control.
+    /// rfvDescricaoNovoCriterio control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.UpdatePanel updPanelNovoCri;
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescricaoNovoCriterio;
+    
+    /// <summary>
+    /// vsNovoCriterio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ValidationSummary vsNovoCriterio;
     
     /// <summary>
     /// btnCriarNovoCriterio control.

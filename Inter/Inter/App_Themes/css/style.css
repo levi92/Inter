@@ -300,6 +300,13 @@ div#PanelCriterios {
     margin-left: 5px;
 }
 
+/*Margem para o conteúdo da modal*/
+
+container-modal{
+    padding:15px;
+    margin:15px;
+}
+
 /*Cadastrar Data*/
 .textData, .textCriterio, .textPesquisa {
     width: 100%;
