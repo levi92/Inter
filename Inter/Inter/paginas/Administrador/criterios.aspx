@@ -56,7 +56,7 @@
                                         <%--Coluna do nome do Critério Geral--%>
                                         <asp:TemplateField HeaderText="Nome do Critério">
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="txtNome" runat="server" Text='<%#Eval ("cge_nome")%>'> </asp:TextBox>
+                                                <asp:TextBox ID="txtNome" runat="server" Width="70%" Text='<%#Eval ("cge_nome")%>'> </asp:TextBox>
                                                 <%--Essa textbox existe para quando for editar aparecer o nome do critério--%>
                                             </EditItemTemplate>
                                             <ItemTemplate>
@@ -196,8 +196,6 @@
 
         <!-- Modal Cadastrar Critérios -->
 
-        <asp:UpdatePanel ID="UpdatePanelModalNovoCriterio" runat="server">
-            <ContentTemplate>
                 <div class="modal fade" data-backdrop="static" id="myModalCadastrarCri" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -211,10 +209,10 @@
                                 <div class="controls-row">
                                     <asp:Label ID="lblNomeNovoCriterio" runat="server" CssClass="control-label col-sm-2" Text="Nome: "></asp:Label>
 
-                                    <asp:TextBox ID="txtNomeNovoCriterio" CssClass="form-control col-sm-8" Width="50%" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtNomeNovoCriterio" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox>
                                     <%--Validação do Campo Nome (Verifica se está vazio e se está preenchido com uma string)--%>
                                     &nbsp<asp:RequiredFieldValidator ID="rfvNomeNovoCriterio" runat="server" CssClass="col-sm1" ErrorMessage="O campo Nome deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtNomeNovoCriterio" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>
-                                    &nbsp<asp:CompareValidator ID="cvNomeNovoCriterio" runat="server" CssClass="col-sm1" ErrorMessage="Nome Inválido. Use somente palavras sem símbolos ou números" ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtNomeNovoCriterio" ValidationGroup="NovoCriterio" ValidationDataType="String"></asp:CompareValidator>
+                                    
 
                                 </div>
                         </div>
@@ -223,20 +221,20 @@
                              <div class="controls-row">
                             <asp:Label ID="lblDescricaoNovoCriterio" runat="server" CssClass="control-label col-sm-2" Text="Descrição: "></asp:Label></td>
                                             
-                                                <asp:TextBox ID="txtDescricaoNovoCriterio" CssClass="form-control col-sm-8" Width="50%" runat="server"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtDescricaoNovoCriterio" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox></td>
                                             
                                          <%--Validação do Campo Descrição (Verifica se está vazio e se está preenchido com uma string)--%>
-                                                 &nbsp<asp:RequiredFieldValidator ID="rfvDescricaoNovoCriterio" CssClass="col-sm1" runat="server" ErrorMessage="O campo Descrição deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtDescricaoNovoCriterio" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>
-                                                 &nbsp<asp:CompareValidator ID="cvDescricaoNovoCriterio" CssClass="col-sm1"  runat="server" ErrorMessage="Descrição Inválida. Use somente palavras sem símbolos ou números" ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtDescricaoNovoCriterio" ValidationGroup="NovoCriterio" ValidationDataType="String"></asp:CompareValidator>
+                                                 &nbsp<asp:RequiredFieldValidator ID="rfvDescricaoNovoCriterio" CssClass="col-sm1" runat="server" ErrorMessage="O campo Descrição deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtDescricaoNovoCriterio" ControlToCompare="txtNomeNovoCriterio" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>
+                                               
                                          
                         </div>
                             </div>
                        
                         <asp:ValidationSummary ID="vsNovoCriterio" ValidationGroup="NovoCriterio" ForeColor="#960d10" runat="server" DisplayMode="List" style="margin:7px;padding:7px;"/>
 
-                        </div>
+                        
                                 
-
+                            
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" id="" data-dismiss="modal" title="Cancelar Inserção">
                                     <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</button>
@@ -249,10 +247,8 @@
                         </div>
                     </div>
                 </div>
-                </div>
-            </ContentTemplate>
-
-        </asp:UpdatePanel>
+               
+        
 
     </div>
 

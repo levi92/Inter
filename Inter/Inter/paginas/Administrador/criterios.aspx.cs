@@ -116,6 +116,7 @@ using System.Data;
             cri.Cge_codigo = 0;
             cri.Cge_nome = txtNomeNovoCriterio.Text;
             cri.Cge_descricao = txtDescricaoNovoCriterio.Text;
+            
             if (Criterios_Gerais_DB.Insert(cri) == 0)
             {
 
@@ -123,6 +124,7 @@ using System.Data;
                 gdvCriteriosAtivos.EditIndex = -1;
                 CarregarGridAtivos();
                 UpdatePanelAtivados.Update();
+        
             }
             else
             {
