@@ -113,5 +113,19 @@ public class Aluno_DB{
         return ds;
     }
 
-
+    public static DataSet SelectAllAlunos()
+    {
+        DataSet ds = new DataSet();
+        IDbConnection objConnection;
+        IDbCommand objCommand;
+        IDataAdapter objDataAdapter;
+        objConnection = Mapped.Connection();
+        objCommand = Mapped.Command("select a.alu_matricula, p.pes_nome from alu_aluno a inner join pes_pessoas p using(pes_codigo); ", objConnection);
+        objDataAdapter = Mapped.Adapter(objCommand);
+        objDataAdapter.Fill(ds);
+        objConnection.Close();
+        objCommand.Dispose();
+        objConnection.Dispose();
+        return ds;
+    }
 }
