@@ -29,7 +29,25 @@ function fechaDiv(idDiv) {
     document.getElementById(idDiv).style.display = "none";
 }
 
+//Function que exibe o conteudo das Div's conforme o parametro utilizado nela
+var idInfo = 0;
+function mostraInfo(idDiv) {
 
+    if (idInfo != 0) {
+        $("#info" + idInfo).hide("slow");
+    }
+
+    if (idDiv == idInfo) {
+        $("#info" + idInfo).hide("slow");
+        idInfo = 0;
+    } else {
+        $("#info" + idDiv).show("slow");
+        idInfo = idDiv;
+    }
+
+    
+
+}
 
 
 //Function que exibe o conteudo das Div's conforme o parametro utilizado nela
