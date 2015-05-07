@@ -31,7 +31,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             prof = (Professor) Session["Professor"];
             //int codProf = Professor_DB.SelectPes(pes.Pes_codigo); //seleciona o código pessoa para verificar qual o cod do Prof
 
-            //CarregarGrid(); //carrega a grid utilizando o cod do Prof
+            CarregarGrid(); //carrega a grid
             auxRb = -1; //selecionar qual linha ta selecionada do rb
         }
     }
@@ -40,40 +40,43 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
 
     public void CarregarGrid()
     {
-        //Professor prof = new Professor();
-        //prof = (Professor)Session["Professor"];
-        //DataSet ds = Professor.SelectAllPIsbyCalendarioAndProfessor(12015, 1, prof.Matricula);
-        ////DataSet ds = Funcoes_DB.SelectDisciplina(proMatricula); //criando um data set oriundo de um select contendo as disciplinas relacionadas ao professor
-        //int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
+        Professor prof = new Professor();
+        prof = (Professor)Session["Professor"];
 
-        ////se qtd for maior que zero, ou seja, se tiver dados no data set
-        //if (qtd > 0)
-        //{
-        //    gdv.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
-        //    gdv.DataBind(); //preenche o grid view com os dados
-        //}
-        //lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
+        Calendario cal = new Calendario();
+        cal = Calendario.SelectbyAtual();
+        DataSet ds = Professor.SelectAllPIsbyCalendarioAndProfessor(cal.AnoSemestreAtual, cal.Codigo, prof.Matricula);
+
+        int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
+
+        //se qtd for maior que zero, ou seja, se tiver dados no data set
+        if (qtd > 0)
+        {
+            gdv.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+            gdv.DataBind(); //preenche o grid view com os dados
+        }
+        lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
     }
 
     // CRIAR ÍCONE DISCIPLINA MÃE
     protected void gdv_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        //e = tdos eventos relacionados a um componente, pega a linha e verifica se é do tipo dados
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {    
-            //se for mãe
-            if (e.Row.Cells[4].Text.ToLower().Equals("true"))
-            {
-                //ícone da estrelinha
-                e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-star'></span>";
-            }
-            else
-            {
-                //ícone de tracinho
-                e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-minus'></span>";
-            }
+        ////e = tdos eventos relacionados a um componente, pega a linha e verifica se é do tipo dados
+        //if (e.Row.RowType == DataControlRowType.DataRow)
+        //{    
+        //    //se for mãe
+        //    if (e.Row.Cells[4].Text.ToLower().Equals("true"))
+        //    {
+        //        //ícone da estrelinha
+        //        e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-star'></span>";
+        //    }
+        //    else
+        //    {
+        //        //ícone de tracinho
+        //        e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-minus'></span>";
+        //    }
 
-        }
+        //}
     }
 
     //evento do botão confirmar: pega linha selecionada e armazena os dados da mesma

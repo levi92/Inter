@@ -20,4 +20,3 @@ Professor - SelectByCod (obj)
 
 Turno - SelecionarTodos (DataSet)
         SelectByCod (obj)
-

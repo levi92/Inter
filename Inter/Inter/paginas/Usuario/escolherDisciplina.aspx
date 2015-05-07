@@ -37,13 +37,13 @@
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <asp:GridView ID="gdv" runat="server" CellPadding="4" GridLines="None" CssClass="gridView"
-                            AutoGenerateColumns="false"
+                            AutoGenerateColumns="true"
                             OnRowDataBound="gdv_RowDataBound">
 
                             <AlternatingRowStyle CssClass="alt" />
 
                             <%-- Configurar colunas do Grid --%>
-                            <Columns>
+                           <%-- <Columns>
 
                                 <asp:TemplateField>
                                     <ItemTemplate>
@@ -58,7 +58,7 @@
                                 <asp:BoundField DataField="dge_sigla" HeaderText="Disciplina" />
                                 <asp:BoundField DataField="adi_mae" HeaderText="Disciplina Mãe" />
 
-                            </Columns>
+                            </Columns>--%>
 
                         </asp:GridView>
                     </ContentTemplate>
