@@ -1,0 +1,23 @@
+Matricula - ListraPresenca (DataSet)
+
+Aluno - SelecionarALuno (obj)
+        ListaAlunos (DataSet)
+
+Calendario - Select (obj)
+	     SelecionarTodos (DataSet)
+	     SelectByAtual (obj)
+
+Curso - SelecionarTodos (DataSet)
+
+Disciplina - SelecionarTodos (DataSet)
+             SelectByCod (obj)
+
+Professor - SelectByCod (obj)
+            Validar (obj)
+            SelectDisciplinasSeleciona (DataSet) disciplina normal do prof, passa ano e sem
+            SelectAllPisByCalendario (DataSet) todas maes e filhas
+            SelectAllPisBysCalendarioAndProfessor (DataSet) passa o calendario mais o codigo se encontrar traz disciplina do prof se e mae ou filha
+
+Turno - SelecionarTodos (DataSet)
+        SelectByCod (obj)
+

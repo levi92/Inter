@@ -39,7 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Interdisciplinar">
-      <HintPath>D:\Debug\Interdisciplinar.dll</HintPath>
+      <HintPath>..\AppCode\obj\Debug\Interdisciplinar.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
@@ -371,6 +371,9 @@
       <Project>{14b88d59-a837-4f4e-8c0b-e62529305e59}</Project>
       <Name>AppCode</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
