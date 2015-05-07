@@ -111,24 +111,32 @@ using System.Data;
         //Método para confirmar a inserção de um novo critério
         protected void btnCriarNovoCriterio_Click(object sender, EventArgs e)
         {
-            
-            Criterios_Gerais cri = new Criterios_Gerais();
-            cri.Cge_codigo = 0;
-            cri.Cge_nome = txtNomeNovoCriterio.Text;
-            cri.Cge_descricao = txtDescricaoNovoCriterio.Text;
-            
-            if (Criterios_Gerais_DB.Insert(cri) == 0)
+            txtNomeNovoCriterio.Style.Clear();
+            txtDescricaoNovoCriterio.Style.Clear();
+
+            if (!String.IsNullOrEmpty(txtNomeNovoCriterio.Text) && !String.IsNullOrEmpty(txtDescricaoNovoCriterio.Text))
             {
 
-                lblMsg.Text = "Critério inserido com sucesso!";
-                gdvCriteriosAtivos.EditIndex = -1;
-                CarregarGridAtivos();
-                UpdatePanelAtivados.Update();
-        
-            }
-            else
-            {
-                lblMsg.Text = "Erro ao inserir critério!";
+                Criterios_Gerais cri = new Criterios_Gerais();
+                cri.Cge_codigo = 0;
+                cri.Cge_nome = txtNomeNovoCriterio.Text;
+                cri.Cge_descricao = txtDescricaoNovoCriterio.Text;
+               
+
+                if (Criterios_Gerais_DB.Insert(cri) == 0)
+                {
+                    lblMsg.Text = "<span class='glyphicon glyphicon-ok-circle'></span> &nbsp Cadastrado com sucesso.";
+                    lblMsg.Style.Add("color", "green");
+                    gdvCriteriosAtivos.EditIndex = -1;
+                    CarregarGridAtivos();
+                    UpdatePanelAtivados.Update();
+
+
+                }
+                else
+                {
+                    lblMsg.Text = "Erro ao inserir critério!";
+                }
             }
         }
 
@@ -167,6 +175,17 @@ using System.Data;
                 {
                     lblMsg2.Text = "Erro ao ativar critério!";
                 }
+        }
+
+
+        protected void btnCancelarNovoCriterio_Click(object sender, EventArgs e)
+        {
+
+            txtNomeNovoCriterio.Text = "";
+            txtDescricaoNovoCriterio.Text = "";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalCriacaoCriterio", "FechaModalCriacaoCriterio();", true);
+            lblMsg.Text = "";
+            
         }
 
        

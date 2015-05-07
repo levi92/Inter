@@ -18,7 +18,7 @@
                         <table class="table" style="border-top: hidden; width:80%; margin:auto;">
                             <tr style="border-bottom: hidden;" >
                                 
-                                <td align="center" class="icon icon-address-book" style="font-size:100px;display:table-cell"></td>
+                                <td align="center" class="glyphicon glyphicon-globe" style="font-size:100px;display:table-cell"></td>
                                 <td align="center" class="glyphicon glyphicon-education" style="font-size:100px;display:table-cell;"></td>
                             </tr>
                             <tr><td align="center"><asp:Button CssClass="btn btn-default" runat="server"  Text="Entrar como Admin" OnClick="Btn_Admin"></asp:Button></td>

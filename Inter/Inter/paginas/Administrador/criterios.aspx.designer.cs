@@ -12,15 +12,6 @@
 public partial class paginas_Admin_criterios {
     
     /// <summary>
-    /// lblMsg control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMsg;
-    
-    /// <summary>
     /// ScriptManager1 control.
     /// </summary>
     /// <remarks>
@@ -75,15 +66,6 @@ public partial class paginas_Admin_criterios {
     protected global::System.Web.UI.WebControls.GridView gdvCriteriosDesativados;
     
     /// <summary>
-    /// lblMsg2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMsg2;
-    
-    /// <summary>
     /// lblQtdRegistro2 control.
     /// </summary>
     /// <remarks>
@@ -91,6 +73,15 @@ public partial class paginas_Admin_criterios {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblQtdRegistro2;
+    
+    /// <summary>
+    /// lblMsg2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsg2;
     
     /// <summary>
     /// UpdatePanelModalNovoCriterio control.
@@ -156,6 +147,15 @@ public partial class paginas_Admin_criterios {
     protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescricaoNovoCriterio;
     
     /// <summary>
+    /// lblMsg control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsg;
+    
+    /// <summary>
     /// vsNovoCriterio control.
     /// </summary>
     /// <remarks>
@@ -163,6 +163,15 @@ public partial class paginas_Admin_criterios {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.ValidationSummary vsNovoCriterio;
+    
+    /// <summary>
+    /// btnCancelarNovoCriterio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnCancelarNovoCriterio;
     
     /// <summary>
     /// btnCriarNovoCriterio control.

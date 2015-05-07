@@ -20,7 +20,7 @@
                  <ul>      
                      <%-- Eventos do onclick estão no arquivo javascript interUser --%>          
                     <li><a id="icone10" onclick="Mostra('p15');" href="#"><span class="glyphicon glyphicon-question-sign"></span>&nbsp Ajuda</a></li>
-                    <li><a id="icone11" data-toggle="modal" data-target="#myModalDesejaSair" href="#" title="Sair do sistema e voltar para o login"><span class="glyphicon glyphicon-off"></span>&nbsp Sair</a></li>                   
+                    <li><a id="icone11" data-toggle="modal" data-target="#myModalDesejaSair" href="#" title="Sair do sistema e voltar para o login"><span class="icon icon-exit"></span>&nbsp Sair</a></li>                   
                                         
                 </ul>
             </div> 
