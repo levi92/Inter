@@ -20,7 +20,7 @@
                     <h4 class="modal-title" id="myModalLabel1" style="float: left;">Mudança de nota no Projeto</h4>
                     
                  
-                    <button type="button" runat="server" id="butMostraMenu" onclick="mostraDiv('subMenu')" style="  float: right;border: none;background: none;margin-top: -2px;" ><span class="mdi mdi-dots-vertical hoverAll" style="font-size: 25px;"></span></button>
+                    <button type="button" runat="server" id="butMostraMenu" name="subMenu" onclick="mostraDiv1('subMenu')" style="  float: right;border: none;background: none;margin-top: -2px;" ><span class="mdi mdi-dots-vertical hoverAll" style="font-size: 25px;"></span></button>
                 
                     <h4 style="float:right;margin-top: 0;padding-right: 10px;"> Claudemir</h4>
 
@@ -30,10 +30,10 @@
 
                 </div>
                 <div class="subMenu" id="subMenu">
-                    <div>Finalizar Favorável</div>
-                    <div>Finalizar Desfavorável</div>
-                    <div>PI Finalizado</div>
-                    <div onclick="fechaDiv('subMenu')">Fechar</div>
+                    <div onclick="butAcao()">Finalizar Favorável</div>
+                    <div onclick="butAcao()">Finalizar Desfavorável</div>
+                    <div onclick="butAcao()">PI Finalizado</div>
+                    <div onclick="fechaDiv1('subMenu')">Fechar</div>
                 </div>
                 <div class="modal-body" style="background-color: whitesmoke;">
                     <table style="width: 95%;">  
