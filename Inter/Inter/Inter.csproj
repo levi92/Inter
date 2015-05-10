@@ -71,7 +71,6 @@
     <Content Include="App_Themes\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="App_Themes\fonts\icomoon.svg" />
     <Content Include="App_Themes\images\Calendar-Add-128x128.png" />
-    <Content Include="Banco\Fatec\Interdisciplinar.dll" />
     <Content Include="Banco\Fatec\Interdisciplinar.pdb" />
     <Content Include="Banco\Fatec\MySql.Data.dll" />
     <Content Include="Banco\Fatec\Retornos Metodos Obj.txt" />
