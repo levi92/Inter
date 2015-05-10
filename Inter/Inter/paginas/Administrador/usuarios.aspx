@@ -26,30 +26,7 @@
                             <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="admin">
 
-                                <table class="table">
-                                    <tr>
-                                        <td>Nome</td>
-                                        <td>Login</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fulano da silva</td>  
-                                        <td>fulanosilva@gmail.com</td>                                             
-                                        <td><a href="#" title="Editar Usuário"><span class="glyphicon glyphicon-pencil"></span></a> &nbsp &nbsp <a href="#" title="Desativar Usuário"><span class="glyphicon glyphicon-remove" style="color: #960d10"></span></a></td>
-                                    </tr>
-                                    <tr>
-                                       <td>Fulano da silva</td>
-                                       <td>fulanosilva@gmail.com</td>  
-                                       <td><a href="#" title="Editar Usuário"><span class="glyphicon glyphicon-pencil"></span></a> &nbsp &nbsp <a href="#" title="Desativar Usuário"><span class="glyphicon glyphicon-remove" style="color: #960d10"></span></a></td>
-                                    </tr>
-                                    <tr>
-                                       <td>Fulano da silva</td>
-                                       <td>fulanosilva@gmail.com</td>  
-                                       <td><a href="#" title="Editar Usuário"><span class="glyphicon glyphicon-pencil"></span></a> &nbsp &nbsp <a href="#" title="Desativar Usuário"><span class="glyphicon glyphicon-remove" style="color: #960d10"></span></a></td>
-                                    </tr>
-
-
-                                </table>
+                          
                                 
                             </div>
                         

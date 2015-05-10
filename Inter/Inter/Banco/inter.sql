@@ -1,5 +1,4 @@
-﻿-- MySQL Administrator dump 1.4
---
+
 -- ------------------------------------------------------
 -- Server version	5.1.35-community
 
@@ -535,6 +534,17 @@ CREATE TABLE `tur_turno` (
   `TUR_NOME` varchar(25) NOT NULL,
   PRIMARY KEY (`TUR_CODIGO`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS per_perfil;
+CREATE TABLE per_perfil (
+-- per_codigo int not null primary key,
+per_matricula varchar(25) not null primary key,
+per_descricao int not null,
+per_login varchar(50),
+per_senha varchar(50));
+
+INSERT INTO per_perfil values ('adm_master', 1, 'adm_master', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
 
 --
 -- Dumping data for table `tur_turno`

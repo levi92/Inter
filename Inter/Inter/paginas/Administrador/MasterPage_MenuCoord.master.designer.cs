@@ -48,15 +48,6 @@ public partial class paginas_Admin_MenuCoord {
     protected global::System.Web.UI.WebControls.HyperLink icone3;
     
     /// <summary>
-    /// icone4 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink icone4;
-    
-    /// <summary>
     /// icone5 control.
     /// </summary>
     /// <remarks>
