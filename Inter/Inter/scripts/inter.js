@@ -10,7 +10,7 @@ $(document).ready(function () {
     //A cada 30 segundos chama a function Atualiza
 
     $("#conteudo").slideUp(500, function () {
-        idDiv = "p1";            
+        idDiv = "p1";
 
         global = idDiv;
         $("#" + idDiv).show();
@@ -51,6 +51,18 @@ $('body').click(function (e) {
     }
 });
 
+function toggleDiv(idDiv) {
+    if (document.getElementById(idDiv).style.display == "none") {
+        subMenu = 1;
+        document.getElementById(idDiv).style.display = "block";
+    }
+    else
+    {
+        subMenu = 1;
+        document.getElementById(idDiv).style.display = "none";
+    }
+}
+
 
 
 
@@ -71,7 +83,7 @@ function mostraInfo(idDiv) {
         idInfo = idDiv;
     }
 
-    
+
 
 }
 
@@ -224,7 +236,7 @@ $(document).ready(function () {
     //    iconeClicado = "p15";
     //});
 
-   
+
 
     $('.restaurar').click(function () {
         $(function () {
@@ -255,5 +267,3 @@ $(document).ready(function () {
 
 
 });
-
-
