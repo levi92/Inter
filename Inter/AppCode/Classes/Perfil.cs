@@ -12,25 +12,25 @@ using System.Threading.Tasks;
         private string per_login;
         private string per_senha;
 
-        public string Per_matricula
+        public string Matricula
         {
             get { return per_matricula; }
             set { per_matricula = value; }
         }
 
-        public int Per_descricao
+        public int Descricao
         {
             get { return per_descricao; }
             set { per_descricao = value; }
         }
      
-        public string Per_login
+        public string Login
         {
             get { return per_login; }
             set { per_login = value; }
         }   
 
-        public string Per_senha
+        public string Senha
         {
             get { return per_senha; }
             set { per_senha = value; }

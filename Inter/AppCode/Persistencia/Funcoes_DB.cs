@@ -21,8 +21,8 @@ public class Funcoes_DB
         IDataReader objDataReader;
         //string sql = "SELECT P.PES_EMAIL, PR.PRO_ADMINISTRADOR FROM PES_PESSOAS P, PRO_PROFESSOR PR WHERE P.PES_EMAIL=?LOGIN AND PR.PRO_SENHA=sha1(?SENHA)";
         //string sql = "SELECT P.PES_EMAIL, PR.ADM_CODIGO FROM PES_PESSOAS P, PRO_PROFESSOR PR WHERE P.PES_EMAIL=?LOGIN AND PR.PRO_SENHA=sha1(?SENHA)";
-//        string sql = "select P.pes_email, A.adm_codigo, Pro.PRO_MATRICULA from pes_pessoas P left join pro_professor Pro using(pes_codigo) left join adm_administrador A using(pes_codigo)" +
-//" left join alu_aluno AL using(pes_codigo) where (AL.ALU_MATRICULA is null) AND P.PES_EMAIL=?LOGIN AND Pro.PRO_SENHA=sha1(?SENHA) OR A.ADM_SENHA=sha1(?SENHA) ";
+        //        string sql = "select P.pes_email, A.adm_codigo, Pro.PRO_MATRICULA from pes_pessoas P left join pro_professor Pro using(pes_codigo) left join adm_administrador A using(pes_codigo)" +
+        //" left join alu_aluno AL using(pes_codigo) where (AL.ALU_MATRICULA is null) AND P.PES_EMAIL=?LOGIN AND Pro.PRO_SENHA=sha1(?SENHA) OR A.ADM_SENHA=sha1(?SENHA) ";
         string sql = "Select p.per_login, p.per_senha, per_descricao from per_perfil p where p.per_login = ?login and p.per_senha=sha1(?senha);";
 
         objconexao = Mapped.Connection();
@@ -36,15 +36,15 @@ public class Funcoes_DB
         while (objDataReader.Read())
         {
             verificaLogin = Convert.ToInt32(objDataReader["per_descricao"]).ToString(); //armazena um valor para ver se a consulta não encontrou nada (ficaria vazio assim " ")
-            if (Convert.ToInt32(objDataReader["per_descricao"]) == 1) //verifica se o campo descricao da tabela perfil do usuário é igual a 1
+            if (Convert.ToInt32(objDataReader["per_descricao"]) == 1) //verifica se o campo descricao da tabela perfil do usuário é igual a 1 (master)
             {
                 descricao = 1;
             }
-            else if (Convert.ToInt32(objDataReader["per_descricao"]) == 2) //veriica se o campo descricao da tabela perfil do usuário é igual a 2
+            else if (Convert.ToInt32(objDataReader["per_descricao"]) == 2) //veriica se o campo descricao da tabela perfil do usuário é igual a 2 (coordenador)
             {
                 descricao = 2;
             }
-           
+
             //if (objDataReader["pro_matricula"] == DBNull.Value)
             //{
             //    promatricula = 0;  
@@ -54,8 +54,6 @@ public class Funcoes_DB
             //    promatricula = Convert.ToInt32(objDataReader["pro_matricula"]);
             //}
 
-                
-            
         }
 
         if (verificaLogin == "")
@@ -88,7 +86,7 @@ public class Funcoes_DB
         objCommand.Dispose();
         objDataReader.Dispose();
 
-        return verificacao;
+        return verificacao; //retorna o valor do resultado da verificação feita acima
     }
 
     public static DataSet SelectDisciplina(int codProf)
@@ -110,7 +108,7 @@ public class Funcoes_DB
 
 
 
-    
+
 
 
 

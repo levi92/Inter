@@ -7,73 +7,114 @@
             $('#icone4').addClass('corIcone');
         });
     </script>
-    
 
-<div id="p1" class="first">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Usuários</h3>
 
+    <div id="p1" class="first">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Usuários</h3>
+
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#admin" role="tab" data-toggle="tab">Administradores</a></li>
+                    <li><a href="#professor" role="tab" data-toggle="tab">Professores</a></li>
+
+                </ul>
+
+                <!-- Conteudo Aba Admin  !-->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="admin">
+                     
+                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                        <asp:UpdatePanel ID="UpdatePanelAdmin" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                   <asp:Label ID="lblMsgAdmin" Text="" runat="server"></asp:Label>
+                                <asp:GridView ID="gdvAdmin" runat="server" CssClass="gridView" AllowPaging="true" DataKeyNames="per_matricula" PageSize="10"
+                                    AutoGenerateColumns="false"
+                                    OnRowUpdating="gdvAdmin_RowUpdating">
+                                   
+                                    <AlternatingRowStyle CssClass="alt" />
+
+
+                                    <Columns>
+                                        <%--Configurar colunas do Grid --%>
+
+                                          <asp:TemplateField HeaderText="Nome">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblMatriculaAdmin" Text='<%#Eval ("per_matricula") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                                               
+                                        <asp:TemplateField HeaderText="Nome">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblNomeAdmin" runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lkbDesfAdm" runat="server" CssClass="mdi-account-remove" Title="Desfazer Admin" CommandName="Update"></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+
+
+                                </asp:GridView>
+                                <asp:Label ID="lblQtdRegistroAdm" runat="server"></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </div>
-                    <div class="panel-body">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="active"><a href="#admin" role="tab" data-toggle="tab">Administradores</a></li>
-                            <li><a href="#professor" role="tab" data-toggle="tab">Professores</a></li>
 
-                        </ul>
+                    <!-- Fim Conteudo Aba Admin !-->
 
-                            <!-- Conteudo Aba Admin  !-->
-                            <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade in active" id="admin">
-
-                          
-                                
-                            </div>
-                        
-                        <!-- Fim Conteudo Aba Admin !-->
-                        
                     <!-- Conteudo Aba Professores  !-->
 
-                            <div role="tabpanel" class="tab-pane fade" id="professor">
+                    <div role="tabpanel" class="tab-pane fade" id="professor">
+                       
+                       
+                        <asp:UpdatePanel ID="UpdatePanelProf" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                 <asp:Label ID="lblMsgProf" Text="" runat="server"></asp:Label>
+                                <asp:GridView ID="gdvProf" runat="server" CellPadding="4" GridLines="None" DataKeyNames="pro_matricula" CssClass="gridView" AllowPaging="true" PageSize="10"
+                                    OnRowUpdating="gdvProf_RowUpdating"
+                                    OnPageIndexChanging="gdvProf_PageIndexChanging"
+                                    AutoGenerateColumns="false">
 
-                                <table class="table">
-                                    <tr>
-                                        <td>Nome</td>
-                                        <td>Login</td>
-                                        <td>Admin?</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ciclano da Silva</td>  
-                                        <td>ciclanodasilva@gmail.com</td>   
-                                        <td>Não</td>                                          
-                                        <td><a href="#" title="Editar Usuário"><span class="glyphicon glyphicon-pencil"></span></a> &nbsp &nbsp <a href="#" title="Desativar Usuário"><span class="glyphicon glyphicon-remove" style="color: #960d10"></span></a></td>
-                                    </tr>
-                                    <tr>
-                                       <td>Ciclano da Silva</td>
-                                       <td>ciclanodasilva@gmail.com</td> 
-                                       <td>Não</td>
-                                       <td><a href="#" title="Editar Usuário"><span class="glyphicon glyphicon-pencil"></span></a> &nbsp &nbsp <a href="#" title="Desativar Usuário"><span class="glyphicon glyphicon-remove" style="color: #960d10"></span></a></td>
-                                    </tr>
-                                    <tr>
-                                       <td>Silvana Correventofffff</td>
-                                       <td>ciclanodasilva@gmail.com</td> 
-                                       <td>Sim</td>   
-                                       <td><a href="#" title="Editar Usuário"><span class="glyphicon glyphicon-pencil"></span></a> &nbsp &nbsp <a href="#" title="Desativar Usuário"><span class="glyphicon glyphicon-remove" style="color: #960d10"></span></a></td>
-                                    </tr>
+                                    <AlternatingRowStyle CssClass="alt" />
 
 
-                                </table>
-                                
-                                
+                                    <Columns>
+                                        <%-- Configurar colunas do Grid --%>
 
-                            </div>
-                                </div>
-                        <!-- Fim Conteudo Aba Professores !-->
-                        </div>
-                        
+
+                                        <asp:BoundField DataField="pro_matricula" HeaderText="Matrícula" />
+                                        <asp:BoundField DataField="pes_nome" HeaderText="Nome" />
+                                        
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                 <asp:LinkButton ID="lkbDefAdm" runat="server" CssClass="mdi-account-star" title="Transformar em Admin" CommandName="Update"></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                    </Columns>
+
+                                </asp:GridView>
+
+                                <asp:Label ID="lblQtdRegistroProf" runat="server"></asp:Label>
+                            </ContentTemplate>
+
+                        </asp:UpdatePanel>
+
+                    </div>
                 </div>
-                </div>
-            
+                <!-- Fim Conteudo Aba Professores !-->
+
+
+            </div>
+
+        </div>
+    </div>
+
 </asp:Content>
 
