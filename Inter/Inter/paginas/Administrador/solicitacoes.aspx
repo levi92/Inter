@@ -81,7 +81,7 @@
                 </div>
                 <!--Início do Corpo-->
                 <div class="modal-body" style="background-color: whitesmoke; padding-top: 100px;">
-                    <select id="dropDownListTipoTicket" runat="server" placeholder="Tipo" style="border-top: none; border-left: none; border-right: none; border-bottom-color: #2196f3; border-bottom-width: 2px; height: 30px; background-color: whitesmoke;">
+                    <select id="dropDownListTipoTicket" runat="server" style="border-top: none; border-left: none; border-right: none; border-bottom-color: #2196f3; border-bottom-width: 2px; height: 30px; background-color: whitesmoke;">
                         <option disabled="disabled" selected="selected" value="Tipo"></option>
                         <option value="Alteração de nota" style="background-color: whitesmoke"></option>
                         <option value="Problema com cadastro" style="background-color: whitesmoke"></option>

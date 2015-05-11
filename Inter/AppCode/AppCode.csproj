@@ -56,11 +56,13 @@
     <Compile Include="Classes\Grupo_Aluno.cs" />
     <Compile Include="Classes\Historico_Disciplina.cs" />
     <Compile Include="Classes\Media_Disciplina.cs" />
+    <Compile Include="Classes\Msg.cs" />
     <Compile Include="Classes\Pessoas.cs" />
     <Compile Include="Classes\Professor.cs" />
     <Compile Include="Classes\Projeto_Inter.cs" />
     <Compile Include="Classes\Requerimento.cs" />
     <Compile Include="Classes\Semestre_Ano.cs" />
+    <Compile Include="Classes\Ticket.cs" />
     <Compile Include="Classes\Turma.cs" />
     <Compile Include="Classes\Turno.cs" />
     <Compile Include="Comuns\Funcoes.cs" />
