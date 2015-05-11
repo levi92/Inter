@@ -1,7 +1,6 @@
 ﻿//Variavel Global - Usada para acessar todas variaveis
 var global = "";
 
-var contador = -1;
 var controlarMostra = false;
 
 //FUNCTION INICIA APÓS CAREGAR A PÁGINA
@@ -36,7 +35,7 @@ function Mostra(idDiv) {
     });
 
 }
-
+//SEM O EFEITO SLIDE
 function etapa2() {
     controlarMostra = true;
     $("#" + global).hide();
@@ -45,12 +44,12 @@ function etapa2() {
     $("#p10").show();
     $("#conteudo").slideDown(500);
 }
-
+//SEM O EFEITO SLIDE
 function etapa3() {
     controlarMostra = true;
     Mostra('p12');
 }
-
+//SEM O EFEITO SLIDE
 function etapa4() {
     controlarMostra = true;
     $("#" + global).hide();
@@ -58,6 +57,21 @@ function etapa4() {
     global = "p13";
     $("#p13").show();
     $("#conteudo").slideDown(500);
+}
+
+//PARA FAZER O EFEITO SLIDE
+function Modaletapa4(idDiv) {
+    controlarMostra = true;
+
+    $("#conteudo").slideUp(500, function () {
+        $("#" + global).hide();
+        $("#c" + global).css("visibility", "hidden");
+        global = idDiv;
+        $("#" + idDiv).show();
+        $("#conteudo").slideDown(500);
+
+    });
+
 }
 
 
@@ -110,7 +124,7 @@ function Dia() {
     NomeMes[10] = "Novembro"
     NomeMes[11] = "Dezembro"
 
-    //Imprime a varivel currentDay na tag dia
+    //IMPRIME A VARIVEL CURRENTDAY NA TAG DIA
     var currentDay = Data + " de " + NomeMes[Mes] + " " + Ano;
     document.getElementById("dia").innerHTML = currentDay;
 }
@@ -137,6 +151,7 @@ $(document).ready(function () {
         showOn: "button",
         buttonImage: "../../App_Themes/images/Calendar-Add-128x128.png",
         buttonImageOnly: true,
+        minDate: 0,
         buttonText: "Abrir Calendário"
 
     });
@@ -150,7 +165,9 @@ $(document).ready(function () {
         contr = false; //PARA SABER SE IRÁ ATUALIZAR OU CRIAR UMA DATA, USADA NO BTN_EDITAR PARA ATUALIZAR O VALOR
 
         $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
-        $("#campoObrigatorio").css('visibility', 'hidden');
+        $("#campoObrigatorio").css('visibility', 'hidden');        
+        $("#textoCampObrig").css('visibility', 'hidden');
+        
         $("#lblDataMsgErro").html("&nbsp &nbsp");
         $("#lblDescDataMsgErro").html("&nbsp &nbsp");
     });
@@ -171,7 +188,11 @@ $(document).ready(function () {
             
             $("#lblDescDataMsgErro").html("&nbsp &nbsp  *");
             $("#lblDataMsgErro").html("&nbsp &nbsp  *");
-            $("#campoObrigatorio").css('visibility', 'visible');
+            $("#campoObrigatorio").css({'visibility': 'visible', 'color': 'red'});
+            $("#campoObrigatorio").attr('class', 'glyphicon glyphicon-remove-circle');
+            $("#textoCampObrig").html("&nbsp Campo obrigatório.");
+            $("#textoCampObrig").css({ 'visibility': 'visible', 'color': 'red' });
+
             $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
 
         } else
@@ -179,14 +200,22 @@ $(document).ready(function () {
                 
                 $("#lblDescDataMsgErro").html("&nbsp &nbsp *");
                 $("#lblDataMsgErro").html("");
-                $("#campoObrigatorio").css('visibility', 'visible');
+                $("#campoObrigatorio").css({ 'visibility': 'visible', 'color': 'red' });
+                $("#campoObrigatorio").attr('class', 'glyphicon glyphicon-remove-circle');
+                $("#textoCampObrig").html("&nbsp Campo obrigatório.");
+                $("#textoCampObrig").css({ 'visibility': 'visible', 'color': 'red' });
+
                 $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
             } else
                 if (data == "") { //MENSAGEM DE ERRO
                     
                     $("#lblDataMsgErro").html("&nbsp &nbsp *");
                     $("#lblDescDataMsgErro").html("");
-                    $("#campoObrigatorio").css('visibility', 'visible');
+                    $("#campoObrigatorio").css({ 'visibility': 'visible', 'color': 'red' });
+                    $("#campoObrigatorio").attr('class', 'glyphicon glyphicon-remove-circle');
+                    $("#textoCampObrig").html("&nbsp Campo obrigatório.");
+                    $("#textoCampObrig").css({ 'visibility': 'visible', 'color': 'red' });
+
                     $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
                 } else { //SE ESTIVER TUDO CERTO 
                     
@@ -240,6 +269,7 @@ $(document).ready(function () {
                             $("#lblDataMsgErro").html("&nbsp &nbsp");
                             $("#lblDescDataMsgErro").html("");
                             $("#campoObrigatorio").css('visibility', 'hidden');
+                            $("#textoCampObrig").css('visibility', 'hidden');
 
                             $("#txtData").val("");
                             indiceId = $(this).attr('id').split('-'); //PEGA O ID DO BTN_EDITAR E CORTA ONDE ACHAR O "-" 
@@ -281,7 +311,11 @@ $(document).ready(function () {
                     $("#lblDataMsgErro").html("");
                     $("#txtDescricaoData").val("");
                     $("#txtData").val("");
-                    $("#campoObrigatorio").css('visibility', 'hidden');
+                    $("#campoObrigatorio").css({ 'visibility': 'visible', 'color': 'green' });                  
+                    $("#campoObrigatorio").attr('class', 'glyphicon glyphicon-ok-circle');
+                    $("#textoCampObrig").html("&nbsp Cadastrado com sucesso.");
+                    $("#textoCampObrig").css({ 'visibility': 'visible', 'color': 'green' });
+
                 }
 
     });
@@ -319,44 +353,14 @@ $(document).ready(function () {
     });
 
 
-    $("#ContinuarEtapa4").click(function () {
-        var msgErro = false;
-        txtPostura = $('#txtP').val();
-        txtVestimenta = $('#txtV').val();
-        txtfala = $('#txtF').val();
-        txtConhecimento = $('#txtC').val();
+    funcaoImpedirValor = function (id) {        
+        var valor = document.getElementById(id).value;
 
-        if ($.trim(txtPostura) == '' || $.trim(txtVestimenta) == '' || $.trim(txtfala) == '' || $.trim(txtConhecimento) == '') {
-            $(function () {
-                $("#boxPesoBranco").dialog({
-                    width: 400,
-                    height: 200,
-                    modal: true,
-                    resizable: false,
-                    draggable: false,
-                    buttons: {
-                        "Sim": function () {
-                            Mostra('p13'); //criar Grupo
-                            $(this).dialog("close");
-
-                        },
-                        "Não": function () {
-                            $(this).dialog("close");
-                        }
-                    }
-
-
-                });
-            });
-        } else {
-            Mostra('p13'); //criar Grupo
+        if (valor <= 0 || valor > 10) {                   
+            $("#"+id).val("");
         }
-    });
 
-
-
-
-
+    }
 
     ////sortable mover com duplo clique
     //$("ul#sortable3 li").dblclick(function () {

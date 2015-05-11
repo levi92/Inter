@@ -10,7 +10,7 @@ $(document).ready(function () {
     //A cada 30 segundos chama a function Atualiza
 
     $("#conteudo").slideUp(500, function () {
-        idDiv = "p1";            
+        idDiv = "p1";
 
         global = idDiv;
         $("#" + idDiv).show();
@@ -19,6 +19,74 @@ $(document).ready(function () {
 
     });
 });
+
+//Function para exibir o subMenu ao clicar no botão
+function mostraDiv(idDiv) {
+    document.getElementById(idDiv).style.display = "block";
+}
+
+function fechaDiv(idDiv) {
+    document.getElementById(idDiv).style.display = "none";
+}
+
+var subMenu = 0;
+function mostraDiv1(idDiv) {
+    subMenu = 1;
+    document.getElementById(idDiv).style.display = "block";
+}
+
+function fechaDiv1(idDiv) {
+    document.getElementById(idDiv).style.display = "none";
+}
+
+function butAcao() {
+    subMenu = 1;
+}
+
+$('body').click(function (e) {
+    if (subMenu == 1) {
+        subMenu = 0;
+    } else {
+        document.getElementById("subMenu").style.display = "none";
+    }
+});
+
+function toggleDiv(idDiv) {
+    if (document.getElementById(idDiv).style.display == "none") {
+        subMenu = 1;
+        document.getElementById(idDiv).style.display = "block";
+    }
+    else
+    {
+        subMenu = 1;
+        document.getElementById(idDiv).style.display = "none";
+    }
+}
+
+
+
+
+
+//Function que exibe o conteudo das Div's conforme o parametro utilizado nela
+var idInfo = 0;
+function mostraInfo(idDiv) {
+
+    if (idInfo != 0) {
+        $("#info" + idInfo).hide("slow");
+    }
+
+    if (idDiv == idInfo) {
+        $("#info" + idInfo).hide("slow");
+        idInfo = 0;
+    } else {
+        $("#info" + idDiv).show("slow");
+        idInfo = idDiv;
+    }
+
+
+
+}
+
 
 //Function que exibe o conteudo das Div's conforme o parametro utilizado nela
 function Mostra(idDiv) {
@@ -168,7 +236,7 @@ $(document).ready(function () {
     //    iconeClicado = "p15";
     //});
 
-   
+
 
     $('.restaurar').click(function () {
         $(function () {
@@ -199,5 +267,3 @@ $(document).ready(function () {
 
 
 });
-
-

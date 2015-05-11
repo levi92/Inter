@@ -10,6 +10,7 @@
 
     <meta charset="utf-8" />
 
+    <link href="../../App_Themes/css/materialdesignicons.min.css" rel="stylesheet" />
     <link href="../../App_Themes/css/bootstrap.css" rel="stylesheet" />
     <link href="../../App_Themes/css/bootstrap-theme.css" rel="stylesheet" />
     <link href="../../App_Themes/css/jquery-ui.css" rel="stylesheet" />
@@ -42,7 +43,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" class="form-control form-horizontal" role="form">
 
 
 

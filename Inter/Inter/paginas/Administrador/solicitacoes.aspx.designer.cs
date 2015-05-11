@@ -10,4 +10,31 @@
 
 
 public partial class paginas_Admin_solicitacoes {
+    
+    /// <summary>
+    /// txtResponder control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtResponder;
+    
+    /// <summary>
+    /// dropDownListTipoTicket control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlSelect dropDownListTipoTicket;
+    
+    /// <summary>
+    /// newMsgSubject control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlInputText newMsgSubject;
 }
