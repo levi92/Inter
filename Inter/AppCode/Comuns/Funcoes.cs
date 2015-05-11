@@ -101,5 +101,27 @@ namespace Inter.Funcoes
 
         //}
 
+        //public static string AESCodifica(string texto)
+
+        //{
+        //    //tratar a key / definir a key
+        //    String FraseSeguranca = "marry";
+        //    byte[] VetorTexto = Encoding.Unicode.GetBytes(texto);
+        //    //vetor que recebe a variavel do metodo para a conversão futura...
+
+        //    //AES... Atraves do using chamar a classe AES
+        //    using (Aes encrypt = Aes.Create())
+        //    {
+        //        Rfc2898DeriveBytes rdb = new Rfc2898DeriveBytes
+        //        (FraseSeguranca, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65,
+        //        0x64, 0x65, 0x76 });
+
+        //        encrypt.Key = rdb.GetBytes(32);
+        //        //alocar os blocs com as informacoes de chave encrypt.Key
+        //        encrypt.IV = rdb.GetBytes(16);
+
+
+        //    }
+        //}
     }
 }

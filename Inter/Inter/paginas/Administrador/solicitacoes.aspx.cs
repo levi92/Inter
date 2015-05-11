@@ -22,5 +22,7 @@ using Inter.Funcoes;
             // CHAMAR A MASTER PAGE CORRESPONDENTE MASTER ou COORD   
             this.Page.MasterPageFile = Funcoes.chamarMasterPage_Admin(Session["coord"].ToString());
         }
+
+
     }
 

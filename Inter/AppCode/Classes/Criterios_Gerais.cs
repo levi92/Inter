@@ -9,7 +9,9 @@ public class Criterios_Gerais{
     private int cge_codigo;
     private string cge_descricao;
     private string cge_nome;
+    private bool cge_ativo;
 
+   
     public string Cge_nome{
         get { return cge_nome; }
         set { cge_nome = value; }
@@ -25,5 +27,10 @@ public class Criterios_Gerais{
         set { cge_codigo = value; }
     }
 
+    public bool Cge_ativo
+    {
+        get { return cge_ativo; }
+        set { cge_ativo = value; }
+    }
 
 }

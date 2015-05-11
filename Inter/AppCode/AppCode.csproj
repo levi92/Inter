@@ -30,13 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interdisciplinar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Inter\bin\Interdisciplinar.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data, Version=5.1.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>obj\Debug\ddl mysql 6 6 5\MySql.Data.dll</HintPath>
+      <HintPath>bin\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -56,11 +52,14 @@
     <Compile Include="Classes\Grupo_Aluno.cs" />
     <Compile Include="Classes\Historico_Disciplina.cs" />
     <Compile Include="Classes\Media_Disciplina.cs" />
+    <Compile Include="Classes\Msg.cs" />
     <Compile Include="Classes\Perfil.cs" />
     <Compile Include="Classes\Pessoas.cs" />
     <Compile Include="Classes\Projeto_Inter.cs" />
     <Compile Include="Classes\Requerimento.cs" />
     <Compile Include="Classes\Semestre_Ano.cs" />
+    <Compile Include="Classes\Ticket.cs" />
+
     <Compile Include="Comuns\Funcoes.cs" />
     <Compile Include="Mapped.cs" />
     <Compile Include="Persistencia\Criterios_Gerais_DB.cs" />

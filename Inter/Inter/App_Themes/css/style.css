@@ -221,7 +221,7 @@ option {
 }
 
 select#listaGrupos {
-  width: 60%;
+    width: 60%;
 }
 
 #listaGrupos option {
@@ -298,6 +298,13 @@ div#PanelCriterios {
     font-weight: bolder;
     padding: 7px;
     margin-left: 5px;
+}
+
+/*Margem para o conteúdo da modal*/
+
+container-modal {
+    padding: 15px;
+    margin: 15px;
 }
 
 /*Cadastrar Data*/
@@ -538,417 +545,413 @@ tabelaHome3 {
 }
 
 img.ui-datepicker-trigger {
-  width: 40px;
-  margin-left: 7px;
-  cursor: pointer;
+    width: 40px;
+    margin-left: 7px;
+    cursor: pointer;
 }
 
 
 /*Icones novos do app Icomoon INICIO----*/
 
 @font-face {
-	font-family: 'icomoon';
-	src:url('../fonts/icomoon.eot?z0ff6p');
-	src:url('../fonts/icomoon.eot?#iefixz0ff6p') format('embedded-opentype'),
-		url('../fonts/icomoon.woff?z0ff6p') format('woff'),
-		url('../fonts/icomoon.ttf?z0ff6p') format('truetype'),
-		url('../fonts/icomoon.svg?z0ff6p#icomoon') format('svg');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'icomoon';
+    src: url('../fonts/icomoon.eot?z0ff6p');
+    src: url('../fonts/icomoon.eot?#iefixz0ff6p') format('embedded-opentype'), url('../fonts/icomoon.woff?z0ff6p') format('woff'), url('../fonts/icomoon.ttf?z0ff6p') format('truetype'), url('../fonts/icomoon.svg?z0ff6p#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 [class^="icon-"], [class*=" icon-"] {
-	font-family: 'icomoon';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .icon-book:before {
-	content: "\e91f";
+    content: "\e91f";
 }
 
 .icon-books:before {
-	content: "\e920";
+    content: "\e920";
 }
 
 .icon-library:before {
-	content: "\e921";
+    content: "\e921";
 }
 
 .icon-file-text:before {
-	content: "\e922";
+    content: "\e922";
 }
 
 .icon-file-empty:before {
-	content: "\e924";
+    content: "\e924";
 }
 
 .icon-folder:before {
-	content: "\e92f";
+    content: "\e92f";
 }
 
 .icon-folder-open:before {
-	content: "\e930";
+    content: "\e930";
 }
 
 .icon-folder-plus:before {
-	content: "\e931";
+    content: "\e931";
 }
 
 .icon-folder-minus:before {
-	content: "\e932";
+    content: "\e932";
 }
 
 .icon-folder-download:before {
-	content: "\e933";
+    content: "\e933";
 }
 
 .icon-folder-upload:before {
-	content: "\e934";
+    content: "\e934";
 }
 
 .icon-address-book:before {
-	content: "\e944";
+    content: "\e944";
 }
 
 .icon-envelop:before {
-	content: "\e945";
+    content: "\e945";
 }
 
 .icon-history:before {
-	content: "\e94d";
+    content: "\e94d";
 }
 
 .icon-clock:before {
-	content: "\e94e";
+    content: "\e94e";
 }
 
 .icon-calendar:before {
-	content: "\e953";
+    content: "\e953";
 }
 
 .icon-printer:before {
-	content: "\e954";
+    content: "\e954";
 }
 
 .icon-box-add:before {
-	content: "\e95e";
+    content: "\e95e";
 }
 
 .icon-box-remove:before {
-	content: "\e95f";
+    content: "\e95f";
 }
 
 .icon-download:before {
-	content: "\e960";
+    content: "\e960";
 }
 
 .icon-upload:before {
-	content: "\e961";
+    content: "\e961";
 }
 
 .icon-floppy-disk:before {
-	content: "\e962";
+    content: "\e962";
 }
 
 .icon-undo:before {
-	content: "\e965";
+    content: "\e965";
 }
 
 .icon-redo:before {
-	content: "\e966";
+    content: "\e966";
 }
 
 .icon-undo2:before {
-	content: "\e967";
+    content: "\e967";
 }
 
 .icon-redo2:before {
-	content: "\e968";
+    content: "\e968";
 }
 
 .icon-forward:before {
-	content: "\e969";
+    content: "\e969";
 }
 
 .icon-reply:before {
-	content: "\e96a";
+    content: "\e96a";
 }
 
 .icon-bubble:before {
-	content: "\e96b";
+    content: "\e96b";
 }
 
 .icon-bubbles:before {
-	content: "\e96c";
+    content: "\e96c";
 }
 
 .icon-bubbles2:before {
-	content: "\e96d";
+    content: "\e96d";
 }
 
 .icon-bubble2:before {
-	content: "\e96e";
+    content: "\e96e";
 }
 
 .icon-bubbles3:before {
-	content: "\e96f";
+    content: "\e96f";
 }
 
 .icon-bubbles4:before {
-	content: "\e970";
+    content: "\e970";
 }
 
 .icon-user:before {
-	content: "\e971";
+    content: "\e971";
 }
 
 .icon-users:before {
-	content: "\e972";
+    content: "\e972";
 }
 
 .icon-user-plus:before {
-	content: "\e973";
+    content: "\e973";
 }
 
 .icon-user-minus:before {
-	content: "\e974";
+    content: "\e974";
 }
 
 .icon-user-check:before {
-	content: "\e975";
+    content: "\e975";
 }
 
 .icon-user-tie:before {
-	content: "\e976";
+    content: "\e976";
 }
 
 .icon-search:before {
-	content: "\e986";
+    content: "\e986";
 }
 
 .icon-zoom-in:before {
-	content: "\e987";
+    content: "\e987";
 }
 
 .icon-zoom-out:before {
-	content: "\e988";
+    content: "\e988";
 }
 
 .icon-enlarge:before {
-	content: "\e989";
+    content: "\e989";
 }
 
 .icon-enlarge2:before {
-	content: "\e98b";
+    content: "\e98b";
 }
 
 .icon-shrink2:before {
-	content: "\e98c";
+    content: "\e98c";
 }
 
 .icon-key:before {
-	content: "\e98d";
+    content: "\e98d";
 }
 
 .icon-key2:before {
-	content: "\e98e";
+    content: "\e98e";
 }
 
 .icon-lock:before {
-	content: "\e98f";
+    content: "\e98f";
 }
 
 .icon-unlocked:before {
-	content: "\e990";
+    content: "\e990";
 }
 
 .icon-wrench:before {
-	content: "\e991";
+    content: "\e991";
 }
 
 .icon-cog:before {
-	content: "\e994";
+    content: "\e994";
 }
 
 .icon-cogs:before {
-	content: "\e995";
+    content: "\e995";
 }
 
 .icon-hammer:before {
-	content: "\e996";
+    content: "\e996";
 }
 
 .icon-bug:before {
-	content: "\e999";
+    content: "\e999";
 }
 
 .icon-pie-chart:before {
-	content: "\e99a";
+    content: "\e99a";
 }
 
 .icon-stats-bars:before {
-	content: "\e99c";
+    content: "\e99c";
 }
 
 .icon-fire:before {
-	content: "\e9a9";
+    content: "\e9a9";
 }
 
 .icon-bin:before {
-	content: "\e9ac";
+    content: "\e9ac";
 }
 
 .icon-bin2:before {
-	content: "\e9ad";
+    content: "\e9ad";
 }
 
 .icon-shield:before {
-	content: "\e9b4";
+    content: "\e9b4";
 }
 
 .icon-power:before {
-	content: "\e9b5";
+    content: "\e9b5";
 }
 
 .icon-switch:before {
-	content: "\e9b6";
+    content: "\e9b6";
 }
 
 .icon-clipboard:before {
-	content: "\e9b8";
+    content: "\e9b8";
 }
 
 .icon-upload2:before {
-	content: "\e9c6";
+    content: "\e9c6";
 }
 
 .icon-earth:before {
-	content: "\e9ca";
+    content: "\e9ca";
 }
 
 .icon-attachment:before {
-	content: "\e9cd";
+    content: "\e9cd";
 }
 
 .icon-eye:before {
-	content: "\e9ce";
+    content: "\e9ce";
 }
 
 .icon-info:before {
-	content: "\ea0c";
+    content: "\ea0c";
 }
 
 .icon-cancel-circle:before {
-	content: "\ea0d";
+    content: "\ea0d";
 }
 
 .icon-blocked:before {
-	content: "\ea0e";
+    content: "\ea0e";
 }
 
 .icon-cross:before {
-	content: "\ea0f";
+    content: "\ea0f";
 }
 
 .icon-checkmark:before {
-	content: "\ea10";
+    content: "\ea10";
 }
 
 .icon-checkmark2:before {
-	content: "\ea11";
+    content: "\ea11";
 }
 
 .icon-enter:before {
-	content: "\ea13";
+    content: "\ea13";
 }
 
 .icon-exit:before {
-	content: "\ea14";
+    content: "\ea14";
 }
 
 .icon-backward:before {
-	content: "\ea1a";
+    content: "\ea1a";
 }
 
 .icon-loop:before {
-	content: "\ea2d";
+    content: "\ea2d";
 }
 
 .icon-loop2:before {
-	content: "\ea2e";
+    content: "\ea2e";
 }
 
 .icon-shuffle:before {
-	content: "\ea30";
+    content: "\ea30";
 }
 
 .icon-arrow-right:before {
-	content: "\ea34";
+    content: "\ea34";
 }
 
 .icon-arrow-left:before {
-	content: "\ea38";
+    content: "\ea38";
 }
 
 .icon-tab:before {
-	content: "\ea45";
+    content: "\ea45";
 }
 
 .icon-shift:before {
-	content: "\ea4f";
+    content: "\ea4f";
 }
 
 .icon-checkbox-checked:before {
-	content: "\ea52";
+    content: "\ea52";
 }
 
 .icon-checkbox-unchecked:before {
-	content: "\ea53";
+    content: "\ea53";
 }
 
 .icon-radio-checked:before {
-	content: "\ea54";
+    content: "\ea54";
 }
 
 .icon-radio-checked2:before {
-	content: "\ea55";
+    content: "\ea55";
 }
 
 .icon-paragraph-justify:before {
-	content: "\ea7a";
+    content: "\ea7a";
 }
 
 .icon-share:before {
-	content: "\ea7d";
+    content: "\ea7d";
 }
 
 .icon-embed:before {
-	content: "\ea7f";
+    content: "\ea7f";
 }
 
 .icon-embed2:before {
-	content: "\ea80";
+    content: "\ea80";
 }
 
 .icon-terminal:before {
-	content: "\ea81";
+    content: "\ea81";
 }
 
 .icon-mail:before {
-	content: "\ea83";
+    content: "\ea83";
 }
 
 .icon-mail4:before {
-	content: "\ea86";
+    content: "\ea86";
 }
 
 
@@ -957,88 +960,134 @@ img.ui-datepicker-trigger {
 /* CAIXA DE MSG PARA SOLICITAÇÕES */
 .minimalScrollbar {
     float: left;
-   width: 92%;
-  resize: none;
-  overflow: hidden;
-  border-radius: 10px;
-  padding: 10px;
-  height: 50px;
--webkit-overflow-scrolling:touch;
-  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.16);
-
+    width: 92%;
+    resize: none;
+    overflow: hidden;
+    border-radius: 10px;
+    padding: 10px;
+    height: 50px;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.16);
 }
 
 .hoverAll:hover {
-  color:#960D10;
+    color: #960D10;
+}
+
+.allMsg {
+    width: 90%;
 }
 
 .txtCard {
-  margin-top: 30px;
-  width: 90%;
-  border-radius: 15px;
-  padding: 13px;
-  color: #424242;
-  margin-left: 3px;
-  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.16);
-  background-color: rgb(255, 255, 255);
+    margin-top: 30px;
+    width: 100%;
+    border-radius: 15px;
+    padding: 13px;
+    color: #424242;
+    margin-left: 3px;
+    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.16);
+    background-color: rgb(255, 255, 255);
 }
 
 .insideBox {
     height: 400px;
-    float: left;
     overflow: auto;
     margin-top: 50px;
     padding-right: 10px;
     scrollbar-face-color: #000000;
     scrollbar-shadow-color: #2D2C4D;
-    scrollbar-highlight-color:#7D7E94;
+    scrollbar-highlight-color: #7D7E94;
     scrollbar-3dlight-color: #7D7E94;
     scrollbar-darkshadow-color: #2D2C4D;
     scrollbar-track-color: #7D7E94;
-    scrollbar-arrow-color: #C1C1D1; 
+    scrollbar-arrow-color: #C1C1D1;
 }
+
 .subMenu {
-  margin-top: 15px;
-  position: absolute;
-  margin-right: 12px;
-  z-index: 999;
-  right: 0;
-  height: 168px;
-  width: 175px;
-  background-color: #FFFFFF;
-  display: none;
-  box-shadow: 0px 3px 10px 2px rgba(0, 0, 0, 0.26);
+    margin-top: 15px;
+    position: absolute;
+    margin-right: 12px;
+    z-index: 999;
+    right: 0;
+    height: 160px;
+    width: 175px;
+    background-color: #FFFFFF;
+    display: none;
+    box-shadow: 0px 3px 10px 2px rgba(0, 0, 0, 0.26);
+}
 
+    .subMenu div {
+        width: 100%;
+        padding: 10px;
+        padding-left: 15px;
+        cursor: pointer;
+    }
 
+        .subMenu div:hover {
+            /*background-color:#e0e0e0;*/
+            box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.26);
+        }
+
+    .subMenu span {
+        padding-right: 5px;
+        font-size: 15px;
+    }
+
+.subMenuPrioridade {
+    margin-top: 135px;
+    position: absolute;
+    margin-right: 12px;
+    z-index: 998;
+    right: 0;
+    height: 160px;
+    width: 175px;
+    background-color: #FFFFFF;
+    display: none;
+    box-shadow: 0px 3px 10px 2px rgba(0, 0, 0, 0.26);
 }
-.subMenu div{
-   width: 100%;
-  padding: 10px;
-  padding-left: 15px;
-  cursor:pointer;
-  
-}
-.subMenu div:hover{
-    background-color:#e0e0e0;
-}
-.subMenu span{
-    padding-right: 5px;
-    font-size: 15px;
-}
+
+    .subMenuPrioridade div {
+        width: 100%;
+        padding: 10px;
+        padding-left: 15px;
+        cursor: pointer;
+    }
+
+        .subMenuPrioridade div:hover {
+            /*background-color:#e0e0e0;*/
+            box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.26);
+        }
+
+    .subMenuPrioridade span {
+        padding-right: 5px;
+        font-size: 15px;
+    }
+
 ::-webkit-scrollbar {
     width: 6px;
 }
+
 ::-webkit-scrollbar-track {
     display: none;
     background-color: #ccc;
     border-left: 1px solid #ccc;
-
 }
+
 ::-webkit-scrollbar-thumb {
     background-color: #ccc;
-    border-radius:30px;
+    border-radius: 30px;
 }
-::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(204, 204, 204, 0.62);
-    border-radius:30px;
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(204, 204, 204, 0.62);
+        border-radius: 30px;
+    }
+
+.infoMsg {
+    float: left;
+    margin: 16px;
+    margin-top: 4px;
+    margin-bottom: 0px;
+    color: #515151;
+    display: none;
 }
