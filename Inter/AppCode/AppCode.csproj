@@ -59,7 +59,6 @@
     <Compile Include="Classes\Requerimento.cs" />
     <Compile Include="Classes\Semestre_Ano.cs" />
     <Compile Include="Classes\Ticket.cs" />
-
     <Compile Include="Comuns\Funcoes.cs" />
     <Compile Include="Mapped.cs" />
     <Compile Include="Persistencia\Criterios_Gerais_DB.cs" />
@@ -70,6 +69,7 @@
     <Compile Include="Persistencia\Projeto_Inter_DB.cs" />
     <Compile Include="Persistencia\Requerimento_DB.cs" />
     <Compile Include="Persistencia\Semestre_Ano_DB.cs" />
+    <Compile Include="Persistencia\Ticket_DB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

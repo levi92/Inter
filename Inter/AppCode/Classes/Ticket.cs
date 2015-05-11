@@ -1,29 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-class Ticket
+
+public class Ticket
 {
-    private int id;
-    private string assunto;
-    private int id_professor;
-    private DateTime data;
-    private int estado;
-    private string tipo;
-    private int prioridade;
-    private List<Msg> mensagens;
 
-    public Ticket(int id, string assunto, int id_professor, DateTime data, int estado, string tipo, int prioridade, List<Msg> mensagens)
+    private int tic_id_professor, tic_estado, tic_prioridade, tic_id;
+    private string tic_assunto, tic_tipo;
+    private DateTime tic_data;
+
+
+    public int Tic_id
     {
-        this.id = id;
-        this.assunto = assunto;
-        this.id_professor = id_professor;
-        this.data = data;
-        this.estado = estado;
-        this.tipo = tipo;
-        this.prioridade= prioridade;
-        this.mensagens = mensagens;
+        get { return tic_id; }
+        set { tic_id = value; }
     }
+
+    public string Tic_assunto
+    {
+        get { return tic_assunto; }
+        set { tic_assunto = value; }
+    }
+
+    public int Tic_id_professor
+    {
+        get { return tic_id_professor; }
+        set { tic_id_professor = value; }
+    }
+
+    public int Tic_estado
+    {
+        get { return tic_estado; }
+        set { tic_estado = value; }
+    }
+
+    public DateTime Tic_data
+    {
+        get { return tic_data; }
+        set { tic_data = value; }
+    }
+
+    public string Tic_tipo
+    {
+        get { return tic_tipo; }
+        set { tic_tipo = value; }
+    }
+
+    public int Tic_prioridade
+    {
+        get { return tic_prioridade; }
+        set { tic_prioridade = value; }
+    }
+
 }
