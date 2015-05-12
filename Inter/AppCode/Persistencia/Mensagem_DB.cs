@@ -4,26 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Data;
 
-public class Ticket_DB
+public class Mensagem_DB
 {
 
     //INSERT
-    public static int Insert(Ticket ticket)
+    public static int Insert(Mensagem mensagem)
     {
         int retorno = 0;
         try
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "INSERT INTO tic_ticket(tic_assunto, tic_id_professor, tic_data, tic_estado, tic_tipo, tic_prioridade) VALUES (?tic_assunto, ?tic_id_professor, ?tic_data, ?tic_estado, ?tic_tipo, ?tic_prioridade)";
+            string sql = "INSERT INTO men_tic_mensagem(men_id_enviadopor, men_hora, men_corpo, men_tic_id) VALUES (?men_id_enviadopor, ?men_hora, ?men_corpo, ?men_tic_id)";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
-            objCommand.Parameters.Add(Mapped.Parameter("?tic_assunto", ticket.Tic_assunto));
-            objCommand.Parameters.Add(Mapped.Parameter("?tic_id_professor", ticket.Tic_id_professor));
-            objCommand.Parameters.Add(Mapped.Parameter("?tic_data", ticket.Tic_data));
-            objCommand.Parameters.Add(Mapped.Parameter("?tic_estado", ticket.Tic_estado));
-            objCommand.Parameters.Add(Mapped.Parameter("?tic_tipo", ticket.Tic_tipo));
-            objCommand.Parameters.Add(Mapped.Parameter("?tic_prioridade", ticket.Tic_prioridade));
+            objCommand.Parameters.Add(Mapped.Parameter("?men_id_enviadopor", mensagem.Men_id_enviado));
+            objCommand.Parameters.Add(Mapped.Parameter("?men_hora", mensagem.Men_hora));
+            objCommand.Parameters.Add(Mapped.Parameter("?men_corpo", mensagem.Men_corpo));
+            objCommand.Parameters.Add(Mapped.Parameter("?men_tic_id", mensagem.Men_tic_id));
             conexao.Close();
             objCommand.Dispose();
             conexao.Dispose();
@@ -36,23 +34,21 @@ public class Ticket_DB
     }
 
     //UPDATE
-    public static int Update(Ticket ticket)
+    public static int Update(Mensagem mensagem)
     {
         int retorno = 0;
         try
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "UPDATE tic_ticket SET tic_assunto = ?tic_assunto, tic_id_professor = ?tic_id_professor, tic_data = ?tic_data, tic_estado = ?tic_estado, tic_tipo = ?tic_tipo, tic_prioridade = ?tic_prioridade WHERE tic_id = ?tic_id ";
+            string sql = "UPDATE men_tic_mensagem SET men_id_enviadopor = ?men_id_enviadopor, men_hora = ?men_hora, men_corpo = ?men_corpo, men_tic_id = ?men_tic_id WHERE men_id = ?men_id ";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
-            objCommand.Parameters.Add(Mapped.Parameter("?tic_assunto", ticket.Tic_assunto));
-            objCommand.Parameters.Add(Mapped.Parameter("?tic_id_professor", ticket.Tic_id_professor));
-            objCommand.Parameters.Add(Mapped.Parameter("?tic_data", ticket.Tic_data));
-            objCommand.Parameters.Add(Mapped.Parameter("?tic_estado", ticket.Tic_estado));
-            objCommand.Parameters.Add(Mapped.Parameter("?tic_tipo", ticket.Tic_tipo));
-            objCommand.Parameters.Add(Mapped.Parameter("?tic_prioridade", ticket.Tic_prioridade));
-            objCommand.Parameters.Add(Mapped.Parameter("?tic_id", ticket.Tic_id));
+            objCommand.Parameters.Add(Mapped.Parameter("?men_id", mensagem.Men_id));
+            objCommand.Parameters.Add(Mapped.Parameter("?men_id_enviadopor", mensagem.Men_id_enviado));
+            objCommand.Parameters.Add(Mapped.Parameter("?men_hora", mensagem.Men_hora));
+            objCommand.Parameters.Add(Mapped.Parameter("?men_corpo", mensagem.Men_corpo));
+            objCommand.Parameters.Add(Mapped.Parameter("?men_tic_id", mensagem.Men_tic_id));
             objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
@@ -73,7 +69,7 @@ public class Ticket_DB
         {
             IDbConnection conexao;
             IDbCommand objComando;
-            string sql = "DELETE FROM tic_ticket WHERE tic_id = ?codigo ";
+            string sql = "DELETE FROM men_tic_mensagem WHERE men_id = ?codigo ";
             conexao = Mapped.Connection();
             objComando = Mapped.Command(sql, conexao);
             objComando.Parameters.Add(Mapped.Parameter("?codigo", codigo));
@@ -90,34 +86,32 @@ public class Ticket_DB
     }
 
     //SELECT
-    public static Ticket Select(int codigo)
+    public static Mensagem Select(int codigo)
     {
         try
         {
-            Ticket objTicket = null;
+            Mensagem objMensagem = null;
             IDbConnection objConnection;
             IDbCommand objCommnad;
             IDataReader objDataReader;
             objConnection = Mapped.Connection();
-            objCommnad = Mapped.Command("SELECT * FROM tic_ticket WHERE tic_id = ?codigo", objConnection);
+            objCommnad = Mapped.Command("SELECT * FROM men_tic_mensagem WHERE men_id = ?codigo", objConnection);
             objCommnad.Parameters.Add(Mapped.Parameter("?codigo", codigo));
             objDataReader = objCommnad.ExecuteReader();
             while (objDataReader.Read())
             {
-                objTicket = new Ticket();
-                objTicket.Tic_assunto = objDataReader["tic_assunto"].ToString();
-                objTicket.Tic_id_professor = Convert.ToInt32(objDataReader["tic_id_professor"]);
-                objTicket.Tic_data = DateTime.ParseExact(objDataReader["tic_data"].ToString(), "dd/MM/yyyy - HH:mm", null);
-                objTicket.Tic_estado = Convert.ToInt32(objDataReader["tic_estado"]);
-                objTicket.Tic_prioridade = Convert.ToInt32(objDataReader["tic_prioridade"]);
-                objTicket.Tic_tipo = objDataReader["tic_tipo"].ToString();
+                objMensagem = new Mensagem();
+                objMensagem.Men_id_enviado = Convert.ToInt32(objDataReader["men_id_enviado"]);
+                objMensagem.Men_hora = DateTime.ParseExact(objDataReader["men_hora"].ToString(), "dd/MM/yyyy - HH:mm", null);
+                objMensagem.Men_corpo = objDataReader["men_hora"].ToString();
+                objMensagem.Men_tic_id = Convert.ToInt32(objDataReader["men_tic_id"]);
             }
             objDataReader.Close();
             objConnection.Close();
             objConnection.Dispose();
             objCommnad.Dispose();
             objDataReader.Dispose();
-            return objTicket;
+            return objMensagem;
         }
         catch (Exception e)
         {
@@ -132,7 +126,7 @@ public class Ticket_DB
         IDbCommand objCommand;
         IDataAdapter objDataAdapter;
         objConnection = Mapped.Connection();
-        objCommand = Mapped.Command("SELECT * FROM tic_ticket ORDER BY tic_id", objConnection);
+        objCommand = Mapped.Command("SELECT * FROM men_tic_mensagem ORDER BY men_id", objConnection);
         objDataAdapter = Mapped.Adapter(objCommand);
         objDataAdapter.Fill(ds);
         objConnection.Close();
