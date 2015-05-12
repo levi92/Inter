@@ -190,4 +190,12 @@ public class Perfil_DB
         objConnection.Dispose();
         return ds;
     }
+
+    public static int SelectCoordById(int matricula)
+    {
+        int descricao = 0;
+
+
+        return descricao;
+    }
 }

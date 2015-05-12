@@ -29,30 +29,33 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 
         Perfil perfil = new Perfil();
 
-        int verificacao = Funcoes_DB.ValidarAdm(user, senha);
-
-
-        Professor prof = new Professor();
-        prof = Professor.Validar(user, senha);
-
         //Verificar se os campos não estão vazios
         if (!String.IsNullOrEmpty(user) && !String.IsNullOrEmpty(senha))
         {
-
-            if (verificacao == 3)
+            int verificaMaster = Funcoes_DB.ValidarAdmMaster(user, senha); //verifica se é master e armazena um número que indica sucesso ou falha 
+            Professor prof = new Professor(); //instancia um novo professor
+            prof = Professor.Validar(user, senha); //valida o professor e retorna para o obj professor
+            if (verificaMaster == 3)
             {
                 //Administrador master                 
                 Session["login"] = user;
                 Session["coord"] = "False";
                 Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
             }
+
             else if (prof != null)
             {
-                if (verificacao == 2)
+                int verificaCoord = Funcoes_DB.ValidarAdmCoord(user, senha, prof);
+                if (verificaCoord == 2)
                 {
-                    Session["login"] = user;
+                    //Administrador Coordenador e professor
+                    //chama a página de escolher o perfil
                     Session["coord"] = "True";
+                    Session["perfil"] = "";
+                    Session["login"] = user;
+                    Session["Professor"] = prof;
                     Response.Redirect("~/Paginas/Administrador/alterar_perfil.aspx");
+
                 }
                 else
                 {

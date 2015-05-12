@@ -40,7 +40,7 @@
                                     <Columns>
                                         <%--Configurar colunas do Grid --%>
 
-                                          <asp:TemplateField HeaderText="Nome">
+                                          <asp:TemplateField HeaderText="Matrícula">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblMatriculaAdmin" Text='<%#Eval ("per_matricula") %>' runat="server"></asp:Label>
                                             </ItemTemplate>
@@ -54,7 +54,7 @@
 
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="lkbDesfAdm" runat="server" CssClass="mdi-account-remove" Title="Desfazer Admin" CommandName="Update"></asp:LinkButton>
+                                                <asp:LinkButton ID="lkbDesfAdm" runat="server" CssClass="mdi mdi-account-remove" Title="Desfazer Admin" CommandName="Update"></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
@@ -93,7 +93,7 @@
                                         
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                 <asp:LinkButton ID="lkbDefAdm" runat="server" CssClass="mdi-account-star" title="Transformar em Admin" CommandName="Update"></asp:LinkButton>
+                                                 <asp:LinkButton ID="lkbDefAdm" runat="server" CssClass="mdi mdi-account-star" title="Transformar em Admin" CommandName="Update"></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 

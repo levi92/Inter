@@ -12,15 +12,6 @@
 public partial class paginas_Admin_usuarios {
     
     /// <summary>
-    /// lblMsgAdmin control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMsgAdmin;
-    
-    /// <summary>
     /// ScriptManager1 control.
     /// </summary>
     /// <remarks>
@@ -37,6 +28,15 @@ public partial class paginas_Admin_usuarios {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.UpdatePanel UpdatePanelAdmin;
+    
+    /// <summary>
+    /// lblMsgAdmin control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgAdmin;
     
     /// <summary>
     /// gdvAdmin control.
@@ -57,15 +57,6 @@ public partial class paginas_Admin_usuarios {
     protected global::System.Web.UI.WebControls.Label lblQtdRegistroAdm;
     
     /// <summary>
-    /// lblMsgProf control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMsgProf;
-    
-    /// <summary>
     /// UpdatePanelProf control.
     /// </summary>
     /// <remarks>
@@ -73,6 +64,15 @@ public partial class paginas_Admin_usuarios {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.UpdatePanel UpdatePanelProf;
+    
+    /// <summary>
+    /// lblMsgProf control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgProf;
     
     /// <summary>
     /// gdvProf control.
