@@ -56,7 +56,6 @@
     <Compile Include="Classes\Grupo_Aluno.cs" />
     <Compile Include="Classes\Historico_Disciplina.cs" />
     <Compile Include="Classes\Media_Disciplina.cs" />
-    <Compile Include="Classes\Msg.cs" />
     <Compile Include="Classes\Perfil.cs" />
     <Compile Include="Classes\Pessoas.cs" />
     <Compile Include="Classes\Projeto_Inter.cs" />
