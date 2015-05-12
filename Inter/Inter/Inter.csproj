@@ -39,7 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Interdisciplinar">
-      <HintPath>..\AppCode\obj\Debug\Interdisciplinar.dll</HintPath>
+      <HintPath>..\AppCode\DLLFatec\Interdisciplinar.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data, Version=6.4.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
