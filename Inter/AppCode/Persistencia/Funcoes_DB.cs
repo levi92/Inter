@@ -43,7 +43,7 @@ public class Funcoes_DB
 
             if (Convert.ToInt32(objDataReader["per_descricao"]) == 1)
             {
-                verificacao = 3;
+                verificacao = 1;
             }
 
 
@@ -68,7 +68,7 @@ public class Funcoes_DB
         return verificacao; //retorna o valor do resultado da verificação feita acima
     }
 
-    public static int ValidarAdmCoord(string login, string senha, Professor prof)
+    public static int ValidarAdmCoord(Professor prof)
     {
         string matricula = prof.Matricula; //pega matrícula do objeto professor obtido do método Professor.Validar
         int verificacao = 0;
@@ -94,6 +94,10 @@ public class Funcoes_DB
             if (Convert.ToInt32(objDataReader["per_descricao"]) == 2)
             {
                 verificacao = 2;
+            }
+            else
+            {
+                verificacao = 3;
             }
         }
         //else if (promatricula != 0)

@@ -32,10 +32,9 @@ public partial class Paginas_Login_login : System.Web.UI.Page
         //Verificar se os campos não estão vazios
         if (!String.IsNullOrEmpty(user) && !String.IsNullOrEmpty(senha))
         {
-            int verificaMaster = Funcoes_DB.ValidarAdmMaster(user, senha); //verifica se é master e armazena um número que indica sucesso ou falha 
-            Professor prof = new Professor(); //instancia um novo professor
-            prof = Professor.Validar(user, senha); //valida o professor e retorna para o obj professor
-            if (verificaMaster == 3)
+            //verifica se é master e armazena um número que indica sucesso ou falha 
+            
+            if (Funcoes_DB.ValidarAdmMaster(user, senha) == 1)
             {
                 //Administrador master                 
                 Session["login"] = user;
@@ -43,10 +42,12 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                 Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
             }
 
-            else if (prof != null)
+            Professor prof = new Professor(); //instancia um novo professor
+            prof = Professor.Validar(user, senha); //valida o professor e retorna para o obj professor
+
+            if (prof != null)
             {
-                int verificaCoord = Funcoes_DB.ValidarAdmCoord(user, senha, prof);
-                if (verificaCoord == 2)
+                if (Funcoes_DB.ValidarAdmCoord(prof) == 2)
                 {
                     //Administrador Coordenador e professor
                     //chama a página de escolher o perfil
@@ -57,7 +58,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                     Response.Redirect("~/Paginas/Administrador/alterar_perfil.aspx");
 
                 }
-                else
+                else if (Funcoes_DB.ValidarAdmCoord(prof) == 3)
                 {
                     Session["Professor"] = prof;
                     Response.Redirect("~/Paginas/Usuario/escolherDisciplina.aspx");
@@ -67,7 +68,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 
             else
             {
-                lblMsgErro.Text = "E-mail ou Senha incorretos.";
+                lblMsgErro.Text = "E-mail e/ou Senha incorretos.";
             }
 
             // Verifica os parametros na função ValidarLogin

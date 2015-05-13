@@ -16,7 +16,7 @@ public class Perfil_DB
             IDbConnection conexao;
             IDbCommand objCommand;
             string sql = "INSERT INTO per_perfil(per_matricula, per_descricao) " +
-                "VALUES (?per_matricula, 2)";
+                "VALUES (?per_matricula, 2)"; 
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
             objCommand.Parameters.Add(Mapped.Parameter("?Per_matricula", perfil.Matricula));
