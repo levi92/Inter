@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Inter.Funcoes;
+using Interdisciplinar;
 
 public partial class paginas_Usuario_home : System.Web.UI.Page
 {
@@ -12,7 +13,7 @@ public partial class paginas_Usuario_home : System.Web.UI.Page
     protected void Page_PreInit(object sender, EventArgs e)
     {
         // Se sessão estiver nula redireciona para o bloqueio Url
-        if (Session["login"] == null)
+        if (Session["Professor"] == null)
         {
             Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
         }
@@ -30,6 +31,9 @@ public partial class paginas_Usuario_home : System.Web.UI.Page
         }
 
         // Aparecer nome do professor na frase Bem-vindo (professor)!
-        lblNomeProf.Text = Session["nomeProf"].ToString();
+        Professor prof = new Professor();
+        prof = (Professor)Session["Professor"];
+        string[] nomeProf = prof.Nome.Split(' ');
+        lblNomeProf.Text = nomeProf[0];
     }
 }

@@ -1,4 +1,5 @@
-﻿using Interdisciplinar;
+﻿using Inter.Funcoes;
+using Interdisciplinar;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,7 +23,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        i = 0;
         // Se não for postback 
         if (!IsPostBack)
         {
@@ -42,41 +43,59 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     {
         Professor prof = new Professor();
         prof = (Professor)Session["Professor"];
-
-        Calendario cal = new Calendario();
-        cal = Calendario.SelectbyAtual();
-        DataSet ds = Professor.SelectAllPIsbyCalendarioAndProfessor(cal.AnoSemestreAtual, cal.Codigo, prof.Matricula);
-
+        DataSet ds = (DataSet)Session["DataSetCalendarioAndProfessor"];        
+        if (Session["DataSetCalendarioAndProfessor"] == null)
+        {
+            Calendario cal = new Calendario();
+            cal = Calendario.SelectbyAtual();
+            ds = Professor.SelectAllPIsbyCalendarioAndProfessor(cal.AnoSemestreAtual, cal.Codigo, prof.Matricula);
+            Session["DataSetCalendarioAndProfessor"] = ds;
+        }
+       
         int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
-
         //se qtd for maior que zero, ou seja, se tiver dados no data set
         if (qtd > 0)
         {
             gdv.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
             gdv.DataBind(); //preenche o grid view com os dados
-        }
+        }       
         lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
     }
 
+    int i = 0;
     // CRIAR ÍCONE DISCIPLINA MÃE
     protected void gdv_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        ////e = tdos eventos relacionados a um componente, pega a linha e verifica se é do tipo dados
-        //if (e.Row.RowType == DataControlRowType.DataRow)
-        //{    
-        //    //se for mãe
-        //    if (e.Row.Cells[4].Text.ToLower().Equals("true"))
-        //    {
-        //        //ícone da estrelinha
-        //        e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-star'></span>";
-        //    }
-        //    else
-        //    {
-        //        //ícone de tracinho
-        //        e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-minus'></span>";
-        //    }
+        DataSet ds = new DataSet();
+        ds = (DataSet)Session["DataSetCalendarioAndProfessor"];
+        int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
+        string[] vetorReturnFunction = new string[3];
 
-        //}
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[i]["disciplina"].ToString());
+            e.Row.Cells[1].Text = vetorReturnFunction[0];
+            e.Row.Cells[2].Text = vetorReturnFunction[1];
+            e.Row.Cells[3].Text = vetorReturnFunction[2];
+            i++;
+        }
+
+        //e = tdos eventos relacionados a um componente, pega a linha e verifica se é do tipo dados
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            //se for mãe
+            if (e.Row.Cells[4].Text.Equals("MAE"))
+            {
+                //ícone da estrelinha
+                e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-star'></span>";
+            }
+            else
+            {
+                //ícone de tracinho
+                e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-minus'></span>";
+            }
+
+        }
     }
 
     //evento do botão confirmar: pega linha selecionada e armazena os dados da mesma
@@ -109,11 +128,11 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             Session["disciplina"] = disciplina;
             if (mae == "<span class='glyphicon glyphicon-star'></span>")
             {
-                Session["mae"] = "True";
+                Session["mae"] = "MAE";
             }
             else
             {
-                Session["mae"] = "False";
+                Session["mae"] = "FILHA";
             }
             //redireciona pra home
             Response.Redirect("home.aspx");

@@ -52,15 +52,20 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                     //Administrador Coordenador e professor
                     //chama a página de escolher o perfil
                     Session["coord"] = "True";
-                    Session["perfil"] = "";
+                    Session["perfil"] = null;
                     Session["login"] = user;
                     Session["Professor"] = prof;
                     Response.Redirect("~/Paginas/Administrador/alterar_perfil.aspx");
 
                 }
-                else if (Funcoes_DB.ValidarAdmCoord(prof) == 3)
+                else if (Funcoes_DB.ValidarAdmCoord(prof) == 0)
                 {
                     Session["Professor"] = prof;
+                    Session["DataSetCalendarioAndProfessor"] = null;
+                    Session["curso"] = "";
+                    Session["semestre"] = "";
+                    Session["disciplina"] = "";
+                    Session["mae"] = "";
                     Response.Redirect("~/Paginas/Usuario/escolherDisciplina.aspx");
                 }
 
