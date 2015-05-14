@@ -34,9 +34,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLLFatec\Interdisciplinar.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=5.1.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+    <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\MySql.Data.dll</HintPath>
+      <HintPath>DLLFatec\ddl mysql 6 6 5\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -77,8 +77,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\MySql.Data.dll" />
+    <Content Include="DLLFatec\ddl mysql 6 6 5\MySql.Data.dll" />
     <Content Include="DLLFatec\Interdisciplinar.dll" />
+    <Content Include="DLLFatec\Interdisciplinar.pdb" />
+    <Content Include="DLLFatec\MySql.Data.dll" />
+    <Content Include="DLLFatec\Retornos Metodos Obj.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

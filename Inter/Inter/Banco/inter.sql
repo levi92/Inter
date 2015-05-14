@@ -574,42 +574,5 @@ CREATE TABLE `men_mensagem` (
   `MEN_ID_ENVIADOPOR` varchar(45) DEFAULT NULL,
   `MEN_TIMESTAMP` datetime DEFAULT NULL,
   `MEN_CORPO` mediumtext,
-  `MEN_TIC_ID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`MEN_ID`),
-  KEY `MEN_TIC_ID_idx` (`MEN_TIC_ID`),
-  CONSTRAINT `MEN_TIC_ID` FOREIGN KEY (`MEN_TIC_ID`) REFERENCES `mydb`.`tic_ticket` (`TIC_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `men_mensagem`
---
-
-LOCK TABLES `men_mensagem` WRITE;
-/*!40000 ALTER TABLE `men_mensagem` DISABLE KEYS */;
-/*!40000 ALTER TABLE `men_mensagem` ENABLE KEYS */;
-UNLOCK TABLES;
-
-DROP TABLE IF EXISTS `tic_ticket`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tic_ticket` (
-  `TIC_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `TIC_ASSUNTO` varchar(45) DEFAULT NULL,
-  `TIC_ID_PROFESSOR` varchar(45) DEFAULT NULL,
-  `TIC_TIMESTAMP` datetime DEFAULT NULL,
-  `TIC_ESTADO` int(11) DEFAULT '1',
-  `TIC_TIPO` varchar(45) DEFAULT NULL,
-  `TIC_PRIORIDADE` int(11) DEFAULT '1',
-  PRIMARY KEY (`TIC_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tic_ticket`
---
-
-LOCK TABLES `tic_ticket` WRITE;
-/*!40000 ALTER TABLE `tic_ticket` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tic_ticket` ENABLE KEYS */;
-UNLOCK TABLES;
+  PRIMARY KEY (`MEN_ID`)
+  );
