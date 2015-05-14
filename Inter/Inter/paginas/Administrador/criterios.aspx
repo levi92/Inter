@@ -66,11 +66,7 @@
                                         </asp:TemplateField>
 
                                         <%--Coluna do nome do Critério Geral--%>
-                                        <asp:TemplateField HeaderText="Nome do Critério">
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtNome" runat="server" Width="70%" Text='<%#Eval ("cge_nome")%>'> </asp:TextBox>
-                                                <%--Essa textbox existe para quando for editar aparecer o nome do critério--%>
-                                            </EditItemTemplate>
+                                        <asp:TemplateField HeaderText="Nome do Critério">                                          
                                             <ItemTemplate>
                                                 <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("cge_nome")%>'></asp:Label>
                                             </ItemTemplate>
