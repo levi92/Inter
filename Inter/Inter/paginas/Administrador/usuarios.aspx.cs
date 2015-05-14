@@ -43,6 +43,18 @@ using Interdisciplinar;
                 gdvProf.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
                 gdvProf.DataBind(); //preenche o grid view com os dados
             }
+            //foreach (GridViewRow linha in gdvAdmin.Rows)
+            //{
+            //    Label matriculaAdmin = (Label)linha.FindControl("lblMatriculaAdmin");
+            //    String matriculaProf = gdvProf.DataKeys[linha.RowIndex]["pro_matricula"].ToString();
+            //    LinkButton botao = (LinkButton)linha.FindControl("lkbDefadm");
+            //    if (matriculaAdmin.Text == matriculaProf)
+            //    {
+            //        botao.Visible = false;
+            //    }
+
+            //}
+            
             lblQtdRegistroProf.Text = "Foram encontrados " + qtd + " registros";
         }
 
@@ -62,7 +74,7 @@ using Interdisciplinar;
                     Professor prof = new Professor(); //instancia um novo professor
                     Label lblMatricula = (Label)linha.FindControl("lblMatriculaAdmin");//acha o label de matrícula da grid e liga a outro label
                     Label lblNome = (Label)linha.FindControl("lblNomeAdmin"); //acha o label de Nome e liga a outro label
-                    prof = Professor.SelectByCodigo(lblMatricula.Text); //o número de matrícula do label é usado para preencher o objeto professor usando o método de selecionar por código
+                    prof = (Professor)Session["Professor"]; //o número de matrícula do label é usado para preencher o objeto professor usando o método de selecionar por código
                     lblNome.Text = prof.Nome; //o label NomeAdmin da grid é preenchido utilizando o nome que está no objeto do professor (método get encapsulado)
                     
                 }
@@ -118,6 +130,31 @@ using Interdisciplinar;
             gdvProf.PageIndex = e.NewPageIndex;
             CarregaGridProf();
           
+        }
+
+        protected void gdvProf_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                bool valor = false;
+                foreach (GridViewRow linha in gdvAdmin.Rows)
+                {
+                    Label matriculaAdmin = (Label)linha.FindControl("lblMatriculaAdmin");
+                    String matriculaProf = e.Row.Cells[0].Text;//gdvProf.DataKeys[linha.RowIndex]["pro_matricula"].ToString();
+                    
+                    if (matriculaAdmin.Text == matriculaProf)
+                    {
+                        valor = true;
+                        
+                    }
+
+                }
+                if (valor)
+                {
+                    LinkButton botao = (LinkButton)e.Row.Cells[2].FindControl("lkbDefAdm");
+                    botao.Visible = false;
+                }
+            }
         }
 
        
