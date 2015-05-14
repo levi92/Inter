@@ -31,6 +31,12 @@ using Interdisciplinar;
             }
         }
 
+        //protected void UpdatePanelAdmin_Update(object sender, EventArgs e)
+        //{
+        //    CarregaGridProf();
+        //    UpdatePanelProf.Update();
+        //}
+
         public void CarregaGridProf()
         {
             DataSet ds = Professor.SelectAll();
@@ -74,7 +80,7 @@ using Interdisciplinar;
                     Professor prof = new Professor(); //instancia um novo professor
                     Label lblMatricula = (Label)linha.FindControl("lblMatriculaAdmin");//acha o label de matrícula da grid e liga a outro label
                     Label lblNome = (Label)linha.FindControl("lblNomeAdmin"); //acha o label de Nome e liga a outro label
-                    prof = (Professor)Session["Professor"]; //o número de matrícula do label é usado para preencher o objeto professor usando o método de selecionar por código
+                    prof = Professor.SelectByCodigo(lblMatricula.Text); //o número de matrícula do label é usado para preencher o objeto professor usando o método de selecionar por código
                     lblNome.Text = prof.Nome; //o label NomeAdmin da grid é preenchido utilizando o nome que está no objeto do professor (método get encapsulado)
                     
                 }
@@ -110,8 +116,8 @@ using Interdisciplinar;
 
             if (Perfil_DB.InsertAdmCoord(perf) == 0)
             {
-                CarregaGridProf();
                 CarregaGridAdmin();
+                CarregaGridProf();              
                 UpdatePanelProf.Update();
                 UpdatePanelAdmin.Update();
                 lblMsgProf.Text = "Administrador Coordenador definido com sucesso!";
@@ -132,7 +138,7 @@ using Interdisciplinar;
           
         }
 
-        protected void gdvProf_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void gdvProf_RowDataBound(object sender, GridViewRowEventArgs e) //ESCONDE O ÍCONE DE DEFINIR ADMIN QUANDO GERAR A GRID E O PROF JÁ É ADMIN E APARECE SE É SÓ PROF
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
@@ -145,15 +151,21 @@ using Interdisciplinar;
                     if (matriculaAdmin.Text == matriculaProf)
                     {
                         valor = true;
-                        
+                                           
+                    }
+                    if (valor)
+                    {
+                        LinkButton botao = (LinkButton)e.Row.Cells[2].FindControl("lkbDefAdm");
+                        botao.Visible = false;
                     }
 
+                    //else
+                    //{
+                    //    LinkButton botao = (LinkButton)e.Row.Cells[2].FindControl("lkbDefAdm");
+                    //    botao.Visible = true;
+                    //}
                 }
-                if (valor)
-                {
-                    LinkButton botao = (LinkButton)e.Row.Cells[2].FindControl("lkbDefAdm");
-                    botao.Visible = false;
-                }
+                
             }
         }
 

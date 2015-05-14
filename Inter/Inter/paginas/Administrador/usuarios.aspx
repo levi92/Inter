@@ -54,7 +54,7 @@
 
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="lkbDesfAdm" runat="server" CssClass="mdi mdi-account-remove" Title="Desfazer Admin" CommandName="Update"></asp:LinkButton>
+                                                <asp:LinkButton ID="lkbDesfAdm" runat="server" CssClass="mdi mdi-account-remove" Font-Size="2em"  Title="Desfazer Admin" CommandName="Update"></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
@@ -94,7 +94,7 @@
                                         
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                 <asp:LinkButton ID="lkbDefAdm" Visible="false" runat="server" CssClass="mdi mdi-account-star" title="Transformar em Admin" CommandName="Update"></asp:LinkButton>
+                                                 <asp:LinkButton ID="lkbDefAdm" Visible="true" runat="server" CssClass="mdi mdi-account-star" Font-Size="2em" title="Transformar em Admin" CommandName="Update"></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
