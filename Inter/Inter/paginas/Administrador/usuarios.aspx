@@ -54,7 +54,7 @@
 
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="lkbDesfAdm" runat="server" CssClass="mdi mdi-account-remove" Title="Desativar Admin" Font-Size="2em" CommandName="Update"></asp:LinkButton>
+                                                <asp:LinkButton ID="lkbDesfAdm" runat="server" CssClass="mdi mdi-account-remove" Title="Desfazer Admin" CommandName="Update"></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
@@ -76,8 +76,9 @@
                         <asp:UpdatePanel ID="UpdatePanelProf" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
                                  <asp:Label ID="lblMsgProf" Text="" runat="server"></asp:Label>
-                                <asp:GridView ID="gdvProf" runat="server" CellPadding="4" GridLines="None" DataKeyNames="pro_matricula"  CssClass="gridView" AllowPaging="true" PageSize="10"
-                                    OnRowUpdating="gdvProf_RowUpdating"
+                                <asp:GridView ID="gdvProf" runat="server" CellPadding="4" GridLines="None" DataKeyNames="pro_matricula" CssClass="gridView" AllowPaging="true" PageSize="10"
+                                    OnRowUpdating="gdvProf_RowUpdating" OnRowDataBound="gdvProf_RowDataBound"
+
                                     OnPageIndexChanging="gdvProf_PageIndexChanging"
                                     AutoGenerateColumns="false">
 
@@ -93,7 +94,7 @@
                                         
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                 <asp:LinkButton ID="lkbDefAdm" runat="server" CssClass="mdi mdi-account-star" Font-Size="2em" title="Definir como Admin" CommandName="Update"></asp:LinkButton>
+                                                 <asp:LinkButton ID="lkbDefAdm" Visible="false" runat="server" CssClass="mdi mdi-account-star" title="Transformar em Admin" CommandName="Update"></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
