@@ -56,6 +56,7 @@
     <Compile Include="Classes\Grupo_Aluno.cs" />
     <Compile Include="Classes\Historico_Disciplina.cs" />
     <Compile Include="Classes\Media_Disciplina.cs" />
+    <Compile Include="Persistencia\Mensagem.cs" />
     <Compile Include="Classes\Perfil.cs" />
     <Compile Include="Classes\Pessoas.cs" />
     <Compile Include="Classes\Projeto_Inter.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Persistencia\Funcoes_DB.cs" />
     <Compile Include="Persistencia\Perfil_DB.cs" />
     <Compile Include="Persistencia\Pessoas_DB.cs" />
+    <Compile Include="Persistencia\Mensagem_DB.cs" />
     <Compile Include="Persistencia\Projeto_Inter_DB.cs" />
     <Compile Include="Persistencia\Requerimento_DB.cs" />
     <Compile Include="Persistencia\Semestre_Ano_DB.cs" />
