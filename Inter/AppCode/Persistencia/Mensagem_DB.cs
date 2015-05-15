@@ -15,13 +15,14 @@ public class Mensagem_DB
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "INSERT INTO men_tic_mensagem(men_id_enviadopor, men_hora, men_corpo, men_tic_id) VALUES (?men_id_enviadopor, ?men_hora, ?men_corpo, ?men_tic_id)";
+            string sql = "INSERT INTO msg_mensagem(pro_matricula, req_codigo, per_matricula, msg_dt_Envio, msg_conteudo) VALUES (?pro_matricula, ?req_codigo, ?per_matricula, ?msg_dt_Envio, ?msg_conteudo)";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
-            objCommand.Parameters.Add(Mapped.Parameter("?men_id_enviadopor", mensagem.Men_id_enviado));
-            objCommand.Parameters.Add(Mapped.Parameter("?men_hora", mensagem.Men_hora));
-            objCommand.Parameters.Add(Mapped.Parameter("?men_corpo", mensagem.Men_corpo));
-            objCommand.Parameters.Add(Mapped.Parameter("?men_tic_id", mensagem.Men_tic_id));
+            objCommand.Parameters.Add(Mapped.Parameter("?pro_matricula", mensagem.MatriculaPro));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_codigo", mensagem.CodigoReq));
+            objCommand.Parameters.Add(Mapped.Parameter("?per_matricula", mensagem.MatriculaAdm));
+            objCommand.Parameters.Add(Mapped.Parameter("?msg_dt_Envio", mensagem.DataEnvio));
+            objCommand.Parameters.Add(Mapped.Parameter("?msg_conteudo", mensagem.Conteudo));
             conexao.Close();
             objCommand.Dispose();
             conexao.Dispose();
@@ -41,14 +42,15 @@ public class Mensagem_DB
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "UPDATE men_tic_mensagem SET men_id_enviadopor = ?men_id_enviadopor, men_hora = ?men_hora, men_corpo = ?men_corpo, men_tic_id = ?men_tic_id WHERE men_id = ?men_id ";
+            string sql = "UPDATE msg_mensagem SET pro_matricula = ?pro_matricula, req_codigo = ?req_codigo, per_matricula = ?per_matricula, msg_conteudo = ?msg_conteudo, msg_dt_Envio = ?msg_dt_Envio WHERE msg_codigo = ?msg_codigo ";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
-            objCommand.Parameters.Add(Mapped.Parameter("?men_id", mensagem.Men_id));
-            objCommand.Parameters.Add(Mapped.Parameter("?men_id_enviadopor", mensagem.Men_id_enviado));
-            objCommand.Parameters.Add(Mapped.Parameter("?men_hora", mensagem.Men_hora));
-            objCommand.Parameters.Add(Mapped.Parameter("?men_corpo", mensagem.Men_corpo));
-            objCommand.Parameters.Add(Mapped.Parameter("?men_tic_id", mensagem.Men_tic_id));
+            objCommand.Parameters.Add(Mapped.Parameter("?msg_codigo", mensagem.CodigoMsg));
+            objCommand.Parameters.Add(Mapped.Parameter("?pro_matricula", mensagem.MatriculaPro));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_codigo", mensagem.CodigoReq));
+            objCommand.Parameters.Add(Mapped.Parameter("?per_matricula", mensagem.MatriculaAdm));
+            objCommand.Parameters.Add(Mapped.Parameter("?msg_dt_Envio", mensagem.DataEnvio));
+            objCommand.Parameters.Add(Mapped.Parameter("?msg_conteudo", mensagem.Conteudo));
             objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
@@ -69,7 +71,7 @@ public class Mensagem_DB
         {
             IDbConnection conexao;
             IDbCommand objComando;
-            string sql = "DELETE FROM men_tic_mensagem WHERE men_id = ?codigo ";
+            string sql = "DELETE FROM msg_mensagem WHERE msg_codigo = ?codigo ";
             conexao = Mapped.Connection();
             objComando = Mapped.Command(sql, conexao);
             objComando.Parameters.Add(Mapped.Parameter("?codigo", codigo));
@@ -95,16 +97,18 @@ public class Mensagem_DB
             IDbCommand objCommnad;
             IDataReader objDataReader;
             objConnection = Mapped.Connection();
-            objCommnad = Mapped.Command("SELECT * FROM men_tic_mensagem WHERE men_id = ?codigo", objConnection);
+            objCommnad = Mapped.Command("SELECT * FROM msg_mensagem WHERE msg_codigo = ?codigo", objConnection);
             objCommnad.Parameters.Add(Mapped.Parameter("?codigo", codigo));
             objDataReader = objCommnad.ExecuteReader();
             while (objDataReader.Read())
             {
                 objMensagem = new Mensagem();
-                objMensagem.Men_id_enviado = Convert.ToInt32(objDataReader["men_id_enviado"]);
-                objMensagem.Men_hora = DateTime.ParseExact(objDataReader["men_hora"].ToString(), "dd/MM/yyyy - HH:mm", null);
-                objMensagem.Men_corpo = objDataReader["men_hora"].ToString();
-                objMensagem.Men_tic_id = Convert.ToInt32(objDataReader["men_tic_id"]);
+                objMensagem.CodigoMsg = Convert.ToInt32(objDataReader["msg_codigo"]);
+                objMensagem.MatriculaPro = objDataReader["pro_matricula"].ToString();
+                objMensagem.CodigoReq = Convert.ToInt32(objDataReader["req_codigo"]);
+                objMensagem.MatriculaAdm = objDataReader["per_matricula"].ToString();
+                objMensagem.DataEnvio = Convert.ToDateTime(objDataReader["msg_dt_Envio"]);
+                objMensagem.Conteudo = objDataReader["msg_conteudo"].ToString();
             }
             objDataReader.Close();
             objConnection.Close();
@@ -126,7 +130,7 @@ public class Mensagem_DB
         IDbCommand objCommand;
         IDataAdapter objDataAdapter;
         objConnection = Mapped.Connection();
-        objCommand = Mapped.Command("SELECT * FROM men_tic_mensagem ORDER BY men_id", objConnection);
+        objCommand = Mapped.Command("SELECT * FROM msg_mensagem ORDER BY msg_codigo", objConnection);
         objDataAdapter = Mapped.Adapter(objCommand);
         objDataAdapter.Fill(ds);
         objConnection.Close();
