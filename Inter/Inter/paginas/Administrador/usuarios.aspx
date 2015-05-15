@@ -31,8 +31,8 @@
                             <ContentTemplate>
                                    <asp:Label ID="lblMsgAdmin" Text="" runat="server"></asp:Label>
                                 <asp:GridView ID="gdvAdmin" runat="server" CssClass="gridView" AllowPaging="true" DataKeyNames="per_matricula" PageSize="10"
-                                    AutoGenerateColumns="false"
-                                    OnRowUpdating="gdvAdmin_RowUpdating">
+                                    OnRowUpdating="gdvAdmin_RowUpdating"
+                                    AutoGenerateColumns="false">
                                    
                                     <AlternatingRowStyle CssClass="alt" />
 
@@ -54,7 +54,7 @@
 
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="lkbDesfAdm" runat="server" CssClass="mdi mdi-account-remove" Font-Size="2em"  Title="Desfazer Admin" CommandName="Update"></asp:LinkButton>
+                                                <asp:LinkButton ID="lkbDesfAdm" runat="server" CssClass="mdi mdi-account-remove" Font-Size="2em"  Title="Desativar Admin" CommandName="Update"></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
@@ -77,8 +77,8 @@
                             <ContentTemplate>
                                  <asp:Label ID="lblMsgProf" Text="" runat="server"></asp:Label>
                                 <asp:GridView ID="gdvProf" runat="server" CellPadding="4" GridLines="None" DataKeyNames="pro_matricula" CssClass="gridView" AllowPaging="true" PageSize="10"
-                                    OnRowUpdating="gdvProf_RowUpdating" OnRowDataBound="gdvProf_RowDataBound"
-
+                                    OnRowCommand="gdvProf_RowCommand"
+                                    OnRowDataBound="gdvProf_RowDataBound"
                                     OnPageIndexChanging="gdvProf_PageIndexChanging"
                                     AutoGenerateColumns="false">
 
@@ -94,7 +94,7 @@
                                         
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                 <asp:LinkButton ID="lkbDefAdm" Visible="true" runat="server" CssClass="mdi mdi-account-star" Font-Size="2em" title="Transformar em Admin" CommandName="Update"></asp:LinkButton>
+                                                 <asp:LinkButton ID="lkbDefAdm" Visible="true" runat="server" CssClass="mdi mdi-account-star" Font-Size="2em" title="Definir como Admin" CommandName="DefinirAdm"></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
