@@ -10,7 +10,7 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
 {
     protected void Page_PreInit(object sender, EventArgs e)
     {
-        if (Session["login"] == null)
+        if (Session["Professor"] == null)
         {
             Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
         }

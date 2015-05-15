@@ -95,10 +95,6 @@ public class Funcoes_DB
             {
                 verificacao = 2;
             }
-            else
-            {
-                verificacao = 3;
-            }
         }
         //else if (promatricula != 0)
         //{
