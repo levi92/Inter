@@ -31,7 +31,7 @@ public partial class paginas_Admin_usuarios : System.Web.UI.Page
 
         }
 
-     
+
     }
 
     //protected void UpdatePanelAdmin_Update(object sender, EventArgs e)
@@ -53,7 +53,6 @@ public partial class paginas_Admin_usuarios : System.Web.UI.Page
             gdvProf.DataBind(); //preenche o grid view com os dados
         }
 
-
         lblQtdRegistroProf.Text = "Foram encontrados " + qtd + " registros";
     }
 
@@ -61,11 +60,13 @@ public partial class paginas_Admin_usuarios : System.Web.UI.Page
     {
         DataSet ds = Perfil_DB.SelectAll();
         int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
-        gdvAdmin.Visible = true;
+
 
         //se qtd for maior que zero, ou seja, se tiver dados no data set
         if (qtd > 0)
         {
+            gdvAdmin.Visible = true; //Parte 2: caso a grid esteja vazia no carregamento e após inserir algum Coordenador, 
+            //a grid precisa ficar visível de novo por causa da Parte1(o else debaixo)(Continua parte 3 - último método)
             gdvAdmin.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
             gdvAdmin.DataBind(); //preenche o grid view com os dados
             foreach (GridViewRow linha in gdvAdmin.Rows)//percorre cada linha da grid (obs: isso existe pelo campo de nome estar em outra tabela no BD da Fatec)
@@ -80,7 +81,9 @@ public partial class paginas_Admin_usuarios : System.Web.UI.Page
         }
         else
         {
-            gdvAdmin.Visible = false;
+            //Parte 1: se não achar nenhum registro no dataset, a grid tem que ficar invisível, pois ela não fica por padrão ao desativar o único adm coordenador restante
+            //(mesmo atualizando a grid e updatepanel)
+            gdvAdmin.Visible = false; 
         }
         lblQtdRegistroAdm.Text = "Foram encontrados " + qtd + " registros";
 
@@ -91,13 +94,13 @@ public partial class paginas_Admin_usuarios : System.Web.UI.Page
     {
         String matricula = gdvAdmin.DataKeys[e.RowIndex]["per_matricula"].ToString(); //pega a matricula do Admin Coordenador da linha específica
 
-        if (Perfil_DB.DeleteAdminCoord(matricula) == "0")
+        if (Perfil_DB.DeleteAdminCoord(matricula) == 0)
         {
             CarregaGridAdmin();
-            UpdatePanelAdmin.Update();       
+            UpdatePanelAdmin.Update();
             lblMsgAdmin.Text = "Administrador Coordenador desativado com sucesso!";
             CarregaGridProf(); //Também carrega a grid e update do Prof para que o ícone de "Definir como Admin" volte a ficar visível para o prof clicado
-            UpdatePanelProf.Update(); 
+            UpdatePanelProf.Update();
 
         }
         else
@@ -189,38 +192,36 @@ public partial class paginas_Admin_usuarios : System.Web.UI.Page
 
     }
 
-    protected void gdvProf_RowDataBound(object sender, GridViewRowEventArgs e) //ESCONDE O ÍCONE DE DEFINIR ADMIN QUANDO GERAR A GRID E O PROF JÁ É ADMIN E APARECE SE É SÓ PROF
+    protected void gdvProf_RowDataBound(object sender, GridViewRowEventArgs e) //ESCONDE O ÍCONE DE DEFINIR ADMIN QUANDO COLOCAR AS LINHAS DA GRID E O PROF JÁ É ADMIN
     {
-
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            bool valor = false;
-            foreach (GridViewRow linha in gdvAdmin.Rows)
+        
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Label matriculaAdmin = (Label)linha.FindControl("lblMatriculaAdmin");
-                String matriculaProf = e.Row.Cells[0].Text;//gdvProf.DataKeys[linha.RowIndex]["pro_matricula"].ToString();
-
-                if (matriculaAdmin.Text == matriculaProf)
+                bool valor = false;
+                foreach (GridViewRow linha in gdvAdmin.Rows)
                 {
-                    valor = true;
+                    Label matriculaAdmin = (Label)linha.FindControl("lblMatriculaAdmin");
+                    String matriculaProf = e.Row.Cells[0].Text;//gdvProf.DataKeys[linha.RowIndex]["pro_matricula"].ToString();
+
+                    if (matriculaAdmin.Text == matriculaProf)
+                    {
+                        valor = true;
+
+                    }
+                    if (valor)
+                    {
+                        if (gdvAdmin.Visible==true) { //Parte 3: somente caso a grid esteja visível ele vai comparar para tirar o ícone
+                        LinkButton botao = (LinkButton)e.Row.Cells[2].FindControl("lkbDefAdm");
+                        botao.Visible = false;
+                        }
+                    }
+
 
                 }
-                if (valor)
-                {
-                    LinkButton botao = (LinkButton)e.Row.Cells[2].FindControl("lkbDefAdm");
-                    botao.Visible = false;
-                }
 
-                //else
-                //{
-                //    LinkButton botao = (LinkButton)e.Row.Cells[2].FindControl("lkbDefAdm");
-                //    botao.Visible = true;
-                //}
             }
+        
 
-        }
     }
-
-
 
 }

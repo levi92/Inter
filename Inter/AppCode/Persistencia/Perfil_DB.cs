@@ -90,9 +90,9 @@ public class Perfil_DB
     }
 
     //DELETE - TIRAR PERFIL DE ADMIN COORDENADOR
-    public static string DeleteAdminCoord(string matricula)
+    public static int DeleteAdminCoord(string matricula)
     {
-        string retorno = "0";
+        int retorno = 0;
         try
         {
             IDbConnection conexao;
@@ -108,7 +108,7 @@ public class Perfil_DB
         }
         catch (Exception e)
         {
-            retorno = "-2";
+            retorno = -2;
         }
         return retorno;
     }
