@@ -68,7 +68,6 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     {
         DataSet ds = new DataSet();
         ds = (DataSet)Session["DataSetCalendarioAndProfessor"];
-        int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
         string[] vetorReturnFunction = new string[3];
 
         if (e.Row.RowType == DataControlRowType.DataRow)

@@ -21,7 +21,7 @@ namespace Inter.Funcoes
         /// <returns> Retorna o caminho da masterpage</returns>
         public static string chamarMasterPage(string mae)
         {
-            if (mae == "True")
+            if (mae == "MAE")
             {
                 return "~/paginas/Usuario/MasterPageMenuMae.master";
             }

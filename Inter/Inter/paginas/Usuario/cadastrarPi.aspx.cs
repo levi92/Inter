@@ -9,6 +9,7 @@ using Inter.Funcoes;
 using AppCode.Persistencia;
 using System.Web.Services;
 using System.Web.Script.Serialization;
+using Interdisciplinar;
 //using System.Runtime.Serialization.Json;
 
 
@@ -18,7 +19,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     protected void Page_PreInit(object sender, EventArgs e)
     {
         //VERIFICAR SESSAO LOGIN
-        if (Session["login"] == null)
+        if (Session["Professor"] == null)
         {
             Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
         }
@@ -36,15 +37,16 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
         //BLOQUEIO SE NÃO FOR DISCIPLINA-MÃE
 
-        if (Session["mae"] == "False")
+        if (Session["mae"] == "FILHA")
         {
             Response.Redirect("home.aspx");
-        }     
+        }
 
 
         //SE NÃO FOR POSTBACK VAI CARREGAR OS MÉTODOS ABAIXO DESCRITOS
         if (!IsPostBack)
         {
+            CarregarDisciplinasEnvolvidas();
             CarregaCriGerais();
             PegarAnoeSemestreAno();
             PegarUltimoCodPI();
@@ -68,6 +70,102 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     // ******************  ETAPA 1 - CADASTRO PI, CADASTRO DE DATAS ******************
     // *******************************************************************************
+
+    private void CarregarDisciplinasEnvolvidas()
+    {
+        Calendario cal = new Calendario();
+        DataSet ds = new DataSet();
+        cal = Calendario.SelectbyAtual();
+        ds = Professor.SelectAllPIsbyCalendario(cal.Codigo, cal.AnoSemestreAtual);
+        int qtd = ds.Tables[0].Rows.Count;
+
+        DataTable dt = new DataTable();
+
+        Table tableDisciplina = new Table();
+        tableDisciplina.CssClass = "gridView";
+        PainelDisciplinas.Controls.Add(tableDisciplina);
+        int row = ds.Tables[0].Rows.Count;
+        
+
+        TableHeaderCell th = new TableHeaderCell();
+        TableHeaderRow thr = new TableHeaderRow();
+        
+        th = new TableHeaderCell();
+        th.Text = "Disciplinas";
+        thr.Cells.Add(th);
+        tableDisciplina.Rows.Add(thr);
+        
+        th = new TableHeaderCell();
+        th.Text = "Mãe/Filha";
+        thr.Cells.Add(th);
+        tableDisciplina.Rows.Add(thr);       
+
+        Label lblDisciplinas = new Label();
+        string[] vetorReturnFunction = new string[3];
+
+        for (int i = 0; i < row; i++){
+            TableRow rows = new TableRow();
+            for (int j = 0; j < 2; j++)
+            {
+                TableCell cell = new TableCell();
+                vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[i]["disciplina"].ToString());
+                if ((vetorReturnFunction[0] == Session["Curso"].ToString()) && (vetorReturnFunction[1] == Session["Semestre"].ToString()))
+                {                    
+                    if (j == 0){
+                        lblDisciplinas = new Label();
+                        lblDisciplinas.Text = vetorReturnFunction[2].ToString();
+                        cell.Controls.Add(lblDisciplinas);
+                    }
+                    else
+                    {
+                        lblDisciplinas = new Label();
+                        lblDisciplinas.Text = ds.Tables[0].Rows[i]["tipo"].ToString();
+                        cell.Controls.Add(lblDisciplinas);
+                    }
+                    rows.Cells.Add(cell);
+                }                
+            }
+            tableDisciplina.Rows.Add(rows);
+        }
+
+
+
+
+        
+        
+        //DataTable dt = new DataTable();
+        //DataRow dr = dt.NewRow();
+        //dt.Columns.Add("Disciplinas", typeof(string));
+        //dt.Columns.Add("Disciplina Mãe", typeof(string));
+
+        //string[] vetorReturnFunction = new string[3];
+
+        //for (int i = 5; i < 10; i++)
+        //{
+        //    vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[i]["disciplina"].ToString());
+        //    if ((vetorReturnFunction[0] == Session["Curso"].ToString()) && (vetorReturnFunction[1] == Session["Semestre"].ToString()))
+        //    {
+        //        dr = dt.NewRow();
+
+        //        dr["Disciplinas"] = vetorReturnFunction[2].ToString();
+        //        dr["Disciplina Mãe"] = ds.Tables[0].Rows[i]["tipo"].ToString();
+
+        //        dt.Rows.Add(dr);
+        //    }
+
+        //}
+
+        //gdvDisciplinasEnvolvidas.DataSource = dt; //fonte de dados do grid view recebe o ds criado anteriormente
+        //gdvDisciplinasEnvolvidas.DataBind(); //preenche o grid view com os dados
+
+
+
+
+
+    }
+
+
+
     private void PegarUltimoCodPI()
     {
         // PEGAR ULTIMO CODIGO DE PI E ACRESCENTAR 1
@@ -329,7 +427,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         }
 
     }
-   
+
 
     //VERIFICAR SE OS TEXTBOXS DOS PESOS ESTÃO EM BRANCO OU INVÁLIDOS
     protected int verificarPesoVazio()
@@ -416,7 +514,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     // ******************** ETAPA 4 - CRIAR GRUPO ******************
     // *************************************************************
-    
+
 
     //EVENTO QUE MOVE OS ALUNOS DA LISTA GERAL PARA A LISTA ESPECÍFICA DE ALUNOS DAQUELE GRUPO 
     protected void listaAlunoGeral_SelectedIndexChanged(object sender, EventArgs e)
@@ -439,7 +537,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         listaAlunosGrupo.ClearSelection();
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
-    }  
+    }
 
     //EVENTO DO BOTÃO VOLTAR: REDIRECIONA PARA A ETAPA ANTERIOR
     protected void LkbVoltarEtapa3_Click(object sender, EventArgs e)
@@ -458,13 +556,13 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     {
         Response.Redirect("home.aspx");
     }
-    
+
 
     //EVENTO DO BOTÃO CONFIRMAR GRUPO: GUARDA O GRUPO ATUAL(COM OS ALUNOS QUE FORAM ESCOLHIDOS) E SUCESSIVAMENTE CRIA NOVO GRUPO
     public static int index = 1; //É UMA CONTROLADORA DO VIEWSTATE (EX: VIEWSTATE["ALUNOS1"]) OBS: PELO INDEX COMEÇAR NO VALOR "1" NÃO HAVERÁ "GRUPO0"
     protected void btnConfirmarGrupo_Click(object sender, EventArgs e)
     {
-        if (! String.IsNullOrEmpty(txtNomeGrupo.Text))
+        if (!String.IsNullOrEmpty(txtNomeGrupo.Text))
         {
             txtNomeGrupo.Style.Clear();
 
@@ -727,6 +825,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
     }
+
+
 
 
 

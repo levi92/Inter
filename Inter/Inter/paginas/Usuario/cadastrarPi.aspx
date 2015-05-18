@@ -107,12 +107,15 @@
                     </tr>
                     <tr>
                         <td>
-                            <div style="text-align: left; margin-left: 20px; border: 1px solid #DDD; padding: 10px;">
-                                Banco de Dados<br />
-                                Engenharia de Software 3<br />
-                                Interação Humano Computador<br />
-                                Programação em Scripts<br />
-                            </div>
+                            <%--<asp:GridView ID="gdvDisciplinasEnvolvidas" runat="server" ClientIDMode="Static" AutoGenerateColumns="false">
+                                <%--<Columns>                                    
+                                <asp:TemplateField HeaderText="Disciplina">
+
+                                </asp:TemplateField>
+                                    <asp:BoundField DataField="tipo" HeaderText="Disciplina Mãe" />
+                                </Columns>-
+                            </asp:GridView>--%>
+                            <asp:Panel ID="PainelDisciplinas" runat="server"></asp:Panel>
                         </td>
                     </tr>
 

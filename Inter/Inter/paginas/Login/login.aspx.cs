@@ -58,7 +58,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                     Response.Redirect("~/Paginas/Administrador/alterar_perfil.aspx");
 
                 }
-                else if (Funcoes_DB.ValidarAdmCoord(prof) == 0)
+                else
                 {
                     Session["Professor"] = prof;
                     Session["DataSetCalendarioAndProfessor"] = null;
