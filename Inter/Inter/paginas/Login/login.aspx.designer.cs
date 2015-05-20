@@ -21,6 +21,42 @@ public partial class Paginas_Login_login {
     protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     
     /// <summary>
+    /// txtLoginM control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtLoginM;
+    
+    /// <summary>
+    /// txtSenhaM control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtSenhaM;
+    
+    /// <summary>
+    /// btnEnviarM control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnEnviarM;
+    
+    /// <summary>
+    /// lblMsgErroM control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgErroM;
+    
+    /// <summary>
     /// txtLogin control.
     /// </summary>
     /// <remarks>
@@ -55,22 +91,4 @@ public partial class Paginas_Login_login {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblMsgErro;
-    
-    /// <summary>
-    /// btnAdministrador control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnAdministrador;
-    
-    /// <summary>
-    /// btnProfessor control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnProfessor;
 }

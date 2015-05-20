@@ -19,6 +19,19 @@
     <script src="../../Scripts/jquery.easing.1.3.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.skitter.js" type="text/javascript"></script>
     <script src="../../Scripts/bootstrap.js" type="text/javascript"></script>
+    <script src="../../scripts/jquery.hotkeys.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(this).bind('keydown', 'alt+f10', function (e) {
+                $('#txtLoginM').toggleClass('hidden')
+                $('#txtSenhaM').toggleClass('hidden')
+                $('#btnEnviarM').toggleClass('hidden');
+                $("#lblMsgErroM").toggleClass('hidden');
+               
+            });
+        });
+    </script>
 
     <!-- Dialog -->
     <%--<script src="../../Scripts/jquery-ui.js"></script>--%>
@@ -37,6 +50,15 @@
                                 <span style="margin-left: 20%;">
                                     <img src="../../App_Themes/images/logo_topo.png" />
                                 </span>
+                            </li>
+
+                            <li>
+                                <div class="container-fluid" style="margin-top:10px;margin-left:15px;">
+                                <asp:TextBox ID="txtLoginM" class="form-horizontal hidden" placeholder="Login" style="width:180px;" runat="server" ></asp:TextBox>&nbsp
+                                <asp:TextBox ID="txtSenhaM" class="form-horizontal hidden"  placeholder="Senha" style="width:180px;" runat="server" Textmode="Password"></asp:TextBox>&nbsp
+                                <asp:Button ID="btnEnviarM" class="btn btn-default hidden" Style="width: 125px;" runat="server" Text="Entrar" OnClick="btnEnviarM_Click" />
+                                <asp:Label ID="lblMsgErroM" class="hidden" runat="server" Style="color: #960d10"></asp:Label>
+                                    </div>
                             </li>
 
                         </ul>
@@ -64,9 +86,9 @@
                     <div class="panel-body">
                         <ul class="pager">
                             <!--- Login de professor / administrador) !--->
-                            <center><asp:TextBox ID="txtLogin" class="form-control"  placeholder="Login" style="width:250px;" runat="server"></asp:TextBox></center>
+                            <center><asp:TextBox ID="txtLogin" class="form-control"  placeholder="Login" style="width:250px;" runat="server" TextMode="Email"></asp:TextBox></center>
                             <br>
-                            <center><asp:TextBox ID="txtSenha" class="form-control"  placeholder="Senha" style="width:250px;" runat="server" TextMode="Password"></asp:TextBox></center>
+                            <center><asp:TextBox ID="txtSenha" class="form-control" placeholder="Senha" style="width:250px;" runat="server" TextMode="Password"></asp:TextBox></center>
                             <br>
                             <asp:Button ID="enviar" class="btn btn-default" Style="width: 250px;" runat="server" Text="Entrar" OnClick="enviar_Click" /><br />
                             <asp:Label ID="lblMsgErro" runat="server" Style="color: #960d10"></asp:Label>
@@ -79,8 +101,8 @@
         </div>
         <div class="col-xs-6 col-md-4"></div>
 
-        <script type="text/javascript">
-            
+        <%--<script type="text/javascript">
+
 
             function EscolherPerfil() {
                 $('#MyModalEscolha').modal(
@@ -108,7 +130,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>--%>
 
 
 

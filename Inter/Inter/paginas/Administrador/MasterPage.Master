@@ -43,7 +43,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server" class="form-control form-horizontal" role="form">
+    <form id="form1" runat="server" role="form">
 
 
 

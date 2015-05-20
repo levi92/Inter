@@ -120,18 +120,40 @@ public partial class Paginas_Login_login : System.Web.UI.Page
         }
     }
 
-    protected void btnProfessor_Click1(object sender, EventArgs e)
+    protected void btnEnviarM_Click(object sender, EventArgs e)
     {
+        lblMsgErroM.Text = "";
 
+        // pegar valor dos textbox do login
+        string user = txtLoginM.Text.ToString();
+        //string senha = Funcoes.Criptografar(txtSenha.Text.ToString(), "SHA1"); ->>> não lê a senha correta do banco por algum motivo
+        string senha = txtSenhaM.Text.ToString();
 
+        Perfil perfil = new Perfil();
 
+        //Verificar se os campos não estão vazios
+        if (!String.IsNullOrEmpty(user) && !String.IsNullOrEmpty(senha))
+        {
+            //verifica se é master e armazena um número que indica sucesso ou falha 
+
+            if (Funcoes_DB.ValidarAdmMaster(user, senha) == 1)
+            {
+                //Administrador master                 
+                Session["login"] = user;
+                Session["coord"] = "False";
+                Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
+            }
+            else
+            {
+                lblMsgErroM.Text = "Login inválido";
+            }
+            
+
+        }
+        else
+        {
+            lblMsgErroM.Text = "Os campos devem ser preenchidos!";
+        }
     }
-
-    protected void btnAdministrador_Click(object sender, EventArgs e)
-    {
-
-
-    }
-
 
 }

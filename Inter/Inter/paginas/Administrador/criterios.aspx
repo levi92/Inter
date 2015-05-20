@@ -19,6 +19,11 @@
             $('#fecharModal').click();
         }
 
+        function MostraMsgAlerta(){
+            $('#alerta').fadeIn(1000);
+        }
+
+
 
     </script>
 
