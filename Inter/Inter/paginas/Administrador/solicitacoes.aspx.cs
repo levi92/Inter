@@ -35,20 +35,51 @@ using System.Data;
 
         public void CarregarGridAtivos()
         {
-            DataSet ds = Criterios_Gerais_DB.SelectAll(); //criando um data set com todos as soliciacoes
-            int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
+            //ABERTO
+            DataSet ds = Requerimento_DB.SelectS(1); //criando um data set com as solicitações abertas
+            int qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
+
+            //se qtd for maior que zero, ou seja, se tiver dados no data set
+            if (qtd > 0) {
+                gdvCriteriosAtivos.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+                gdvCriteriosAtivos.DataBind(); //preenche o grid view com os dados
+                lblQtdRegistro.Text = "Foram encontradas " + qtd + " solicitações";
+            } else {
+                lblQtdRegistro.Text = "Nenhuma Solicitação foi cadastrada.";
+            }
+
+            //EM ANDAMENTO
+            ds = Requerimento_DB.SelectS(2); //criando um data set com as solicitações abertas
+            qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
 
             //se qtd for maior que zero, ou seja, se tiver dados no data set
             if (qtd > 0)
             {
-                gdvCriteriosAtivos.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
-                gdvCriteriosAtivos.DataBind(); //preenche o grid view com os dados
-                lblQtdRegistro.Text = "Foram encontradas " + qtd + " solicitações";
+                gdvRequerimentoAndamento.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+                gdvRequerimentoAndamento.DataBind(); //preenche o grid view com os dados
+                lblQtdRegistroAnd.Text = "Foram encontradas " + qtd + " solicitações";
             }
             else
             {
-                lblQtdRegistro.Text = "Nenhuma Solicitação foi cadastrada.";
+                lblQtdRegistroAnd.Text = "Nenhuma Solicitação foi cadastrada.";
             }
+
+            //FINALIZADO
+            ds = Requerimento_DB.SelectS(3); //criando um data set com as solicitações abertas
+            qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
+
+            //se qtd for maior que zero, ou seja, se tiver dados no data set
+            if (qtd > 0)
+            {
+                gdvRequerimentoFinalizado.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+                gdvRequerimentoFinalizado.DataBind(); //preenche o grid view com os dados
+                lblQtdRegistroFin.Text = "Foram encontradas " + qtd + " solicitações";
+            }
+            else
+            {
+                lblQtdRegistroFin.Text = "Nenhuma Solicitação foi cadastrada.";
+            }
+
 
         }
 
