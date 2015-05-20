@@ -62,7 +62,6 @@
     <Compile Include="Classes\Projeto_Inter.cs" />
     <Compile Include="Classes\Requerimento.cs" />
     <Compile Include="Classes\Semestre_Ano.cs" />
-    <Compile Include="Classes\Ticket.cs" />
     <Compile Include="Comuns\Funcoes.cs" />
     <Compile Include="Mapped.cs" />
     <Compile Include="Persistencia\Criterios_Gerais_DB.cs" />
