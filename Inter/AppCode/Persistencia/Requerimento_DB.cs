@@ -132,4 +132,22 @@ public class Requerimento_DB{
         return ds;
     }
 
+    //SELECT STATUS
+    public static DataSet SelectS(int codigo)
+    {
+        DataSet ds = new DataSet();
+        IDbConnection objConnection;
+        IDbCommand objCommand;
+        IDataAdapter objDataAdapter;
+        objConnection = Mapped.Connection();
+        objCommand = Mapped.Command("SELECT * FROM req_requerimento WHERE req_status=?codigo ORDER BY req_codigo", objConnection);
+        objCommand.Parameters.Add(Mapped.Parameter("?codigo", codigo));
+        objDataAdapter = Mapped.Adapter(objCommand);                            
+        objDataAdapter.Fill(ds);
+        objConnection.Close();
+        objCommand.Dispose();
+        objConnection.Dispose();
+        return ds;
+    }
+
 }

@@ -93,6 +93,60 @@ public partial class paginas_Admin_solicitacoes {
     protected global::System.Web.UI.WebControls.Label lblQtdRegistro;
     
     /// <summary>
+    /// UpdatePanel1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+    
+    /// <summary>
+    /// gdvRequerimentoAndamento control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvRequerimentoAndamento;
+    
+    /// <summary>
+    /// lblQtdRegistroAnd control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblQtdRegistroAnd;
+    
+    /// <summary>
+    /// UpdatePanel2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+    
+    /// <summary>
+    /// gdvRequerimentoFinalizado control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvRequerimentoFinalizado;
+    
+    /// <summary>
+    /// lblQtdRegistroFin control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblQtdRegistroFin;
+    
+    /// <summary>
     /// UpdatePanelModalNovoCriterio control.
     /// </summary>
     /// <remarks>
