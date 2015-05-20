@@ -1091,3 +1091,7 @@ img.ui-datepicker-trigger {
     color: #515151;
     display: none;
 }
+
+.hidden {
+    visibility: hidden;
+}
