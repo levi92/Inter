@@ -11,27 +11,48 @@ using System.Web;
 public class Requerimento{
 
     //CHAVE PRIMÁRIA.Identificador do requerimento.
-    private int _codigoreq;
+    public int CodigoReq { get; }
     //Identificador do professor que abriu o requerimento.
-    private string _matriculapro;
+    public string MatriculaPro { get; }
     //Identificador do grupo ao qual a mudança de nota foi requerida.
-    private Grupo _codigogrupo;
+    public Grupo CodigoGrupo { get; }
     //Assunto que o Requerimento aborda.
-    private string _assunto;
+    public string Assunto { get; }
     //Data e hora de criação do requerimento.
-    private DateTime _datareq;
+    public DateTime DataReq { get; }
     //Status do ticket: aberto(0), em andamento(1) e resolvido(2).
-    private int _status;
+    public int Status { get; }
     //Categoria em que o ticket se encaixa.
-    private string _categoria;
+    public string Categoria { get; }
 
     public Requerimento(string matricula, Grupo grupo, string assunto, DateTime data, int status, string categoria)
     {
-        _matriculapro = matricula;
-        _codigogrupo = grupo;
-        _assunto = assunto;
-        _datareq = data;
-        _status = status;
-        _categoria = categoria;
+        MatriculaPro = matricula;
+        CodigoGrupo = grupo;
+        Assunto = assunto;
+        DataReq = data;
+        Status = status;
+        Categoria = categoria;
+    }
+    //Constructor do select
+    public Requerimento(int codigo, string matricula, Grupo grupo, string assunto, DateTime data, int status, string categoria)
+    {
+        CodigoReq = codigo;
+        MatriculaPro = matricula;
+        CodigoGrupo = grupo;
+        Assunto = assunto;
+        DataReq = data;
+        Status = status;
+        Categoria = categoria;
+    }
+    //Constructor do Insert
+    public Requerimento(string matricula, Grupo grupo, string assunto, string categoria)
+    {
+        MatriculaPro = matricula;
+        CodigoGrupo = grupo;
+        Assunto = assunto;
+        Categoria = categoria;
+        DataReq = DateTime.Now; //Pega na hora da criação o tempo do servidor
+        Status = 0; //Por padrão: Status "em aberto"
     }
 }

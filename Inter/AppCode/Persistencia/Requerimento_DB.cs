@@ -34,7 +34,7 @@ public class Requerimento_DB{
         return retorno;
     }
 
-    //UPDATE
+    /*UPDATE
     public static int Update(Requerimento requerimento){
         int retorno = 0;
         try{
@@ -114,7 +114,7 @@ public class Requerimento_DB{
         catch (Exception e){
             return null;
         }
-    }
+    }*/
 
     //SELECT ALL
     public static DataSet SelectAll(){
@@ -140,7 +140,7 @@ public class Requerimento_DB{
         IDbCommand objCommand;
         IDataAdapter objDataAdapter;
         objConnection = Mapped.Connection();
-        objCommand = Mapped.Command("SELECT * FROM req_requerimento WHERE req_status=?codigo ORDER BY req_codigo", objConnection);
+        objCommand = Mapped.Command("SELECT * FROM req_requerimento WHERE req_status=?codigo ORDER BY req_codigo DESC", objConnection);
         objCommand.Parameters.Add(Mapped.Parameter("?codigo", codigo));
         objDataAdapter = Mapped.Adapter(objCommand);                            
         objDataAdapter.Fill(ds);
