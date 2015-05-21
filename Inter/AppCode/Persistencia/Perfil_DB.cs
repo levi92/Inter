@@ -90,9 +90,9 @@ public class Perfil_DB
     }
 
     //DELETE - TIRAR PERFIL DE ADMIN COORDENADOR
-    public static string DeleteAdminCoord(string matricula)
+    public static int DeleteAdminCoord(string matricula)
     {
-        string retorno = "0";
+        int retorno = 0;
         try
         {
             IDbConnection conexao;
@@ -108,35 +108,11 @@ public class Perfil_DB
         }
         catch (Exception e)
         {
-            retorno = "-2";
+            retorno = -2;
         }
         return retorno;
     }
 
-
-    //DELETE    
-    public static string Delete(string matricula)
-    {
-        string retorno = "0";
-        try
-        {
-            IDbConnection conexao;
-            IDbCommand objComando;
-            string sql = "DELETE FROM Per_perfil WHERE Per_matricula = ?matricula ";
-            conexao = Mapped.Connection();
-            objComando = Mapped.Command(sql, conexao);
-            objComando.Parameters.Add(Mapped.Parameter("?matricula", matricula));
-            objComando.ExecuteNonQuery();
-            conexao.Close();
-            objComando.Dispose();
-            conexao.Dispose();
-        }
-        catch (Exception e)
-        {
-            retorno = "-2";
-        }
-        return retorno;
-    }
 
     //SELECT -->>>>>>>>>>>>>>>>>>>>>>  VERIFICAR E ARRUMAR CASO FOR USAR
     //public static string Select(string codigo)

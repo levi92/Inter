@@ -8,20 +8,21 @@ public class Mensagem
 {
 
     //CHAVE PRIMÁRIA.Identificador da Mensagem. Set privado porque o ID é autoincrementado no BD
-    public int CodigoMsg { get; set; }
-
+    private int _codigomsg;
     //Identificador do usuario que enviou a mensagem
-    public int CodigoReq { get; set; }
-
+    private int _codigoreq;
     //Identificador do ticket ao qual a mensagem pertence
-    public string MatriculaPro { get; set; }
-
-    //Identificador do ticket ao qual a mensagem pertence
-    public string MatriculaAdm { get; set; }
-
+    private string _matriculapro;
     //Data e hora de envio da mensagem
-    public DateTime? DataEnvio { get; set; }
-
+    private DateTime _dataenvio;
     //Conteúdo da mensagem 
-    public string Conteudo { get; set; } 
+    private string _conteudo;
+
+    public Mensagem (int codrequerimento, string matricula, DateTime dataenvio, string conteudo)
+    {
+        _codigoreq = codrequerimento;
+        _matriculapro = matricula;
+        _dataenvio = dataenvio;
+        _conteudo = conteudo;
+    }
 }
