@@ -10,18 +10,12 @@ using System.Web;
         private DateTime eve_data;
         private string eve_tipo;
         private Projeto_Inter pri_codigo;
-        private Projeto_Inter adi_codigo;
+        
 
         public global::Projeto_Inter Pri_codigo
         {
             get { return pri_codigo; }
             set { pri_codigo = value; }
-        }
-
-        public global::Projeto_Inter Adi_codigo
-        {
-            get { return adi_codigo; }
-            set { adi_codigo = value; }
         }
 
         public int Eve_codigo

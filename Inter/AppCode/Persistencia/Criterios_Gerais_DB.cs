@@ -243,4 +243,7 @@ public class Criterios_Gerais_DB{
         }
         return retorno;
     }
+
+
+
 }

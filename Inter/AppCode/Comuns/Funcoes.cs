@@ -143,6 +143,12 @@ namespace Inter.Funcoes
             return vetReturn;
         }
 
+        public static string SplitNomes(string nome)
+        {
+            string[] nomes = nome.Split(' ');
+            return nomes[0];
+        }
+
 
 
     }

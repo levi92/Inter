@@ -11,19 +11,13 @@ using System.Web;
         private string gru_nome_projeto;
         private double gru_media;
         private bool gru_finalizado;
-        private Projeto_Inter pri_codigo, adi_codigo;
+        private Projeto_Inter pri_codigo;
 
         public global::Projeto_Inter Pri_codigo
         {
             get { return pri_codigo; }
             set { pri_codigo = value; }
-        }
-
-        public global::Projeto_Inter Adi_codigo
-        {
-            get { return adi_codigo; }
-            set { adi_codigo = value; }
-        }
+        }       
 
         public bool Gru_finalizado
         {

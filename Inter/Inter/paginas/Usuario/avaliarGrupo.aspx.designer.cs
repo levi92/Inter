@@ -12,6 +12,24 @@
 public partial class paginas_Usuario_avaliarGrupo {
     
     /// <summary>
+    /// ScriptManager1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.ScriptManager ScriptManager1;
+    
+    /// <summary>
+    /// updAvaliar control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel updAvaliar;
+    
+    /// <summary>
     /// lblGrupo control.
     /// </summary>
     /// <remarks>
@@ -30,13 +48,22 @@ public partial class paginas_Usuario_avaliarGrupo {
     protected global::System.Web.UI.WebControls.DropDownList ddlGrupos;
     
     /// <summary>
-    /// gdvAvaliarGrupo control.
+    /// panelAvaliar control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.GridView gdvAvaliarGrupo;
+    protected global::System.Web.UI.WebControls.Panel panelAvaliar;
+    
+    /// <summary>
+    /// btnSalvar control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnSalvar;
     
     /// <summary>
     /// txtAnotacao control.
@@ -46,4 +73,13 @@ public partial class paginas_Usuario_avaliarGrupo {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtAnotacao;
+    
+    /// <summary>
+    /// valorPeso control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField valorPeso;
 }

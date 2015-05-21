@@ -24,6 +24,7 @@ public class Requerimento_DB{
             objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", requerimento.CodigoGrupo.Gru_codigo));
             objCommand.Parameters.Add(Mapped.Parameter("?req_status", requerimento.Status));
             objCommand.Parameters.Add(Mapped.Parameter("?req_categoria", requerimento.Categoria));
+            objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
             conexao.Dispose();

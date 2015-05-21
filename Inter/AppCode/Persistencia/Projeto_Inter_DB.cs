@@ -16,13 +16,12 @@ using System.Threading.Tasks;
             {
                 IDbConnection conexao;
                 IDbCommand objCommand;
-                string sql = "INSERT INTO pri_projeto_inter(san_semestre_ano, pri_descricao, pri_ementa, adi_codigo) VALUES(?san_semestre_ano, ?pri_descricao, ?pri_ementa, ?adi_codigo)";
+                string sql = "INSERT INTO pri_projeto_inter(pri_codigo, san_codigo) VALUES(?pri_codigo, ?san_codigo)";
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
-                objCommand.Parameters.Add(Mapped.Parameter("?san_semestre_ano", proInt.San_semestre_ano));
-                objCommand.Parameters.Add(Mapped.Parameter("?pri_descricao", proInt.Pri_descricao));
-                objCommand.Parameters.Add(Mapped.Parameter("?pri_ementa", proInt.Pri_ementa));
-                //objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", proInt.Adi_codigo));
+                objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", proInt.Pri_codigo));  
+                objCommand.Parameters.Add(Mapped.Parameter("?san_semestre_ano", proInt.San_codigo));
+                objCommand.ExecuteNonQuery();               
                 conexao.Close();
                 objCommand.Dispose();
                 conexao.Dispose();
