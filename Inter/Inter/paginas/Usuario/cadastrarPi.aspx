@@ -13,9 +13,12 @@
 
         // LIMPAR TEXTBOXS MODAL CADASTRAR CRTITÉRIO 
         function fechaModalCri() {
-            $('#txtNomeCriterio').val(" ");
-            $('#txtDescricaoCriterio').val(" ");
-            $('#lblMsgCriterio').html(" ");
+            $('#txtNomeCriterio').val("");
+            $('#txtDescricaoCriterio').val("");
+            $('#txtNomeCriterio').css("border", "0px solid #ccc");
+            $('#txtDescricaoCriterio').css("border", "0px solid #ccc");
+            $('#txtDescricaoCriterio').val("");
+            $('#lblMsgCriterio').html("");
         }
 
         // ABRIR MODAL PESO 1
@@ -30,6 +33,15 @@
 
         function fechaModalPeso1() {
             $('#fecharModalPeso1').click();
+        }
+
+        //APAGA A MSG DEPOIS DE x SEGUNDOS
+        function apagarMsg() {            
+            setTimeout('atualiza()', 4000);
+        }
+
+        function atualiza() {
+            $("#lblMsgCriterio").html("");
         }
 
     </script>
@@ -105,17 +117,9 @@
                         </td>
                         <td colspan="2"></td>
                     </tr>
-                    <tr>
+                    <tr>                        
                         <td>
-                            <%--<asp:GridView ID="gdvDisciplinasEnvolvidas" runat="server" ClientIDMode="Static" AutoGenerateColumns="false">
-                                <%--<Columns>                                    
-                                <asp:TemplateField HeaderText="Disciplina">
-
-                                </asp:TemplateField>
-                                    <asp:BoundField DataField="tipo" HeaderText="Disciplina Mãe" />
-                                </Columns>-
-                            </asp:GridView>--%>
-                            <asp:Panel ID="PainelDisciplinas" runat="server"></asp:Panel>
+                           <asp:Panel ID="PainelDisciplinas" runat="server"></asp:Panel>
                         </td>
                     </tr>
 
@@ -320,11 +324,7 @@
                                     <div style="width: 100%; height: 230px;">
                                         <asp:ListBox ID="listaAlunoGeral" runat="server"
                                             AutoPostBack="true" OnSelectedIndexChanged="listaAlunoGeral_SelectedIndexChanged" ClientIDMode="Static">
-                                            <asp:ListItem Value="1">Bruno</asp:ListItem>
-                                            <asp:ListItem Value="2">Felipe</asp:ListItem>
-                                            <asp:ListItem Value="3">Higor</asp:ListItem>
-                                            <asp:ListItem Value="4">Dayane</asp:ListItem>
-                                            <asp:ListItem Value="5">Gabriel</asp:ListItem>
+                                            
                                         </asp:ListBox>
                                     </div>
                                 </td>
@@ -505,7 +505,7 @@
                             <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</asp:LinkButton>
 
                             <asp:LinkButton ID="btnCriarNovoCriterio" runat="server" CssClass="btn btn-default"
-                                OnClick="btnCriarNovoCriterio_Click" ToolTip="Confirmar Inserção">
+                                OnClick="btnCriarNovoCriterio_Click" ToolTip="Confirmar Inserção" OnClientClick="apagarMsg();">
                                    <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar </asp:LinkButton>
                         </div>
 

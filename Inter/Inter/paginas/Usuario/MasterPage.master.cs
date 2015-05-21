@@ -41,6 +41,7 @@ public partial class paginas_Usuario_MasterPage : System.Web.UI.MasterPage
         Session["semestre"] = "";
         Session["disciplina"] = "";
         Session["mae"] = "";
+        Session["codAtr"] = "";
 
         Response.Redirect("escolherDisciplina.aspx");
 

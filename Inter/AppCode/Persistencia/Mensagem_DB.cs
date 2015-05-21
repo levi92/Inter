@@ -23,6 +23,7 @@ public class Mensagem_DB
             objCommand.Parameters.Add(Mapped.Parameter("?per_matricula", mensagem.MatriculaAdm));
             objCommand.Parameters.Add(Mapped.Parameter("?msg_dt_Envio", mensagem.DataEnvio));
             objCommand.Parameters.Add(Mapped.Parameter("?msg_conteudo", mensagem.Conteudo));
+            objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
             conexao.Dispose();

@@ -24,6 +24,7 @@ namespace AppCode.Persistencia
                 objCommand.Parameters.Add(Mapped.Parameter("?san_ano", semAno.San_ano));
                 objCommand.Parameters.Add(Mapped.Parameter("?san_semestre", semAno.San_semestre));
                 objCommand.Parameters.Add(Mapped.Parameter("?san_ativo", semAno.San_ativo));
+                objCommand.ExecuteNonQuery();
                 conexao.Close();
                 objCommand.Dispose();
                 conexao.Dispose();

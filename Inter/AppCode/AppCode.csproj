@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Atribuicao_PI.cs" />
     <Compile Include="Classes\Criterios_Gerais.cs" />
     <Compile Include="Classes\Criterio_PI.cs" />
     <Compile Include="Classes\Disciplinas_Gerais.cs" />
