@@ -12,13 +12,13 @@ using System.Web;
         private Atribuicao_PI pri_codigo, adi_codigo;
         private Grupo gru_codigo;
 
-        public global::Atribuicao_PI Adi_codigo
+        public Atribuicao_PI Adi_codigo
         {
             get { return adi_codigo; }
             set { adi_codigo = value; }
         }
 
-        public global::Atribuicao_PI Pri_codigo
+        public Atribuicao_PI Pri_codigo
         {
             get { return pri_codigo; }
             set { pri_codigo = value; }

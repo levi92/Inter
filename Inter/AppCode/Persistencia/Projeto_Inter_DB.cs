@@ -45,9 +45,7 @@ using System.Threading.Tasks;
                 " WHERE pri_codigo = ?pri_codigo";
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
-                objCommand.Parameters.Add(Mapped.Parameter("?san_semestre_ano", proInt.San_semestre_ano));
-                objCommand.Parameters.Add(Mapped.Parameter("?pri_descricao", proInt.Pri_descricao));
-                objCommand.Parameters.Add(Mapped.Parameter("?pri_ementa", proInt.Pri_ementa));
+                objCommand.Parameters.Add(Mapped.Parameter("?san_semestre_ano", proInt.San_codigo));
                 //objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", proInt.Adi_codigo));
                 objCommand.ExecuteNonQuery();
                 conexao.Close();
@@ -102,9 +100,7 @@ using System.Threading.Tasks;
                 {
                     objProInt = new Projeto_Inter();
                     objProInt.Pri_codigo = Convert.ToInt32(objDataReader["pri_codigo"]);
-                    objProInt.San_semestre_ano.San_codigo = Convert.ToInt32(objDataReader["san_semestre_ano"]);
-                    objProInt.Pri_descricao = objDataReader["pri_descricao"].ToString();
-                    objProInt.Pri_ementa = objDataReader["pri_ementa"].ToString();
+                    objProInt.San_codigo.San_codigo = Convert.ToInt32(objDataReader["san_semestre_ano"]);
                     //objProInt.Adi_codigo.Adi_codigo = Convert.ToInt32(objDataReader["adi_codigo"]);
                 }
                 objDataReader.Close();

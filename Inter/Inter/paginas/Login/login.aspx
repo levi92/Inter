@@ -86,7 +86,7 @@
                     <div class="panel-body">
                         <ul class="pager">
                             <!--- Login de professor / administrador) !--->
-                            <center><asp:TextBox ID="txtLogin" class="form-control"  placeholder="Login" style="width:250px;" runat="server" TextMode="Email"></asp:TextBox></center>
+                            <center><asp:TextBox ID="txtLogin" class="form-control"  placeholder="Login" style="width:250px;" runat="server"></asp:TextBox></center>
                             <br>
                             <center><asp:TextBox ID="txtSenha" class="form-control" placeholder="Senha" style="width:250px;" runat="server" TextMode="Password"></asp:TextBox></center>
                             <br>
