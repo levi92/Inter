@@ -73,7 +73,6 @@
     <Compile Include="Persistencia\Projeto_Inter_DB.cs" />
     <Compile Include="Persistencia\Requerimento_DB.cs" />
     <Compile Include="Persistencia\Semestre_Ano_DB.cs" />
-    <Compile Include="Persistencia\Ticket_DB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

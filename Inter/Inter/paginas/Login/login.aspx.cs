@@ -133,7 +133,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
         //string senha = Funcoes.Criptografar(txtSenha.Text.ToString(), "SHA1"); ->>> não lê a senha correta do banco por algum motivo
         string senha = txtSenhaM.Text.ToString();
 
-        Perfil perfil = new Perfil();
+        
 
         //Verificar se os campos não estão vazios
         if (!String.IsNullOrEmpty(user) && !String.IsNullOrEmpty(senha))
@@ -142,9 +142,12 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 
             if (Funcoes_DB.ValidarAdmMaster(user, senha) == 1)
             {
+                Perfil perfil = new Perfil("master");
                 //Administrador master                 
                 Session["login"] = user;
                 Session["coord"] = "False";
+                Session["matricula"] = perfil.Matricula;
+                Session["nome"] = "Master";
                 Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
             }
             else
