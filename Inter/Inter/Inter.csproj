@@ -38,7 +38,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Interdisciplinar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\AppCode\DLLFatec\Interdisciplinar.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\AppCode\DLLFatec\ddl mysql 6 6 5\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -64,6 +72,9 @@
     <Content Include="App_Themes\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="App_Themes\fonts\icomoon.svg" />
     <Content Include="App_Themes\images\Calendar-Add-128x128.png" />
+    <Content Include="Banco\Fatec\Interdisciplinar.pdb" />
+    <Content Include="Banco\Fatec\MySql.Data.dll" />
+    <Content Include="Banco\Fatec\Retornos Metodos Obj.txt" />
     <Content Include="Banco\inter.sql" />
     <Content Include="Banco\PI.png" />
     <Content Include="Banco\PI.xml" />
@@ -76,8 +87,9 @@
     <Content Include="paginas\Administrador\projetos.aspx" />
     <Content Include="paginas\Administrador\solicitacoes.aspx" />
     <Content Include="paginas\Administrador\usuarios.aspx" />
-    <Content Include="paginas\Usuario\MasterPage.master" />
+    <Content Include="paginas\Login\login.aspx" />
     <Content Include="Banco\PI BANCO.docx" />
+    <Content Include="paginas\Usuario\escolherDisciplina.aspx" />
     <Content Include="paginas\Usuario\MasterPageMenuPadrao.master" />
     <Content Include="paginas\Usuario\MasterPageMenuMae.master" />
     <Content Include="paginas\Usuario\MasterPageMenuFilha.master" />
@@ -88,6 +100,7 @@
     <Content Include="paginas\Administrador\MasterPage.Master" />
     <Content Include="paginas\Administrador\MasterPage_MenuCoord.master" />
     <Content Include="paginas\Administrador\MasterPage_MenuMaster.master" />
+    <Content Include="paginas\Usuario\MasterPage.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -123,11 +136,9 @@
     <Content Include="App_Themes\images\logo_topo.png" />
     <Content Include="Global.asax" />
     <Content Include="paginas\Login\bloqueioUrl.aspx" />
-    <Content Include="paginas\Login\login.aspx" />
     <Content Include="paginas\Usuario\avaliarGrupo.aspx" />
     <Content Include="paginas\Usuario\cadastrarPi.aspx" />
     <Content Include="paginas\Usuario\consultarPi.aspx" />
-    <Content Include="paginas\Usuario\escolherDisciplina.aspx" />
     <Content Include="paginas\Usuario\finalizarGrupo.aspx" />
     <Content Include="paginas\Usuario\home.aspx" />
     <Content Include="paginas\Usuario\notificacoes.aspx" />
@@ -364,6 +375,9 @@
       <Project>{14b88d59-a837-4f4e-8c0b-e62529305e59}</Project>
       <Name>AppCode</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

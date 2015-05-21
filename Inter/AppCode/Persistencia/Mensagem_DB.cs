@@ -4,20 +4,25 @@ using System.Linq;
 using System.Web;
 using System.Data;
 
-public class Disciplina_Aluno_DB{
+public class Mensagem_DB
+{
 
-	   public static int Insert(Disciplina_Aluno disciplina_aluno){
+    //INSERT
+    public static int Insert(Mensagem mensagem)
+    {
         int retorno = 0;
         try
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "INSERT INTO dal_disciplina_aluno(adi_codigo, alu_matricula, dal_semestre_ano) VALUES (?adi_codigo, ?alu_matricula, ?dal_semestre_ano)";
+            string sql = "INSERT INTO msg_mensagem(matricula, req_codigo, msg_dt_Envio, msg_conteudo) VALUES (?matricula, ?req_codigo, ?msg_dt_Envio, ?msg_conteudo)";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
-            objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", disciplina_aluno.Adi_codigo.Adi_codigo));
-            objCommand.Parameters.Add(Mapped.Parameter("?alu_matricula", disciplina_aluno.Alu_matricula.Alu_matricula));
-            objCommand.Parameters.Add(Mapped.Parameter("?dal_semestre_ano",disciplina_aluno.Semestre_ano));            
+            objCommand.Parameters.Add(Mapped.Parameter("?matricula", mensagem.MatriculaPro));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_codigo", mensagem.CodigoReq));
+            objCommand.Parameters.Add(Mapped.Parameter("?msg_dt_Envio", mensagem.DataEnvio));
+            objCommand.Parameters.Add(Mapped.Parameter("?msg_conteudo", mensagem.Conteudo));
+            objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
             conexao.Dispose();
@@ -29,21 +34,23 @@ public class Disciplina_Aluno_DB{
         return retorno;
     }
 
-    //UPDATE
-    public static int Update(Disciplina_Aluno disciplina_aluno)
+    /*UPDATE
+    public static int Update(Mensagem mensagem)
     {
         int retorno = 0;
         try
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "UPDATE dal_disciplina_aluno SET adi_codigo = ?adi_codigo, alu_matricula = ?alu_matricula, dal_semestre_ano = ?dal_semestre_ano " +
-            " WHEREadi_codigo = ?adi_codigo ";
+            string sql = "UPDATE msg_mensagem SET pro_matricula = ?pro_matricula, req_codigo = ?req_codigo, msg_conteudo = ?msg_conteudo, msg_dt_Envio = ?msg_dt_Envio WHERE msg_codigo = ?msg_codigo ";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
-            objCommand.Parameters.Add(Mapped.Parameter("adi_codigo",disciplina_aluno.Adi_codigo.Adi_codigo));
-            objCommand.Parameters.Add(Mapped.Parameter("?alu_matricula", disciplina_aluno.Alu_matricula.Alu_matricula));
-            objCommand.Parameters.Add(Mapped.Parameter("?dal_semestre_ano", disciplina_aluno.Semestre_ano));   
+            objCommand.Parameters.Add(Mapped.Parameter("?msg_codigo", mensagem.CodigoMensagem));
+            objCommand.Parameters.Add(Mapped.Parameter("?pro_matricula", mensagem.MatriculaPro));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_codigo", mensagem.CodigoReq));
+            objCommand.Parameters.Add(Mapped.Parameter("?per_matricula", mensagem.MatriculaAdm));
+            objCommand.Parameters.Add(Mapped.Parameter("?msg_dt_Envio", mensagem.DataEnvio));
+            objCommand.Parameters.Add(Mapped.Parameter("?msg_conteudo", mensagem.Conteudo));
             objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
@@ -64,7 +71,7 @@ public class Disciplina_Aluno_DB{
         {
             IDbConnection conexao;
             IDbCommand objComando;
-            string sql = "DELETE FROM dal_disciplina_aluno WHERE adi_codigo = ?adi_codigo ";
+            string sql = "DELETE FROM msg_mensagem WHERE msg_codigo = ?codigo ";
             conexao = Mapped.Connection();
             objComando = Mapped.Command(sql, conexao);
             objComando.Parameters.Add(Mapped.Parameter("?codigo", codigo));
@@ -78,35 +85,35 @@ public class Disciplina_Aluno_DB{
             retorno = -2;
         }
         return retorno;
-    }
+    }*/
 
     //SELECT
-    public static Disciplina_Aluno Select(int codigo)
+    public static Mensagem Select(int codigo)
     {
         try
         {
-            Disciplina_Aluno objDisciplinaAluno = null;
+            Mensagem objMensagem = null;
             IDbConnection objConnection;
             IDbCommand objCommnad;
             IDataReader objDataReader;
             objConnection = Mapped.Connection();
-            objCommnad = Mapped.Command("SELECT * FROM dal_disciplina_aluno WHERE adi_codigo = ?codigo", objConnection);
+            objCommnad = Mapped.Command("SELECT * FROM msg_mensagem WHERE msg_codigo = ?codigo", objConnection);
             objCommnad.Parameters.Add(Mapped.Parameter("?codigo", codigo));
             objDataReader = objCommnad.ExecuteReader();
             while (objDataReader.Read())
             {
-                objDisciplinaAluno = new Disciplina_Aluno();
-                objDisciplinaAluno.Adi_codigo.Adi_codigo = Convert.ToInt32(objDataReader["adi_codigo"]);
-                objDisciplinaAluno.Alu_matricula.Alu_matricula = Convert.ToInt32(objDataReader["alu_matricula"]);
-                objDisciplinaAluno.Semestre_ano = objDataReader["dal_semestre_ano"].ToString();
-              
+                objMensagem = new Mensagem(Convert.ToInt32(objDataReader["req_codigo"]),
+                    objDataReader["pro_matricula"].ToString(),
+                    Convert.ToDateTime(objDataReader["msg_dt_Envio"]),
+                    objDataReader["msg_conteudo"].ToString(),
+                    Convert.ToInt32(objDataReader["msg_codigo"]));
             }
             objDataReader.Close();
             objConnection.Close();
             objConnection.Dispose();
             objCommnad.Dispose();
             objDataReader.Dispose();
-            return objDisciplinaAluno;
+            return objMensagem;
         }
         catch (Exception e)
         {
@@ -116,12 +123,12 @@ public class Disciplina_Aluno_DB{
     //SELECT ALL
     public static DataSet SelectAll()
     {
-        DataSet ds = new DataSet();
+        var ds = new DataSet();
         IDbConnection objConnection;
         IDbCommand objCommand;
         IDataAdapter objDataAdapter;
         objConnection = Mapped.Connection();
-        objCommand = Mapped.Command("SELECT * FROM dal_disciplina_aluno ORDER BY adi_codigo", objConnection);
+        objCommand = Mapped.Command("SELECT * FROM msg_mensagem ORDER BY msg_codigo", objConnection);
         objDataAdapter = Mapped.Adapter(objCommand);
         objDataAdapter.Fill(ds);
         objConnection.Close();
@@ -129,5 +136,5 @@ public class Disciplina_Aluno_DB{
         objConnection.Dispose();
         return ds;
     }
-}
 
+}

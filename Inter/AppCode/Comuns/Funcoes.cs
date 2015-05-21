@@ -21,7 +21,7 @@ namespace Inter.Funcoes
         /// <returns> Retorna o caminho da masterpage</returns>
         public static string chamarMasterPage(string mae)
         {
-            if (mae == "True")
+            if (mae == "MAE")
             {
                 return "~/paginas/Usuario/MasterPageMenuMae.master";
             }
@@ -32,7 +32,7 @@ namespace Inter.Funcoes
 
         public static string chamarMasterPage_Admin(string coord)
         {
-            
+
             if (coord == "True")
             {
                 return "~/paginas/Administrador/MasterPage_MenuCoord.master";
@@ -49,13 +49,14 @@ namespace Inter.Funcoes
             HashAlgorithm algoritmo = HashAlgorithm.Create(nomeHash);
 
             //se a hash não for inicializada, crio a excessao e retorno a msg para o usuario (throw retorn automatico)
-            if(algoritmo == null)
+            if (algoritmo == null)
             {
                 //return "Erro ao criptografar";
                 throw new ArgumentException("Nome da hash informada não é válida");
 
             }
-            else {
+            else
+            {
                 //divisão da hash em partes para a cirptografia
                 //alocação, buffer
                 //computehash... geração da criptografia
@@ -123,5 +124,32 @@ namespace Inter.Funcoes
 
         //    }
         //}
+
+
+        public static string[] tratarDadosProfessor(string dados)
+        {
+            string[] cursoTurnoSemestre = dados.Split('-');
+            string[] cursoTurno = cursoTurnoSemestre[0].Split(')');
+            string curso_turno = cursoTurno[0] + ")";
+            string semestre = cursoTurno[1].Substring(1, 1);
+            string[] disciplinaGrande = cursoTurnoSemestre[2].Split('(');
+            string disciplina = disciplinaGrande[0];
+            string[] vetReturn = new string[3];
+
+            vetReturn[0] = curso_turno;
+            vetReturn[1] = semestre;
+            vetReturn[2] = disciplina;
+
+            return vetReturn;
+        }
+
+        public static string SplitNomes(string nome)
+        {
+            string[] nomes = nome.Split(' ');
+            return nomes[0];
+        }
+
+
+
     }
 }

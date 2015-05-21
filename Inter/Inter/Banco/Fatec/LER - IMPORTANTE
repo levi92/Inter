@@ -1,0 +1,5 @@
+Essa pasta somente deve ser usada para manter os arquivos referentes ao banco da Fatec atualizados e suas dlls NÂO devem 
+ser usadas para fazer referência no AppCode ou em qualquer outro lugar do projeto!!
+
+Os arquivos dlls referenciados sempre devem ficar na pasta bin do AppCode para evitar problemas de diretório e problemas
+com adição de arquivos no commit que são somente usados em tempo de execução (runtime).

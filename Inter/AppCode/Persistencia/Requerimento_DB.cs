@@ -13,17 +13,18 @@ public class Requerimento_DB{
         try{
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "INSERT INTO req_requerimento(req_codigo, req_descricao, req_data_requisicao, req_data_inicial, req_data_final, req_resolvido, pro_matricula ) " +
-            " VALUES (?req_codigo, ?req_descricao, ?req_data_requisicao, ?req_data_inicial, ?req_data_final, ?req_resolvido, ?pro_matricula)";
+            string sql = "INSERT INTO req_requerimento(req_codigo, req_assunto, req_dt_requisicao, pro_matricula, gru_codigo, req_status, req_categoria ) " +
+            " VALUES (?req_codigo, ?req_assunto, ?req_dt_requisicao, ?pro_matricula, ?gru_codigo, ?req_status, ?req_categoria)";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
-            objCommand.Parameters.Add(Mapped.Parameter("?req_codigo", requerimento.Req_codigo));
-            objCommand.Parameters.Add(Mapped.Parameter("?req_descricao", requerimento.Req_descricao));
-            objCommand.Parameters.Add(Mapped.Parameter("?req_data_requisicao", requerimento.Req_data_requisicao));
-            objCommand.Parameters.Add(Mapped.Parameter("?req_data_inicial", requerimento.Req_data_inicial));
-            objCommand.Parameters.Add(Mapped.Parameter("?req_data_final", requerimento.Req_data_final));
-            objCommand.Parameters.Add(Mapped.Parameter("?req_resolvido", requerimento.Req_resolvido));
-            objCommand.Parameters.Add(Mapped.Parameter("?pro_matricula", requerimento.Pro_matricula.Pro_matricula));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_codigo", requerimento.CodigoReq));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_assunto", requerimento.Assunto));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_dt_requisicao", requerimento.DataReq));
+            objCommand.Parameters.Add(Mapped.Parameter("?pro_matricula", requerimento.MatriculaPro));
+            objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", requerimento.CodigoGrupo.Gru_codigo));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_status", requerimento.Status));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_categoria", requerimento.Categoria));
+            objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
             conexao.Dispose();
@@ -34,23 +35,23 @@ public class Requerimento_DB{
         return retorno;
     }
 
-    //UPDATE
+    /*UPDATE
     public static int Update(Requerimento requerimento){
         int retorno = 0;
         try{
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "UPDATE req_requerimento SET req_codigo = ?req_codigo, req_descricao = ?req_descricao, req_data_requisicao = ?req_data_requisicao, " + 
-            "req_data_inicial = ?req_data_inicial, req_data_final = ?req_data_final, req_resolvido = ?req_resolvido, pro_matricula = ?pro_matricula WHERE req_codigo = ?req_codigo";
+            string sql = "UPDATE req_requerimento SET req_codigo = ?req_codigo, req_assunto = ?req_assunto, req_dt_requisicao = ?req_dt_requisicao, " +
+            "pro_matricula = ?pro_matricula, gru_codigo = ?gru_codigo, req_status = ?req_status, req_categoria = ?req_categoria WHERE req_codigo = ?req_codigo";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
-            objCommand.Parameters.Add(Mapped.Parameter("?req_codigo", requerimento.Req_codigo));
-            objCommand.Parameters.Add(Mapped.Parameter("?req_descricao",requerimento.Req_descricao));
-            objCommand.Parameters.Add(Mapped.Parameter("?req_data_requisicao", requerimento.Req_data_requisicao));
-            objCommand.Parameters.Add(Mapped.Parameter("?req_data_inicial", requerimento.Req_data_inicial));
-            objCommand.Parameters.Add(Mapped.Parameter("?req_data_final", requerimento.Req_data_final));
-            objCommand.Parameters.Add(Mapped.Parameter("?req_resolvido", requerimento.Req_resolvido));
-            objCommand.Parameters.Add(Mapped.Parameter("?pro_matricula", requerimento.Pro_matricula.Pro_matricula));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_codigo", requerimento.CodigoReq));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_assunto",requerimento.Assunto));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_dt_requisicao", requerimento.DataReq));
+            objCommand.Parameters.Add(Mapped.Parameter("?pro_matricula", requerimento.MatriculaPro));
+            objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", requerimento.CodigoGrupo.Gru_codigo));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_status", requerimento.Status));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_categoria", requerimento.Categoria));
             objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
@@ -71,7 +72,7 @@ public class Requerimento_DB{
             string sql = "DELETE FROM req_requerimento WHERE req_codigo = ?codigo ";
             conexao = Mapped.Connection();
             objComando = Mapped.Command(sql, conexao);
-            objComando.Parameters.Add(Mapped.Parameter("?req_codigo", codigo));
+            objComando.Parameters.Add(Mapped.Parameter("?codigo", codigo));
             objComando.ExecuteNonQuery();
             conexao.Close();
             objComando.Dispose();
@@ -92,17 +93,17 @@ public class Requerimento_DB{
             IDataReader objDataReader;
             objConnection = Mapped.Connection();
             objCommnad = Mapped.Command("SELECT * FROM req_requerimento WHERE req_codigo = ?codigo", objConnection);
-            objCommnad.Parameters.Add(Mapped.Parameter("?req_codigo", codigo));
+            objCommnad.Parameters.Add(Mapped.Parameter("?codigo", codigo));
             objDataReader = objCommnad.ExecuteReader();
             while (objDataReader.Read()){
                 objRequerimento = new Requerimento();
-                objRequerimento.Req_codigo = Convert.ToInt32(objDataReader["req_codigo"]);
-                objRequerimento.Req_descricao = objDataReader["req_descricao"].ToString();
-                objRequerimento.Req_data_requisicao = Convert.ToDateTime(objDataReader["req_data_requisicao"]);
-                objRequerimento.Req_data_inicial = Convert.ToDateTime(objDataReader["req_data_inicial"]);
-                objRequerimento.Req_data_final = Convert.ToDateTime(objDataReader["req_data_final"]);
-                objRequerimento.Req_resolvido = Convert.ToBoolean(objDataReader["req_resolvido"]);
-                objRequerimento.Pro_matricula.Pro_matricula = Convert.ToInt32(objDataReader["pro_matricula"]);               
+                objRequerimento.CodigoReq = Convert.ToInt32(objDataReader["req_codigo"]);
+                objRequerimento.Assunto = objDataReader["req_assunto"].ToString();
+                objRequerimento.DataReq = Convert.ToDateTime(objDataReader["req_dt_requisicao"]);
+                objRequerimento.MatriculaPro = objDataReader["pro_matricula"].ToString();
+                objRequerimento.CodigoGrupo.Gru_codigo = Convert.ToInt32(objDataReader["gru_codigo"]);
+                objRequerimento.Status = Convert.ToInt32(objDataReader["req_status"]);
+                objRequerimento.Categoria = objDataReader["pro_matricula"].ToString();               
             }
             objDataReader.Close();
             objConnection.Close();
@@ -114,7 +115,7 @@ public class Requerimento_DB{
         catch (Exception e){
             return null;
         }
-    }
+    }*/
 
     //SELECT ALL
     public static DataSet SelectAll(){
@@ -125,6 +126,24 @@ public class Requerimento_DB{
         objConnection = Mapped.Connection();
         objCommand = Mapped.Command("SELECT * FROM req_requerimento ORDER BY req_codigo", objConnection);
         objDataAdapter = Mapped.Adapter(objCommand);
+        objDataAdapter.Fill(ds);
+        objConnection.Close();
+        objCommand.Dispose();
+        objConnection.Dispose();
+        return ds;
+    }
+
+    //SELECT STATUS
+    public static DataSet SelectS(int codigo)
+    {
+        DataSet ds = new DataSet();
+        IDbConnection objConnection;
+        IDbCommand objCommand;
+        IDataAdapter objDataAdapter;
+        objConnection = Mapped.Connection();
+        objCommand = Mapped.Command("SELECT * FROM req_requerimento WHERE req_status=?codigo ORDER BY req_codigo DESC", objConnection);
+        objCommand.Parameters.Add(Mapped.Parameter("?codigo", codigo));
+        objDataAdapter = Mapped.Adapter(objCommand);                            
         objDataAdapter.Fill(ds);
         objConnection.Close();
         objCommand.Dispose();

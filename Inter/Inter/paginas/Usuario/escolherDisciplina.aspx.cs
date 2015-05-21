@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Inter.Funcoes;
+using Interdisciplinar;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,7 +14,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     protected void Page_PreInit(object sender, EventArgs e)
     {
         // Se sessão estiver nula redireciona para o bloqueio Url
-        if (Session["login"] == null)
+        if (Session["Professor"] == null)
         {
             Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
         }
@@ -21,48 +23,66 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        // Se não for postback 
+        i = 0;
+        // SE NÃO FOR POSTBACK 
         if (!IsPostBack)
         {
-            Pessoas pes = new Pessoas();
 
-            string NomeUser = Session["login"].ToString(); //recebe email do professor logado
-            pes = Pessoas_DB.Select(NomeUser); //cria um obj pessoa do professor, decorrente de um select utilizando seu email como parametro
-            Session["nomeProf"] = pes.Pes_nome; //!! Criar sessão separado para admin
+            Professor prof = new Professor();
+            prof = (Professor) Session["Professor"];
 
-            int codProf = Professor_DB.SelectPes(pes.Pes_codigo); //seleciona o código pessoa para verificar qual o cod do Prof
-
-            CarregarGrid(codProf); //carrega a grid utilizando o cod do Prof
-            auxRb = -1; //selecionar qual linha ta selecionada do rb
+            CarregarGrid(); //CARREGA A GRID
+            auxRb = -1; //SELECIONAR QUAL LINHA TA SELECIONADA DO RB
         }
     }
 
 
 
-    public void CarregarGrid(int proMatricula)
+    public void CarregarGrid()
     {
-        DataSet ds = Funcoes_DB.SelectDisciplina(proMatricula); //criando um data set oriundo de um select contendo as disciplinas relacionadas ao professor
+        Professor prof = new Professor();
+        prof = (Professor)Session["Professor"];
+        DataSet ds = (DataSet)Session["DataSetCalendarioAndProfessor"];        
+        if (Session["DataSetCalendarioAndProfessor"] == null)
+        {
+            Calendario cal = new Calendario();
+            cal = Calendario.SelectbyAtual();
+            ds = Professor.SelectAllPIsbyCalendarioAndProfessor(cal.AnoSemestreAtual, cal.Codigo, prof.Matricula);
+            Session["DataSetCalendarioAndProfessor"] = ds;
+        }
+       
         int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
-
         //se qtd for maior que zero, ou seja, se tiver dados no data set
         if (qtd > 0)
         {
             gdv.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
             gdv.DataBind(); //preenche o grid view com os dados
-            lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
-        }
-
+        }       
+        lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
     }
 
+    int i = 0;
     // CRIAR ÍCONE DISCIPLINA MÃE
     protected void gdv_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+        DataSet ds = new DataSet();
+        ds = (DataSet)Session["DataSetCalendarioAndProfessor"];
+        string[] vetorReturnFunction = new string[3];
+
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[i]["disciplina"].ToString());
+            e.Row.Cells[1].Text = vetorReturnFunction[0];
+            e.Row.Cells[2].Text = vetorReturnFunction[1];
+            e.Row.Cells[3].Text = vetorReturnFunction[2];
+            i++;
+        }
+
         //e = tdos eventos relacionados a um componente, pega a linha e verifica se é do tipo dados
         if (e.Row.RowType == DataControlRowType.DataRow)
-        {    
+        {
             //se for mãe
-            if (e.Row.Cells[4].Text.ToLower().Equals("true"))
+            if (e.Row.Cells[4].Text.Equals("MAE"))
             {
                 //ícone da estrelinha
                 e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-star'></span>";
@@ -81,6 +101,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     {
         //linha não selecionada
         int linhaSelecionada = -1;
+        int codAtr = 0;
 
         foreach (GridViewRow grid in gdv.Rows)//percorrer toda a grid
         {
@@ -89,7 +110,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
 
             if (rb.Checked)
             {
-                linhaSelecionada = grid.RowIndex;//recebe a linha selecionada
+                linhaSelecionada = grid.RowIndex;//recebe a linha selecionada                
                 break;
             }
         }
@@ -106,11 +127,13 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             Session["disciplina"] = disciplina;
             if (mae == "<span class='glyphicon glyphicon-star'></span>")
             {
-                Session["mae"] = "True";
+                Session["mae"] = "MAE";
+                codAtr = Convert.ToInt32(gdv.Rows[linhaSelecionada].Cells[5].Text);
+                Session["codAtr"] = codAtr;
             }
             else
             {
-                Session["mae"] = "False";
+                Session["mae"] = "FILHA";
             }
             //redireciona pra home
             Response.Redirect("home.aspx");

@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_escolherDisciplina" Codebehind="escolherDisciplina.aspx.cs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_escolherDisciplina" CodeBehind="escolherDisciplina.aspx.cs" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
     <script type="text/javascript">
-        
+
         // Modal Dialog - solicita a escolha de uma disciplina se o usuário não escolher nenhuma
         // Chamando essa modal e configurando 
         // Criando as configurações da modal
@@ -52,11 +52,16 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
+                                <asp:TemplateField HeaderText="Curso"></asp:TemplateField>
 
-                                <asp:BoundField DataField="cur_sigla" HeaderText="Curso" />
-                                <asp:BoundField DataField="trm_nome" HeaderText="Semestre" />
-                                <asp:BoundField DataField="dge_sigla" HeaderText="Disciplina" />
-                                <asp:BoundField DataField="adi_mae" HeaderText="Disciplina Mãe" />
+                                <asp:TemplateField HeaderText="Semestre"></asp:TemplateField>
+
+                                <asp:TemplateField HeaderText="Disciplina"></asp:TemplateField>
+
+                                <asp:BoundField DataField="tipo" HeaderText="Disciplina Mãe" />
+
+                                <asp:boundfield datafield="atr_codigo" headertext="código atribuição" />
+
 
                             </Columns>
 
@@ -86,13 +91,13 @@
         </div>
     </div>
 
-    
+
     <!-- Modal dialog - configurando o texto que vai aparecer -->
     <div id="boxSelecioneDisc" title="Selecione uma disciplina!" style="display: none;">
         <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&nbsp Para prosseguir você deve selecionar uma disciplina! </p>
     </div>
 
-    
+
 
 
 </asp:Content>

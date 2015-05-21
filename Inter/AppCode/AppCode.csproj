@@ -30,9 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=5.1.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+    <Reference Include="Interdisciplinar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\MySql.Data.dll</HintPath>
+      <HintPath>DLLFatec\Interdisciplinar.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLFatec\ddl mysql 6 6 5\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -44,48 +48,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Aluno.cs" />
-    <Compile Include="Classes\Atribuicao_Disciplina.cs" />
+    <Compile Include="Classes\Atribuicao_PI.cs" />
     <Compile Include="Classes\Criterios_Gerais.cs" />
     <Compile Include="Classes\Criterio_PI.cs" />
-    <Compile Include="Classes\Curso.cs" />
     <Compile Include="Classes\Disciplinas_Gerais.cs" />
-    <Compile Include="Classes\Disciplina_Aluno.cs" />
     <Compile Include="Classes\Eventos.cs" />
     <Compile Include="Classes\Grupo.cs" />
     <Compile Include="Classes\Grupo_Aluno.cs" />
     <Compile Include="Classes\Historico_Disciplina.cs" />
     <Compile Include="Classes\Media_Disciplina.cs" />
-    <Compile Include="Classes\Msg.cs" />
+    <Compile Include="Classes\Mensagem.cs" />
+    <Compile Include="Classes\Perfil.cs" />
     <Compile Include="Classes\Pessoas.cs" />
-    <Compile Include="Classes\Professor.cs" />
     <Compile Include="Classes\Projeto_Inter.cs" />
     <Compile Include="Classes\Requerimento.cs" />
     <Compile Include="Classes\Semestre_Ano.cs" />
     <Compile Include="Classes\Ticket.cs" />
-    <Compile Include="Classes\Turma.cs" />
-    <Compile Include="Classes\Turno.cs" />
     <Compile Include="Comuns\Funcoes.cs" />
     <Compile Include="Mapped.cs" />
-    <Compile Include="Persistencia\Aluno_DB.cs" />
-    <Compile Include="Persistencia\Atribuicao_Disciplina_DB.cs" />
     <Compile Include="Persistencia\Criterios_Gerais_DB.cs" />
-    <Compile Include="Persistencia\Curso_DB.cs" />
     <Compile Include="Persistencia\Disciplinas_Gerais_DB.cs" />
-    <Compile Include="Persistencia\Disciplina_Aluno_DB.cs" />
     <Compile Include="Persistencia\Funcoes_DB.cs" />
+    <Compile Include="Persistencia\Perfil_DB.cs" />
     <Compile Include="Persistencia\Pessoas_DB.cs" />
-    <Compile Include="Persistencia\Professor_DB.cs" />
+    <Compile Include="Persistencia\Mensagem_DB.cs" />
     <Compile Include="Persistencia\Projeto_Inter_DB.cs" />
     <Compile Include="Persistencia\Requerimento_DB.cs" />
     <Compile Include="Persistencia\Semestre_Ano_DB.cs" />
-    <Compile Include="Persistencia\Turma_DB.cs" />
-    <Compile Include="Persistencia\Turno_DB.cs" />
+    <Compile Include="Persistencia\Ticket_DB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\MySql.Data.dll" />
+    <Content Include="DLLFatec\ddl mysql 6 6 5\MySql.Data.dll" />
+    <Content Include="DLLFatec\Interdisciplinar.dll" />
+    <Content Include="DLLFatec\Interdisciplinar.pdb" />
+    <Content Include="DLLFatec\MySql.Data.dll" />
+    <Content Include="DLLFatec\Retornos Metodos Obj.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

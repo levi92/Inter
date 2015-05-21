@@ -74,15 +74,15 @@ using System.Data;
         protected void gdvCriterios_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             Label lblCodigo = (Label)gdvCriteriosAtivos.Rows[e.RowIndex].FindControl("lblCodigo");
-            TextBox txtNome = (TextBox)gdvCriteriosAtivos.Rows[e.RowIndex].FindControl("txtNome");
+            Label lblNome = (Label)gdvCriteriosAtivos.Rows[e.RowIndex].FindControl("lblNome");
             TextBox txtDescricao = (TextBox)gdvCriteriosAtivos.Rows[e.RowIndex].FindControl("txtDescricao");
             Criterios_Gerais cri = new Criterios_Gerais();
             cri.Cge_codigo = Convert.ToInt32(lblCodigo.Text);
-            cri.Cge_nome = txtNome.Text;
+            cri.Cge_nome = lblNome.Text;
             cri.Cge_descricao = txtDescricao.Text;
             if (Criterios_Gerais_DB.Update(cri) == 0)
             {
-                lblMsg.Text = "Critério atualizado com sucesso!";
+                lblMsg.Text = "Critério "+lblNome.Text+" atualizado com sucesso!";
                 gdvCriteriosAtivos.EditIndex = -1;
                 CarregarGridAtivos();
                 UpdatePanelAtivados.Update();
@@ -90,7 +90,7 @@ using System.Data;
             }
             else
             {
-                lblMsg.Text = "Erro ao atualizar!";
+                lblMsg.Text = "Erro ao atualizar "+lblNome.Text+"!";
             }
         }
 
@@ -181,10 +181,10 @@ using System.Data;
         protected void btnCancelarNovoCriterio_Click(object sender, EventArgs e)
         {
 
-            txtNomeNovoCriterio.Text = "";
-            txtDescricaoNovoCriterio.Text = "";
             ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalCriacaoCriterio", "FechaModalCriacaoCriterio();", true);
             lblMsg.Text = "";
+            txtNomeNovoCriterio.Text = "";
+            txtDescricaoNovoCriterio.Text = "";
             
         }
 

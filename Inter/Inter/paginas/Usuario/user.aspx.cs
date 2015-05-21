@@ -99,20 +99,20 @@ public partial class Paginas_Usuario_user : System.Web.UI.Page
     public void CarregarGrid()
     {
         //DataSet ds = new DataSet();
-        DataSet ds = Professor_DB.SelectAll();
-        int qtd = ds.Tables[0].Rows.Count;
-        if (qtd > 0)
-        {
-            gdv.DataSource = ds.Tables[0].DefaultView;
-            gdv.DataBind();
-            gdv.Visible = true;
-            //lbl.Text = "Foram encontrados " + qtd + " de registros";
-        }
-        else
-        {
-            gdv.Visible = false;
-            //lbl.Text = "Não foram encontrado registros...";
-        }
+        //DataSet ds = Professor_DB.SelectAll();
+        //int qtd = ds.Tables[0].Rows.Count;
+        //if (qtd > 0)
+        //{
+        //    gdv.DataSource = ds.Tables[0].DefaultView;
+        //    gdv.DataBind();
+        //    gdv.Visible = true;
+        //    //lbl.Text = "Foram encontrados " + qtd + " de registros";
+        //}
+        //else
+        //{
+        //    gdv.Visible = false;
+        //    //lbl.Text = "Não foram encontrado registros...";
+        //}
     }
 
     //ScriptManager.RegisterClientScriptBlock(this, typeof(System.Web.UI.Page), "LoginFail", "LoginFail();", true);

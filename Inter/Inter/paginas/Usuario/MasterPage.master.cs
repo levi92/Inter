@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interdisciplinar;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,21 +12,25 @@ public partial class paginas_Usuario_MasterPage : System.Web.UI.MasterPage
     protected void Page_Load(object sender, EventArgs e)
     {
         // Verificar se a sessão está vazia e redirecionar para o bloqueio Url
-        if (Session["login"] == null)
+        if (Session["Professor"] == null)
         {
             Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
         }
 
+        Professor prof = new Professor();
+        prof = (Professor)Session["Professor"];
+        string[] nomeProf = prof.Nome.Split(' ');
+
         // Colocando os conteudos da sessão atual (criada no login) na tabela do topo
-        professorLogado.Text = Session["nomeProf"].ToString();
+        professorLogado.Text = nomeProf[0]+" "+nomeProf[nomeProf.Length-1];
         cursoLogado.Text = Session["curso"].ToString();
         semestreLogado.Text = Session["semestre"].ToString();
         disciplinaLogado.Text = Session["disciplina"].ToString();
 
         // Colocar ícones específicos para mãe e para filha
-        if (Session["mae"] == "True")
+        if (Session["mae"] == "MAE")
             maeLogado.Text = "<span class='glyphicon glyphicon-star'></span>";
-        else if (Session["mae"] == "False")
+        else if (Session["mae"] == "FILHA")
             maeLogado.Text = "<span class='glyphicon glyphicon-minus'></span>";
     }
 
@@ -36,6 +41,7 @@ public partial class paginas_Usuario_MasterPage : System.Web.UI.MasterPage
         Session["semestre"] = "";
         Session["disciplina"] = "";
         Session["mae"] = "";
+        Session["codAtr"] = "";
 
         Response.Redirect("escolherDisciplina.aspx");
 

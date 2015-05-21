@@ -34,11 +34,7 @@ namespace Inter.paginas.Administrador
         protected void Btn_Prof(object sender, EventArgs e)
         {
             Session["perfil"] = "escolheu";
-            Session["curso"] = "";
-            Session["semestre"] = "";
-            Session["disciplina"] = "";
-            Session["mae"] = "";
-            Response.Redirect("../Usuario/escolherDisciplina.aspx");
+            Response.Redirect("~/paginas/Usuario/escolherDisciplina.aspx");           
         }
 
        

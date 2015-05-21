@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Data;
 
-
 public class Criterios_Gerais_DB{
     public static int Insert(Criterios_Gerais criterio){
         int retorno = 0;
@@ -244,4 +243,7 @@ public class Criterios_Gerais_DB{
         }
         return retorno;
     }
+
+
+
 }

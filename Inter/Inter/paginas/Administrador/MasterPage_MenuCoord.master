@@ -21,8 +21,6 @@
                         <span class="glyphicon glyphicon-bullhorn"></span>&nbsp Solicitações</asp:HyperLink></li>
                     <li><asp:HyperLink ID="icone3" runat="server" NavigateUrl="~/paginas/Administrador/criterios.aspx" ClientIDMode="Static" Enabled="True">
                         <span class="glyphicon glyphicon-list"></span>&nbsp Critérios</asp:HyperLink></li>
-                    <li><asp:HyperLink ID="icone4" runat="server" NavigateUrl="~/paginas/Administrador/usuarios.aspx" ClientIDMode="Static" Enabled="True">
-                        <span class="glyphicon glyphicon-user"></span>&nbsp Usuários</asp:HyperLink></li>
                     <li><asp:HyperLink ID="icone5" runat="server" NavigateUrl="~/paginas/Administrador/projetos.aspx" ClientIDMode="Static" Enabled="True">
                         <span class="glyphicon glyphicon-folder-open"></span>&nbsp Projetos</asp:HyperLink></li>  
                     

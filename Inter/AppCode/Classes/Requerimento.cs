@@ -1,50 +1,58 @@
 ﻿using System;
+using Interdisciplinar;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
+
+/*Requerimento = Solicitação = Ticket*/
 
 
 public class Requerimento{
 
-    private int req_codigo;
-    private string req_descricao;
-    private DateTime? req_data_requisicao, req_data_inicial, req_data_final;
-    private bool req_resolvido;
-    private Professor pro_matricula;
-    
+    //CHAVE PRIMÁRIA.Identificador do requerimento.
+    public int CodigoReq { get; set;  }
+    //Identificador do professor que abriu o requerimento.
+    public string MatriculaPro { get; set; }
+    //Identificador do grupo ao qual a mudança de nota foi requerida.
+    public Grupo CodigoGrupo { get; set; }
+    //Assunto que o Requerimento aborda.
+    public string Assunto { get; set; }
+    //Data e hora de criação do requerimento.
+    public DateTime DataReq { get; set; }
+    //Status do ticket: aberto(0), em andamento(1) e resolvido(2).
+    public int Status { get; set; }
+    //Categoria em que o ticket se encaixa.
+    public string Categoria { get; set; }
 
-    public int Req_codigo{
-        get { return req_codigo; }
-        set { req_codigo = value; }
+    public Requerimento(string matricula, Grupo grupo, string assunto, DateTime data, int status, string categoria)
+    {
+        MatriculaPro = matricula;
+        CodigoGrupo = grupo;
+        Assunto = assunto;
+        DataReq = data;
+        Status = status;
+        Categoria = categoria;
     }
-    public string Req_descricao{
-        get { return req_descricao; }
-        set { req_descricao = value; }
+    //Constructor do select
+    public Requerimento(int codigo, string matricula, Grupo grupo, string assunto, DateTime data, int status, string categoria)
+    {
+        CodigoReq = codigo;
+        MatriculaPro = matricula;
+        CodigoGrupo = grupo;
+        Assunto = assunto;
+        DataReq = data;
+        Status = status;
+        Categoria = categoria;
     }
-
-    public DateTime? Req_data_final{
-        get { return req_data_final; }
-        set { req_data_final = value; }
+    //Constructor do Insert
+    public Requerimento(string matricula, Grupo grupo, string assunto, string categoria)
+    {
+        MatriculaPro = matricula;
+        CodigoGrupo = grupo;
+        Assunto = assunto;
+        Categoria = categoria;
+        DataReq = DateTime.Now; //Pega na hora da criação o tempo do servidor
+        Status = 0; //Por padrão: Status "em aberto"
     }
-
-    public DateTime? Req_data_inicial{
-        get { return req_data_inicial; }
-        set { req_data_inicial = value; }
-    }
-
-    public DateTime? Req_data_requisicao{
-        get { return req_data_requisicao; }
-        set { req_data_requisicao = value; }
-    }
-
-    public bool Req_resolvido{
-        get { return req_resolvido; }
-        set { req_resolvido = value; }
-    }
-
-    public global::Professor Pro_matricula{
-        get { return pro_matricula; }
-        set { pro_matricula = value; }
-    }
-
 }

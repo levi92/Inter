@@ -9,6 +9,7 @@ using Inter.Funcoes;
 using AppCode.Persistencia;
 using System.Web.Services;
 using System.Web.Script.Serialization;
+using Interdisciplinar;
 //using System.Runtime.Serialization.Json;
 
 
@@ -18,7 +19,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     protected void Page_PreInit(object sender, EventArgs e)
     {
         //VERIFICAR SESSAO LOGIN
-        if (Session["login"] == null)
+        if (Session["Professor"] == null)
         {
             Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
         }
@@ -36,16 +37,19 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
         //BLOQUEIO SE NÃO FOR DISCIPLINA-MÃE
 
-        if (Session["mae"] == "False")
+        if (Session["mae"] == "FILHA")
         {
             Response.Redirect("home.aspx");
-        }     
+        }
 
 
         //SE NÃO FOR POSTBACK VAI CARREGAR OS MÉTODOS ABAIXO DESCRITOS
         if (!IsPostBack)
         {
             CarregaCriGerais();
+            CarregaAlunosCadastrarPi();
+            CarregarDisciplinasEnvolvidas();
+            updPanelGrupos.Update();
             PegarAnoeSemestreAno();
             PegarUltimoCodPI();
             lblCursoAut.Text = Session["curso"].ToString();
@@ -68,11 +72,81 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     // ******************  ETAPA 1 - CADASTRO PI, CADASTRO DE DATAS ******************
     // *******************************************************************************
+
+    private void CarregarDisciplinasEnvolvidas(){
+
+        
+        Calendario cal = new Calendario();
+        DataSet ds = new DataSet();
+        cal = Calendario.SelectbyAtual();
+        ds = Professor.SelectAllPIsbyCalendario(cal.Codigo, cal.AnoSemestreAtual);
+        int qtd = ds.Tables[0].Rows.Count;
+
+        Table tableDisciplina = new Table();
+        tableDisciplina.CssClass = "gridView";
+        PainelDisciplinas.Controls.Add(tableDisciplina);
+        int row = ds.Tables[0].Rows.Count;
+        
+        TableHeaderCell th = new TableHeaderCell();
+        TableHeaderRow thr = new TableHeaderRow();
+        
+        //ADICIONANDO CABEÇALHO  DISCIPLINAS / MÃE-FILHAS
+        th = new TableHeaderCell();
+        th.Text = "Disciplinas";
+        thr.Cells.Add(th);
+        tableDisciplina.Rows.Add(thr);
+        
+        th = new TableHeaderCell();
+        th.Text = "Mãe/Filha";
+        thr.Cells.Add(th);
+        tableDisciplina.Rows.Add(thr);       
+
+        Label lblDisciplinas = new Label();
+        string[] vetorReturnFunction = new string[3];
+
+        for (int i = 0; i < row; i++){
+            TableRow rows = new TableRow();
+            for (int j = 0; j < 2; j++)
+            {
+                TableCell cell = new TableCell();
+                vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[i]["disciplina"].ToString());
+                if ((vetorReturnFunction[0] == Session["Curso"].ToString()) && (vetorReturnFunction[1] == Session["Semestre"].ToString()))
+                {                    
+                    if (j == 0){
+                        lblDisciplinas = new Label();
+                        lblDisciplinas.Text = vetorReturnFunction[2].ToString();
+                        cell.Controls.Add(lblDisciplinas);
+                    }
+                    else
+                    {
+                        lblDisciplinas = new Label();
+                        if (ds.Tables[0].Rows[i]["tipo"].ToString() == "MAE")
+                        {
+                            //ícone da estrelinha
+                            lblDisciplinas.Text =  "<span class='glyphicon glyphicon-star'></span>";
+                        }
+                        else
+                        {
+                            //ícone de tracinho
+                            lblDisciplinas.Text = "<span class='glyphicon glyphicon-minus'></span>";
+                        }                        
+                        cell.Controls.Add(lblDisciplinas);
+                    }
+                    rows.Cells.Add(cell);
+                }                
+            }
+            tableDisciplina.Rows.Add(rows);
+        }           
+    }
+
     private void PegarUltimoCodPI()
     {
         // PEGAR ULTIMO CODIGO DE PI E ACRESCENTAR 1
         int cod = Projeto_Inter_DB.SelectUltimoCod();
         int codMais = cod + 1;
+        if (codMais < 0) {
+            codMais = 1;
+        }
         lblCodigoPiAut.Text = codMais.ToString();
     }
 
@@ -120,6 +194,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         return dadosEventos;
 
     }
+
 
 
     // ****************** ETAPA 2 - CADASTRO DE CRITÉRIOS ******************
@@ -176,8 +251,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         }
     }
 
-    public static List<string> liCritTip = new List<string>();
-    public static List<string> liCritCod = new List<string>();
+    public static List<string> liCritTip = new List<string>(); //PARA ARMAZENAR O QUE VAI APARECER NO TIP
+    public static List<string> liCritCod = new List<string>(); //PARA ARMAZENAR O CÓDIGO E COMPARAR COM O VALUE PARA JOGAR NO LISTITEM CERTO O TIP
     public static int UltCodCrit = 0;
 
     //MÉTODO PARA CARREGAR OS CRITÉRIOS GERAIS DO BANCO NO COMPONENTE LISTBOX
@@ -213,7 +288,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         txtNomeCriterio.Style.Clear();
         txtDescricaoCriterio.Style.Clear();
 
-        if (!String.IsNullOrEmpty(txtNomeCriterio.Text) && !String.IsNullOrEmpty(txtDescricaoCriterio.Text))
+        if (!String.IsNullOrEmpty(txtNomeCriterio.Text.Trim()) && !String.IsNullOrEmpty(txtDescricaoCriterio.Text.Trim()))
         {
             //ADICIONA OS NOVOS CRITÉRIOS NAS LISTAS
             ListItem li = new ListItem();
@@ -233,7 +308,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             txtNomeCriterio.Text = "";
             txtDescricaoCriterio.Text = "";
         }
-        else if (String.IsNullOrEmpty(txtNomeCriterio.Text) && String.IsNullOrEmpty(txtDescricaoCriterio.Text))
+        else if (String.IsNullOrEmpty(txtNomeCriterio.Text.Trim()) && String.IsNullOrEmpty(txtDescricaoCriterio.Text.Trim()))
         {
             lblMsgCriterio.Text = "<span class='glyphicon glyphicon-remove-circle'></span>&nbsp Campo obrigatório.";
             lblMsgCriterio.Style.Add("color", "red");
@@ -241,7 +316,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             txtNomeCriterio.Style.Add("border", "solid 1px red");
             txtDescricaoCriterio.Style.Add("border", "solid 1px red");
         }
-        else if (String.IsNullOrEmpty(txtNomeCriterio.Text))
+        else if (String.IsNullOrEmpty(txtNomeCriterio.Text.Trim()))
         {
             lblMsgCriterio.Text = "<span class='glyphicon glyphicon-remove-circle'></span>&nbsp Campo obrigatório.";
             lblMsgCriterio.Style.Add("color", "red");
@@ -278,10 +353,11 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     {
         txtNomeCriterio.Text = "";
         txtDescricaoCriterio.Text = "";
+        txtNomeCriterio.Style.Clear();
+        txtDescricaoCriterio.Style.Clear();
         lblMsgCriterio.Text = "";
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalCriacaoCriterio", "FechaModalCriacaoCriterio();", true);
-
     }
 
     // ******************* ETAPA 3 - ADICIONAR PESO AOS CRITÉRIOS ********************
@@ -329,7 +405,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         }
 
     }
-   
+
 
     //VERIFICAR SE OS TEXTBOXS DOS PESOS ESTÃO EM BRANCO OU INVÁLIDOS
     protected int verificarPesoVazio()
@@ -383,20 +459,22 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     protected void ContinuarEtapa4_Click(object sender, EventArgs e)
     {
-        if (verificarPesoVazio() == 1)
+        if (verificarPesoVazio() == 1) // QUANDO TEXTBOX ESTÁ VAZIO
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
             //CHAMA A MODAL PESO VAZIO
             ScriptManager.RegisterStartupScript(this, this.GetType(), "MostraModalPesoUm", "MostraModalPesoUm();", true);
         }
-        else if (verificarPesoVazio() == 2)
+        else if (verificarPesoVazio() == 2) // VALOR DE PESO INVÁLIDO
         {
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
         }
-        else
+        else // SECESSO 
         {
             lblMsgPesosCriterios.Visible = false;
+            CarregaTipAluno();
+            updPanelGrupos.Update();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "Modaletapa4('p13');", true);
 
         }
@@ -416,7 +494,69 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     // ******************** ETAPA 4 - CRIAR GRUPO ******************
     // *************************************************************
-    
+    public static List<string> liNomeAlunoTip = new List<string>(); //PARA ARMAZENAR O QUE VAI APARECER NO TIP
+    public static List<string> liMatriculaAluno = new List<string>(); //PARA ARMAZENAR O CÓDIGO E COMPARAR COM O VALUE PARA JOGAR NO LISTITEM CERTO O TIP
+
+    private void CarregaTipAluno()
+    {
+        string[] vetTip = liNomeAlunoTip.ToArray();
+        string[] vetCod = liMatriculaAluno.ToArray();
+        foreach (ListItem li in listaAlunoGeral.Items)
+        {
+            for (int j = 0; j < vetCod.Length; j++)
+            {
+                if (li.Value == vetCod[j])
+                {
+                    li.Attributes.Add("title", vetTip[j]);
+                }
+            }
+
+        }
+
+        foreach (ListItem li in listaAlunosGrupo.Items)
+        {
+            for (int j = 0; j < vetCod.Length; j++)
+            {
+                if (li.Value == vetCod[j])
+                {
+                    li.Attributes.Add("title", vetTip[j]);
+                }
+            }
+
+        }
+    }
+
+    //MÉTODO PARA CARREGAR OS ALUNOS GERAIS DO BANCO NO COMPONENTE LISTBOX
+    private void CarregaAlunosCadastrarPi()
+    {
+        //DATASET VAI RECEBER TODOS OS CRITÉRIOS DO BANCO DE DADOS PELO SELECTALL
+        
+
+        DataSet dsAluno = new DataSet();
+        int codAtr = (int)Session["codAtr"];
+        dsAluno = Matricula.ListaPresenca(codAtr);      
+        int qtd = dsAluno.Tables[0].Rows.Count;
+
+        //se houver alunos 
+        if (qtd > 0)
+        {
+            //vai rodar todas as linhas do dataset e jogar os dados na listbox 
+            foreach (DataRow dr in dsAluno.Tables[0].Rows)
+            {
+                ListItem li = new ListItem();
+                li.Value = dr["Matricula"].ToString();
+                li.Text = Funcoes.SplitNomes(dr["Nome"].ToString());
+                li.Attributes.Add("title", dr["Nome"].ToString());
+                liNomeAlunoTip.Add(dr["Nome"].ToString());
+                liMatriculaAluno.Add(dr["Matricula"].ToString());
+                //adicionando código e nome do critério aos critérios encontrados no dataset
+                listaAlunoGeral.Items.Add(li);
+
+            }
+            //gdvdisciplinasenvolvidas.DataSource = dsAluno;
+            //gdvdisciplinasenvolvidas.DataBind();
+        }
+    }
 
     //EVENTO QUE MOVE OS ALUNOS DA LISTA GERAL PARA A LISTA ESPECÍFICA DE ALUNOS DAQUELE GRUPO 
     protected void listaAlunoGeral_SelectedIndexChanged(object sender, EventArgs e)
@@ -425,7 +565,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         listaAlunoGeral.Items.RemoveAt(listaAlunoGeral.SelectedIndex);
         listaAlunoGeral.ClearSelection();
         listaAlunosGrupo.ClearSelection();
-
+        CarregaTipAluno();
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
     }
 
@@ -437,9 +577,9 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         listaAlunosGrupo.Items.RemoveAt(listaAlunosGrupo.SelectedIndex);
         listaAlunoGeral.ClearSelection();
         listaAlunosGrupo.ClearSelection();
-
+        CarregaTipAluno();
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
-    }  
+    }
 
     //EVENTO DO BOTÃO VOLTAR: REDIRECIONA PARA A ETAPA ANTERIOR
     protected void LkbVoltarEtapa3_Click(object sender, EventArgs e)
@@ -458,13 +598,15 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     {
         Response.Redirect("home.aspx");
     }
-    
+
 
     //EVENTO DO BOTÃO CONFIRMAR GRUPO: GUARDA O GRUPO ATUAL(COM OS ALUNOS QUE FORAM ESCOLHIDOS) E SUCESSIVAMENTE CRIA NOVO GRUPO
     public static int index = 1; //É UMA CONTROLADORA DO VIEWSTATE (EX: VIEWSTATE["ALUNOS1"]) OBS: PELO INDEX COMEÇAR NO VALOR "1" NÃO HAVERÁ "GRUPO0"
     protected void btnConfirmarGrupo_Click(object sender, EventArgs e)
     {
-        if (! String.IsNullOrEmpty(txtNomeGrupo.Text))
+        CarregaTipAluno();
+
+        if (!String.IsNullOrEmpty(txtNomeGrupo.Text))
         {
             txtNomeGrupo.Style.Clear();
 
@@ -503,7 +645,6 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             txtNomeGrupo.Style.Add("border", "1px solid red");
 
         }
-
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
     }
 
@@ -554,12 +695,14 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         btnExcluirGrupo.Style.Clear();
         btnCancelarEdicao.Style.Clear();
 
+        CarregaTipAluno();
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
     }
 
     //CONFIRMAR EDIÇÃO
     protected void btnConfirmarEdicao_Click(object sender, EventArgs e)
     {
+        CarregaTipAluno();
         int indice = Convert.ToInt32(listaGrupos.SelectedValue); //PEGA O INDICE DO GRUPO QUE IRÁ SER EDITADO 
 
         string listItem = "";
@@ -671,8 +814,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         btnConfirmarEdicao.Style.Add("pointer-events", "none");
         btnCancelarEdicao.Style.Add("pointer-events", "none");
         btnExcluirGrupo.Style.Add("pointer-events", "none");
-
-
+        CarregaTipAluno();
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
     }
 
@@ -724,20 +866,9 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         btnCancelarEdicao.Style.Add("pointer-events", "none");
         btnExcluirGrupo.Style.Add("pointer-events", "none");
         btnConfirmarGrupo.Style.Clear();
-
+        CarregaTipAluno();
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
