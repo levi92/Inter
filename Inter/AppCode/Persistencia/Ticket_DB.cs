@@ -24,6 +24,7 @@ public class Ticket_DB
             objCommand.Parameters.Add(Mapped.Parameter("?tic_estado", ticket.Tic_Estado));
             objCommand.Parameters.Add(Mapped.Parameter("?tic_tipo", ticket.Tic_Tipo));
             objCommand.Parameters.Add(Mapped.Parameter("?tic_prioridade", ticket.Tic_Prioridade));
+            objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
             conexao.Dispose();

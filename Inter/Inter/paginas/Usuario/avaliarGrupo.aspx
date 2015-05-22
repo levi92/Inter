@@ -6,10 +6,22 @@
     <!-- Alterar cor do ícone no menu lateral -->
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#cphConteudo_icone8').addClass('corIcone');
+            $('#cphConteudo_icone8').addClass('corIcone');            
         });
-    </script>
 
+        //FUNÇÃO ZEBRADO NO GRIDVIEW AVALIAR GRUPOS
+        function ZebradoGridAvaliar() {
+            var countRow = $("#tableAvaliar tr").length - 1;
+            for (var i = 0; i < countRow; i++) {
+                if (i % 2 != 0) {                    
+                    $("#cphConteudo_cphConteudoCentral_" + i).css("background-color", "rgba(206, 206, 206, 0.31)");
+                }
+            }
+        }
+
+    </script>
+    
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <!-- Avaliar Grupos (p8) -->
 
@@ -29,52 +41,51 @@
                 <!-- Conteudo Aba Avaliacao !-->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane fade in active" id="avaliacao">
-                        <table class="tabelaAvaliar table ">
-                            <tr>
-                                <td><asp:Label ID="lblGrupo" runat="server" Text="Grupo: "></asp:Label> </td>
-                                <td colspan="4">
-                                    <asp:DropDownList ID="ddlGrupos" runat="server" CssClass="dropDown">
-                                        <asp:ListItem>Sistema de Avaliação de interdisciplinar-Usuário</asp:ListItem>
-                                        <asp:ListItem>Sistema de Avaliação de interdisciplinar-Admin</asp:ListItem>
-                                    </asp:DropDownList>
+                        <asp:UpdatePanel ID="updAvaliar" UpdateMode="Conditional" runat="server">
+                            <ContentTemplate>
 
-                                </td>
-                            </tr>
-                            
-                          
-                        </table>
+                                <table class="tabelaAvaliar">
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="lblGrupo" runat="server" Text="Grupo: "></asp:Label>
+                                        </td>
+                                        <td colspan="4">
+                                            <asp:DropDownList ID="ddlGrupos" runat="server" CssClass="dropDown">
+                                                <asp:ListItem>Sistema de Avaliação de interdisciplinar-Usuário</asp:ListItem>
+                                                <asp:ListItem>Sistema de Avaliação de interdisciplinar-Admin</asp:ListItem>
+                                            </asp:DropDownList>
 
-                        <asp:GridView ID="gdvAvaliarGrupo" runat="server" CellPadding="4" GridLines="None" CssClass="gridView"
-                            AutoGenerateColumns="true">
+                                        </td>
+                                    </tr>
+                                </table>
 
-                            <AlternatingRowStyle CssClass="alt" />
-                            
-                            
-                        </asp:GridView>
-                        
-                        <table class="tabelaAvaliar table">
-                            <tr>
-                                <td>
-                                    <button type="button" class="btn btn-default" id="" disabled="disabled">
-                                        <span class="glyphicon glyphicon-pencil"></span>&nbsp Editar</button></td>
+                                <asp:Panel ID="panelAvaliar" runat="server"></asp:Panel>
 
-                                <td>
-                                    <button type="button" class="btn btn-default" id="">
-                                        <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp Salvar</button></td>
+                                <table class="tabelaAvaliar table">
+                                    <tr>
+                                        <td>
+                                            <button type="button" class="btn btn-default" id="" disabled="disabled">
+                                                <span class="glyphicon glyphicon-pencil"></span>&nbsp Editar</button></td>
 
+                                        <td>
+                                            <asp:LinkButton ID="btnSalvar" runat="server" CssClass="btn btn-default" ToolTip="Salvar a avaliação">
+                                        <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp Salvar
+                                            </asp:LinkButton></td>
+                                        <td>
+                                            <button type="button" class="btn btn-default" id="">
+                                                <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</button></td>
+                                        <td></td>
 
+                                        <td>
+                                            <button type="button" class="btn btn-default" id="btnImprimirAvaliacao" title="Imprimir a tabela de atribuição de notas acima">
+                                                <span class="glyphicon glyphicon-print"></span>&nbsp Imprimir</button>
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
 
-                                <td>
-                                    <button type="button" class="btn btn-default" id="">
-                                        <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</button></td>
-                                <td></td>
-
-                                <td>
-                                    <button type="button" class="btn btn-default" id="btnImprimirAvaliacao" title="Imprimir a tabela de atribuição de notas acima">
-                                        <span class="glyphicon glyphicon-print"></span>&nbsp Imprimir</button>
-                                </td>
-                            </tr>
-                        </table>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </div>
 
                     <!-- Fim Conteudo Aba Avaliacao !-->
@@ -93,6 +104,8 @@
             </div>
         </div>
     </div>
+
+    <asp:HiddenField ID="valorPeso" runat="server" ClientIDMode="Static" />
 
 </asp:Content>
 

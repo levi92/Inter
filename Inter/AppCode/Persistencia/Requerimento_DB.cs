@@ -24,6 +24,7 @@ public class Requerimento_DB{
             objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", requerimento.CodigoGrupo.Gru_codigo));
             objCommand.Parameters.Add(Mapped.Parameter("?req_status", requerimento.Status));
             objCommand.Parameters.Add(Mapped.Parameter("?req_categoria", requerimento.Categoria));
+            objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
             conexao.Dispose();
@@ -34,7 +35,7 @@ public class Requerimento_DB{
         return retorno;
     }
 
-    //UPDATE
+    /*UPDATE
     public static int Update(Requerimento requerimento){
         int retorno = 0;
         try{
@@ -114,7 +115,7 @@ public class Requerimento_DB{
         catch (Exception e){
             return null;
         }
-    }
+    }*/
 
     //SELECT ALL
     public static DataSet SelectAll(){
@@ -125,6 +126,24 @@ public class Requerimento_DB{
         objConnection = Mapped.Connection();
         objCommand = Mapped.Command("SELECT * FROM req_requerimento ORDER BY req_codigo", objConnection);
         objDataAdapter = Mapped.Adapter(objCommand);
+        objDataAdapter.Fill(ds);
+        objConnection.Close();
+        objCommand.Dispose();
+        objConnection.Dispose();
+        return ds;
+    }
+
+    //SELECT STATUS
+    public static DataSet SelectS(int codigo)
+    {
+        DataSet ds = new DataSet();
+        IDbConnection objConnection;
+        IDbCommand objCommand;
+        IDataAdapter objDataAdapter;
+        objConnection = Mapped.Connection();
+        objCommand = Mapped.Command("SELECT * FROM req_requerimento WHERE req_status=?codigo ORDER BY req_codigo DESC", objConnection);
+        objCommand.Parameters.Add(Mapped.Parameter("?codigo", codigo));
+        objDataAdapter = Mapped.Adapter(objCommand);                            
         objDataAdapter.Fill(ds);
         objConnection.Close();
         objCommand.Dispose();

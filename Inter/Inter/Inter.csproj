@@ -150,6 +150,7 @@
     <Content Include="paginas\Usuario\user.aspx" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\cursor.js" />
     <Content Include="scripts\examples.js" />
     <Content Include="scripts\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="scripts\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -172,7 +173,6 @@
     <Content Include="scripts\jquery-ui.min.css" />
     <Content Include="scripts\jquery.easing.1.3.js" />
     <Content Include="scripts\jquery.fullPage.js" />
-    <Content Include="scripts\jquery.hotkeys.js" />
     <Content Include="scripts\jquery.skitter.js" />
     <Content Include="scripts\jquery.skitter.min.js" />
     <Content Include="scripts\Sortable\jquery-1.10.2.js" />

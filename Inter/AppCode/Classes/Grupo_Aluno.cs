@@ -8,7 +8,7 @@ using System.Web;
     {
 
         private Grupo gru_codigo;
-        //private Disciplina_Aluno alu_matricula;
+        private string alu_matricula;
 
         public global::Grupo Gru_codigo
         {
@@ -16,10 +16,10 @@ using System.Web;
             set { gru_codigo = value; }
         }
 
-        //public global::Disciplina_Aluno Alu_matricula
-        //{
-        //    get { return alu_matricula; }
-        //    set { alu_matricula = value; }
-        //}
+        public string Alu_matricula
+        {
+            get { return alu_matricula; }
+            set { alu_matricula = value; }
+        }
 
     }

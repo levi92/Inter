@@ -30,6 +30,15 @@ public partial class paginas_Admin_criterios {
     protected global::System.Web.UI.UpdatePanel UpdatePanelAtivados;
     
     /// <summary>
+    /// lblMsgCriterio control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgCriterio;
+    
+    /// <summary>
     /// gdvCriteriosAtivos control.
     /// </summary>
     /// <remarks>

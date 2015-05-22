@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Atribuicao_PI.cs" />
     <Compile Include="Classes\Criterios_Gerais.cs" />
     <Compile Include="Classes\Criterio_PI.cs" />
     <Compile Include="Classes\Disciplinas_Gerais.cs" />
@@ -65,9 +66,14 @@
     <Compile Include="Classes\Ticket.cs" />
     <Compile Include="Comuns\Funcoes.cs" />
     <Compile Include="Mapped.cs" />
+    <Compile Include="Persistencia\Atribuicao_PI_DB.cs" />
     <Compile Include="Persistencia\Criterios_Gerais_DB.cs" />
     <Compile Include="Persistencia\Disciplinas_Gerais_DB.cs" />
+    <Compile Include="Persistencia\Eventos_DB.cs" />
     <Compile Include="Persistencia\Funcoes_DB.cs" />
+    <Compile Include="Persistencia\Grupo_Aluno_DB.cs" />
+    <Compile Include="Persistencia\Grupo_DB.cs" />
+    <Compile Include="Persistencia\Media_Disciplina_DB.cs" />
     <Compile Include="Persistencia\Perfil_DB.cs" />
     <Compile Include="Persistencia\Pessoas_DB.cs" />
     <Compile Include="Persistencia\Mensagem_DB.cs" />

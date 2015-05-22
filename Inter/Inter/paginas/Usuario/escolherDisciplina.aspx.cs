@@ -24,16 +24,15 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         i = 0;
-        // Se não for postback 
+        // SE NÃO FOR POSTBACK 
         if (!IsPostBack)
         {
 
             Professor prof = new Professor();
             prof = (Professor) Session["Professor"];
-            //int codProf = Professor_DB.SelectPes(pes.Pes_codigo); //seleciona o código pessoa para verificar qual o cod do Prof
 
-            CarregarGrid(); //carrega a grid
-            auxRb = -1; //selecionar qual linha ta selecionada do rb
+            CarregarGrid(); //CARREGA A GRID
+            auxRb = -1; //SELECIONAR QUAL LINHA TA SELECIONADA DO RB
         }
     }
 
@@ -102,6 +101,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     {
         //linha não selecionada
         int linhaSelecionada = -1;
+        int codAtr = 0;
 
         foreach (GridViewRow grid in gdv.Rows)//percorrer toda a grid
         {
@@ -110,7 +110,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
 
             if (rb.Checked)
             {
-                linhaSelecionada = grid.RowIndex;//recebe a linha selecionada
+                linhaSelecionada = grid.RowIndex;//recebe a linha selecionada                
                 break;
             }
         }
@@ -128,6 +128,8 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             if (mae == "<span class='glyphicon glyphicon-star'></span>")
             {
                 Session["mae"] = "MAE";
+                codAtr = Convert.ToInt32(gdv.Rows[linhaSelecionada].Cells[5].Text);
+                Session["codAtr"] = codAtr;
             }
             else
             {

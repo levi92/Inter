@@ -15,14 +15,14 @@ public class Mensagem_DB
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "INSERT INTO msg_mensagem(pro_matricula, req_codigo, per_matricula, msg_dt_Envio, msg_conteudo) VALUES (?pro_matricula, ?req_codigo, ?per_matricula, ?msg_dt_Envio, ?msg_conteudo)";
+            string sql = "INSERT INTO msg_mensagem(matricula, req_codigo, msg_dt_Envio, msg_conteudo) VALUES (?matricula, ?req_codigo, ?msg_dt_Envio, ?msg_conteudo)";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
-            objCommand.Parameters.Add(Mapped.Parameter("?pro_matricula", mensagem.MatriculaPro));
+            objCommand.Parameters.Add(Mapped.Parameter("?matricula", mensagem.MatriculaPro));
             objCommand.Parameters.Add(Mapped.Parameter("?req_codigo", mensagem.CodigoReq));
-            objCommand.Parameters.Add(Mapped.Parameter("?per_matricula", mensagem.MatriculaAdm));
             objCommand.Parameters.Add(Mapped.Parameter("?msg_dt_Envio", mensagem.DataEnvio));
             objCommand.Parameters.Add(Mapped.Parameter("?msg_conteudo", mensagem.Conteudo));
+            objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
             conexao.Dispose();
@@ -34,7 +34,7 @@ public class Mensagem_DB
         return retorno;
     }
 
-    //UPDATE
+    /*UPDATE
     public static int Update(Mensagem mensagem)
     {
         int retorno = 0;
@@ -42,10 +42,10 @@ public class Mensagem_DB
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "UPDATE msg_mensagem SET pro_matricula = ?pro_matricula, req_codigo = ?req_codigo, per_matricula = ?per_matricula, msg_conteudo = ?msg_conteudo, msg_dt_Envio = ?msg_dt_Envio WHERE msg_codigo = ?msg_codigo ";
+            string sql = "UPDATE msg_mensagem SET pro_matricula = ?pro_matricula, req_codigo = ?req_codigo, msg_conteudo = ?msg_conteudo, msg_dt_Envio = ?msg_dt_Envio WHERE msg_codigo = ?msg_codigo ";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
-            objCommand.Parameters.Add(Mapped.Parameter("?msg_codigo", mensagem.CodigoMsg));
+            objCommand.Parameters.Add(Mapped.Parameter("?msg_codigo", mensagem.CodigoMensagem));
             objCommand.Parameters.Add(Mapped.Parameter("?pro_matricula", mensagem.MatriculaPro));
             objCommand.Parameters.Add(Mapped.Parameter("?req_codigo", mensagem.CodigoReq));
             objCommand.Parameters.Add(Mapped.Parameter("?per_matricula", mensagem.MatriculaAdm));
@@ -85,7 +85,7 @@ public class Mensagem_DB
             retorno = -2;
         }
         return retorno;
-    }
+    }*/
 
     //SELECT
     public static Mensagem Select(int codigo)
@@ -102,13 +102,11 @@ public class Mensagem_DB
             objDataReader = objCommnad.ExecuteReader();
             while (objDataReader.Read())
             {
-                objMensagem = new Mensagem();
-                objMensagem.CodigoMsg = Convert.ToInt32(objDataReader["msg_codigo"]);
-                objMensagem.MatriculaPro = objDataReader["pro_matricula"].ToString();
-                objMensagem.CodigoReq = Convert.ToInt32(objDataReader["req_codigo"]);
-                objMensagem.MatriculaAdm = objDataReader["per_matricula"].ToString();
-                objMensagem.DataEnvio = Convert.ToDateTime(objDataReader["msg_dt_Envio"]);
-                objMensagem.Conteudo = objDataReader["msg_conteudo"].ToString();
+                objMensagem = new Mensagem(Convert.ToInt32(objDataReader["req_codigo"]),
+                    objDataReader["pro_matricula"].ToString(),
+                    Convert.ToDateTime(objDataReader["msg_dt_Envio"]),
+                    objDataReader["msg_conteudo"].ToString(),
+                    Convert.ToInt32(objDataReader["msg_codigo"]));
             }
             objDataReader.Close();
             objConnection.Close();
@@ -125,7 +123,7 @@ public class Mensagem_DB
     //SELECT ALL
     public static DataSet SelectAll()
     {
-        DataSet ds = new DataSet();
+        var ds = new DataSet();
         IDbConnection objConnection;
         IDbCommand objCommand;
         IDataAdapter objDataAdapter;

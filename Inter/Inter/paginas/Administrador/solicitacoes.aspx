@@ -123,20 +123,11 @@
                     <div role="tabpanel" class="tab-pane fade in active" id="geral">
                         <%--Grid com UpdatePanel para não atualizar a página inteira ao editar, inserir e desativar solicitacoes--%>
                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
-                        <br />
-                        <button type="button" class="btn btn-default" id="" data-toggle="modal" data-target="#myModal2" title="Ir para cadastro de critérios">
-                            <span class="glyphicon glyphicon-plus"></span>&nbsp Nova Solicitação
-                       
-                        </button>
                         <asp:UpdatePanel ID="UpdatePanelAtivados" UpdateMode="Conditional" runat="server">
                             <ContentTemplate>
-                                <asp:GridView ID="gdvCriteriosAtivos" runat="server" CssClass="gridView" DataKeyNames="cge_codigo"
+                                <asp:GridView ID="gdvRequerimentoAberto" runat="server" CssClass="gridView" DataKeyNames="req_codigo"
                                     AutoGenerateColumns="false"
-                                    AutoGenerateEditButton="false"
-                                    OnRowUpdating="gdvCriterios_RowUpdating"
-                                    OnRowEditing="gdvCriterios_RowEditing"
-                                    OnRowCancelingEdit="gdvCriterios_RowCancelingEdit">
+                                    AutoGenerateEditButton="false">
 
 
                                     <AlternatingRowStyle CssClass="alt" />
@@ -144,74 +135,51 @@
                                     <%-- Configurar colunas do Grid (Cada TemplateField é uma coluna) --%>
                                     <Columns>
 
-                                        <%--Coluna do Código do Critério Geral--%>
+                                        <%--Coluna do Código do Requerimento--%>
                                         <asp:TemplateField HeaderText="Código" Visible="false">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblCodigo" runat="server" Text='<%#Eval ("cge_codigo")%>'></asp:Label>
+                                                <asp:Label ID="lblCodigo" runat="server" Text='<%#Eval ("req_codigo")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
-                                        <%--Coluna do nome do Critério Geral--%>
+                                        <%--Coluna do assunto do Requerimento--%>
                                         <asp:TemplateField HeaderText="Assunto"> 
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("cge_descricao")%>'> </asp:TextBox>                                                
+                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_assunto")%>'> </asp:TextBox>                                                
                                             </EditItemTemplate>                                         
                                             <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("cge_nome")%>'></asp:Label>
+                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
-                                        <%--Coluna do nome do Critério Geral--%>
+                                        <%--Coluna da categoria do Requerimento--%>
                                         <asp:TemplateField HeaderText="Categoria">  
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("cge_descricao")%>'> </asp:TextBox>                                                
+                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_categoria")%>'> </asp:TextBox>                                                
                                             </EditItemTemplate>                                        
                                             <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("cge_nome")%>'></asp:Label>
+                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_categoria")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <%--Coluna do nome do Critério Geral--%>
+                                        <%--Coluna do usuario do Requerimento--%>
                                         <asp:TemplateField HeaderText="Usuario">  
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("cge_descricao")%>'> </asp:TextBox>                                                
+                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("pro_matricula")%>'> </asp:TextBox>                                                
                                             </EditItemTemplate>                                        
                                             <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("cge_nome")%>'></asp:Label>
+                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("pro_matricula")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
                                         <%--Coluna da descrição do Critério Geral--%>
                                         <asp:TemplateField HeaderText="Data">
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("cge_descricao")%>'> </asp:TextBox>                                                
+                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'> </asp:TextBox>                                                
                                             </EditItemTemplate>
                                             <ItemTemplate>
-                                                <asp:Label ID="lblDescricao" runat="server" Text='<%#Eval ("cge_descricao")%>'></asp:Label>
+                                                <asp:Label ID="lblDescricao" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-
-                                        <%--Coluna do botão de Editar (o lápis) --%>
-                                        <asp:TemplateField HeaderText="" ItemStyle-Width="15px" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="lkbEditar" CssClass="glyphicon glyphicon-pencil" title="Editar" runat="server" CommandName="Edit"></asp:LinkButton>
-                                            </ItemTemplate>
-                                            <EditItemTemplate>
-                                                <asp:LinkButton ID="lkbAtualizar" CssClass="glyphicon glyphicon-ok" title="Confirmar" CommandName="Update" runat="server"></asp:LinkButton>
-                                                <%--Essa linha e a debaixo são os botões que aparecem quando se clica no botão Editar de cima--%>
-                                                <asp:LinkButton ID="lkbCancelar" CssClass="glyphicon glyphicon-remove" title="Cancelar" CommandName="Cancel" runat="server"></asp:LinkButton>
-                                            </EditItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <%--Coluna do botão de desativar --%>
-                                        <asp:TemplateField HeaderText="" ItemStyle-Width="15px">
-                                            <ItemTemplate>
-                                                <span onclick="return confirm('Tem certeza que deseja desativar este critério?')">
-                                                    <asp:LinkButton ID="lkbExcluir" CssClass="glyphicon glyphicon-trash" Title="Desativar" runat="server" CommandName="Delete"></asp:LinkButton>
-                                                </span>
-                                            </ItemTemplate>
-
-                                        </asp:TemplateField>
-
 
                                     </Columns>
 
@@ -224,53 +192,140 @@
                     </div>
                     <!-- TICKETS EM ANDAMENTO -->
                     <div role="tabpanel" class="tab-pane fade in" id="andamento">
-                        <div class="panel-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <td>Assunto</td>
-                                        <td>Tipo</td>
-                                        <td>Usuário</td>
-                                        <td>Data</td>
-                                        <td>Prioridade</td>
-                                    </tr>
-                                </thead>
-                                <tr>
-                                    <td><a href="#"></a></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                            <ul class="pager">
-                                <li class="previous disabled"><a href="#">&larr; Anterior</a></li>
-                                <li class="next disabled"><a href="#">Próximo &rarr;</a></li>
-                            </ul>
-                        </div>
+                        <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server">
+                            <ContentTemplate>
+                                <asp:GridView ID="gdvRequerimentoAndamento" runat="server" CssClass="gridView" DataKeyNames="req_codigo"
+                                    AutoGenerateColumns="false"
+                                    AutoGenerateEditButton="false">
+
+
+                                    <AlternatingRowStyle CssClass="alt" />
+
+                                    <%-- Configurar colunas do Grid (Cada TemplateField é uma coluna) --%>
+                                    <Columns>
+
+                                        <%--Coluna do Código do Requerimento--%>
+                                        <asp:TemplateField HeaderText="Código" Visible="false">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblCodigo" runat="server" Text='<%#Eval ("req_codigo")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <%--Coluna do assunto do Requerimento--%>
+                                        <asp:TemplateField HeaderText="Assunto"> 
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_assunto")%>'> </asp:TextBox>                                                
+                                            </EditItemTemplate>                                         
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <%--Coluna da categoria do Requerimento--%>
+                                        <asp:TemplateField HeaderText="Categoria">  
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_categoria")%>'> </asp:TextBox>                                                
+                                            </EditItemTemplate>                                        
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_categoria")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <%--Coluna do usuario do Requerimento--%>
+                                        <asp:TemplateField HeaderText="Usuario">  
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("pro_matricula")%>'> </asp:TextBox>                                                
+                                            </EditItemTemplate>                                        
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("pro_matricula")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <%--Coluna da descrição do Critério Geral--%>
+                                        <asp:TemplateField HeaderText="Data">
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'> </asp:TextBox>                                                
+                                            </EditItemTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblDescricao" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+
+                                    </Columns>
+
+                                </asp:GridView>
+                                <asp:Label ID="lblQtdRegistroAnd" runat="server"></asp:Label>
+                            </ContentTemplate>
+
+                        </asp:UpdatePanel>
                     </div>
                     <!-- TICKETS FINALIZADOS -->
                     <div role="tabpanel" class="tab-pane fade in" id="finalizado">
-                        <div class="panel-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <td>Assunto</td>
-                                        <td>Tipo</td>
-                                        <td>Usuário</td>
-                                        <td>Data</td>
-                                        <td>Prioridade</td>
-                                    </tr>
-                                </thead>
-                                <tr>
-                                    <td><a href="#"></a></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                            <ul class="pager">
-                                <li class="previous disabled"><a href="#">&larr; Anterior</a></li>
-                                <li class="next disabled"><a href="#">Próximo &rarr;</a></li>
-                            </ul>
-                        </div>
+                        <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
+                            <ContentTemplate>
+                                <asp:GridView ID="gdvRequerimentoFinalizado" runat="server" CssClass="gridView" DataKeyNames="req_codigo"
+                                    AutoGenerateColumns="false"
+                                    AutoGenerateEditButton="false">
+
+
+                                    <AlternatingRowStyle CssClass="alt" />
+
+                                    <%-- Configurar colunas do Grid (Cada TemplateField é uma coluna) --%>
+                                    <Columns>
+
+                                        <%--Coluna do Código do Requerimento--%>
+                                        <asp:TemplateField HeaderText="Código" Visible="false">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblCodigo" runat="server" Text='<%#Eval ("req_codigo")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <%--Coluna do assunto do Requerimento--%>
+                                        <asp:TemplateField HeaderText="Assunto"> 
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_assunto")%>'> </asp:TextBox>                                                
+                                            </EditItemTemplate>                                         
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <%--Coluna da categoria do Requerimento--%>
+                                        <asp:TemplateField HeaderText="Categoria">  
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_categoria")%>'> </asp:TextBox>                                                
+                                            </EditItemTemplate>                                        
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_categoria")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <%--Coluna do usuario do Requerimento--%>
+                                        <asp:TemplateField HeaderText="Usuario">  
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("pro_matricula")%>'> </asp:TextBox>                                                
+                                            </EditItemTemplate>                                        
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("pro_matricula")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <%--Coluna da descrição do Critério Geral--%>
+                                        <asp:TemplateField HeaderText="Data">
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'> </asp:TextBox>                                                
+                                            </EditItemTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblDescricao" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                    </Columns>
+
+                                </asp:GridView>
+                                <asp:Label ID="lblQtdRegistroFin" runat="server"></asp:Label>
+                            </ContentTemplate>
+
+                        </asp:UpdatePanel>
                     </div>
                 </div>
             </div>
@@ -279,7 +334,7 @@
     <!--Fim das tabs-->
 
     <div class="modal fade" data-backdrop="static" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <asp:UpdatePanel ID="UpdatePanelModalNovoCriterio" UpdateMode="Conditional" runat="server">
+              <asp:UpdatePanel ID="UpdatePanelModalNovoRequerimento" UpdateMode="Conditional" runat="server">
                 <ContentTemplate>             
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -291,54 +346,42 @@
 
                             <div class="form-group">
                                 <div class="controls-row">
-                                    <asp:Label ID="lblNomeNovoCriterio" runat="server" CssClass="control-label col-sm-2" Text="Nome: "></asp:Label>
-
-                                    <asp:TextBox ID="txtAssunto" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox>
-                                    <%--Validação do Campo Nome (Verifica se está vazio e se está preenchido com uma string)--%>
-                                    &nbsp<asp:RequiredFieldValidator ID="rfvNomeNovoCriterio" runat="server" CssClass="col-sm1" ErrorMessage="O campo Nome deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtAssunto" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>
-
-
+                                    <asp:Label ID="lblAssuntoNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Assunto: "></asp:Label>
+                                    <asp:TextBox ID="txtAssunto" ClientIDMode="Static" CssClass="form-control col-sm-9" runat="server"></asp:TextBox>
+                                    
+                                    <%--Validação do Campo Assunto (Verifica se está vazio e se está preenchido com uma string)--%>
+                                    &nbsp<asp:RequiredFieldValidator ID="rfvAssuntoNovoRequerimento" runat="server" CssClass="col-sm1" ErrorMessage="O campo Assunto deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtAssunto" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>
+                                    
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="controls-row">
 
-                                    <asp:Label ID="lblDescricaoNovoCriterio" runat="server" CssClass="control-label col-sm-2" Text="Categoria: "></asp:Label></td>
-                                            
-                                               
-
-                                    <asp:TextBox ID="txtDescricaoNovoCriterio" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox></td>
-                                            
-                                        
-
-                                    <%--Validação do Campo Descrição (Verifica se está vazio e se está preenchido com uma string)--%>
-                                                 &nbsp<asp:RequiredFieldValidator ID="rfvDescricaoNovoCriterio" CssClass="col-sm1" runat="server" ErrorMessage="O campo Descrição deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtDescricaoNovoCriterio" ControlToCompare="txtNomeNovoCriterio" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>
-                                    
-                                  
+                                    <asp:Label ID="lblCategoriaNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Categoria: "></asp:Label></td>
+                                    <asp:TextBox ID="txtCategoria" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox></td>
+                                   
+                                     <%--Validação do Campo Categoria (Verifica se está vazio e se está preenchido com uma string)--%>
+                                     &nbsp<asp:RequiredFieldValidator ID="rfvCategoriaNovoRequerimento" CssClass="col-sm1" runat="server" ErrorMessage="O campo Categoria deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtCategoria" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>
+                                   
                                 </div>
-                                <br />
                                    <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px;padding-left:30px;"></asp:Label>
                             </div>
                           
                              
-                            <asp:ValidationSummary ID="vsNovoCriterio" ValidationGroup="NovoCriterio" ForeColor="#960d10" runat="server" DisplayMode="List" Style="margin: 7px; padding: 7px;" />
-
-
-
+                            <asp:ValidationSummary ID="vsNovoRequerimento" ValidationGroup="NovoRequerimento" ForeColor="#960d10" runat="server" DisplayMode="List" Style="margin: 7px; padding: 7px;" />
 
                             <div class="modal-footer">
-                                <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarNovoCriterio" runat="server" title="Cancelar Inserção">
+                                <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarNovoRequerimento" runat="server" title="Cancelar Inserção">
                                     <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</asp:LinkButton>
 
-                                <asp:LinkButton ID="btnCriarNovoCriterio" runat="server" CssClass="btn btn-default"
-                                    ToolTip="Confirmar Inserção" CausesValidation="true" ValidationGroup="NovoCriterio">
+                                <asp:LinkButton ID="btnCriarNovoRequerimento" runat="server" CssClass="btn btn-default" ToolTip="Confirmar Inserção" CausesValidation="true" ValidationGroup="NovoRequerimento">
                                    <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar </asp:LinkButton>
                             </div>
 
                         </div>
                     </div>
-                    </ContentTemplate>
-                 </asp:UpdatePanel>
+                  </ContentTemplate>
+              </asp:UpdatePanel>
         </div>
 </asp:Content>
