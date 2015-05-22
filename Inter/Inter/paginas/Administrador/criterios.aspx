@@ -49,6 +49,12 @@
                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         <asp:UpdatePanel ID="UpdatePanelAtivados" UpdateMode="Conditional" runat="server">
                             <ContentTemplate>
+                                <br />
+                                <div class="alert alert-success" role="alert">                                    
+                                    <span class="glyphicon glyphicon-ok-circle"></span>
+                                <asp:Label ID="lblMsgCriterio" Text="Critério cadastrado com sucesso!" ClientIDMode="Static" runat="server"></asp:Label>
+                                <button style="float: right;" data-dismiss="alert"> &times</button>
+                                </div>
                                 <asp:GridView ID="gdvCriteriosAtivos" runat="server" CssClass="gridView" DataKeyNames="cge_codigo"
                                     AutoGenerateColumns="false"
                                     AutoGenerateEditButton="false"

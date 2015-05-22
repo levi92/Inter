@@ -20,7 +20,7 @@ namespace AppCode.Persistencia
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
                 objCommand.Parameters.Add(Mapped.Parameter("?mdd_codigo", mdd.Mdd_codigo));
-                objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", mdd.Adi_codigo.));
+                objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", mdd.Adi_codigo));
                 objCommand.ExecuteNonQuery();
                 conexao.Close();
                 objCommand.Dispose();
