@@ -10,7 +10,8 @@ CREATE TABLE PER_PERFIL(
 
 select sha1('123');
 insert into per_perfil values
-('adm_master', 1, 'adm_master', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
+('adm_master', 1, 'adm_master', '40bd001563085fc35165329ea1ff5c5ecbdbbeef'),
+('PRO106007',2,NULL,NULL);
 
 CREATE TABLE SAN_SEMESTRE_ANO(
   SAN_CODIGO INT PRIMARY KEY AUTO_INCREMENT,
@@ -100,6 +101,13 @@ CREATE TABLE CGE_CRITERIOS_GERAIS(
   CGE_DESCRICAO VARCHAR(200),
   CGE_ATIVO BOOL
 );
+
+INSERT INTO CGE_CRITERIOS_GERAIS VALUES
+(1,'Postura','Desenvoltura do aluno na apresentação',1),
+(2,'Apresentação','Maneira do aluno apresentar',1),
+(3,'Vestimenta','Trajes devidamente adequados',1),
+(4,'Conhecimento','Conhecimento do aluno sobre o projeto',1),
+(5,'Fala','Dicção do aluno na apresentação',1);
 
 CREATE TABLE CPI_CRITERIO_PI(
   CPI_CODIGO INT PRIMARY KEY AUTO_INCREMENT,
