@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage_MenuMaster.Master" AutoEventWireup="true" CodeBehind="configuracoes.aspx.cs" Inherits="paginas_Admin_configuracoes" %>
+﻿<%@ Page EnableEventValidation="false" Title="" Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage_MenuMaster.Master" AutoEventWireup="true" CodeBehind="configuracoes.aspx.cs" Inherits="paginas_Admin_configuracoes" %>
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ConteudoCentral" runat="server">
@@ -82,12 +82,13 @@
                             </tr>
                         </table>
                         <br />
-                        <button type="button" class="btn btn-default btn-lg" title="Criar novo Backup">
-                            <span class="glyphicon glyphicon-plus"></span>&nbsp Novo Backup
-                        </button>
+                        <asp:Button ID="btnCriarBackup" runat="server" CssClass="btn btn-default btn-lg" Text="Criar Backup" OnClick="btnCriarBackup_Click" />
+                        
                         <button type="button" class="btn btn-default btn-lg" title="Enviar Backup do Computador">
                             <span class="glyphicon glyphicon-upload"></span>&nbsp Enviar Backup...
                         </button>
+
+                        <asp:Label ID="lblBackup" runat="server"></asp:Label>
 
 
                     </div>

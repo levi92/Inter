@@ -28,4 +28,22 @@ public partial class paginas_Admin_configuracoes {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.HtmlControls.HtmlButton btAdmTrocarSenha;
+    
+    /// <summary>
+    /// btnCriarBackup control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnCriarBackup;
+    
+    /// <summary>
+    /// lblBackup control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblBackup;
 }
