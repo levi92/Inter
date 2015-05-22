@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\MySql.Data.dll" />
+    <Content Include="bin\MySqlBackup.dll" />
     <Content Include="DLLFatec\ddl mysql 6 6 5\MySql.Data.dll" />
     <Content Include="DLLFatec\Interdisciplinar.dll" />
     <Content Include="DLLFatec\Interdisciplinar.pdb" />
