@@ -119,7 +119,9 @@
                     </tr>
                     <tr>                        
                         <td>
-                           <asp:Panel ID="PainelDisciplinas" runat="server"></asp:Panel>
+                           <asp:Panel ID="PainelDisciplinas" runat="server">
+                               <asp:Table runat="server" ID="tblDisciplinasEnvolvidas"></asp:Table>
+                           </asp:Panel>
                         </td>
                     </tr>
 
@@ -382,8 +384,11 @@
                                     <asp:LinkButton ID="btnConfirmarGrupo" runat="server" OnClick="btnConfirmarGrupo_Click" CssClass="btn btn-default" ToolTip="Confirmar o grupo atual e Criar outro grupo">
                                         <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar Grupo</asp:LinkButton></td>
                                 <td>
-                                    <button type="button" class="btn btn-default" id="finalizarCriarPi" onclick="finalizarCadastroPI();" data-toggle="modal" data-target="#myModalPiCadastrado" title="Finalizar criação de PI">
-                                        <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</button></td>
+                                    <asp:LinkButton ID="btnFinalizarCriarPi" runat="server" OnClick="btnFinalizarCriarPi_Click" CssClass="btn btn-default" ToolTip="Finalizar criação de PI">
+                                        <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</asp:LinkButton></td>
+
+                                    <%--<button type="button" class="btn btn-default" id="finalizarCriarPi" onclick="finalizarCadastroPI();" data-toggle="modal" data-target="#myModalPiCadastrado" title="Finalizar criação de PI">
+                                        <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</button></td>--%>
                             </tr>
 
 

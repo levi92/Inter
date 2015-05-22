@@ -42,6 +42,7 @@ public partial class paginas_Usuario_MasterPage : System.Web.UI.MasterPage
         Session["disciplina"] = "";
         Session["mae"] = "";
         Session["codAtr"] = "";
+        Session["DataSetPIsbyCalendario"] = "";
 
         Response.Redirect("escolherDisciplina.aspx");
 
