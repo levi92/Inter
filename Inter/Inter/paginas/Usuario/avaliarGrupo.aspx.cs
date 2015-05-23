@@ -15,7 +15,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
     protected void Page_PreInit(object sender, EventArgs e)
     {
         //VERIFICAR SESSAO LOGIN
-        if (Session["login"] == null)
+        if (Session["Professor"] == null)
         {
             Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
         }

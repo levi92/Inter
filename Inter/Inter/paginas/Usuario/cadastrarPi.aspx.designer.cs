@@ -129,6 +129,15 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.Panel PainelDisciplinas;
     
     /// <summary>
+    /// tblDisciplinasEnvolvidas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Table tblDisciplinasEnvolvidas;
+    
+    /// <summary>
     /// lblDatas control.
     /// </summary>
     /// <remarks>
@@ -379,6 +388,15 @@ public partial class paginas_Usuario_cadastrarPi {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.LinkButton btnConfirmarGrupo;
+    
+    /// <summary>
+    /// btnFinalizarCriarPi control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnFinalizarCriarPi;
     
     /// <summary>
     /// lblDescricaoData control.

@@ -330,7 +330,7 @@ $(document).ready(function () {
             auxData = $('#descData' + index).html();
 
             if (typeof (auxData) != "undefined") {
-                dadosDatas += $('#descData' + index).html() + "-" + $('#data' + index).html() + "|";
+                dadosDatas += $('#descData' + index).html() + "|" + $('#data' + index).html() + "|";
             }
 
         }

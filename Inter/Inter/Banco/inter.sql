@@ -1,4 +1,4 @@
-CREATE DATABASE INTER;
+﻿CREATE DATABASE INTER;
 USE INTER;
 
 CREATE TABLE PER_PERFIL(
@@ -10,7 +10,8 @@ CREATE TABLE PER_PERFIL(
 
 select sha1('123');
 insert into per_perfil values
-('adm_master', 1, 'adm_master', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
+('adm_master', 1, 'adm_master', '40bd001563085fc35165329ea1ff5c5ecbdbbeef'),
+('PRO106007',2,NULL,NULL);
 
 CREATE TABLE SAN_SEMESTRE_ANO(
   SAN_CODIGO INT PRIMARY KEY AUTO_INCREMENT,
