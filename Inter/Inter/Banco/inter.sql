@@ -96,18 +96,18 @@ CREATE TABLE GAL_GRUPO_ALUNO(
 );
 
 CREATE TABLE CGE_CRITERIOS_GERAIS(
-  CGE_CODIGO INT PRIMARY KEY,
+  CGE_CODIGO INT PRIMARY KEY AUTO_INCREMENT,
   CGE_NOME VARCHAR(50),
   CGE_DESCRICAO VARCHAR(200),
   CGE_ATIVO BOOL
 );
 
 INSERT INTO CGE_CRITERIOS_GERAIS VALUES
-(1,'Postura','Desenvoltura do aluno na apresentação',1),
-(2,'Apresentação','Maneira do aluno apresentar',1),
-(3,'Vestimenta','Trajes devidamente adequados',1),
-(4,'Conhecimento','Conhecimento do aluno sobre o projeto',1),
-(5,'Fala','Dicção do aluno na apresentação',1);
+(0,'Postura','Desenvoltura do aluno na apresentação',1),
+(0,'Apresentação','Maneira do aluno apresentar',1),
+(0,'Vestimenta','Trajes devidamente adequados',1),
+(0,'Conhecimento','Conhecimento do aluno sobre o projeto',1),
+(0,'Fala','Dicção do aluno na apresentação',1);
 
 CREATE TABLE CPI_CRITERIO_PI(
   CPI_CODIGO INT PRIMARY KEY AUTO_INCREMENT,
