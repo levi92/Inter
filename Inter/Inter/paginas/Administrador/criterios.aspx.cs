@@ -8,7 +8,6 @@ using Inter.Funcoes;
 using System.Data;
 
 
-
     public partial class paginas_Admin_criterios : System.Web.UI.Page
     {
         protected void Page_PreInit(object sender, EventArgs e)
@@ -30,10 +29,13 @@ using System.Data;
                 CarregarGridAtivos();
                 CarregarGridDesativados();
             }
+
+        
         }
 
         public void CarregarGridAtivos()
         {
+            gdvCriteriosAtivos.Visible = true;
             DataSet ds = Criterios_Gerais_DB.SelectAtivos(); //criando um data set com todos os critérios gerais
             int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
 
@@ -46,6 +48,7 @@ using System.Data;
             }
             else
             {
+                gdvCriteriosAtivos.Visible = false;
                 lblQtdRegistro.Text = "Nenhum critério foi cadastrado.";
             }
 
@@ -53,6 +56,7 @@ using System.Data;
 
         public void CarregarGridDesativados()
         {
+            gdvCriteriosDesativados.Visible = true;
             DataSet ds = Criterios_Gerais_DB.SelectDesativados(); //criando um data set com todos os critérios gerais
             int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
 
@@ -65,6 +69,7 @@ using System.Data;
             }
             else
             {
+                gdvCriteriosDesativados.Visible = false;
                 lblQtdRegistro2.Text = "Nenhum critério foi desativado.";
             }
 
@@ -73,6 +78,7 @@ using System.Data;
         //Método para salvar as alterações feitas em um critério ativo
         protected void gdvCriterios_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+            
             Label lblCodigo = (Label)gdvCriteriosAtivos.Rows[e.RowIndex].FindControl("lblCodigo");
             Label lblNome = (Label)gdvCriteriosAtivos.Rows[e.RowIndex].FindControl("lblNome");
             TextBox txtDescricao = (TextBox)gdvCriteriosAtivos.Rows[e.RowIndex].FindControl("txtDescricao");
@@ -163,12 +169,14 @@ using System.Data;
         {
             Label lblCodigo = (Label)gdvCriteriosDesativados.Rows[e.RowIndex].FindControl("lblCodigo");
                 if (Criterios_Gerais_DB.Ativar(Convert.ToInt32(lblCodigo.Text)) == 0)
-                {
+                {                    
                     lblMsg2.Text = "Critério ativado com sucesso!";                 
                     CarregarGridAtivos();
                     CarregarGridDesativados();
                     UpdatePanelDesativados.Update();
-                    UpdatePanelAtivados.Update();
+                    ScriptManager.RegisterClientScriptBlock(UpdatePanelDesativados, UpdatePanelDesativados.GetType(), "blockPage", "blockPage()", true);
+                    UpdatePanelAtivados.Update();              
+                    
                     
                 }
                 else

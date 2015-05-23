@@ -81,10 +81,11 @@
                             <br>
                             <asp:Button ID="enviar" class="btn btn-default" Style="width: 250px;" runat="server" Text="Entrar" OnClick="enviar_Click" /><br />
                             <asp:Label ID="lblMsgErro" runat="server" Style="color: #960d10"></asp:Label>
-                            <center><a href="#" style="font-size:13px" data-toggle="modal" data-target="#myModal">Problemas com o Login?</a>
+                            <center><a href="#" style="font-size:13px" data-toggle="modal" data-target="#myModal">Esqueceu sua senha?</a>
+                                </ul>
                     </div>
 
-                    </ul>
+                    
                 </div>
             </div>
         </div>
