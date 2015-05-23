@@ -73,7 +73,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     // ******************  ETAPA 1 - CADASTRO PI, CADASTRO DE DATAS ******************
     // *******************************************************************************
-    public static int tamanhoVetorCodigoDisciplina;
+    //public static int tamanhoVetorCodigoDisciplina;
+    public static List<int> listCodDisciplinas = new List<int>();
     private void CarregarDisciplinasEnvolvidas(){
 
         
@@ -152,7 +153,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                         lblCodigoDisciplina.Text = ds.Tables[0].Rows[i]["atr_codigo"].ToString();
                         lblCodigoDisciplina.ID = "codDisciplina" + i;
                         cell.Controls.Add(lblCodigoDisciplina);
-                        tamanhoVetorCodigoDisciplina++;
+                        listCodDisciplinas.Add(Convert.ToInt32(lblCodigoDisciplina.Text));
+                        //tamanhoVetorCodigoDisciplina++;
                     }
                     rows.Cells.Add(cell);
                 }
@@ -923,34 +925,44 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             Eventos_DB.Insert(eve);
         }
         //Inserindo na tabela Atribuicao_PI
-        int iCodDisciplina = 0;
-        int[] vetCodigoDisciplina = new int[tamanhoVetorCodigoDisciplina];
-        foreach(Control lbl in PainelDisciplinas.Controls){
-            if (lbl is Label)
-            {
-                Label lblAdiCodigo = new Label();
-                lblAdiCodigo = (Label)lbl;
-                if (lbl.ID == "cphConteudo_cphConteudoCentral_codDisciplina" + iCodDisciplina)
-                {
-                    Atribuicao_PI atr = new Atribuicao_PI();
-                    atr.Adi_codigo = Convert.ToInt32(lblAdiCodigo.Text);
-                    atr.Pri_codigo = pi;
-                    Atribuicao_PI_DB.Insert(atr);
-                    vetCodigoDisciplina[iCodDisciplina] = atr.Adi_codigo;
-                    iCodDisciplina++;
-                }
-            }
+        //int iCodDisciplina = 0;
+        int[] codDisciplina = listCodDisciplinas.ToArray();
+        //int[] vetCodigoDisciplina = new int[tamanhoVetorCodigoDisciplina];
+        for (int i = 0; i < codDisciplina.Length; i++)
+        {
+            Atribuicao_PI atr = new Atribuicao_PI();
+            atr.Adi_codigo = codDisciplina[i];
+            atr.Pri_codigo = pi;
+            Atribuicao_PI_DB.Insert(atr);
         }
+
+            //foreach (Control lbl in PainelDisciplinas.Controls)
+            //{
+            //    if (lbl is Label)
+            //    {
+            //        Label lblAdiCodigo = new Label();
+            //        lblAdiCodigo = (Label)lbl;
+            //        if (lbl.ID == "cphConteudo_cphConteudoCentral_codDisciplina" + iCodDisciplina)
+            //        {
+            //            Atribuicao_PI atr = new Atribuicao_PI();
+            //            atr.Adi_codigo = Convert.ToInt32(lblAdiCodigo.Text);
+            //            atr.Pri_codigo = pi;
+            //            Atribuicao_PI_DB.Insert(atr);
+            //            vetCodigoDisciplina[iCodDisciplina] = atr.Adi_codigo;
+            //            iCodDisciplina++;
+            //        }
+            //    }
+            //}
         //Inserindo na tabela Criterio_PI
         int indiceCrit = 0;
         foreach(ListItem li in listaCritPi.Items){            
             TextBox txtPeso = (TextBox) PanelCriterios.FindControl("txtCriterio"+(indiceCrit));
-            for (int i = 0; i <= iCodDisciplina; i++)
+            for (int i = 0; i < codDisciplina.Length; i++)
             {
                 Criterio_PI critPi = new Criterio_PI();
                 Criterios_Gerais crit = new Criterios_Gerais();
                 Atribuicao_PI atr = new Atribuicao_PI();
-                atr.Adi_codigo = Convert.ToInt32(vetCodigoDisciplina[i]);
+                atr.Adi_codigo = codDisciplina[i];
                 crit.Cge_codigo = Convert.ToInt32(li.Value);
                 critPi.Cge_codigo = crit;
                 critPi.Adi_codigo = atr;
