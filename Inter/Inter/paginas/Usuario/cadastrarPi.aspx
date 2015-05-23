@@ -44,6 +44,11 @@
             $("#lblMsgCriterio").html("");
         }
 
+        //CHAMAR MODAL COM MENSAGEM DE CADASTRO DE PI
+        function msgFinalizarCadastroPi() {
+            $("#finalizarCriarPi").click();
+        }
+
     </script>
 
     <button style="display: none" type="button" id="btnModalPesoUm" data-toggle="modal" data-target="#myModalPesoUm"></button>
@@ -387,8 +392,8 @@
                                     <asp:LinkButton ID="btnFinalizarCriarPi" runat="server" OnClick="btnFinalizarCriarPi_Click" CssClass="btn btn-default" ToolTip="Finalizar criação de PI">
                                         <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</asp:LinkButton></td>
 
-                                    <%--<button type="button" class="btn btn-default" id="finalizarCriarPi" onclick="finalizarCadastroPI();" data-toggle="modal" data-target="#myModalPiCadastrado" title="Finalizar criação de PI">
-                                        <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</button></td>--%>
+                                <button type="button" hidden="hidden" class="btn btn-default" id="finalizarCriarPi" onclick="finalizarCadastroPI();" data-toggle="modal" data-target="#myModalPiCadastrado" title="Finalizar criação de PI">
+                                        <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</button></td>
                             </tr>
 
 

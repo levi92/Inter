@@ -8,7 +8,8 @@ using System.Web;
     {
 
         private int cpi_codigo, cpi_peso;
-        private Projeto_Inter pri_codigo, adi_codigo;
+        private Projeto_Inter pri_codigo;
+        private Atribuicao_PI adi_codigo;
         private Criterios_Gerais cge_codigo;
 
         public global::Criterios_Gerais Cge_codigo
@@ -17,7 +18,7 @@ using System.Web;
             set { cge_codigo = value; }
         }
 
-        public global::Projeto_Inter Adi_codigo
+        public global::Atribuicao_PI Adi_codigo
         {
             get { return adi_codigo; }
             set { adi_codigo = value; }
