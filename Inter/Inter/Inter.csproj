@@ -75,6 +75,7 @@
     <Content Include="App_Themes\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="App_Themes\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="App_Themes\fonts\icomoon.svg" />
+    <Content Include="App_Themes\images\ajax-loader.gif" />
     <Content Include="App_Themes\images\Calendar-Add-128x128.png" />
     <Content Include="Banco\BANCO RESUMIDO.txt" />
     <Content Include="Banco\Fatec\Interdisciplinar.pdb" />

@@ -12,6 +12,24 @@
 public partial class paginas_Admin_criterios {
     
     /// <summary>
+    /// upgAdmin control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdateProgress upgAdmin;
+    
+    /// <summary>
+    /// upgProf control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdateProgress upgProf;
+    
+    /// <summary>
     /// ScriptManager1 control.
     /// </summary>
     /// <remarks>
@@ -28,15 +46,6 @@ public partial class paginas_Admin_criterios {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.UpdatePanel UpdatePanelAtivados;
-    
-    /// <summary>
-    /// lblMsgCriterio control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMsgCriterio;
     
     /// <summary>
     /// gdvCriteriosAtivos control.
@@ -91,6 +100,15 @@ public partial class paginas_Admin_criterios {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblMsg2;
+    
+    /// <summary>
+    /// UpdateProgress control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdateProgress UpdateProgress;
     
     /// <summary>
     /// UpdatePanelModalNovoCriterio control.
