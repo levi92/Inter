@@ -20,7 +20,7 @@ using System.Threading.Tasks;
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
                 objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", proInt.Pri_codigo));  
-                objCommand.Parameters.Add(Mapped.Parameter("?san_semestre_ano", proInt.San_codigo));
+                objCommand.Parameters.Add(Mapped.Parameter("?san_codigo", proInt.San_codigo.San_codigo));
                 objCommand.ExecuteNonQuery();               
                 conexao.Close();
                 objCommand.Dispose();
