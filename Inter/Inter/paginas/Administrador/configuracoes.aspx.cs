@@ -31,18 +31,17 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        Backup(gdvBkp, Request.PhysicalApplicationPath + "Backup\\");
+        Backup(gdvBkp);
 
     }
 
-    public DataTable Backup(GridView gv_arquivos, String folder)
+    public DataTable Backup(GridView gv_arquivos)
     {
         string caminho = (Request.PhysicalApplicationPath + "Backup\\");
-        folder = caminho;
-        DirectoryInfo pasta = new DirectoryInfo(folder);
+        DirectoryInfo pasta = new DirectoryInfo(caminho);
         //DirectoryInfo[] subPastas = pasta.GetDirectories();
-        FileInfo[] arquivos = pasta.GetFiles();
-        //string[] arquivos = Directory.GetFiles(caminho, "*");
+        //FileInfo[] arquivos = pasta.GetFiles();
+        string[] arquivos = Directory.GetFiles(caminho, "*");
 
         DataTable dt = new DataTable();
 
@@ -52,21 +51,41 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
         mDataColumn.ColumnName = "Nome";
         dt.Columns.Add(mDataColumn);
 
-        foreach (FileInfo file in arquivos)
+
+        int i, j, min;
+        string varAux;
+        for (i = 0; i < arquivos.Length - 1; i++)
+        {
+            min = i;
+            for (j = i + 1; j < arquivos.Length; j++)
+            {
+                // Utilizando o CompareTo para comparar as string do vetor
+                // resultado -1 significa que arquivos[j] < arquivos[min]
+                if (arquivos[j].CompareTo(arquivos[min]) != -1)
+                {
+                    min = j;
+                }
+            }
+            varAux = arquivos[min];
+            arquivos[min] = arquivos[i];
+            arquivos[i] = varAux;
+        }
+
+        /*foreach (FileInfo file in arquivos)
         {
             DataRow dr = dt.NewRow();
             dr["Nome"] = file.Name;
             dt.Rows.Add(dr);
-        }
+        }*/
 
-        /*foreach (string file in arquivos)
+        foreach (string file in arquivos)
         {
             DataRow dr = dt.NewRow();
-            dr["Nome"] = file.Replace(caminho,"").Replace(".sql","");
+            dr["Nome"] = file.Replace(caminho, "").Replace(".sql", "");
 
             dt.Rows.Add(dr);
-        
-        }*/
+
+        }
 
         gv_arquivos.DataSource = dt.DefaultView;
         gv_arquivos.DataBind();
@@ -83,17 +102,31 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
         string server = "localhost";
         string nome_arquivo = "bkp_" + database + "_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".sql";
         string directory = (Request.PhysicalApplicationPath + "Backup");
+        string caminhoDump = ("C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin\\mysqldump.exe");
+
+
 
         if (!Directory.Exists(directory))
         {
             Directory.CreateDirectory(directory);
+            if (!Directory.Exists(directory))
+            {
+
+            }
         }
 
-        Process.Start("C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin\\mysqldump.exe", ("-u " + user + " -p" + password + " -x -e -B " + database + " > -r " + directory + "\\" + nome_arquivo));
+        if (!Directory.Exists(caminhoDump))
+        {
+
+        }
+
+
+        Process.Start(caminhoDump, ("-u " + user + " -p" + password + " -x -e -B " + database + " > -r " + directory + "\\" + nome_arquivo));
         System.Threading.Thread.Sleep(500);
 
-        Backup(gdvBkp, Request.PhysicalApplicationPath + "Backup\\");
+        Backup(gdvBkp);
         UpdatePanelBkp.Update();
+
         /*string constring = ("server=" + server + ";user=" + user + ";database=" + database + ";password=" + password);
         string file = (directory + "\\" + nome_arquivo);
         using (MySqlConnection conn = new MySqlConnection(constring))
@@ -109,6 +142,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                 }
             }
         }*/
+
     }
 
     protected void gdvBkp_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -124,6 +158,6 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
     protected void gdvBkp_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         gdvBkp.PageIndex = e.NewPageIndex;
-        Backup(gdvBkp, Request.PhysicalApplicationPath + "Backup\\");
+        Backup(gdvBkp);
     }
 }
