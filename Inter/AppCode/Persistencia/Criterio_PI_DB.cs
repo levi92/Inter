@@ -30,4 +30,23 @@ public class Criterio_PI_DB{
         }
         return retorno;
     }
+
+    //SELECIONA TODOS OS PESOS E CRITÉRIOS DO PI ATIVO E DA MATÉRIA SELECIONADA
+    public static DataSet SelectCriteriosPesosByPI(int codPi, int codAtr)
+    {
+        DataSet ds = new DataSet();
+        IDbConnection objConnection;
+        IDbCommand objCommand;
+        IDataAdapter objDataAdapter;
+        objConnection = Mapped.Connection();
+        objCommand = Mapped.Command("SELECT CG.CGE_NOME, CG.CGE_DESCRICAO, CP.CPI_PESO FROM CPI_CRITERIO_PI CP INNER JOIN CGE_CRITERIOS_GERAIS CG USING(CGE_CODIGO) WHERE CP.PRI_CODIGO = ?pri_codigo AND CP.ADI_CODIGO = ?adi_codigo;", objConnection);
+        objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", codPi));
+        objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", codAtr));
+        objDataAdapter = Mapped.Adapter(objCommand);
+        objDataAdapter.Fill(ds);
+        objConnection.Close();
+        objCommand.Dispose();
+        objConnection.Dispose();
+        return ds;
+    }
 }

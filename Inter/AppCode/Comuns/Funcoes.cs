@@ -148,8 +148,21 @@ namespace Inter.Funcoes
         {
             string[] nomes = nome.Split(' ');
             return nomes[0];
-        }        
+        }
 
+
+        //JOGA O NOMES DOS ALUNOS EM UM VETOR DEPENDENDO DE SUA MATRICULA
+        public static string[] NomeAlunosByMatricula(string[] codAlunos)
+        {
+            string[] nomeAlunos = new string[codAlunos.Length - 1];
+            for(int i=0; i<codAlunos.Length-1; i++){
+                Aluno alu = new Aluno();
+                alu = Aluno.SelecionarAluno(codAlunos[i]);
+                nomeAlunos[i] = alu.Nome;
+            }            
+
+            return nomeAlunos;
+        }
 
     }
 }
