@@ -38,6 +38,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 
             if (prof != null)
             {
+                Session["DS_AllPIsbyCalendarioAtual"] = null;
                 if (Funcoes_DB.ValidarAdmCoord(prof) == 2)
                 {
                     //Administrador Coordenador e professor

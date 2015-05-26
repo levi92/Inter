@@ -22,7 +22,7 @@
         }
 
 
-        //$('#alerta').before("<div id=conteudoAlerta class='alerta'><div class='alert alert-success alert-dismissible' role='alert'><span class='glyphicon glyphicon-ok-circle' aria-hidden='true'></span>Operação efetuada com sucesso!<button type='button' class='close' data-dismiss='alert'> &times</button></div></div>");
+        //$('#alerta').before("<div id=conteudoAlerta class='alerta'><div class='alert alert-success alert-dismissible' role='alert'><span class='glyphicon glyphicon-ok-circle' aria-hidden='true'></span>Operação efetuada com sucesso!<button type='button' class='close' data-dismiss='alert'> &times</button></div></div></br>");
 
     </script>
 
@@ -78,7 +78,7 @@
                             <ContentTemplate>
 
                                 <asp:GridView ID="gdvCriteriosAtivos" runat="server" CssClass="gridView" DataKeyNames="cge_codigo"
-                                    AutoGenerateColumns="false"
+                                    AutoGenerateColumns="false" AllowSorting="true"
                                     AutoGenerateEditButton="false"
                                     OnRowUpdating="gdvCriterios_RowUpdating"
                                     OnRowEditing="gdvCriterios_RowEditing"
@@ -293,25 +293,11 @@
                                 <div class="form-group">
                                     <div class="controls-row">
                                         <asp:Label ID="lblDescricaoNovoCriterio" runat="server" CssClass="control-label col-sm-2" Text="Descrição: "></asp:Label></td>
-                                            
-                                               
-
-                                   
-
-
 
                                         <asp:TextBox ID="txtDescricaoNovoCriterio" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox></td>
-                                            
-                                        
-
-                                   
-
-
 
                                         <%--Validação do Campo Descrição (Verifica se está vazio e se está preenchido com uma string)--%>
                                                  &nbsp<asp:RequiredFieldValidator ID="rfvDescricaoNovoCriterio" CssClass="col-sm1" runat="server" ErrorMessage="O campo Descrição deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtDescricaoNovoCriterio" ControlToCompare="txtNomeNovoCriterio" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>
-
-
                                     </div>
                                     <br />
                                     <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
