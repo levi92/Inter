@@ -35,5 +35,12 @@ public partial class paginas_Usuario_home : System.Web.UI.Page
         prof = (Professor)Session["Professor"];
         string[] nomeProf = prof.Nome.Split(' ');
         lblNomeProf.Text = nomeProf[0];
+
+        int codAtribuicao = Convert.ToInt32(Session["codAtr"]);
+        int codPiAtivoMateria = Projeto_Inter_DB.SelectCodPiAtivoMateria(codAtribuicao);
+        if (codPiAtivoMateria != -2)
+        {
+            Session["CodigoPIAtivoMateria"] = codPiAtivoMateria;
+        }
     }
 }

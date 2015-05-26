@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -150,6 +151,18 @@ namespace Inter.Funcoes
         }
 
 
+        //JOGA O NOMES DOS ALUNOS EM UM VETOR DEPENDENDO DE SUA MATRICULA
+        public static string[] NomeAlunosByMatricula(string[] codAlunos)
+        {
+            string[] nomeAlunos = new string[codAlunos.Length - 1];
+            for(int i=0; i<codAlunos.Length-1; i++){
+                Aluno alu = new Aluno();
+                alu = Aluno.SelecionarAluno(codAlunos[i]);
+                nomeAlunos[i] = alu.Nome;
+            }            
+
+            return nomeAlunos;
+        }
 
     }
 }

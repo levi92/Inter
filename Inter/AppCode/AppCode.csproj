@@ -67,7 +67,7 @@
     <Compile Include="Comuns\Funcoes.cs" />
     <Compile Include="Mapped.cs" />
     <Compile Include="Persistencia\Atribuicao_PI_DB.cs" />
-    <Compile Include="Persistencia\Criterios_Gerais_DB - Copy.cs" />
+    <Compile Include="Persistencia\Criterios_Gerais_DB.cs" />
     <Compile Include="Persistencia\Criterio_PI_DB.cs" />
     <Compile Include="Persistencia\Disciplinas_Gerais_DB.cs" />
     <Compile Include="Persistencia\Eventos_DB.cs" />

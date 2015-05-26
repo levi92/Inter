@@ -43,52 +43,34 @@
                     </div>
 
                     <div role="tabpanel" class="tab-pane fade" id="backup">
-                        <table class="table">
-                            <tr>
-                                <td>Nome</td>
-                                <td>Data Envio</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>inter_bkp_00-00-00-00-00-05</td>
-                                <td>22-11-2014</td>
-                                <td><a href="#"><span class="glyphicon glyphicon-download" title="Baixar Backup"></span></a>&nbsp &nbsp <a href="#" class="restaurar"><span class="glyphicon glyphicon-open" title="Restaurar o Sistema"></span></a>&nbsp &nbsp <a href="#"><span class="glyphicon glyphicon-trash" title="Remover Backup"></span></a></td>
+                        <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
+                        <asp:UpdatePanel ID="UpdatePanelBkp" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                 
+                                <asp:GridView ID="gdvBkp" runat="server" CellPadding="4" GridLines="None" CssClass="gridView" AllowPaging="true" PageSize="10"
+                                    OnRowCommand="gdvBkp_RowCommand"
+                                    OnRowDataBound="gdvBkp_RowDataBound"
+                                    OnPageIndexChanging="gdvBkp_PageIndexChanging"
+                                    AutoGenerateColumns="true"
+                                    Visible="true">
 
-                            </tr>
-                            <tr>
-                                <td>inter_bkp_00-00-00-00-00-04</td>
-                                <td>21-11-2014</td>
-                                <td><a href="#"><span class="glyphicon glyphicon-download" title="Baixar Backup"></span></a>&nbsp &nbsp <a href="#" class="restaurar"><span class="glyphicon glyphicon-open" title="Restaurar o Sistema"></span></a>&nbsp &nbsp <a href="#"><span class="glyphicon glyphicon-trash" title="Remover Backup"></span></a></td>
+                                    <AlternatingRowStyle CssClass="alt" />
 
-                            </tr>
-                            <tr>
-                                <td>inter_bkp_00-00-00-00-00-03</td>
-                                <td>20-11-2014</td>
-                                <td><a href="#"><span class="glyphicon glyphicon-download" title="Baixar Backup"></span></a>&nbsp &nbsp <a href="#" class="restaurar"><span class="glyphicon glyphicon-open" title="Restaurar o Sistema"></span></a>&nbsp &nbsp <a href="#"><span class="glyphicon glyphicon-trash" title="Remover Backup"></span></a></td>
+                                    <Columns>
+                                        <%-- Configurar colunas do Grid --%>
+                                    </Columns>
+                                    
 
-                            </tr>
-                            <tr>
-                                <td>inter_bkp_00-00-00-00-00-02</td>
-                                <td>19-11-2014</td>
-                                <td><a href="#"><span class="glyphicon glyphicon-download" title="Baixar Backup"></span></a>&nbsp &nbsp <a href="#" class="restaurar"><span class="glyphicon glyphicon-open" title="Restaurar o Sistema"></span></a>&nbsp &nbsp <a href="#"><span class="glyphicon glyphicon-trash" title="Remover Backup"></span></a></td>
+                                </asp:GridView>
+                                <asp:Button ID="btnCriarBackup" runat="server" CssClass="btn btn-default btn-lg" Text="Criar Backup" OnClick="btnCriarBackup_Click" />
+                                <asp:Label ID="lblBackup" runat="server"></asp:Label>
+                            </ContentTemplate>
 
-                            </tr>
-                            <tr>
-                                <td>inter_bkp_00-00-00-00-00-01</td>
-                                <td>18-11-2014</td>
-                                <td><a href="#"><span class="glyphicon glyphicon-download" title="Baixar Backup"></span></a>&nbsp &nbsp <a href="#" class="restaurar"><span class="glyphicon glyphicon-open" title="Restaurar o Sistema"></span></a>&nbsp &nbsp <a href="#"><span class="glyphicon glyphicon-trash" title="Remover Backup"></span></a></td>
-
-                            </tr>
-                        </table>
-                        <br />
-                        <asp:Button ID="btnCriarBackup" runat="server" CssClass="btn btn-default btn-lg" Text="Criar Backup" OnClick="btnCriarBackup_Click" />
+                        </asp:UpdatePanel>
                         
-                        <button type="button" class="btn btn-default btn-lg" title="Enviar Backup do Computador">
-                            <span class="glyphicon glyphicon-upload"></span>&nbsp Enviar Backup...
-                        </button>
-
-                        <asp:Label ID="lblBackup" runat="server"></asp:Label>
+                        <br />
+                        
+                        
 
 
                     </div>
