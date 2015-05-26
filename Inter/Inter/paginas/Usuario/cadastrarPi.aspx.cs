@@ -821,6 +821,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
         ViewState["Alunos" + indice2.ToString()] = null;
         ViewState["CodAlunos" + indice2.ToString()] = null;
+        ViewState["NomeGrupo" + indice2.ToString()] = null;
 
         txtNomeGrupo.Text = null;
         listaGrupos.Items.RemoveAt(indice);
@@ -973,7 +974,44 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             indiceCrit++;
         }
 
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalPiCadastrado", "msgFinalizarCadastroPi();", true);
+        //Inserindo na tabela Grupo
+        int ultCodGrupo = Grupo_DB.SelectUltimoCod();
+        if (ultCodGrupo == -2)
+        {
+            ultCodGrupo = 1;
+        }
+        else
+        {
+            ultCodGrupo++;
+        }
+        for (int i = 1; i < index; i++)
+        {
+            if (ViewState["NomeGrupo" + i.ToString()].ToString() != null)
+            {
+                string nomeGrupo = ViewState["NomeGrupo" + i.ToString()].ToString();       
+                Grupo gru = new Grupo();
+                gru.Gru_codigo = ultCodGrupo;
+                gru.Gru_nome_projeto = nomeGrupo;
+                gru.Pri_codigo = pi;
+                Grupo_DB.Insert(gru);
+                
+                Grupo_Aluno gal = new Grupo_Aluno();
+                gal.Gru_codigo = gru;
+
+                string[] codAlunos = ViewState["CodAlunos"+i.ToString()].ToString().Split('|');
+                for (int j = 0; j < codAlunos.Length-1; j++)
+                {
+                    if (codAlunos[j] != null)
+                    {
+                        gal.Alu_matricula = codAlunos[j];
+                        Grupo_Aluno_DB.Insert(gal);
+                    }
+                }
+            }
+            ultCodGrupo++;
+        }
+
+       ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalPiCadastrado", "msgFinalizarCadastroPi();", true);
     }
 
 
