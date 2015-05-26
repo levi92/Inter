@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Inter.Funcoes;
 using System.Data;
+using AppCode.Persistencia;
 
 public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 {
@@ -32,7 +33,12 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 
         if (!Page.IsPostBack)
         {
-
+            DataSet dsGrupos = new DataSet();
+            dsGrupos = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["CodigoPIAtivoMateria"]));
+            ddlGrupos.DataSource = dsGrupos;
+            ddlGrupos.DataTextField = "GRU_NOME_PROJETO";
+            ddlGrupos.DataValueField = "GRU_CODIGO";
+            ddlGrupos.DataBind();
         }
         else
         {
@@ -174,7 +180,6 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         //ScriptManager.RegisterStartupScript(this, this.GetType(), "ZebradoGridAvaliar", "ZebradoGridAvaliar();", true);
 
     }
-
 
 
     //private void txbNotasTextChanged(object sender, EventArgs e)

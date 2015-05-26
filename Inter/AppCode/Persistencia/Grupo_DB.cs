@@ -64,6 +64,24 @@ namespace AppCode.Persistencia
             }
         }
 
+        //SELECT GRUPOS DO SEMESTRE ATUAL PARA A PÁGINA DE AVALIAÇÃO
+        public static DataSet SelectAllGruposAvaliar(int codPi)
+        {
+            DataSet ds = new DataSet();
+            IDbConnection objConnection;
+            IDbCommand objCommand;
+            IDataAdapter objDataAdapter;
+            objConnection = Mapped.Connection();
+            objCommand = Mapped.Command("SELECT GR.GRU_CODIGO, GR.GRU_NOME_PROJETO FROM GRU_GRUPO GR INNER JOIN PRI_PROJETO_INTER PR USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO SA USING(SAN_CODIGO) WHERE SA.SAN_ATIVO = 1 AND PR.PRI_CODIGO = ?pri_codigo;", objConnection);
+            objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", codPi));
+            objDataAdapter = Mapped.Adapter(objCommand);
+            objDataAdapter.Fill(ds);
+            objConnection.Close();
+            objCommand.Dispose();
+            objConnection.Dispose();
+            return ds;
+        }
+
 
     }
 }

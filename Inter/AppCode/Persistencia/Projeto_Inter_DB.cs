@@ -161,6 +161,36 @@ using System.Threading.Tasks;
             objConnection.Dispose();
             return ds;
         }
+
+        //SELECT CODIGO DO PI ATUAL ATIVO DA MATÉRIA
+        public static int SelectCodPiAtivoMateria(int codAtribuicaoMateria)
+        {
+            try
+            {
+                int codPiAtivo = 0;
+                IDbConnection objConnection;
+                IDbCommand objCommand;
+                IDataReader objDataReader;
+                objConnection = Mapped.Connection();
+                objCommand = Mapped.Command("SELECT PR.PRI_CODIGO FROM SAN_SEMESTRE_ANO SA INNER JOIN PRI_PROJETO_INTER PR USING(SAN_CODIGO) INNER JOIN API_ATRIBUICAO_PI USING(PRI_CODIGO) WHERE ADI_CODIGO = ?adi_codigo AND SA.SAN_ATIVO = 1;", objConnection);
+                objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", codAtribuicaoMateria));
+                objDataReader = objCommand.ExecuteReader();
+                while (objDataReader.Read())
+                {
+                    codPiAtivo = Convert.ToInt32(objDataReader["PRI_CODIGO"]);
+                }
+                objDataReader.Close();
+                objConnection.Close();
+                objConnection.Dispose();
+                objCommand.Dispose();
+                objDataReader.Dispose();
+                return codPiAtivo;
+            }
+            catch (Exception e)
+            {
+                return -2;
+            }
+        }
     }
 
 

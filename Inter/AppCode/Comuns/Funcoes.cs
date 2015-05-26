@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -147,8 +148,7 @@ namespace Inter.Funcoes
         {
             string[] nomes = nome.Split(' ');
             return nomes[0];
-        }
-
+        }        
 
 
     }
