@@ -51,8 +51,7 @@
                                         </td>
                                         <td colspan="4">
                                             <asp:DropDownList ID="ddlGrupos" runat="server" CssClass="dropDown">
-                                                <asp:ListItem>Sistema de Avaliação de interdisciplinar-Usuário</asp:ListItem>
-                                                <asp:ListItem>Sistema de Avaliação de interdisciplinar-Admin</asp:ListItem>
+                                               
                                             </asp:DropDownList>
 
                                         </td>

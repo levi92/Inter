@@ -63,9 +63,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             btnExcluirGrupo.Style.Add("pointer-events", "none");
 
         }
-
-        PanelCriterios.Controls.Clear();
-        updPanelPeso.Update();
+        
         CriarCriterio();
         updPanelPeso.Update();
 
@@ -136,12 +134,12 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                         lblDisciplinas = new Label();
                         if (ds.Tables[0].Rows[i]["tipo"].ToString() == "MAE")
                         {
-                            //ícone da estrelinha
+                            //ÍCONE DA ESTRELINHA
                             lblDisciplinas.Text = "<span class='glyphicon glyphicon-star'></span>";
                         }
                         else
                         {
-                            //ícone de tracinho
+                            //ÍCONE DE TRACINHO
                             lblDisciplinas.Text = "<span class='glyphicon glyphicon-minus'></span>";
                         }
                         cell.Controls.Add(lblDisciplinas);
@@ -153,7 +151,6 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                         lblCodigoDisciplina.ID = "codDisciplina" + i;
                         cell.Controls.Add(lblCodigoDisciplina);
                         listCodDisciplinas.Add(Convert.ToInt32(lblCodigoDisciplina.Text));
-                        //tamanhoVetorCodigoDisciplina++;
                     }
                     rows.Cells.Add(cell);
                 }
@@ -189,26 +186,26 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     public static string GetEventos(string dadosEventos)
     {
 
-        string[] eventos = dadosEventos.Split('|'); //divide quando achar o pipe('|') 
+        string[] eventos = dadosEventos.Split('|'); //DIVIDE QUANDO ACHAR O PIPE('|') 
 
-        List<string> descricao = new List<string>(); //cria uma List, porque não tem um tamanho definido
+        List<string> descricao = new List<string>(); //CRIA UMA LIST, PORQUE NÃO TEM UM TAMANHO DEFINIDO
         List<string> data = new List<string>();
 
 
         for (int i = 0; i < eventos.Length - 1; i++)
         {
-            if (i % 2 == 0) //se for par
+            if (i % 2 == 0) //SE FOR PAR
             {
                 descricao.Add(eventos[i]);
             }
-            else //se for impar
+            else //SE FOR IMPAR
             {
                 data.Add(eventos[i]);
             }
 
         }
 
-        desc = descricao.ToArray(); //toArray converte a List em Array
+        desc = descricao.ToArray(); //TOARRAY CONVERTE A LIST EM ARRAY
         dat = data.ToArray();
 
 
@@ -570,18 +567,17 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     //MÉTODO PARA CARREGAR OS ALUNOS GERAIS DO BANCO NO COMPONENTE LISTBOX
     private void CarregaAlunosCadastrarPi()
     {
-        //DATASET VAI RECEBER TODOS OS CRITÉRIOS DO BANCO DE DADOS PELO SELECTALL
-        
+        //DATASET VAI RECEBER TODOS OS CRITÉRIOS DO BANCO DE DADOS PELO SELECTALL        
 
         DataSet dsAluno = new DataSet();
         int codAtr = (int)Session["codAtr"];
         dsAluno = Matricula.ListaPresenca(codAtr);      
         int qtd = dsAluno.Tables[0].Rows.Count;
 
-        //se houver alunos 
+        //SE HOUVER ALUNOS 
         if (qtd > 0)
         {
-            //vai rodar todas as linhas do dataset e jogar os dados na listbox 
+            //VAI RODAR TODAS AS LINHAS DO DATASET E JOGAR OS DADOS NA LISTBOX 
             foreach (DataRow dr in dsAluno.Tables[0].Rows)
             {
                 ListItem li = new ListItem();
@@ -590,12 +586,11 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 li.Attributes.Add("title", dr["Nome"].ToString());
                 liNomeAlunoTip.Add(dr["Nome"].ToString());
                 liMatriculaAluno.Add(dr["Matricula"].ToString());
-                //adicionando código e nome do critério aos critérios encontrados no dataset
+                //ADICIONANDO CÓDIGO E NOME DO CRITÉRIO AOS CRITÉRIOS ENCONTRADOS NO DATASET
                 listaAlunoGeral.Items.Add(li);
 
             }
-            //gdvdisciplinasenvolvidas.DataSource = dsAluno;
-            //gdvdisciplinasenvolvidas.DataBind();
+            
         }
     }
 
@@ -666,7 +661,6 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
             //ADICIONANDO AO LISTBOX DE GRUPOS, ADICIONA O NOME DO GRUPO AO LISITEM E NO VALUE RECEBE UM INDEX ÚNICO PARA CADA LISTITEM
             listaGrupos.Items.Add(new ListItem("Grupo: " + txtNomeGrupo.Text, index.ToString()));
-            //"Clique para Editar o grupo" -> vamos inserir um texto de ajuda fixo na lateral!
             index++;
             listaAlunosGrupo.Items.Clear();
             txtNomeGrupo.Text = "";
@@ -727,7 +721,6 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         btnExcluirGrupo.Enabled = true;
         btnCancelarEdicao.Enabled = true;
         listaGrupos.Enabled = false;
-
 
         btnConfirmarGrupo.Style.Add("opacity", "0.4");
         btnConfirmarGrupo.Style.Add("pointer-events", "none");
@@ -914,14 +907,15 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     protected void btnFinalizarCriarPi_Click(object sender, EventArgs e)
     {
-        //Inserindo na tabela Projeto_Inter
+        //INSERINDO NA TABELA PROJETO_INTER
         Projeto_Inter pi = new Projeto_Inter();
         pi.Pri_codigo = Convert.ToInt32(lblCodigoPiAut.Text);
         Semestre_Ano san = new Semestre_Ano();
         san = Semestre_Ano_DB.Select();
         pi.San_codigo = san;
         Projeto_Inter_DB.Insert(pi);
-        //Inserindo na tabela Eventos
+
+        //INSERINDO NA TABELA EVENTOS
         for (int i = 0; i < desc.Length; i++)
         {
             Eventos eve = new Eventos();
@@ -930,7 +924,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             eve.Eve_data = Convert.ToDateTime(dat[i]);
             Eventos_DB.Insert(eve);
         }
-        //Inserindo na tabela Atribuicao_PI
+
+        //INSERINDO NA TABELA ATRIBUICAO_PI
        
         int[] codDisciplina = listCodDisciplinas.ToArray();
        
@@ -942,7 +937,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             Atribuicao_PI_DB.Insert(atr);
         }
             
-        //Inserindo na tabela Criterio_PI
+        //INSERINDO NA TABELA CRITERIO_PI
         int indiceCrit = 0;
         foreach(ListItem li in listaCritPi.Items){            
             TextBox txtPeso = (TextBox) PanelCriterios.FindControl("txtCriterio"+(indiceCrit));
@@ -962,7 +957,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             indiceCrit++;
         }
 
-        //Inserindo na tabela Grupo
+        //INSERINDO NA TABELA GRUPO
         int ultCodGrupo = Grupo_DB.SelectUltimoCod();
         if (ultCodGrupo == -2)
         {
