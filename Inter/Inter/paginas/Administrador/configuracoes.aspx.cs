@@ -37,6 +37,17 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 
     public DataTable Backup(GridView gv_arquivos)
     {
+        string directory = (Request.PhysicalApplicationPath + "Backup");
+
+        if (!Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+            if (!Directory.Exists(directory))
+            {
+
+            }
+        }
+
         string caminho = (Request.PhysicalApplicationPath + "Backup\\");
         DirectoryInfo pasta = new DirectoryInfo(caminho);
         //DirectoryInfo[] subPastas = pasta.GetDirectories();
@@ -126,6 +137,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 
         Backup(gdvBkp);
         UpdatePanelBkp.Update();
+        lblBackup.Text = "Backup efetuado com sucesso!";
 
         /*string constring = ("server=" + server + ";user=" + user + ";database=" + database + ";password=" + password);
         string file = (directory + "\\" + nome_arquivo);

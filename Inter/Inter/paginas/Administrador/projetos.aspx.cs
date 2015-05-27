@@ -34,20 +34,33 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
 
     {    
         string busca = txtBusca.Text;
-        DataSet dsPIFatec = (DataSet)Session["DS_AllPIsbyCalendarioAtual"];
-        if (Session["DS_AllPIsbyCalendarioAtual"] == null)
+        DataSet dsPIsFatec = (DataSet)Session["DS_AllPIsbyCalendarioAtual"]; //instancia um dataset usando um dataset existente em uma varíavel de sessão(que é instanciada no login como null)
+        if (Session["DS_AllPIsbyCalendarioAtual"] == null) //se a variável de sessão estiver null(sem dataset nenhum), irá colocar um dataset dentro da varíavel de sessão
         {
             Calendario cal = Calendario.SelectbyAtual();           
-            dsPIFatec = Professor.SelectAllPIsbyCalendario(cal.Codigo, cal.AnoSemestreAtual);
-            Session["DS_AllPIsbyCalendarioAtual"] = dsPIFatec;
-        }
-        string[] vetorReturnFunction = new string[3];
+            dsPIsFatec = Professor.SelectAllPIsbyCalendario(cal.Codigo, cal.AnoSemestreAtual);
+            Session["DS_AllPIsbyCalendarioAtual"] = dsPIsFatec;
 
-        //foreach(row in (DataSet)Session["DS_AllPIsbyCalendarioAtual"])
-        //vetorReturnFunction = Funcoes.tratarDadosProfessor((DataSet)Session["DS_AllPIsbyCalendarioAtual"].Tables[0].Rows[i]["disciplina"].ToString());
+        }
+        int qtdPIs = dsPIsFatec.Tables[0].Rows.Count; //pega a quantidade total de linhas na tabela do dataset e armazena na variável qtdPIs
+        string[] cursos = new string[0]; //instancia um novo array cursos com tamanho indefinido
+        cursos = Funcoes.tratarDadosCursosComPI(dsPIsFatec, qtdPIs); //usa um método para tratar o nome dos cursos e trazer somente um de cada
+        ddlCurso.DataSource = cursos;
+        ddlCurso.DataBind();
 
         DataSet ds = Funcoes_DB.SelectAllPIs();
         ds.Tables.Add();
+        
+        string[] anoSemestre = new string[0];
+        int i = 0;
+        //foreach (string SemestreAno in ds.Tables[0].Rows[i]["SAN")
+        //{
+        //    if (!anoSemestre.Contains(SemestreAno))
+        //    {
+                
+        //    }
+        //}
+
         //if (!String.IsNullOrEmpty(busca))
         //{
         //    ds.Tables[0].Select("where GRU_NOME_PROJETO like '%" + busca + "%'");
@@ -73,13 +86,13 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
 
             i++;
 
-            if (e.Row.Cells[3].Text == "False") //verifica se o valor da coluna GRU_FINALIZADO 
+            if (e.Row.Cells[3].Text == "False") //verifica se o valor da coluna GRU_FINALIZADO é "false"
             {
-                e.Row.Cells[3].Text = "Aberto";
+                e.Row.Cells[3].Text = "Aberto"; //se for, troca o "false" por "aberto"
             }
             else
             {
-                e.Row.Cells[3].Text = "Finalizado";
+                e.Row.Cells[3].Text = "Finalizado"; //se não for "false", troca por "finalizado"
             }
         }
     }

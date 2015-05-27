@@ -47,9 +47,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AppCode\DLLFatec\ddl mysql 6 6 5\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="MySqlBackup, Version=2.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\MySqlBackup.dll</HintPath>
+    <Reference Include="MySqlBackup">
+      <HintPath>..\AppCode\DLLFatec\MySqlBackup.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
