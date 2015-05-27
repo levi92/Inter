@@ -52,14 +52,9 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
         ds.Tables.Add();
         
         string[] anoSemestre = new string[0];
-        int i = 0;
-        //foreach (string SemestreAno in ds.Tables[0].Rows[i]["SAN")
-        //{
-        //    if (!anoSemestre.Contains(SemestreAno))
-        //    {
-                
-        //    }
-        //}
+        //for()
+        //anoSemestre = ds.Tables[0]
+     
 
         //if (!String.IsNullOrEmpty(busca))
         //{
