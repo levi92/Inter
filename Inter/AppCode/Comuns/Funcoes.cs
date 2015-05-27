@@ -155,14 +155,42 @@ namespace Inter.Funcoes
         public static string[] NomeAlunosByMatricula(string[] codAlunos)
         {
             string[] nomeAlunos = new string[codAlunos.Length - 1];
-            for(int i=0; i<codAlunos.Length-1; i++){
+            for (int i = 0; i < codAlunos.Length - 1; i++)
+            {
                 Aluno alu = new Aluno();
                 alu = Aluno.SelecionarAluno(codAlunos[i]);
                 nomeAlunos[i] = alu.Nome;
-            }            
+            }
 
             return nomeAlunos;
         }
+
+        public static string[] tratarDadosCursosComPI(DataSet ds, int qtdPIs)
+        {
+            string[] vetorReturnFunction = new string[3];
+            string[] cursosRepetidos = new string[qtdPIs];
+            string[] cursos = new string[5];
+
+            for (int j = 0; j < qtdPIs; j++)
+            {
+                vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[j]["disciplina"].ToString());
+                cursosRepetidos[j] = vetorReturnFunction[0];
+
+            }
+            int i = 0;
+            foreach (string nome in cursosRepetidos)
+            {
+                if (!cursos.Contains(nome))
+                {
+                    cursos[i] = nome;
+                    i++;
+                }
+            }
+
+
+            return cursos;
+        }
+
 
     }
 }

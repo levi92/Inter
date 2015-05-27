@@ -67,9 +67,10 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         //ADICIONA AS COLUNAS DO CABEÇALHO COM OS "IDs" DE ACORDO COM O NOME DO ALUNO 
         for (int i = 0; i < nomeAlunos.Length; i++)
         {
-            dt.Columns.Add(Funcoes.SplitNomes(nomeAlunos[i].ToString()), typeof(string));
+            dt.Columns.Add(Funcoes.SplitNomes((i+1) + nomeAlunos[i].ToString()), typeof(string));
         }
 
+        string pesos = "";
 
         for (int j = 0; j < dsCriteriosPesos.Tables[0].Rows.Count; j++)
         {
@@ -78,6 +79,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
             {
                 if (i == 0) //COLUNA FOR IGUAL A 0
                 {
+                    pesos += dsCriteriosPesos.Tables[0].Rows[j]["cpi_peso"].ToString() + "|";
                     dr[" "] = dsCriteriosPesos.Tables[0].Rows[j]["cge_nome"].ToString() +" ("+dsCriteriosPesos.Tables[0].Rows[j]["cpi_peso"].ToString()+")";
                 }
             }
@@ -137,8 +139,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                 }
                 else
                 {
-                    int peso = 10;
-                    valorPeso.Value = peso.ToString();
+                    valorPeso.Value = pesos.ToString();
                     txbNotas = new TextBox();
                     txbNotas.ID = "txtNotasRow_" + (rowIndex) + "_Col_" + colIndex;
                     txbNotas.ClientIDMode = System.Web.UI.ClientIDMode.Static;

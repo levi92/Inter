@@ -12,24 +12,6 @@
 public partial class paginas_Admin_configuracoes {
     
     /// <summary>
-    /// txtEndereco control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtEndereco;
-    
-    /// <summary>
-    /// btAdmTrocarSenha control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlButton btAdmTrocarSenha;
-    
-    /// <summary>
     /// ScriptManager2 control.
     /// </summary>
     /// <remarks>
@@ -48,6 +30,15 @@ public partial class paginas_Admin_configuracoes {
     protected global::System.Web.UI.UpdatePanel UpdatePanelBkp;
     
     /// <summary>
+    /// lblBackup control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblBackup;
+    
+    /// <summary>
     /// gdvBkp control.
     /// </summary>
     /// <remarks>
@@ -64,13 +55,4 @@ public partial class paginas_Admin_configuracoes {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Button btnCriarBackup;
-    
-    /// <summary>
-    /// lblBackup control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblBackup;
 }

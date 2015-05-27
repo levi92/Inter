@@ -1145,11 +1145,13 @@ td.mediaAvaliar {
 
 .modalLoader
 {
-    position: fixed;
+    position: absolute;
     z-index: 999;
     height: 100%%;
     width: 100%;
+    background-color: black;
     top: 0;
+    left: 0;
     filter: alpha(opacity=50);
     opacity: 0.5;
 
@@ -1158,12 +1160,12 @@ td.mediaAvaliar {
 {
     z-index: 1000;
     margin: 15% 35%;
-    padding: 10px;
     width: 50px;
     background-color: White;
     border-radius: 10px;
     filter: alpha(opacity=80);
     opacity:0.8;
+    text-align: center;
   
 }
 

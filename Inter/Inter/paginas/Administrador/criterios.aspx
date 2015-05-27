@@ -168,12 +168,7 @@
                             </div>
                         </div>
 
-                        <%--Botão de novo critério--%>
-                        <button type="button" class="btn btn-default" id="btnMostraModal" onclick="mostraModal()" title="Ir para cadastro de critérios">
-                            <span class="glyphicon glyphicon-plus"></span>&nbsp Modal
-                       
-                       
-                        </button>
+                     
                     </div>
 
 

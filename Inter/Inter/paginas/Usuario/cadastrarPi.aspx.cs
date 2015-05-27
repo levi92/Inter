@@ -969,7 +969,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         }
         for (int i = 1; i < index; i++)
         {
-            if (ViewState["NomeGrupo" + i.ToString()].ToString() != null)
+            if (ViewState["NomeGrupo" + i.ToString()] != null)
             {
                 string nomeGrupo = ViewState["NomeGrupo" + i.ToString()].ToString();       
                 Grupo gru = new Grupo();

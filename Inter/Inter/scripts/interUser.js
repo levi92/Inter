@@ -352,28 +352,80 @@ $(document).ready(function () {
 
     });
 
-
-    funcaoImpedirValor = function (id) {        
+    funcaoImpedirValor = function (id) {
         var valor = document.getElementById(id).value;
 
-        if (valor <= 0 || valor > 10) {                   
-            $("#"+id).val("");
+        if (valor <= 0 || valor > 10) {
+            $("#" + id).val("");
         }
 
     }
 
-    ////sortable mover com duplo clique
-    //$("ul#sortable3 li").dblclick(function () {
-    //    $(this).appendTo("ul#sortable4");
-    //});
+    funcaoImpedirValorAvaliar = function (id) {
+        var valor = document.getElementById(id).value;
+
+        if (valor < 0 || valor > 10) {
+            $("#" + id).val("");
+        }
+
+    }
+
+    funcaoAtualizarMedia = function (id) { //QUANDO TEXTBOX PERDE O FOCO
+
+        var idLinhaCol = id;
+        var coluna = idLinhaCol.split("_");
+        var countRow = $("#tableAvaliar tr").length - 2; //POR CAUSA DO CABEÇALHO E RODAPÉ
+
+        var valor = 0;
+        var valorMultiplicacao = 0;
+        var TodosPesos = ($('#valorPeso').val()).split('|');
+        var somaPeso = 0;
+
+        //txtNotasRow_1_Col_1
+        for (var i = 0; i < countRow; i++) {
+
+            valor = parseFloat($("#txtNotasRow_" + i + "_Col_" + coluna[3]).val());
+            //Se textbox não estiver vazio
+            if (!isNaN(valor)) {
+                var peso = parseFloat(TodosPesos[i]);
+                valorMultiplicacao += valor * peso;
+                somaPeso += peso;
+            }
+        }
+
+        var linhaLblMedia = $("#tableAvaliar tr").length - 1;
+        $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html((valorMultiplicacao / somaPeso).toFixed(2));
 
 
+    }
 
+}); //FECHAMENTO $(document).ready
 
+function funcaoAtualizarMediaAll() {
 
+    var countRow = $("#tableAvaliar tr").length - 2; // - 2 POR CAUSA DO CABEÇALHO E RODAPÉ 
+    var qtdTotalCol = $('#tableAvaliar tr td').length; //QTD TOTAL DE COLUNAS
+    var qtdColuna = $('#tableAvaliar tr td').length / (countRow + 1); //QTD COLUNA POR LINHA
 
+    var valor = 0;
+    var valorMultiplicacao = 0;
+    var TodosPesos = ($('#valorPeso').val()).split('|');
+    var somaPeso = 0;
 
+    for (var j = 1; j < qtdColuna; j++) {
+        for (var i = 0; i < countRow; i++) {
 
+            valor = parseFloat($("#txtNotasRow_" + i + "_Col_" + j).val());
+            var peso = parseFloat(TodosPesos);
+            if (!isNaN(valor)) {
+                valorMultiplicacao += valor * peso;
+                somaPeso += peso;
+            }
+        }
 
+        var linhaLblMedia = $("#tableAvaliar tr").length - 1; //ULTIMA LINHA DA TABELA
+        $('#lblMediaRow_' + linhaLblMedia + '_Col_' + j).html((valorMultiplicacao / somaPeso).toFixed(2));
+        valorMultiplicacao = 0;
+    }
 
-});
+}

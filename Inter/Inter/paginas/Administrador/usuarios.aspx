@@ -9,15 +9,11 @@
     </script>
 
         
-
-    <div id="p1" class="first">
-
            <asp:UpdateProgress ID="upgAdmin" runat="server" AssociatedUpdatePanelID="UpdatePanelAdmin">
                     <ProgressTemplate>
                         <div class="modalLoader">
                             <div class="modalCenter">
-                                <img alt="Carregando" src="../../App_Themes/images/ajax-loader.gif" /><br />
-                                
+                                <img alt="Carregando" src="../../App_Themes/images/ajax-loader.gif" />                          
                             </div>
                         </div>
                     </ProgressTemplate>
@@ -34,6 +30,9 @@
                         </div>
                     </ProgressTemplate>
                 </asp:UpdateProgress>
+
+    <div id="p1" class="first">
+
 
         <div class="panel panel-default">
             <div class="panel-heading">

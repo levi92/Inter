@@ -32,7 +32,7 @@
                                     <div class="col-md-3" style="top:6px;">
                                         Ano
                                         <asp:DropDownList ID="ddlSemestreAno" CssClass="dropdown" runat="server">
-                                       <asp:ListItem>Todos</asp:ListItem>
+                                       <asp:ListItem Text="Todos Cursos" Value="Todos"></asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
 
@@ -58,13 +58,6 @@
 
                                     <Columns>
 
-                                        <%--<asp:TemplateField>
-                                            <InsertItemTemplate>
-                                                <input type="text" />
-                                            </InsertItemTemplate>
-                                        </asp:TemplateField>--%>
-
-
                                         <asp:BoundField DataField="GRU_NOME_PROJETO" HeaderText="Nome" />
 
                                         <asp:TemplateField HeaderText="Curso/Turno"><%--esse campo curso é pego no método RowDataBound no code behind--%>
@@ -75,7 +68,6 @@
                                         <asp:BoundField DataField="SAN" HeaderText="Ano/Semestre" />
 
                                        <asp:BoundField Datafield="GRU_FINALIZADO" HeaderText="Status"  />
-
 
                                     </Columns>
 
