@@ -352,28 +352,77 @@ $(document).ready(function () {
 
     });
 
-
-    funcaoImpedirValor = function (id) {        
+    funcaoImpedirValor = function (id) {
         var valor = document.getElementById(id).value;
 
-        if (valor <= 0 || valor > 10) {                   
-            $("#"+id).val("");
+        if (valor <= 0 || valor > 10) {
+            $("#" + id).val("");
         }
 
     }
 
-    ////sortable mover com duplo clique
-    //$("ul#sortable3 li").dblclick(function () {
-    //    $(this).appendTo("ul#sortable4");
-    //});
+    funcaoImpedirValorAvaliar = function (id) {
+        var valor = document.getElementById(id).value;
+
+        if (valor < 0 || valor > 10) {
+            $("#" + id).val("");
+        }
+
+    }
+
+    funcaoAtualizarMedia = function (id) { //QUANDO TEXTBOX PERDE O FOCO
+
+        var idLinhaCol = id;
+        var coluna = idLinhaCol.split("_");
+        var countRow = $("#tableAvaliar tr").length - 2; //POR CAUSA DO CABEÇALHO E RODAPÉ
+
+        var valor = 0;
+        var valorMultiplicacao = 0;
+        var peso = 2;
+        var somaPeso = parseFloat($('#valorPeso').val());
+
+        //txtNotasRow_1_Col_1
+        for (var i = 0; i < countRow; i++) {
+
+            valor = parseFloat($("#txtNotasRow_" + i + "_Col_" + coluna[3]).val());
+
+            if (!isNaN(valor)) {
+                valorMultiplicacao += valor * peso;
+            }
+        }
+
+        var linhaLblMedia = $("#tableAvaliar tr").length - 1;
+        $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html(valorMultiplicacao / somaPeso);
 
 
+    }
 
+}); //FECHAMENTO $(document).ready
 
+function funcaoAtualizarMediaAll() {
 
+    var countRow = $("#tableAvaliar tr").length - 2; // - 2 POR CAUSA DO CABEÇALHO E RODAPÉ 
+    var qtdTotalCol = $('#tableAvaliar tr td').length; //QTD TOTAL DE COLUNAS
+    var qtdColuna = $('#tableAvaliar tr td').length / (countRow + 1); //QTD COLUNA POR LINHA
 
+    var valor = 0;
+    var valorMultiplicacao = 0;
+    var peso = 2;
+    var somaPeso = parseFloat($('#valorPeso').val());
 
+    for (var j = 1; j < qtdColuna; j++) {
+        for (var i = 0; i < countRow; i++) {
 
+            valor = parseFloat($("#txtNotasRow_" + i + "_Col_" + j).val());
 
+            if (!isNaN(valor)) {
+                valorMultiplicacao += valor * peso;
+            }
+        }
 
-});
+        var linhaLblMedia = $("#tableAvaliar tr").length - 1; //ULTIMA LINHA DA TABELA
+        $('#lblMediaRow_' + linhaLblMedia + '_Col_' + j).html(valorMultiplicacao / somaPeso);
+        valorMultiplicacao = 0;
+    }
+
+}
