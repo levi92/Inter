@@ -378,21 +378,23 @@ $(document).ready(function () {
 
         var valor = 0;
         var valorMultiplicacao = 0;
-        var peso = 2;
-        var somaPeso = parseFloat($('#valorPeso').val());
+        var TodosPesos = ($('#valorPeso').val()).split('|');
+        var somaPeso = 0;
 
         //txtNotasRow_1_Col_1
         for (var i = 0; i < countRow; i++) {
 
             valor = parseFloat($("#txtNotasRow_" + i + "_Col_" + coluna[3]).val());
-
+            //Se textbox não estiver vazio
             if (!isNaN(valor)) {
+                var peso = parseFloat(TodosPesos[i]);
                 valorMultiplicacao += valor * peso;
+                somaPeso += peso;
             }
         }
 
         var linhaLblMedia = $("#tableAvaliar tr").length - 1;
-        $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html(valorMultiplicacao / somaPeso);
+        $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html((valorMultiplicacao / somaPeso).toFixed(2));
 
 
     }
@@ -407,21 +409,22 @@ function funcaoAtualizarMediaAll() {
 
     var valor = 0;
     var valorMultiplicacao = 0;
-    var peso = 2;
-    var somaPeso = parseFloat($('#valorPeso').val());
+    var TodosPesos = ($('#valorPeso').val()).split('|');
+    var somaPeso = 0;
 
     for (var j = 1; j < qtdColuna; j++) {
         for (var i = 0; i < countRow; i++) {
 
             valor = parseFloat($("#txtNotasRow_" + i + "_Col_" + j).val());
-
+            var peso = parseFloat(TodosPesos);
             if (!isNaN(valor)) {
                 valorMultiplicacao += valor * peso;
+                somaPeso += peso;
             }
         }
 
         var linhaLblMedia = $("#tableAvaliar tr").length - 1; //ULTIMA LINHA DA TABELA
-        $('#lblMediaRow_' + linhaLblMedia + '_Col_' + j).html(valorMultiplicacao / somaPeso);
+        $('#lblMediaRow_' + linhaLblMedia + '_Col_' + j).html((valorMultiplicacao / somaPeso).toFixed(2));
         valorMultiplicacao = 0;
     }
 
