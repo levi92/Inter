@@ -149,6 +149,7 @@ using System.Data;
         //Método para desativar um critério
         protected void gdvCriterios_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            System.Threading.Thread.Sleep(3000);
             Label lblCodigo = (Label)gdvCriteriosAtivos.Rows[e.RowIndex].FindControl("lblCodigo");
             if (Criterios_Gerais_DB.Desativar(Convert.ToInt32(lblCodigo.Text)) == 0)
             {
@@ -167,6 +168,7 @@ using System.Data;
         //Método para ativar um critério
         protected void gdvCriteriosDesativados_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+            System.Threading.Thread.Sleep(3000);
             Label lblCodigo = (Label)gdvCriteriosDesativados.Rows[e.RowIndex].FindControl("lblCodigo");
                 if (Criterios_Gerais_DB.Ativar(Convert.ToInt32(lblCodigo.Text)) == 0)
                 {                    
@@ -174,7 +176,6 @@ using System.Data;
                     CarregarGridAtivos();
                     CarregarGridDesativados();
                     UpdatePanelDesativados.Update();
-                    ScriptManager.RegisterClientScriptBlock(UpdatePanelDesativados, UpdatePanelDesativados.GetType(), "blockPage", "blockPage()", true);
                     UpdatePanelAtivados.Update();              
                     
                     
