@@ -88,11 +88,11 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
 
             if (e.Row.Cells[3].Text == "False") //verifica se o valor da coluna GRU_FINALIZADO é "false"
             {
-                e.Row.Cells[3].Text = "Aberto"; //se for, troca o "false" por "aberto"
+                e.Row.Cells[3].Text = "Finalizado"; //se for, troca o "false" por "aberto"
             }
             else
             {
-                e.Row.Cells[3].Text = "Finalizado"; //se não for "false", troca por "finalizado"
+                e.Row.Cells[3].Text = "Aberto"; //se não for "false", troca por "finalizado"
             }
         }
     }
