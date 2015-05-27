@@ -114,7 +114,7 @@ using System.Data;
                 }
                 else
                 {
-                    lblMsg.Text = "Erro ao inserir critério!";
+                    lblMsg.Text = "Erro ao inserir solicitação!";
                 }
             }
         }
