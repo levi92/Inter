@@ -5,12 +5,15 @@ using System.Web;
 using System.Data;
 
 
-public class Requerimento_DB{
+public class Requerimento_DB
+{
 
     //INSERT
-    public static int Insert(Requerimento requerimento){
+    public static int Insert(Requerimento requerimento)
+    {
         int retorno = 0;
-        try{
+        try
+        {
             IDbConnection conexao;
             IDbCommand objCommand;
             //string sql = "INSERT INTO req_requerimento(req_assunto, req_dt_requisicao, pro_matricula, gru_codigo, req_status, req_categoria ) " +
@@ -29,7 +32,8 @@ public class Requerimento_DB{
             objCommand.Dispose();
             conexao.Dispose();
         }
-        catch (Exception e){
+        catch (Exception e)
+        {
             retorno = -2;
         }
         return retorno;
@@ -118,7 +122,8 @@ public class Requerimento_DB{
     }*/
 
     //SELECT ALL
-    public static DataSet SelectAll(){
+    public static DataSet SelectAll()
+    {
         DataSet ds = new DataSet();
         IDbConnection objConnection;
         IDbCommand objCommand;
@@ -143,7 +148,7 @@ public class Requerimento_DB{
         objConnection = Mapped.Connection();
         objCommand = Mapped.Command("SELECT * FROM req_requerimento WHERE req_status=?codigo ORDER BY req_codigo DESC", objConnection);
         objCommand.Parameters.Add(Mapped.Parameter("?codigo", codigo));
-        objDataAdapter = Mapped.Adapter(objCommand);                            
+        objDataAdapter = Mapped.Adapter(objCommand);
         objDataAdapter.Fill(ds);
         objConnection.Close();
         objCommand.Dispose();

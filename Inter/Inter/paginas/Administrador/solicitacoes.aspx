@@ -34,19 +34,8 @@
                     <div onclick="butAcao()">Finalizar Favorável</div>
                     <div onclick="butAcao()">Finalizar Desfavorável</div>
                     <div onclick="butAcao()">PI Finalizado</div>
-                    <!--O ícone de prioridade sera definido com base na opção de prioridade escolhida-->
-                    <div onclick="toggleDiv('subMenuPrioridade')">Prioridade<span class="mdi mdi-alert" style="float: right; color: yellow; font-size: 20px"></span></div>
                 </div>
                 <!--Fim do submenu-->
-                <!--Início do submenu de prioridade-->
-                <!--Animação de deslizar para abrir e fechar o menu | prioridade que esta escolhida como padrão deve aparecer como desabilitada na hora da escolha-->
-                <div id="subMenuPrioridade" class="subMenuPrioridade" style="display: none">
-                    <div>Prioridade</div>
-                    <div onclick="butAcao()">Normal<span class="mdi mdi-alert" style="float: right; color: green; font-size: 20px"></span></div>
-                    <div onclick="butAcao()">Média<span class="mdi mdi-alert" style="float: right; color: yellow; font-size: 20px"></span></div>
-                    <div onclick="butAcao()">Alta<span class="mdi mdi-alert" style="float: right; color: red; font-size: 20px"></span></div>
-                </div>
-                <!--Fim do submenu de prioridade-->
                 <!--Fim 3-dot menu-->
                 <!--Início do Corpo-->
                 <div class="modal-body" style="background-color: whitesmoke;">
