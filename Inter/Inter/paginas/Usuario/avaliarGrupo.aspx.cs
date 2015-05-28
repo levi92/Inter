@@ -11,8 +11,6 @@ using AppCode.Persistencia;
 public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 {
 
-
-
     protected void Page_PreInit(object sender, EventArgs e)
     {
         //VERIFICAR SESSAO LOGIN
@@ -31,33 +29,45 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
             Response.Redirect("escolherDisciplina.aspx");
         }
 
-        if (!Page.IsPostBack)
+        if (!IsPostBack)
         {
             //CARREGA DDL DOS GRUPOS DEPENDENDO DO PI ATIVO DA MATERIA SELECIONADA
             DataSet dsGrupos = new DataSet();
-            DataSet dsCriteriosPesos = new DataSet();
+
             dsGrupos = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["CodigoPIAtivoMateria"]));
             ddlGrupos.DataSource = dsGrupos;
             ddlGrupos.DataTextField = "GRU_NOME_PROJETO";
             ddlGrupos.DataValueField = "GRU_CODIGO";
             ddlGrupos.DataBind();
+            ddlGrupos.Items.Insert(0, "Selecione");
 
+            DataSet dsCriteriosPesos = new DataSet();
             dsCriteriosPesos = Criterio_PI_DB.SelectCriteriosPesosByPI(Convert.ToInt32(Session["CodigoPIAtivoMateria"]), Convert.ToInt32(Session["codAtr"]));
-
-            CarregaTableAvaliar(Convert.ToInt32(ddlGrupos.SelectedValue), dsCriteriosPesos);
+            Session["dsCriteriosPesos"] = dsCriteriosPesos;
         }
         else
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "funcaoAtualizarMediaAll", "funcaoAtualizarMediaAll();", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "funcaoAtualizarMediaAll", "funcaoAtualizarMediaAll();", true);
+            DataSet dsCriteriosPesos = (DataSet)Session["dsCriteriosPesos"];
+            CarregaTableAvaliar(Convert.ToInt32(ddlGrupos.SelectedValue), dsCriteriosPesos);
         }
 
     }
 
+    protected void ddlGrupos_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //if (ddlGrupos.SelectedIndex != 0)
+        //{
+        //    DataSet dsCriteriosPesos = (DataSet)Session["dsCriteriosPesos"];
+        //    CarregaTableAvaliar(Convert.ToInt32(ddlGrupos.SelectedValue), dsCriteriosPesos);
+        //}
+    }
+    Table table = new Table();
     private void CarregaTableAvaliar(int codGrupo, DataSet dsCriteriosPesos)
     {
         string[] codAlunos = Grupo_Aluno_DB.SelectAllMatriculaByGrupo(codGrupo);
         string[] nomeAlunos = Funcoes.NomeAlunosByMatricula(codAlunos);
-        
+
         DataTable dt = new DataTable();
         DataRow dr = dt.NewRow();
 
@@ -67,7 +77,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         //ADICIONA AS COLUNAS DO CABEÇALHO COM OS "IDs" DE ACORDO COM O NOME DO ALUNO 
         for (int i = 0; i < nomeAlunos.Length; i++)
         {
-            dt.Columns.Add(Funcoes.SplitNomes((i+1) + nomeAlunos[i].ToString()), typeof(string));
+            dt.Columns.Add(Funcoes.SplitNomes((i + 1) + nomeAlunos[i].ToString()), typeof(string));
         }
 
         string pesos = "";
@@ -80,13 +90,15 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                 if (i == 0) //COLUNA FOR IGUAL A 0
                 {
                     pesos += dsCriteriosPesos.Tables[0].Rows[j]["cpi_peso"].ToString() + "|";
-                    dr[" "] = dsCriteriosPesos.Tables[0].Rows[j]["cge_nome"].ToString() +" ("+dsCriteriosPesos.Tables[0].Rows[j]["cpi_peso"].ToString()+")";
+                    dr[" "] = dsCriteriosPesos.Tables[0].Rows[j]["cge_nome"].ToString() + " (" + dsCriteriosPesos.Tables[0].Rows[j]["cpi_peso"].ToString() + ")";
                 }
             }
             dt.Rows.Add(dr);
         }
 
-        Table table = new Table();
+        valorPeso.Value = pesos.ToString();
+
+        
         TextBox txbNotas;
         Label lblCriterios;
 
@@ -98,6 +110,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         int rowsCount = dt.Rows.Count;
         int colsCount = dt.Columns.Count;
         Session["rowsCount"] = rowsCount;
+        Session["colsCount"] = colsCount;
 
         TableHeaderRow thr = new TableHeaderRow();
         TableHeaderCell th = new TableHeaderCell();
@@ -139,7 +152,6 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                 }
                 else
                 {
-                    valorPeso.Value = pesos.ToString();
                     txbNotas = new TextBox();
                     txbNotas.ID = "txtNotasRow_" + (rowIndex) + "_Col_" + colIndex;
                     txbNotas.ClientIDMode = System.Web.UI.ClientIDMode.Static;
@@ -152,7 +164,6 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                     cell.Style.Add("text-align", "center");
 
                     txbNotas.Text = dt.Rows[rowIndex][colIndex].ToString();
-                    //txbNotas.Text = "";
 
                     cell.Controls.Add(txbNotas);
                 }
@@ -178,7 +189,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
             }
             else
             {
-                lblMedia.Text = "0.0";
+                lblMedia.Text = "0.00";
             }
             cell.Controls.Add(lblMedia);
             rowMedia.Cells.Add(cell);
@@ -189,33 +200,44 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
     }
 
 
-    private void txbNotasTextChanged(object sender, EventArgs e)
+    private void PegarValoresNotas()
     {
-        TextBox txtChanged = ((TextBox)sender);
-
-        string[] valoresLinCol = txtChanged.ID.Split('_');
-        double valorMultiplicacao = 0, valor = 0;
+        double valorMultiplicacao = 0, valor = 0, mediaDisciplina = 0, mediaPonderada = 0;
         int rowsCount = Convert.ToInt32(Session["rowsCount"]);
-        int col = Convert.ToInt32(valoresLinCol[3]);
+        int colsCount = Convert.ToInt32(Session["colsCount"]);
+        int somaPeso = 0;
+        string[] todosPesos = valorPeso.Value.Split('|');
 
-        for (int i = 0; i < rowsCount; i++)
+        for (int j = 1; j < colsCount; j++)
         {
-            //txtNotasRow_1_Col_1 = [0] = txtNotasRow - [1] = 1 - [2] = Col - [3] = 1
-            TextBox txt = (TextBox)Page.FindControl("ctl00$ctl00$cphConteudo$cphConteudoCentral$txtNotasRow_" + i.ToString() + "_Col_" + col);
-            if (!String.IsNullOrEmpty(txt.Text))
+            for (int i = 0; i < rowsCount; i++)
             {
-                valor = Convert.ToDouble(txt.Text);
-                valorMultiplicacao += valor * 2;
+                //txtNotasRow_1_Col_1 = [0] = txtNotasRow - [1] = 1 - [2] = Col - [3] = 1
+                TextBox txt = (TextBox)Page.FindControl("ctl00$ctl00$cphConteudo$cphConteudoCentral$txtNotasRow_" + i.ToString() + "_Col_" + j.ToString());
+                if (!String.IsNullOrEmpty(txt.Text))
+                {
+                    valor = Convert.ToDouble(txt.Text);
+                    valorMultiplicacao += valor * Convert.ToInt32(todosPesos[i]);
+                    somaPeso += Convert.ToInt32(todosPesos[i]);
+                }
             }
+            mediaPonderada = valorMultiplicacao / somaPeso;
 
         }
-        Label lblMedia = new Label();
-        lblMedia = (Label)Page.FindControl("ctl00$ctl00$cphConteudo$cphConteudoCentral$lblMediaRow_" + (rowsCount + 1).ToString() + "_Col_" + col.ToString());
-        lblMedia.Text = (valorMultiplicacao / 10).ToString();
-
-
+               
+        
+       
 
     }
+
+    protected void btnFinalizar_Click(object sender, EventArgs e)
+    {
+        
+        PegarValoresNotas();
+        
+    }
+
+
 
 
 

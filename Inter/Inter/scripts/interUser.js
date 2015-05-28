@@ -371,32 +371,44 @@ $(document).ready(function () {
     }
 
     funcaoAtualizarMedia = function (id) { //QUANDO TEXTBOX PERDE O FOCO
+        var qtdValoresNulos = 0;
+        var mediaPonderada = 0;
 
         var idLinhaCol = id;
         var coluna = idLinhaCol.split("_");
-        var countRow = $("#tableAvaliar tr").length - 2; //POR CAUSA DO CABEÇALHO E RODAPÉ
-
+        var countRow = $("#tableAvaliar tr").length - 2; //POR CAUSA DO CABEÇALHO E RODAPÉ        
         var valor = 0;
         var valorMultiplicacao = 0;
-        var TodosPesos = ($('#valorPeso').val()).split('|');
+        var TodosPesos = ($('#valorPeso').val()).split('|');      
+
         var somaPeso = 0;
 
         //txtNotasRow_1_Col_1
         for (var i = 0; i < countRow; i++) {
 
             valor = parseFloat($("#txtNotasRow_" + i + "_Col_" + coluna[3]).val());
-            //Se textbox não estiver vazio
-            if (!isNaN(valor)) {
-                var peso = parseFloat(TodosPesos[i]);
-                valorMultiplicacao += valor * peso;
-                somaPeso += peso;
+            var peso = parseFloat(TodosPesos[i]);
+            somaPeso += peso;
+
+            //SE TEXTBOX NÃO ESTIVER VAZIO
+            if (!isNaN(valor)) {                
+                valorMultiplicacao += valor * peso;                               
+            } else {
+                qtdValoresNulos++;
             }
+            
         }
+        
+        var linhaLblMedia = $("#tableAvaliar tr").length - 1;        
 
-        var linhaLblMedia = $("#tableAvaliar tr").length - 1;
-        $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html((valorMultiplicacao / somaPeso).toFixed(2));
+        if(qtdValoresNulos == countRow){
+            $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html("0.00");
+        } else {
+            mediaPonderada = (valorMultiplicacao / somaPeso).toFixed(2);
+            $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html(mediaPonderada);
+        }        
 
-
+        qtdValoresNulos = 0;
     }
 
 }); //FECHAMENTO $(document).ready
