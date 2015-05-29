@@ -59,7 +59,7 @@
     <Compile Include="Classes\Eventos.cs" />
     <Compile Include="Classes\Grupo.cs" />
     <Compile Include="Classes\Grupo_Aluno.cs" />
-    <Compile Include="Classes\Historico_Disciplina.cs" />
+    <Compile Include="Classes\Historico_Aluno_Disciplina.cs" />
     <Compile Include="Classes\Media_Disciplina.cs" />
     <Compile Include="Classes\Mensagem.cs" />
     <Compile Include="Classes\Perfil.cs" />
@@ -78,6 +78,7 @@
     <Compile Include="Persistencia\Funcoes_DB.cs" />
     <Compile Include="Persistencia\Grupo_Aluno_DB.cs" />
     <Compile Include="Persistencia\Grupo_DB.cs" />
+    <Compile Include="Persistencia\Historico_Aluno_Disciplina_DB.cs" />
     <Compile Include="Persistencia\Media_Disciplina_DB.cs" />
     <Compile Include="Persistencia\Perfil_DB.cs" />
     <Compile Include="Persistencia\Pessoas_DB.cs" />

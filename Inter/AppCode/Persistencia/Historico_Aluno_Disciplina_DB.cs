@@ -5,23 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+namespace AppCode.Persistencia
+{
 
-    public class Media_Disciplina_DB
+    public class Historico_Aluno_Disciplina_DB
     {
-        public static int Insert(Media_Disciplina mdd)
+        public static int Insert(Historico_Aluno_Disciplina his)
         {
             int retorno = 0;
             try
             {
                 IDbConnection conexao;
                 IDbCommand objCommand;
-                string sql = "INSERT INTO mdd_media_disciplina(mdd_codigo, adi_codigo, pri_codigo, gru_codigo, mdd_media) VALUES(0, ?adi_codigo, ?pri_codigo, ?gru_codigo, ?mdd_media)";
+                string sql = "INSERT INTO his_historico_aluno_disciplina(his_codigo, alu_matricula, cpi_codigo, his_nota) VALUES(0, ?alu_matricula, ?cpi_codigo, ?his_nota)";
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
-                objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", mdd.Adi_codigo.Adi_codigo));
-                objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", mdd.Pri_codigo.Pri_codigo));
-                objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", mdd.Gru_codigo.Gru_codigo));
-                objCommand.Parameters.Add(Mapped.Parameter("?mdd_media", mdd.Mdd_media));
+                objCommand.Parameters.Add(Mapped.Parameter("?alu_matricula", his.Alu_matricula.Alu_matricula));
+                objCommand.Parameters.Add(Mapped.Parameter("?cpi_codigo", his.Cpi_codigo.Cpi_codigo));
+                objCommand.Parameters.Add(Mapped.Parameter("?his_nota", his.His_nota));
                 objCommand.ExecuteNonQuery();
                 conexao.Close();
                 objCommand.Dispose();
@@ -35,3 +36,4 @@ using System.Threading.Tasks;
         }
     }
 
+}

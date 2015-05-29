@@ -30,7 +30,7 @@ public partial class paginas_Usuario_home : System.Web.UI.Page
             Response.Redirect("escolherDisciplina.aspx");
         }
 
-        // Aparecer nome do professor na frase Bem-vindo (professor)!
+        // APARECER NOME DO PROFESSOR NA FRASE BEM-VINDO (PROFESSOR)!
         Professor prof = new Professor();
         prof = (Professor)Session["Professor"];
         string[] nomeProf = prof.Nome.Split(' ');

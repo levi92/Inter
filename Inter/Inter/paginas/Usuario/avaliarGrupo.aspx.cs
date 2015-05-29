@@ -48,9 +48,14 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         else
         {
             //ScriptManager.RegisterStartupScript(this, this.GetType(), "funcaoAtualizarMediaAll", "funcaoAtualizarMediaAll();", true);
-            DataSet dsCriteriosPesos = (DataSet)Session["dsCriteriosPesos"];
-            CarregaTableAvaliar(Convert.ToInt32(ddlGrupos.SelectedValue), dsCriteriosPesos);
+            
+            if (ddlGrupos.SelectedIndex != 0)
+            {
+                DataSet dsCriteriosPesos = (DataSet)Session["dsCriteriosPesos"];
+                CarregaTableAvaliar(Convert.ToInt32(ddlGrupos.SelectedValue), dsCriteriosPesos);
+            }
         }
+
 
     }
 
@@ -67,6 +72,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
     {
         string[] codAlunos = Grupo_Aluno_DB.SelectAllMatriculaByGrupo(codGrupo);
         string[] nomeAlunos = Funcoes.NomeAlunosByMatricula(codAlunos);
+        Session["matriculasAlunos"] = codAlunos;
 
         DataTable dt = new DataTable();
         DataRow dr = dt.NewRow();
@@ -98,7 +104,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 
         valorPeso.Value = pesos.ToString();
 
-        
+
         TextBox txbNotas;
         Label lblCriterios;
 
@@ -125,7 +131,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
             th = new TableHeaderCell();
             lblCabecalho = new Label();
             lblCabecalho.Text = Funcoes.SplitNomes(nomeAlunos[i].ToString());
-            lblCabecalho.ToolTip = nomeAlunos[i].ToString();
+            lblCabecalho.ToolTip = nomeAlunos[i].ToString();            
             th.Style.Add("text-align", "center");
             th.Controls.Add(lblCabecalho);
             thr.Cells.Add(th);
@@ -208,33 +214,54 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         int somaPeso = 0;
         string[] todosPesos = valorPeso.Value.Split('|');
 
-        for (int j = 1; j < colsCount; j++)
+        DataSet dsCriteriosPesos = (DataSet)Session["dsCriteriosPesos"];
+        int cpiCodigo = 0;
+        string[] codAlunos = (string[])Session["matriculasAlunos"];
+
+        for (int j = 1; j < colsCount; j++) //ALUNOS
         {
-            for (int i = 0; i < rowsCount; i++)
+            Historico_Aluno_Disciplina his = new Historico_Aluno_Disciplina();
+            Grupo_Aluno gal = new Grupo_Aluno();
+
+            gal.Alu_matricula = codAlunos[j - 1];
+            his.Alu_matricula = gal;
+
+            for (int i = 0; i < rowsCount; i++) //CRITÉRIOS
             {
                 //txtNotasRow_1_Col_1 = [0] = txtNotasRow - [1] = 1 - [2] = Col - [3] = 1
-                TextBox txt = (TextBox)Page.FindControl("ctl00$ctl00$cphConteudo$cphConteudoCentral$txtNotasRow_" + i.ToString() + "_Col_" + j.ToString());
-                if (!String.IsNullOrEmpty(txt.Text))
+                TextBox txtNota = (TextBox)Page.FindControl("ctl00$ctl00$cphConteudo$cphConteudoCentral$txtNotasRow_" + i.ToString() + "_Col_" + j.ToString());
+                if (!String.IsNullOrEmpty(txtNota.Text))
                 {
-                    valor = Convert.ToDouble(txt.Text);
+                    valor = Convert.ToDouble(txtNota.Text);
                     valorMultiplicacao += valor * Convert.ToInt32(todosPesos[i]);
-                    somaPeso += Convert.ToInt32(todosPesos[i]);
                 }
+
+                somaPeso += Convert.ToInt32(todosPesos[i]);
+
+                cpiCodigo = Convert.ToInt32(dsCriteriosPesos.Tables[0].Rows[i]["CPI_CODIGO"]); //CÓDIGO DO CRITÉRIO PI
+                Criterio_PI cpi = new Criterio_PI();
+                cpi.Cpi_codigo = cpiCodigo;
+                his.Cpi_codigo = cpi;
+                his.His_nota = valor;
+
+                Historico_Aluno_Disciplina_DB.Insert(his);
+
             }
             mediaPonderada = valorMultiplicacao / somaPeso;
-
+            somaPeso = 0;
+            valorMultiplicacao = 0;
         }
-               
-        
-       
+
+
+
 
     }
 
     protected void btnFinalizar_Click(object sender, EventArgs e)
     {
-        
+
         PegarValoresNotas();
-        
+
     }
 
 

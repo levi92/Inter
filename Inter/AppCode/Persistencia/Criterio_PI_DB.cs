@@ -39,7 +39,7 @@ public class Criterio_PI_DB{
         IDbCommand objCommand;
         IDataAdapter objDataAdapter;
         objConnection = Mapped.Connection();
-        objCommand = Mapped.Command("SELECT CG.CGE_NOME, CG.CGE_DESCRICAO, CP.CPI_PESO FROM CPI_CRITERIO_PI CP INNER JOIN CGE_CRITERIOS_GERAIS CG USING(CGE_CODIGO) WHERE CP.PRI_CODIGO = ?pri_codigo AND CP.ADI_CODIGO = ?adi_codigo;", objConnection);
+        objCommand = Mapped.Command("SELECT CP.CPI_CODIGO, CG.CGE_NOME, CG.CGE_DESCRICAO, CP.CPI_PESO FROM CPI_CRITERIO_PI CP INNER JOIN CGE_CRITERIOS_GERAIS CG USING(CGE_CODIGO) WHERE CP.PRI_CODIGO = ?pri_codigo AND CP.ADI_CODIGO = ?adi_codigo;", objConnection);
         objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", codPi));
         objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", codAtr));
         objDataAdapter = Mapped.Adapter(objCommand);

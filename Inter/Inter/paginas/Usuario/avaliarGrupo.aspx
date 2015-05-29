@@ -9,6 +9,7 @@
             $('#cphConteudo_icone8').addClass('corIcone');
         });
 
+     
         //FUNÇÃO ZEBRADO NO GRIDVIEW AVALIAR GRUPOS
         function ZebradoGridAvaliar() {
             var countRow = $("#tableAvaliar tr").length - 1;
@@ -87,8 +88,10 @@
                                 </table>
 
                                 <asp:HiddenField ID="valorPeso" runat="server" ClientIDMode="Static" />
+
                             </ContentTemplate>
                         </asp:UpdatePanel>
+
                     </div>
 
                     <!-- Fim Conteudo Aba Avaliacao !-->

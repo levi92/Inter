@@ -115,33 +115,35 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             }
         }
 
-        if (linhaSelecionada != -1)//caso tenha rb selecionado
+        if (linhaSelecionada != -1)//CASO TENHA RB SELECIONADO
         {
             string curso = gdv.Rows[linhaSelecionada].Cells[1].Text;
             string semestre = gdv.Rows[linhaSelecionada].Cells[2].Text;
             string disciplina = gdv.Rows[linhaSelecionada].Cells[3].Text;
             string mae = gdv.Rows[linhaSelecionada].Cells[4].Text;
-            // sessões com os dados da linha selecionada
+            codAtr = Convert.ToInt32(gdv.Rows[linhaSelecionada].Cells[5].Text);
+
+            // SESSÕES COM OS DADOS DA LINHA SELECIONADA
             Session["curso"] = curso;
             Session["semestre"] = semestre;
-            Session["disciplina"] = disciplina;
+            Session["disciplina"] = disciplina;            
+            Session["codAtr"] = codAtr;
+
             if (mae == "<span class='glyphicon glyphicon-star'></span>")
             {
-                Session["mae"] = "MAE";
-                codAtr = Convert.ToInt32(gdv.Rows[linhaSelecionada].Cells[5].Text);
-                Session["codAtr"] = codAtr;
+                Session["mae"] = "MAE";                
             }
             else
             {
                 Session["mae"] = "FILHA";
             }
-            //redireciona pra home
+            //REDIRECIONA PRA HOME
             Response.Redirect("home.aspx");
         }
         else
         {
-            //se nenhum rb for selecionado, uma modal de aviso é exibida
-            //ScriptManager serve para chamar um javascript via c#
+            //SE NENHUM RB FOR SELECIONADO, UMA MODAL DE AVISO É EXIBIDA
+            //SCRIPTMANAGER SERVE PARA CHAMAR UM JAVASCRIPT VIA C#
             ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEscolherDis", "modalEscolherDis();", true);
         }
     }
