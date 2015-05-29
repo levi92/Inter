@@ -278,7 +278,6 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 
     protected void btnFinalizar_Click(object sender, EventArgs e)
     {
-
         PegarValoresNotas();
 
     }

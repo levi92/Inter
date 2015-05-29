@@ -484,7 +484,8 @@ tabelaHome3 {
         padding: 2px;
         border: solid 1px #c1c1c1;
         color: #717171;
-        padding-left: 25px;
+        padding-left: 20px;
+        padding-right:20px;
     }
 
     .gridView th {
@@ -1145,19 +1146,18 @@ td.mediaAvaliar {
 
 .modalLoader
 {
-    position: fixed;
-    z-index: 999;
-    height: 100%%;
+    position: absolute;
+    z-index: 2000;
+    height: 100%;
     width: 100%;
     top: 0;
-    filter: alpha(opacity=50);
-    opacity: 0.5;
-
+    left: 0;
+    background-color:rgba(0,0,0,0.7);
 }
 .modalCenter
 {
     z-index: 1000;
-    margin: 15% 35%;
+    margin: 20% auto;
     padding: 10px;
     width: 50px;
     background-color: White;

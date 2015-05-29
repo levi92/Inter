@@ -22,6 +22,17 @@
 
     </script>
 
+     <asp:UpdateProgress ID="upgAvaliar" runat="server" AssociatedUpdatePanelID="updAvaliar">
+        <ProgressTemplate>
+            <div class="modalLoader">
+                <div class="modalCenter">
+                    <img alt="Carregando" src="../../App_Themes/images/ajax-loader.gif" /><br />
+
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <!-- Avaliar Grupos (p8) -->
