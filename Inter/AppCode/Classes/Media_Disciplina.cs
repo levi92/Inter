@@ -8,7 +8,8 @@ using System.Web;
 
         private int mdd_codigo;
         private double mdd_media;
-        private Atribuicao_PI pri_codigo, adi_codigo;
+        private Projeto_Inter pri_codigo;
+        private Atribuicao_PI adi_codigo;
         private Grupo gru_codigo;
 
         public Atribuicao_PI Adi_codigo
@@ -17,7 +18,7 @@ using System.Web;
             set { adi_codigo = value; }
         }
 
-        public Atribuicao_PI Pri_codigo
+        public global::Projeto_Inter Pri_codigo
         {
             get { return pri_codigo; }
             set { pri_codigo = value; }

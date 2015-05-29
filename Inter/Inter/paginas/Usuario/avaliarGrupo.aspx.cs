@@ -66,6 +66,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         //    DataSet dsCriteriosPesos = (DataSet)Session["dsCriteriosPesos"];
         //    CarregaTableAvaliar(Convert.ToInt32(ddlGrupos.SelectedValue), dsCriteriosPesos);
         //}
+        
     }
     Table table = new Table();
     private void CarregaTableAvaliar(int codGrupo, DataSet dsCriteriosPesos)
@@ -208,10 +209,10 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 
     private void PegarValoresNotas()
     {
-        double valorMultiplicacao = 0, valor = 0, mediaDisciplina = 0, mediaPonderada = 0;
+        double valorMultiplicacao = 0, valor = 0, mediaDisciplina = 0, mediaPonderada = 0, somaMediaPonderada = 0;
         int rowsCount = Convert.ToInt32(Session["rowsCount"]);
         int colsCount = Convert.ToInt32(Session["colsCount"]);
-        int somaPeso = 0;
+        int somaPeso = 0; 
         string[] todosPesos = valorPeso.Value.Split('|');
 
         DataSet dsCriteriosPesos = (DataSet)Session["dsCriteriosPesos"];
@@ -221,7 +222,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         for (int j = 1; j < colsCount; j++) //ALUNOS
         {
             Historico_Aluno_Disciplina his = new Historico_Aluno_Disciplina();
-            Grupo_Aluno gal = new Grupo_Aluno();
+            Grupo_Aluno gal = new Grupo_Aluno();            
 
             gal.Alu_matricula = codAlunos[j - 1];
             his.Alu_matricula = gal;
@@ -248,12 +249,30 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 
             }
             mediaPonderada = valorMultiplicacao / somaPeso;
+            somaMediaPonderada += mediaPonderada;
             somaPeso = 0;
             valorMultiplicacao = 0;
         }
 
+        int qtdAlunos = colsCount - 1;
+        mediaDisciplina = somaMediaPonderada / qtdAlunos;
 
+        Grupo gru = new Grupo();
+        gru.Gru_codigo = Convert.ToInt32(ddlGrupos.SelectedValue);
 
+        Projeto_Inter pri = new Projeto_Inter();
+        pri.Pri_codigo = Convert.ToInt32(Session["CodigoPIAtivoMateria"]);
+
+        Atribuicao_PI api = new Atribuicao_PI();
+        api.Adi_codigo = Convert.ToInt32(Session["codAtr"]);
+
+        Media_Disciplina mdd = new Media_Disciplina();
+        mdd.Pri_codigo = pri;
+        mdd.Adi_codigo = api;
+        mdd.Gru_codigo = gru;
+        mdd.Mdd_media = mediaDisciplina;
+
+        Media_Disciplina_DB.Insert(mdd);
 
     }
 
