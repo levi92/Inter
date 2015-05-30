@@ -72,7 +72,7 @@ namespace AppCode.Persistencia
             IDbCommand objCommand;
             IDataAdapter objDataAdapter;
             objConnection = Mapped.Connection();
-            objCommand = Mapped.Command("SELECT GR.GRU_CODIGO, GR.GRU_NOME_PROJETO FROM GRU_GRUPO GR INNER JOIN PRI_PROJETO_INTER PR USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO SA USING(SAN_CODIGO) WHERE SA.SAN_ATIVO = 1 AND PR.PRI_CODIGO = ?pri_codigo;", objConnection);
+            objCommand = Mapped.Command("SELECT GR.GRU_CODIGO, GR.GRU_NOME_PROJETO FROM GRU_GRUPO GR INNER JOIN PRI_PROJETO_INTER PR USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO SA USING(SAN_CODIGO) WHERE SA.SAN_ATIVO = 1 AND PR.PRI_CODIGO = ?pri_codigo AND GRU_FINALIZADO = 0;", objConnection);
             objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", codPi));
             objDataAdapter = Mapped.Adapter(objCommand);
             objDataAdapter.Fill(ds);
@@ -80,6 +80,29 @@ namespace AppCode.Persistencia
             objCommand.Dispose();
             objConnection.Dispose();
             return ds;
+        }
+
+        public static int UpdateGrupoFinalizado(Grupo gru)
+        {
+            int retorno = 0;
+            try
+            {
+                IDbConnection conexao;
+                IDbCommand objCommand;
+                string sql = "UPDATE gru_grupo SET gru_finalizado = 1 WHERE gru_codigo = ?gru_codigo";
+                conexao = Mapped.Connection();
+                objCommand = Mapped.Command(sql, conexao);
+                objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", gru.Gru_codigo));                
+                objCommand.ExecuteNonQuery();
+                conexao.Close();
+                objCommand.Dispose();
+                conexao.Dispose();
+            }
+            catch (Exception e)
+            {
+                retorno = -2;
+            }
+            return retorno;
         }
 
 

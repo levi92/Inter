@@ -584,9 +584,7 @@
 
                 <div class="modal-footer">
                     <asp:LinkButton CssClass="btn btn-default" ID="btnVoltarHome2" runat="server" OnClick="btnVoltarHome2_Click" ToolTip="Voltar para a home do sistema">
-                        <span class="glyphicon glyphicon-home"></span>&nbsp Voltar para a home</asp:LinkButton>
-                    <asp:LinkButton CssClass="btn btn-default" ID="btnVoltarAvaliar" runat="server" OnClick="btnVoltarAvaliar_Click" ToolTip="Ir para a avaliação dos grupos do PI">
-                        <span class="glyphicon glyphicon-check"></span>&nbsp Avaliar grupos </asp:LinkButton>
+                        <span class="glyphicon glyphicon-home"></span>&nbsp Voltar para a home</asp:LinkButton>                    
                 </div>
             </div>
         </div>

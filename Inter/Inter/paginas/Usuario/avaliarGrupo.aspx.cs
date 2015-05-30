@@ -247,6 +247,10 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                 if (!String.IsNullOrEmpty(txtNota.Text))
                 {
                     valor = Convert.ToDouble(txtNota.Text);
+                    if (valor > 10)
+                    {
+                        valor = valor/10;
+                    }
                     valorMultiplicacao += valor * Convert.ToInt32(todosPesos[i]);
                 }
 
@@ -268,10 +272,11 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         }
 
         int qtdAlunos = colsCount - 1;
-        mediaDisciplina = somaMediaPonderada / qtdAlunos;
+        mediaDisciplina = Math.Round((somaMediaPonderada / qtdAlunos),2);
 
         Grupo gru = new Grupo();
         gru.Gru_codigo = Convert.ToInt32(ddlGrupos.SelectedValue);
+        Grupo_DB.UpdateGrupoFinalizado(gru);
 
         Projeto_Inter pri = new Projeto_Inter();
         pri.Pri_codigo = Convert.ToInt32(Session["CodigoPIAtivoMateria"]);
@@ -287,11 +292,14 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 
         Media_Disciplina_DB.Insert(mdd);
 
+        ddlGrupos.Items.RemoveAt(ddlGrupos.SelectedIndex);
+
     }
 
     protected void btnFinalizar_Click(object sender, EventArgs e)
     {
         PegarValoresNotas();
+
 
     }
 

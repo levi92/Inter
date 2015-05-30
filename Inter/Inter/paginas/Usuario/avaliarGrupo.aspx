@@ -66,7 +66,7 @@
                                             <asp:Label ID="lblGrupo" runat="server" Text="Grupo: "></asp:Label>
                                         </td>
                                         <td colspan="4">
-                                            <asp:DropDownList ID="ddlGrupos" runat="server" OnSelectedIndexChanged="ddlGrupos_SelectedIndexChanged" AutoPostBack="true" CssClass="dropDown">
+                                            <asp:DropDownList ID="ddlGrupos" runat="server" ClientIDMode="Static" OnSelectedIndexChanged="ddlGrupos_SelectedIndexChanged" AutoPostBack="true" CssClass="dropDown">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>

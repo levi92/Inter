@@ -244,6 +244,20 @@ select#listaGrupos {
 }
 
 
+#ddlGrupos option {
+    margin: 5px auto;
+    padding: 7px 5px;
+    font-size: 14px;
+    width: 120px;
+    cursor: pointer;
+    border: 1px solid #d3d3d3;    
+    font-weight: normal;
+    background-color:#FFF;
+    color: #555555;
+    text-align: center;
+}
+
+
 
 /*------------------------------
 =FOOTER
@@ -1145,7 +1159,7 @@ td.mediaAvaliar {
 }
 
 .modalLoader {
-    position: absolute;
+    position: fixed;
     z-index: 2000;
     height: 100%;
     width: 100%;
