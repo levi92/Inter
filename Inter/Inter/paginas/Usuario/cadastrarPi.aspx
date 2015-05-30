@@ -51,6 +51,16 @@
 
     </script>
 
+    <asp:UpdateProgress ID="upgCadastrar" runat="server" AssociatedUpdatePanelID="updPanelGrupos">
+        <ProgressTemplate>
+            <div class="modalLoader">
+                <div class="modalCenter">
+                    <img alt="Carregando" src="../../App_Themes/images/ajax-loader.gif" /><br />                    
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
     <button style="display: none" type="button" id="btnModalPesoUm" data-toggle="modal" data-target="#myModalPesoUm"></button>
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>

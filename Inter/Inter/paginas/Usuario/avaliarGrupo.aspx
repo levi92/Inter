@@ -1,14 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_avaliarGrupo" CodeBehind="avaliarGrupo.aspx.cs" %>
 
-
 <asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
 
-    <!-- Alterar cor do ícone no menu lateral -->
+    <!-- ALTERAR COR DO ÍCONE NO MENU LATERAL -->
     <script type="text/javascript">
         $(document).ready(function () {
             $('#cphConteudo_icone8').addClass('corIcone');
         });
-
      
         //FUNÇÃO ZEBRADO NO GRIDVIEW AVALIAR GRUPOS
         function ZebradoGridAvaliar() {
@@ -20,14 +18,20 @@
             }
         }
 
+        
+        //Sys.Application.add_load(BindEvents);
+        //function BindEvents() {
+        //    $('[data-toggle=tooltip]').tooltip();
+        //    // other bootstrap binding code - see the combined Bootstrap.js for ideas
+        //}
+
     </script>
 
      <asp:UpdateProgress ID="upgAvaliar" runat="server" AssociatedUpdatePanelID="updAvaliar">
         <ProgressTemplate>
             <div class="modalLoader">
                 <div class="modalCenter">
-                    <img alt="Carregando" src="../../App_Themes/images/ajax-loader.gif" /><br />
-
+                    <img alt="Carregando" src="../../App_Themes/images/ajax-loader.gif" /><br />                    
                 </div>
             </div>
         </ProgressTemplate>

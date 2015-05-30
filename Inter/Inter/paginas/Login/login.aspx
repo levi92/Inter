@@ -26,7 +26,7 @@
     <%--<script src="../../Scripts/jquery-ui.js"></script>--%>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" defaultbutton="enviar">
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="container-fluid">

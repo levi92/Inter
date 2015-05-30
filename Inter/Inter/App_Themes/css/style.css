@@ -485,7 +485,7 @@ tabelaHome3 {
         border: solid 1px #c1c1c1;
         color: #717171;
         padding-left: 20px;
-        padding-right:20px;
+        padding-right: 20px;
     }
 
     .gridView th {
@@ -1140,33 +1140,34 @@ td.mediaAvaliar {
     display: none;
 }
 
-.alerta{
+.alerta {
     margin-top: 8px;
 }
 
-.modalLoader
-{
+.modalLoader {
     position: absolute;
     z-index: 2000;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
-    background-color:rgba(0,0,0,0.7);
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.7);
 }
-.modalCenter
-{
+
+.modalCenter {
     z-index: 1000;
     margin: 20% auto;
     padding: 10px;
     width: 50px;
+    text-align: center;
     background-color: White;
     border-radius: 10px;
     filter: alpha(opacity=80);
-    opacity:0.8;
-  
+    opacity: 0.8;
 }
 
 .busca {
-    padding-left:initial;
+    padding-left: initial;
 }

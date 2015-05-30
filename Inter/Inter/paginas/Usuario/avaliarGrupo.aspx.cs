@@ -61,14 +61,27 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 
     protected void ddlGrupos_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //if (ddlGrupos.SelectedIndex != 0)
-        //{
-        //    DataSet dsCriteriosPesos = (DataSet)Session["dsCriteriosPesos"];
-        //    CarregaTableAvaliar(Convert.ToInt32(ddlGrupos.SelectedValue), dsCriteriosPesos);
-        //}
+        if (ddlGrupos.SelectedIndex != 0)
+        {
+            int rowsCount = Convert.ToInt32(Session["rowsCount"]);
+            int colsCount = Convert.ToInt32(Session["colsCount"]);
+
+            //LIMPAR TEXTBOX NOTAS
+            for (int j = 1; j < colsCount; j++) //ALUNOS
+            {
+
+                for (int i = 0; i < rowsCount; i++) //CRITÉRIOS
+                {
+                    //EX: txtNotasRow_1_Col_1 = [0] = txtNotasRow - [1] = 1 - [2] = Col - [3] = 1
+                    TextBox txtNota = (TextBox)Page.FindControl("ctl00$ctl00$cphConteudo$cphConteudoCentral$txtNotasRow_" + i.ToString() + "_Col_" + j.ToString());
+                    txtNota.Text = string.Empty;
+                }
+            }
+        }
         
     }
-    Table table = new Table();
+    
+
     private void CarregaTableAvaliar(int codGrupo, DataSet dsCriteriosPesos)
     {
         string[] codAlunos = Grupo_Aluno_DB.SelectAllMatriculaByGrupo(codGrupo);
@@ -105,7 +118,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 
         valorPeso.Value = pesos.ToString();
 
-
+        Table table = new Table();
         TextBox txbNotas;
         Label lblCriterios;
 
@@ -143,7 +156,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         for (int rowIndex = 0; rowIndex < rowsCount; rowIndex++)
         {
             TableRow row = new TableRow();
-            row.ID = rowIndex.ToString();
+            row.ID = rowIndex.ToString(); //PARA O ZEBRADO
 
             for (int colIndex = 0; colIndex < colsCount; colIndex++)
             {
