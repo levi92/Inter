@@ -67,7 +67,7 @@
                     <%-- Início do conteúdo da aba Ativos--%>
                     <div role="tabpanel" class="tab-pane fade in active" id="ativos">
 
-                        <div id="alerta"></div>
+                        <%--<div id="alerta"></div>--%>
                         <%--Grid com UpdatePanel para não atualizar a página inteira ao editar, inserir e desativar critérios--%>
 
 
@@ -92,18 +92,10 @@
                                     <Columns>
 
                                         <%--Coluna do Código do Critério Geral--%>
-                                        <asp:TemplateField HeaderText="Código" Visible="false">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblCodigo" runat="server" Text='<%#Eval ("cge_codigo")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="cge_codigo" Visible="false" />
 
                                         <%--Coluna do nome do Critério Geral--%>
-                                        <asp:TemplateField HeaderText="Nome do Critério">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("cge_nome")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="cge_nome" HeaderText="Nome"/>
 
                                         <%--Coluna da descrição do Critério Geral--%>
                                         <asp:TemplateField HeaderText="Descrição">

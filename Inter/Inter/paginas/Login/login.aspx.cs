@@ -11,13 +11,10 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (IsPostBack)
-        {
-
-        }
+     
     }
 
-    protected void enviar_Click(object sender, EventArgs e)
+    protected void enviar_Click(object sender, EventArgs e) //Botão Login ADM COORD e PROF 
     {
 
         lblMsgErro.Text = "";
@@ -80,14 +77,14 @@ public partial class Paginas_Login_login : System.Web.UI.Page
         }
     }
 
-    protected void btnEnviarM_Click(object sender, EventArgs e)
+    protected void btnEnviarM_Click(object sender, EventArgs e) //BOTÃO LOGIN MASTER
     {
         lblMsgErroM.Text = "";
 
         // pegar valor dos textbox do login
-        string user = txtLoginM.Text.ToString();
+        string user = txtLoginM.Text; //.ToString() não precisa, o .Text já converte pra String
         //string senha = Funcoes.Criptografar(txtSenha.Text.ToString(), "SHA1"); ->>> não lê a senha correta do banco por algum motivo
-        string senha = txtSenhaM.Text.ToString();
+        string senha = txtSenhaM.Text;
 
 
 
