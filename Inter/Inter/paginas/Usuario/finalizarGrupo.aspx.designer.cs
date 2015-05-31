@@ -12,6 +12,24 @@
 public partial class paginas_Usuario_finalizarGrupo {
     
     /// <summary>
+    /// ddlFinalizarGrupos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList ddlFinalizarGrupos;
+    
+    /// <summary>
+    /// PanelFinalizarGrupo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Panel PanelFinalizarGrupo;
+    
+    /// <summary>
     /// cblLiberarDisciplinas control.
     /// </summary>
     /// <remarks>

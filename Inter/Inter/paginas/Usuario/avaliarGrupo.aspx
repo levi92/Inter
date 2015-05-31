@@ -25,6 +25,7 @@
         //    // other bootstrap binding code - see the combined Bootstrap.js for ideas
         //}
 
+
     </script>
 
      <asp:UpdateProgress ID="upgAvaliar" runat="server" AssociatedUpdatePanelID="updAvaliar">
@@ -95,8 +96,8 @@
                                         <td></td>
 
                                         <td>
-                                            <button type="button" class="btn btn-default" id="btnImprimirAvaliacao" title="Imprimir a tabela de atribuição de notas acima">
-                                                <span class="glyphicon glyphicon-print"></span>&nbsp Imprimir</button>
+                                            <button type="button" class="btn btn-default" id="btnImprimirAvaliacao" onclick="ImprimirGrupo();" title="Imprimir a tabela de atribuição de notas acima">
+                                                <span class="glyphicon glyphicon-print"></span>&nbsp Imprimir</button>                                            
                                         </td>
                                     </tr>
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interdisciplinar;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -165,6 +166,18 @@ namespace Inter.Funcoes
             return nomeAlunos;
         }
 
+        public static string[] MateriasByCodigo(string[] adiMatricula)
+        {
+            string[] materias = new string[adiMatricula.Length - 1];
+            for (int i = 0; i < adiMatricula.Length - 1; i++)
+            {
+                Disciplina dis = new Disciplina();
+                dis = Disciplina.SelectByCodigo(adiMatricula[i]);
+                materias[i] = dis.Nome + i;
+            }
+            return materias;
+        }
+
         public static string[] tratarDadosCursosComPI(DataSet ds, int qtdPIs)
         {
             string[] vetorReturnFunction = new string[3];
@@ -190,6 +203,116 @@ namespace Inter.Funcoes
 
             return cursos;
         }
+
+        public static int SelectCodPIAtivoByAtr(int codAtr)
+        {
+            try
+            {
+                int codPIAtivo = 0;
+                IDbConnection objConnection;
+                IDbCommand objCommand;
+                IDataReader objDataReader;
+                objConnection = Mapped.Connection();
+                objCommand = Mapped.Command("SELECT PI.PRI_CODIGO FROM API_ATRIBUICAO_PI AP INNER JOIN PRI_PROJETO_INTER PI USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO SA USING(SAN_CODIGO) WHERE SA.SAN_CODIGO = 1 AND AP.ADI_CODIGO = ?codAtr;", objConnection);
+                objCommand.Parameters.Add(Mapped.Parameter("?codAtr", codAtr));
+                objDataReader = objCommand.ExecuteReader();
+                while (objDataReader.Read())
+                {
+                    codPIAtivo = Convert.ToInt32(objDataReader["pri_codigo"]);
+                }
+                objDataReader.Close();
+                objConnection.Close();
+                objConnection.Dispose();
+                objCommand.Dispose();
+                objDataReader.Dispose();
+                return codPIAtivo;
+            }
+            catch (Exception e)
+            {
+                return -2;
+            }
+        }
+
+        public static string[] SelectAtrDisciplinasEnvolvidas(int codPIAtivo)
+        {
+               try
+                {
+                    string codAtrPipe = "";
+                    string[] codAtr;
+                    IDbConnection objConnection;
+                    IDbCommand objCommand;
+                    IDataReader objDataReader;
+                    objConnection = Mapped.Connection();
+                    objCommand = Mapped.Command("SELECT AP.ADI_CODIGO FROM API_ATRIBUICAO_PI AP LEFT JOIN PRI_PROJETO_INTER PI USING(PRI_CODIGO) WHERE PI.PRI_CODIGO = ?codPIAtivo;", objConnection);
+                    objCommand.Parameters.Add(Mapped.Parameter("?codPIAtivo", codPIAtivo));
+                    objDataReader = objCommand.ExecuteReader();
+                    while (objDataReader.Read())
+                    {
+                        codAtrPipe += objDataReader["adi_codigo"].ToString() + "|";
+                    }
+                    codAtr = codAtrPipe.Split('|');
+                    objDataReader.Close();
+                    objConnection.Close();
+                    objConnection.Dispose();
+                    objCommand.Dispose();
+                    objDataReader.Dispose();
+                    return codAtr;
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }           
+        
+
+        public static double CalcularMediaPonderadaAlunoDisciplinas(int codPIAtivo, string codAluno, int codDisc)
+        {
+            try
+            {
+                double NotasXPesos = 0;
+                int somaPesos = 0;
+                double media = 0;
+                double nota = 0;
+                int peso = 0;
+                IDbConnection objConnection;
+                IDbCommand objCommand;
+                IDataReader objDataReader;
+                objConnection = Mapped.Connection();
+                objCommand = Mapped.Command("SELECT HI.HIS_NOTA, CP.CPI_PESO FROM HIS_HISTORICO_ALUNO_DISCIPLINA HI INNER JOIN CPI_CRITERIO_PI CP USING(CPI_CODIGO) WHERE CP.PRI_CODIGO = ?codPIAtivo AND CP.ADI_CODIGO = ?codDisc AND HI.ALU_MATRICULA = ?codAluno;", objConnection);
+                objCommand.Parameters.Add(Mapped.Parameter("?codPIAtivo", codPIAtivo));
+                objCommand.Parameters.Add(Mapped.Parameter("?codAluno", codAluno));
+                objCommand.Parameters.Add(Mapped.Parameter("?codDisc", codDisc));
+                objDataReader = objCommand.ExecuteReader();
+                while (objDataReader.Read())
+                {
+                    nota = Convert.ToDouble(objDataReader["his_nota"]);
+                    peso = Convert.ToInt32(objDataReader["cpi_peso"]);                    
+                    NotasXPesos += nota * peso;
+                    somaPesos += peso;
+                }
+                media = NotasXPesos / somaPesos;
+                if (media>=0 && media<=10)
+                {
+                    media = media;
+                }
+                else
+                {
+                    media = 0;
+                }
+                objDataReader.Close();
+                objConnection.Close();
+                objConnection.Dispose();
+                objCommand.Dispose();
+                objDataReader.Dispose();
+                return Math.Round(media,2);
+            }
+            catch (Exception e)
+            {
+                return -2;
+            }
+        }
+
+
 
 
     }

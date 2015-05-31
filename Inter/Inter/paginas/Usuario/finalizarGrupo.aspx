@@ -24,87 +24,17 @@
                         <tr>
                             <td>Grupo</td>
                             <td colspan="4">
-                                <select name="grupo" id="" class="dropDown">
-                                    <option>Sistema de Avaliação de interdisciplinar-Usuário</option>
-                                    <option>Sistema de Avaliação de interdisciplinar-Admin</option>
-                                </select>
+                                <asp:DropDownList ID="ddlFinalizarGrupos" runat="server" ClientIDMode="Static" AutoPostBack="true" CssClass="dropDown" OnSelectedIndexChanged="ddlFinalizarGrupos_SelectedIndexChanged">
+
+                                </asp:DropDownList>
                             </td>
                         </tr>
                     </thead>
-
-
-                    <tr style="color: black; font-weight: bolder; font-size: 14px; font: Helvetica, Arial, sans-serif;">
-                        <td>
-                            <label>Integrantes</label></td>
-                        <td>
-                            <label>ES3</label></td>
-                        <td>
-                            <label>BD</label></td>
-                        <td>
-                            <label>IHC</label></td>
-                        <td>
-                            <label>PS</label></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>Bruno Eduardo</label>
-                        </td>
-                        <td>
-                            <label id="critPostura">10</label></td>
-                        <td>
-                            <label id="critVestimenta">10</label></td>
-                        <td>
-                            <label id="critFala">10</label></td>
-                        <td>
-                            <label id="crit">10</label></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>Felipe Ayres </label>
-                        </td>
-                        <td>
-                            <label id="critPostura2">10</label></td>
-                        <td>
-                            <label id="critVestimenta2">10</label></td>
-                        <td>
-                            <label id="critFala2">10</label></td>
-                        <td>
-                            <label id="crit2">10</label></td>
-
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>Higor Gomes </label>
-                        </td>
-                        <td>
-                            <label id="critPostura3">10</label></td>
-                        <td>
-                            <label id="critVestimenta3">10</label></td>
-                        <td>
-                            <label id="critFala3">10</label></td>
-                        <td>
-                            <label id="crit3">10</label></td>
-
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>Dayane Ferraz </label>
-                        </td>
-                        <td>
-                            <label id="critPostura4">10</label></td>
-                        <td>
-                            <label id="critVestimenta4">10</label></td>
-                        <td>
-                            <label id="critFala4">10</label></td>
-                        <td>
-                            <label id="crit4">10</label></td>
-
-                    </tr>
                 </table>
+
+                <asp:Panel ID="PanelFinalizarGrupo" runat="server">
+                   
+                </asp:Panel>
 
                 <table class="table" style="width: 50%; margin-top: 5%; margin-left: 25%; border: 1px solid #DDD; text-align: center">
                     <thead>

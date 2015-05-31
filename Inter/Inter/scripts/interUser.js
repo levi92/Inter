@@ -441,3 +441,19 @@ function funcaoAtualizarMediaAll() {
     }
 
 }
+
+
+function ImprimirGrupo() {
+    var printContent = document.getElementById("cphConteudo_cphConteudoCentral_panelAvaliar").innerHTML;
+    var windowUrl = 'about:blank';
+    var uniqueName = new Date();
+    var windowName = 'Print' + uniqueName.getTime();
+    var printWindow = window.open(windowUrl, windowName, 'left=50000,top=50000,width=0,height=0');
+
+    printWindow.document.write("<link rel=\"stylesheet\" href=\"/../App_Themes/css/style.css\" type=\"text/css\" media=\"print\" />");
+    printWindow.document.write(printContent);
+    printWindow.focus();
+    printWindow.print();
+    printWindow.close();
+
+}

@@ -1,4 +1,5 @@
-﻿using Inter.Funcoes;
+﻿using AppCode.Persistencia;
+using Inter.Funcoes;
 using Interdisciplinar;
 using System;
 using System.Collections.Generic;
@@ -128,6 +129,19 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             Session["semestre"] = semestre;
             Session["disciplina"] = disciplina;            
             Session["codAtr"] = codAtr;
+
+            Session["codPIAtivo"] = Funcoes.SelectCodPIAtivoByAtr(codAtr);
+            DataSet dsGrupos = new DataSet();
+            dsGrupos = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
+            Session["Grupos"] = dsGrupos;
+
+            if (Convert.ToInt32(Session["codPIAtivo"]) != -2) { 
+                Session["atrDisciplinas"] = Funcoes.SelectAtrDisciplinasEnvolvidas(Convert.ToInt32(Session["codPIAtivo"]));
+            }
+            else
+            {
+                Session["atrDisciplinas"] = null;
+            }
 
             if (mae == "<span class='glyphicon glyphicon-star'></span>")
             {

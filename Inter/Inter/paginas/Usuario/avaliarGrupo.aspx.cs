@@ -31,11 +31,8 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            //CARREGA DDL DOS GRUPOS DEPENDENDO DO PI ATIVO DA MATERIA SELECIONADA
-            DataSet dsGrupos = new DataSet();
-
-            dsGrupos = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["CodigoPIAtivoMateria"]));
-            ddlGrupos.DataSource = dsGrupos;
+            //CARREGA DDL DOS GRUPOS DEPENDENDO DO PI ATIVO DA MATERIA SELECIONADA            
+            ddlGrupos.DataSource = Session["Grupos"];
             ddlGrupos.DataTextField = "GRU_NOME_PROJETO";
             ddlGrupos.DataValueField = "GRU_CODIGO";
             ddlGrupos.DataBind();
@@ -209,7 +206,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
             }
             else
             {
-                lblMedia.Text = "0.00";
+                lblMedia.Text = " ";
             }
             cell.Controls.Add(lblMedia);
             rowMedia.Cells.Add(cell);
@@ -299,8 +296,6 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
     protected void btnFinalizar_Click(object sender, EventArgs e)
     {
         PegarValoresNotas();
-
-
     }
 
 
