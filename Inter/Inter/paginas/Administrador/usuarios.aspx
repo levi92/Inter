@@ -45,7 +45,7 @@
 
                 <ul class="nav nav-tabs" role="tablist">
 
-                    <li class="active"><a href="#admin" role="tab" data-toggle="tab">Administradores</a></li>
+                    <li class="active"><a href="#admin" role="tab" data-toggle="tab">Coordenadores</a></li>
                     <li><a href="#professor" role="tab" data-toggle="tab">Professores</a></li>
 
                 </ul>
