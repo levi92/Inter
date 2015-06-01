@@ -1002,10 +1002,13 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         }
 
         Session["codPIAtivo"] = Funcoes.SelectCodPIAtivoByAtr(Convert.ToInt32(Session["codAtr"]));
-        DataSet dsGrupos = new DataSet();
-        dsGrupos = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
-        Session["Grupos"] = dsGrupos;
+        DataSet dsGruposFinalizar = new DataSet();
+        dsGruposFinalizar = Grupo_DB.SelectAllGruposFinalizar(Convert.ToInt32(Session["codPIAtivo"]));
+        DataSet dsGruposAvaliar = new DataSet();
+        dsGruposAvaliar = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
+        Session["GruposAvaliar"] = dsGruposAvaliar;
         Session["atrDisciplinas"] = Funcoes.SelectAtrDisciplinasEnvolvidas(Convert.ToInt32(Session["codPIAtivo"]));
+        Session["GruposFinalizar"] = dsGruposFinalizar;
 
        ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalPiCadastrado", "msgFinalizarCadastroPi();", true);
     }

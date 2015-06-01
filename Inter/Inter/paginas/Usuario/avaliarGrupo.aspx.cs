@@ -28,12 +28,12 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         {
             Response.Redirect("escolherDisciplina.aspx");
         }
-        if (Session["Grupos"] != null)
+        if (Session["GruposAvaliar"] != null)
         {
             if (!IsPostBack)
             {
                 //CARREGA DDL DOS GRUPOS DEPENDENDO DO PI ATIVO DA MATERIA SELECIONADA            
-                ddlGrupos.DataSource = Session["Grupos"];
+                ddlGrupos.DataSource = Session["GruposAvaliar"];
                 ddlGrupos.DataTextField = "GRU_NOME_PROJETO";
                 ddlGrupos.DataValueField = "GRU_CODIGO";
                 ddlGrupos.DataBind();
@@ -279,7 +279,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 
         Grupo gru = new Grupo();
         gru.Gru_codigo = Convert.ToInt32(ddlGrupos.SelectedValue);
-        Grupo_DB.UpdateGrupoFinalizado(gru);
+        Grupo_DB.UpdateGrupoAvaliado(gru);
 
         Projeto_Inter pri = new Projeto_Inter();
         pri.Pri_codigo = Convert.ToInt32(Session["CodigoPIAtivoMateria"]);
@@ -296,6 +296,21 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         Media_Disciplina_DB.Insert(mdd);
 
         ddlGrupos.Items.RemoveAt(ddlGrupos.SelectedIndex);
+
+        DataSet dsGruposFinalizar = new DataSet();
+        dsGruposFinalizar = Grupo_DB.SelectAllGruposFinalizar(Convert.ToInt32(Session["codPIAtivo"]));
+        if (dsGruposFinalizar == null)
+        {
+            Session["GruposFinalizar"] = null;
+        }
+        else
+        {
+            Session["GruposFinalizar"] = dsGruposFinalizar;
+        }
+        DataSet dsGruposAvaliar = new DataSet();
+        dsGruposAvaliar = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
+        Session["GruposAvaliar"] = dsGruposAvaliar;
+        Session["atrDisciplinas"] = Funcoes.SelectAtrDisciplinasEnvolvidas(Convert.ToInt32(Session["codPIAtivo"]));
 
     }
 

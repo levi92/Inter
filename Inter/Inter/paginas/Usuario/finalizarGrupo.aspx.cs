@@ -36,11 +36,11 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
             Response.Redirect("home.aspx");
         }
 
-        if (Session["Grupos"] != null)
+        if (Session["GruposFinalizar"] != null)
         {
             if (!IsPostBack)
             {
-                ddlFinalizarGrupos.DataSource = Session["Grupos"];
+                ddlFinalizarGrupos.DataSource = Session["GruposFinalizar"];
                 ddlFinalizarGrupos.DataTextField = "GRU_NOME_PROJETO";
                 ddlFinalizarGrupos.DataValueField = "GRU_CODIGO";
                 ddlFinalizarGrupos.DataBind();
