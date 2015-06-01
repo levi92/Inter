@@ -32,10 +32,10 @@ namespace Inter.Funcoes
 
         }
 
-        public static string chamarMasterPage_Admin(string coord)
+        public static string chamarMasterPage_Admin(string menu)
         {
 
-            if (coord == "True")
+            if (menu == "coordenador")
             {
                 return "~/paginas/Administrador/MasterPage_MenuCoord.master";
             }

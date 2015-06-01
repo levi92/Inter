@@ -19,21 +19,23 @@ namespace Inter.paginas.Administrador
             }
 
             // CHAMAR A MASTER PAGE CORRESPONDENTE MASTER ou COORD SE ELE JÁ ESCOLHEU O PERFIL
-            if (Session["perfil"] != "")
+            if (Session["perfil"] == "coordenador")
             {
-                this.Page.MasterPageFile = Funcoes.Funcoes.chamarMasterPage_Admin(Session["coord"].ToString());
+                btnCoord.Enabled = false;
+                this.Page.MasterPageFile = Funcoes.Funcoes.chamarMasterPage_Admin(Session["menu"].ToString());
             }
+          
         }
 
         protected void Btn_Admin(object sender, EventArgs e)
         {
-            Session["perfil"] = "escolheu";   
+            Session["perfil"] = "coordenador";   
             Response.Redirect("~/paginas/Administrador/solicitacoes.aspx");
         }
 
         protected void Btn_Prof(object sender, EventArgs e)
         {
-            Session["perfil"] = "escolheu";
+            Session["perfil"] = "professor";
             Response.Redirect("~/paginas/Usuario/escolherDisciplina.aspx");           
         }
 

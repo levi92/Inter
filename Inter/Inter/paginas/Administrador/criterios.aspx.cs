@@ -18,8 +18,8 @@ using System.Data;
                 Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
             }
 
-            // CHAMA A MASTER PAGE CORRESPONDENTE MasterPage_MenuMaster ou MasterPage_MenuCoord
-            this.Page.MasterPageFile = Funcoes.chamarMasterPage_Admin(Session["coord"].ToString());
+            // CHAMA A MASTER PAGE CORRESPONDENTE MasterPage_MenuMaster ou MasterPage_MenuCoord através da função chamarMasterPage
+            this.Page.MasterPageFile = Funcoes.chamarMasterPage_Admin(Session["menu"].ToString());
         }
 
         protected void Page_Load(object sender, EventArgs e)

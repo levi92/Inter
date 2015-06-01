@@ -38,9 +38,9 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                 Session["DS_AllPIsbyCalendarioAtual"] = null;
                 if (Funcoes_DB.ValidarAdmCoord(prof) == 2)
                 {
-                    //Administrador Coordenador e professor
+                    //Coordenador e professor
                     //chama a página de escolher o perfil
-                    Session["coord"] = "True";
+                    Session["menu"] = "coordenador";
                     Session["perfil"] = null;
                     Session["login"] = user;
                     Session["Professor"] = prof;
@@ -98,7 +98,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                 Perfil perfil = new Perfil("master");
                 //Administrador master                 
                 Session["login"] = user;
-                Session["coord"] = "False";
+                Session["menu"] = "master";
                 Session["matricula"] = perfil.Matricula;
                 Session["nome"] = "Master";
                 Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
