@@ -131,7 +131,8 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             Session["codAtr"] = codAtr;
 
             Session["codPIAtivo"] = Funcoes.SelectCodPIAtivoByAtr(codAtr);
-            if (Convert.ToInt32(Session["codPIAtivo"]) != -2) { 
+            if (Convert.ToInt32(Session["codPIAtivo"]) != -2 && Convert.ToInt32(Session["codPIAtivo"]) != 0)
+            { 
                 DataSet dsGrupos = new DataSet();
                 dsGrupos = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
                 Session["Grupos"] = dsGrupos;
