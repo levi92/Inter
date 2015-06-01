@@ -28,29 +28,35 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         {
             Response.Redirect("escolherDisciplina.aspx");
         }
-
-        if (!IsPostBack)
+        if (Session["GruposAvaliar"] != null)
         {
-            //CARREGA DDL DOS GRUPOS DEPENDENDO DO PI ATIVO DA MATERIA SELECIONADA            
-            ddlGrupos.DataSource = Session["Grupos"];
-            ddlGrupos.DataTextField = "GRU_NOME_PROJETO";
-            ddlGrupos.DataValueField = "GRU_CODIGO";
-            ddlGrupos.DataBind();
-            ddlGrupos.Items.Insert(0, "Selecione");
+            if (!IsPostBack)
+            {
+                //CARREGA DDL DOS GRUPOS DEPENDENDO DO PI ATIVO DA MATERIA SELECIONADA            
+                ddlGrupos.DataSource = Session["GruposAvaliar"];
+                ddlGrupos.DataTextField = "GRU_NOME_PROJETO";
+                ddlGrupos.DataValueField = "GRU_CODIGO";
+                ddlGrupos.DataBind();
+                ddlGrupos.Items.Insert(0, "Selecione");
 
-            DataSet dsCriteriosPesos = new DataSet();
-            dsCriteriosPesos = Criterio_PI_DB.SelectCriteriosPesosByPI(Convert.ToInt32(Session["CodigoPIAtivoMateria"]), Convert.ToInt32(Session["codAtr"]));
-            Session["dsCriteriosPesos"] = dsCriteriosPesos;
+                DataSet dsCriteriosPesos = new DataSet();
+                dsCriteriosPesos = Criterio_PI_DB.SelectCriteriosPesosByPI(Convert.ToInt32(Session["CodigoPIAtivoMateria"]), Convert.ToInt32(Session["codAtr"]));
+                Session["dsCriteriosPesos"] = dsCriteriosPesos;
+            }
+            else
+            {
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "funcaoAtualizarMediaAll", "funcaoAtualizarMediaAll();", true);
+
+                if (ddlGrupos.SelectedIndex != 0)
+                {
+                    DataSet dsCriteriosPesos = (DataSet)Session["dsCriteriosPesos"];
+                    CarregaTableAvaliar(Convert.ToInt32(ddlGrupos.SelectedValue), dsCriteriosPesos);
+                }
+            }
         }
         else
         {
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "funcaoAtualizarMediaAll", "funcaoAtualizarMediaAll();", true);
-            
-            if (ddlGrupos.SelectedIndex != 0)
-            {
-                DataSet dsCriteriosPesos = (DataSet)Session["dsCriteriosPesos"];
-                CarregaTableAvaliar(Convert.ToInt32(ddlGrupos.SelectedValue), dsCriteriosPesos);
-            }
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalNaoPossuiGrupo", "msgNaoPossuiGrupos();", true);
         }
 
 
@@ -273,7 +279,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 
         Grupo gru = new Grupo();
         gru.Gru_codigo = Convert.ToInt32(ddlGrupos.SelectedValue);
-        Grupo_DB.UpdateGrupoFinalizado(gru);
+        Grupo_DB.UpdateGrupoAvaliado(gru);
 
         Projeto_Inter pri = new Projeto_Inter();
         pri.Pri_codigo = Convert.ToInt32(Session["CodigoPIAtivoMateria"]);
@@ -291,11 +297,31 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 
         ddlGrupos.Items.RemoveAt(ddlGrupos.SelectedIndex);
 
+        DataSet dsGruposFinalizar = new DataSet();
+        dsGruposFinalizar = Grupo_DB.SelectAllGruposFinalizar(Convert.ToInt32(Session["codPIAtivo"]));
+        if (dsGruposFinalizar == null)
+        {
+            Session["GruposFinalizar"] = null;
+        }
+        else
+        {
+            Session["GruposFinalizar"] = dsGruposFinalizar;
+        }
+        DataSet dsGruposAvaliar = new DataSet();
+        dsGruposAvaliar = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
+        Session["GruposAvaliar"] = dsGruposAvaliar;
+        Session["atrDisciplinas"] = Funcoes.SelectAtrDisciplinasEnvolvidas(Convert.ToInt32(Session["codPIAtivo"]));
+
     }
 
     protected void btnFinalizar_Click(object sender, EventArgs e)
     {
         PegarValoresNotas();
+    }
+
+    protected void btnVoltarHome2_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("home.aspx");
     }
 
 

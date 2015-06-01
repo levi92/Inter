@@ -42,30 +42,37 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             Response.Redirect("home.aspx");
         }
 
-
-        //SE NÃO FOR POSTBACK VAI CARREGAR OS MÉTODOS ABAIXO DESCRITOS
-        if (!IsPostBack)
+        if (Session["codPIAtivo"] == null)
         {
-            CarregaCriGerais();
-            CarregaAlunosCadastrarPi();
-            CarregarDisciplinasEnvolvidas();
-            updPanelGrupos.Update();
-            PegarAnoeSemestreAno();
-            PegarUltimoCodPI();
-            lblCursoAut.Text = Session["curso"].ToString();
-            lblSemestreAut.Text = Session["semestre"].ToString();
-            index = 1;
-            btnConfirmarEdicao.Style.Add("opacity", "0.4");
-            btnExcluirGrupo.Style.Add("opacity", "0.4");
-            btnCancelarEdicao.Style.Add("opacity", "0.4");
-            btnConfirmarEdicao.Style.Add("pointer-events", "none");
-            btnCancelarEdicao.Style.Add("pointer-events", "none");
-            btnExcluirGrupo.Style.Add("pointer-events", "none");
 
+            //SE NÃO FOR POSTBACK VAI CARREGAR OS MÉTODOS ABAIXO DESCRITOS
+            if (!IsPostBack)
+            {
+                CarregaCriGerais();
+                CarregaAlunosCadastrarPi();
+                CarregarDisciplinasEnvolvidas();
+                updPanelGrupos.Update();
+                PegarAnoeSemestreAno();
+                PegarUltimoCodPI();
+                lblCursoAut.Text = Session["curso"].ToString();
+                lblSemestreAut.Text = Session["semestre"].ToString();
+                index = 1;
+                btnConfirmarEdicao.Style.Add("opacity", "0.4");
+                btnExcluirGrupo.Style.Add("opacity", "0.4");
+                btnCancelarEdicao.Style.Add("opacity", "0.4");
+                btnConfirmarEdicao.Style.Add("pointer-events", "none");
+                btnCancelarEdicao.Style.Add("pointer-events", "none");
+                btnExcluirGrupo.Style.Add("pointer-events", "none");
+
+            }
+
+            CriarCriterio();
+            updPanelPeso.Update();
         }
-        
-        CriarCriterio();
-        updPanelPeso.Update();
+        else
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalPossuiPI", "msgPossuiPI();", true);
+        }
 
     }
 
@@ -993,6 +1000,15 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             }
             ultCodGrupo++;
         }
+
+        Session["codPIAtivo"] = Funcoes.SelectCodPIAtivoByAtr(Convert.ToInt32(Session["codAtr"]));
+        DataSet dsGruposFinalizar = new DataSet();
+        dsGruposFinalizar = Grupo_DB.SelectAllGruposFinalizar(Convert.ToInt32(Session["codPIAtivo"]));
+        DataSet dsGruposAvaliar = new DataSet();
+        dsGruposAvaliar = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
+        Session["GruposAvaliar"] = dsGruposAvaliar;
+        Session["atrDisciplinas"] = Funcoes.SelectAtrDisciplinasEnvolvidas(Convert.ToInt32(Session["codPIAtivo"]));
+        Session["GruposFinalizar"] = dsGruposFinalizar;
 
        ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalPiCadastrado", "msgFinalizarCadastroPi();", true);
     }

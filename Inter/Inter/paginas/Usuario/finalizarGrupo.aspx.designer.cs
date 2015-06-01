@@ -37,4 +37,13 @@ public partial class paginas_Usuario_finalizarGrupo {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.CheckBoxList cblLiberarDisciplinas;
+    
+    /// <summary>
+    /// btnVoltarHome2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnVoltarHome2;
 }

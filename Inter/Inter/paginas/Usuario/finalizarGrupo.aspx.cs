@@ -36,22 +36,30 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
             Response.Redirect("home.aspx");
         }
 
-        if (!IsPostBack)
-        {   
-            ddlFinalizarGrupos.DataSource = Session["Grupos"];
-            ddlFinalizarGrupos.DataTextField = "GRU_NOME_PROJETO";
-            ddlFinalizarGrupos.DataValueField = "GRU_CODIGO";
-            ddlFinalizarGrupos.DataBind();
-            ddlFinalizarGrupos.Items.Insert(0, "Selecione");
+        if (Session["GruposFinalizar"] != null)
+        {
+            if (!IsPostBack)
+            {
+                ddlFinalizarGrupos.DataSource = Session["GruposFinalizar"];
+                ddlFinalizarGrupos.DataTextField = "GRU_NOME_PROJETO";
+                ddlFinalizarGrupos.DataValueField = "GRU_CODIGO";
+                ddlFinalizarGrupos.DataBind();
+                ddlFinalizarGrupos.Items.Insert(0, "Selecione");
 
+
+            }
+            else
+            {
+                if (ddlFinalizarGrupos.SelectedIndex != 0)
+                {
+                    CarregarGruposFinalizar(Convert.ToInt32(ddlFinalizarGrupos.SelectedValue));
+                }
+            }
         }
         else
         {
-            if (ddlFinalizarGrupos.SelectedIndex != 0)
-            {
-                CarregarGruposFinalizar(Convert.ToInt32(ddlFinalizarGrupos.SelectedValue));
-            }
-        }        
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalNaoPossuiGrupo", "msgNaoPossuiGrupos();", true);
+        }
     }
 
     protected void ddlFinalizarGrupos_SelectedIndexChanged(object sender, EventArgs e)
@@ -167,5 +175,10 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
 
         
 
+    }
+
+    protected void btnVoltarHome2_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("home.aspx");
     }
 }

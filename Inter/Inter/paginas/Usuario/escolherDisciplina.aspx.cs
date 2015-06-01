@@ -131,15 +131,27 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             Session["codAtr"] = codAtr;
 
             Session["codPIAtivo"] = Funcoes.SelectCodPIAtivoByAtr(codAtr);
-            DataSet dsGrupos = new DataSet();
-            dsGrupos = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
-            Session["Grupos"] = dsGrupos;
-
-            if (Convert.ToInt32(Session["codPIAtivo"]) != -2) { 
+            if (Convert.ToInt32(Session["codPIAtivo"]) != -2 && Convert.ToInt32(Session["codPIAtivo"]) != 0)
+            { 
+                DataSet dsGruposAvaliar = new DataSet();
+                DataSet dsGruposFinalizar = new DataSet();
+                dsGruposAvaliar = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
+                dsGruposFinalizar = Grupo_DB.SelectAllGruposFinalizar(Convert.ToInt32(Session["codPIAtivo"]));
+                if (dsGruposFinalizar == null)
+                {
+                    Session["GruposFinalizar"] = null;
+                }
+                else
+                {
+                    Session["GruposFinalizar"] = dsGruposFinalizar;
+                }
+                Session["GruposAvaliar"] = dsGruposAvaliar;
                 Session["atrDisciplinas"] = Funcoes.SelectAtrDisciplinasEnvolvidas(Convert.ToInt32(Session["codPIAtivo"]));
-            }
-            else
-            {
+            }else{
+                Session["codPIAtivo"] = null;
+                Session["GruposAvaliar"] = null;
+                Session["GruposFinalizar"] = null;
+                Session["Grupos"] = null;
                 Session["atrDisciplinas"] = null;
             }
 

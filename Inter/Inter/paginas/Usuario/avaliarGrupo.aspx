@@ -18,6 +18,10 @@
             }
         }
 
+        //CHAMAR MODAL COM MENSAGEM DE NÃO POSSUI GRUPOS PARA AVALIAR
+        function msgNaoPossuiGrupos() {
+            $("#naoPossuiGrupo").click();
+        }
         
         //Sys.Application.add_load(BindEvents);
         //function BindEvents() {
@@ -27,7 +31,7 @@
 
 
     </script>
-
+    <button type="button" style="display: none;" id="naoPossuiGrupo" data-toggle="modal" data-target="#myModalNaoPossuiGrupo"></button>
      <asp:UpdateProgress ID="upgAvaliar" runat="server" AssociatedUpdatePanelID="updAvaliar">
         <ProgressTemplate>
             <div class="modalLoader">
@@ -127,7 +131,25 @@
         </div>
     </div>
 
+    <!-- MODAL NÃO POSSUI GRUPO PARA AVALIAR -->
 
+    <div class="modal fade" data-backdrop="static" id="myModalNaoPossuiGrupo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    <h1 style="font-size: 30px; font-weight: bolder; text-align: center; color: #1f1f1f">
+                        <span style="color: #960d10;" class="glyphicon glyphicon-remove"></span>&nbsp Sua matéria ainda não possui grupos para avaliar!</h1>
+                </div>
+
+                <div class="modal-footer">
+                    <asp:LinkButton CssClass="btn btn-default" ID="btnVoltarHome2" runat="server" OnClick="btnVoltarHome2_Click" ToolTip="Voltar para a home do sistema">
+                        <span class="glyphicon glyphicon-home"></span>&nbsp Voltar para a home</asp:LinkButton>                    
+                </div>
+            </div>
+        </div>
+    </div>
 
 </asp:Content>
 

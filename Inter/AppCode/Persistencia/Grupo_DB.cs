@@ -17,7 +17,7 @@ namespace AppCode.Persistencia
             {
                 IDbConnection conexao;
                 IDbCommand objCommand;
-                string sql = "INSERT INTO gru_grupo(gru_codigo, pri_codigo, gru_nome_projeto, gru_media, gru_finalizado) VALUES(?gru_codigo, ?pri_codigo, ?gru_nome_projeto, null, 0)";
+                string sql = "INSERT INTO gru_grupo(gru_codigo, pri_codigo, gru_nome_projeto, gru_media, gru_finalizado, gru_avaliado) VALUES(?gru_codigo, ?pri_codigo, ?gru_nome_projeto, null, 0, 0)";
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
                 objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", gru.Gru_codigo));
@@ -72,7 +72,7 @@ namespace AppCode.Persistencia
             IDbCommand objCommand;
             IDataAdapter objDataAdapter;
             objConnection = Mapped.Connection();
-            objCommand = Mapped.Command("SELECT GR.GRU_CODIGO, GR.GRU_NOME_PROJETO FROM GRU_GRUPO GR INNER JOIN PRI_PROJETO_INTER PR USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO SA USING(SAN_CODIGO) WHERE SA.SAN_ATIVO = 1 AND PR.PRI_CODIGO = ?pri_codigo AND GRU_FINALIZADO = 0;", objConnection);
+            objCommand = Mapped.Command("SELECT GR.GRU_CODIGO, GR.GRU_NOME_PROJETO FROM GRU_GRUPO GR INNER JOIN PRI_PROJETO_INTER PR USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO SA USING(SAN_CODIGO) WHERE SA.SAN_ATIVO = 1 AND PR.PRI_CODIGO = ?pri_codigo AND GR.GRU_AVALIADO = 0;", objConnection);
             objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", codPi));
             objDataAdapter = Mapped.Adapter(objCommand);
             objDataAdapter.Fill(ds);
@@ -82,14 +82,36 @@ namespace AppCode.Persistencia
             return ds;
         }
 
-        public static int UpdateGrupoFinalizado(Grupo gru)
+        //SELECT GRUPOS DO SEMESTRE ATUAL
+        public static DataSet SelectAllGruposFinalizar(int codPi)
+        {
+            DataSet ds = new DataSet();
+            IDbConnection objConnection;
+            IDbCommand objCommand;
+            IDataAdapter objDataAdapter;
+            objConnection = Mapped.Connection();
+            objCommand = Mapped.Command("SELECT GR.GRU_CODIGO, GR.GRU_NOME_PROJETO FROM GRU_GRUPO GR INNER JOIN PRI_PROJETO_INTER PR USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO SA USING(SAN_CODIGO) WHERE SA.SAN_ATIVO = 1 AND PR.PRI_CODIGO = ?pri_codigo AND GR.GRU_AVALIADO = 1 AND GR.GRU_FINALIZADO = 0", objConnection);
+            objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", codPi));
+            objDataAdapter = Mapped.Adapter(objCommand);
+            objDataAdapter.Fill(ds);
+            objConnection.Close();
+            objCommand.Dispose();
+            objConnection.Dispose();
+            if (ds.Tables[0].Rows.Count == 0)
+            {
+                ds = null;
+            }
+            return ds;
+        }
+
+        public static int UpdateGrupoAvaliado(Grupo gru)
         {
             int retorno = 0;
             try
             {
                 IDbConnection conexao;
                 IDbCommand objCommand;
-                string sql = "UPDATE gru_grupo SET gru_finalizado = 1 WHERE gru_codigo = ?gru_codigo";
+                string sql = "UPDATE gru_grupo SET gru_avaliado = 1 WHERE gru_codigo = ?gru_codigo";
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
                 objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", gru.Gru_codigo));                
