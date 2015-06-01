@@ -131,15 +131,14 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             Session["codAtr"] = codAtr;
 
             Session["codPIAtivo"] = Funcoes.SelectCodPIAtivoByAtr(codAtr);
-            DataSet dsGrupos = new DataSet();
-            dsGrupos = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
-            Session["Grupos"] = dsGrupos;
-
             if (Convert.ToInt32(Session["codPIAtivo"]) != -2) { 
+                DataSet dsGrupos = new DataSet();
+                dsGrupos = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
+                Session["Grupos"] = dsGrupos;
                 Session["atrDisciplinas"] = Funcoes.SelectAtrDisciplinasEnvolvidas(Convert.ToInt32(Session["codPIAtivo"]));
-            }
-            else
-            {
+            }else{
+                Session["codPIAtivo"] = null;
+                Session["Grupos"] = null;
                 Session["atrDisciplinas"] = null;
             }
 
