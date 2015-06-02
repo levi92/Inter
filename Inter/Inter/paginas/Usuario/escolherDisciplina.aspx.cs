@@ -130,6 +130,41 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             Session["disciplina"] = disciplina;            
             Session["codAtr"] = codAtr;
 
+            // CARREGAR DISCIPLINAS ENVOLVIDAS EM SESSOES
+            DataSet dsEnvolvidas = new DataSet();
+            Calendario cal = new Calendario();
+            cal = Calendario.SelectbyAtual();
+            dsEnvolvidas = Professor.SelectAllPIsbyCalendario(cal.Codigo, cal.AnoSemestreAtual);
+
+            string[] dadosDisc = new string[4];
+            List<string> codEnvolvidas = new List<string>();
+            List<string> atrEnvolvidas = new List<string>();
+            List<string> nomeEnvolvidas = new List<string>();
+            List<string> maeEnvolvidas = new List<string>();
+            for (int i = 0; i < dsEnvolvidas.Tables[0].Rows.Count; i++)
+            {
+                dadosDisc = Funcoes.tratarDadosProfessor(dsEnvolvidas.Tables[0].Rows[i][1].ToString());
+                if ((dadosDisc[0] == Session["Curso"].ToString()) && (dadosDisc[1] == Session["Semestre"].ToString()))
+                {
+                    codEnvolvidas.Add(dadosDisc[3]);
+                    atrEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][0].ToString());
+                    nomeEnvolvidas.Add(dadosDisc[2]);
+                    maeEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][2].ToString());
+                }
+            }
+
+            string[] vetCodEnvolvidas = codEnvolvidas.ToArray();
+            Session["codEnvolvidas"] = vetCodEnvolvidas;
+            string[] vetAtrEnvolvidas = atrEnvolvidas.ToArray();
+            Session["atrEnvolvidas"] = vetAtrEnvolvidas;
+            string[] vetNomeEnvolvidas = nomeEnvolvidas.ToArray();
+            Session["nomeEnvolvidas"] = vetNomeEnvolvidas;
+            string[] vetMaeEnvolvidas = maeEnvolvidas.ToArray();
+            Session["maeEnvolvidas"] = vetMaeEnvolvidas;
+
+
+                // CARREGAR SESSOES
+
             Session["codPIAtivo"] = Funcoes.SelectCodPIAtivoByAtr(codAtr);
             if (Convert.ToInt32(Session["codPIAtivo"]) != -2 && Convert.ToInt32(Session["codPIAtivo"]) != 0)
             { 
@@ -146,13 +181,12 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
                     Session["GruposFinalizar"] = dsGruposFinalizar;
                 }
                 Session["GruposAvaliar"] = dsGruposAvaliar;
-                Session["atrDisciplinas"] = Funcoes.SelectAtrDisciplinasEnvolvidas(Convert.ToInt32(Session["codPIAtivo"]));
             }else{
                 Session["codPIAtivo"] = null;
                 Session["GruposAvaliar"] = null;
                 Session["GruposFinalizar"] = null;
                 Session["Grupos"] = null;
-                Session["atrDisciplinas"] = null;
+                Session["codDisciplinas"] = null;
             }
 
             if (mae == "<span class='glyphicon glyphicon-star'></span>")

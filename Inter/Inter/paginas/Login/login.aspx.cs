@@ -6,12 +6,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Inter.Funcoes;
 using Interdisciplinar;
+using System.Data;
 
 public partial class Paginas_Login_login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-     
+        
     }
 
     protected void enviar_Click(object sender, EventArgs e) //Botão Login ADM COORD e PROF 

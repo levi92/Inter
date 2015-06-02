@@ -310,7 +310,6 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         DataSet dsGruposAvaliar = new DataSet();
         dsGruposAvaliar = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
         Session["GruposAvaliar"] = dsGruposAvaliar;
-        Session["atrDisciplinas"] = Funcoes.SelectAtrDisciplinasEnvolvidas(Convert.ToInt32(Session["codPIAtivo"]));
 
     }
 

@@ -79,24 +79,17 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     // ******************  ETAPA 1 - CADASTRO PI, CADASTRO DE DATAS ******************
     // *******************************************************************************
     public static List<int> listCodDisciplinas = new List<int>();
-    private void CarregarDisciplinasEnvolvidas(){
+    private void CarregarDisciplinasEnvolvidas(){    
 
-        
-        Calendario cal = new Calendario();
-        DataSet ds = (DataSet)Session["DataSetPIsbyCalendario"]; //É DENTRO DO IF?
-        if (Session["DataSetPIsbyCalendario"] == null)
-        {
-            cal = Calendario.SelectbyAtual();
-            ds = Professor.SelectAllPIsbyCalendario(cal.Codigo, cal.AnoSemestreAtual);
-            Session["DataSetPIsbyCalendario"] = ds;
-        }
-            
-        int qtd = ds.Tables[0].Rows.Count;
+        string[] nomeEnvolvidas = (string[])Session["nomeEnvolvidas"];
+        string[] maeEnvolvidas = (string[])Session["maeEnvolvidas"];
+        string[] atrEnvolvidas = (string[])Session["atrEnvolvidas"];
+
 
         Table tableDisciplina = new Table();
         tableDisciplina.CssClass = "gridView";
         PainelDisciplinas.Controls.Add(tableDisciplina);
-        int row = ds.Tables[0].Rows.Count;
+        int row = nomeEnvolvidas.Length;
 
         TableHeaderCell th = new TableHeaderCell();
         TableHeaderRow thr = new TableHeaderRow();
@@ -119,7 +112,6 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
         Label lblDisciplinas = new Label();
         Label lblCodigoDisciplina = new Label();
-        string[] vetorReturnFunction = new string[3];
 
         for (int i = 0; i < row; i++)
         {
@@ -127,19 +119,16 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             for (int j = 0; j < 3; j++)
             {
                 TableCell cell = new TableCell();
-                vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[i]["disciplina"].ToString());
-                if ((vetorReturnFunction[0] == Session["Curso"].ToString()) && (vetorReturnFunction[1] == Session["Semestre"].ToString()))
-                {
                     if (j == 1)
                     {
                         lblDisciplinas = new Label();
-                        lblDisciplinas.Text = vetorReturnFunction[2].ToString();
+                        lblDisciplinas.Text = nomeEnvolvidas[i];
                         cell.Controls.Add(lblDisciplinas);
                     }
                     else if(j == 2)
                     {
                         lblDisciplinas = new Label();
-                        if (ds.Tables[0].Rows[i]["tipo"].ToString() == "MAE")
+                        if (maeEnvolvidas[i] == "MAE")
                         {
                             //ÍCONE DA ESTRELINHA
                             lblDisciplinas.Text = "<span class='glyphicon glyphicon-star'></span>";
@@ -154,13 +143,12 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                     else
                     {
                         lblCodigoDisciplina = new Label();
-                        lblCodigoDisciplina.Text = ds.Tables[0].Rows[i]["atr_codigo"].ToString();
+                        lblCodigoDisciplina.Text = atrEnvolvidas[i];
                         lblCodigoDisciplina.ID = "codDisciplina" + i;
                         cell.Controls.Add(lblCodigoDisciplina);
                         listCodDisciplinas.Add(Convert.ToInt32(lblCodigoDisciplina.Text));
                     }
-                    rows.Cells.Add(cell);
-                }
+                    rows.Cells.Add(cell);                
             }
             tableDisciplina.Rows.Add(rows);
         }  
@@ -1007,7 +995,6 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         DataSet dsGruposAvaliar = new DataSet();
         dsGruposAvaliar = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
         Session["GruposAvaliar"] = dsGruposAvaliar;
-        Session["atrDisciplinas"] = Funcoes.SelectAtrDisciplinasEnvolvidas(Convert.ToInt32(Session["codPIAtivo"]));
         Session["GruposFinalizar"] = dsGruposFinalizar;
 
        ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalPiCadastrado", "msgFinalizarCadastroPi();", true);

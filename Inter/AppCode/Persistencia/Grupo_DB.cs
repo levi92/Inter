@@ -82,7 +82,7 @@ namespace AppCode.Persistencia
             return ds;
         }
 
-        //SELECT GRUPOS DO SEMESTRE ATUAL
+        //SELECT GRUPOS PARA A PAGINA DE FINALIZAR
         public static DataSet SelectAllGruposFinalizar(int codPi)
         {
             DataSet ds = new DataSet();
