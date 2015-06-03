@@ -279,7 +279,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
 
         Grupo gru = new Grupo();
         gru.Gru_codigo = Convert.ToInt32(ddlGrupos.SelectedValue);
-        Grupo_DB.UpdateGrupoAvaliado(gru);
+        //Grupo_DB.UpdateGrupoAvaliado(gru);
 
         Projeto_Inter pri = new Projeto_Inter();
         pri.Pri_codigo = Convert.ToInt32(Session["CodigoPIAtivoMateria"]);
@@ -298,7 +298,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         ddlGrupos.Items.RemoveAt(ddlGrupos.SelectedIndex);
 
         DataSet dsGruposFinalizar = new DataSet();
-        dsGruposFinalizar = Grupo_DB.SelectAllGruposFinalizar(Convert.ToInt32(Session["codPIAtivo"]));
+        dsGruposFinalizar = Grupo_DB.SelectAllGruposFinalizar(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
         if (dsGruposFinalizar == null)
         {
             Session["GruposFinalizar"] = null;
@@ -308,9 +308,8 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
             Session["GruposFinalizar"] = dsGruposFinalizar;
         }
         DataSet dsGruposAvaliar = new DataSet();
-        dsGruposAvaliar = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
+        dsGruposAvaliar = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
         Session["GruposAvaliar"] = dsGruposAvaliar;
-
     }
 
     protected void btnFinalizar_Click(object sender, EventArgs e)

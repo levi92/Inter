@@ -170,16 +170,9 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             { 
                 DataSet dsGruposAvaliar = new DataSet();
                 DataSet dsGruposFinalizar = new DataSet();
-                dsGruposAvaliar = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]));
-                dsGruposFinalizar = Grupo_DB.SelectAllGruposFinalizar(Convert.ToInt32(Session["codPIAtivo"]));
-                if (dsGruposFinalizar == null)
-                {
-                    Session["GruposFinalizar"] = null;
-                }
-                else
-                {
-                    Session["GruposFinalizar"] = dsGruposFinalizar;
-                }
+                dsGruposAvaliar = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
+                dsGruposFinalizar = Grupo_DB.SelectAllGruposFinalizar(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));                
+                Session["GruposFinalizar"] = dsGruposFinalizar;               
                 Session["GruposAvaliar"] = dsGruposAvaliar;
             }else{
                 Session["codPIAtivo"] = null;
