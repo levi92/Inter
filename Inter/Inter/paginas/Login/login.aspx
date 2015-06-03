@@ -30,7 +30,7 @@
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="container-fluid">
-
+                    <asp:GridView ID="gdv" runat="server" AutoGenerateColumns="true"></asp:GridView>
 
                     <!-- Barra de cima onde fica o logo e depois as informações da sessão do usuário // Revisado(?) -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

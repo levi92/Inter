@@ -71,16 +71,16 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
     {
         string[] codAlunos = Grupo_Aluno_DB.SelectAllMatriculaByGrupo(codGrupo);
         string[] nomesAlunos = Funcoes.NomeAlunosByMatricula(codAlunos);
-        string[] atrDisciplinas = (string[])Session["atrDisciplinas"];
-        string[] nomesMaterias = Funcoes.MateriasByCodigo(atrDisciplinas);
-
+        string[] codEnvolvidas = (string[])Session["codEnvolvidas"];
+        string[] nomesMaterias = Funcoes.MateriasByCodigo(codEnvolvidas);
+        string[] atrEnvolvidas = (string[])Session["atrEnvolvidas"];
         DataTable dt = new DataTable();
         DataRow dr = dt.NewRow();        
 
         dt.Columns.Add("Integrantes", typeof(string)); //ADICIONA A PRIMEIRA COLUNA DO CABEÇALHO (INTEGRANTES)
 
         //ADICIONA AS COLUNAS DO CABEÇALHO COM OS "IDs" DE ACORDO COM O NOME DO ALUNO 
-        for (int i = 0; i < atrDisciplinas.Length-1; i++)
+        for (int i = 0; i < codEnvolvidas.Length; i++)
         {           
             dt.Columns.Add(nomesMaterias[i], typeof(string));
         }
@@ -89,7 +89,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         for (int j = 0; j < nomesAlunos.Length; j++)
         {
             dr = dt.NewRow();
-            for (int i = 0; i < atrDisciplinas.Length - 1; i++)
+            for (int i = 0; i < codEnvolvidas.Length; i++)
             {
                 if (i == 0) //COLUNA FOR IGUAL A 0
                 {
@@ -127,7 +127,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         thr.Cells.Add(th);
 
 
-        for (int i = 0; i < atrDisciplinas.Length - 1; i++)
+        for (int i = 0; i < codEnvolvidas.Length; i++)
         {
             th = new TableHeaderCell();
             lblCabecalho = new Label();
@@ -163,7 +163,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
                     lblNotas.ID = "lblNotasRow_" + (rowIndex) + "_Col_" + colIndex;
                     lblNotas.ClientIDMode = System.Web.UI.ClientIDMode.Static;                                      
                     cell.Style.Add("text-align", "center");
-                    lblNotas.Text = Funcoes.CalcularMediaPonderadaAlunoDisciplinas(Convert.ToInt32(Session["codPIAtivo"]), codAlunos[rowIndex], Convert.ToInt32(atrDisciplinas[colIndex-1])).ToString(); 
+                    lblNotas.Text = Funcoes.CalcularMediaPonderadaAlunoDisciplinas(Convert.ToInt32(Session["codPIAtivo"]), codAlunos[rowIndex], Convert.ToInt32(atrEnvolvidas[colIndex-1])).ToString(); 
                     cell.Controls.Add(lblNotas);
                 }
                 row.Cells.Add(cell);

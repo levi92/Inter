@@ -136,15 +136,17 @@ namespace Inter.Funcoes
         {
             string[] cursoTurnoSemestre = dados.Split('-');
             string[] cursoTurno = cursoTurnoSemestre[0].Split(')');
+            string codDisc = cursoTurnoSemestre[1].Trim();
             string curso_turno = cursoTurno[0] + ")";
             string semestre = cursoTurno[1].Substring(1, 1);
             string[] disciplinaGrande = cursoTurnoSemestre[2].Split('(');
             string disciplina = disciplinaGrande[0];
-            string[] vetReturn = new string[3];
+            string[] vetReturn = new string[4];
 
             vetReturn[0] = curso_turno;
             vetReturn[1] = semestre;
             vetReturn[2] = disciplina;
+            vetReturn[3] = codDisc;
 
             return vetReturn;
         }
@@ -172,12 +174,12 @@ namespace Inter.Funcoes
 
         public static string[] MateriasByCodigo(string[] adiMatricula)
         {
-            string[] materias = new string[adiMatricula.Length - 1];
-            for (int i = 0; i < adiMatricula.Length - 1; i++)
+            string[] materias = new string[adiMatricula.Length];
+            for (int i = 0; i < adiMatricula.Length; i++)
             {
                 Disciplina dis = new Disciplina();
                 dis = Disciplina.SelectByCodigo(adiMatricula[i]);
-                materias[i] = dis.Nome + i;
+                materias[i] = dis.Nome;
             }
             return materias;
         }
@@ -237,37 +239,37 @@ namespace Inter.Funcoes
             }
         }
 
-        public static string[] SelectAtrDisciplinasEnvolvidas(int codPIAtivo)
-        {
-            try
-            {
-                string codAtrPipe = "";
-                string[] codAtr;
-                IDbConnection objConnection;
-                IDbCommand objCommand;
-                IDataReader objDataReader;
-                objConnection = Mapped.Connection();
-                objCommand = Mapped.Command("SELECT AP.ADI_CODIGO FROM API_ATRIBUICAO_PI AP LEFT JOIN PRI_PROJETO_INTER PI USING(PRI_CODIGO) WHERE PI.PRI_CODIGO = ?codPIAtivo;", objConnection);
-                objCommand.Parameters.Add(Mapped.Parameter("?codPIAtivo", codPIAtivo));
-                objDataReader = objCommand.ExecuteReader();
-                while (objDataReader.Read())
-                {
-                    codAtrPipe += objDataReader["adi_codigo"].ToString() + "|";
-                }
-                codAtr = codAtrPipe.Split('|');
-                objDataReader.Close();
-                objConnection.Close();
-                objConnection.Dispose();
-                objCommand.Dispose();
-                objDataReader.Dispose();
-                return codAtr;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-        }
-
+        //public static string[] SelectAtrDisciplinasEnvolvidas(int codPIAtivo)
+        //{
+        //       try
+        //        {
+        //            string codAtrPipe = "";
+        //            string[] codAtr;
+        //            IDbConnection objConnection;
+        //            IDbCommand objCommand;
+        //            IDataReader objDataReader;
+        //            objConnection = Mapped.Connection();
+        //            objCommand = Mapped.Command("SELECT AP.ADI_CODIGO FROM API_ATRIBUICAO_PI AP LEFT JOIN PRI_PROJETO_INTER PI USING(PRI_CODIGO) WHERE PI.PRI_CODIGO = ?codPIAtivo;", objConnection);
+        //            objCommand.Parameters.Add(Mapped.Parameter("?codPIAtivo", codPIAtivo));
+        //            objDataReader = objCommand.ExecuteReader();
+        //            while (objDataReader.Read())
+        //            {
+        //                codAtrPipe += objDataReader["adi_codigo"].ToString() + "|";
+        //            }
+        //            codAtr = codAtrPipe.Split('|');
+        //            objDataReader.Close();
+        //            objConnection.Close();
+        //            objConnection.Dispose();
+        //            objCommand.Dispose();
+        //            objDataReader.Dispose();
+        //            return codAtr;
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            return null;
+        //        }
+        //    }           
+        
 
         public static double CalcularMediaPonderadaAlunoDisciplinas(int codPIAtivo, string codAluno, int codDisc)
         {
@@ -290,7 +292,7 @@ namespace Inter.Funcoes
                 while (objDataReader.Read())
                 {
                     nota = Convert.ToDouble(objDataReader["his_nota"]);
-                    peso = Convert.ToInt32(objDataReader["cpi_peso"]);
+                    peso = Convert.ToInt32(objDataReader["cpi_peso"]);                    
                     NotasXPesos += nota * peso;
                     somaPesos += peso;
                 }
