@@ -43,8 +43,8 @@
 
                             <li>
                                 <div class="container-fluid" style="margin-top:10px;margin-left:15px;">
-                                <asp:TextBox ID="txtLoginM" class="form-horizontal hidden" placeholder="Login" style="width:180px;" runat="server" ></asp:TextBox>&nbsp
-                                <asp:TextBox ID="txtSenhaM" class="form-horizontal hidden"  placeholder="Senha" style="width:180px;" runat="server" Textmode="Password"></asp:TextBox>&nbsp
+                                <asp:TextBox ID="txtLoginM" class="form-horizontal hidden" placeholder="Login" style="width:180px;" runat="server" MaxLength="63"></asp:TextBox>&nbsp
+                                <asp:TextBox ID="txtSenhaM" class="form-horizontal hidden"  placeholder="Senha" style="width:180px;" runat="server" Textmode="Password" MaxLength="63"></asp:TextBox>&nbsp
                                 <asp:Button ID="btnEnviarM" class="btn btn-default hidden" Style="width: 125px;" runat="server" Text="Entrar" OnClick="btnEnviarM_Click" />
                                 <asp:Label ID="lblMsgErroM" class="hidden" runat="server" Style="color: #960d10"></asp:Label>
                                     </div>
@@ -75,9 +75,9 @@
                     <div class="panel-body">
                         <ul class="pager">
                             <!--- Login de professor / administrador) !--->
-                            <center><asp:TextBox ID="txtLogin" class="form-control"  placeholder="Login" style="width:250px;" runat="server"></asp:TextBox></center>
+                            <center><asp:TextBox ID="txtLogin" class="form-control"  placeholder="Login" style="width:250px;" runat="server" MaxLength="63"></asp:TextBox></center>
                             <br>
-                            <center><asp:TextBox ID="txtSenha" class="form-control" placeholder="Senha" style="width:250px;" runat="server" TextMode="Password"></asp:TextBox></center>
+                            <center><asp:TextBox ID="txtSenha" class="form-control" placeholder="Senha" style="width:250px;" runat="server" TextMode="Password" MaxLength="63"></asp:TextBox></center>
                             <br>
                             <asp:Button ID="enviar" class="btn btn-default" Style="width: 250px;" runat="server" Text="Entrar" OnClick="enviar_Click" /><br />
                             <asp:Label ID="lblMsgErro" runat="server" Style="color: #960d10"></asp:Label>

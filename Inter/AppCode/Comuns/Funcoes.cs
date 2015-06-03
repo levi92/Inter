@@ -6,7 +6,11 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
-
+using System.IO;
+using MySql.Data.MySqlClient;
+using System.Diagnostics;
+using System.IO;
+using System.Data;
 /// <summary>
 /// Summary description for funcoes
 /// </summary>
@@ -235,35 +239,35 @@ namespace Inter.Funcoes
 
         public static string[] SelectAtrDisciplinasEnvolvidas(int codPIAtivo)
         {
-               try
+            try
+            {
+                string codAtrPipe = "";
+                string[] codAtr;
+                IDbConnection objConnection;
+                IDbCommand objCommand;
+                IDataReader objDataReader;
+                objConnection = Mapped.Connection();
+                objCommand = Mapped.Command("SELECT AP.ADI_CODIGO FROM API_ATRIBUICAO_PI AP LEFT JOIN PRI_PROJETO_INTER PI USING(PRI_CODIGO) WHERE PI.PRI_CODIGO = ?codPIAtivo;", objConnection);
+                objCommand.Parameters.Add(Mapped.Parameter("?codPIAtivo", codPIAtivo));
+                objDataReader = objCommand.ExecuteReader();
+                while (objDataReader.Read())
                 {
-                    string codAtrPipe = "";
-                    string[] codAtr;
-                    IDbConnection objConnection;
-                    IDbCommand objCommand;
-                    IDataReader objDataReader;
-                    objConnection = Mapped.Connection();
-                    objCommand = Mapped.Command("SELECT AP.ADI_CODIGO FROM API_ATRIBUICAO_PI AP LEFT JOIN PRI_PROJETO_INTER PI USING(PRI_CODIGO) WHERE PI.PRI_CODIGO = ?codPIAtivo;", objConnection);
-                    objCommand.Parameters.Add(Mapped.Parameter("?codPIAtivo", codPIAtivo));
-                    objDataReader = objCommand.ExecuteReader();
-                    while (objDataReader.Read())
-                    {
-                        codAtrPipe += objDataReader["adi_codigo"].ToString() + "|";
-                    }
-                    codAtr = codAtrPipe.Split('|');
-                    objDataReader.Close();
-                    objConnection.Close();
-                    objConnection.Dispose();
-                    objCommand.Dispose();
-                    objDataReader.Dispose();
-                    return codAtr;
+                    codAtrPipe += objDataReader["adi_codigo"].ToString() + "|";
                 }
-                catch (Exception e)
-                {
-                    return null;
-                }
-            }           
-        
+                codAtr = codAtrPipe.Split('|');
+                objDataReader.Close();
+                objConnection.Close();
+                objConnection.Dispose();
+                objCommand.Dispose();
+                objDataReader.Dispose();
+                return codAtr;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
 
         public static double CalcularMediaPonderadaAlunoDisciplinas(int codPIAtivo, string codAluno, int codDisc)
         {
@@ -286,12 +290,12 @@ namespace Inter.Funcoes
                 while (objDataReader.Read())
                 {
                     nota = Convert.ToDouble(objDataReader["his_nota"]);
-                    peso = Convert.ToInt32(objDataReader["cpi_peso"]);                    
+                    peso = Convert.ToInt32(objDataReader["cpi_peso"]);
                     NotasXPesos += nota * peso;
                     somaPesos += peso;
                 }
                 media = NotasXPesos / somaPesos;
-                if (media>=0 && media<=10)
+                if (media >= 0 && media <= 10)
                 {
                     media = media;
                 }
@@ -304,7 +308,7 @@ namespace Inter.Funcoes
                 objConnection.Dispose();
                 objCommand.Dispose();
                 objDataReader.Dispose();
-                return Math.Round(media,2);
+                return Math.Round(media, 2);
             }
             catch (Exception e)
             {
@@ -312,8 +316,48 @@ namespace Inter.Funcoes
             }
         }
 
+        public static string[] tratarArquivosBackup(string caminho)
+        {
 
+            string[] arquivos = Directory.GetFiles(caminho, "*");
 
+            int i, j, min;
+            string varAux;
+            for (i = 0; i < arquivos.Length - 1; i++)
+            {
+                min = i;
+                for (j = i + 1; j < arquivos.Length; j++)
+                {
+                    // Utilizando o CompareTo para comparar as string do vetor
+                    // resultado -1 significa que arquivos[j] < arquivos[min]
+                    if (arquivos[j].CompareTo(arquivos[min]) != -1)
+                    {
+                        min = j;
+                    }
+                }
+                varAux = arquivos[min];
+                arquivos[min] = arquivos[i];
+                arquivos[i] = varAux;
+            }
+
+            int a = 0;
+            foreach (string file in arquivos)
+            {
+                arquivos[a] = file.Replace(caminho, "").Replace(".sql", "");
+                a++;
+
+            }
+
+            /*foreach (FileInfo file in arquivos)
+            {
+                DataRow dr = dt.NewRow();
+                dr["Nome"] = file.Name;
+                dt.Rows.Add(dr);
+            }*/
+
+            return arquivos;
+
+        }
 
     }
 }

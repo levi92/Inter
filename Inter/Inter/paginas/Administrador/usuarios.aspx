@@ -2,14 +2,15 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ConteudoCentral" runat="server">
 
+
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#icone4').addClass('corIcone');
+            $('#icone4').addClass('corIcone')
         });
     </script>
 
         
-           <asp:UpdateProgress ID="upgAdmin" runat="server" AssociatedUpdatePanelID="UpdatePanelAdmin">
+           <asp:UpdateProgress ID="upgAdmin" runat="server" AssociatedUpdatePanelID="UpdatePanelAdmin" DisplayAfter="1500">
                     <ProgressTemplate>
                         <div class="modalLoader">
                             <div class="modalCenter">
@@ -19,7 +20,7 @@
                     </ProgressTemplate>
                 </asp:UpdateProgress>
 
-                 <asp:UpdateProgress ID="upgProf" runat="server" AssociatedUpdatePanelID="UpdatePanelProf">
+                 <asp:UpdateProgress ID="upgProf" runat="server" AssociatedUpdatePanelID="UpdatePanelProf" DisplayAfter="1500">
                     <ProgressTemplate>
                         <div class="modalLoader">
                             <div class="modalCenter">

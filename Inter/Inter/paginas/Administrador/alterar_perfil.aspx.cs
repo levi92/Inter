@@ -19,12 +19,24 @@ namespace Inter.paginas.Administrador
             }
 
             // CHAMAR A MASTER PAGE CORRESPONDENTE MASTER ou COORD SE ELE JÁ ESCOLHEU O PERFIL
-            if (Session["perfil"] == "coordenador")
+            if ((String)Session["perfil"] == "coordenador")
             {
-                btnCoord.Enabled = false;
+                
                 this.Page.MasterPageFile = Funcoes.Funcoes.chamarMasterPage_Admin(Session["menu"].ToString());
             }
           
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            if ((String)Session["perfil"] == "coordenador")
+            {
+
+                btnCoord.Enabled = false;
+            }
+
+         
         }
 
         protected void Btn_Admin(object sender, EventArgs e)

@@ -32,14 +32,14 @@
                                     <div class="col-md-3" style="top:6px;">
                                         Ano
                                         <asp:DropDownList ID="ddlSemestreAno" CssClass="dropdown" runat="server">
-                                       <asp:ListItem Text="Todos Cursos" Value="Todos"></asp:ListItem>
+                                       <asp:ListItem Text="Todos" Value="Todos"></asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="input-group">
 
-                                            <asp:TextBox ID="txtBusca" runat="server" CssClass="form-control" TextMode="Search" placeholder="Palavras-chave(opcional)"></asp:TextBox>
+                                            <asp:TextBox ID="txtBusca" runat="server" CssClass="form-control" TextMode="Search" placeholder="Pesquisa avançada" MaxLength="200"></asp:TextBox>
 
                                             <div class="input-group-addon">
                                                 <asp:LinkButton ID="lkbBuscar" runat="server" CssClass="glyphicon glyphicon-search"></asp:LinkButton>
@@ -60,7 +60,7 @@
 
                                         <asp:BoundField DataField="GRU_NOME_PROJETO" HeaderText="Nome" />
 
-                                        <asp:TemplateField HeaderText="Curso/Turno"><%--esse campo curso é pego no método RowDataBound no code behind--%>
+                                        <asp:TemplateField HeaderText="Curso/Turno"><%--esse campo curso/turno é pego no método RowDataBound no code behind--%>
                                             <ItemTemplate>
                                                 <asp:Label ID="lblCurso" runat="server"></asp:Label></ItemTemplate>
                                         </asp:TemplateField>

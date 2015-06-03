@@ -4,8 +4,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#icone3').addClass('corIcone')
-
+            $('#icone3').addClass('corIcone');        
         });
 
 
@@ -26,7 +25,7 @@
 
     </script>
 
-    <asp:UpdateProgress ID="upgAdmin" runat="server" AssociatedUpdatePanelID="UpdatePanelAtivados">
+    <asp:UpdateProgress ID="upgAdmin" runat="server" AssociatedUpdatePanelID="UpdatePanelAtivados" DisplayAfter="1000">
         <ProgressTemplate>
             <div class="modalLoader">
                 <div class="modalCenter">
@@ -37,7 +36,7 @@
         </ProgressTemplate>
     </asp:UpdateProgress>
 
-    <asp:UpdateProgress ID="upgProf" runat="server" AssociatedUpdatePanelID="UpdatePanelDesativados">
+    <asp:UpdateProgress ID="upgProf" runat="server" AssociatedUpdatePanelID="UpdatePanelDesativados" DisplayAfter="1000">
         <ProgressTemplate>
             <div class="modalLoader">
                 <div class="modalCenter">
@@ -92,7 +91,11 @@
                                     <Columns>
 
                                         <%--Coluna do Código do Critério Geral--%>
-                                        <asp:BoundField DataField="cge_codigo" Visible="false" />
+                                         <asp:TemplateField HeaderText="Código" Visible="false">                                     
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblCodigo" runat="server" Text='<%#Eval ("cge_codigo")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
 
                                         <%--Coluna do nome do Critério Geral--%>
                                         <asp:BoundField DataField="cge_nome" HeaderText="Nome"/>
@@ -269,7 +272,7 @@
                                     <div class="controls-row">
                                         <asp:Label ID="lblNomeNovoCriterio" runat="server" CssClass="control-label col-sm-2" Text="Nome: "></asp:Label>
 
-                                        <asp:TextBox ID="txtNomeNovoCriterio" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtNomeNovoCriterio" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server" MaxLength="50"></asp:TextBox>
                                         <%--Validação do Campo Nome (Verifica se está vazio e se está preenchido com uma string)--%>
                                     &nbsp<asp:RequiredFieldValidator ID="rfvNomeNovoCriterio" runat="server" CssClass="col-sm1" ErrorMessage="O campo Nome deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtNomeNovoCriterio" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>
 
@@ -281,7 +284,7 @@
                                     <div class="controls-row">
                                         <asp:Label ID="lblDescricaoNovoCriterio" runat="server" CssClass="control-label col-sm-2" Text="Descrição: "></asp:Label></td>
 
-                                        <asp:TextBox ID="txtDescricaoNovoCriterio" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox></td>
+                                        <asp:TextBox ID="txtDescricaoNovoCriterio" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server" MaxLength="200"></asp:TextBox></td>
 
                                         <%--Validação do Campo Descrição (Verifica se está vazio e se está preenchido com uma string)--%>
                                                  &nbsp<asp:RequiredFieldValidator ID="rfvDescricaoNovoCriterio" CssClass="col-sm1" runat="server" ErrorMessage="O campo Descrição deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtDescricaoNovoCriterio" ControlToCompare="txtNomeNovoCriterio" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>

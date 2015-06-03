@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using Inter.Funcoes;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Inter.Funcoes;
 using MySql.Data.MySqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Data;
-using Interdisciplinar;
+using System.Net;
 
 
 public partial class paginas_Admin_configuracoes : System.Web.UI.Page
@@ -30,80 +29,48 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        Backup(gdvBkp);
+        
+        CarregaGrid();
 
     }
 
-    public DataTable Backup(GridView gv_arquivos)
+    private void CarregaGrid()
     {
-        string directory = (Request.PhysicalApplicationPath + "Backup");
-
-        if (!Directory.Exists(directory))
+        string caminho = pegaDirBackup();
+        string[] arquivos = Funcoes.tratarArquivosBackup(caminho);
+        int qtd = arquivos.Length;
+        if (qtd > 0)
         {
-            Directory.CreateDirectory(directory);
-            if (!Directory.Exists(directory))
-            {
-
-            }
+            gdvBkp.DataSource = arquivos;
+            gdvBkp.DataBind();
+            lblQtdRegistros.Text = "Foram encontrados " + qtd + " registros";
         }
-
-        string caminho = (Request.PhysicalApplicationPath + "Backup\\");
-        DirectoryInfo pasta = new DirectoryInfo(caminho);
-        //DirectoryInfo[] subPastas = pasta.GetDirectories();
-        //FileInfo[] arquivos = pasta.GetFiles();
-        string[] arquivos = Directory.GetFiles(caminho, "*");
-
-        DataTable dt = new DataTable();
-
-        DataColumn mDataColumn;
-        mDataColumn = new DataColumn();
-        mDataColumn.DataType = typeof(string);
-        mDataColumn.ColumnName = "Nome";
-        dt.Columns.Add(mDataColumn);
-
-
-        int i, j, min;
-        string varAux;
-        for (i = 0; i < arquivos.Length - 1; i++)
+        else
         {
-            min = i;
-            for (j = i + 1; j < arquivos.Length; j++)
-            {
-                // Utilizando o CompareTo para comparar as string do vetor
-                // resultado -1 significa que arquivos[j] < arquivos[min]
-                if (arquivos[j].CompareTo(arquivos[min]) != -1)
-                {
-                    min = j;
-                }
-            }
-            varAux = arquivos[min];
-            arquivos[min] = arquivos[i];
-            arquivos[i] = varAux;
+            lblQtdRegistros.Text = "Nenhum backup foi encontrado! Seu sistema está em risco! Crie um backup AGORA!";
         }
-
-        /*foreach (FileInfo file in arquivos)
-        {
-            DataRow dr = dt.NewRow();
-            dr["Nome"] = file.Name;
-            dt.Rows.Add(dr);
-        }*/
-
-        foreach (string file in arquivos)
-        {
-            DataRow dr = dt.NewRow();
-            dr["Nome"] = file.Replace(caminho, "").Replace(".sql", "");
-
-            dt.Rows.Add(dr);
-
-        }
-
-        gv_arquivos.DataSource = dt.DefaultView;
-        gv_arquivos.DataBind();
-
-        return dt;
+        
     }
 
+    private string pegaDirBackup()
+    {
+        string directory = (Request.PhysicalApplicationPath + "Backup"); //armazena em uma string o caminho da aplicação + a pasta Backup
+
+        if (!Directory.Exists(directory)) //se o diretório não existe
+        {
+            Directory.CreateDirectory(directory); //cria o diretório
+            if (!Directory.Exists(directory)) 
+            {
+
+            }
+        }
+        
+        string caminho = (Request.PhysicalApplicationPath + "Backup\\"); //pega o caminho do diretório (com \\ pois estamos pegando o diretório "aberto") ->>>> tirar dúvida sobre isso, é isso mesmo?
+        //DirectoryInfo pasta = new DirectoryInfo(caminho); //não está usando o DirectoryInfo pasta, então pra que criar?
+        return caminho;
+
+    }
+   
     protected void btnCriarBackup_Click(object sender, EventArgs e)
     {
 
@@ -133,9 +100,9 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 
 
         Process.Start(caminhoDump, ("-u " + user + " -p" + password + " -x -e -B " + database + " > -r " + directory + "\\" + nome_arquivo));
-        System.Threading.Thread.Sleep(500);
+        System.Threading.Thread.Sleep(800);
 
-        Backup(gdvBkp);
+        CarregaGrid();
         UpdatePanelBkp.Update();
         lblBackup.Text = "Backup efetuado com sucesso!";
 
@@ -159,7 +126,24 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 
     protected void gdvBkp_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-
+        if (e.CommandName == "bkpDownload")
+        {
+            WebClient req = new WebClient();
+            HttpResponse response = HttpContext.Current.Response;
+            string caminho = pegaDirBackup();
+            GridViewRow gvr = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer); //pega a linha da grid pela fonte do comando
+            string arquivo = gdvBkp.Rows[gvr.RowIndex].Cells[0].Text; //pega nome do arquivo daquela linha do gridview
+            string caminhoDoArquivo = caminho + arquivo + ".sql"; //junta o diretório + nome do arquivo
+            //response.Clear();
+            //response.ClearContent();
+            //response.ClearHeaders();
+            //response.Buffer = true;
+            Response.ContentType = ContentType;
+            Response.AppendHeader("Content-Disposition", "attachment;filename="+Path.GetFileName(caminhoDoArquivo));
+            //byte[] data = req.DownloadData(caminhoDoArquivo);
+            Response.WriteFile(caminhoDoArquivo);
+            Response.End();         
+        }
     }
 
     protected void gdvBkp_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -170,6 +154,6 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
     protected void gdvBkp_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         gdvBkp.PageIndex = e.NewPageIndex;
-        Backup(gdvBkp);
+        CarregaGrid();
     }
 }

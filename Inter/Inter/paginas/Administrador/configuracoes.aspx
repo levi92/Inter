@@ -26,24 +26,34 @@
                             <ContentTemplate>
                                  <asp:Label ID="lblBackup" runat="server"></asp:Label>
                                 <asp:GridView ID="gdvBkp" runat="server" CellPadding="4" GridLines="None" CssClass="gridView" AllowPaging="true" PageSize="10"
-                                    OnRowCommand="gdvBkp_RowCommand"
-                                    OnRowDataBound="gdvBkp_RowDataBound"
+                                    OnRowCommand="gdvBkp_RowCommand"                                  
                                     OnPageIndexChanging="gdvBkp_PageIndexChanging"
-                                    AutoGenerateColumns="true"
+                                    AutoGenerateColumns="false"
                                     Visible="true">
 
                                     <AlternatingRowStyle CssClass="alt" />
 
                                     <Columns>
                                         <%-- Configurar colunas do Grid --%>
+                                        
+                                        <asp:BoundField DataField="!" HeaderText="Nome"/> 
+
+                                        <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="8%">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lkbDownload" CssClass="glyphicon glyphicon-download" Font-size="1.5em" runat="server" CommandName="bkpDownload" ></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
                                     </Columns>
                                     
 
                                 </asp:GridView>
+                                <asp:Label ID="lblQtdRegistros" runat="server"></asp:Label><br />
                                 <asp:Button ID="btnCriarBackup" runat="server" CssClass="btn btn-default btn-lg" Text="Criar Backup" OnClick="btnCriarBackup_Click" />
+                            
                                 
                             </ContentTemplate>
-
+                            
                         </asp:UpdatePanel>
                         
                         <br />
