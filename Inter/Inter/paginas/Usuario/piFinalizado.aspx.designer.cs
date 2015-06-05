@@ -12,56 +12,74 @@
 public partial class paginas_Usuario_piFinalizado {
     
     /// <summary>
-    /// Label11 control.
+    /// lblPesquisar control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label11;
+    protected global::System.Web.UI.WebControls.Label lblPesquisar;
     
     /// <summary>
-    /// TextBox1 control.
+    /// txtPesquisar control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox TextBox1;
+    protected global::System.Web.UI.WebControls.TextBox txtPesquisar;
     
     /// <summary>
-    /// CheckBox1 control.
+    /// ddlCursos control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.CheckBox CheckBox1;
+    protected global::System.Web.UI.WebControls.DropDownList ddlCursos;
     
     /// <summary>
-    /// CheckBox3 control.
+    /// ddlDisciplinas control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.CheckBox CheckBox3;
+    protected global::System.Web.UI.WebControls.DropDownList ddlDisciplinas;
     
     /// <summary>
-    /// CheckBox4 control.
+    /// ddlAno control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.CheckBox CheckBox4;
+    protected global::System.Web.UI.WebControls.DropDownList ddlAno;
     
     /// <summary>
-    /// CheckBox5 control.
+    /// ddlSemestre control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.CheckBox CheckBox5;
+    protected global::System.Web.UI.WebControls.DropDownList ddlSemestre;
+    
+    /// <summary>
+    /// lbPesquisar control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton lbPesquisar;
+    
+    /// <summary>
+    /// PanelPIsFinalizados control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Panel PanelPIsFinalizados;
 }

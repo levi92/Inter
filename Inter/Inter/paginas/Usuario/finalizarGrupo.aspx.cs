@@ -45,16 +45,16 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
                 ddlFinalizarGrupos.DataValueField = "GRU_CODIGO";
                 ddlFinalizarGrupos.DataBind();
                 ddlFinalizarGrupos.Items.Insert(0, "Selecione");
-
-
             }
             else
             {
                 if (ddlFinalizarGrupos.SelectedIndex != 0)
                 {
                     CarregarGruposFinalizar(Convert.ToInt32(ddlFinalizarGrupos.SelectedValue));
+                    CriarTabelaMediasDisciplinas();
                 }
             }
+
         }
         else
         {
@@ -67,21 +67,27 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
 
     }
 
+    public static string[] nomesDisciplinas;
+    public static string[] atribuicaoEnvolvidas;
+
     public void CarregarGruposFinalizar(int codGrupo)
     {
         string[] codAlunos = Grupo_Aluno_DB.SelectAllMatriculaByGrupo(codGrupo);
         string[] nomesAlunos = Funcoes.NomeAlunosByMatricula(codAlunos);
         string[] codEnvolvidas = (string[])Session["codEnvolvidas"];
         string[] nomesMaterias = Funcoes.MateriasByCodigo(codEnvolvidas);
+        nomesDisciplinas = nomesMaterias;
         string[] atrEnvolvidas = (string[])Session["atrEnvolvidas"];
+        atribuicaoEnvolvidas = atrEnvolvidas;
+
         DataTable dt = new DataTable();
-        DataRow dr = dt.NewRow();        
+        DataRow dr = dt.NewRow();
 
         dt.Columns.Add("Integrantes", typeof(string)); //ADICIONA A PRIMEIRA COLUNA DO CABEÇALHO (INTEGRANTES)
 
         //ADICIONA AS COLUNAS DO CABEÇALHO COM OS "IDs" DE ACORDO COM O NOME DO ALUNO 
         for (int i = 0; i < codEnvolvidas.Length; i++)
-        {           
+        {
             dt.Columns.Add(nomesMaterias[i], typeof(string));
         }
 
@@ -105,7 +111,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
 
 
 
-        Table table = new Table();        
+        Table table = new Table();
         Label lblNotas, lblAlunos;
 
         table.ID = "tableFinalizarGrupos";
@@ -117,7 +123,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         int colsCount = dt.Columns.Count;
         Session["rowsCountFinalizar"] = rowsCount;
         Session["colsCountFinalizar"] = colsCount;
-        
+
         TableHeaderRow thr = new TableHeaderRow();
         TableHeaderCell th = new TableHeaderCell();
         Label lblCabecalho = new Label();
@@ -131,8 +137,8 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         {
             th = new TableHeaderCell();
             lblCabecalho = new Label();
-                           
-            lblCabecalho.Text = nomesMaterias[i];            
+
+            lblCabecalho.Text = nomesMaterias[i];
             th.Style.Add("text-align", "center");
             th.Controls.Add(lblCabecalho);
             thr.Cells.Add(th);
@@ -161,9 +167,9 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
                 {
                     lblNotas = new Label();
                     lblNotas.ID = "lblNotasRow_" + (rowIndex) + "_Col_" + colIndex;
-                    lblNotas.ClientIDMode = System.Web.UI.ClientIDMode.Static;                                      
+                    lblNotas.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                     cell.Style.Add("text-align", "center");
-                    lblNotas.Text = Funcoes.CalcularMediaPonderadaAlunoDisciplinas(Convert.ToInt32(Session["codPIAtivo"]), codAlunos[rowIndex], Convert.ToInt32(atrEnvolvidas[colIndex-1])).ToString(); 
+                    lblNotas.Text = Funcoes.CalcularMediaPonderadaAlunoDisciplinas(Convert.ToInt32(Session["codPIAtivo"]), codAlunos[rowIndex], Convert.ToInt32(atrEnvolvidas[colIndex - 1])).ToString();
                     cell.Controls.Add(lblNotas);
                 }
                 row.Cells.Add(cell);
@@ -171,14 +177,53 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
             table.Rows.Add(row);
         }
 
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "ZebradoGridAvaliar", "ZebradoGridAvaliar();", true);
 
-
-        
 
     }
+
+
+    private void CriarTabelaMediasDisciplinas()
+    {
+
+        DataSet dsGruposFinalizar = (DataSet)Session["GruposFinalizar"];
+        string[] codEnvolvidas = (string[])Session["codEnvolvidas"];
+        int CodGrupo = Convert.ToInt32(ddlFinalizarGrupos.SelectedValue);
+
+        DataTable dt = new DataTable();
+        DataRow dr = dt.NewRow();
+
+        dt.Columns.Add("Disciplinas", typeof(string)); //ADICIONA A PRIMEIRA COLUNA DO CABEÇALHO (DISCIPLINAS)        
+        dt.Columns.Add("Media", typeof(string));
+
+        for (int j = 0; j < nomesDisciplinas.Length; j++)
+        {
+            dr = dt.NewRow();
+            for (int i = 0; i < codEnvolvidas.Length; i++)
+            {
+                int atr = Convert.ToInt32(atribuicaoEnvolvidas[j]);
+                if (i == 0) //COLUNA FOR IGUAL A 0
+                {
+                    dr["Disciplinas"] = nomesDisciplinas[j].ToString();
+                }
+                else
+                {
+                    dr["Media"] = dsGruposFinalizar.Tables[0].Rows[i][2];
+
+                }
+            }
+            dt.Rows.Add(dr);
+        }
+
+        gdvMediasDisciplinas.DataSource = dt;
+        gdvMediasDisciplinas.DataBind();
+ 
+    }
+
 
     protected void btnVoltarHome2_Click(object sender, EventArgs e)
     {
         Response.Redirect("home.aspx");
     }
+
 }

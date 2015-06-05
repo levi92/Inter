@@ -361,5 +361,35 @@ namespace Inter.Funcoes
 
         }
 
+        public static string PesquisarByNomeGrupo(string nomeGru)
+        {
+            try
+            {
+                string nomesGrupos = "";
+                IDbConnection objConnection;
+                IDbCommand objCommand;
+                IDataReader objDataReader;
+                objConnection = Mapped.Connection();
+                objCommand = Mapped.Command("SELECT G.GRU_NOME_PROJETO FROM GRU_GRUPO G WHERE GRU_NOME_PROJETO LIKE concat('%',?nomeGru,'%');", objConnection);
+                objCommand.Parameters.Add(Mapped.Parameter("?nomeGru", nomeGru));
+                objDataReader = objCommand.ExecuteReader();
+                while (objDataReader.Read())
+                {
+                    nomesGrupos += (objDataReader["gru_nome_projeto"].ToString()) + "|";
+                }
+
+                objDataReader.Close();
+                objConnection.Close();
+                objConnection.Dispose();
+                objCommand.Dispose();
+                objDataReader.Dispose();
+                return nomesGrupos;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
     }
 }

@@ -22,69 +22,42 @@
 
                     <tr>
                         <td>
-                            <asp:Label ID="Label11" CssClass="label" runat="server" Text="Pesquisar:"></asp:Label>
+                            <asp:Label ID="lblPesquisar" CssClass="label" runat="server" Text="Pesquisar:"></asp:Label>
                         </td>
 
                         <td colspan="2">
-                            <asp:TextBox ID="TextBox1" CssClass="textPesquisa" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtPesquisar" CssClass="textPesquisa" runat="server"></asp:TextBox>
                         </td>
 
                         <td>
-                            <asp:CheckBox ID="CheckBox1" runat="server" Text="&nbsp Nome" />
+                            <asp:DropDownList ID="ddlCursos" runat="server"></asp:DropDownList>
                         </td>
                         <td>
-                            <asp:CheckBox ID="CheckBox3" runat="server" Text="&nbsp Disciplina" />
+                            <asp:DropDownList ID="ddlDisciplinas" runat="server"></asp:DropDownList>
                         </td>
                         <td>
-                            <asp:CheckBox ID="CheckBox4" runat="server" Text="&nbsp  Ano" />
+                            <asp:DropDownList ID="ddlAno" runat="server">
+                                
+                            </asp:DropDownList>
                         </td>
                         <td>
-                            <asp:CheckBox ID="CheckBox5" runat="server" Text="&nbsp Semestre" />
+                            <asp:DropDownList ID="ddlSemestre" runat="server"></asp:DropDownList>
                         </td>
                         <td>
-
+<%--
                             <button type="button" class="btn btn-default" id="btnPesquisar">
-                                <span class="glyphicon glyphicon-search"></span>&nbsp Pesquisar</button>
+                                <span class="glyphicon glyphicon-search"></span>&nbsp Pesquisar</button>--%>
+                            <asp:LinkButton ID="lbPesquisar" runat="server" CssClass="btn btn-default" OnClick="lbPesquisar_Click">
+                                 <span class="glyphicon glyphicon-search"></span>&nbsp Pesquisar
+                            </asp:LinkButton>
                         </td>
                     </tr>
                 </table>
 
                 <hr />
 
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td>Projeto</td>
-                            <td>Data de finaização</td>
-                            <td>Disciplina</td>
-                            <td>Semestre</td>
-                            <td>Solicitar alteração</td>
-                        </tr>
-                    </thead>
-                    <tr>
-                        <td><a href="#">Sistema Inter_Sistema SAM</a></td>
-                        <td>02/12/2014</td>
-                        <td>IHC</td>
-                        <td>4</td>
-                        <td><span style="color: #428bca" class="glyphicon glyphicon-share-alt"></span></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Sistema Aluno Online</a></td>
-                        <td>18/05/2014</td>
-                        <td>Gestão de equipes</td>
-                        <td>6</td>
-                        <td><span style="color: #d7d5d5" class="glyphicon glyphicon-share-alt"></span></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Sistema Viva no Azul</a></td>
-                        <td>27/11/2014</td>
-                        <td>Programação Web</td>
-                        <td>5</td>
-                        <td><span style="color: #428bca" class="glyphicon glyphicon-share-alt"></span></td>
-                    </tr>
-
-                </table>
+                <asp:Panel ID="PanelPIsFinalizados" runat="server"></asp:Panel>
+                
 
             </div>
         </div>

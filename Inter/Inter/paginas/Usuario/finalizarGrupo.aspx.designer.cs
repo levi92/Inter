@@ -12,6 +12,42 @@
 public partial class paginas_Usuario_finalizarGrupo {
     
     /// <summary>
+    /// upgAvaliar control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdateProgress upgAvaliar;
+    
+    /// <summary>
+    /// ScriptManager1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.ScriptManager ScriptManager1;
+    
+    /// <summary>
+    /// updFinalizar control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel updFinalizar;
+    
+    /// <summary>
+    /// lblGrupo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblGrupo;
+    
+    /// <summary>
     /// ddlFinalizarGrupos control.
     /// </summary>
     /// <remarks>
@@ -28,6 +64,15 @@ public partial class paginas_Usuario_finalizarGrupo {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Panel PanelFinalizarGrupo;
+    
+    /// <summary>
+    /// gdvMediasDisciplinas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvMediasDisciplinas;
     
     /// <summary>
     /// cblLiberarDisciplinas control.
