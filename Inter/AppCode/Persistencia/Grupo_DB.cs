@@ -72,7 +72,7 @@ namespace AppCode.Persistencia
             IDbCommand objCommand;
             IDataAdapter objDataAdapter;
             objConnection = Mapped.Connection();
-            objCommand = Mapped.Command("SELECT GR.GRU_CODIGO, GR.GRU_NOME_PROJETO FROM GRU_GRUPO GR INNER JOIN PRI_PROJETO_INTER PR USING(PRI_CODIGO) INNER JOIN API_ATRIBUICAO_PI AP USING(PRI_CODIGO) WHERE PR.PRI_CODIGO = ?PRI_CODIGO AND GR.GRU_FINALIZADO = 0 AND AP.ADI_CODIGO = ?ADI_CODIGO AND GR.GRU_CODIGO NOT IN(SELECT MD.GRU_CODIGO FROM MDD_MEDIA_DISCIPLINA MD);", objConnection);
+            objCommand = Mapped.Command("SELECT GR.GRU_CODIGO, GR.GRU_NOME_PROJETO FROM GRU_GRUPO GR INNER JOIN PRI_PROJETO_INTER PR USING(PRI_CODIGO) INNER JOIN API_ATRIBUICAO_PI AP USING(PRI_CODIGO) WHERE PR.PRI_CODIGO = ?PRI_CODIGO AND GR.GRU_FINALIZADO = 0 AND AP.ADI_CODIGO = ?ADI_CODIGO AND GR.GRU_CODIGO NOT IN(SELECT MD.GRU_CODIGO FROM MDD_MEDIA_DISCIPLINA MD WHERE MD.ADI_CODIGO = ?ADI_CODIGO);", objConnection);
             objCommand.Parameters.Add(Mapped.Parameter("?PRI_CODIGO", codPi));
             objCommand.Parameters.Add(Mapped.Parameter("?ADI_CODIGO", atrCod));
             objDataAdapter = Mapped.Adapter(objCommand);

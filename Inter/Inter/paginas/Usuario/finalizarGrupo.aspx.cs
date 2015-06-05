@@ -52,6 +52,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
                 {
                     CarregarGruposFinalizar(Convert.ToInt32(ddlFinalizarGrupos.SelectedValue));
                     CriarTabelaMediasDisciplinas();
+
                 }
             }
 
@@ -185,7 +186,8 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
 
     private void CriarTabelaMediasDisciplinas()
     {
-
+        int cont = 0;
+        double somaMedia = 0;
         DataSet dsGruposFinalizar = (DataSet)Session["GruposFinalizar"];
         string[] codEnvolvidas = (string[])Session["codEnvolvidas"];
         int CodGrupo = Convert.ToInt32(ddlFinalizarGrupos.SelectedValue);
@@ -208,11 +210,24 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
                 }
                 else
                 {
-                    dr["Media"] = dsGruposFinalizar.Tables[0].Rows[i][2];
-
+                    dr["Media"] = Funcoes.SelectMediabyDisciplina(atr, CodGrupo, Convert.ToInt32(Session["codPIAtivo"])).ToString();
+                    if (dr["Media"] != "-")
+                    {
+                        cont++;
+                        somaMedia += Convert.ToDouble(dr["Media"]);
+                    }
                 }
             }
             dt.Rows.Add(dr);
+        }
+
+        if (cont == codEnvolvidas.Length)
+        {
+            lblMediaGrupos.Text = (somaMedia / cont).ToString();
+        }
+        else
+        {
+            lblMediaGrupos.Text = "Existem disciplinas sem avaliação";
         }
 
         gdvMediasDisciplinas.DataSource = dt;

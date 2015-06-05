@@ -21,15 +21,6 @@ public partial class Paginas_Login_login {
     protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     
     /// <summary>
-    /// gdv control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.GridView gdv;
-    
-    /// <summary>
     /// txtLoginM control.
     /// </summary>
     /// <remarks>

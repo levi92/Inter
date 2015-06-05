@@ -75,6 +75,15 @@ public partial class paginas_Usuario_finalizarGrupo {
     protected global::System.Web.UI.WebControls.GridView gdvMediasDisciplinas;
     
     /// <summary>
+    /// lblMediaGrupos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMediaGrupos;
+    
+    /// <summary>
     /// cblLiberarDisciplinas control.
     /// </summary>
     /// <remarks>

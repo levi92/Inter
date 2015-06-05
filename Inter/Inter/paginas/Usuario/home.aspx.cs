@@ -28,8 +28,9 @@ public partial class paginas_Usuario_home : System.Web.UI.Page
         if (Session["disciplina"] == "")
         {
             Response.Redirect("escolherDisciplina.aspx");
-        }
 
+        }
+        
         // APARECER NOME DO PROFESSOR NA FRASE BEM-VINDO (PROFESSOR)!
         Professor prof = new Professor();
         prof = (Professor)Session["Professor"];

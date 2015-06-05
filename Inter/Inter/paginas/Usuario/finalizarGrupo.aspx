@@ -80,7 +80,7 @@
                                     <label style="font-size: 18px; font-weight: bolder; color: #960d10;">MÉDIA FINAL: </label>
                                 </td>
                                 <td>
-                                    <label style="font-size: 18px; font-weight: bolder; color: #960d10;">10</label>
+                                    <asp:Label ID="lblMediaGrupos" runat="server" ></asp:Label>
                                 </td>
 
                             </tr>

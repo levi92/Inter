@@ -271,7 +271,7 @@ namespace Inter.Funcoes
         //    }           
         
 
-        public static double CalcularMediaPonderadaAlunoDisciplinas(int codPIAtivo, string codAluno, int codDisc)
+        public static string CalcularMediaPonderadaAlunoDisciplinas(int codPIAtivo, string codAluno, int codDisc)
         {
             try
             {
@@ -297,24 +297,26 @@ namespace Inter.Funcoes
                     somaPesos += peso;
                 }
                 media = NotasXPesos / somaPesos;
-                if (media >= 0 && media <= 10)
+                
+                if (!(media >= 0 && media <= 10))
                 {
-                    media = media;
-                }
-                else
-                {
-                    media = 0;
+                    objDataReader.Close();
+                    objConnection.Close();
+                    objConnection.Dispose();
+                    objCommand.Dispose();
+                    objDataReader.Dispose();
+                    return "Não avaliado";
                 }
                 objDataReader.Close();
                 objConnection.Close();
                 objConnection.Dispose();
                 objCommand.Dispose();
                 objDataReader.Dispose();
-                return Math.Round(media, 2);
+                return Math.Round(media, 1).ToString();
             }
             catch (Exception e)
             {
-                return -2;
+                return "Erro";
             }
         }
 
@@ -359,6 +361,47 @@ namespace Inter.Funcoes
 
             return arquivos;
 
+        }
+
+        public static string SelectMediabyDisciplina(int codAtr, int codGru, int codPiAtivo)
+        {
+            try
+            {
+                double mediaDisciplina=-1;
+                IDbConnection objConnection;
+                IDbCommand objCommand;
+                IDataReader objDataReader;
+                objConnection = Mapped.Connection();
+                objCommand = Mapped.Command("SELECT M.MDD_MEDIA FROM mdd_media_disciplina m INNER JOIN GRU_GRUPO G USING(GRU_CODIGO) INNER JOIN PRI_PROJETO_INTER P on p.PRI_CODIGO = g.pri_codigo INNER JOIN API_ATRIBUICAO_PI A ON A.ADI_CODIGO = M.ADI_CODIGO WHERE P.PRI_CODIGO = ?codPri AND A.ADI_CODIGO = ?codAtr AND G.GRU_CODIGO = ?codGru;", objConnection);
+                objCommand.Parameters.Add(Mapped.Parameter("?codAtr", codAtr));
+                objCommand.Parameters.Add(Mapped.Parameter("?codGru", codGru));
+                objCommand.Parameters.Add(Mapped.Parameter("?codPri", codPiAtivo));
+
+                objDataReader = objCommand.ExecuteReader();
+                while (objDataReader.Read())
+                {
+                    mediaDisciplina = Convert.ToDouble(objDataReader["MDD_MEDIA"]);
+                }
+                if (!(mediaDisciplina >= 0 && mediaDisciplina <= 10))
+                {
+                    objDataReader.Close();
+                    objConnection.Close();
+                    objConnection.Dispose();
+                    objCommand.Dispose();
+                    objDataReader.Dispose();
+                    return "-";
+                }
+                objDataReader.Close();
+                objConnection.Close();
+                objConnection.Dispose();
+                objCommand.Dispose();
+                objDataReader.Dispose();
+                return Math.Round(mediaDisciplina,1).ToString();
+            }
+            catch (Exception e)
+            {
+                return "Erro";
+            }
         }
 
         public static string PesquisarByNomeGrupo(string nomeGru)
