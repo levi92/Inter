@@ -110,28 +110,29 @@ namespace AppCode.Persistencia
             return ds;
         }
 
-        //public static int UpdateGrupoAvaliado(Grupo gru)
-        //{
-        //    int retorno = 0;
-        //    try
-        //    {
-        //        IDbConnection conexao;
-        //        IDbCommand objCommand;
-        //        string sql = "UPDATE gru_grupo SET gru_avaliado = 1 WHERE gru_codigo = ?gru_codigo";
-        //        conexao = Mapped.Connection();
-        //        objCommand = Mapped.Command(sql, conexao);
-        //        objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", gru.Gru_codigo));                
-        //        objCommand.ExecuteNonQuery();
-        //        conexao.Close();
-        //        objCommand.Dispose();
-        //        conexao.Dispose();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        retorno = -2;
-        //    }
-        //    return retorno;
-        //}
+        public static int UpdateGrupoAvaliado(Grupo gru)
+        {
+            int retorno = 0;
+            try
+            {
+                IDbConnection conexao;
+                IDbCommand objCommand;
+                string sql = "UPDATE gru_grupo SET gru_finalizado = 1, gru_media = ?gru_media WHERE gru_codigo = ?gru_codigo";
+                conexao = Mapped.Connection();
+                objCommand = Mapped.Command(sql, conexao);
+                objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", gru.Gru_codigo));
+                objCommand.Parameters.Add(Mapped.Parameter("?gru_media", gru.Gru_media));
+                objCommand.ExecuteNonQuery();
+                conexao.Close();
+                objCommand.Dispose();
+                conexao.Dispose();
+            }
+            catch (Exception e)
+            {
+                retorno = -2;
+            }
+            return retorno;
+        }
 
 
     }

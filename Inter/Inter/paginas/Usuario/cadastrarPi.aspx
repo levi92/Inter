@@ -604,7 +604,7 @@
                 </div>
                 <div class="modal-body">
                     <h1 style="font-size: 30px; font-weight: bolder; text-align: center; color: #1f1f1f">
-                        <span style="color: #960d10;" class="glyphicon glyphicon-remove"></span>&nbsp Sua matéria já possui um PI cadastrado ativo!</h1>
+                        <span style="color: #960d10;" class="glyphicon glyphicon-remove"></span>&nbsp Sua disciplina já possui um PI cadastrado ativo!</h1>
                 </div>
 
                 <div class="modal-footer">

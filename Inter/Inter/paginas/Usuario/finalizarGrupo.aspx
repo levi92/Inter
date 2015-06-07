@@ -66,7 +66,7 @@
 
                         <asp:Panel ID="PanelFinalizarGrupo" runat="server"></asp:Panel>
 
-                        <asp:GridView ID="gdvMediasDisciplinas" CssClass="gridView" runat="server" Width="50%" Style="margin: 4% 25%;" AutoGenerateColumns="false">
+                        <asp:GridView ID="gdvMediasDisciplinas" CssClass="tableFinalizar" runat="server" Width="50%" Style="margin: 4% 25%;" AutoGenerateColumns="false">
                             <AlternatingRowStyle CssClass="alt" />
                             <Columns>
                                 <asp:BoundField DataField="Disciplinas" HeaderText="Disciplinas" />
@@ -74,7 +74,7 @@
                             </Columns>
                         </asp:GridView>
 
-                        <table class="table" style="width: 50%; margin-top: 5%; margin-left: 25%; border: 1px solid #DDD; text-align: center">
+                        <table class="table" style="width: 50%; margin-left: 25%; border: 1px solid #ddd; text-align: center">
                             <tr>
                                 <td>
                                     <label style="font-size: 18px; font-weight: bolder; color: #960d10;">MÉDIA FINAL: </label>
@@ -90,9 +90,10 @@
                                     <button type="button" class="btn btn-default" id="" data-toggle="modal" data-target="#myModalLiberarEdicao">
                                         <span class="glyphicon glyphicon-pencil"></span>&nbsp Editar</button></td>
 
-                                <td>
-                                    <button type="button" class="btn btn-default" id="" onclick="Mostra('p16');">
-                                        <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</button></td>
+                                <td>                                   
+                                <asp:LinkButton id="btnFinalizarGrupos" runat="server" CssClass="btn btn-default" OnClick="btnFinalizarGrupos_Click" >
+                                    <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar
+                                </asp:LinkButton></td>
 
                             </tr>
                         </table>
@@ -255,7 +256,7 @@
                 </div>
                 <div class="modal-body">
                     <h1 style="font-size: 30px; font-weight: bolder; text-align: center; color: #1f1f1f">
-                        <span style="color: #960d10;" class="glyphicon glyphicon-remove"></span>&nbsp Sua matéria ainda não possui grupos para finalizar!</h1>
+                        <span style="color: #960d10;" class="glyphicon glyphicon-remove"></span>&nbsp Sua disciplina não possui grupos para finalizar!</h1>
                 </div>
 
                 <div class="modal-footer">

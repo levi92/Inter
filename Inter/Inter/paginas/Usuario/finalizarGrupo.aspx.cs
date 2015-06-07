@@ -117,7 +117,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
 
         table.ID = "tableFinalizarGrupos";
         table.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-        table.CssClass = "gridViewAvaliar";
+        table.CssClass = "tableAlunosNotas";
         PanelFinalizarGrupo.Controls.Add(table);
 
         int rowsCount = dt.Rows.Count;
@@ -129,10 +129,12 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         TableHeaderCell th = new TableHeaderCell();
         Label lblCabecalho = new Label();
         th.Text = "INTEGRANTES";
-        th.Style.Add("background-color", "#3A3638");
+        th.Style.Add("background-color", "#FFF");
         th.Style.Add("border", "transparent");
         thr.Cells.Add(th);
-
+        
+       
+        
 
         for (int i = 0; i < codEnvolvidas.Length; i++)
         {
@@ -160,6 +162,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
                     lblAlunos = new Label();
                     lblAlunos.ID = "lblAlunosRow_" + rowIndex + "_Col_" + colIndex;
                     lblAlunos.ClientIDMode = System.Web.UI.ClientIDMode.Static;
+                    lblAlunos.Style.Add("font-weight", "bold");
                     lblAlunos.Text = Funcoes.SplitNomes(dt.Rows[rowIndex][colIndex].ToString());
                     lblAlunos.ToolTip = dt.Rows[rowIndex][colIndex].ToString();
                     cell.Controls.Add(lblAlunos);
@@ -178,7 +181,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
             table.Rows.Add(row);
         }
 
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "ZebradoGridAvaliar", "ZebradoGridAvaliar();", true);
+        //ScriptManager.RegisterStartupScript(this, this.GetType(), "ZebradoGridAvaliar", "ZebradoGridAvaliar();", true);
 
 
     }
@@ -191,17 +194,21 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         DataSet dsGruposFinalizar = (DataSet)Session["GruposFinalizar"];
         string[] codEnvolvidas = (string[])Session["codEnvolvidas"];
         int CodGrupo = Convert.ToInt32(ddlFinalizarGrupos.SelectedValue);
+        lblMediaGrupos.Style.Add("font-size", "15px");
+        lblMediaGrupos.Style.Add("margin-top", "8px");
 
         DataTable dt = new DataTable();
         DataRow dr = dt.NewRow();
+        
 
         dt.Columns.Add("Disciplinas", typeof(string)); //ADICIONA A PRIMEIRA COLUNA DO CABEÇALHO (DISCIPLINAS)        
         dt.Columns.Add("Media", typeof(string));
+        
 
         for (int j = 0; j < nomesDisciplinas.Length; j++)
         {
             dr = dt.NewRow();
-            for (int i = 0; i < codEnvolvidas.Length; i++)
+            for (int i = 0; i < 2; i++)
             {
                 int atr = Convert.ToInt32(atribuicaoEnvolvidas[j]);
                 if (i == 0) //COLUNA FOR IGUAL A 0
@@ -220,18 +227,34 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
             }
             dt.Rows.Add(dr);
         }
-
+        
         if (cont == codEnvolvidas.Length)
         {
-            lblMediaGrupos.Text = (somaMedia / cont).ToString();
+            Session["MediaGrupo"] = (somaMedia / cont); 
+            lblMediaGrupos.Text = Session["MediaGrupo"].ToString();
+            lblMediaGrupos.Style.Add("color", "#960d10");
+            lblMediaGrupos.Style.Add("font-size", "18px");
+            lblMediaGrupos.Style.Add("font-weight", "bold");
         }
         else
         {
             lblMediaGrupos.Text = "Existem disciplinas sem avaliação";
+            lblMediaGrupos.Style.Add("color", "#000");
         }
 
         gdvMediasDisciplinas.DataSource = dt;
         gdvMediasDisciplinas.DataBind();
+
+        if (Session["MediaGrupo"] != null)
+        {
+            btnFinalizarGrupos.Enabled = true;
+        }
+        else
+        {
+            btnFinalizarGrupos.Enabled = false;
+            btnFinalizarGrupos.Style.Add("opacity", "0.4");            
+            btnFinalizarGrupos.Style.Add("pointer-events", "none");
+        }
  
     }
 
@@ -239,6 +262,24 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
     protected void btnVoltarHome2_Click(object sender, EventArgs e)
     {
         Response.Redirect("home.aspx");
+    }
+
+    protected void btnFinalizarGrupos_Click(object sender, EventArgs e)
+    {
+        if (Session["MediaGrupo"] != null)
+        {            
+            Grupo gru = new Grupo();
+            gru.Gru_codigo = Convert.ToInt32(ddlFinalizarGrupos.SelectedValue);
+            gru.Gru_media = Convert.ToDouble(Session["MediaGrupo"]);
+            Grupo_DB.UpdateGrupoAvaliado(gru);
+
+            DataSet dsGruposFinalizar = new DataSet();
+            dsGruposFinalizar = Grupo_DB.SelectAllGruposFinalizar(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
+            Session["GruposFinalizar"] = dsGruposFinalizar;
+
+            Response.Redirect("finalizarGrupo.aspx");
+        }
+        
     }
 
 }

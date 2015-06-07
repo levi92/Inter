@@ -575,7 +575,58 @@ tabelaHome3 {
         border: none;
     }
 
+/* TABELA FINALIZAR GRUPOS */
+    .tableFinalizar {
+    width: 100%;
+    background-color: #FFF;
+    margin: 10px 0 15px 0;
+    border:1px solid #ddd;
+}
+    .tableFinalizar td {
+        padding:9px;
+        border: 1px solid #ddd;
+        text-align:left;
+        font-size:13px;
+        margin-left:5px;
+    }
 
+    .tableFinalizar th {
+        padding: 7px;
+        color: #525252;
+        background-color: #FFF;
+        font-size: 14px;
+        border: none;
+        font-weight:bold;
+    }
+
+    
+    /* TABELA FINALIZAR ALUNOS NOTAS */
+    .tableAlunosNotas {
+    width: 100%;
+    background-color: #FFF;
+    padding:7px;  
+    border-top: 1px solid #ddd;  
+}
+    .tableAlunosNotas td {
+        padding:7px;
+        text-align:left;
+        font-size:14px;
+        margin:5px;
+        border-top:1px solid #ddd;
+        text-align:center;
+        color: #525252;
+    }
+
+    .tableAlunosNotas th {
+        padding: 7px;
+        color: #525252;
+        background-color: #FFF;
+        font-size: 13px;
+        margin:5px;
+        border-top: 1px solid #ddd;
+    }
+
+    
 
 .btnExcluir, .btnEditar {
     padding: 3px 7px;
