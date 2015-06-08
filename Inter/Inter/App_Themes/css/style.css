@@ -176,6 +176,15 @@ table thead {
     text-align: center;
 }
 
+#tabelaBotoesAvaliar {
+    width: 80%;
+    margin: auto;
+}
+
+    #tabelaBotoesAvaliar td {
+        width: 20%;
+        text-align: center;
+    }
 
 
 /* SORTABLE */
@@ -250,9 +259,9 @@ select#listaGrupos {
     font-size: 14px;
     width: 120px;
     cursor: pointer;
-    border: 1px solid #d3d3d3;    
+    border: 1px solid #d3d3d3;
     font-weight: normal;
-    background-color:#FFF;
+    background-color: #FFF;
     color: #555555;
     text-align: center;
 }
@@ -576,18 +585,19 @@ tabelaHome3 {
     }
 
 /* TABELA FINALIZAR GRUPOS */
-    .tableFinalizar {
+.tableFinalizar {
     width: 100%;
     background-color: #FFF;
     margin: 10px 0 15px 0;
-    border:1px solid #ddd;
+    border: 1px solid #ddd;
 }
+
     .tableFinalizar td {
-        padding:9px;
+        padding: 9px;
         border: 1px solid #ddd;
-        text-align:left;
-        font-size:13px;
-        margin-left:5px;
+        text-align: left;
+        font-size: 13px;
+        margin-left: 5px;
     }
 
     .tableFinalizar th {
@@ -596,24 +606,25 @@ tabelaHome3 {
         background-color: #FFF;
         font-size: 14px;
         border: none;
-        font-weight:bold;
+        font-weight: bold;
     }
 
-    
-    /* TABELA FINALIZAR ALUNOS NOTAS */
-    .tableAlunosNotas {
+
+/* TABELA FINALIZAR ALUNOS NOTAS */
+.tableAlunosNotas {
     width: 100%;
     background-color: #FFF;
-    padding:7px;  
-    border-top: 1px solid #ddd;  
+    padding: 7px;
+    border-top: 1px solid #ddd;
 }
+
     .tableAlunosNotas td {
-        padding:7px;
-        text-align:left;
-        font-size:14px;
-        margin:5px;
-        border-top:1px solid #ddd;
-        text-align:center;
+        padding: 7px;
+        text-align: left;
+        font-size: 14px;
+        margin: 5px;
+        border-top: 1px solid #ddd;
+        text-align: center;
         color: #525252;
     }
 
@@ -622,11 +633,11 @@ tabelaHome3 {
         color: #525252;
         background-color: #FFF;
         font-size: 13px;
-        margin:5px;
+        margin: 5px;
         border-top: 1px solid #ddd;
     }
 
-    
+
 
 .btnExcluir, .btnEditar {
     padding: 3px 7px;
@@ -661,6 +672,12 @@ td.mediaAvaliar {
     color: #960d10;
     font-weight: bold;
     text-align: center;
+}
+
+/* DISABLED BUTTONS */
+.disabled {
+    opacity: 0.4;
+    pointer-events: none;
 }
 
 
@@ -1238,5 +1255,5 @@ td.mediaAvaliar {
 }
 
 .hidden {
-  visibility: hidden;
+    visibility: hidden;
 }

@@ -28,10 +28,16 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         {
             Response.Redirect("escolherDisciplina.aspx");
         }
+
         if (Session["GruposAvaliar"] != null)
         {
             if (!IsPostBack)
             {
+                btnSalvar.Enabled = false;
+                btnFinalizar.Enabled = false;
+                btnFinalizar.CssClass = "btn btn-default disabled";
+                btnSalvar.CssClass = "btn btn-default disabled";
+
                 //CARREGA DDL DOS GRUPOS DEPENDENDO DO PI ATIVO DA MATERIA SELECIONADA            
                 ddlGrupos.DataSource = Session["GruposAvaliar"];
                 ddlGrupos.DataTextField = "GRU_NOME_PROJETO";
@@ -43,9 +49,9 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                 dsCriteriosPesos = Criterio_PI_DB.SelectCriteriosPesosByPI(Convert.ToInt32(Session["CodigoPIAtivoMateria"]), Convert.ToInt32(Session["codAtr"]));
                 Session["dsCriteriosPesos"] = dsCriteriosPesos;
             }
-            else
+            else //SE FOR POSTBACK
             {
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "funcaoAtualizarMediaAll", "funcaoAtualizarMediaAll();", true);
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "funcaoAtualizarMediaAll", "funcaoAtualizarMediaAll();", true);                
 
                 if (ddlGrupos.SelectedIndex != 0)
                 {
@@ -80,6 +86,18 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                     txtNota.Text = string.Empty;
                 }
             }
+
+            btnSalvar.Enabled = true;
+            btnFinalizar.Enabled = true;
+            btnFinalizar.CssClass = "btn btn-default";
+            btnSalvar.CssClass = "btn btn-default";
+        }
+        else
+        {
+            btnSalvar.Enabled = false;
+            btnFinalizar.Enabled = false;
+            btnFinalizar.CssClass = "btn btn-default disabled";
+            btnSalvar.CssClass = "btn btn-default disabled";
         }
         
     }
@@ -185,10 +203,29 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                     txbNotas.Attributes["onkeyup"] = "funcaoImpedirValorAvaliar(this.id);";
                     txbNotas.Attributes["onblur"] = "funcaoAtualizarMedia(this.id);";
                     cell.Style.Add("text-align", "center");
-
                     txbNotas.Text = dt.Rows[rowIndex][colIndex].ToString();
 
+                    RequiredFieldValidator rfvTxb = new RequiredFieldValidator();
+                    rfvTxb.ID = "rfvTxb" + rowIndex + "_Col_" + colIndex;
+                    rfvTxb.ControlToValidate = "txtNotasRow_" + rowIndex + "_Col_" + colIndex;
+                    rfvTxb.EnableClientScript = true;
+                    rfvTxb.ErrorMessage = " *";
+                    rfvTxb.ForeColor = System.Drawing.Color.Red;
+
+                    RangeValidator ranTxb = new RangeValidator();
+                    ranTxb.ID = "ranTxb" + rowIndex + "_Col_" + colIndex;
+                    ranTxb.ControlToValidate = "txtNotasRow_" + rowIndex + "_Col_" + colIndex;
+                    ranTxb.MinimumValue = "0";
+                    ranTxb.MaximumValue = "10";
+                    ranTxb.Type = ValidationDataType.Double;
+                    ranTxb.EnableClientScript = true;
+                    ranTxb.ErrorMessage = " *";
+                    ranTxb.ForeColor = System.Drawing.Color.Red;
+
                     cell.Controls.Add(txbNotas);
+                    cell.Controls.Add(rfvTxb);
+                    cell.Controls.Add(ranTxb);
+
                 }
                 row.Cells.Add(cell);
             }

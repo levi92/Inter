@@ -362,11 +362,12 @@ $(document).ready(function () {
     }
 
     funcaoImpedirValorAvaliar = function (id) {
-        var valor = document.getElementById(id).value;
 
+        valor = document.getElementById(id).value;
+       
         if (valor < 0 || valor > 10) {
             $("#" + id).val("");
-        }
+        }       
 
     }
 

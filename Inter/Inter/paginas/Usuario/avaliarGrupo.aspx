@@ -79,7 +79,7 @@
 
                                 <asp:Panel ID="panelAvaliar" runat="server"></asp:Panel>
 
-                                <table class="tabelaAvaliar table">
+                                <table id="tabelaBotoesAvaliar">
                                     <tr>
                                         <td>
                                             <button type="button" class="btn btn-default" id="" disabled="disabled">
@@ -95,9 +95,7 @@
                                         <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar
                                             </asp:LinkButton>
 
-                                        </td>
-
-                                        <td></td>
+                                        </td>                                        
 
                                         <td>
                                             <button type="button" class="btn btn-default" id="btnImprimirAvaliacao" onclick="ImprimirGrupo();" title="Imprimir a tabela de atribuição de notas acima">
