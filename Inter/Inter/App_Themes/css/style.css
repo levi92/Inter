@@ -609,6 +609,33 @@ tabelaHome3 {
         font-weight: bold;
     }
 
+    /* TABELA DISCIPLINAS ENVOLVIDAS */
+.tableDisciplinasEnvolvidas {
+    width: 100%;
+    background-color: #FFF;
+    margin: 20px 0 15px 0;
+    border: 1px solid #ddd;
+
+}
+
+    .tableDisciplinasEnvolvidas  td {
+        padding: 9px;
+        border: 1px solid #ddd;
+        text-align:center;
+        font-size: 13px;
+        margin-left: 5px;
+    }
+
+    .tableDisciplinasEnvolvidas  th {
+        padding: 7px;
+        color: #525252;
+        background-color:rgb(242,242,242);
+        font-size: 14px;
+        border: none;
+        text-align:center;
+        font-weight: bold;
+    }
+
 
 /* TABELA FINALIZAR ALUNOS NOTAS */
 .tableAlunosNotas {
@@ -633,6 +660,35 @@ tabelaHome3 {
         color: #525252;
         background-color: #FFF;
         font-size: 13px;
+        margin: 5px;
+        border-top: 1px solid #ddd;
+    }
+
+
+    /* TABELA ESCOLHER DISCIPLINA */
+.tableEscolherDisciplina {
+    width: 100%;
+    background-color: #FFF;
+    padding: 7px;
+    border-top: 1px solid #ddd;
+    margin-top:15px;
+    margin-bottom:20px;
+}
+
+    .tableEscolherDisciplina td {
+        padding: 8px;
+        text-align: left;
+        font-size: 14px;
+        margin-left: 5px;
+        border-top: 1px solid #ddd;
+        color: #525252;        
+    }
+
+    .tableEscolherDisciplina th {
+        padding: 8px;
+        color: #525252;
+        background-color:rgb(242,242,242);
+        font-size: 14px;
         margin: 5px;
         border-top: 1px solid #ddd;
     }

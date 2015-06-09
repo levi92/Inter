@@ -87,7 +87,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
 
         Table tableDisciplina = new Table();
-        tableDisciplina.CssClass = "gridView";
+        tableDisciplina.CssClass = "tableDisciplinasEnvolvidas";
         PainelDisciplinas.Controls.Add(tableDisciplina);
         int row = nomeEnvolvidas.Length;
 
