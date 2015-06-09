@@ -5,9 +5,10 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-
             // ALTERAR COR DO ÍCONE NO MENU LATERAL 
             $('#cphConteudo_icone9').addClass('corIcone');
+
+            $('[data-toggle="tooltip"]').tooltip();
         });
 
         //CHAMAR MODAL COM MENSAGEM DE NÃO POSSUI GRUPOS PARA FINALIZAR
@@ -23,6 +24,12 @@
                     $("#cphConteudo_cphConteudoCentral_" + i).css("background-color", "rgba(206, 206, 206, 0.31)");
                 }
             }
+        }
+
+        Sys.Application.add_load(BindEvents);
+        function BindEvents() {
+            $('[data-toggle=tooltip]').tooltip();
+            // other bootstrap binding code - see the combined Bootstrap.js for ideas
         }
 
     </script>

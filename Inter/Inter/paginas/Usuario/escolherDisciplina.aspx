@@ -2,10 +2,12 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
     <script type="text/javascript">
-
-        // Modal Dialog - solicita a escolha de uma disciplina se o usuário não escolher nenhuma
-        // Chamando essa modal e configurando 
-        // Criando as configurações da modal
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        // MODAL DIALOG - SOLICITA A ESCOLHA DE UMA DISCIPLINA SE O USUÁRIO NÃO ESCOLHER NENHUMA
+        // CHAMANDO ESSA MODAL E CONFIGURANDO 
+        // CRIANDO AS CONFIGURAÇÕES DA MODAL
         function modalEscolherDis() {
             $(function () {
                 $("#boxSelecioneDisc").dialog({
@@ -33,16 +35,16 @@
 
             <div class="panel-body">
                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                <%-- UpdatePanel utilizado por causa do radio button que estava atualizando a página --%>
+                <%-- UPDATEPANEL UTILIZADO POR CAUSA DO RADIO BUTTON QUE ESTAVA ATUALIZANDO A PÁGINA --%>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="gdv" runat="server" CellPadding="4" GridLines="None" CssClass="gridView"
+                        <asp:GridView ID="gdv" runat="server" CellPadding="4" GridLines="None" CssClass="tableFinalizar"
                             AutoGenerateColumns="false"
                             OnRowDataBound="gdv_RowDataBound">
 
                             <AlternatingRowStyle CssClass="alt" />
 
-                            <%-- Configurar colunas do Grid --%>
+                            <%-- CONFIGURAR COLUNAS DO GRID --%>
                             <Columns>
 
                                 <asp:TemplateField>
@@ -69,17 +71,17 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
 
-                <%-- Label com quantidade de registros --%>
+                <%-- LABEL COM QUANTIDADE DE REGISTROS --%>
                 <asp:Label ID="lblQtdRegistro" runat="server"></asp:Label>
                 <br />
                 <br />
 
-                <%-- Botão para confirmar --%>
+                <%-- BOTÃO PARA CONFIRMAR --%>
                 <asp:LinkButton ID="btnConfirmar" runat="server" CssClass="btn btn-default" OnClick="btnConfirmar_Click">
                       <i aria-hidden="true" class="glyphicon glyphicon-ok"></i>&nbsp Confirmar
                 </asp:LinkButton>
 
-                <%-- Legenda --%>
+                <%-- LEGENDA --%>
                 <section style="float: right; margin-right: 20px; border: 1px solid #CCC; padding: 15px; border-radius: 5px;">
                     <h4 style="margin-top: -7px;">Legenda</h4>
                     <span class="glyphicon glyphicon-star"></span>&nbsp- Disciplina Mãe
@@ -92,7 +94,7 @@
     </div>
 
 
-    <!-- Modal dialog - configurando o texto que vai aparecer -->
+    <!-- MODAL DIALOG - CONFIGURANDO O TEXTO QUE VAI APARECER -->
     <div id="boxSelecioneDisc" title="Selecione uma disciplina!" style="display: none;">
         <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&nbsp Para prosseguir você deve selecionar uma disciplina! </p>
     </div>

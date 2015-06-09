@@ -6,6 +6,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#cphConteudo_icone8').addClass('corIcone');
+
+            //$('[data-toggle="tooltip"]').tooltip();
         });
      
         //FUNÇÃO ZEBRADO NO GRIDVIEW AVALIAR GRUPOS
@@ -23,11 +25,11 @@
             $("#naoPossuiGrupo").click();
         }
         
-        //Sys.Application.add_load(BindEvents);
-        //function BindEvents() {
-        //    $('[data-toggle=tooltip]').tooltip();
-        //    // other bootstrap binding code - see the combined Bootstrap.js for ideas
-        //}
+        Sys.Application.add_load(BindEvents);
+        function BindEvents() {
+            $('[data-toggle=tooltip]').tooltip();
+            // other bootstrap binding code - see the combined Bootstrap.js for ideas
+        }
 
 
     </script>

@@ -233,6 +233,7 @@ option {
     font-weight: normal;
     color: #555555;
     text-align: center;
+    white-space: normal;
 }
 
 select#listaGrupos {
@@ -603,7 +604,8 @@ tabelaHome3 {
     .tableFinalizar th {
         padding: 7px;
         color: #525252;
-        background-color: #FFF;
+        /*background-color: #FFF;*/
+        background-color:#F7F7F7;
         font-size: 14px;
         border: none;
         font-weight: bold;
