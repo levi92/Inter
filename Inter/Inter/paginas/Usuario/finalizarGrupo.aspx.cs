@@ -167,6 +167,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
                     lblAlunos.Style.Add("font-weight", "bold");
                     lblAlunos.Text = Funcoes.SplitNomes(dt.Rows[rowIndex][colIndex].ToString());
                     lblAlunos.ToolTip = dt.Rows[rowIndex][colIndex].ToString();
+                    lblAlunos.Attributes["data-toggle"] = "tooltip";
                     cell.Controls.Add(lblAlunos);
                 }
                 else
@@ -229,7 +230,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
             }
             dt.Rows.Add(dr);
         }
-        cont++;
+        //cont++;
         if (cont == codEnvolvidas.Length)
         {
             Session["MediaGrupo"] = (somaMedia / cont); 

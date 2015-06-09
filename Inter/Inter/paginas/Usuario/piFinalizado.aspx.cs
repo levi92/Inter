@@ -56,8 +56,18 @@ public partial class paginas_Usuario_piFinalizado : System.Web.UI.Page
     public void PiFinalizados(DataSet ds)
     {
         gdvPisFinalizados.DataSource = ds;
-        gdvPisFinalizados.DataBind();             
+        gdvPisFinalizados.DataBind();
+        int qtd = ds.Tables[0].Rows.Count;
 
+        if (qtd > 0)
+        {
+            lblQtdRegistro.Text = "Foram encontados " + qtd + " registros";
+        }
+        else
+        {
+            lblQtdRegistro.Text = "Nenhum registro encontrado";
+
+        }
     }
 
     protected void ddlSemestreAno_SelectedIndexChanged(object sender, EventArgs e)
