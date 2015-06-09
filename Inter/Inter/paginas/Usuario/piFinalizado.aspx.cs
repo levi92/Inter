@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Inter.Funcoes;
 using System.Data;
+using AppCode.Persistencia;
 
 public partial class paginas_Usuario_piFinalizado : System.Web.UI.Page
 {
@@ -27,85 +28,46 @@ public partial class paginas_Usuario_piFinalizado : System.Web.UI.Page
         {
             Response.Redirect("escolherDisciplina.aspx");
         }
+
+        if (!IsPostBack)
+        {
+            DataSet dsSan = new DataSet();
+            dsSan = Semestre_Ano_DB.SelectAll();          
+            for(int i=0; i<dsSan.Tables[0].Rows.Count;i++){             
+                ddlSemestreAno.Items.Add(new ListItem(dsSan.Tables[0].Rows[i]["san_ano"].ToString() + "/" + dsSan.Tables[0].Rows[i]["san_semestre"].ToString(), dsSan.Tables[0].Rows[i]["san_codigo"].ToString()));
+            }
+            ddlSemestreAno.Items.Insert(0, "Selecione");
+
+            DataSet ds = new DataSet();
+            ds = Funcoes.SelectAllPIsFinalizados(Convert.ToInt32(Session["codAtr"]));
+            PiFinalizados(ds);
+
+        }
+
     }
 
     protected void lbPesquisar_Click(object sender, EventArgs e)
     {
-        PiFinalizados();
+        DataSet dsNomeProjeto = new DataSet();
+        dsNomeProjeto = Funcoes.SelectByNomeProjeto(Convert.ToInt32(Session["codAtr"]), txtPesquisar.Text);
+        PiFinalizados(dsNomeProjeto);
     }
 
-    public void PiFinalizados()
+    public void PiFinalizados(DataSet ds)
     {
-        DataTable dt = new DataTable();
-        DataRow dr = dt.NewRow();   
+        gdvPisFinalizados.DataSource = ds;
+        gdvPisFinalizados.DataBind();             
 
-            dt.Columns.Add("Projeto", typeof(string));
-            dt.Columns.Add("Data Finalização", typeof(string));
-            dt.Columns.Add("Disciplina mãe", typeof(string));
-            dt.Columns.Add("Semestre", typeof(string));
-            dt.Columns.Add("Solicitar alteração", typeof(string));
+    }
 
-            dt.Rows.Add(dr);
-
-        Table table = new Table();        
-        Label lblProjeto, lblData, lblDisciplina, lblSemestre;
-
-        table.ID = "tablePIsFinalizados";
-        table.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-        table.CssClass = "gridViewAvaliar";
-        PanelPIsFinalizados.Controls.Add(table);
-
-        string nomeGrupos = Funcoes.PesquisarByNomeGrupo(txtPesquisar.Text);
-        string[] projetos = nomeGrupos.Split('|');
-        
-
-        int rowsCount = projetos.Length-1;
-        int colsCount = 5;
-        
-        
-        TableHeaderRow thr = new TableHeaderRow();
-        TableHeaderCell th = new TableHeaderCell();
-        Label lblCabecalho = new Label();       
-
-
-        for (int rowIndex = 0; rowIndex < rowsCount; rowIndex++)
+    protected void ddlSemestreAno_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddlSemestreAno.SelectedIndex != 0)
         {
-            TableRow row = new TableRow();
-            row.ID = rowIndex.ToString(); 
-
-            for (int colIndex = 0; colIndex < colsCount; colIndex++)
-            {
-                TableCell cell = new TableCell();    
-                switch(colIndex){
-                    case 0:
-                        lblProjeto = new Label();
-                        lblProjeto.Text = projetos[rowIndex].ToString();
-                        cell.Controls.Add(lblProjeto);
-                    break;
-                    case 1:
-                        lblData = new Label();
-                        lblData.Text = " ";
-                        cell.Controls.Add(lblData);
-                    break;
-                    case 2:
-                        lblDisciplina = new Label();
-                        lblDisciplina.Text = " ";
-                        cell.Controls.Add(lblDisciplina);
-                    break;
-                    case 3:
-                        lblSemestre = new Label();
-                        lblSemestre.Text = " ";
-                        cell.Controls.Add(lblSemestre);
-                    break;
-                    case 4:
-
-                    break;
-                }                                        
-                row.Cells.Add(cell);
-            }
-            table.Rows.Add(row);
-        }      
-
+            DataSet ds = new DataSet();
+            ds = Funcoes.SelectBySemestreAno(Convert.ToInt32(Session["codAtr"]), Convert.ToInt32(ddlSemestreAno.SelectedValue));
+            PiFinalizados(ds);
+        }
     }
 
     

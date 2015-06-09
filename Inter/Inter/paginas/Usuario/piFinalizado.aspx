@@ -12,53 +12,79 @@
 
     <!-- PIS FINALIZADOS (P4) -->
 
+     <asp:UpdateProgress ID="upgPIsFinalizados" runat="server" AssociatedUpdatePanelID="updPIsFinalizados">
+        <ProgressTemplate>
+            <div class="modalLoader">
+                <div class="modalCenter">
+                    <img alt="Carregando" src="../../App_Themes/images/ajax-loader.gif" /><br />                    
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
     <div id="p1" class="first">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">PIs Finalizados</h3>
             </div>
-            <div class="panel-body">
-                <table class="table">
 
+
+
+            <div class="panel-body">
+                <asp:UpdatePanel ID="updPIsFinalizados" UpdateMode="Conditional" runat="server">
+                <ContentTemplate>
+                <table class="table">
                     <tr>
                         <td>
                             <asp:Label ID="lblPesquisar" CssClass="label" runat="server" Text="Pesquisar:"></asp:Label>
                         </td>
 
                         <td colspan="2">
-                            <asp:TextBox ID="txtPesquisar" CssClass="textPesquisa" runat="server"></asp:TextBox>
+                            <div class="input-group">
+                                <asp:TextBox ID="txtPesquisar" CssClass="form-control" runat="server" placeholder="Digite o nome do projeto"></asp:TextBox>
+                                <span class="input-group-btn">
+                                    <asp:LinkButton ID="lbPesquisar" runat="server" CssClass="btn btn-default" OnClick="lbPesquisar_Click">
+                                        <span class="glyphicon glyphicon-search"></span>&nbsp
+                                    </asp:LinkButton>
+                                </span>
+                            </div>
                         </td>
-
+                        <td><asp:Label ID="lblSemestreAno" runat="server" CssClass="label" Text="Semestre/Ano:"></asp:Label></td> 
                         <td>
-                            <asp:DropDownList ID="ddlCursos" runat="server"></asp:DropDownList>
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlDisciplinas" runat="server"></asp:DropDownList>
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlAno" runat="server">
-                                
+                            <asp:DropDownList ID="ddlSemestreAno" ClientIDMode="Static" CssClass="dropDown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSemestreAno_SelectedIndexChanged">                                
                             </asp:DropDownList>
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="ddlSemestre" runat="server"></asp:DropDownList>
-                        </td>
-                        <td>
-<%--
-                            <button type="button" class="btn btn-default" id="btnPesquisar">
-                                <span class="glyphicon glyphicon-search"></span>&nbsp Pesquisar</button>--%>
-                            <asp:LinkButton ID="lbPesquisar" runat="server" CssClass="btn btn-default" OnClick="lbPesquisar_Click">
-                                 <span class="glyphicon glyphicon-search"></span>&nbsp Pesquisar
-                            </asp:LinkButton>
-                        </td>
+                        </td>  
+                        <td></td>
+                        <td></td> 
+                        <td></td>
+                        <td></td> 
+                        <td></td>                    
                     </tr>
                 </table>
-
+                     
+               
                 <hr />
+                <asp:GridView ID="gdvPisFinalizados" CssClass="tableFinalizar" runat="server" AutoGenerateColumns="false">
+                    <Columns>
+                        <asp:BoundField HeaderText="Projeto" DataField="gru_nome_projeto" />
+                        <asp:BoundField HeaderText="Semestre" DataField="pri_semestre" />
+                        <asp:BoundField HeaderText="Ano" DataField="san_ano" />   
+                        <asp:TemplateField HeaderText="Detalhes">                            
+                            <ItemTemplate>
+                                <asp:LinkButton ID="lbDetalhesProjeto" runat="server" ToolTip="Ver detalhes do projeto." >
+                                    <span style="font-size:20px" class="glyphicon glyphicon-list-alt"></span>
+                                </asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>                                           
+                    </Columns>
 
+                </asp:GridView>
                 <asp:Panel ID="PanelPIsFinalizados" runat="server"></asp:Panel>
-                
 
+                </ContentTemplate>
+                     </asp:UpdatePanel>
             </div>
         </div>
     </div>

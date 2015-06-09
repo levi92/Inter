@@ -23,7 +23,7 @@
             });
         }
     </script>
-
+    
     <!-- ESCOLHER DISCIPLINA -->
     <div id="p1" class="first">
         <div class="panel panel-default">
@@ -58,9 +58,9 @@
 
                                 <asp:TemplateField HeaderText="Disciplina"></asp:TemplateField>
 
-                                <asp:BoundField DataField="tipo" HeaderText="Disciplina Mãe" />
+                                <asp:BoundField DataField="tipo" HeaderText="Mãe / Filha" />
 
-                                <asp:boundfield datafield="atr_codigo" headertext="código atribuição" />
+                                <asp:boundfield datafield="atr_codigo" headertext="Código" />
 
 
                             </Columns>

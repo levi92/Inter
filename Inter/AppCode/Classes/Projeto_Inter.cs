@@ -9,7 +9,13 @@ using System.Web;
 
         private int pri_codigo;
         private Semestre_Ano san_codigo;
-       
+        private int pri_semestre;
+
+        public int Pri_semestre
+        {
+            get { return pri_semestre; }
+            set { pri_semestre = value; }
+        }
 
         public global::Semestre_Ano San_codigo
         {

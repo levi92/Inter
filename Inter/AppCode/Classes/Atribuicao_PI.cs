@@ -9,6 +9,14 @@ using System.Web;
 
         private Projeto_Inter pri_codigo;
         private int adi_codigo;
+        private bool adi_mae;
+
+        public bool Adi_mae
+        {
+            get { return adi_mae; }
+            set { adi_mae = value; }
+        }
+
 
         public global::Projeto_Inter Pri_codigo
         {

@@ -73,7 +73,7 @@
                             <td rowspan="2">
 
                                 <%--Botão alterar disciplina --%>
-                                <asp:Button ID="btnEscolherDisciplina" class="btn btn-default" OnClick="btnEscolherDisciplina_Click"
+                                <asp:Button ID="btnEscolherDisciplina" CssClass="btn btn-default" OnClick="btnEscolherDisciplina_Click"
                                     runat="server" Text="Alterar Disciplina" />
                             </td>
                         </tr>

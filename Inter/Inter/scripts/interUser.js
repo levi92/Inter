@@ -364,8 +364,11 @@ $(document).ready(function () {
     funcaoImpedirValorAvaliar = function (id) {
 
         valor = document.getElementById(id).value;
-       
+        if (!$.isNumeric(valor)) {
+            $("#" + id).val("");
+        }
         if (valor < 0 || valor > 10) {
+            
             $("#" + id).val("");
         }       
 

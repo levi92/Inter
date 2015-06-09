@@ -305,7 +305,7 @@ namespace Inter.Funcoes
                     objConnection.Dispose();
                     objCommand.Dispose();
                     objDataReader.Dispose();
-                    return "Não avaliado";
+                    return " - ";
                 }
                 objDataReader.Close();
                 objConnection.Close();
@@ -403,35 +403,60 @@ namespace Inter.Funcoes
                 return "Erro";
             }
         }
-
-        public static string PesquisarByNomeGrupo(string nomeGru)
+        public static DataSet SelectByNomeProjeto(int atr, string nomeGru)
         {
-            try
-            {
-                string nomesGrupos = "";
-                IDbConnection objConnection;
-                IDbCommand objCommand;
-                IDataReader objDataReader;
-                objConnection = Mapped.Connection();
-                objCommand = Mapped.Command("SELECT G.GRU_NOME_PROJETO FROM GRU_GRUPO G WHERE GRU_NOME_PROJETO LIKE concat('%',?nomeGru,'%');", objConnection);
-                objCommand.Parameters.Add(Mapped.Parameter("?nomeGru", nomeGru));
-                objDataReader = objCommand.ExecuteReader();
-                while (objDataReader.Read())
-                {
-                    nomesGrupos += (objDataReader["gru_nome_projeto"].ToString()) + "|";
-                }
+            DataSet ds = new DataSet();
+            IDbConnection objConnection;
+            IDbCommand objCommand;
+            IDataAdapter objDataAdapter;
+            objConnection = Mapped.Connection();
+            objCommand = Mapped.Command("SELECT G.GRU_NOME_PROJETO, P.PRI_SEMESTRE, S.SAN_ANO FROM GRU_GRUPO G INNER JOIN API_ATRIBUICAO_PI A USING(PRI_CODIGO) INNER JOIN PRI_PROJETO_INTER P USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO S USING(SAN_CODIGO) WHERE GRU_NOME_PROJETO LIKE concat('%',?nomeGru,'%') AND GRU_FINALIZADO = 1 AND ADI_CODIGO = ?ADI_CODIGO;", objConnection);
+            objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", atr));
+            objCommand.Parameters.Add(Mapped.Parameter("?nomeGru", nomeGru));
+            objDataAdapter = Mapped.Adapter(objCommand);
+            objDataAdapter.Fill(ds);
+            objConnection.Close();
+            objCommand.Dispose();
+            objConnection.Dispose();
+            return ds;
+        }
 
-                objDataReader.Close();
-                objConnection.Close();
-                objConnection.Dispose();
-                objCommand.Dispose();
-                objDataReader.Dispose();
-                return nomesGrupos;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+        public static DataSet SelectBySemestreAno(int atr, int CodSan)
+        {
+            DataSet ds = new DataSet();
+            IDbConnection objConnection;
+            IDbCommand objCommand;
+            IDataAdapter objDataAdapter;
+            objConnection = Mapped.Connection();
+            objCommand = Mapped.Command("SELECT G.GRU_NOME_PROJETO, P.PRI_SEMESTRE, S.SAN_ANO FROM GRU_GRUPO G INNER JOIN API_ATRIBUICAO_PI A USING(PRI_CODIGO) INNER JOIN PRI_PROJETO_INTER P USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO S USING(SAN_CODIGO) WHERE  GRU_FINALIZADO = 1 AND ADI_CODIGO = ?ADI_CODIGO AND SAN_CODIGO = ?SAN_CODIGO;", objConnection);
+            objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", atr));
+            objCommand.Parameters.Add(Mapped.Parameter("?san_codigo", CodSan));
+            objDataAdapter = Mapped.Adapter(objCommand);
+            objDataAdapter.Fill(ds);
+            objConnection.Close();
+            objCommand.Dispose();
+            objConnection.Dispose();
+            return ds;
+        }
+        
+
+        
+
+        public static DataSet SelectAllPIsFinalizados(int atr)
+        {
+            DataSet ds = new DataSet();
+            IDbConnection objConnection;
+            IDbCommand objCommand;
+            IDataAdapter objDataAdapter;
+            objConnection = Mapped.Connection();
+            objCommand = Mapped.Command("SELECT G.GRU_NOME_PROJETO, P.PRI_SEMESTRE, S.SAN_ANO FROM GRU_GRUPO G INNER JOIN API_ATRIBUICAO_PI A USING(PRI_CODIGO) INNER JOIN PRI_PROJETO_INTER P USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO S USING(SAN_CODIGO) WHERE GRU_FINALIZADO = 1 AND ADI_CODIGO = ?adi_codigo;", objConnection);
+            objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", atr));
+            objDataAdapter = Mapped.Adapter(objCommand);
+            objDataAdapter.Fill(ds);
+            objConnection.Close();
+            objCommand.Dispose();
+            objConnection.Dispose();
+            return ds;
         }
 
     }

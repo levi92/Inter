@@ -163,6 +163,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             Session["maeEnvolvidas"] = vetMaeEnvolvidas;
 
 
+
                 // CARREGAR SESSOES
 
             Session["codPIAtivo"] = Funcoes.SelectCodPIAtivoByAtr(codAtr);
@@ -181,10 +182,10 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
                 Session["Grupos"] = null;
                 Session["codDisciplinas"] = null;
             }
-
+            
             if (mae == "<span class='glyphicon glyphicon-star'></span>")
             {
-                Session["mae"] = "MAE";                
+                Session["mae"] = "MAE";               
             }
             else
             {

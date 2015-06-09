@@ -905,6 +905,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         //INSERINDO NA TABELA PROJETO_INTER
         Projeto_Inter pi = new Projeto_Inter();
         pi.Pri_codigo = Convert.ToInt32(lblCodigoPiAut.Text);
+        pi.Pri_semestre = Convert.ToInt32(Session["semestre"]);
         Semestre_Ano san = new Semestre_Ano();
         san = Semestre_Ano_DB.Select();
         pi.San_codigo = san;
@@ -929,6 +930,14 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             Atribuicao_PI atr = new Atribuicao_PI();
             atr.Adi_codigo = codDisciplina[i];
             atr.Pri_codigo = pi;
+            if (Convert.ToInt32(Session["codAtr"]) == codDisciplina[i])
+            {
+                atr.Adi_mae = true;
+            }
+            else
+            {
+                atr.Adi_mae = false;
+            }            
             Atribuicao_PI_DB.Insert(atr);
         }
             
