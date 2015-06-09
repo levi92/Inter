@@ -604,8 +604,7 @@ tabelaHome3 {
     .tableFinalizar th {
         padding: 7px;
         color: #525252;
-        /*background-color: #FFF;*/
-        background-color:#F7F7F7;
+        background-color:rgb(242,242,242);
         font-size: 14px;
         border: none;
         font-weight: bold;

@@ -219,7 +219,7 @@ namespace Inter.Funcoes
                 IDbCommand objCommand;
                 IDataReader objDataReader;
                 objConnection = Mapped.Connection();
-                objCommand = Mapped.Command("SELECT PI.PRI_CODIGO FROM API_ATRIBUICAO_PI AP INNER JOIN PRI_PROJETO_INTER PI USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO SA USING(SAN_CODIGO) WHERE SA.SAN_CODIGO = 1 AND AP.ADI_CODIGO = ?codAtr;", objConnection);
+                objCommand = Mapped.Command("SELECT PI.PRI_CODIGO FROM API_ATRIBUICAO_PI AP INNER JOIN PRI_PROJETO_INTER PI USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO SA USING(SAN_CODIGO) WHERE SA.SAN_ATIVO = 1 AND AP.ADI_CODIGO = ?codAtr;", objConnection);
                 objCommand.Parameters.Add(Mapped.Parameter("?codAtr", codAtr));
                 objDataReader = objCommand.ExecuteReader();
                 while (objDataReader.Read())

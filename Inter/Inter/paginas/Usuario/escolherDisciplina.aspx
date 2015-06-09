@@ -38,7 +38,7 @@
                 <%-- UPDATEPANEL UTILIZADO POR CAUSA DO RADIO BUTTON QUE ESTAVA ATUALIZANDO A PÁGINA --%>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="gdv" runat="server" CellPadding="4" GridLines="None" CssClass="gridView"
+                        <asp:GridView ID="gdv" runat="server" CellPadding="4" GridLines="None" CssClass="tableEscolherDisciplina"
                             AutoGenerateColumns="false"
                             OnRowDataBound="gdv_RowDataBound">
 
