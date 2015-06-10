@@ -912,13 +912,16 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         Projeto_Inter_DB.Insert(pi);
 
         //INSERINDO NA TABELA EVENTOS
-        for (int i = 0; i < desc.Length; i++)
+        if (desc != null)
         {
-            Eventos eve = new Eventos();
-            eve.Pri_codigo = pi;
-            eve.Eve_tipo = desc[i];
-            eve.Eve_data = Convert.ToDateTime(dat[i]);
-            Eventos_DB.Insert(eve);
+            for (int i = 0; i < desc.Length; i++)
+            {
+                Eventos eve = new Eventos();
+                eve.Pri_codigo = pi;
+                eve.Eve_tipo = desc[i];
+                eve.Eve_data = Convert.ToDateTime(dat[i]);
+                Eventos_DB.Insert(eve);
+            }
         }
 
         //INSERINDO NA TABELA ATRIBUICAO_PI
