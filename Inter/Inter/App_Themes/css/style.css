@@ -695,6 +695,15 @@ tabelaHome3 {
     }
 
 
+ /*LABELS PIS FINALIZADOS*/
+ .labelProjeto{    
+    font-size:20px;
+    text-align:center;    
+    font-weight: bolder;
+    margin-top:25px;
+    margin-bottom:50px;  
+ }
+ 
 
 .btnExcluir, .btnEditar {
     padding: 3px 7px;

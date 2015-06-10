@@ -74,7 +74,7 @@
                                 <asp:BoundField HeaderText="Ano" DataField="san_ano" />
                                 <asp:TemplateField HeaderText="Detalhes">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lbDetalhesProjeto" runat="server" OnClick="lbDetalhesProjeto_Click" ToolTip="Ver detalhes do projeto.">
+                                        <asp:LinkButton ID="lbDetalhesProjeto" ClientIDMode="Static" runat="server" OnClick="lbDetalhesProjeto_Click" ToolTip="Ver detalhes do projeto.">
                                     <span style="font-size:20px" class="glyphicon glyphicon-list-alt"></span>&nbsp Visualizar
                                         </asp:LinkButton>
                                     </ItemTemplate>
@@ -98,13 +98,32 @@
             <div class="panel-heading">
                 <h3 class="panel-title">PIs Finalizados</h3>
             </div>
-
             <div class="panel-body">
-                <asp:Label ID="Label3" runat="server" Text="teste"></asp:Label>
+                <asp:UpdatePanel ID="UpdDetalhesProjeto" UpdateMode="Conditional" runat="server">
+                    <ContentTemplate>
+                        <br />                        
+                        <asp:Label ID="lblProjeto" Style="color:#525252" CssClass="labelProjeto"  runat="server" Text="Projeto: "></asp:Label>
+                        <asp:Label ID="lblNomeProjeto" Style="color:#960d10" CssClass="labelProjeto" runat="server"></asp:Label><br />
+                        <asp:GridView ID="gdvDetalhesProjeto" CssClass="tableFinalizar" runat="server" AutoGenerateColumns="false">
+                            <Columns>            
+                                <asp:BoundField HeaderText="Código" DataField="adi_codigo" />
+                                <asp:TemplateField HeaderText="Disciplinas">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblNomeDisciplinas" runat="server"></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>                    
+                                <asp:BoundField HeaderText="Médias" DataField="mdd_media" />
+                            </Columns>
 
-                <asp:LinkButton ID="btnVoltar" runat="server" CssClass="btn btn-default" OnClientClick="Mostra('p1'); return false;" ToolTip="Voltar aos PIs Finalizados">
+                        </asp:GridView><br />
+                        <asp:Label ID="lblMedia" Style="color:#525252" CssClass="labelProjeto" runat="server" Text="Média Projeto: "></asp:Label>
+                        <asp:Label ID="lblMediaProjeto" Style="color:#960d10"  CssClass="labelProjeto" runat="server"></asp:Label><br /><br />
+
+                        <asp:LinkButton ID="btnVoltar" runat="server" CssClass="btn btn-default" OnClientClick="Mostra('p1'); return false;" ToolTip="Voltar aos PIs Finalizados">
                     <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar
-                </asp:LinkButton>
+                        </asp:LinkButton>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
     </div>

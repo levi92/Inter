@@ -410,7 +410,7 @@ namespace Inter.Funcoes
             IDbCommand objCommand;
             IDataAdapter objDataAdapter;
             objConnection = Mapped.Connection();
-            objCommand = Mapped.Command("SELECT G.GRU_NOME_PROJETO, P.PRI_SEMESTRE, S.SAN_ANO, G.GRU_CODIGO FROM GRU_GRUPO G INNER JOIN API_ATRIBUICAO_PI A USING(PRI_CODIGO) INNER JOIN PRI_PROJETO_INTER P USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO S USING(SAN_CODIGO) WHERE GRU_NOME_PROJETO LIKE concat('%',?nomeGru,'%') AND GRU_FINALIZADO = 1 AND ADI_CODIGO = ?ADI_CODIGO;", objConnection);
+            objCommand = Mapped.Command("SELECT G.GRU_CODIGO, G.GRU_NOME_PROJETO, P.PRI_SEMESTRE, S.SAN_ANO, G.GRU_CODIGO FROM GRU_GRUPO G INNER JOIN API_ATRIBUICAO_PI A USING(PRI_CODIGO) INNER JOIN PRI_PROJETO_INTER P USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO S USING(SAN_CODIGO) WHERE GRU_NOME_PROJETO LIKE concat('%',?nomeGru,'%') AND GRU_FINALIZADO = 1 AND ADI_CODIGO = ?ADI_CODIGO;", objConnection);
             objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", atr));
             objCommand.Parameters.Add(Mapped.Parameter("?nomeGru", nomeGru));
             objDataAdapter = Mapped.Adapter(objCommand);
@@ -428,7 +428,7 @@ namespace Inter.Funcoes
             IDbCommand objCommand;
             IDataAdapter objDataAdapter;
             objConnection = Mapped.Connection();
-            objCommand = Mapped.Command("SELECT G.GRU_NOME_PROJETO, P.PRI_SEMESTRE, S.SAN_ANO FROM GRU_GRUPO G INNER JOIN API_ATRIBUICAO_PI A USING(PRI_CODIGO) INNER JOIN PRI_PROJETO_INTER P USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO S USING(SAN_CODIGO) WHERE  GRU_FINALIZADO = 1 AND ADI_CODIGO = ?ADI_CODIGO AND SAN_CODIGO = ?SAN_CODIGO;", objConnection);
+            objCommand = Mapped.Command("SELECT G.GRU_CODIGO, G.GRU_NOME_PROJETO, P.PRI_SEMESTRE, S.SAN_ANO FROM GRU_GRUPO G INNER JOIN API_ATRIBUICAO_PI A USING(PRI_CODIGO) INNER JOIN PRI_PROJETO_INTER P USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO S USING(SAN_CODIGO) WHERE  GRU_FINALIZADO = 1 AND ADI_CODIGO = ?ADI_CODIGO AND SAN_CODIGO = ?SAN_CODIGO;", objConnection);
             objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", atr));
             objCommand.Parameters.Add(Mapped.Parameter("?san_codigo", CodSan));
             objDataAdapter = Mapped.Adapter(objCommand);
@@ -438,9 +438,6 @@ namespace Inter.Funcoes
             objConnection.Dispose();
             return ds;
         }
-        
-
-        
 
         public static DataSet SelectAllPIsFinalizados(int atr)
         {
@@ -449,8 +446,25 @@ namespace Inter.Funcoes
             IDbCommand objCommand;
             IDataAdapter objDataAdapter;
             objConnection = Mapped.Connection();
-            objCommand = Mapped.Command("SELECT G.GRU_NOME_PROJETO, P.PRI_SEMESTRE, S.SAN_ANO FROM GRU_GRUPO G INNER JOIN API_ATRIBUICAO_PI A USING(PRI_CODIGO) INNER JOIN PRI_PROJETO_INTER P USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO S USING(SAN_CODIGO) WHERE GRU_FINALIZADO = 1 AND ADI_CODIGO = ?adi_codigo;", objConnection);
+            objCommand = Mapped.Command("SELECT G.GRU_CODIGO, G.GRU_NOME_PROJETO, P.PRI_SEMESTRE, S.SAN_ANO FROM GRU_GRUPO G INNER JOIN API_ATRIBUICAO_PI A USING(PRI_CODIGO) INNER JOIN PRI_PROJETO_INTER P USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO S USING(SAN_CODIGO) WHERE GRU_FINALIZADO = 1 AND ADI_CODIGO = ?adi_codigo;", objConnection);
             objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", atr));
+            objDataAdapter = Mapped.Adapter(objCommand);
+            objDataAdapter.Fill(ds);
+            objConnection.Close();
+            objCommand.Dispose();
+            objConnection.Dispose();
+            return ds;
+        }
+
+        public static DataSet SelectDetalhesGrupo(int CodGru)
+        {
+            DataSet ds = new DataSet();
+            IDbConnection objConnection;
+            IDbCommand objCommand;
+            IDataAdapter objDataAdapter;
+            objConnection = Mapped.Connection();
+            objCommand = Mapped.Command("SELECT G.GRU_NOME_PROJETO, G.GRU_MEDIA, M.MDD_MEDIA, A.ADI_CODIGO FROM GRU_GRUPO G INNER JOIN MDD_MEDIA_DISCIPLINA M USING(GRU_CODIGO) INNER JOIN API_ATRIBUICAO_PI A USING(ADI_CODIGO) WHERE GRU_CODIGO = ?gru_codigo", objConnection);
+            objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo",CodGru));
             objDataAdapter = Mapped.Adapter(objCommand);
             objDataAdapter.Fill(ds);
             objConnection.Close();

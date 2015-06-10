@@ -102,13 +102,58 @@ public partial class paginas_Usuario_piFinalizado {
     protected global::System.Web.UI.WebControls.Label lblQtdRegistro;
     
     /// <summary>
-    /// Label3 control.
+    /// UpdDetalhesProjeto control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label3;
+    protected global::System.Web.UI.UpdatePanel UpdDetalhesProjeto;
+    
+    /// <summary>
+    /// lblProjeto control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblProjeto;
+    
+    /// <summary>
+    /// lblNomeProjeto control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblNomeProjeto;
+    
+    /// <summary>
+    /// gdvDetalhesProjeto control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvDetalhesProjeto;
+    
+    /// <summary>
+    /// lblMedia control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMedia;
+    
+    /// <summary>
+    /// lblMediaProjeto control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMediaProjeto;
     
     /// <summary>
     /// btnVoltar control.
