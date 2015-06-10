@@ -230,7 +230,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
             }
             dt.Rows.Add(dr);
         }
-        //cont++;
+        cont++;
         if (cont == codEnvolvidas.Length)
         {
             Session["MediaGrupo"] = (somaMedia / cont); 

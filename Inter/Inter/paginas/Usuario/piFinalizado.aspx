@@ -37,8 +37,8 @@
                     <ContentTemplate>
                         <table class="table">
                             <tr>
-                                <td>
-                                    <asp:Label ID="lblPesquisar" CssClass="label" runat="server" Text="Pesquisar:"></asp:Label>
+                                <td style="text-align:right">
+                                    <asp:Label Style="line-height:2.3; vertical-align:middle" ID="lblPesquisar" CssClass="label" runat="server" Text="Pesquisar:"></asp:Label>
                                 </td>
 
                                 <td colspan="2">
@@ -51,10 +51,10 @@
                                         </span>
                                     </div>
                                 </td>
+                                <td style="text-align:right">
+                                    <asp:Label ID="lblSemestreAno" Style="line-height:2.3; vertical-align:middle" runat="server" CssClass="label" Text="Semestre/Ano:"></asp:Label></td>
                                 <td>
-                                    <asp:Label ID="lblSemestreAno" runat="server" CssClass="label" Text="Semestre/Ano:"></asp:Label></td>
-                                <td>
-                                    <asp:DropDownList ID="ddlSemestreAno" ClientIDMode="Static" CssClass="dropDown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSemestreAno_SelectedIndexChanged">
+                                    <asp:DropDownList ID="ddlSemestreAno" style="border:#f8f8f8" Width="100%" Height="33px" ClientIDMode="Static" CssClass="dropDown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSemestreAno_SelectedIndexChanged">
                                     </asp:DropDownList>
                                 </td>
                                 <td></td>
@@ -75,7 +75,7 @@
                                 <asp:TemplateField HeaderText="Detalhes">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="lbDetalhesProjeto" runat="server" ToolTip="Ver detalhes do projeto.">
-                                    <span style="font-size:20px" class="glyphicon glyphicon-list-alt"></span>
+                                    <span style="font-size:20px" class="glyphicon glyphicon-list-alt"></span>&nbsp Visualizar
                                         </asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
