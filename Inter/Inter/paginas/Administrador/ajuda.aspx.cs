@@ -14,7 +14,7 @@ using Inter.Funcoes;
             // Se sessão estiver nula redireciona para o bloqueio Url
             if (Session["login"] == null)
             {
-                Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+                Response.Redirect("~/BloqueioUrl");
             }
 
             // CHAMAR A MASTER PAGE CORRESPONDENTE MASTER ou COORD   

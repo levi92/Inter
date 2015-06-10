@@ -60,7 +60,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                     Session["semestre"] = "";
                     Session["disciplina"] = "";
                     Session["mae"] = "";
-                    Response.Redirect("~/Paginas/Usuario/escolherDisciplina.aspx");
+                    Response.Redirect("~/EscolherDisciplina");
                 }
 
             }

@@ -11,13 +11,12 @@ using System.Web.UI.WebControls;
 
 public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
 {
-
     protected void Page_PreInit(object sender, EventArgs e)
     {
         // SE SESSÃO ESTIVER NULA REDIRECIONA PARA O BLOQUEIO URL
         if (Session["Professor"] == null)
         {
-            Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+            Response.Redirect("~/BloqueioUrl");
         }
 
     }
@@ -194,7 +193,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
                 Session["mae"] = "FILHA";
             }
             //REDIRECIONA PRA HOME
-            Response.Redirect("home.aspx");
+            Response.Redirect("~/Home");
         }
         else
         {

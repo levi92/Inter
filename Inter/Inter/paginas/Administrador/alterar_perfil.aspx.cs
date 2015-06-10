@@ -15,7 +15,7 @@ namespace Inter.paginas.Administrador
             // Se sessão estiver nula redireciona para o bloqueio Url
             if (Session["login"] == null)
             {
-                Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+                Response.Redirect("~/BloqueioUrl");
             }
 
             // CHAMAR A MASTER PAGE CORRESPONDENTE MASTER ou COORD SE ELE JÁ ESCOLHEU O PERFIL
@@ -48,7 +48,7 @@ namespace Inter.paginas.Administrador
         protected void Btn_Prof(object sender, EventArgs e)
         {
             Session["perfil"] = "professor";
-            Response.Redirect("~/paginas/Usuario/escolherDisciplina.aspx");           
+            Response.Redirect("~/EscolherDisciplina");           
         }
 
        

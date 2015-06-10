@@ -15,7 +15,7 @@ public partial class paginas_Usuario_piFinalizado : System.Web.UI.Page
         //VERIFICAR SESSAO LOGIN
         if (Session["Professor"] == null)
         {
-            Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+            Response.Redirect("~/BloqueioUrl");
         }
         // CHAMAR A MASTER PAGE             
         this.Page.MasterPageFile = Funcoes.chamarMasterPage(Session["mae"].ToString());
@@ -26,7 +26,7 @@ public partial class paginas_Usuario_piFinalizado : System.Web.UI.Page
         //BLOQUEIO URL
         if (Session["disciplina"] == "")
         {
-            Response.Redirect("escolherDisciplina.aspx");
+            Response.Redirect("~/EscolherDisciplina");
         }
 
         if (!IsPostBack)

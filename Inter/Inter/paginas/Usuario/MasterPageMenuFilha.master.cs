@@ -19,7 +19,7 @@ namespace Inter.paginas.Usuario
         {
             Session.RemoveAll();
 
-            Response.Redirect("~/paginas/Login/login.aspx");
+            Response.Redirect("~/Login");
         }
 
     }

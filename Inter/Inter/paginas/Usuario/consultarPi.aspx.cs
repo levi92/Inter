@@ -12,7 +12,7 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
     {
         if (Session["Professor"] == null)
         {
-            Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+            Response.Redirect("~/BloqueioUrl");
         }
         // CHAMAR A MASTER PAGE             
         this.Page.MasterPageFile = Funcoes.chamarMasterPage(Session["mae"].ToString());
@@ -22,7 +22,7 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
     {
         if (Session["disciplina"] == "")
         {
-            Response.Redirect("escolherDisciplina.aspx");
+            Response.Redirect("~/EscolherDisciplina");
         }
         
     }

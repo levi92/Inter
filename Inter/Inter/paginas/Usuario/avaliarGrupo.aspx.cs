@@ -16,7 +16,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         //VERIFICAR SESSAO LOGIN
         if (Session["Professor"] == null)
         {
-            Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+            Response.Redirect("~/BloqueioUrl");
         }
         // CHAMAR A MASTER PAGE             
         this.Page.MasterPageFile = Funcoes.chamarMasterPage(Session["mae"].ToString());
@@ -26,7 +26,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
     {
         if (Session["disciplina"].ToString() == "")
         {
-            Response.Redirect("escolherDisciplina.aspx");
+            Response.Redirect("~/EscolherDisciplina");
         }
 
         if (Session["GruposAvaliar"] != null)
@@ -352,12 +352,12 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
     protected void btnFinalizar_Click(object sender, EventArgs e)
     {
         PegarValoresNotas();
-        Response.Redirect("avaliarGrupo.aspx");
+        Response.Redirect("~/AvaliarGrupo");
     }
 
     protected void btnVoltarHome2_Click(object sender, EventArgs e)
     {
-        Response.Redirect("home.aspx");
+        Response.Redirect("~/Home");
     }
 
 

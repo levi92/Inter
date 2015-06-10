@@ -15,7 +15,7 @@ public partial class paginas_Usuario_home : System.Web.UI.Page
         // Se sessão estiver nula redireciona para o bloqueio Url
         if (Session["Professor"] == null)
         {
-            Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+            Response.Redirect("~/BloqueioUrl");
         }
 
         // CHAMAR A MASTER PAGE CORRESPONDENTE MÃE OU FILHA         
@@ -27,7 +27,7 @@ public partial class paginas_Usuario_home : System.Web.UI.Page
         // VERIFICAR SE O PROFESSOR NÃO ESCOLHEU UMA DISCIPLINA E REDIRECIONA PARA A PÁGINA ESCOLHER DISCIPLINA
         if (Session["disciplina"] == "")
         {
-            Response.Redirect("escolherDisciplina.aspx");
+            Response.Redirect("~/EscolherDisciplina");
 
         }
                 

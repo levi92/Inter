@@ -15,7 +15,7 @@ using System.Data;
             // Se sessão estiver nula redireciona para o bloqueio Url
             if (Session["login"] == null)
             {
-                Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+                Response.Redirect("~/BloqueioUrl");
             }
 
             // CHAMA A MASTER PAGE CORRESPONDENTE MasterPage_MenuMaster ou MasterPage_MenuCoord através da função chamarMasterPage

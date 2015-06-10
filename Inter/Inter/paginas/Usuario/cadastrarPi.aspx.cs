@@ -21,7 +21,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         //VERIFICAR SESSAO LOGIN
         if (Session["Professor"] == null)
         {
-            Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+            Response.Redirect("~/BloqueioUrl");
         }
         // CHAMAR A MASTER PAGE - OBS: MASTERPAGEFILE É O CAMINHO DO ARQUIVO MASTERPAGE QUE VOCÊ DESEJA CHAMAR        
         this.Page.MasterPageFile = Funcoes.chamarMasterPage(Session["mae"].ToString());
@@ -32,14 +32,14 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         //BLOQUEIO URL SE NÃO TIVER ESCOLHIDO ALGUMA DISCIPLINA 
         if (Session["disciplina"] == "")
         {
-            Response.Redirect("escolherDisciplina.aspx");
+            Response.Redirect("~/EscolherDisciplina");
         }
 
         //BLOQUEIO SE NÃO FOR DISCIPLINA-MÃE
 
         if (Session["mae"] == "FILHA")
         {
-            Response.Redirect("home.aspx");
+            Response.Redirect("~/Home");
         }
 
         if (Session["codPIAtivo"] == null)
@@ -621,13 +621,13 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     //REDIRECIONA PARA A PÁGINA AVALIAR GRUPO
     protected void btnVoltarAvaliar_Click(object sender, EventArgs e)
     {
-        Response.Redirect("avaliarGrupo.aspx");
+        Response.Redirect("~/AvaliarGrupo");
     }
 
     //REDIRECIONA PARA A PÁGINA HOME
     protected void btnVoltarHome2_Click(object sender, EventArgs e)
     {
-        Response.Redirect("home.aspx");
+        Response.Redirect("~/Home");
     }
 
 

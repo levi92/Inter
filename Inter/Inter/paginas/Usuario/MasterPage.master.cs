@@ -14,7 +14,7 @@ public partial class paginas_Usuario_MasterPage : System.Web.UI.MasterPage
         // Verificar se a sessão está vazia e redirecionar para o bloqueio Url
         if (Session["Professor"] == null)
         {
-            Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+            Response.Redirect("~/BloqueioUrl");
         }
 
         Professor prof = new Professor();
@@ -44,7 +44,7 @@ public partial class paginas_Usuario_MasterPage : System.Web.UI.MasterPage
         Session["codAtr"] = "";
         Session["DataSetPIsbyCalendario"] = "";
 
-        Response.Redirect("escolherDisciplina.aspx");
+        Response.Redirect("~/EscolherDisciplina");
 
 
     }

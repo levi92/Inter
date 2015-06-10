@@ -15,7 +15,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         //VERIFICAR SESSAO LOGIN
         if (Session["Professor"] == null)
         {
-            Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+            Response.Redirect("~/BloqueioUrl");
         }
         // CHAMAR A MASTER PAGE             
         this.Page.MasterPageFile = Funcoes.chamarMasterPage(Session["mae"].ToString());
@@ -26,14 +26,14 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         //BLOQUEIO URL SE NÃO TIVER ESCOLHIDO ALGUMA DISCIPLINA 
         if (Session["disciplina"] == "")
         {
-            Response.Redirect("escolherDisciplina.aspx");
+            Response.Redirect("~/EscolherDisciplina");
         }
 
         //BLOQUEIO SE NÃO FOR DISCIPLINA-MÃE
 
         if (Session["mae"] == "FILHA")
         {
-            Response.Redirect("home.aspx");
+            Response.Redirect("~/Home");
         }
 
         if (Session["GruposFinalizar"] != null)
@@ -266,7 +266,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
 
     protected void btnVoltarHome2_Click(object sender, EventArgs e)
     {
-        Response.Redirect("home.aspx");
+        Response.Redirect("~/Home");
     }
 
     protected void btnFinalizarGrupos_Click(object sender, EventArgs e)
@@ -282,7 +282,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
             dsGruposFinalizar = Grupo_DB.SelectAllGruposFinalizar(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
             Session["GruposFinalizar"] = dsGruposFinalizar;
 
-            Response.Redirect("finalizarGrupo.aspx");
+            Response.Redirect("~/FinalizarGrupo");
         }
         
     }

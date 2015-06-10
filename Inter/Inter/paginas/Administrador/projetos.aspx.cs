@@ -15,7 +15,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
         // Se sessão estiver nula redireciona para o bloqueio Url
         if (Session["login"] == null)
         {
-            Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+            Response.Redirect("~/BloqueioUrlx");
         }
 
         // CHAMAR A MASTER PAGE CORRESPONDENTE MASTER ou COORD   
