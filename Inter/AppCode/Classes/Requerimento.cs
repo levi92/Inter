@@ -15,7 +15,7 @@ public class Requerimento{
     //Identificador do professor que abriu o requerimento.
     public string MatriculaPro { get; set; }
     //Identificador do grupo ao qual a mudança de nota foi requerida.
-    public Grupo CodigoGrupo { get; set; }
+    public int CodigoGrupo { get; set; }
     //Assunto que o Requerimento aborda.
     public string Assunto { get; set; }
     //Data e hora de criação do requerimento.
@@ -25,7 +25,7 @@ public class Requerimento{
     //Categoria em que o ticket se encaixa.
     public string Categoria { get; set; }
 
-    public Requerimento(string matricula, Grupo grupo, string assunto, DateTime data, int status, string categoria)
+    public Requerimento(string matricula, int grupo, string assunto, DateTime data, int status, string categoria)
     {
         MatriculaPro = matricula;
         CodigoGrupo = grupo;
@@ -35,7 +35,7 @@ public class Requerimento{
         Categoria = categoria;
     }
     //Constructor do select
-    public Requerimento(int codigo, string matricula, Grupo grupo, string assunto, DateTime data, int status, string categoria)
+    public Requerimento(int codigo, string matricula, int grupo, string assunto, DateTime data, int status, string categoria)
     {
         CodigoReq = codigo;
         MatriculaPro = matricula;
@@ -46,7 +46,7 @@ public class Requerimento{
         Categoria = categoria;
     }
     //Constructor do Insert
-    public Requerimento(string matricula, Grupo grupo, string assunto, string categoria)
+    public Requerimento(string matricula, int grupo, string assunto, string categoria)
     {
         MatriculaPro = matricula;
         CodigoGrupo = grupo;
