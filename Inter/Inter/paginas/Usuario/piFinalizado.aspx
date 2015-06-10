@@ -37,8 +37,8 @@
                     <ContentTemplate>
                         <table class="table">
                             <tr>
-                                <td style="text-align:right">
-                                    <asp:Label Style="line-height:2.3; vertical-align:middle" ID="lblPesquisar" CssClass="label" runat="server" Text="Pesquisar:"></asp:Label>
+                                <td style="text-align: right">
+                                    <asp:Label Style="line-height: 2.3; vertical-align: middle" ID="lblPesquisar" CssClass="label" runat="server" Text="Pesquisar:"></asp:Label>
                                 </td>
 
                                 <td colspan="2">
@@ -51,10 +51,10 @@
                                         </span>
                                     </div>
                                 </td>
-                                <td style="text-align:right">
-                                    <asp:Label ID="lblSemestreAno" Style="line-height:2.3; vertical-align:middle" runat="server" CssClass="label" Text="Semestre/Ano:"></asp:Label></td>
+                                <td style="text-align: right">
+                                    <asp:Label ID="lblSemestreAno" Style="line-height: 2.3; vertical-align: middle" runat="server" CssClass="label" Text="Semestre/Ano:"></asp:Label></td>
                                 <td>
-                                    <asp:DropDownList ID="ddlSemestreAno" style="border:#f8f8f8" Width="100%" Height="33px" ClientIDMode="Static" CssClass="dropDown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSemestreAno_SelectedIndexChanged">
+                                    <asp:DropDownList ID="ddlSemestreAno" Style="border: #f8f8f8" Width="100%" Height="33px" ClientIDMode="Static" CssClass="dropDown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSemestreAno_SelectedIndexChanged">
                                     </asp:DropDownList>
                                 </td>
                                 <td></td>
@@ -74,7 +74,7 @@
                                 <asp:BoundField HeaderText="Ano" DataField="san_ano" />
                                 <asp:TemplateField HeaderText="Detalhes">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lbDetalhesProjeto" runat="server" ToolTip="Ver detalhes do projeto.">
+                                        <asp:LinkButton ID="lbDetalhesProjeto" runat="server" OnClick="lbDetalhesProjeto_Click" ToolTip="Ver detalhes do projeto.">
                                     <span style="font-size:20px" class="glyphicon glyphicon-list-alt"></span>&nbsp Visualizar
                                         </asp:LinkButton>
                                     </ItemTemplate>
@@ -88,6 +88,23 @@
 
                     </ContentTemplate>
                 </asp:UpdatePanel>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="p2" class="first">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">PIs Finalizados</h3>
+            </div>
+
+            <div class="panel-body">
+                <asp:Label ID="Label3" runat="server" Text="teste"></asp:Label>
+
+                <asp:LinkButton ID="btnVoltar" runat="server" CssClass="btn btn-default" OnClientClick="Mostra('p1'); return false;" ToolTip="Voltar aos PIs Finalizados">
+                    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar
+                </asp:LinkButton>
             </div>
         </div>
     </div>

@@ -410,7 +410,7 @@ namespace Inter.Funcoes
             IDbCommand objCommand;
             IDataAdapter objDataAdapter;
             objConnection = Mapped.Connection();
-            objCommand = Mapped.Command("SELECT G.GRU_NOME_PROJETO, P.PRI_SEMESTRE, S.SAN_ANO FROM GRU_GRUPO G INNER JOIN API_ATRIBUICAO_PI A USING(PRI_CODIGO) INNER JOIN PRI_PROJETO_INTER P USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO S USING(SAN_CODIGO) WHERE GRU_NOME_PROJETO LIKE concat('%',?nomeGru,'%') AND GRU_FINALIZADO = 1 AND ADI_CODIGO = ?ADI_CODIGO;", objConnection);
+            objCommand = Mapped.Command("SELECT G.GRU_NOME_PROJETO, P.PRI_SEMESTRE, S.SAN_ANO, G.GRU_CODIGO FROM GRU_GRUPO G INNER JOIN API_ATRIBUICAO_PI A USING(PRI_CODIGO) INNER JOIN PRI_PROJETO_INTER P USING(PRI_CODIGO) INNER JOIN SAN_SEMESTRE_ANO S USING(SAN_CODIGO) WHERE GRU_NOME_PROJETO LIKE concat('%',?nomeGru,'%') AND GRU_FINALIZADO = 1 AND ADI_CODIGO = ?ADI_CODIGO;", objConnection);
             objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", atr));
             objCommand.Parameters.Add(Mapped.Parameter("?nomeGru", nomeGru));
             objDataAdapter = Mapped.Adapter(objCommand);

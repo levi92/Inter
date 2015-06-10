@@ -80,6 +80,12 @@ public partial class paginas_Usuario_piFinalizado : System.Web.UI.Page
         }
     }
 
+    protected void lbDetalhesProjeto_Click(object sender, EventArgs e)
+    {
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "MostraVizualizar()", "Mostra('p2');", true);
+
+    }
+
     
 
 
