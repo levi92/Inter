@@ -335,8 +335,13 @@
 
                             <div class="form-group">
                                 <div class="controls-row">
-                                    <asp:Label ID="lblAssuntoNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Assunto: "></asp:Label>
-                                    <asp:TextBox ID="txtAssunto" ClientIDMode="Static" CssClass="form-control col-sm-9"  Width="50%" runat="server"></asp:TextBox>
+                                    <asp:Label ID="lblAssuntoNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Assunto: "></asp:Label>                                    
+                                    <asp:DropDownList ID="txtAssunto" ClientIDMode="Static" CssClass="form-control col-sm-9"  Width="50%" runat="server">
+                                        <asp:ListItem>Alteração de notas</asp:ListItem>
+                                        <asp:ListItem>Problema com cadastros</asp:ListItem>
+                                        <asp:ListItem>Problema com avaliações</asp:ListItem>
+                                        <asp:ListItem>Sugestão</asp:ListItem>
+                                    </asp:DropDownList>
                                     
                                     <%--Validação do Campo Assunto (Verifica se está vazio e se está preenchido com uma string)--%>
                                     &nbsp<asp:RequiredFieldValidator ID="rfvAssuntoNovoRequerimento" runat="server" CssClass="col-sm1" ErrorMessage="O campo Assunto deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtAssunto" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>

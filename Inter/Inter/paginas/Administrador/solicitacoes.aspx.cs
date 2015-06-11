@@ -100,7 +100,7 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
 
             var assunto = txtAssunto.Text;
             var categoria = txtCategoria.Text;
-            Grupo grupo = new Grupo();
+            var grupo = 0;
 
             Requerimento req = new Requerimento("0", grupo, assunto, categoria);
 

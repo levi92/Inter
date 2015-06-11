@@ -59,10 +59,6 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
         if (!Directory.Exists(directory)) //se o diretório não existe
         {
             Directory.CreateDirectory(directory); //cria o diretório
-            if (!Directory.Exists(directory)) 
-            {
-
-            }
         }
         
         string caminho = (Request.PhysicalApplicationPath + "Backup\\"); //pega o caminho do diretório (com \\ pois estamos pegando o diretório "aberto") ->>>> tirar dúvida sobre isso, é isso mesmo?
@@ -82,29 +78,26 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
         string directory = (Request.PhysicalApplicationPath + "Backup");
         string caminhoDump = ("C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin\\mysqldump.exe");
 
-
-
-        if (!Directory.Exists(directory))
-        {
-            Directory.CreateDirectory(directory);
-            if (!Directory.Exists(directory))
-            {
-
-            }
-        }
-
-        if (!Directory.Exists(caminhoDump))
-        {
-
-        }
-
-
+        
         Process.Start(caminhoDump, ("-u " + user + " -p" + password + " -x -e -B " + database + " > -r " + directory + "\\" + nome_arquivo));
         System.Threading.Thread.Sleep(800);
 
         CarregaGrid();
         UpdatePanelBkp.Update();
-        lblBackup.Text = "Backup efetuado com sucesso!";
+
+        string caminho = pegaDirBackup();
+        string[] arquivos = Funcoes.tratarArquivosBackup(caminho);
+
+        if (arquivos[0] == nome_arquivo.Replace(".sql","")) // Verifica se o Backup foi realmente criado
+        {
+            lblBackup.Text = "Backup efetuado com sucesso!";
+        }
+        else
+        {
+            lblBackup.Text = "Erro ao criar Backup!";
+        }
+
+        
 
         /*string constring = ("server=" + server + ";user=" + user + ";database=" + database + ";password=" + password);
         string file = (directory + "\\" + nome_arquivo);
