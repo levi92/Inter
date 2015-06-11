@@ -703,6 +703,10 @@ tabelaHome3 {
     margin-top:25px;
     margin-bottom:50px;  
  }
+
+ .TextAlign{
+     text-align:center;
+ }
  
 
 .btnExcluir, .btnEditar {

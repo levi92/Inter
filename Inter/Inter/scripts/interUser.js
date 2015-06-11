@@ -447,8 +447,8 @@ function funcaoAtualizarMediaAll() {
 }
 
 
-function ImprimirGrupo() {
-    var printContent = document.getElementById("cphConteudo_cphConteudoCentral_panelAvaliar").innerHTML;
+function ImprimirGrupo(id) {
+    var printContent = document.getElementById(id).innerHTML;
     var windowUrl = 'about:blank';
     var uniqueName = new Date();
     var windowName = 'Print' + uniqueName.getTime();

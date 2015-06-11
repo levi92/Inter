@@ -101,27 +101,36 @@
             <div class="panel-body">
                 <asp:UpdatePanel ID="UpdDetalhesProjeto" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>
-                        <br />                        
-                        <asp:Label ID="lblProjeto" Style="color:#525252" CssClass="labelProjeto"  runat="server" Text="Projeto: "></asp:Label>
-                        <asp:Label ID="lblNomeProjeto" Style="color:#960d10" CssClass="labelProjeto" runat="server"></asp:Label><br />
-                        <asp:GridView ID="gdvDetalhesProjeto" CssClass="tableFinalizar" runat="server" AutoGenerateColumns="false">
-                            <Columns>            
-                                <asp:BoundField HeaderText="Código" DataField="adi_codigo" />
-                                <asp:TemplateField HeaderText="Disciplinas">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblNomeDisciplinas" runat="server"></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>                    
-                                <asp:BoundField HeaderText="Médias" DataField="mdd_media" />
-                            </Columns>
+                        <div id="PanelProjeto" style="text-align:center;">
+                            <br />
+                            <asp:Label ID="lblProjeto" Style="color: #525252" CssClass="labelProjeto" runat="server" Text="Projeto: "></asp:Label>
+                            <asp:Label ID="lblNomeProjeto" Style="color: #960d10" CssClass="labelProjeto" runat="server"></asp:Label><br />
+                            <asp:GridView ID="gdvDetalhesProjeto" CssClass="tableFinalizar" runat="server" AutoGenerateColumns="false">
+                                <Columns>
+                                    <asp:BoundField HeaderText="Código" DataField="adi_codigo" />
+                                    <asp:TemplateField HeaderText="Disciplinas">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblNomeDisciplinas" runat="server"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField HeaderText="Médias" DataField="mdd_media" />
+                                </Columns>
 
-                        </asp:GridView><br />
-                        <asp:Label ID="lblMedia" Style="color:#525252" CssClass="labelProjeto" runat="server" Text="Média Projeto: "></asp:Label>
-                        <asp:Label ID="lblMediaProjeto" Style="color:#960d10"  CssClass="labelProjeto" runat="server"></asp:Label><br /><br />
-
-                        <asp:LinkButton ID="btnVoltar" runat="server" CssClass="btn btn-default" OnClientClick="Mostra('p1'); return false;" ToolTip="Voltar aos PIs Finalizados">
+                            </asp:GridView>
+                            <br />
+                            <asp:Label ID="lblMedia" Style="color: #525252" CssClass="labelProjeto" runat="server" Text="Média Projeto: "></asp:Label>
+                            <asp:Label ID="lblMediaProjeto" Style="color: #960d10" CssClass="labelProjeto" runat="server"></asp:Label><br />
+                            <br />
+                        </div>
+                        <asp:LinkButton ID="btnVoltar" Style="float: left" runat="server" CssClass="btn btn-default" OnClientClick="Mostra('p1'); return false;" ToolTip="Voltar aos PIs Finalizados">
                     <span class="glyphicon glyphicon-arrow-left"></span>&nbsp Voltar
                         </asp:LinkButton>
+                        <asp:LinkButton ID="lbGrafico" Style="float: right; margin-left:15px;" runat="server" CssClass="btn btn-default" ToolTip="Gerar gráfico">
+                    <span class="glyphicon glyphicon-stats"></span>&nbsp Gerar gráfico
+                        </asp:LinkButton>
+                        <asp:LinkButton style="float: right" cssClass="btn btn-default" ID="btnImprimirProjeto" OnClientClick="ImprimirGrupo('PanelProjeto'); return false;" runat="server" ToolTip="Imprimir a tabela do projeto finalizado">
+                            <span class="glyphicon glyphicon-print"></span>&nbsp Imprimir</asp:LinkButton>
+
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>

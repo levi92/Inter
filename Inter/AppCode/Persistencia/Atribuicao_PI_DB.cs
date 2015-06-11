@@ -18,11 +18,12 @@ namespace AppCode.Persistencia
             {
                 IDbConnection conexao;
                 IDbCommand objCommand;
-                string sql = "INSERT INTO api_atribuicao_pi(pri_codigo, adi_codigo) VALUES(?pri_codigo, ?adi_codigo)";
+                string sql = "INSERT INTO api_atribuicao_pi(pri_codigo, adi_codigo, dis_codigo) VALUES(?pri_codigo, ?adi_codigo, ?dis_codigo)";
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
                 objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", atr.Pri_codigo.Pri_codigo));
                 objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", atr.Adi_codigo));
+                objCommand.Parameters.Add(Mapped.Parameter("?dis_codigo", atr.Dis_codigo));
                 objCommand.ExecuteNonQuery();
                 conexao.Close();
                 objCommand.Dispose();

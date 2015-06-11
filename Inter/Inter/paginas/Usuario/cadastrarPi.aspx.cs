@@ -78,12 +78,14 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
     // ******************  ETAPA 1 - CADASTRO PI, CADASTRO DE DATAS ******************
     // *******************************************************************************
+    public static List<int> listAtrDisciplinas = new List<int>();
     public static List<int> listCodDisciplinas = new List<int>();
     private void CarregarDisciplinasEnvolvidas(){    
 
         string[] nomeEnvolvidas = (string[])Session["nomeEnvolvidas"];
         string[] maeEnvolvidas = (string[])Session["maeEnvolvidas"];
         string[] atrEnvolvidas = (string[])Session["atrEnvolvidas"];
+        string[] codEnvolvidas = (string[])Session["codEnvolvidas"];
 
 
         Table tableDisciplina = new Table();
@@ -146,7 +148,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                         lblCodigoDisciplina.Text = atrEnvolvidas[i];
                         lblCodigoDisciplina.ID = "codDisciplina" + i;
                         cell.Controls.Add(lblCodigoDisciplina);
-                        listCodDisciplinas.Add(Convert.ToInt32(lblCodigoDisciplina.Text));
+                        listAtrDisciplinas.Add(Convert.ToInt32(lblCodigoDisciplina.Text));
+                        listCodDisciplinas.Add(Convert.ToInt32(codEnvolvidas[i]));
                     }
                     rows.Cells.Add(cell);                
             }
@@ -925,15 +928,17 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         }
 
         //INSERINDO NA TABELA ATRIBUICAO_PI
-       
+
+        int[] atrDisciplina = listAtrDisciplinas.ToArray();
         int[] codDisciplina = listCodDisciplinas.ToArray();
-       
-        for (int i = 0; i < codDisciplina.Length; i++)
+
+        for (int i = 0; i < atrDisciplina.Length; i++)
         {
             Atribuicao_PI atr = new Atribuicao_PI();
-            atr.Adi_codigo = codDisciplina[i];
+            atr.Adi_codigo = atrDisciplina[i];
             atr.Pri_codigo = pi;
-            if (Convert.ToInt32(Session["codAtr"]) == codDisciplina[i])
+            atr.Dis_codigo = codDisciplina[i];
+            if (Convert.ToInt32(Session["codAtr"]) == atrDisciplina[i])
             {
                 atr.Adi_mae = true;
             }
@@ -948,12 +953,12 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         int indiceCrit = 0;
         foreach(ListItem li in listaCritPi.Items){            
             TextBox txtPeso = (TextBox) PanelCriterios.FindControl("txtCriterio"+(indiceCrit));
-            for (int i = 0; i < codDisciplina.Length; i++)
+            for (int i = 0; i < atrDisciplina.Length; i++)
             {
                 Criterio_PI critPi = new Criterio_PI();
                 Criterios_Gerais crit = new Criterios_Gerais();
                 Atribuicao_PI atr = new Atribuicao_PI();
-                atr.Adi_codigo = codDisciplina[i];
+                atr.Adi_codigo = atrDisciplina[i];
                 crit.Cge_codigo = Convert.ToInt32(li.Value);
                 critPi.Cge_codigo = crit;
                 critPi.Adi_codigo = atr;

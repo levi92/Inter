@@ -10,6 +10,13 @@ using System.Web;
         private Projeto_Inter pri_codigo;
         private int adi_codigo;
         private bool adi_mae;
+        private int dis_codigo;
+
+        public int Dis_codigo
+        {
+            get { return dis_codigo; }
+            set { dis_codigo = value; }
+        }
 
         public bool Adi_mae
         {

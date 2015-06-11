@@ -79,7 +79,7 @@
                                     </tr>
                                 </table>
 
-                                <asp:Panel ID="panelAvaliar" runat="server"></asp:Panel>
+                                <asp:Panel ID="panelAvaliar" ClientIDMode="Static" runat="server"></asp:Panel>
 
                                 <table id="tabelaBotoesAvaliar">
                                     <tr>
@@ -100,8 +100,9 @@
                                         </td>                                        
 
                                         <td>
-                                            <button type="button" class="btn btn-default" id="btnImprimirAvaliacao" onclick="ImprimirGrupo();" title="Imprimir a tabela de atribuição de notas acima">
-                                                <span class="glyphicon glyphicon-print"></span>&nbsp Imprimir</button>                                            
+                                            <button type="button" class="btn btn-default" id="btnImprimirAvaliacao" onclick="ImprimirGrupo('panelAvaliar');" title="Imprimir a tabela de atribuição de notas acima">
+                                                <span class="glyphicon glyphicon-print"></span>&nbsp Imprimir</button>  
+                                                                                      
                                         </td>
                                     </tr>
 
