@@ -121,26 +121,31 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
     {
         if (e.CommandName == "bkpDownload")
         {
-            WebClient req = new WebClient();
             HttpResponse response = HttpContext.Current.Response;
             string caminho = pegaDirBackup();
             GridViewRow gvr = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer); //pega a linha da grid pela fonte do comando
             string arquivo = gdvBkp.Rows[gvr.RowIndex].Cells[0].Text; //pega nome do arquivo daquela linha do gridview
             string caminhoDoArquivo = caminho + arquivo + ".sql"; //junta o diretório + nome do arquivo
-            //response.Clear();
-            //response.ClearContent();
-            //response.ClearHeaders();
-            //response.Buffer = true;
-            Response.ContentType = ContentType;
-            Response.AppendHeader("Content-Disposition", "attachment;filename="+Path.GetFileName(caminhoDoArquivo));
-            //byte[] data = req.DownloadData(caminhoDoArquivo);
-            Response.WriteFile(caminhoDoArquivo);
+            FileInfo file = new FileInfo(caminhoDoArquivo);
+            Response.Clear();
+            Response.ClearHeaders();
+            Response.ClearContent();
+            Response.AddHeader("Content-Disposition", "attachment;filename="+file.Name);
+            Response.AddHeader("Content-Length", file.Length.ToString());
+            Response.ContentType = "text/plain";
+            Response.Flush();
+            Response.TransmitFile(file.FullName);
             Response.End();         
         }
     }
 
     protected void gdvBkp_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+        LinkButton lb = (LinkButton)e.Row.FindControl("lkbDownload"); //acha o botão download e coloca no controle lb
+        if (lb != null)
+        {
+            ScriptManager2.RegisterPostBackControl(lb); //usando o ScriptManager, registra todos os botões de download para fazer postback (o padrão é PostBack parcial por causa do UpdatePanel, o que não deixava fazer o download!)
+        }
 
     }
 

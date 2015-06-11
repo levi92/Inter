@@ -26,7 +26,8 @@
                             <ContentTemplate>
                                  <asp:Label ID="lblBackup" runat="server"></asp:Label>
                                 <asp:GridView ID="gdvBkp" runat="server" CellPadding="4" GridLines="None" CssClass="gridView" AllowPaging="true" PageSize="10"
-                                    OnRowCommand="gdvBkp_RowCommand"                                  
+                                    OnRowCommand="gdvBkp_RowCommand"     
+                                    OnRowDataBound="gdvBkp_RowDataBound"                             
                                     OnPageIndexChanging="gdvBkp_PageIndexChanging"
                                     AutoGenerateColumns="false"
                                     Visible="true">
