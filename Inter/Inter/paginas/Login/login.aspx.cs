@@ -97,6 +97,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
             if (Funcoes_DB.ValidarAdmMaster(user, senha) == 1)
             {
                 Perfil perfil = new Perfil("master");
+
                 //Administrador master                 
                 Session["login"] = user;
                 Session["menu"] = "master";
