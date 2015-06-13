@@ -12,18 +12,11 @@ public class Funcoes_DB
     public static int ValidarAdmMaster(string login, string senha)
     {
         int verificacao = 0;
-        //string verificaLogin = "";
-        //bool adm = false;
-        //int proadmcodigo = 0;
-        //int promatricula = 0;
         IDbConnection objconexao;
         IDbCommand objCommand;
         IDataReader objDataReader;
-        //string sql = "SELECT P.PES_EMAIL, PR.PRO_ADMINISTRADOR FROM PES_PESSOAS P, PRO_PROFESSOR PR WHERE P.PES_EMAIL=?LOGIN AND PR.PRO_SENHA=sha1(?SENHA)";
-        //string sql = "SELECT P.PES_EMAIL, PR.ADM_CODIGO FROM PES_PESSOAS P, PRO_PROFESSOR PR WHERE P.PES_EMAIL=?LOGIN AND PR.PRO_SENHA=sha1(?SENHA)";
-        //        string sql = "select P.pes_email, A.adm_codigo, Pro.PRO_MATRICULA from pes_pessoas P left join pro_professor Pro using(pes_codigo) left join adm_administrador A using(pes_codigo)" +
-        //" left join alu_aluno AL using(pes_codigo) where (AL.ALU_MATRICULA is null) AND P.PES_EMAIL=?LOGIN AND Pro.PRO_SENHA=sha1(?SENHA) OR A.ADM_SENHA=sha1(?SENHA) ";
-        string sql = "Select per_login, per_senha, per_descricao from per_perfil where per_login = ?login and per_senha=sha1(?senha);";
+
+        string sql = "Select per_login, per_senha, per_descricao from per_perfil where per_login = ?login and per_senha=sha1(?senha) and per_descricao=1;";
 
         objconexao = Mapped.Connection();
         objCommand = Mapped.Command(sql, objconexao);
@@ -49,16 +42,6 @@ public class Funcoes_DB
 
         }
 
-        //else if (promatricula != 0)
-        //{
-        //    //verifica se é professor
-        //    verificacao = 0;
-        //}
-        //else if(descricao != 0) //validação do campo para melhor entendimento
-        //{
-        //    //verifica se é administrador
-        //    verificacao = 1;
-        //}
         objDataReader.Close();
         objconexao.Close();
         objconexao.Dispose();
@@ -96,16 +79,7 @@ public class Funcoes_DB
                 verificacao = 2;
             }
         }
-        //else if (promatricula != 0)
-        //{
-        //    //verifica se é professor
-        //    verificacao = 0;
-        //}
-        //else if(descricao != 0) //validação do campo para melhor entendimento
-        //{
-        //    //verifica se é administrador
-        //    verificacao = 1;
-        //}
+
         objDataReader.Close();
         objconexao.Close();
         objconexao.Dispose();
@@ -132,7 +106,22 @@ public class Funcoes_DB
         return ds;
     }
 
-
+    public static DataSet SelectAllPIs()
+    {
+        DataSet ds = new DataSet();
+        IDbConnection objConnection;
+        IDbCommand objCommand;
+        IDataAdapter objDataAdapter;
+        objConnection = Mapped.Connection();
+        objCommand = Mapped.Command("SELECT G.GRU_NOME_PROJETO, CONCAT(S.SAN_ANO, '-', S.SAN_SEMESTRE) AS SAN, G.GRU_FINALIZADO FROM SAN_SEMESTRE_ANO S INNER JOIN PRI_PROJETO_INTER P ON (S.SAN_CODIGO = P.SAN_CODIGO)" + 
+"INNER JOIN GRU_GRUPO G ON (P.PRI_CODIGO = G.PRI_CODIGO);", objConnection);
+        objDataAdapter = Mapped.Adapter(objCommand);
+        objDataAdapter.Fill(ds);
+        objConnection.Close();
+        objCommand.Dispose();
+        objConnection.Dispose();
+        return ds;
+    }
 
 
 

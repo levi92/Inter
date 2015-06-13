@@ -44,7 +44,27 @@
             $("#lblMsgCriterio").html("");
         }
 
+        //CHAMAR MODAL COM MENSAGEM DE CADASTRO DE PI
+        function msgFinalizarCadastroPi() {
+            $("#finalizarCriarPi").click();
+        }
+
+        //CHAMAR MODAL COM MENSAGEM QUE JÁ POSSUI PI CADASTRADO
+        function msgPossuiPI() {
+            $("#possuiPI").click();
+        }
+
     </script>
+    <button type="button" style="display: none;" id="possuiPI" data-toggle="modal" data-target="#myModalPossuiPI"></button>
+    <asp:UpdateProgress ID="upgCadastrar" runat="server" AssociatedUpdatePanelID="updPanelGrupos">
+        <ProgressTemplate>
+            <div class="modalLoader">
+                <div class="modalCenter">
+                    <img alt="Carregando" src="../../App_Themes/images/ajax-loader.gif" /><br />                    
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
 
     <button style="display: none" type="button" id="btnModalPesoUm" data-toggle="modal" data-target="#myModalPesoUm"></button>
 
@@ -119,7 +139,9 @@
                     </tr>
                     <tr>                        
                         <td>
-                           <asp:Panel ID="PainelDisciplinas" runat="server"></asp:Panel>
+                           <asp:Panel ID="PainelDisciplinas" runat="server">
+                               <asp:Table runat="server" ID="tblDisciplinasEnvolvidas"></asp:Table>
+                           </asp:Panel>
                         </td>
                     </tr>
 
@@ -382,8 +404,10 @@
                                     <asp:LinkButton ID="btnConfirmarGrupo" runat="server" OnClick="btnConfirmarGrupo_Click" CssClass="btn btn-default" ToolTip="Confirmar o grupo atual e Criar outro grupo">
                                         <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar Grupo</asp:LinkButton></td>
                                 <td>
-                                    <button type="button" class="btn btn-default" id="finalizarCriarPi" onclick="finalizarCadastroPI();" data-toggle="modal" data-target="#myModalPiCadastrado" title="Finalizar criação de PI">
-                                        <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</button></td>
+                                    <asp:LinkButton ID="btnFinalizarCriarPi" runat="server" OnClick="btnFinalizarCriarPi_Click" CssClass="btn btn-default" ToolTip="Finalizar criação de PI">
+                                        <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</asp:LinkButton></td>
+
+                                 <button type="button" style="display: none;" id="finalizarCriarPi" data-toggle="modal" data-target="#myModalPiCadastrado"></button>
                             </tr>
 
 
@@ -565,9 +589,27 @@
 
                 <div class="modal-footer">
                     <asp:LinkButton CssClass="btn btn-default" ID="btnVoltarHome2" runat="server" OnClick="btnVoltarHome2_Click" ToolTip="Voltar para a home do sistema">
-                        <span class="glyphicon glyphicon-home"></span>&nbsp Voltar para a home</asp:LinkButton>
-                    <asp:LinkButton CssClass="btn btn-default" ID="btnVoltarAvaliar" runat="server" OnClick="btnVoltarAvaliar_Click" ToolTip="Ir para a avaliação dos grupos do PI">
-                        <span class="glyphicon glyphicon-check"></span>&nbsp Avaliar grupos </asp:LinkButton>
+                        <span class="glyphicon glyphicon-home"></span>&nbsp Voltar para a home</asp:LinkButton>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- MODAL JÁ POSSUI PI CADASTRADO -->
+
+    <div class="modal fade" data-backdrop="static" id="myModalPossuiPI" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    <h1 style="font-size: 30px; font-weight: bolder; text-align: center; color: #1f1f1f">
+                        <span style="color: #960d10;" class="glyphicon glyphicon-remove"></span>&nbsp Sua disciplina já possui um PI cadastrado ativo!</h1>
+                </div>
+
+                <div class="modal-footer">
+                    <asp:LinkButton CssClass="btn btn-default" ID="LinkButton1" runat="server" OnClick="btnVoltarHome2_Click" ToolTip="Voltar para a home do sistema">
+                        <span class="glyphicon glyphicon-home"></span>&nbsp Voltar para a home</asp:LinkButton>                    
                 </div>
             </div>
         </div>

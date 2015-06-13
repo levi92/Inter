@@ -34,19 +34,8 @@
                     <div onclick="butAcao()">Finalizar Favorável</div>
                     <div onclick="butAcao()">Finalizar Desfavorável</div>
                     <div onclick="butAcao()">PI Finalizado</div>
-                    <!--O ícone de prioridade sera definido com base na opção de prioridade escolhida-->
-                    <div onclick="toggleDiv('subMenuPrioridade')">Prioridade<span class="mdi mdi-alert" style="float: right; color: yellow; font-size: 20px"></span></div>
                 </div>
                 <!--Fim do submenu-->
-                <!--Início do submenu de prioridade-->
-                <!--Animação de deslizar para abrir e fechar o menu | prioridade que esta escolhida como padrão deve aparecer como desabilitada na hora da escolha-->
-                <div id="subMenuPrioridade" class="subMenuPrioridade" style="display: none">
-                    <div>Prioridade</div>
-                    <div onclick="butAcao()">Normal<span class="mdi mdi-alert" style="float: right; color: green; font-size: 20px"></span></div>
-                    <div onclick="butAcao()">Média<span class="mdi mdi-alert" style="float: right; color: yellow; font-size: 20px"></span></div>
-                    <div onclick="butAcao()">Alta<span class="mdi mdi-alert" style="float: right; color: red; font-size: 20px"></span></div>
-                </div>
-                <!--Fim do submenu de prioridade-->
                 <!--Fim 3-dot menu-->
                 <!--Início do Corpo-->
                 <div class="modal-body" style="background-color: whitesmoke;">
@@ -148,7 +137,7 @@
                                                 <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_assunto")%>'> </asp:TextBox>                                                
                                             </EditItemTemplate>                                         
                                             <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label>
+                                                <a data-toggle='modal' data-target='#myModal1'><asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label></a>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
@@ -217,7 +206,7 @@
                                                 <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_assunto")%>'> </asp:TextBox>                                                
                                             </EditItemTemplate>                                         
                                             <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label>
+                                                <a data-toggle='modal' data-target='#myModal1'><asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label></a>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
@@ -286,7 +275,7 @@
                                                 <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_assunto")%>'> </asp:TextBox>                                                
                                             </EditItemTemplate>                                         
                                             <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label>
+                                                <a data-toggle='modal' data-target='#myModal1'><asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label></a>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
@@ -346,8 +335,13 @@
 
                             <div class="form-group">
                                 <div class="controls-row">
-                                    <asp:Label ID="lblAssuntoNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Assunto: "></asp:Label>
-                                    <asp:TextBox ID="txtAssunto" ClientIDMode="Static" CssClass="form-control col-sm-9" runat="server"></asp:TextBox>
+                                    <asp:Label ID="lblAssuntoNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Assunto: "></asp:Label>                                    
+                                    <asp:DropDownList ID="txtAssunto" ClientIDMode="Static" CssClass="form-control col-sm-9"  Width="50%" runat="server">
+                                        <asp:ListItem>Alteração de notas</asp:ListItem>
+                                        <asp:ListItem>Problema com cadastros</asp:ListItem>
+                                        <asp:ListItem>Problema com avaliações</asp:ListItem>
+                                        <asp:ListItem>Sugestão</asp:ListItem>
+                                    </asp:DropDownList>
                                     
                                     <%--Validação do Campo Assunto (Verifica se está vazio e se está preenchido com uma string)--%>
                                     &nbsp<asp:RequiredFieldValidator ID="rfvAssuntoNovoRequerimento" runat="server" CssClass="col-sm1" ErrorMessage="O campo Assunto deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtAssunto" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>
@@ -372,10 +366,10 @@
                             <asp:ValidationSummary ID="vsNovoRequerimento" ValidationGroup="NovoRequerimento" ForeColor="#960d10" runat="server" DisplayMode="List" Style="margin: 7px; padding: 7px;" />
 
                             <div class="modal-footer">
-                                <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarNovoRequerimento" runat="server" title="Cancelar Inserção">
+                                <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarNovoRequerimento" runat="server" title="Cancelar Inserção" OnClick="btnCancelarNovoCriterio_Click">
                                     <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</asp:LinkButton>
 
-                                <asp:LinkButton ID="btnCriarNovoRequerimento" runat="server" CssClass="btn btn-default" ToolTip="Confirmar Inserção" CausesValidation="true" ValidationGroup="NovoRequerimento">
+                                <asp:LinkButton ID="btnCriarNovoRequerimento" OnClick="btnCriarNovoTicket_Click" runat="server" CssClass="btn btn-default" ToolTip="Confirmar Inserção" CausesValidation="true" ValidationGroup="NovoRequerimento">
                                    <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar </asp:LinkButton>
                             </div>
 

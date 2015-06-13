@@ -1,4 +1,5 @@
-﻿using Inter.Funcoes;
+﻿using AppCode.Persistencia;
+using Inter.Funcoes;
 using Interdisciplinar;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,14 @@ using System.Web.UI.WebControls;
 
 public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
 {
-
     protected void Page_PreInit(object sender, EventArgs e)
     {
-        // Se sessão estiver nula redireciona para o bloqueio Url
+        // SE SESSÃO ESTIVER NULA REDIRECIONA PARA O BLOQUEIO URL
         if (Session["Professor"] == null)
         {
-            Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+            Response.Redirect("~/BloqueioUrl");
         }
-        
+
     }
 
     protected void Page_Load(object sender, EventArgs e)
@@ -29,7 +29,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
         {
 
             Professor prof = new Professor();
-            prof = (Professor) Session["Professor"];
+            prof = (Professor)Session["Professor"];
 
             CarregarGrid(); //CARREGA A GRID
             auxRb = -1; //SELECIONAR QUAL LINHA TA SELECIONADA DO RB
@@ -42,7 +42,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     {
         Professor prof = new Professor();
         prof = (Professor)Session["Professor"];
-        DataSet ds = (DataSet)Session["DataSetCalendarioAndProfessor"];        
+        DataSet ds = (DataSet)Session["DataSetCalendarioAndProfessor"];
         if (Session["DataSetCalendarioAndProfessor"] == null)
         {
             Calendario cal = new Calendario();
@@ -50,14 +50,14 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             ds = Professor.SelectAllPIsbyCalendarioAndProfessor(cal.AnoSemestreAtual, cal.Codigo, prof.Matricula);
             Session["DataSetCalendarioAndProfessor"] = ds;
         }
-       
-        int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
-        //se qtd for maior que zero, ou seja, se tiver dados no data set
+
+        int qtd = ds.Tables[0].Rows.Count; //QTD DE LINHAS DO DS
+        //SE QTD FOR MAIOR QUE ZERO, OU SEJA, SE TIVER DADOS NO DATA SET
         if (qtd > 0)
         {
-            gdv.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
-            gdv.DataBind(); //preenche o grid view com os dados
-        }       
+            gdv.DataSource = ds.Tables[0].DefaultView; //FONTE DE DADOS DO GRID VIEW RECEBE O DS CRIADO ANTERIORMENTE
+            gdv.DataBind(); //PREENCHE O GRID VIEW COM OS DADOS
+        }
         lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
     }
 
@@ -96,52 +96,109 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
         }
     }
 
-    //evento do botão confirmar: pega linha selecionada e armazena os dados da mesma
+    //EVENTO DO BOTÃO CONFIRMAR: PEGA LINHA SELECIONADA E ARMAZENA OS DADOS DA MESMA
     protected void btnConfirmar_Click(object sender, EventArgs e)
     {
-        //linha não selecionada
+        //LINHA NÃO SELECIONADA
         int linhaSelecionada = -1;
         int codAtr = 0;
 
-        foreach (GridViewRow grid in gdv.Rows)//percorrer toda a grid
+        foreach (GridViewRow grid in gdv.Rows)//PERCORRER TODA A GRID
         {
-            RadioButton rb = (RadioButton)grid.FindControl("rb");//procurando um rb
+            RadioButton rb = (RadioButton)grid.FindControl("rb");//PROCURANDO UM RB
 
 
             if (rb.Checked)
             {
-                linhaSelecionada = grid.RowIndex;//recebe a linha selecionada                
+                linhaSelecionada = grid.RowIndex;//RECEBE A LINHA SELECIONADA                
                 break;
             }
         }
 
-        if (linhaSelecionada != -1)//caso tenha rb selecionado
+        if (linhaSelecionada != -1)//CASO TENHA RB SELECIONADO
         {
             string curso = gdv.Rows[linhaSelecionada].Cells[1].Text;
             string semestre = gdv.Rows[linhaSelecionada].Cells[2].Text;
             string disciplina = gdv.Rows[linhaSelecionada].Cells[3].Text;
             string mae = gdv.Rows[linhaSelecionada].Cells[4].Text;
-            // sessões com os dados da linha selecionada
+            codAtr = Convert.ToInt32(gdv.Rows[linhaSelecionada].Cells[5].Text);
+
+            // SESSÕES COM OS DADOS DA LINHA SELECIONADA
             Session["curso"] = curso;
             Session["semestre"] = semestre;
             Session["disciplina"] = disciplina;
+            Session["codAtr"] = codAtr;
+
+            // CARREGAR DISCIPLINAS ENVOLVIDAS EM SESSOES
+            DataSet dsEnvolvidas = new DataSet();
+            Calendario cal = new Calendario();
+            cal = Calendario.SelectbyAtual();
+            dsEnvolvidas = Professor.SelectAllPIsbyCalendario(cal.Codigo, cal.AnoSemestreAtual);
+
+            string[] dadosDisc = new string[4];
+            List<string> codEnvolvidas = new List<string>();
+            List<string> atrEnvolvidas = new List<string>();
+            List<string> nomeEnvolvidas = new List<string>();
+            List<string> maeEnvolvidas = new List<string>();
+            for (int i = 0; i < dsEnvolvidas.Tables[0].Rows.Count; i++)
+            {
+                dadosDisc = Funcoes.tratarDadosProfessor(dsEnvolvidas.Tables[0].Rows[i][1].ToString());
+                if ((dadosDisc[0] == Session["Curso"].ToString()) && (dadosDisc[1] == Session["Semestre"].ToString()))
+                {
+                    codEnvolvidas.Add(dadosDisc[3]);
+                    atrEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][0].ToString());
+                    nomeEnvolvidas.Add(dadosDisc[2]);
+                    maeEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][2].ToString());
+                }
+            }
+
+            string[] vetCodEnvolvidas = codEnvolvidas.ToArray();
+            Session["codEnvolvidas"] = vetCodEnvolvidas;
+            string[] vetAtrEnvolvidas = atrEnvolvidas.ToArray();
+            Session["atrEnvolvidas"] = vetAtrEnvolvidas;
+            string[] vetNomeEnvolvidas = nomeEnvolvidas.ToArray();
+            Session["nomeEnvolvidas"] = vetNomeEnvolvidas;
+            string[] vetMaeEnvolvidas = maeEnvolvidas.ToArray();
+            Session["maeEnvolvidas"] = vetMaeEnvolvidas;
+
+
+
+            // CARREGAR SESSOES
+
+            Session["codPIAtivo"] = Funcoes.SelectCodPIAtivoByAtr(codAtr);
+            if (Convert.ToInt32(Session["codPIAtivo"]) != -2 && Convert.ToInt32(Session["codPIAtivo"]) != 0)
+            {
+                DataSet dsGruposAvaliar = new DataSet();
+                DataSet dsGruposFinalizar = new DataSet();
+                dsGruposAvaliar = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
+                dsGruposFinalizar = Grupo_DB.SelectAllGruposFinalizar(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
+                Session["GruposFinalizar"] = dsGruposFinalizar;
+                Session["GruposAvaliar"] = dsGruposAvaliar;
+            }
+            else
+            {
+                Session["codPIAtivo"] = null;
+                Session["GruposAvaliar"] = null;
+                Session["GruposFinalizar"] = null;
+                Session["Grupos"] = null;
+                Session["codDisciplinas"] = null;
+            }
+
             if (mae == "<span class='glyphicon glyphicon-star'></span>")
             {
                 Session["mae"] = "MAE";
-                codAtr = Convert.ToInt32(gdv.Rows[linhaSelecionada].Cells[5].Text);
-                Session["codAtr"] = codAtr;
             }
             else
             {
                 Session["mae"] = "FILHA";
             }
-            //redireciona pra home
-            Response.Redirect("home.aspx");
+            //REDIRECIONA PRA HOME
+            Response.Redirect("~/Home");
         }
         else
         {
-            //se nenhum rb for selecionado, uma modal de aviso é exibida
-            //ScriptManager serve para chamar um javascript via c#
+            //SE NENHUM RB FOR SELECIONADO, UMA MODAL DE AVISO É EXIBIDA
+            //SCRIPTMANAGER SERVE PARA CHAMAR UM JAVASCRIPT VIA C#
             ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEscolherDis", "modalEscolherDis();", true);
         }
     }
@@ -154,25 +211,25 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     protected void rb_CheckedChanged(object sender, EventArgs e)
     {
 
-        foreach (GridViewRow grid in gdv.Rows)//percorrer toda a grid
+        foreach (GridViewRow grid in gdv.Rows)//PERCORRER TODA A GRID
         {
-            RadioButton rb = (RadioButton)grid.FindControl("rb");//procurando um rb
+            RadioButton rb = (RadioButton)grid.FindControl("rb");//PROCURANDO UM RB
 
-            if (grid.RowIndex == auxRb) //se a linha atual da grid for igual a linha que existe um radio selecionado
+            if (grid.RowIndex == auxRb) //SE A LINHA ATUAL DA GRID FOR IGUAL A LINHA QUE EXISTE UM RADIO SELECIONADO
             {
-                rb.Checked = false; //desseleciona radio que estava selecionado
+                rb.Checked = false; //DESSELECIONA RADIO QUE ESTAVA SELECIONADO
                 break;
             }
         }
 
 
-        foreach (GridViewRow grid in gdv.Rows)//percorrer toda a grid
+        foreach (GridViewRow grid in gdv.Rows)//PERCORRER TODA A GRID
         {
             RadioButton rb = (RadioButton)grid.FindControl("rb");//procurando um rb
 
             if (rb.Checked)
             {
-                auxRb = grid.RowIndex; //guarda radio atual selecionado                
+                auxRb = grid.RowIndex; //GUARDA RADIO ATUAL SELECIONADO                
                 break;
             }
         }

@@ -12,6 +12,15 @@
 public partial class paginas_Usuario_avaliarGrupo {
     
     /// <summary>
+    /// upgAvaliar control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdateProgress upgAvaliar;
+    
+    /// <summary>
     /// ScriptManager1 control.
     /// </summary>
     /// <remarks>
@@ -66,13 +75,13 @@ public partial class paginas_Usuario_avaliarGrupo {
     protected global::System.Web.UI.WebControls.LinkButton btnSalvar;
     
     /// <summary>
-    /// txtAnotacao control.
+    /// btnFinalizar control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtAnotacao;
+    protected global::System.Web.UI.WebControls.LinkButton btnFinalizar;
     
     /// <summary>
     /// valorPeso control.
@@ -82,4 +91,22 @@ public partial class paginas_Usuario_avaliarGrupo {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.HiddenField valorPeso;
+    
+    /// <summary>
+    /// txtAnotacao control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtAnotacao;
+    
+    /// <summary>
+    /// btnVoltarHome2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnVoltarHome2;
 }

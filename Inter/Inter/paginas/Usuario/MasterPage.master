@@ -37,6 +37,12 @@
 
     <form id="form1" runat="server">
 
+        <script>
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
+
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="container-fluid">
@@ -57,9 +63,9 @@
                     <!-- tabela do topo - informações: Professor, Curso ...  -->
                     <table style="float: right; margin-right: 40px; text-align: center;">
                         <tr class="tabelaEscolherDis">
-                            
+
                             <%--Títulos--%>
-                            
+
                             <td>
                                 <asp:Label ID="lblProfessorLogado" runat="server" Text="Professor" Width="100px"></asp:Label></td>
                             <td>
@@ -73,8 +79,8 @@
                             <td rowspan="2">
 
                                 <%--Botão alterar disciplina --%>
-                                <asp:Button ID="btnEscolherDisciplina" class="btn btn-default" OnClick="btnEscolherDisciplina_Click"
-                                    runat="server" Text="Alterar Disciplina" />
+                                <asp:Button ID="btnEscolherDisciplina" CssClass="btn btn-default" OnClick="btnEscolherDisciplina_Click"
+                                    runat="server" Text="Alterar Disciplina" data-toggle="tooltip" ToolTip="Alterar a disciplina" />
                             </td>
                         </tr>
 

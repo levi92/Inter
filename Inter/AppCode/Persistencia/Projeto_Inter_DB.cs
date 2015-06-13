@@ -16,11 +16,12 @@ using System.Threading.Tasks;
             {
                 IDbConnection conexao;
                 IDbCommand objCommand;
-                string sql = "INSERT INTO pri_projeto_inter(pri_codigo, san_codigo) VALUES(?pri_codigo, ?san_codigo)";
+                string sql = "INSERT INTO pri_projeto_inter(pri_codigo, san_codigo, pri_semestre) VALUES(?pri_codigo, ?san_codigo, ?pri_semestre)";
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
                 objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", proInt.Pri_codigo));  
-                objCommand.Parameters.Add(Mapped.Parameter("?san_semestre_ano", proInt.San_codigo));
+                objCommand.Parameters.Add(Mapped.Parameter("?san_codigo", proInt.San_codigo.San_codigo));
+                objCommand.Parameters.Add(Mapped.Parameter("?pri_semestre", proInt.Pri_semestre));
                 objCommand.ExecuteNonQuery();               
                 conexao.Close();
                 objCommand.Dispose();
@@ -41,12 +42,13 @@ using System.Threading.Tasks;
             {
                 IDbConnection conexao;
                 IDbCommand objCommand;
-                string sql = "UPDATE pri_projeto_inter SET san_semestre_ano = ?san_semestre_ano, pri_descricao = ?pri_descricao,  pri_ementa = ?pri_ementa, adi_codigo = ?adi_codigo" +
+                string sql = "UPDATE pri_projeto_inter SET san_semestre_ano = ?san_semestre_ano, adi_codigo = ?adi_codigo, pri_semestre = ?pri_semestre" +
                 " WHERE pri_codigo = ?pri_codigo";
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
                 objCommand.Parameters.Add(Mapped.Parameter("?san_semestre_ano", proInt.San_codigo));
                 //objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", proInt.Adi_codigo));
+                objCommand.Parameters.Add(Mapped.Parameter("?pri_semestre", proInt.Pri_semestre));
                 objCommand.ExecuteNonQuery();
                 conexao.Close();
                 objCommand.Dispose();
@@ -160,6 +162,36 @@ using System.Threading.Tasks;
             objCommand.Dispose();
             objConnection.Dispose();
             return ds;
+        }
+
+        //SELECT CODIGO DO PI ATUAL ATIVO DA MATÉRIA
+        public static int SelectCodPiAtivoMateria(int codAtribuicaoMateria)
+        {
+            try
+            {
+                int codPiAtivo = 0;
+                IDbConnection objConnection;
+                IDbCommand objCommand;
+                IDataReader objDataReader;
+                objConnection = Mapped.Connection();
+                objCommand = Mapped.Command("SELECT PR.PRI_CODIGO FROM SAN_SEMESTRE_ANO SA INNER JOIN PRI_PROJETO_INTER PR USING(SAN_CODIGO) INNER JOIN API_ATRIBUICAO_PI USING(PRI_CODIGO) WHERE ADI_CODIGO = ?adi_codigo AND SA.SAN_ATIVO = 1;", objConnection);
+                objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", codAtribuicaoMateria));
+                objDataReader = objCommand.ExecuteReader();
+                while (objDataReader.Read())
+                {
+                    codPiAtivo = Convert.ToInt32(objDataReader["PRI_CODIGO"]);
+                }
+                objDataReader.Close();
+                objConnection.Close();
+                objConnection.Dispose();
+                objCommand.Dispose();
+                objDataReader.Dispose();
+                return codPiAtivo;
+            }
+            catch (Exception e)
+            {
+                return -2;
+            }
         }
     }
 

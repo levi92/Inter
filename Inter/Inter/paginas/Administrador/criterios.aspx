@@ -4,8 +4,9 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#icone3').addClass('corIcone');
+            $('#icone3').addClass('corIcone');        
         });
+
 
         // LIMPAR TEXTBOXS MODAL CADASTRAR CRTITÉRIO 
 
@@ -19,13 +20,34 @@
             $('#fecharModal').click();
         }
 
-        function MostraMsgAlerta(){
-            $('#alerta').fadeIn(1000);
-        }
 
-
+        //$('#alerta').before("<div id=conteudoAlerta class='alerta'><div class='alert alert-success alert-dismissible' role='alert'><span class='glyphicon glyphicon-ok-circle' aria-hidden='true'></span>Operação efetuada com sucesso!<button type='button' class='close' data-dismiss='alert'> &times</button></div></div></br>");
 
     </script>
+
+    <asp:UpdateProgress ID="upgAdmin" runat="server" AssociatedUpdatePanelID="UpdatePanelAtivados" DisplayAfter="1000">
+        <ProgressTemplate>
+            <div class="modalLoader">
+                <div class="modalCenter">
+                    <img alt="Carregando" src="../../App_Themes/images/ajax-loader.gif" /><br />
+
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
+    <asp:UpdateProgress ID="upgProf" runat="server" AssociatedUpdatePanelID="UpdatePanelDesativados" DisplayAfter="1000">
+        <ProgressTemplate>
+            <div class="modalLoader">
+                <div class="modalCenter">
+                    <img alt="Carregando" src="../../App_Themes/images/ajax-loader.gif" />
+
+
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
 
     <div id="p1" class="first">
         <div class="panel panel-default">
@@ -44,13 +66,18 @@
                     <%-- Início do conteúdo da aba Ativos--%>
                     <div role="tabpanel" class="tab-pane fade in active" id="ativos">
 
-
+                        <%--<div id="alerta"></div>--%>
                         <%--Grid com UpdatePanel para não atualizar a página inteira ao editar, inserir e desativar critérios--%>
+
+
+
                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         <asp:UpdatePanel ID="UpdatePanelAtivados" UpdateMode="Conditional" runat="server">
+
                             <ContentTemplate>
+
                                 <asp:GridView ID="gdvCriteriosAtivos" runat="server" CssClass="gridView" DataKeyNames="cge_codigo"
-                                    AutoGenerateColumns="false"
+                                    AutoGenerateColumns="false" AllowSorting="true"
                                     AutoGenerateEditButton="false"
                                     OnRowUpdating="gdvCriterios_RowUpdating"
                                     OnRowEditing="gdvCriterios_RowEditing"
@@ -64,18 +91,14 @@
                                     <Columns>
 
                                         <%--Coluna do Código do Critério Geral--%>
-                                        <asp:TemplateField HeaderText="Código" Visible="false">
+                                         <asp:TemplateField HeaderText="Código" Visible="false">                                     
                                             <ItemTemplate>
                                                 <asp:Label ID="lblCodigo" runat="server" Text='<%#Eval ("cge_codigo")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
                                         <%--Coluna do nome do Critério Geral--%>
-                                        <asp:TemplateField HeaderText="Nome do Critério">                                          
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("cge_nome")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="cge_nome" HeaderText="Nome"/>
 
                                         <%--Coluna da descrição do Critério Geral--%>
                                         <asp:TemplateField HeaderText="Descrição">
@@ -121,7 +144,7 @@
                         <%--Fim do Grid--%>
 
                         <%-- Label com quantidade de registros --%>
-                        
+
                         <br />
 
 
@@ -129,153 +152,176 @@
                         <button type="button" class="btn btn-default" id="" data-toggle="modal" data-target="#myModalCadastrarCri" title="Ir para cadastro de critérios">
                             <span class="glyphicon glyphicon-plus"></span>&nbsp Novo Critério
                        
+                       
                         </button>
+
+                        <div id="modalAlerta" class="modal fade modal-sm" tabindex="-1" role="dialog" aria-labelledby="ModalAlerta" aria-hidden="true">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <img src="../../App_Themes/images/ajax-loader.gif" />
+                                </div>
+                            </div>
+                        </div>
+
+                     
                     </div>
 
 
 
                     <%--Início conteúdo da aba Desativados--%>
                     <div role="tabpanel" class="tab-pane fade" id="desativados">
+                        <div id="conteudoAlerta">
+                            <%--<div class="alert alert-success alert-dismissible" role="alert">                                    
+                                    <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                                <asp:Label ID="lblMsgCriterio" Text="" ClientIDMode="Static" runat="server"></asp:Label>
+                                    <button type="button" class="close" data-dismiss="alert"> &times</button>
+                                </div>
+                            </div>--%>
+                            <%--Grid com UpdatePanel para não atualizar a página inteira ao ativar critérios--%>
+
+                            <asp:UpdatePanel ID="UpdatePanelDesativados" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
 
 
-                        <br />
-
-                        <%--Grid com UpdatePanel para não atualizar a página inteira ao ativar critérios--%>
-
-                        <asp:UpdatePanel ID="UpdatePanelDesativados" runat="server" UpdateMode="Conditional">
-                            <ContentTemplate>
-                                <asp:GridView ID="gdvCriteriosDesativados" runat="server" CssClass="gridView" DataKeyNames="cge_codigo"
-                                    AutoGenerateColumns="false"
-                                    AutoGenerateEditButton="false"
-                                    OnRowUpdating="gdvCriteriosDesativados_RowUpdating">
+                                    <asp:GridView ID="gdvCriteriosDesativados" ClientIDMode="Static" runat="server" CssClass="gridView" DataKeyNames="cge_codigo"
+                                        AutoGenerateColumns="false"
+                                        AutoGenerateEditButton="false"
+                                        OnRowUpdating="gdvCriteriosDesativados_RowUpdating">
 
 
-                                    <AlternatingRowStyle CssClass="alt" />
+                                        <AlternatingRowStyle CssClass="alt" />
 
-                                    <%-- Configurar colunas do Grid (Cada TemplateField é uma coluna) --%>
-                                    <Columns>
+                                        <%-- Configurar colunas do Grid (Cada TemplateField é uma coluna) --%>
+                                        <Columns>
 
-                                        <%--Coluna do Código do Critério Geral--%>
-                                        <asp:TemplateField HeaderText="Código" Visible="false">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblCodigo" runat="server" Text='<%#Eval ("cge_codigo")%>'></asp:Label>
-                                            </ItemTemplate>
+                                            <%--Coluna do Código do Critério Geral--%>
+                                            <asp:TemplateField HeaderText="Código" Visible="false">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblCodigo" runat="server" Text='<%#Eval ("cge_codigo")%>'></asp:Label>
+                                                </ItemTemplate>
 
-                                        </asp:TemplateField>
+                                            </asp:TemplateField>
 
-                                        <%--Coluna do nome do Critério Geral--%>
-                                        <asp:TemplateField HeaderText="Nome do Critério">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("cge_nome")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                            <%--Coluna do nome do Critério Geral--%>
+                                            <asp:TemplateField HeaderText="Nome do Critério">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("cge_nome")%>'></asp:Label>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
 
-                                        <%--Coluna da descrição do Critério Geral--%>
-                                        <asp:TemplateField HeaderText="Descrição">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblDescricao" runat="server" Text='<%#Eval ("cge_descricao")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                            <%--Coluna da descrição do Critério Geral--%>
+                                            <asp:TemplateField HeaderText="Descrição">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblDescricao" runat="server" Text='<%#Eval ("cge_descricao")%>'></asp:Label>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
 
-                                        <%--Coluna do botão de Ativar --%>
-                                        <asp:TemplateField HeaderText="" ItemStyle-Width="15px" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="lkbAtivar" CssClass="mdi mdi-keyboard-return" title="Reativar" runat="server" CommandName="Update"></asp:LinkButton>
-                                            </ItemTemplate>
-                                            <EditItemTemplate>
-                                            </EditItemTemplate>
+                                            <%--Coluna do botão de Ativar --%>
+                                            <asp:TemplateField HeaderText="" ItemStyle-Width="15px" ItemStyle-HorizontalAlign="Center">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="lkbAtivar" CssClass="mdi mdi-keyboard-return" title="Reativar" runat="server" CommandName="Update"></asp:LinkButton>
+                                                </ItemTemplate>
+                                                <EditItemTemplate>
+                                                </EditItemTemplate>
 
-                                        </asp:TemplateField>
-
-
-                                    </Columns>
-
-                                </asp:GridView>
-                                <asp:Label ID="lblQtdRegistro2" runat="server"></asp:Label>
-                            </ContentTemplate>
-
-                        </asp:UpdatePanel>
-                        <%--Fim do Grid--%>
-
-                        <%-- Label com quantidade de registros --%>
-                        <asp:Label ID="lblMsg2" Text="" runat="server"></asp:Label><br />
-                        
-                        <br />
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
+                                            </asp:TemplateField>
 
 
-        <!-- Modal Cadastrar Critérios -->
+                                        </Columns>
 
-        <div class="modal fade" data-backdrop="static" id="myModalCadastrarCri" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <asp:UpdatePanel ID="UpdatePanelModalNovoCriterio" UpdateMode="Conditional" runat="server">
-                <ContentTemplate>
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" id="fecharModal" onclick="fechaModalCri();" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title" id="myModalLabel3">Cadastrar Critérios</h4>
-                            </div>
+                                    </asp:GridView>
+                                    <asp:Label ID="lblQtdRegistro2" runat="server"></asp:Label>
+                                </ContentTemplate>
+
+                            </asp:UpdatePanel>
+                            <%--Fim do Grid--%>
+
+                            <%-- Label com quantidade de registros --%>
+                            <asp:Label ID="lblMsg2" Text="" runat="server"></asp:Label><br />
+
                             <br />
-
-                            <div class="form-group">
-                                <div class="controls-row">
-                                    <asp:Label ID="lblNomeNovoCriterio" runat="server" CssClass="control-label col-sm-2" Text="Nome: "></asp:Label>
-
-                                    <asp:TextBox ID="txtNomeNovoCriterio" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox>
-                                    <%--Validação do Campo Nome (Verifica se está vazio e se está preenchido com uma string)--%>
-                                    &nbsp<asp:RequiredFieldValidator ID="rfvNomeNovoCriterio" runat="server" CssClass="col-sm1" ErrorMessage="O campo Nome deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtNomeNovoCriterio" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>
-
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="controls-row">
-                                    <asp:Label ID="lblDescricaoNovoCriterio" runat="server" CssClass="control-label col-sm-2" Text="Descrição: "></asp:Label></td>
-                                            
-                                               
-
-                                    <asp:TextBox ID="txtDescricaoNovoCriterio" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox></td>
-                                            
-                                        
-
-                                    <%--Validação do Campo Descrição (Verifica se está vazio e se está preenchido com uma string)--%>
-                                                 &nbsp<asp:RequiredFieldValidator ID="rfvDescricaoNovoCriterio" CssClass="col-sm1" runat="server" ErrorMessage="O campo Descrição deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtDescricaoNovoCriterio" ControlToCompare="txtNomeNovoCriterio" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>
-                                    
-                                  
-                                </div>
-                                <br />
-                                   <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px;padding-left:30px;"></asp:Label>
-                            </div>
-                          
-                             
-                            <asp:ValidationSummary ID="vsNovoCriterio" ValidationGroup="NovoCriterio" ForeColor="#960d10" runat="server" DisplayMode="List" Style="margin: 7px; padding: 7px;" />
-
-
-
-
-                            <div class="modal-footer">
-                                <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarNovoCriterio" runat="server" title="Cancelar Inserção" OnClick="btnCancelarNovoCriterio_Click">
-                                    <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</asp:LinkButton>
-
-                                <asp:LinkButton ID="btnCriarNovoCriterio" runat="server" CssClass="btn btn-default"
-                                    OnClick="btnCriarNovoCriterio_Click" ToolTip="Confirmar Inserção" CausesValidation="true" ValidationGroup="NovoCriterio">
-                                   <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar </asp:LinkButton>
-                            </div>
 
                         </div>
                     </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
+
+                </div>
+            </div>
+
+
+
+            <asp:UpdateProgress ID="UpdateProgress" runat="server">
+                <ProgressTemplate>
+                </ProgressTemplate>
+            </asp:UpdateProgress>
+
+
+            <!-- Modal Cadastrar Critérios -->
+
+            <div class="modal fade" data-backdrop="static" id="myModalCadastrarCri" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <asp:UpdatePanel ID="UpdatePanelModalNovoCriterio" UpdateMode="Conditional" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" id="fecharModal" onclick="fechaModalCri();" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title" id="myModalLabel3">Cadastrar Critérios</h4>
+                                </div>
+                                <br />
+
+                                <div class="form-group">
+                                    <div class="controls-row">
+                                        <asp:Label ID="lblNomeNovoCriterio" runat="server" CssClass="control-label col-sm-2" Text="Nome: "></asp:Label>
+
+                                        <asp:TextBox ID="txtNomeNovoCriterio" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server" MaxLength="50"></asp:TextBox>
+                                        <%--Validação do Campo Nome (Verifica se está vazio e se está preenchido com uma string)--%>
+                                    &nbsp<asp:RequiredFieldValidator ID="rfvNomeNovoCriterio" runat="server" CssClass="col-sm1" ErrorMessage="O campo Nome deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtNomeNovoCriterio" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="controls-row">
+                                        <asp:Label ID="lblDescricaoNovoCriterio" runat="server" CssClass="control-label col-sm-2" Text="Descrição: "></asp:Label></td>
+
+                                        <asp:TextBox ID="txtDescricaoNovoCriterio" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server" MaxLength="200"></asp:TextBox></td>
+
+                                        <%--Validação do Campo Descrição (Verifica se está vazio e se está preenchido com uma string)--%>
+                                                 &nbsp<asp:RequiredFieldValidator ID="rfvDescricaoNovoCriterio" CssClass="col-sm1" runat="server" ErrorMessage="O campo Descrição deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtDescricaoNovoCriterio" ControlToCompare="txtNomeNovoCriterio" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>
+                                    </div>
+                                    <br />
+                                    <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
+                                </div>
+
+
+                                <asp:ValidationSummary ID="vsNovoCriterio" ValidationGroup="NovoCriterio" ForeColor="#960d10" runat="server" DisplayMode="List" Style="margin: 7px; padding: 7px;" />
+
+
+
+
+                                <div class="modal-footer">
+                                    <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarNovoCriterio" runat="server" title="Cancelar Inserção" OnClick="btnCancelarNovoCriterio_Click">
+                                    <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</asp:LinkButton>
+
+                                    <asp:LinkButton ID="btnCriarNovoCriterio" runat="server" CssClass="btn btn-default"
+                                        OnClick="btnCriarNovoCriterio_Click" ToolTip="Confirmar Inserção" CausesValidation="true" ValidationGroup="NovoCriterio">
+                                   <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar </asp:LinkButton>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </ContentTemplate>
+
+
+
+                </asp:UpdatePanel>
+
+
+            </div>
+
+
+
         </div>
-
-
-
-    </div>
-
 </asp:Content>

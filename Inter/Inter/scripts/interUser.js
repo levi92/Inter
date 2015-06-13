@@ -330,7 +330,7 @@ $(document).ready(function () {
             auxData = $('#descData' + index).html();
 
             if (typeof (auxData) != "undefined") {
-                dadosDatas += $('#descData' + index).html() + "-" + $('#data' + index).html() + "|";
+                dadosDatas += $('#descData' + index).html() + "|" + $('#data' + index).html() + "|";
             }
 
         }
@@ -352,28 +352,112 @@ $(document).ready(function () {
 
     });
 
-
-    funcaoImpedirValor = function (id) {        
+    funcaoImpedirValor = function (id) {
         var valor = document.getElementById(id).value;
 
-        if (valor <= 0 || valor > 10) {                   
-            $("#"+id).val("");
+        if (valor <= 0 || valor > 10) {
+            $("#" + id).val("");
         }
 
     }
 
-    ////sortable mover com duplo clique
-    //$("ul#sortable3 li").dblclick(function () {
-    //    $(this).appendTo("ul#sortable4");
-    //});
+    funcaoImpedirValorAvaliar = function (id) {
+
+        valor = document.getElementById(id).value;
+        if (!$.isNumeric(valor)) {
+            $("#" + id).val("");
+        }
+        if (valor < 0 || valor > 10) {
+            
+            $("#" + id).val("");
+        }       
+
+    }
+
+    funcaoAtualizarMedia = function (id) { //QUANDO TEXTBOX PERDE O FOCO
+        var qtdValoresNulos = 0;
+        var mediaPonderada = 0;
+
+        var idLinhaCol = id;
+        var coluna = idLinhaCol.split("_");
+        var countRow = $("#tableAvaliar tr").length - 2; //POR CAUSA DO CABEÇALHO E RODAPÉ        
+        var valor = 0;
+        var valorMultiplicacao = 0;
+        var TodosPesos = ($('#valorPeso').val()).split('|');      
+
+        var somaPeso = 0;
+
+        //txtNotasRow_1_Col_1
+        for (var i = 0; i < countRow; i++) {
+
+            valor = parseFloat($("#txtNotasRow_" + i + "_Col_" + coluna[3]).val());
+            var peso = parseFloat(TodosPesos[i]);
+            somaPeso += peso;
+
+            //SE TEXTBOX NÃO ESTIVER VAZIO
+            if (!isNaN(valor)) {                
+                valorMultiplicacao += valor * peso;                               
+            } else {
+                qtdValoresNulos++;
+            }
+            
+        }
+        
+        var linhaLblMedia = $("#tableAvaliar tr").length - 1;        
+
+        if(qtdValoresNulos == countRow){
+            $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html("0.00");
+        } else {
+            mediaPonderada = (valorMultiplicacao / somaPeso).toFixed(2);
+            $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html(mediaPonderada);
+        }        
+
+        qtdValoresNulos = 0;
+    }
+
+}); //FECHAMENTO $(document).ready
+
+function funcaoAtualizarMediaAll() {
+
+    var countRow = $("#tableAvaliar tr").length - 2; // - 2 POR CAUSA DO CABEÇALHO E RODAPÉ 
+    var qtdTotalCol = $('#tableAvaliar tr td').length; //QTD TOTAL DE COLUNAS
+    var qtdColuna = $('#tableAvaliar tr td').length / (countRow + 1); //QTD COLUNA POR LINHA
+
+    var valor = 0;
+    var valorMultiplicacao = 0;
+    var TodosPesos = ($('#valorPeso').val()).split('|');
+    var somaPeso = 0;
+
+    for (var j = 1; j < qtdColuna; j++) {
+        for (var i = 0; i < countRow; i++) {
+
+            valor = parseFloat($("#txtNotasRow_" + i + "_Col_" + j).val());
+            var peso = parseFloat(TodosPesos);
+            if (!isNaN(valor)) {
+                valorMultiplicacao += valor * peso;
+                somaPeso += peso;
+            }
+        }
+
+        var linhaLblMedia = $("#tableAvaliar tr").length - 1; //ULTIMA LINHA DA TABELA
+        $('#lblMediaRow_' + linhaLblMedia + '_Col_' + j).html((valorMultiplicacao / somaPeso).toFixed(2));
+        valorMultiplicacao = 0;
+    }
+
+}
 
 
+function ImprimirGrupo(id) {
+    var printContent = document.getElementById(id).innerHTML;
+    var windowUrl = 'about:blank';
+    var uniqueName = new Date();
+    var windowName = 'Print' + uniqueName.getTime();
+    var printWindow = window.open(windowUrl, windowName, 'left=50000,top=50000,width=0,height=0');
 
+    printWindow.document.write("<link rel=\"stylesheet\" href=\"/../App_Themes/css/style.css\" type=\"text/css\" media=\"print\" />");
+    printWindow.document.write(printContent);
+    printWindow.focus();
+    printWindow.print();
+    printWindow.close();
 
-
-
-
-
-
-
-});
+}

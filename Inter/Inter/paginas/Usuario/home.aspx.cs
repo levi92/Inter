@@ -15,7 +15,7 @@ public partial class paginas_Usuario_home : System.Web.UI.Page
         // Se sessão estiver nula redireciona para o bloqueio Url
         if (Session["Professor"] == null)
         {
-            Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+            Response.Redirect("~/BloqueioUrl");
         }
 
         // CHAMAR A MASTER PAGE CORRESPONDENTE MÃE OU FILHA         
@@ -27,13 +27,21 @@ public partial class paginas_Usuario_home : System.Web.UI.Page
         // VERIFICAR SE O PROFESSOR NÃO ESCOLHEU UMA DISCIPLINA E REDIRECIONA PARA A PÁGINA ESCOLHER DISCIPLINA
         if (Session["disciplina"] == "")
         {
-            Response.Redirect("escolherDisciplina.aspx");
-        }
+            Response.Redirect("~/EscolherDisciplina");
 
-        // Aparecer nome do professor na frase Bem-vindo (professor)!
+        }
+                
+        // APARECER NOME DO PROFESSOR NA FRASE BEM-VINDO (PROFESSOR)!
         Professor prof = new Professor();
         prof = (Professor)Session["Professor"];
         string[] nomeProf = prof.Nome.Split(' ');
         lblNomeProf.Text = nomeProf[0];
+
+        int codAtribuicao = Convert.ToInt32(Session["codAtr"]);
+        int codPiAtivoMateria = Projeto_Inter_DB.SelectCodPiAtivoMateria(codAtribuicao);
+        if (codPiAtivoMateria != -2)
+        {
+            Session["CodigoPIAtivoMateria"] = codPiAtivoMateria;
+        }
     }
 }

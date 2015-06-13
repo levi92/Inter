@@ -38,6 +38,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLLFatec\ddl mysql 6 6 5\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="MySqlBackup, Version=2.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLFatec\MySqlBackup.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -55,7 +59,7 @@
     <Compile Include="Classes\Eventos.cs" />
     <Compile Include="Classes\Grupo.cs" />
     <Compile Include="Classes\Grupo_Aluno.cs" />
-    <Compile Include="Classes\Historico_Disciplina.cs" />
+    <Compile Include="Classes\Historico_Aluno_Disciplina.cs" />
     <Compile Include="Classes\Media_Disciplina.cs" />
     <Compile Include="Classes\Mensagem.cs" />
     <Compile Include="Classes\Perfil.cs" />
@@ -66,9 +70,16 @@
     <Compile Include="Classes\Ticket.cs" />
     <Compile Include="Comuns\Funcoes.cs" />
     <Compile Include="Mapped.cs" />
+    <Compile Include="Persistencia\Atribuicao_PI_DB.cs" />
     <Compile Include="Persistencia\Criterios_Gerais_DB.cs" />
+    <Compile Include="Persistencia\Criterio_PI_DB.cs" />
     <Compile Include="Persistencia\Disciplinas_Gerais_DB.cs" />
+    <Compile Include="Persistencia\Eventos_DB.cs" />
     <Compile Include="Persistencia\Funcoes_DB.cs" />
+    <Compile Include="Persistencia\Grupo_Aluno_DB.cs" />
+    <Compile Include="Persistencia\Grupo_DB.cs" />
+    <Compile Include="Persistencia\Historico_Aluno_Disciplina_DB.cs" />
+    <Compile Include="Persistencia\Media_Disciplina_DB.cs" />
     <Compile Include="Persistencia\Perfil_DB.cs" />
     <Compile Include="Persistencia\Pessoas_DB.cs" />
     <Compile Include="Persistencia\Mensagem_DB.cs" />
@@ -80,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\MySql.Data.dll" />
+    <Content Include="bin\MySqlBackup.dll" />
     <Content Include="DLLFatec\ddl mysql 6 6 5\MySql.Data.dll" />
     <Content Include="DLLFatec\Interdisciplinar.dll" />
     <Content Include="DLLFatec\Interdisciplinar.pdb" />

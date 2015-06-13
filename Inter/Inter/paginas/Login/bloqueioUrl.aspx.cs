@@ -13,6 +13,6 @@ public partial class Paginas_Login_bloqueioUrl : System.Web.UI.Page
     }
     protected void btnVoltar_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/Paginas/Login/login.aspx");
+        Response.Redirect("~/Login");
     }
 }

@@ -14,10 +14,10 @@ using Inter.Funcoes;
             // Se sessão estiver nula redireciona para o bloqueio Url
             if (Session["login"] == null)
             {
-                Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+                Response.Redirect("~/BloqueioUrl");
             }
 
             // CHAMAR A MASTER PAGE CORRESPONDENTE MASTER ou COORD   
-            this.Page.MasterPageFile = Funcoes.chamarMasterPage_Admin(Session["coord"].ToString());
+            this.Page.MasterPageFile = Funcoes.chamarMasterPage_Admin(Session["menu"].ToString());
         }
     }

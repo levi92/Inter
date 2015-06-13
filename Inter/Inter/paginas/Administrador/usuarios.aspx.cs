@@ -15,11 +15,11 @@ public partial class paginas_Admin_usuarios : System.Web.UI.Page
         // Se sessão estiver nula redireciona para o bloqueio Url
         if (Session["login"] == null)
         {
-            Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+            Response.Redirect("~/BloqueioUrl");
         }
 
         // CHAMAR A MASTER PAGE CORRESPONDENTE MASTER ou COORD   
-        this.Page.MasterPageFile = Funcoes.chamarMasterPage_Admin(Session["coord"].ToString());
+        this.Page.MasterPageFile = Funcoes.chamarMasterPage_Admin(Session["menu"].ToString());
     }
 
     protected void Page_Load(object sender, EventArgs e)

@@ -21,8 +21,8 @@
                                 <td align="center" class="icon icon-user-tie" style="font-size:100px;display:table-cell"></td>
                                 <td align="center" class="glyphicon glyphicon-education" style="font-size:100px;display:table-cell;"></td>
                             </tr>
-                            <tr><td align="center"><asp:Button CssClass="btn btn-default" runat="server"  Text="Entrar como Admin" OnClick="Btn_Admin"></asp:Button></td>
-                                <td align="center"><asp:Button CssClass="btn btn-default" runat="server" Text="Entrar como Professor" OnClick="Btn_Prof"></asp:Button></td>
+                            <tr><td align="center"><asp:Button id="btnCoord" CssClass="btn btn-default" runat="server"  Text="Entrar como Admin" OnClick="Btn_Admin"></asp:Button></td>
+                                <td align="center"><asp:Button id="btnProf" CssClass="btn btn-default" runat="server" Text="Entrar como Professor" OnClick="Btn_Prof"></asp:Button></td>
                             </tr>
                         </table>
                       

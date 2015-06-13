@@ -17,25 +17,25 @@
             <ul class="menu">
                 <%-- Links equivalentes a disciplina Mãe --%>
                 <li>
-                    <asp:HyperLink ID="icone2" runat="server" NavigateUrl="~/paginas/Usuario/home.aspx" Enabled="True">
+                    <asp:HyperLink ID="icone2" runat="server" NavigateUrl="~/Home" Enabled="True">
                         <span class="glyphicon glyphicon-home"></span>&nbsp Home</asp:HyperLink></li>
                 <li>
-                    <asp:HyperLink ID="icone3" runat="server" NavigateUrl="~/paginas/Usuario/notificacoes.aspx" Enabled="True">
+                    <asp:HyperLink ID="icone3" runat="server" NavigateUrl="~/Notificacoes" Enabled="True">
                         <span class="glyphicon glyphicon-bell"></span>&nbsp Notificações</asp:HyperLink></li>
                 <li>
-                    <asp:HyperLink ID="icone4" runat="server" NavigateUrl="~/paginas/Usuario/piFinalizado.aspx" Enabled="True">
+                    <asp:HyperLink ID="icone4" runat="server" NavigateUrl="~/PIFinalizado" Enabled="True">
                         <span class="glyphicon glyphicon-folder-open"></span>&nbsp PIs Finalizados</asp:HyperLink></li>
                 <li>
-                    <asp:HyperLink ID="icone5" runat="server" NavigateUrl="~/paginas/Usuario/cadastrarPi.aspx" Enabled="True">
+                    <asp:HyperLink ID="icone5" runat="server" NavigateUrl="~/CadastrarPI" Enabled="True">
                         <span class="glyphicon glyphicon-edit"></span>&nbsp Cadastrar PI</asp:HyperLink></li>
                 <li>
-                    <asp:HyperLink ID="icone6" runat="server" NavigateUrl="~/paginas/Usuario/consultarPi.aspx" Enabled="True">
+                    <asp:HyperLink ID="icone6" runat="server" NavigateUrl="~/ConsultarPI" Enabled="True">
                         <span class="glyphicon glyphicon-search"></span>&nbsp Consultar PI</asp:HyperLink></li>
                 <li>
-                    <asp:HyperLink ID="icone8" runat="server" NavigateUrl="~/paginas/Usuario/avaliarGrupo.aspx" Enabled="True">
+                    <asp:HyperLink ID="icone8" runat="server" NavigateUrl="~/AvaliarGrupo" Enabled="True">
                         <span class="glyphicon glyphicon-check"></span>&nbsp Avaliar Grupos</asp:HyperLink></li>
                 <li>
-                    <asp:HyperLink ID="icone9" runat="server" NavigateUrl="~/paginas/Usuario/finalizarGrupo.aspx" Enabled="True">
+                    <asp:HyperLink ID="icone9" runat="server" NavigateUrl="~/FinalizarGrupo" Enabled="True">
                         <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp Finalizar Grupos</asp:HyperLink></li>
                 <hr />
                 <li><a id="icone10" onclick="Mostra('p15');" href="#"><span class="glyphicon glyphicon-question-sign"></span>&nbsp Ajuda</a></li>

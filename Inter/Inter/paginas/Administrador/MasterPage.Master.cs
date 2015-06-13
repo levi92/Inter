@@ -12,14 +12,14 @@ using System.Web.UI.WebControls;
         {
             if (Session["login"] == null)
             {
-                Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+                Response.Redirect("~/BloqueioUrl");
             }
         }
         protected void btnSair_Click(object sender, EventArgs e)
         {
             Session.RemoveAll();
 
-            Response.Redirect("~/paginas/Login/login.aspx");
+            Response.Redirect("~/Login");
         }
         
     }

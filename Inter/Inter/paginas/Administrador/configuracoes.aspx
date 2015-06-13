@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage_MenuMaster.Master" AutoEventWireup="true" CodeBehind="configuracoes.aspx.cs" Inherits="paginas_Admin_configuracoes" %>
+﻿<%@ Page EnableEventValidation="false" Title="" Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage_MenuMaster.Master" AutoEventWireup="true" CodeBehind="configuracoes.aspx.cs" Inherits="paginas_Admin_configuracoes" %>
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ConteudoCentral" runat="server">
@@ -17,84 +17,56 @@
             </div>
             <div class="panel-body">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="active"><a href="#geral" role="tab" data-toggle="tab">Geral</a></li>
-                    <li><a href="#backup" role="tab" data-toggle="tab">Backup</a></li>
+                    <li class="active"><a href="#backup" role="tab" data-toggle="tab">Backup</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade in active" id="geral">
+                    
+                        <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
+                        <asp:UpdatePanel ID="UpdatePanelBkp" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                 <asp:Label ID="lblBackup" runat="server"></asp:Label>
+                                <asp:GridView ID="gdvBkp" runat="server" CellPadding="4" GridLines="None" CssClass="gridView" AllowPaging="true" PageSize="10"
+                                    OnRowCommand="gdvBkp_RowCommand"     
+                                    OnRowDataBound="gdvBkp_RowDataBound"                             
+                                    OnPageIndexChanging="gdvBkp_PageIndexChanging"
+                                    AutoGenerateColumns="false"
+                                    Visible="true">
+
+                                    <AlternatingRowStyle CssClass="alt" />
+
+                                    <Columns>
+                                        <%-- Configurar colunas do Grid --%>
+                                        
+                                        <asp:BoundField DataField="!" HeaderText="Nome"/> 
+
+                                        <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="8%">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lkbDownload" CssClass="glyphicon glyphicon-download" Font-size="1.5em" runat="server" CommandName="bkpDownload" ></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                    </Columns>
+                                    
+
+                                </asp:GridView>
+                                <asp:Label ID="lblQtdRegistros" runat="server"></asp:Label><br />
+                                <asp:Button ID="btnCriarBackup" runat="server" CssClass="btn btn-default btn-lg" Text="Criar Backup" OnClick="btnCriarBackup_Click" />
+                            
+                                
+                            </ContentTemplate>
+                            
+                        </asp:UpdatePanel>
+                        
                         <br />
-                        <strong>URL para Importar Dados Semestrais</strong>
-                        <form class="form-inline" role="form">
-                            <div class="form-group" style="margin-top: 10px;">
-                                <div class="input-group">
-                                    <label for="txtEndereco" class="sr-only">URL do Banco</label>
-                                    <div class="input-group-addon"><a href="#" title="Sincronizar Dados"><span class="glyphicon glyphicon-retweet"></span></a></div>
-                                    <input id="txtEndereco" runat="server" type="url" value="http://localhost:17758/DB" class="form-control" />
-
-                                </div>
-                            </div>
-                        </form>
-                        <%-- <button type="button" class="btn btn-default" name="SincronizarDados" title="Sincronizar Dados">Sincronizar Dados</button>--%>
-                        <hr />
-                        <button type="button" class="btn btn-default" id="btAdmTrocarSenha" data-toggle="modal" data-target="#alterarSenhaAdm" runat="server" name="alterarSenhaAdm" title="Alterar Senha">Alterar Senha</button><br />
-                        <br />
-
-
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane fade" id="backup">
-                        <table class="table">
-                            <tr>
-                                <td>Nome</td>
-                                <td>Data Envio</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>inter_bkp_00-00-00-00-00-05</td>
-                                <td>22-11-2014</td>
-                                <td><a href="#"><span class="glyphicon glyphicon-download" title="Baixar Backup"></span></a>&nbsp &nbsp <a href="#" class="restaurar"><span class="glyphicon glyphicon-open" title="Restaurar o Sistema"></span></a>&nbsp &nbsp <a href="#"><span class="glyphicon glyphicon-trash" title="Remover Backup"></span></a></td>
-
-                            </tr>
-                            <tr>
-                                <td>inter_bkp_00-00-00-00-00-04</td>
-                                <td>21-11-2014</td>
-                                <td><a href="#"><span class="glyphicon glyphicon-download" title="Baixar Backup"></span></a>&nbsp &nbsp <a href="#" class="restaurar"><span class="glyphicon glyphicon-open" title="Restaurar o Sistema"></span></a>&nbsp &nbsp <a href="#"><span class="glyphicon glyphicon-trash" title="Remover Backup"></span></a></td>
-
-                            </tr>
-                            <tr>
-                                <td>inter_bkp_00-00-00-00-00-03</td>
-                                <td>20-11-2014</td>
-                                <td><a href="#"><span class="glyphicon glyphicon-download" title="Baixar Backup"></span></a>&nbsp &nbsp <a href="#" class="restaurar"><span class="glyphicon glyphicon-open" title="Restaurar o Sistema"></span></a>&nbsp &nbsp <a href="#"><span class="glyphicon glyphicon-trash" title="Remover Backup"></span></a></td>
-
-                            </tr>
-                            <tr>
-                                <td>inter_bkp_00-00-00-00-00-02</td>
-                                <td>19-11-2014</td>
-                                <td><a href="#"><span class="glyphicon glyphicon-download" title="Baixar Backup"></span></a>&nbsp &nbsp <a href="#" class="restaurar"><span class="glyphicon glyphicon-open" title="Restaurar o Sistema"></span></a>&nbsp &nbsp <a href="#"><span class="glyphicon glyphicon-trash" title="Remover Backup"></span></a></td>
-
-                            </tr>
-                            <tr>
-                                <td>inter_bkp_00-00-00-00-00-01</td>
-                                <td>18-11-2014</td>
-                                <td><a href="#"><span class="glyphicon glyphicon-download" title="Baixar Backup"></span></a>&nbsp &nbsp <a href="#" class="restaurar"><span class="glyphicon glyphicon-open" title="Restaurar o Sistema"></span></a>&nbsp &nbsp <a href="#"><span class="glyphicon glyphicon-trash" title="Remover Backup"></span></a></td>
-
-                            </tr>
-                        </table>
-                        <br />
-                        <button type="button" class="btn btn-default btn-lg" title="Criar novo Backup">
-                            <span class="glyphicon glyphicon-plus"></span>&nbsp Novo Backup
-                        </button>
-                        <button type="button" class="btn btn-default btn-lg" title="Enviar Backup do Computador">
-                            <span class="glyphicon glyphicon-upload"></span>&nbsp Enviar Backup...
-                        </button>
+                        
+                        
 
 
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+   
 
 
 

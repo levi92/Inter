@@ -15,26 +15,40 @@ namespace Inter.paginas.Administrador
             // Se sessão estiver nula redireciona para o bloqueio Url
             if (Session["login"] == null)
             {
-                Response.Redirect("~/Paginas/Login/bloqueioUrl.aspx");
+                Response.Redirect("~/BloqueioUrl");
             }
 
             // CHAMAR A MASTER PAGE CORRESPONDENTE MASTER ou COORD SE ELE JÁ ESCOLHEU O PERFIL
-            if (Session["perfil"] != "")
+            if ((String)Session["perfil"] == "coordenador")
             {
-                this.Page.MasterPageFile = Funcoes.Funcoes.chamarMasterPage_Admin(Session["coord"].ToString());
+                
+                this.Page.MasterPageFile = Funcoes.Funcoes.chamarMasterPage_Admin(Session["menu"].ToString());
             }
+          
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            if ((String)Session["perfil"] == "coordenador")
+            {
+
+                btnCoord.Enabled = false;
+            }
+
+         
         }
 
         protected void Btn_Admin(object sender, EventArgs e)
         {
-            Session["perfil"] = "escolheu";   
+            Session["perfil"] = "coordenador";   
             Response.Redirect("~/paginas/Administrador/solicitacoes.aspx");
         }
 
         protected void Btn_Prof(object sender, EventArgs e)
         {
-            Session["perfil"] = "escolheu";
-            Response.Redirect("~/paginas/Usuario/escolherDisciplina.aspx");           
+            Session["perfil"] = "professor";
+            Response.Redirect("~/EscolherDisciplina");           
         }
 
        

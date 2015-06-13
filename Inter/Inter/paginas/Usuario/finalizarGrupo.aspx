@@ -1,15 +1,50 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_finalizarGrupo" Codebehind="finalizarGrupo.aspx.cs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_finalizarGrupo" CodeBehind="finalizarGrupo.aspx.cs" %>
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
 
     <script type="text/javascript">
         $(document).ready(function () {
-
             // ALTERAR COR DO ÍCONE NO MENU LATERAL 
             $('#cphConteudo_icone9').addClass('corIcone');
+
+            $('[data-toggle="tooltip"]').tooltip();
         });
+
+        //CHAMAR MODAL COM MENSAGEM DE NÃO POSSUI GRUPOS PARA FINALIZAR
+        function msgNaoPossuiGrupos() {
+            $("#naoPossuiGrupo").click();
+        }
+
+        //FUNÇÃO ZEBRADO NO GRIDVIEW AVALIAR GRUPOS
+        function ZebradoGridAvaliar() {
+            var countRow = $("#tableFinalizarGrupos tr").length - 1;
+            for (var i = 0; i < countRow; i++) {
+                if (i % 2 != 0) {
+                    $("#cphConteudo_cphConteudoCentral_" + i).css("background-color", "rgba(206, 206, 206, 0.31)");
+                }
+            }
+        }
+
+        Sys.Application.add_load(BindEvents);
+        function BindEvents() {
+            $('[data-toggle=tooltip]').tooltip();
+            // other bootstrap binding code - see the combined Bootstrap.js for ideas
+        }
+
     </script>
+
+    <asp:UpdateProgress ID="upgAvaliar" runat="server" AssociatedUpdatePanelID="updFinalizar">
+        <ProgressTemplate>
+            <div class="modalLoader">
+                <div class="modalCenter">
+                    <img alt="Carregando" src="../../App_Themes/images/ajax-loader.gif" /><br />                    
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <!-- Finalizar Grupos (p9) -->
 
@@ -19,162 +54,58 @@
                 <h3 class="panel-title">Finalizar Grupos</h3>
             </div>
             <div class="panel-body-usuarios">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td>Grupo</td>
-                            <td colspan="4">
-                                <select name="grupo" id="" class="dropDown">
-                                    <option>Sistema de Avaliação de interdisciplinar-Usuário</option>
-                                    <option>Sistema de Avaliação de interdisciplinar-Admin</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </thead>
+                <button type="button" style="display: none;" id="naoPossuiGrupo" data-toggle="modal" data-target="#myModalNaoPossuiGrupo"></button>
 
+                <asp:UpdatePanel ID="updFinalizar" UpdateMode="Conditional" runat="server">
+                    <ContentTemplate>
+                        <table class="tabelaAvaliar">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        <asp:Label ID="lblGrupo" runat="server" Text="Grupo: "></asp:Label></td>
+                                    <td colspan="4">
+                                        <asp:DropDownList ID="ddlFinalizarGrupos" runat="server" ClientIDMode="Static" AutoPostBack="true" CssClass="dropDown" OnSelectedIndexChanged="ddlFinalizarGrupos_SelectedIndexChanged">
+                                        </asp:DropDownList>
+                                    </td>
+                                </tr>
+                            </thead>
+                        </table>
 
-                    <tr style="color: black; font-weight: bolder; font-size: 14px; font: Helvetica, Arial, sans-serif;">
-                        <td>
-                            <label>Integrantes</label></td>
-                        <td>
-                            <label>ES3</label></td>
-                        <td>
-                            <label>BD</label></td>
-                        <td>
-                            <label>IHC</label></td>
-                        <td>
-                            <label>PS</label></td>
-                    </tr>
+                        <asp:Panel ID="PanelFinalizarGrupo" runat="server"></asp:Panel>
 
-                    <tr>
-                        <td>
-                            <label>Bruno Eduardo</label>
-                        </td>
-                        <td>
-                            <label id="critPostura">10</label></td>
-                        <td>
-                            <label id="critVestimenta">10</label></td>
-                        <td>
-                            <label id="critFala">10</label></td>
-                        <td>
-                            <label id="crit">10</label></td>
-                    </tr>
+                        <asp:GridView ID="gdvMediasDisciplinas" CssClass="tableFinalizar" runat="server" Width="50%" Style="margin: 4% 25%;" AutoGenerateColumns="false">
+                            <AlternatingRowStyle CssClass="alt" />
+                            <Columns>
+                                <asp:BoundField DataField="Disciplinas" HeaderText="Disciplinas" />
+                                <asp:BoundField DataField="Media" HeaderText="Média" />
+                            </Columns>
+                        </asp:GridView>
 
-                    <tr>
-                        <td>
-                            <label>Felipe Ayres </label>
-                        </td>
-                        <td>
-                            <label id="critPostura2">10</label></td>
-                        <td>
-                            <label id="critVestimenta2">10</label></td>
-                        <td>
-                            <label id="critFala2">10</label></td>
-                        <td>
-                            <label id="crit2">10</label></td>
+                        <table class="table" style="width: 50%; margin-left: 25%; border: 1px solid #ddd; text-align: center">
+                            <tr>
+                                <td>
+                                    <label style="font-size: 18px; font-weight: bolder; color: #960d10;">MÉDIA FINAL: </label>
+                                </td>
+                                <td>
+                                    <asp:Label ID="lblMediaGrupos" runat="server" ></asp:Label>
+                                </td>
 
-                    </tr>
+                            </tr>
 
-                    <tr>
-                        <td>
-                            <label>Higor Gomes </label>
-                        </td>
-                        <td>
-                            <label id="critPostura3">10</label></td>
-                        <td>
-                            <label id="critVestimenta3">10</label></td>
-                        <td>
-                            <label id="critFala3">10</label></td>
-                        <td>
-                            <label id="crit3">10</label></td>
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-default" id="" data-toggle="modal" data-target="#myModalLiberarEdicao">
+                                        <span class="glyphicon glyphicon-pencil"></span>&nbsp Editar</button></td>
 
-                    </tr>
+                                <td>                                   
+                                <asp:LinkButton id="btnFinalizarGrupos" runat="server" CssClass="btn btn-default" OnClick="btnFinalizarGrupos_Click" >
+                                    <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar
+                                </asp:LinkButton></td>
 
-                    <tr>
-                        <td>
-                            <label>Dayane Ferraz </label>
-                        </td>
-                        <td>
-                            <label id="critPostura4">10</label></td>
-                        <td>
-                            <label id="critVestimenta4">10</label></td>
-                        <td>
-                            <label id="critFala4">10</label></td>
-                        <td>
-                            <label id="crit4">10</label></td>
-
-                    </tr>
-                </table>
-
-                <table class="table" style="width: 50%; margin-top: 5%; margin-left: 25%; border: 1px solid #DDD; text-align: center">
-                    <thead>
-                        <tr>
-                            <td colspan="2">
-                                <label>MÉDIA NAS DISCIPLINAS</label>
-                            </td>
-                        </tr>
-                    </thead>
-
-                    <tr>
-                        <td>
-                            <label>Engenharia de Software 3 (ES3): </label>
-                        </td>
-                        <td>
-                            <label>10</label>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>Banco de Dados (BD): </label>
-                        </td>
-                        <td>
-                            <label>10</label>
-                        </td>
-
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>Interação Humano Computador (IHC): </label>
-                        </td>
-                        <td>
-                            <label>10</label>
-                        </td>
-
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>Programação em  Scripts (PS): </label>
-                        </td>
-                        <td>
-                            <label>10</label>
-                        </td>
-
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label style="font-size: 18px; font-weight: bolder; color: #960d10;">MÉDIA FINAL: </label>
-                        </td>
-                        <td>
-                            <label style="font-size: 18px; font-weight: bolder; color: #960d10;">10</label>
-                        </td>
-
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <button type="button" class="btn btn-default" id="" data-toggle="modal" data-target="#myModalLiberarEdicao">
-                                <span class="glyphicon glyphicon-pencil"></span>&nbsp Editar</button></td>
-
-                        <td>
-                            <button type="button" class="btn btn-default" id="" onclick="Mostra('p16');">
-                                <span class="glyphicon glyphicon-ok-circle"></span>&nbsp Finalizar</button></td>
-
-                    </tr>
-                </table>
+                            </tr>
+                        </table>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
     </div>
@@ -296,33 +227,52 @@
 
     <!-- MODAL FINALIZADO COM SUCESSO -->
 
-        <div class="modal fade" data-backdrop="static" id="myModalFinalizadoSucesso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <!--   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+    <div class="modal fade" data-backdrop="static" id="myModalFinalizadoSucesso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!--   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
 
-                    </div>
-                    <div class="modal-body">
-                        <h1 style="font-size: 30px; font-weight: bolder; text-align: center; color: #1f1f1f">
-                            <span style="color: #09a01c;" class="glyphicon glyphicon-ok-sign"></span>&nbsp Grupo Finalizado com Sucesso!</h1>
-
-
-
-                    </div>
-
-                    <div class="modal-footer">
-
-                        <button type="button" class="btn btn-default" id="btnVoltarHome" data-dismiss="modal" onclick="Mostra('p2');" title="Voltar para a Home do sistema ">Voltar para Home</button>
-
-                        <button type="button" class="btn btn-default" id="" data-dismiss="modal" onclick="Mostra('p9');" title="Voltar para a finalização dos grupos do PI">Finalizar outro Grupo</button>
+                </div>
+                <div class="modal-body">
+                    <h1 style="font-size: 30px; font-weight: bolder; text-align: center; color: #1f1f1f">
+                        <span style="color: #09a01c;" class="glyphicon glyphicon-ok-sign"></span>&nbsp Grupo Finalizado com Sucesso!</h1>
 
 
-                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-default" id="btnVoltarHome" data-dismiss="modal" onclick="Mostra('p2');" title="Voltar para a Home do sistema ">Voltar para Home</button>
+
+                    <button type="button" class="btn btn-default" id="" data-dismiss="modal" onclick="Mostra('p9');" title="Voltar para a finalização dos grupos do PI">Finalizar outro Grupo</button>
+
+
                 </div>
             </div>
         </div>
+    </div>
 
+    <!-- MODAL NÃO POSSUI GRUPO PARA FINALIZAR -->
+
+    <div class="modal fade" data-backdrop="static" id="myModalNaoPossuiGrupo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    <h1 style="font-size: 30px; font-weight: bolder; text-align: center; color: #1f1f1f">
+                        <span style="color: #960d10;" class="glyphicon glyphicon-remove"></span>&nbsp Sua disciplina não possui grupos para finalizar!</h1>
+                </div>
+
+                <div class="modal-footer">
+                    <asp:LinkButton CssClass="btn btn-default" ID="btnVoltarHome2" runat="server" OnClick="btnVoltarHome2_Click" ToolTip="Voltar para a home do sistema">
+                        <span class="glyphicon glyphicon-home"></span>&nbsp Voltar para a home</asp:LinkButton>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </asp:Content>

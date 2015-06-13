@@ -12,56 +12,173 @@
 public partial class paginas_Usuario_piFinalizado {
     
     /// <summary>
-    /// Label11 control.
+    /// upgPIsFinalizados control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label11;
+    protected global::System.Web.UI.UpdateProgress upgPIsFinalizados;
     
     /// <summary>
-    /// TextBox1 control.
+    /// ScriptManager1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox TextBox1;
+    protected global::System.Web.UI.ScriptManager ScriptManager1;
     
     /// <summary>
-    /// CheckBox1 control.
+    /// updPIsFinalizados control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.CheckBox CheckBox1;
+    protected global::System.Web.UI.UpdatePanel updPIsFinalizados;
     
     /// <summary>
-    /// CheckBox3 control.
+    /// lblPesquisar control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.CheckBox CheckBox3;
+    protected global::System.Web.UI.WebControls.Label lblPesquisar;
     
     /// <summary>
-    /// CheckBox4 control.
+    /// txtPesquisar control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.CheckBox CheckBox4;
+    protected global::System.Web.UI.WebControls.TextBox txtPesquisar;
     
     /// <summary>
-    /// CheckBox5 control.
+    /// lbPesquisar control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.CheckBox CheckBox5;
+    protected global::System.Web.UI.WebControls.LinkButton lbPesquisar;
+    
+    /// <summary>
+    /// lblSemestreAno control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblSemestreAno;
+    
+    /// <summary>
+    /// ddlSemestreAno control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList ddlSemestreAno;
+    
+    /// <summary>
+    /// gdvPisFinalizados control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvPisFinalizados;
+    
+    /// <summary>
+    /// lblQtdRegistro control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblQtdRegistro;
+    
+    /// <summary>
+    /// UpdDetalhesProjeto control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel UpdDetalhesProjeto;
+    
+    /// <summary>
+    /// lblProjeto control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblProjeto;
+    
+    /// <summary>
+    /// lblNomeProjeto control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblNomeProjeto;
+    
+    /// <summary>
+    /// gdvDetalhesProjeto control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvDetalhesProjeto;
+    
+    /// <summary>
+    /// lblMedia control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMedia;
+    
+    /// <summary>
+    /// lblMediaProjeto control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMediaProjeto;
+    
+    /// <summary>
+    /// btnVoltar control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnVoltar;
+    
+    /// <summary>
+    /// lbGrafico control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton lbGrafico;
+    
+    /// <summary>
+    /// btnImprimirProjeto control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnImprimirProjeto;
 }

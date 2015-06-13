@@ -20,28 +20,17 @@
     <script src="../../Scripts/jquery.skitter.js" type="text/javascript"></script>
     <script src="../../Scripts/bootstrap.js" type="text/javascript"></script>
     <script src="../../scripts/jquery.hotkeys.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $(this).bind('keydown', 'alt+f10', function (e) {
-                $('#txtLoginM').toggleClass('hidden')
-                $('#txtSenhaM').toggleClass('hidden')
-                $('#btnEnviarM').toggleClass('hidden');
-                $("#lblMsgErroM").toggleClass('hidden');
-               
-            });
-        });
-    </script>
+    <script src="../../scripts/cursor.js"></script>
 
     <!-- Dialog -->
     <%--<script src="../../Scripts/jquery-ui.js"></script>--%>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" defaultbutton="enviar">
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="container-fluid">
-
+                   
 
                     <!-- Barra de cima onde fica o logo e depois as informações da sessão do usuário // Revisado(?) -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -54,14 +43,15 @@
 
                             <li>
                                 <div class="container-fluid" style="margin-top:10px;margin-left:15px;">
-                                <asp:TextBox ID="txtLoginM" class="form-horizontal hidden" placeholder="Login" style="width:180px;" runat="server" ></asp:TextBox>&nbsp
-                                <asp:TextBox ID="txtSenhaM" class="form-horizontal hidden"  placeholder="Senha" style="width:180px;" runat="server" Textmode="Password"></asp:TextBox>&nbsp
+                                <asp:TextBox ID="txtLoginM" class="form-horizontal hidden" placeholder="Login" style="width:180px;" runat="server" MaxLength="63"></asp:TextBox>&nbsp
+                                <asp:TextBox ID="txtSenhaM" class="form-horizontal hidden"  placeholder="Senha" style="width:180px;" runat="server" Textmode="Password" MaxLength="63"></asp:TextBox>&nbsp
                                 <asp:Button ID="btnEnviarM" class="btn btn-default hidden" Style="width: 125px;" runat="server" Text="Entrar" OnClick="btnEnviarM_Click" />
                                 <asp:Label ID="lblMsgErroM" class="hidden" runat="server" Style="color: #960d10"></asp:Label>
                                     </div>
                             </li>
 
                         </ul>
+                         
                     </div>
                     <!-- /.navbar-collapse -->
                 </div>
@@ -86,53 +76,21 @@
                     <div class="panel-body">
                         <ul class="pager">
                             <!--- Login de professor / administrador) !--->
-                            <center><asp:TextBox ID="txtLogin" class="form-control"  placeholder="Login" style="width:250px;" runat="server"></asp:TextBox></center>
+                            <center><asp:TextBox ID="txtLogin" class="form-control"  placeholder="Login" style="width:250px;" runat="server" MaxLength="63"></asp:TextBox></center>
                             <br>
-                            <center><asp:TextBox ID="txtSenha" class="form-control" placeholder="Senha" style="width:250px;" runat="server" TextMode="Password"></asp:TextBox></center>
+                            <center><asp:TextBox ID="txtSenha" class="form-control" placeholder="Senha" style="width:250px;" runat="server" TextMode="Password" MaxLength="63"></asp:TextBox></center>
                             <br>
                             <asp:Button ID="enviar" class="btn btn-default" Style="width: 250px;" runat="server" Text="Entrar" OnClick="enviar_Click" /><br />
                             <asp:Label ID="lblMsgErro" runat="server" Style="color: #960d10"></asp:Label>
-                            <center><a href="#" style="font-size:13px" data-toggle="modal" data-target="#myModal">Problemas com o Login?</a>
+                            <center><a href="#" style="font-size:13px" data-toggle="modal" data-target="#myModal">Esqueceu sua senha?</a>
+                                </ul>
                     </div>
 
-                    </ul>
+                    
                 </div>
             </div>
         </div>
         <div class="col-xs-6 col-md-4"></div>
-
-        <%--<script type="text/javascript">
-
-
-            function EscolherPerfil() {
-                $('#MyModalEscolha').modal(
-                    {
-                        url: 'login.aspx'
-                    }
-                );
-            }
-        </script>
-
-        <div class="modal fade" id="MyModalEscolha" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fechar</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Escolha o seu perfil:</h4>
-                    </div>
-                    <div class="modal-body">
-                        <asp:Button ID="btnAdministrador" CssClass="btn btn-default" Text="Administrador" runat="server" OnClick="btnAdministrador_Click" />
-                        &nbsp
-                            <asp:Button ID="btnProfessor" CssClass="btn btn-default" Text="Professor" runat="server" OnClick="btnProfessor_Click1" />
-
-                    </div>
-                    <div class="modal-footer">
-                    </div>
-                </div>
-            </div>
-        </div>--%>
-
-
 
     </form>
 </body>

@@ -1,16 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
 
-namespace AppCode.Classes
-{
+
     public class Atribuicao_PI{
 
         private Projeto_Inter pri_codigo;
         private int adi_codigo;
+        private bool adi_mae;
+        private int dis_codigo;
+
+        public int Dis_codigo
+        {
+            get { return dis_codigo; }
+            set { dis_codigo = value; }
+        }
+
+        public bool Adi_mae
+        {
+            get { return adi_mae; }
+            set { adi_mae = value; }
+        }
+
 
         public global::Projeto_Inter Pri_codigo
         {
@@ -26,4 +39,4 @@ namespace AppCode.Classes
 
 
     }
-}
+
