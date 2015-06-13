@@ -12,7 +12,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+
     }
 
     protected void enviar_Click(object sender, EventArgs e) //Botão Login ADM COORD e PROF 
@@ -36,30 +36,28 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 
             if (prof != null)
             {
+                Session["curso"] = "";
+                Session["semestre"] = "";
+                Session["disciplina"] = "";
+                Session["mae"] = "";
+                Session["Professor"] = prof;
+                Session["matricula"] = prof.Matricula;
+                Session["nome"] = prof.Nome;
+                Session["menu"] = "coordenador";
+                Session["perfil"] = null;
+                Session["login"] = user;
+                Session["DataSetCalendarioAndProfessor"] = null;
                 Session["DS_AllPIsbyCalendarioAtual"] = null;
+
                 if (Funcoes_DB.ValidarAdmCoord(prof) == 2)
                 {
                     //Coordenador e professor
                     //chama a página de escolher o perfil
-                    Session["menu"] = "coordenador";
-                    Session["perfil"] = null;
-                    Session["login"] = user;
-                    Session["Professor"] = prof;
-                    Session["matricula"] = prof.Matricula;
-                    Session["nome"] = prof.Nome;
                     Response.Redirect("~/Paginas/Administrador/alterar_perfil.aspx");
 
                 }
                 else
                 {
-                    Session["Professor"] = prof;
-                    Session["matricula"] = prof.Matricula;
-                    Session["nome"] = prof.Nome;
-                    Session["DataSetCalendarioAndProfessor"] = null;
-                    Session["curso"] = "";
-                    Session["semestre"] = "";
-                    Session["disciplina"] = "";
-                    Session["mae"] = "";
                     Response.Redirect("~/EscolherDisciplina");
                 }
 
