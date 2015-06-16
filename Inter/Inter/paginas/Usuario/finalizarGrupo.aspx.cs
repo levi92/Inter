@@ -276,6 +276,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
             Grupo gru = new Grupo();
             gru.Gru_codigo = Convert.ToInt32(ddlFinalizarGrupos.SelectedValue);
             gru.Gru_media = Convert.ToDouble(Session["MediaGrupo"]);
+            gru.Gru_usuario = Session["nome"].ToString();
             Grupo_DB.UpdateGrupoAvaliado(gru);
 
             DataSet dsGruposFinalizar = new DataSet();

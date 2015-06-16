@@ -12,13 +12,14 @@ public class Criterio_PI_DB{
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "INSERT INTO cpi_criterio_pi(cpi_codigo, cge_codigo, pri_codigo, adi_codigo, cpi_peso) VALUES(0, ?cge_codigo, ?pri_codigo, ?adi_codigo, ?cpi_peso)";
+            string sql = "INSERT INTO cpi_criterio_pi(cpi_codigo, cge_codigo, pri_codigo, adi_codigo, cpi_peso, cpi_usuario) VALUES(0, ?cge_codigo, ?pri_codigo, ?adi_codigo, ?cpi_peso, ?cpi_usuario)";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
             objCommand.Parameters.Add(Mapped.Parameter("?cge_codigo", criterio.Cge_codigo.Cge_codigo));
             objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", criterio.Pri_codigo.Pri_codigo));
             objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", criterio.Adi_codigo.Adi_codigo));
             objCommand.Parameters.Add(Mapped.Parameter("?cpi_peso", criterio.Cpi_peso));
+            objCommand.Parameters.Add(Mapped.Parameter("?cpi_usuario", criterio.Cpi_usuario));
             objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();

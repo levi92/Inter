@@ -12,6 +12,7 @@ using System.Web;
         private double gru_media;
         private bool gru_finalizado;
         private Projeto_Inter pri_codigo;
+        private string gru_usuario;
 
         public global::Projeto_Inter Pri_codigo
         {
@@ -41,6 +42,12 @@ using System.Web;
         {
             get { return gru_codigo; }
             set { gru_codigo = value; }
+        }
+
+        public string Gru_usuario
+        {
+            get { return gru_usuario; }
+            set { gru_usuario = value; }
         }
 
     }

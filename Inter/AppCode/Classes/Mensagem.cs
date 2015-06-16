@@ -18,6 +18,14 @@ public class Mensagem
     //Conteúdo da mensagem 
     public string Conteudo { get; set; }
 
+    private string msg_usuario;
+
+    public string Msg_usuario
+    {
+        get { return msg_usuario; }
+        set { msg_usuario = value; }
+    }
+
     public Mensagem (int codrequerimento, string matricula, DateTime dataenvio, string conteudo)
     {
         CodigoReq = codrequerimento;

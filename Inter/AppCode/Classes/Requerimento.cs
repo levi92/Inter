@@ -25,6 +25,8 @@ public class Requerimento{
     //Categoria em que o ticket se encaixa.
     public string Categoria { get; set; }
 
+    public string Usuario { get; set; }
+
     public Requerimento(string matricula, int grupo, string assunto, DateTime data, int status, string categoria)
     {
         MatriculaPro = matricula;
@@ -46,13 +48,15 @@ public class Requerimento{
         Categoria = categoria;
     }
     //Constructor do Insert
-    public Requerimento(string matricula, int grupo, string assunto, string categoria)
+    public Requerimento(string matricula, int grupo, string assunto, string categoria, string usuario)
     {
+        CodigoReq = 0;
         MatriculaPro = matricula;
         CodigoGrupo = grupo;
         Assunto = assunto;
         Categoria = categoria;
         DataReq = DateTime.Now; //Pega na hora da criação o tempo do servidor
-        Status = 0; //Por padrão: Status "em aberto"
+        Status = 1; //Por padrão: Status "em aberto"
+        Usuario = usuario;
     }
 }

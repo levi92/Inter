@@ -138,7 +138,9 @@ public partial class paginas_Admin_usuarios : System.Web.UI.Page
             GridViewRow gvr = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer); //pega a linha da grid pela fonte do comando
             string matricula = gdvProf.Rows[gvr.RowIndex].Cells[0].Text; //pega a matricula daquela linha do gridview
             Perfil perf = new Perfil();
+            perf.Per_usuario = Session["nome"].ToString();
             perf.Matricula = matricula;
+            perf.Descricao = 2;
 
             if (Perfil_DB.InsertAdmCoord(perf) == 0)
             {
