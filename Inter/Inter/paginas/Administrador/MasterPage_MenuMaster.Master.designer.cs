@@ -30,6 +30,15 @@ public partial class paginas_Admin_MenuMaster {
     protected global::System.Web.UI.WebControls.Label dia;
     
     /// <summary>
+    /// icone65 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HyperLink icone65;
+    
+    /// <summary>
     /// icone2 control.
     /// </summary>
     /// <remarks>

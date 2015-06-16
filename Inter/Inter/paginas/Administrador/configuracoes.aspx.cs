@@ -13,7 +13,6 @@ using System.Net;
 
 public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 {
-    internal DataTable dt = null;
     protected void Page_PreInit(object sender, EventArgs e)
     {
         // Se sessão estiver nula redireciona para o bloqueio Url
