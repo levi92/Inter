@@ -98,17 +98,17 @@
     <div id="p1" class="first">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Tickets</h3>
+                <h3 class="panel-title">Solicitações</h3>
             </div>
             <div class="panel-body">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="active"><a href="#geral" role="tab" data-toggle="tab">Aberto</a></li>
                     <li><a href="#andamento" role="tab" data-toggle="tab">Em Andamento</a></li>
                     <li><a href="#finalizado" role="tab" data-toggle="tab">Finalizado</a></li>
-                    <!--Placeholder, isso vai no usuário--><li><a data-toggle='modal' data-target='#myModal2'>Novo Ticket</a></li>
+                    <!--Placeholder, isso vai no usuário--><li><a data-toggle='modal' data-target='#myModal2'>Nova Solicitação</a></li>
                 </ul>
                 <div class="tab-content">
-                    <!-- TICKETS EM ABERTO -->
+                    <!-- SOLICITACAO EM ABERTO -->
                     <div role="tabpanel" class="tab-pane fade in active" id="geral">
                         <%--Grid com UpdatePanel para não atualizar a página inteira ao editar, inserir e desativar solicitacoes--%>
                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -336,12 +336,7 @@
                             <div class="form-group">
                                 <div class="controls-row">
                                     <asp:Label ID="lblAssuntoNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Assunto: "></asp:Label>                                    
-                                    <asp:DropDownList ID="txtAssunto" ClientIDMode="Static" CssClass="form-control col-sm-9"  Width="50%" runat="server">
-                                        <asp:ListItem>Alteração de notas</asp:ListItem>
-                                        <asp:ListItem>Problema com cadastros</asp:ListItem>
-                                        <asp:ListItem>Problema com avaliações</asp:ListItem>
-                                        <asp:ListItem>Sugestão</asp:ListItem>
-                                    </asp:DropDownList>
+                                    <asp:TextBox ID="txtAssunto" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox>
                                     
                                     <%--Validação do Campo Assunto (Verifica se está vazio e se está preenchido com uma string)--%>
                                     &nbsp<asp:RequiredFieldValidator ID="rfvAssuntoNovoRequerimento" runat="server" CssClass="col-sm1" ErrorMessage="O campo Assunto deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtAssunto" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>
@@ -352,8 +347,13 @@
                             <div class="form-group">
                                 <div class="controls-row">
 
-                                    <asp:Label ID="lblCategoriaNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Categoria: "></asp:Label></td>
-                                    <asp:TextBox ID="txtCategoria" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox></td>
+                                    <asp:Label ID="lblCategoriaNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Categoria: "></asp:Label></td>    
+                                    <asp:DropDownList ID="txtCategoria" ClientIDMode="Static" CssClass="form-control col-sm-9"  Width="50%" runat="server">
+                                        <asp:ListItem>Alteração de notas</asp:ListItem>
+                                        <asp:ListItem>Problema com cadastros</asp:ListItem>
+                                        <asp:ListItem>Problema com avaliações</asp:ListItem>
+                                        <asp:ListItem>Sugestão</asp:ListItem>
+                                    </asp:DropDownList></td>
                                    
                                      <%--Validação do Campo Categoria (Verifica se está vazio e se está preenchido com uma string)--%>
                                      &nbsp<asp:RequiredFieldValidator ID="rfvCategoriaNovoRequerimento" CssClass="col-sm1" runat="server" ErrorMessage="O campo Categoria deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtCategoria" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>

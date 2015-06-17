@@ -171,7 +171,7 @@ public partial class paginas_Admin_solicitacoes {
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList txtAssunto;
+    protected global::System.Web.UI.WebControls.TextBox txtAssunto;
     
     /// <summary>
     /// rfvAssuntoNovoRequerimento control.
@@ -198,7 +198,7 @@ public partial class paginas_Admin_solicitacoes {
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtCategoria;
+    protected global::System.Web.UI.WebControls.DropDownList txtCategoria;
     
     /// <summary>
     /// rfvCategoriaNovoRequerimento control.

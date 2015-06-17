@@ -44,11 +44,11 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         {
             gdvRequerimentoAberto.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
             gdvRequerimentoAberto.DataBind(); //preenche o grid view com os dados
-            lblQtdRegistro.Text = "Foram encontrados " + qtd + " Requerimentos";
+            lblQtdRegistro.Text = "Foram encontrados " + qtd + " Solicitações";
         }
         else
         {
-            lblQtdRegistro.Text = "Nenhum Requerimento foi encontrado.";
+            lblQtdRegistro.Text = "Nenhuma Solicitação foi encontrada.";
         }
 
 
@@ -61,11 +61,11 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         {
             gdvRequerimentoAndamento.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
             gdvRequerimentoAndamento.DataBind(); //preenche o grid view com os dados
-            lblQtdRegistroAnd.Text = "Foram encontrados " + qtd + " Requerimentos";
+            lblQtdRegistroAnd.Text = "Foram encontrados " + qtd + " Solicitações";
         }
         else
         {
-            lblQtdRegistroAnd.Text = "Nenhum Requerimento foi encontrado.";
+            lblQtdRegistroAnd.Text = "Nenhuma Solicitação foi encontrada.";
         }
 
 
@@ -78,11 +78,11 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         {
             gdvRequerimentoFinalizado.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
             gdvRequerimentoFinalizado.DataBind(); //preenche o grid view com os dados
-            lblQtdRegistroFin.Text = "Foram encontrados " + qtd + " Requerimentos";
+            lblQtdRegistroFin.Text = "Foram encontrados " + qtd + " Solicitações";
         }
         else
         {
-            lblQtdRegistroFin.Text = "Nenhum Requerimento foi encontrado.";
+            lblQtdRegistroFin.Text = "Nenhuma Solicitação foi encontrada.";
         }
 
 
@@ -99,12 +99,10 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         {
 
             string usuario = Session["nome"].ToString();
-            string assunto = "teste ass";
-            string categoria = "teste cat";
-            int grupo = 1;
-            string matricula = "1";
+            string assunto = txtAssunto.Text;
+            string categoria = txtCategoria.Text;
 
-            Requerimento req = new Requerimento(matricula, grupo, assunto, categoria, usuario);
+            Requerimento req = new Requerimento(usuario, assunto, categoria, usuario);
 
             if (Requerimento_DB.Insert(req) == 0)
             {

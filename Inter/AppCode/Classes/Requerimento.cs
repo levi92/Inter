@@ -59,4 +59,17 @@ public class Requerimento{
         Status = 1; //Por padrão: Status "em aberto"
         Usuario = usuario;
     }
+
+    //Constructor do Insert (SEM GRUPO)
+    public Requerimento(string matricula, string assunto, string categoria, string usuario)
+    {
+        CodigoReq = 0;
+        MatriculaPro = matricula;
+        CodigoGrupo = 0;
+        Assunto = assunto;
+        Categoria = categoria;
+        DataReq = DateTime.Now; //Pega na hora da criação o tempo do servidor
+        Status = 1; //Por padrão: Status "em aberto"
+        Usuario = usuario;
+    }
 }

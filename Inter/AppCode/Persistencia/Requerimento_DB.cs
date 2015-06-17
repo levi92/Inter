@@ -16,7 +16,14 @@ public class Requerimento_DB
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "INSERT INTO req_requerimento(REQ_CODIGO, PRO_MATRICULA, GRU_CODIGO, REQ_ASSUNTO, REQ_DT_REQUISICAO, REQ_STATUS, REQ_CATEGORIA, REQ_USUARIO) VALUES(?req_codigo, ?pro_matricula, ?gru_codigo, ?req_assunto, ?req_dt_requisicao, ?req_status, ?req_categoria, ?req_usuario)";
+            string sql = " ";
+
+            if (requerimento.CodigoGrupo != 0) {
+               sql = "INSERT INTO req_requerimento(REQ_CODIGO, PRO_MATRICULA, GRU_CODIGO, REQ_ASSUNTO, REQ_DT_REQUISICAO, REQ_STATUS, REQ_CATEGORIA, REQ_USUARIO) VALUES (?req_codigo, ?pro_matricula, ?gru_codigo, ?req_assunto, ?req_dt_requisicao, ?req_status, ?req_categoria, ?req_usuario)";
+            } else {
+               sql = "INSERT INTO req_requerimento(REQ_CODIGO, PRO_MATRICULA, REQ_ASSUNTO, REQ_DT_REQUISICAO, REQ_STATUS, REQ_CATEGORIA, REQ_USUARIO) VALUES (?req_codigo, ?pro_matricula, ?req_assunto, ?req_dt_requisicao, ?req_status, ?req_categoria, ?req_usuario)";
+            }
+            
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
             objCommand.Parameters.Add(Mapped.Parameter("?req_codigo", requerimento.CodigoReq));
