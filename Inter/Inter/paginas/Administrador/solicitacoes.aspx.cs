@@ -32,6 +32,10 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         }
     }
 
+    public void Teste()
+    {
+        lblMsgAssunto.Text = "mudar";
+    }
 
     public void CarregarGridAtivos()
     {
@@ -42,6 +46,8 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         //se qtd for maior que zero, ou seja, se tiver dados no data set
         if (qtd > 0)
         {
+            lblMsgAssunto.Text = "teste";
+
             gdvRequerimentoAberto.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
             gdvRequerimentoAberto.DataBind(); //preenche o grid view com os dados
             lblQtdRegistro.Text = "Foram encontrados " + qtd + " Solicitações";
@@ -130,6 +136,23 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         txtAssunto.Text = "";
         txtCategoria.Text = "";
 
+    }
+
+    protected void gdvRequerimentoAberto_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+
+    }
+
+    protected void btnModal_Command(object sender, CommandEventArgs e)
+    {
+        int ID=Convert.ToInt32(e.CommandArgument);
+        Requerimento req = Requerimento_DB.Select(ID);
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+
+        Teste();
+
+        
     }
 
 

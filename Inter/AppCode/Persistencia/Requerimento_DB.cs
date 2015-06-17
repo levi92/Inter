@@ -65,11 +65,10 @@ public class Requerimento_DB
                 var Assunto = objDataReader["req_assunto"].ToString();
                 var DataReq = Convert.ToDateTime(objDataReader["req_dt_requisicao"]);
                 var MatriculaPro = objDataReader["pro_matricula"].ToString();
-                var CodigoGrupo = Convert.ToInt32(objDataReader["gru_codigo"]);
                 var Status = Convert.ToInt32(objDataReader["req_status"]);
                 var Categoria = objDataReader["pro_matricula"].ToString();    
            
-                objRequerimento = new Requerimento(CodigoReq, MatriculaPro, CodigoGrupo, Assunto, DataReq, Status, Categoria);
+                objRequerimento = new Requerimento(CodigoReq, MatriculaPro, Assunto, DataReq, Status, Categoria);
             }
             objDataReader.Close();
             objConnection.Close();
