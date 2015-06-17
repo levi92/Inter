@@ -47,6 +47,17 @@ public class Requerimento{
         Status = status;
         Categoria = categoria;
     }
+
+    //Constructor do select
+    public Requerimento(int codigo, string matricula, string assunto, DateTime data, int status, string categoria)
+    {
+        CodigoReq = codigo;
+        MatriculaPro = matricula;
+        Assunto = assunto;
+        DataReq = data;
+        Status = status;
+        Categoria = categoria;
+    }
     //Constructor do Insert
     public Requerimento(string matricula, int grupo, string assunto, string categoria, string usuario)
     {

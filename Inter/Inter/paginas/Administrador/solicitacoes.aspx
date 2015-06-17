@@ -9,11 +9,18 @@
         * Encerrado, não favorável: Amarelo(#FFEB3B)
         * Encerrado, favorável: Verde (#4CAF50)
         -->
+    <script type="text/javascript" src="../../scripts/bootstrap.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#icone2').addClass('corIcone');
         });
     </script>
+
+    <script type="text/javascript">
+        function openModal() {
+            $('#myModal1').modal('show');
+        }
+        </script>
     <!--Início do modal de Msg-->
     <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width: 60%;">
@@ -22,10 +29,13 @@
                 <div class="modal-header" style="background-color: #960d10; color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);">
                     <!--Arrumar o hover aqui-->
                     <button type="button" data-dismiss="modal" style="margin-top: -9px; float: left; border: none; background: none;"><span class="mdi mdi-chevron-left hoverAll" style="font-size: 33px; margin-top: 4.5px;"></span></button>
-                    <!--ASSUNTO DO TICKET<h4 class="modal-title" id="myModalLabel1" style="float: left;">--ASSUNtO_DO_TICKET_AQUI--</h4>-->
+                    <!--ASSUNTO DO TICKET-->
+                    <h4 class="modal-title" id="myModalLabelT1" style="float: left;"></h4>
                     <!--Arrumar  Hover aqui-->
                     <button type="button" id="butMostraMenu" name="subMenu" onclick="mostraDiv1('subMenu')" style="float: right; border: none; background: none; margin-top: -2px;"><span class="mdi mdi-dots-vertical hoverAll" style="font-size: 25px;"></span></button>
-                    <!--NOME DO PROFESSOR QUE ABRIU O TICKET<h4 style="float: right; margin-top: 0; padding-right: 10px;">--NOME_DO_PROFESSOR_AQUI--</h4>-->
+                    <!--NOME DO PROFESSOR QUE ABRIU O TICKET-->
+                    
+                    <h4 style="float: right; margin-top: 0; padding-right: 10px;">--NOME_DO_PROFESSOR_AQUI--</h4>
                 </div>
                 <!--Início 3-dot menu-->
                 <!--Início do submenu-->
@@ -47,6 +57,17 @@
                             <div class="txtCard" onclick="mostraInfo(1)">--MSG_AQUI--.</div>
                             <div id="info1" class="infoMsg">Enviado por Jusjiscreudo - As 20:72</div>
                         </div>-->
+        
+                        <%--Grid com UpdatePanel para não atualizar a página inteira ao editar, inserir e desativar solicitacoes--%>
+                      
+                         
+                      
+                       
+                         
+
+                       
+                   
+              
                     </div>
                 </div>
                 <!--Fim do corpo-->
@@ -66,7 +87,7 @@
 
     <div class="modal fade" data-backdrop="static" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width: 30%;">
-            <div class="modal-content">
+            <div class="modal-focontent">
                 <div class="modal-header" style="background-color: #960d10; color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);">
                     <!--Arrumar o hover aqui-->
                     <button type="button" data-dismiss="modal" style="margin-top: -9px; float: left; border: none; background: none;"><span class="mdi mdi-chevron-left hoverAll" style="font-size: 33px; margin-top: 4.5px;"></span></button>
@@ -108,14 +129,16 @@
                     <!--Placeholder, isso vai no usuário--><li><a data-toggle='modal' data-target='#myModal2'>Nova Solicitação</a></li>
                 </ul>
                 <div class="tab-content">
+
                     <!-- SOLICITACAO EM ABERTO -->
-                    <div role="tabpanel" class="tab-pane fade in active" id="geral">
+                    <div role="tabpanel" class="tab-pane fade in active" id="geral"> 
                         <%--Grid com UpdatePanel para não atualizar a página inteira ao editar, inserir e desativar solicitacoes--%>
                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         <asp:UpdatePanel ID="UpdatePanelAtivados" UpdateMode="Conditional" runat="server">
                             <ContentTemplate>
                                 <asp:GridView ID="gdvRequerimentoAberto" runat="server" CssClass="gridView" DataKeyNames="req_codigo"
                                     AutoGenerateColumns="false"
+                                    
                                     AutoGenerateEditButton="false">
 
 
@@ -132,47 +155,36 @@
                                         </asp:TemplateField>
 
                                         <%--Coluna do assunto do Requerimento--%>
-                                        <asp:TemplateField HeaderText="Assunto"> 
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_assunto")%>'> </asp:TextBox>                                                
-                                            </EditItemTemplate>                                         
+                                        <asp:TemplateField HeaderText="Assunto">                                       
                                             <ItemTemplate>
-                                                <a data-toggle='modal' data-target='#myModal1'><asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label></a>
+                                                <asp:LinkButton ID="btnModal" runat="server" Text='<%#Eval ("req_assunto")%>' CommandArgument='<%#Eval ("req_codigo")%>' OnCommand="btnModal_Command" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
                                         <%--Coluna da categoria do Requerimento--%>
-                                        <asp:TemplateField HeaderText="Categoria">  
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_categoria")%>'> </asp:TextBox>                                                
-                                            </EditItemTemplate>                                        
+                                        <asp:TemplateField HeaderText="Categoria">                                       
                                             <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_categoria")%>'></asp:Label>
+                                                <asp:Label ID="lblCategoria1" runat="server" Text='<%#Eval ("req_categoria")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <%--Coluna do usuario do Requerimento--%>
-                                        <asp:TemplateField HeaderText="Usuario">  
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("pro_matricula")%>'> </asp:TextBox>                                                
-                                            </EditItemTemplate>                                        
+                                        <asp:TemplateField HeaderText="Usuario">                                   
                                             <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("pro_matricula")%>'></asp:Label>
+                                                <asp:Label ID="lblUsuario1" runat="server" Text='<%#Eval ("pro_matricula")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
                                         <%--Coluna da descrição do Critério Geral--%>
                                         <asp:TemplateField HeaderText="Data">
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'> </asp:TextBox>                                                
-                                            </EditItemTemplate>
                                             <ItemTemplate>
-                                                <asp:Label ID="lblDescricao" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
+                                                <asp:Label ID="lblDescricao1" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
                                     </Columns>
 
                                 </asp:GridView>
+                               <asp:Label ID="lblMsgAssunto" runat="server"></asp:Label>
                                 <asp:Label ID="lblQtdRegistro" runat="server"></asp:Label>
                             </ContentTemplate>
 
@@ -201,41 +213,29 @@
                                         </asp:TemplateField>
 
                                         <%--Coluna do assunto do Requerimento--%>
-                                        <asp:TemplateField HeaderText="Assunto"> 
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_assunto")%>'> </asp:TextBox>                                                
-                                            </EditItemTemplate>                                         
+                                        <asp:TemplateField HeaderText="Assunto">                                          
                                             <ItemTemplate>
                                                 <a data-toggle='modal' data-target='#myModal1'><asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label></a>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
                                         <%--Coluna da categoria do Requerimento--%>
-                                        <asp:TemplateField HeaderText="Categoria">  
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_categoria")%>'> </asp:TextBox>                                                
-                                            </EditItemTemplate>                                        
+                                        <asp:TemplateField HeaderText="Categoria">                                      
                                             <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_categoria")%>'></asp:Label>
+                                                <asp:Label ID="lblCategoria2" runat="server" Text='<%#Eval ("req_categoria")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <%--Coluna do usuario do Requerimento--%>
-                                        <asp:TemplateField HeaderText="Usuario">  
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("pro_matricula")%>'> </asp:TextBox>                                                
-                                            </EditItemTemplate>                                        
+                                        <asp:TemplateField HeaderText="Usuario">                                      
                                             <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("pro_matricula")%>'></asp:Label>
+                                                <asp:Label ID="lblUsuario2" runat="server" Text='<%#Eval ("pro_matricula")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
                                         <%--Coluna da descrição do Critério Geral--%>
                                         <asp:TemplateField HeaderText="Data">
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'> </asp:TextBox>                                                
-                                            </EditItemTemplate>
                                             <ItemTemplate>
-                                                <asp:Label ID="lblDescricao" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
+                                                <asp:Label ID="lblData2" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
@@ -270,41 +270,30 @@
                                         </asp:TemplateField>
 
                                         <%--Coluna do assunto do Requerimento--%>
-                                        <asp:TemplateField HeaderText="Assunto"> 
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_assunto")%>'> </asp:TextBox>                                                
-                                            </EditItemTemplate>                                         
+                                        <asp:TemplateField HeaderText="Assunto">                                       
                                             <ItemTemplate>
+                                                
                                                 <a data-toggle='modal' data-target='#myModal1'><asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label></a>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
                                         <%--Coluna da categoria do Requerimento--%>
-                                        <asp:TemplateField HeaderText="Categoria">  
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_categoria")%>'> </asp:TextBox>                                                
-                                            </EditItemTemplate>                                        
+                                        <asp:TemplateField HeaderText="Categoria">                                       
                                             <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_categoria")%>'></asp:Label>
+                                                <asp:Label ID="lblCategoria3" runat="server" Text='<%#Eval ("req_categoria")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <%--Coluna do usuario do Requerimento--%>
-                                        <asp:TemplateField HeaderText="Usuario">  
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("pro_matricula")%>'> </asp:TextBox>                                                
-                                            </EditItemTemplate>                                        
+                                        <asp:TemplateField HeaderText="Usuario">                                  
                                             <ItemTemplate>
-                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("pro_matricula")%>'></asp:Label>
+                                                <asp:Label ID="lblUsuario3" runat="server" Text='<%#Eval ("pro_matricula")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
                                         <%--Coluna da descrição do Critério Geral--%>
                                         <asp:TemplateField HeaderText="Data">
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'> </asp:TextBox>                                                
-                                            </EditItemTemplate>
                                             <ItemTemplate>
-                                                <asp:Label ID="lblDescricao" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
+                                                <asp:Label ID="lblData3" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
