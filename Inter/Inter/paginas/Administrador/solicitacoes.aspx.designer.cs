@@ -12,6 +12,69 @@
 public partial class paginas_Admin_solicitacoes {
     
     /// <summary>
+    /// ScriptManager2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.ScriptManager ScriptManager2;
+    
+    /// <summary>
+    /// UpdatePanel3 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+    
+    /// <summary>
+    /// lblMsgAssunto control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgAssunto;
+    
+    /// <summary>
+    /// lblMsgCategoria control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgCategoria;
+    
+    /// <summary>
+    /// lblMsgProfessor control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgProfessor;
+    
+    /// <summary>
+    /// msgInsideBox control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl msgInsideBox;
+    
+    /// <summary>
+    /// lblMsgId control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgId;
+    
+    /// <summary>
     /// txtResponder control.
     /// </summary>
     /// <remarks>
@@ -19,6 +82,15 @@ public partial class paginas_Admin_solicitacoes {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtResponder;
+    
+    /// <summary>
+    /// btnNovaMsg control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnNovaMsg;
     
     /// <summary>
     /// dropDownListTipoTicket control.
@@ -57,15 +129,6 @@ public partial class paginas_Admin_solicitacoes {
     protected global::System.Web.UI.WebControls.LinkButton btnCriarNovoTicket;
     
     /// <summary>
-    /// ScriptManager1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.ScriptManager ScriptManager1;
-    
-    /// <summary>
     /// UpdatePanelAtivados control.
     /// </summary>
     /// <remarks>
@@ -82,15 +145,6 @@ public partial class paginas_Admin_solicitacoes {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.GridView gdvRequerimentoAberto;
-    
-    /// <summary>
-    /// lblMsgAssunto control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMsgAssunto;
     
     /// <summary>
     /// lblQtdRegistro control.

@@ -32,17 +32,13 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         }
     }
 
-    public void Teste()
-    {
-        lblMsgAssunto.Text = "mudar";
-    }
+
 
     public void CarregarGridAtivos()
     {
         //ABERTO
         DataSet ds = Requerimento_DB.SelectS(1); //criando um data set com as solicitações abertas
         int qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
-
         //se qtd for maior que zero, ou seja, se tiver dados no data set
         if (qtd > 0)
         {
@@ -149,10 +145,57 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         Requerimento req = Requerimento_DB.Select(ID);
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+        lblMsgAssunto.Text = req.Assunto;
+        lblMsgProfessor.Text = req.MatriculaPro;
+        lblMsgCategoria.Text = req.Categoria;
+        lblMsgId.Text = req.CodigoReq.ToString();
 
-        Teste();
+        abrirMensagens(req.CodigoReq);  
+
+        UpdatePanel3.Update();
+        
 
         
+    }
+
+    public void abrirMensagens(int cod)
+    {
+        DataSet msgDt = Mensagem_DB.SelectAll(cod);
+        int qtd = msgDt.Tables[0].Rows.Count;
+        string msgBox = " ";
+        for (int i = 0; i < qtd; i++)
+        {
+            msgBox = msgBox + "<div class='allMsg' style='float: left'><div class='txtCard' onclick='mostraInfo(1)'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info1' class='infoMsg'>Enviado por Jusjiscreudo - As 20:72</div></div>";
+        }
+
+        msgInsideBox.InnerHtml = msgBox;  
+    }
+
+    protected void btnNovaMsg_Click(object sender, EventArgs e)
+    {
+        
+
+        if (!String.IsNullOrEmpty(txtResponder.Text))
+        {
+
+            string usuario = Session["nome"].ToString();
+            string msg = txtResponder.Text;
+            int cod = Convert.ToInt32(lblMsgId.Text);
+
+            Mensagem men = new Mensagem(cod, usuario, msg);
+
+            if (Mensagem_DB.Insert(men) == 0)
+            {
+            abrirMensagens(cod);         
+            }
+                
+          
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+            UpdatePanel3.Update();
+
+
+        }
     }
 
 
