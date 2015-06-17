@@ -171,8 +171,7 @@
                         <td class="colunaBotoes"></td>
                         <td class="colunaBotoes"></td>
                         <td class="colunaBotoes">
-                            <asp:Button ID="btnContinuarEtapa2" OnClientClick="Mostra('p10'); return false;" ClientIDMode="Static"
-                                CssClass="btn btn-default" runat="server" Text="Continuar" ToolTip="Ir para adicionar critérios" />
+                            <button ID="btnContinuarEtapa2" OnClick="Mostra('p10'); return false;" Class="btn btn-default" Value="Continuar" Title="Ir para adicionar critérios" />
                         </td>
                     </tr>
                 </table>

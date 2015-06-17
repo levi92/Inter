@@ -328,16 +328,18 @@ $(document).ready(function () {
         for (var index = 0; index < i; index++) {
             auxData = "";
             auxData = $('#descData' + index).html();
+            var vetorData = $('#data' + index).html().split('/');
+            var dataInvertida = vetorData[2] + '-' + vetorData[1] + '-' + vetorData[0];
 
             if (typeof (auxData) != "undefined") {
-                dadosDatas += $('#descData' + index).html() + "|" + $('#data' + index).html() + "|";
+                dadosDatas += $('#descData' + index).html() + "|" + dataInvertida + "|";
             }
 
         }
 
         $.ajax({
             type: 'POST',
-            url: 'cadastrarPi.aspx/GetEventos',
+            url: 'paginas/Usuario/cadastrarPi.aspx/GetEventos',
             data: "{dadosEventos:" + JSON.stringify(dadosDatas) + "}",
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
