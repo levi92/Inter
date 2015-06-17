@@ -915,6 +915,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         pi.San_codigo = san;
         Projeto_Inter_DB.Insert(pi);
 
+        string sqlInsertEventos = "";
         //INSERINDO NA TABELA EVENTOS
         if (desc != null)
         {
@@ -924,9 +925,12 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 eve.Pri_codigo = pi;
                 eve.Eve_tipo = desc[i];
                 eve.Eve_data = Convert.ToDateTime(dat[i]);
+                sqlInsertEventos += "(0," + eve.Pri_codigo.Pri_codigo + ",'" + eve.Eve_data + "','" + eve.Eve_tipo + "'),";                               
                 eve.Eve_usuario = Session["nome"].ToString();
-                Eventos_DB.Insert(eve);
+               
             }
+            
+            Eventos_DB.Insert(sqlInsertEventos.Substring(0,sqlInsertEventos.Length-1));
         }
 
         //INSERINDO NA TABELA ATRIBUICAO_PI

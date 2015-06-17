@@ -156,15 +156,6 @@ public partial class paginas_Usuario_cadastrarPi {
     protected global::System.Web.UI.WebControls.Label lblDatas;
     
     /// <summary>
-    /// btnContinuarEtapa2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnContinuarEtapa2;
-    
-    /// <summary>
     /// updPanelCriterio control.
     /// </summary>
     /// <remarks>
