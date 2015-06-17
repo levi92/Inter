@@ -36,6 +36,29 @@ namespace AppCode.Persistencia
             return retorno;
         }
 
+        public static int Insert(string sqlInsert)
+        {
+            int retorno = 0;
+            try
+            {
+                IDbConnection conexao;
+                IDbCommand objCommand;
+                string sql = "INSERT INTO gru_grupo(gru_codigo, pri_codigo, gru_nome_projeto, gru_media, gru_finalizado, gru_usuario) VALUES" + sqlInsert;
+                conexao = Mapped.Connection();
+                objCommand = Mapped.Command(sql, conexao);
+
+                objCommand.ExecuteNonQuery();
+                conexao.Close();
+                objCommand.Dispose();
+                conexao.Dispose();
+            }
+            catch (Exception e)
+            {
+                retorno = -2;
+            }
+            return retorno;
+        }
+
         //SELECT ULTIMO CODIGO
         public static int SelectUltimoCod()
         {

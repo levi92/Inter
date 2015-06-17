@@ -43,7 +43,7 @@ namespace AppCode.Persistencia
             {
                 IDbConnection conexao;
                 IDbCommand objCommand;
-                string sql = "INSERT INTO eve_eventos(eve_codigo, pri_codigo, eve_data, eve_tipo) VALUES" + sqlInsert;
+                string sql = "INSERT INTO eve_eventos(eve_codigo, pri_codigo, eve_data, eve_tipo, eve_usuario) VALUES" + sqlInsert;
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
                 

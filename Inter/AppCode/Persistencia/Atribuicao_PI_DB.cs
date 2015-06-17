@@ -35,6 +35,29 @@ namespace AppCode.Persistencia
             }
             return retorno;
         }
+        public static int Insert(string sqlInsert)
+        {
+            int retorno = 0;
+            try
+            {
+                IDbConnection conexao;
+                IDbCommand objCommand;
+                string sql = "INSERT INTO api_atribuicao_pi(pri_codigo, adi_codigo, dis_codigo) VALUES" + sqlInsert;
+                conexao = Mapped.Connection();
+                objCommand = Mapped.Command(sql, conexao);
+
+                objCommand.ExecuteNonQuery();
+                conexao.Close();
+                objCommand.Dispose();
+                conexao.Dispose();
+            }
+            catch (Exception e)
+            {
+                retorno = -2;
+            }
+            return retorno;
+        }
+
 
 
     }

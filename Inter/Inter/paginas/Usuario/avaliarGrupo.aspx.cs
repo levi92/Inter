@@ -197,7 +197,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                     txbNotas.ID = "txtNotasRow_" + (rowIndex) + "_Col_" + colIndex;
                     txbNotas.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                     txbNotas.CssClass = "text";
-                    txbNotas.Attributes["type"] = "Number";
+                    //txbNotas.Attributes["type"] = "Number";
                     txbNotas.Attributes["min"] = "0";
                     txbNotas.Attributes["max"] = "10";
                     txbNotas.Attributes["onkeyup"] = "funcaoImpedirValorAvaliar(this.id);";
