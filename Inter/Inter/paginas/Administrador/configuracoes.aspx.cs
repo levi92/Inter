@@ -77,8 +77,24 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
         string directory = (Request.PhysicalApplicationPath + "Backup");
         string caminhoDump = ("C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin\\mysqldump.exe");
 
+
+        string constring = ("server=" + server + ";user=" + user + ";database=" + database + ";password=" + password);
+        string file = (directory + "\\" + nome_arquivo);
+        using (MySqlConnection conn = new MySqlConnection(constring))
+        {
+            using (MySqlCommand cmd = new MySqlCommand())
+            {
+                using (MySqlBackup mb = new MySqlBackup(cmd))
+                {
+                    cmd.Connection = conn;
+                    conn.Open();
+                    mb.ExportToFile(file);
+                    conn.Close();
+                }
+            }
+        }
         
-        Process.Start(caminhoDump, ("-u " + user + " -p" + password + " -x -e -B " + database + " > -r " + directory + "\\" + nome_arquivo));
+        //Process.Start(caminhoDump, ("-u " + user + " -p" + password + " -x -e -B " + database + " > -r " + directory + "\\" + nome_arquivo));
         System.Threading.Thread.Sleep(800);
 
         CarregaGrid();
@@ -98,21 +114,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 
         
 
-        /*string constring = ("server=" + server + ";user=" + user + ";database=" + database + ";password=" + password);
-        string file = (directory + "\\" + nome_arquivo);
-        using (MySqlConnection conn = new MySqlConnection(constring))
-        {
-            using (MySqlCommand cmd = new MySqlCommand())
-            {
-                using (MySqlBackup mb = new MySqlBackup(cmd))
-                {
-                    cmd.Connection = conn;
-                    conn.Open();
-                    mb.ExportToFile(file);
-                    conn.Close();
-                }
-            }
-        }*/
+        
 
     }
 

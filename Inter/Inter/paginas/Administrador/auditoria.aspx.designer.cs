@@ -21,11 +21,29 @@ public partial class paginas_Admin_auditoria {
     protected global::System.Web.UI.ScriptManager ScriptManager1;
     
     /// <summary>
-    /// UpdatePanelAtivados control.
+    /// UpdatePanelAuditoria control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.UpdatePanel UpdatePanelAtivados;
+    protected global::System.Web.UI.UpdatePanel UpdatePanelAuditoria;
+    
+    /// <summary>
+    /// gdvAud control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvAud;
+    
+    /// <summary>
+    /// lblQtdRegistro control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblQtdRegistro;
 }

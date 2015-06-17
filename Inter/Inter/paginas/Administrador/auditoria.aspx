@@ -18,11 +18,34 @@
 
                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-                        <asp:UpdatePanel ID="UpdatePanelAtivados" UpdateMode="Conditional" runat="server">
+                        <asp:UpdatePanel ID="UpdatePanelAuditoria" UpdateMode="Conditional" runat="server">
 
                             <ContentTemplate>
-                              
-                                
+                                <asp:GridView ID="gdvAud" runat="server" CellPadding="4" GridLines="None" CssClass="gridView" AllowPaging="true" PageSize="10"
+                                    OnRowCommand="gdvAud_RowCommand"     
+                                    OnRowDataBound="gdvAud_RowDataBound"                         
+                                    OnPageIndexChanging="gdvAud_PageIndexChanging"
+                                    AutoGenerateColumns="false"
+                                    Visible="true">
+
+                                    <AlternatingRowStyle CssClass="alt" />
+
+                                    <Columns>
+                                        <%-- Configurar colunas do Grid --%>
+                                        
+                                        <asp:BoundField DataField="aud_data" HeaderText="Data"/> 
+                                        <asp:BoundField DataField="aud_usuario" HeaderText="Usuário"/>
+                                        <asp:BoundField DataField="aud_acao" HeaderText="Ação"/>
+                                        <asp:BoundField DataField="aud_tabela" HeaderText="Tabela"/>
+                                        <asp:BoundField DataField="aud_dados_antes" HeaderText="Dados Anteriores"/>
+                                        <asp:BoundField DataField="aud_dados_depois" HeaderText="Dados Posteriores"/>
+                                       
+
+                                    </Columns>
+                                    
+
+                                </asp:GridView>
+                                <asp:Label ID="lblQtdRegistro" runat="server"></asp:Label>
 
                                 </ContentTemplate>
                         </asp:UpdatePanel>
