@@ -30,17 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interdisciplinar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>DLLFatec\Interdisciplinar.dll</HintPath>
+    <Reference Include="Interdisciplinar">
+      <HintPath>..\Inter\Banco\Fatec\Interdisciplinar.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+    <Reference Include="MySql.Data, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>DLLFatec\ddl mysql 6 6 5\MySql.Data.dll</HintPath>
+      <HintPath>..\Inter\Banco\Fatec\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="MySqlBackup, Version=2.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>DLLFatec\MySqlBackup.dll</HintPath>
+    <Reference Include="MySqlBackup">
+      <HintPath>..\Inter\Banco\Fatec\MySqlBackup.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -71,6 +69,7 @@
     <Compile Include="Comuns\Funcoes.cs" />
     <Compile Include="Mapped.cs" />
     <Compile Include="Persistencia\Atribuicao_PI_DB.cs" />
+    <Compile Include="Persistencia\Auditoria_DB.cs" />
     <Compile Include="Persistencia\Criterios_Gerais_DB.cs" />
     <Compile Include="Persistencia\Criterio_PI_DB.cs" />
     <Compile Include="Persistencia\Disciplinas_Gerais_DB.cs" />
@@ -90,8 +89,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\MySql.Data.dll" />
-    <Content Include="bin\MySqlBackup.dll" />
     <Content Include="DLLFatec\ddl mysql 6 6 5\MySql.Data.dll" />
     <Content Include="DLLFatec\Interdisciplinar.dll" />
     <Content Include="DLLFatec\Interdisciplinar.pdb" />
