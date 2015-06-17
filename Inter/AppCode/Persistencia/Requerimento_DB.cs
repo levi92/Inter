@@ -66,7 +66,7 @@ public class Requerimento_DB
                 var DataReq = Convert.ToDateTime(objDataReader["req_dt_requisicao"]);
                 var MatriculaPro = objDataReader["pro_matricula"].ToString();
                 var Status = Convert.ToInt32(objDataReader["req_status"]);
-                var Categoria = objDataReader["pro_matricula"].ToString();    
+                var Categoria = objDataReader["req_categoria"].ToString();    
            
                 objRequerimento = new Requerimento(CodigoReq, MatriculaPro, Assunto, DataReq, Status, Categoria);
             }
