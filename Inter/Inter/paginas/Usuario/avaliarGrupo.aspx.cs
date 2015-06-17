@@ -301,6 +301,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                 cpi.Cpi_codigo = cpiCodigo;
                 his.Cpi_codigo = cpi;
                 his.His_nota = valor;
+                his.His_usuario = Session["nome"].ToString();
 
                 Historico_Aluno_Disciplina_DB.Insert(his);
 

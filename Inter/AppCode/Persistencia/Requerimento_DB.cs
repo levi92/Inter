@@ -16,15 +16,18 @@ public class Requerimento_DB
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "INSERT req_requerimento (PRO_MATRICULA, GRU_CODIGO, REQ_ASSUNTO, REQ_DT_REQUISICAO, REQ_STATUS, REQ_CATEGORIA) VALUES (?pro_matricula, ?gru_codigo, ?req_assunto, ?req_dt_requisicao, ?req_status, ?req_categoria)";
+            string sql = "INSERT INTO req_requerimento(REQ_CODIGO, PRO_MATRICULA, GRU_CODIGO, REQ_ASSUNTO, REQ_DT_REQUISICAO, REQ_STATUS, REQ_CATEGORIA, REQ_USUARIO) VALUES(?req_codigo, ?pro_matricula, ?gru_codigo, ?req_assunto, ?req_dt_requisicao, ?req_status, ?req_categoria, ?req_usuario)";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
-            objCommand.Parameters.Add(Mapped.Parameter("?req_assunto", requerimento.Assunto));
-            objCommand.Parameters.Add(Mapped.Parameter("?req_dt_requisicao", requerimento.DataReq));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_codigo", requerimento.CodigoReq));
             objCommand.Parameters.Add(Mapped.Parameter("?pro_matricula", requerimento.MatriculaPro));
             objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", requerimento.CodigoGrupo));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_assunto", requerimento.Assunto));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_dt_requisicao", requerimento.DataReq));
             objCommand.Parameters.Add(Mapped.Parameter("?req_status", requerimento.Status));
             objCommand.Parameters.Add(Mapped.Parameter("?req_categoria", requerimento.Categoria));
+            objCommand.Parameters.Add(Mapped.Parameter("?req_usuario", requerimento.Usuario));
+            
             objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();

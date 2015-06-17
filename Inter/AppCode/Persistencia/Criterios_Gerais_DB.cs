@@ -11,12 +11,13 @@ public class Criterios_Gerais_DB{
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "INSERT INTO cge_criterios_gerais(cge_codigo, cge_nome, cge_descricao, cge_ativo) VALUES(?cge_codigo, ?cge_nome, ?cge_descricao, 1)";
+            string sql = "INSERT INTO cge_criterios_gerais(cge_codigo, cge_nome, cge_descricao, cge_ativo, cge_usuario) VALUES(?cge_codigo, ?cge_nome, ?cge_descricao, 1, ?cge_usuario)";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
             objCommand.Parameters.Add(Mapped.Parameter("?cge_codigo", criterio.Cge_codigo));
             objCommand.Parameters.Add(Mapped.Parameter("?cge_nome", criterio.Cge_nome));
             objCommand.Parameters.Add(Mapped.Parameter("?cge_descricao", criterio.Cge_descricao));
+            objCommand.Parameters.Add(Mapped.Parameter("?cge_usuario", criterio.Cge_usuario));
             objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
@@ -37,13 +38,14 @@ public class Criterios_Gerais_DB{
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "UPDATE cge_criterios_gerais SET cge_codigo = ?cge_codigo, cge_nome = ?cge_nome, cge_descricao = ?cge_descricao  " +
+            string sql = "UPDATE cge_criterios_gerais SET cge_codigo = ?cge_codigo, cge_nome = ?cge_nome, cge_descricao = ?cge_descricao, cge_usuario = ?cge_usuario" +
             " WHERE cge_codigo = ?cge_codigo ";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
             objCommand.Parameters.Add(Mapped.Parameter("?cge_codigo", criterio.Cge_codigo));
             objCommand.Parameters.Add(Mapped.Parameter("?cge_nome", criterio.Cge_nome));
             objCommand.Parameters.Add(Mapped.Parameter("?cge_descricao", criterio.Cge_descricao));
+            objCommand.Parameters.Add(Mapped.Parameter("?cge_usuario", criterio.Cge_usuario));
             objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
@@ -99,6 +101,7 @@ public class Criterios_Gerais_DB{
                 objCriterio.Cge_codigo = Convert.ToInt32(objDataReader["cge_codigo"]);
                 objCriterio.Cge_nome = objDataReader["cge_nome"].ToString();
                 objCriterio.Cge_descricao = objDataReader["cge_descricao"].ToString();
+                objCriterio.Cge_usuario = objDataReader["cge_usuario"].ToString();
 
             }
             objDataReader.Close();
@@ -198,17 +201,18 @@ public class Criterios_Gerais_DB{
 
     //DESATIVAR CRITERIO
 
-    public static int Desativar(int codigo)
+    public static int Desativar(int codigo, Criterios_Gerais criterio)
     {
         int retorno = 0;
         try
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "UPDATE cge_criterios_gerais SET cge_ativo = 0 WHERE cge_codigo = ?cge_codigo ";
+            string sql = "UPDATE cge_criterios_gerais SET cge_ativo = 0, cge_usuario = ?cge_usuario WHERE cge_codigo = ?cge_codigo ";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
             objCommand.Parameters.Add(Mapped.Parameter("?cge_codigo", codigo));
+            objCommand.Parameters.Add(Mapped.Parameter("?cge_usuario", criterio.Cge_usuario));
             objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
@@ -221,17 +225,18 @@ public class Criterios_Gerais_DB{
         return retorno;
     }
 
-    public static int Ativar(int codigo)
+    public static int Ativar(int codigo, Criterios_Gerais criterio)
     {
         int retorno = 0;
         try
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "UPDATE cge_criterios_gerais SET cge_ativo = 1 WHERE cge_codigo = ?cge_codigo ";
+            string sql = "UPDATE cge_criterios_gerais SET cge_ativo = 1, cge_usuario = ?cge_usuario WHERE cge_codigo = ?cge_codigo ";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
             objCommand.Parameters.Add(Mapped.Parameter("?cge_codigo", codigo));
+            objCommand.Parameters.Add(Mapped.Parameter("?cge_usuario", criterio.Cge_usuario));
             objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();

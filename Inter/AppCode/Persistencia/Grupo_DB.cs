@@ -17,12 +17,13 @@ namespace AppCode.Persistencia
             {
                 IDbConnection conexao;
                 IDbCommand objCommand;
-                string sql = "INSERT INTO gru_grupo(gru_codigo, pri_codigo, gru_nome_projeto, gru_media, gru_finalizado) VALUES(?gru_codigo, ?pri_codigo, ?gru_nome_projeto, null, 0)";
+                string sql = "INSERT INTO gru_grupo(gru_codigo, pri_codigo, gru_nome_projeto, gru_media, gru_finalizado, gru_usuario) VALUES(?gru_codigo, ?pri_codigo, ?gru_nome_projeto, null, 0, ?gru_usuario)";
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
                 objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", gru.Gru_codigo));
                 objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", gru.Pri_codigo.Pri_codigo));
                 objCommand.Parameters.Add(Mapped.Parameter("?gru_nome_projeto", gru.Gru_nome_projeto));
+                objCommand.Parameters.Add(Mapped.Parameter("?gru_usuario", gru.Gru_usuario));
                 objCommand.ExecuteNonQuery();
                 conexao.Close();
                 objCommand.Dispose();
@@ -117,11 +118,12 @@ namespace AppCode.Persistencia
             {
                 IDbConnection conexao;
                 IDbCommand objCommand;
-                string sql = "UPDATE gru_grupo SET gru_finalizado = 1, gru_media = ?gru_media WHERE gru_codigo = ?gru_codigo";
+                string sql = "UPDATE gru_grupo SET gru_finalizado = 1, gru_media = ?gru_media, gru_usuario = ?gru_usuario WHERE gru_codigo = ?gru_codigo";
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
                 objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", gru.Gru_codigo));
                 objCommand.Parameters.Add(Mapped.Parameter("?gru_media", gru.Gru_media));
+                objCommand.Parameters.Add(Mapped.Parameter("?gru_usuario", gru.Gru_usuario));
                 objCommand.ExecuteNonQuery();
                 conexao.Close();
                 objCommand.Dispose();

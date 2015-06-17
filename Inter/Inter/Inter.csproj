@@ -91,6 +91,7 @@
     <Content Include="paginas\Administrador\ajuda.aspx" />
     <Content Include="paginas\Administrador\ajuda_alterar_perfil.aspx" />
     <Content Include="paginas\Administrador\alterar_perfil.aspx" />
+    <Content Include="paginas\Administrador\auditoria.aspx" />
     <Content Include="paginas\Administrador\configuracoes.aspx" />
     <Content Include="paginas\Administrador\criterios.aspx" />
     <Content Include="paginas\Administrador\projetos.aspx" />
@@ -211,6 +212,13 @@
     </Compile>
     <Compile Include="paginas\Administrador\alterar_perfil.aspx.designer.cs">
       <DependentUpon>alterar_perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\auditoria.aspx.cs">
+      <DependentUpon>auditoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\auditoria.aspx.designer.cs">
+      <DependentUpon>auditoria.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\Administrador\configuracoes.aspx.cs">
       <DependentUpon>configuracoes.aspx</DependentUpon>

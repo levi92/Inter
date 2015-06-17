@@ -1,58 +1,68 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/paginas/Administrador/MasterPage.Master" AutoEventWireup="true" CodeBehind="MasterPage_MenuMaster.master.cs" Inherits="paginas_Admin_MenuMaster" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ConteudoMenu" runat="server">
 
 
-    
-        <!-- Menu Lateral  -->
 
-        <div id="lateral">
-             
-             <div id="menu">
-                <h1>
-                    <asp:Label ID="hora" runat="server" ClientIDMode="Static"></asp:Label></h1>
-                <h5>
-                    <asp:Label ID="dia" runat="server" ClientIDMode="Static"></asp:Label></h5>
-                <hr />
-                 <ul>      
-                    <li><asp:HyperLink ID="icone2" runat="server" NavigateUrl="~/paginas/Administrador/solicitacoes.aspx" ClientIDMode="Static" Enabled="True">
+    <!-- Menu Lateral  -->
+
+    <div id="lateral">
+
+        <div id="menu">
+            <h1>
+                <asp:Label ID="hora" runat="server" ClientIDMode="Static"></asp:Label></h1>
+            <h5>
+                <asp:Label ID="dia" runat="server" ClientIDMode="Static"></asp:Label></h5>
+            <hr />
+            <ul>
+                 <li>
+                    <asp:HyperLink ID="icone65" runat="server" NavigateUrl="~/paginas/Administrador/auditoria.aspx" ClientIDMode="Static" Enabled="True">
+                        <span class="glyphicon glyphicon-list-alt"></span>&nbsp Auditoria</asp:HyperLink></li>
+                <li>
+                    <asp:HyperLink ID="icone2" runat="server" NavigateUrl="~/paginas/Administrador/solicitacoes.aspx" ClientIDMode="Static" Enabled="True">
                         <span class="glyphicon glyphicon-bullhorn"></span>&nbsp Solicitações</asp:HyperLink></li>
-                    <li><asp:HyperLink ID="icone3" runat="server" NavigateUrl="~/paginas/Administrador/criterios.aspx" ClientIDMode="Static" Enabled="True">
+                <li>
+                    <asp:HyperLink ID="icone3" runat="server" NavigateUrl="~/paginas/Administrador/criterios.aspx" ClientIDMode="Static" Enabled="True">
                         <span class="glyphicon glyphicon-list"></span>&nbsp Critérios</asp:HyperLink></li>
-                    <li><asp:HyperLink ID="icone4" runat="server" NavigateUrl="~/paginas/Administrador/usuarios.aspx" ClientIDMode="Static" Enabled="True">
+                <li>
+                    <asp:HyperLink ID="icone4" runat="server" NavigateUrl="~/paginas/Administrador/usuarios.aspx" ClientIDMode="Static" Enabled="True">
                         <span class="glyphicon glyphicon-user"></span>&nbsp Usuários</asp:HyperLink></li>
-                    <li><asp:HyperLink ID="icone5" runat="server" NavigateUrl="~/paginas/Administrador/projetos.aspx" ClientIDMode="Static" Enabled="True">
-                        <span class="glyphicon glyphicon-folder-open"></span>&nbsp Projetos</asp:HyperLink></li>  
-                           <li><asp:HyperLink ID="icone6" runat="server" NavigateUrl="~/paginas/Administrador/configuracoes.aspx" ClientIDMode="Static" Enabled="True">
-                        <span class="glyphicon glyphicon-cog"></span>&nbsp Configurações</asp:HyperLink></li>                  
-                    <hr />
-                      <li><asp:HyperLink ID="icone7" runat="server" NavigateUrl="~/paginas/Administrador/ajuda.aspx" ClientIDMode="Static" Enabled="True">
-                        <span class="glyphicon glyphicon-question-sign"></span>&nbsp Ajuda</asp:HyperLink></li>  
-                   
-                    <li><a id="icone11" data-toggle="modal" data-target="#myModalDesejaSair" href="#" title="Sair do sistema e voltar para o login"><span class="icon icon-exit"></span>&nbsp Sair</a></li>
-                                        
-                </ul>
-            </div> 
-            <!-- /#menu -->
+                <li>
+                    <asp:HyperLink ID="icone5" runat="server" NavigateUrl="~/paginas/Administrador/projetos.aspx" ClientIDMode="Static" Enabled="True">
+                        <span class="glyphicon glyphicon-folder-open"></span>&nbsp Projetos</asp:HyperLink></li>
+                <li>
+                    <asp:HyperLink ID="icone6" runat="server" NavigateUrl="~/paginas/Administrador/configuracoes.aspx" ClientIDMode="Static" Enabled="True">
+                        <span class="glyphicon glyphicon-cog"></span>&nbsp Configurações</asp:HyperLink></li>
+                 
+                <hr />
+                <li>
+                    <asp:HyperLink ID="icone7" runat="server" NavigateUrl="~/paginas/Administrador/ajuda.aspx" ClientIDMode="Static" Enabled="True">
+                        <span class="glyphicon glyphicon-question-sign"></span>&nbsp Ajuda</asp:HyperLink></li>
+
+                <li><a id="icone11" data-toggle="modal" data-target="#myModalDesejaSair" href="#" title="Sair do sistema e voltar para o login"><span class="icon icon-exit"></span>&nbsp Sair</a></li>
+
+            </ul>
+        </div>
+        <!-- /#menu -->
+
+    </div>
+    <!-- /#lateral -->
+
+
+    <div class="container">
+        <div id="conteudo">
+
+            <asp:ContentPlaceHolder ID="ConteudoCentral" runat="server">
+            </asp:ContentPlaceHolder>
 
         </div>
-        <!-- /#lateral -->
+    </div>
 
 
-        <div class="container">
-            <div id="conteudo">
-            
-        <asp:ContentPlaceHolder ID="ConteudoCentral" runat="server">
-        
-        </asp:ContentPlaceHolder>
-
-            </div>
-        </div>
 
 
-       
 
-     
 
 </asp:Content>

@@ -15,13 +15,14 @@ public class Mensagem_DB
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "INSERT INTO msg_mensagem(matricula, req_codigo, msg_dt_Envio, msg_conteudo) VALUES (?matricula, ?req_codigo, ?msg_dt_Envio, ?msg_conteudo)";
+            string sql = "INSERT INTO msg_mensagem(matricula, req_codigo, msg_dt_Envio, msg_conteudo, msg_usuario) VALUES (?matricula, ?req_codigo, ?msg_dt_Envio, ?msg_conteudo, ?msg_usuario)";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
             objCommand.Parameters.Add(Mapped.Parameter("?matricula", mensagem.MatriculaPro));
             objCommand.Parameters.Add(Mapped.Parameter("?req_codigo", mensagem.CodigoReq));
             objCommand.Parameters.Add(Mapped.Parameter("?msg_dt_Envio", mensagem.DataEnvio));
             objCommand.Parameters.Add(Mapped.Parameter("?msg_conteudo", mensagem.Conteudo));
+            objCommand.Parameters.Add(Mapped.Parameter("?msg_usuario", mensagem.Msg_usuario));
             objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();

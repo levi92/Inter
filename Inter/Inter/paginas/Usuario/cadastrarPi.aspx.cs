@@ -330,6 +330,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             cge.Cge_codigo = Convert.ToInt32(li.Value);
             cge.Cge_nome = li.Text;
             cge.Cge_descricao = txtDescricaoCriterio.Text;
+            cge.Cge_usuario = Session["nome"].ToString();
             if (Criterios_Gerais_DB.Insert(cge) != -2)
             {
                 lblMsgCriterio.Text = "<span class='glyphicon glyphicon-ok-circle'></span> &nbsp Cadastrado com sucesso.";
@@ -925,6 +926,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 eve.Eve_tipo = desc[i];
                 eve.Eve_data = Convert.ToDateTime(dat[i]);
                 sqlInsertEventos += "(0," + eve.Pri_codigo.Pri_codigo + ",'" + eve.Eve_data + "','" + eve.Eve_tipo + "'),";                               
+                eve.Eve_usuario = Session["nome"].ToString();
+               
             }
             
             Eventos_DB.Insert(sqlInsertEventos.Substring(0,sqlInsertEventos.Length-1));
@@ -967,6 +970,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 critPi.Adi_codigo = atr;
                 critPi.Pri_codigo = pi;
                 critPi.Cpi_peso = Convert.ToInt32(txtPeso.Text);
+                critPi.Cpi_usuario = Session["nome"].ToString();
                 Criterio_PI_DB.Insert(critPi);
             }
             indiceCrit++;
@@ -991,10 +995,12 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 gru.Gru_codigo = ultCodGrupo;
                 gru.Gru_nome_projeto = nomeGrupo;
                 gru.Pri_codigo = pi;
+                gru.Gru_usuario = Session["nome"].ToString();
                 Grupo_DB.Insert(gru);
                 
                 Grupo_Aluno gal = new Grupo_Aluno();
                 gal.Gru_codigo = gru;
+                gal.Gal_usuario = Session["nome"].ToString();
 
                 string[] codAlunos = ViewState["CodAlunos"+i.ToString()].ToString().Split('|');
                 for (int j = 0; j < codAlunos.Length-1; j++)

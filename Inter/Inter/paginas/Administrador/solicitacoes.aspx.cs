@@ -36,7 +36,7 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
     public void CarregarGridAtivos()
     {
         //ABERTO
-        DataSet ds = Requerimento_DB.SelectS(0); //criando um data set com as solicitações abertas
+        DataSet ds = Requerimento_DB.SelectS(1); //criando um data set com as solicitações abertas
         int qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
 
         //se qtd for maior que zero, ou seja, se tiver dados no data set
@@ -53,7 +53,7 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
 
 
         //EM ANDAMENTO
-        ds = Requerimento_DB.SelectS(1); //criando um data set com as solicitações abertas
+        ds = Requerimento_DB.SelectS(2); //criando um data set com as solicitações abertas
         qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
 
         //se qtd for maior que zero, ou seja, se tiver dados no data set
@@ -70,7 +70,7 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
 
 
         //FINALIZADO
-        ds = Requerimento_DB.SelectS(2); //criando um data set com as solicitações abertas
+        ds = Requerimento_DB.SelectS(3); //criando um data set com as solicitações abertas
         qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
 
         //se qtd for maior que zero, ou seja, se tiver dados no data set
@@ -98,12 +98,13 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         if (!String.IsNullOrEmpty(txtAssunto.Text) && !String.IsNullOrEmpty(txtCategoria.Text))
         {
 
-            var assunto = txtAssunto.Text;
-            var categoria = txtCategoria.Text;
-            var grupo = 0;
+            string usuario = Session["nome"].ToString();
+            string assunto = "teste ass";
+            string categoria = "teste cat";
+            int grupo = 1;
+            string matricula = "1";
 
-            Requerimento req = new Requerimento("0", grupo, assunto, categoria);
-
+            Requerimento req = new Requerimento(matricula, grupo, assunto, categoria, usuario);
 
             if (Requerimento_DB.Insert(req) == 0)
             {

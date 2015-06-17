@@ -15,4 +15,12 @@ public class Ticket
     public string Tic_Assunto { get; set; } //Assunto do ticket
     public string Tic_Tipo { get; set; } //Tipo do Ticket. Categorias pré-definidas. (Usuário)
     public DateTime Tic_Data { get; set; } //Data e hora da criação do Ticket
+
+    private string tic_usuario;
+
+    public string Tic_usuario
+    {
+        get { return tic_usuario; }
+        set { tic_usuario = value; }
+    }
 }
