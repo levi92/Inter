@@ -7,27 +7,31 @@ using System.Web.UI.WebControls;
 using Inter.Funcoes;
 using System.Data;
 
+
+//Se usar um namespace aqui ele não reconhece o Funcoes por algum motivo...
+
 public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
 {
-     
     protected void Page_PreInit(object sender, EventArgs e)
     {
-        //VERIFICAR SESSAO LOGIN
-            if (Session["Professor"] == null)
-            {
-                Response.Redirect("~/BloqueioUrl");
-            }
-            // CHAMAR A MASTER PAGE             
-            this.Page.MasterPageFile = Funcoes.chamarMasterPage(Session["mae"].ToString());
+        // Se sessão estiver nula redireciona para o bloqueio Url
+        if (Session["Professor"] == null)
+        {
+            Response.Redirect("~/BloqueioUrl");
+        }
+
+        // CHAMAR A MASTER PAGE CORRESPONDENTE MÃE OU FILHA         
+        this.Page.MasterPageFile = Funcoes.chamarMasterPage(Session["mae"].ToString());
     }
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        // VERIFICAR SE O PROFESSOR NÃO ESCOLHEU UMA DISCIPLINA E REDIRECIONA PARA A PÁGINA ESCOLHER DISCIPLINA
         if (Session["disciplina"] == "")
-               {
-                    Response.Redirect("~/EscolherDisciplina");
-        }
+        {
+            Response.Redirect("~/EscolherDisciplina");
 
+        }
         if (!IsPostBack)
         {
             CarregarGridAtivos();
@@ -44,7 +48,6 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         //se qtd for maior que zero, ou seja, se tiver dados no data set
         if (qtd > 0)
         {
-            lblMsgAssunto.Text = "teste";
 
             gdvRequerimentoAberto.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
             gdvRequerimentoAberto.DataBind(); //preenche o grid view com os dados
@@ -143,7 +146,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
 
     protected void btnModal_Command(object sender, CommandEventArgs e)
     {
-        int ID=Convert.ToInt32(e.CommandArgument);
+        int ID = Convert.ToInt32(e.CommandArgument);
         Requerimento req = Requerimento_DB.Select(ID);
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
@@ -151,31 +154,56 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         lblMsgProfessor.Text = req.MatriculaPro;
         lblMsgCategoria.Text = req.Categoria;
         lblMsgId.Text = req.CodigoReq.ToString();
+        switch (req.Status)
+        {
+            case 1:
+                mdlHeader.Attributes["style"] = "background-color: #960d10;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
+                break;
+            case 2:
+                mdlHeader.Attributes["style"] = "background-color: #f9ae0e;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
+                break;
+            case 3:
+                mdlHeader.Attributes["style"] = "background-color: #0D9643;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);;";
+                break;
 
-        abrirMensagens(req.CodigoReq);  
+        }
+        abrirMensagens(req.CodigoReq);
 
         UpdatePanel3.Update();
-        
 
-        
+
+
     }
 
     public void abrirMensagens(int cod)
     {
         DataSet msgDt = Mensagem_DB.SelectAll(cod);
+
         int qtd = msgDt.Tables[0].Rows.Count;
+        string usuario = Session["nome"].ToString();
         string msgBox = " ";
+        int b = 0;
         for (int i = 0; i < qtd; i++)
         {
-            msgBox = msgBox + "<div class='allMsg' style='float: left'><div class='txtCard' onclick='mostraInfo(1)'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info1' class='infoMsg'>Enviado por Jusjiscreudo - As 20:72</div></div>";
+            b = i + 1;
+            if (usuario == msgDt.Tables[0].Rows[i][2].ToString())
+            {
+                msgBox = msgBox + "<div class='allMsg' style='float: right'><div class='txtCard' style='background-color: rgb(247, 247, 228);' onclick='mostraInfo(" + b + ")'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info" + b + "' class='infoMsg'>Enviado por " + msgDt.Tables[0].Rows[i][2].ToString() + " - " + msgDt.Tables[0].Rows[i][4].ToString() + "</div></div>";
+            }
+            else
+            {
+                msgBox = msgBox + "<div class='allMsg' style='float: left'> <div class='txtCard' onclick='mostraInfo(" + b + ")'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info" + b + "' class='infoMsg'>Enviado por " + msgDt.Tables[0].Rows[i][2].ToString() + " - " + msgDt.Tables[0].Rows[i][4].ToString() + "</div></div>";
+            }
+
         }
 
-        msgInsideBox.InnerHtml = msgBox;  
+        msgInsideBox.InnerHtml = msgBox;
     }
 
     protected void btnNovaMsg_Click(object sender, EventArgs e)
     {
-        
+
+
 
         if (!String.IsNullOrEmpty(txtResponder.Text))
         {
@@ -187,12 +215,12 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
             Mensagem men = new Mensagem(cod, usuario, msg);
 
             if (Mensagem_DB.Insert(men) == 0)
-            {
-            abrirMensagens(cod);         
+            {                
+                abrirMensagens(cod);
             }
-                
-          
 
+
+            txtResponder.Text = "";
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
             UpdatePanel3.Update();
 
@@ -202,7 +230,5 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
 
 
 }
-
-
 
 

@@ -1,16 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_notificacoes" Codebehind="notificacoes.aspx.cs" %>
 
-
-<asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
-
-    <!-- ALTERAR COR DO ÍCONE NO MENU LATERAL -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#cphConteudo_icone3').addClass('corIcone');
-        });
-    </script>
-
-     <!--
+<asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="server">
+    <!--
         TABELA DE CORES DO HEADER
         
         * Não aberto: Vermelho Fatec (#960d10)
@@ -19,9 +10,10 @@
         * Encerrado, favorável: Verde (#4CAF50)
         -->
     <script type="text/javascript" src="../../scripts/bootstrap.js"></script>
+    <script src="../../scripts/inter.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#icone2').addClass('corIcone');
+            $('#cphConteudo_icone3').addClass('corIcone');
         });
     </script>
 
@@ -32,13 +24,14 @@
         </script>
     <!--Início do modal de Msg-->
     <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
+    
+    <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <asp:UpdatePanel ID="UpdatePanel3" UpdateMode="Conditional" runat="server">
     <ContentTemplate>
-    <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width: 60%;">
             <div class="modal-content">
                 <!--A cor do Header muda de acordo com o status-->
-                <div class="modal-header" style="background-color: #960d10; color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);">
+                <div class="modal-header" runat="server" id="mdlHeader" style="background-color: #960d10; color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);">
                     <!--Arrumar o hover aqui-->
                     <button type="button" data-dismiss="modal" style="margin-top: -9px; float: left; border: none; background: none;"><span class="mdi mdi-chevron-left hoverAll" style="font-size: 33px; margin-top: 4.5px;"></span></button>
                     <!--ASSUNTO DO TICKET-->
@@ -49,35 +42,12 @@
                     
                     <h4 style="float: right; margin-top: 0; padding-right: 10px;"><asp:Label ID="lblMsgProfessor" runat="server"></asp:Label></h4>
                 </div>
-                <!--Início 3-dot menu-->
-                <!--Início do submenu-->
-                <div class="subMenu" id="subMenu">
-                    <!--Clicar em um item fecha o menu | ESC fecha o menu sem fechar a modal-->
-                    <div onclick="butAcao()">Finalizar Favorável</div>
-                    <div onclick="butAcao()">Finalizar Desfavorável</div>
-                    <div onclick="butAcao()">PI Finalizado</div>
-                </div>
-                <!--Fim do submenu-->
-                <!--Fim 3-dot menu-->
                 <!--Início do Corpo-->
                 <div class="modal-body" style="background-color: whitesmoke;">
                     <div id="msgInsideBox" runat="server" class="insideBox">
                         <!--Mensagem
                             Cada mensagem do banco deve ter seu bloco de mensagem.
                             As mensagens do usuario sempre aparecem à direita e a dos outros à esquerda -->
-                        <div class='allMsg' style='float: left'>
-                            <div class='txtCard' onclick='mostraInfo(1)'>--MSG_AQUI--.</div>
-                            <div id='info1' class='infoMsg'>Enviado por Jusjiscreudo - As 20:72</div>
-                        </div>
-        
-                      
-                      
-                         
-                     
-
-                       
-                   
-              
                     </div>
                 </div>
                 <!--Fim do corpo-->
@@ -85,14 +55,15 @@
                      <asp:Label runat="server" ID="lblMsgId" Visible="false"></asp:Label>
                     <asp:TextBox runat="server" ID="txtResponder" TextMode="MultiLine" CssClass="minimalScrollbar"></asp:TextBox>
                     <!--Colocar hoover aqui-->
-                    <div style="float: right; width: 50px; text-align: center; height: 50px; border-radius: 100px; background-color: #960D10; box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.16);"><asp:LinkButton ID="btnNovaMsg" runat="server" Text="Enviar" OnClick="btnNovaMsg_Click"></asp:LinkButton>
+                    <div style="float: right; width: 50px; text-align: center; height: 50px; border-radius: 100px; background-color: #960D10; box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.16);"><asp:LinkButton ID="btnNovaMsg" runat="server"  Text="Enviar" style="padding-top: 14px;  padding-left: 6px;color: white;float: left;" OnClick="btnNovaMsg_Click"></asp:LinkButton>
                    <!--<spano style='color: #fff; padding-top: 7px; padding-left: 5px; font-size: 35px;'></span>--></div>
                 </div>
             </div>
         </div>
-    </div>
-    </ContentTemplate>
+         </ContentTemplate>
     </asp:UpdatePanel>
+    </div>
+   
                          
     <!--Fim do modal de Msg-->
     <!--Início do modal de novo ticket-->
@@ -151,7 +122,7 @@
  
                         <asp:UpdatePanel ID="UpdatePanelAtivados" UpdateMode="Conditional" runat="server">
                             <ContentTemplate>
-                                <asp:GridView ID="gdvRequerimentoAberto" runat="server" CssClass="gridView" DataKeyNames="req_codigo"
+                                <asp:GridView ID="gdvRequerimentoAberto" runat="server" CssClass="tableEscolherDisciplina" DataKeyNames="req_codigo"
                                     AutoGenerateColumns="false"
                                     
                                     AutoGenerateEditButton="false">
@@ -210,7 +181,7 @@
                     <div role="tabpanel" class="tab-pane fade in" id="andamento">
                         <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server">
                             <ContentTemplate>
-                                <asp:GridView ID="gdvRequerimentoAndamento" runat="server" CssClass="gridView" DataKeyNames="req_codigo"
+                                <asp:GridView ID="gdvRequerimentoAndamento" runat="server" CssClass="tableEscolherDisciplina" DataKeyNames="req_codigo"
                                     AutoGenerateColumns="false"
                                     AutoGenerateEditButton="false">
 
@@ -230,7 +201,7 @@
                                         <%--Coluna do assunto do Requerimento--%>
                                         <asp:TemplateField HeaderText="Assunto">                                          
                                             <ItemTemplate>
-                                                <a data-toggle='modal' data-target='#myModal1'><asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label></a>
+                                                <asp:LinkButton ID="btnModal" runat="server" Text='<%#Eval ("req_assunto")%>' CommandArgument='<%#Eval ("req_codigo")%>' OnCommand="btnModal_Command" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
@@ -267,7 +238,7 @@
                     <div role="tabpanel" class="tab-pane fade in" id="finalizado">
                         <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
                             <ContentTemplate>
-                                <asp:GridView ID="gdvRequerimentoFinalizado" runat="server" CssClass="gridView" DataKeyNames="req_codigo"
+                                <asp:GridView ID="gdvRequerimentoFinalizado" runat="server" CssClass="tableEscolherDisciplina" DataKeyNames="req_codigo"
                                     AutoGenerateColumns="false"
                                     AutoGenerateEditButton="false">
 
@@ -286,9 +257,8 @@
 
                                         <%--Coluna do assunto do Requerimento--%>
                                         <asp:TemplateField HeaderText="Assunto">                                       
-                                            <ItemTemplate>
-                                                
-                                                <a data-toggle='modal' data-target='#myModal1'><asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label></a>
+                                            <ItemTemplate>                                                
+                                               <asp:LinkButton ID="btnModal" runat="server" Text='<%#Eval ("req_assunto")%>' CommandArgument='<%#Eval ("req_codigo")%>' OnCommand="btnModal_Command" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
 

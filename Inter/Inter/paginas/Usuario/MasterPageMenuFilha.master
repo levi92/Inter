@@ -22,7 +22,7 @@
                         <span class="glyphicon glyphicon-home"></span>&nbsp Home</asp:HyperLink></li>
                 <li>
                     <asp:HyperLink ID="icone3" runat="server" NavigateUrl="~/Notificacoes" Enabled="True">
-                        <span class="glyphicon glyphicon-bell"></span>&nbsp Notificações</asp:HyperLink></li>
+                        <span class="glyphicon glyphicon-bell"></span>&nbsp Solicitações</asp:HyperLink></li>
                 <li>
                     <asp:HyperLink ID="icone4" runat="server" NavigateUrl="~/PIFinalizado" Enabled="True">
                         <span class="glyphicon glyphicon-folder-open"></span>&nbsp PIs Finalizados</asp:HyperLink></li>                
