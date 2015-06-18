@@ -30,6 +30,15 @@ public partial class paginas_Admin_solicitacoes {
     protected global::System.Web.UI.UpdatePanel UpdatePanel3;
     
     /// <summary>
+    /// mdlHeader control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl mdlHeader;
+    
+    /// <summary>
     /// lblMsgAssunto control.
     /// </summary>
     /// <remarks>
