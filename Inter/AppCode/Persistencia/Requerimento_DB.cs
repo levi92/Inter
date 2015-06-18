@@ -46,8 +46,32 @@ public class Requerimento_DB
         }
         return retorno;
     }
-    
 
+    //UPDATE
+    public static int Update(int cod, int status)
+    {
+        int retorno = 0;
+        try
+        {
+            IDbConnection conexao;
+            IDbCommand objCommand;
+            string sql = "UPDATE req_requerimento SET req_status = ?status WHERE req_codigo = ?codigo ";
+            conexao = Mapped.Connection();
+            objCommand = Mapped.Command(sql, conexao);
+            objCommand.Parameters.Add(Mapped.Parameter("?codigo", cod));
+            objCommand.Parameters.Add(Mapped.Parameter("?status", status));
+            objCommand.ExecuteNonQuery();
+            conexao.Close();
+            objCommand.Dispose();
+            conexao.Dispose();
+        }
+        catch (Exception e)
+        {
+            string erro = e.Message;
+            retorno = -2;
+        }
+        return retorno;
+    }
     //SELECT
     public static Requerimento Select(int codigo){
         try{

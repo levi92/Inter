@@ -23,13 +23,14 @@
         </script>
     <!--Início do modal de Msg-->
     <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
+    
+    <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <asp:UpdatePanel ID="UpdatePanel3" UpdateMode="Conditional" runat="server">
     <ContentTemplate>
-    <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width: 60%;">
             <div class="modal-content">
                 <!--A cor do Header muda de acordo com o status-->
-                <div class="modal-header" style="background-color: #960d10; color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);">
+                <div class="modal-header" runat="server" id="mdlHeader" style="background-color: #960d10; color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);">
                     <!--Arrumar o hover aqui-->
                     <button type="button" data-dismiss="modal" style="margin-top: -9px; float: left; border: none; background: none;"><span class="mdi mdi-chevron-left hoverAll" style="font-size: 33px; margin-top: 4.5px;"></span></button>
                     <!--ASSUNTO DO TICKET-->
@@ -56,19 +57,6 @@
                         <!--Mensagem
                             Cada mensagem do banco deve ter seu bloco de mensagem.
                             As mensagens do usuario sempre aparecem à direita e a dos outros à esquerda -->
-                        <div class='allMsg' style='float: left'>
-                            <div class='txtCard' onclick='mostraInfo(1)'>--MSG_AQUI--.</div>
-                            <div id='info1' class='infoMsg'>Enviado por Jusjiscreudo - As 20:72</div>
-                        </div>
-        
-                      
-                      
-                         
-                     
-
-                       
-                   
-              
                     </div>
                 </div>
                 <!--Fim do corpo-->
@@ -76,14 +64,15 @@
                      <asp:Label runat="server" ID="lblMsgId" Visible="false"></asp:Label>
                     <asp:TextBox runat="server" ID="txtResponder" TextMode="MultiLine" CssClass="minimalScrollbar"></asp:TextBox>
                     <!--Colocar hoover aqui-->
-                    <div style="float: right; width: 50px; text-align: center; height: 50px; border-radius: 100px; background-color: #960D10; box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.16);"><asp:LinkButton ID="btnNovaMsg" runat="server" Text="Enviar" OnClick="btnNovaMsg_Click"></asp:LinkButton>
+                    <div style="float: right; width: 50px; text-align: center; height: 50px; border-radius: 100px; background-color: #960D10; box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.16);"><asp:LinkButton ID="btnNovaMsg" runat="server"  Text="Enviar" style="padding-top: 14px;  padding-left: 6px;color: white;float: left;" OnClick="btnNovaMsg_Click"></asp:LinkButton>
                    <!--<spano style='color: #fff; padding-top: 7px; padding-left: 5px; font-size: 35px;'></span>--></div>
                 </div>
             </div>
         </div>
-    </div>
-    </ContentTemplate>
+         </ContentTemplate>
     </asp:UpdatePanel>
+    </div>
+   
                          
     <!--Fim do modal de Msg-->
     <!--Início do modal de novo ticket-->
@@ -221,7 +210,7 @@
                                         <%--Coluna do assunto do Requerimento--%>
                                         <asp:TemplateField HeaderText="Assunto">                                          
                                             <ItemTemplate>
-                                                <a data-toggle='modal' data-target='#myModal1'><asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label></a>
+                                                <asp:LinkButton ID="btnModal" runat="server" Text='<%#Eval ("req_assunto")%>' CommandArgument='<%#Eval ("req_codigo")%>' OnCommand="btnModal_Command" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
@@ -277,9 +266,8 @@
 
                                         <%--Coluna do assunto do Requerimento--%>
                                         <asp:TemplateField HeaderText="Assunto">                                       
-                                            <ItemTemplate>
-                                                
-                                                <a data-toggle='modal' data-target='#myModal1'><asp:Label ID="lblNome" runat="server" Text='<%#Eval ("req_assunto")%>'></asp:Label></a>
+                                            <ItemTemplate>                                                
+                                               <asp:LinkButton ID="btnModal" runat="server" Text='<%#Eval ("req_assunto")%>' CommandArgument='<%#Eval ("req_codigo")%>' OnCommand="btnModal_Command" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
