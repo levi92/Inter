@@ -197,6 +197,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                     txbNotas.ID = "txtNotasRow_" + (rowIndex) + "_Col_" + colIndex;
                     txbNotas.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                     txbNotas.CssClass = "text";
+                    txbNotas.MaxLength = 3;
                     //txbNotas.Attributes["type"] = "Number";
                     txbNotas.Attributes["min"] = "0";
                     txbNotas.Attributes["max"] = "10";
@@ -286,11 +287,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                 TextBox txtNota = (TextBox)Page.FindControl("ctl00$ctl00$cphConteudo$cphConteudoCentral$txtNotasRow_" + i.ToString() + "_Col_" + j.ToString());
                 if (!String.IsNullOrEmpty(txtNota.Text))
                 {
-                    valor = Convert.ToDouble(txtNota.Text);
-                    if (valor > 10)
-                    {
-                        valor = valor/10;
-                    }
+                    valor = Convert.ToDouble(txtNota.Text);                    
                     valorMultiplicacao += valor * Convert.ToInt32(todosPesos[i]);
                 }
 
