@@ -12,92 +12,101 @@
 public partial class paginas_Usuario_consultarPi {
     
     /// <summary>
-    /// Label1 control.
+    /// lblCodigo control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label1;
+    protected global::System.Web.UI.WebControls.Label lblCodigo;
     
     /// <summary>
-    /// Label2 control.
+    /// lblCodigoPI control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label2;
+    protected global::System.Web.UI.WebControls.Label lblCodigoPI;
     
     /// <summary>
-    /// Label3 control.
+    /// lblCurso control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label3;
+    protected global::System.Web.UI.WebControls.Label lblCurso;
     
     /// <summary>
-    /// Label4 control.
+    /// lblCursoValor control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label4;
+    protected global::System.Web.UI.WebControls.Label lblCursoValor;
     
     /// <summary>
-    /// Label5 control.
+    /// lblSemestre control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label5;
+    protected global::System.Web.UI.WebControls.Label lblSemestre;
     
     /// <summary>
-    /// Label6 control.
+    /// lblSemestreValor control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label6;
+    protected global::System.Web.UI.WebControls.Label lblSemestreValor;
     
     /// <summary>
-    /// Label7 control.
+    /// lblAno control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label7;
+    protected global::System.Web.UI.WebControls.Label lblAno;
     
     /// <summary>
-    /// Label8 control.
+    /// lblAnoValor control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label8;
+    protected global::System.Web.UI.WebControls.Label lblAnoValor;
     
     /// <summary>
-    /// Label9 control.
+    /// lblSemestreAno control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label9;
+    protected global::System.Web.UI.WebControls.Label lblSemestreAno;
     
     /// <summary>
-    /// Label10 control.
+    /// lblSemestreAnoValor control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label10;
+    protected global::System.Web.UI.WebControls.Label lblSemestreAnoValor;
+    
+    /// <summary>
+    /// gdvEventosConsultarPI control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvEventosConsultarPI;
 }
