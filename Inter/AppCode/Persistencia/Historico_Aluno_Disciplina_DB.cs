@@ -35,6 +35,29 @@ namespace AppCode.Persistencia
             }
             return retorno;
         }
+
+        public static int Insert(string sqlInsert)
+        {
+            int retorno = 0;
+            try
+            {
+                IDbConnection conexao;
+                IDbCommand objCommand;
+                string sql = "INSERT INTO his_historico_aluno_disciplina(his_codigo, alu_matricula, cpi_codigo, his_nota, his_usuario) VALUES" + sqlInsert;
+                conexao = Mapped.Connection();
+                objCommand = Mapped.Command(sql, conexao);
+
+                objCommand.ExecuteNonQuery();
+                conexao.Close();
+                objCommand.Dispose();
+                conexao.Dispose();
+            }
+            catch (Exception e)
+            {
+                retorno = -2;
+            }
+            return retorno;
+        }
     }
 
 }

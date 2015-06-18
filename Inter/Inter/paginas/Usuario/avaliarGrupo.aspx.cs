@@ -273,6 +273,8 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         int cpiCodigo = 0;
         string[] codAlunos = (string[])Session["matriculasAlunos"];
 
+        string sqlInsertHistoricoAluDisc = "";
+
         for (int j = 1; j < colsCount; j++) //ALUNOS
         {
             Historico_Aluno_Disciplina his = new Historico_Aluno_Disciplina();
@@ -300,14 +302,14 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                 his.His_nota = valor;
                 his.His_usuario = Session["nome"].ToString();
 
-                Historico_Aluno_Disciplina_DB.Insert(his);
-
+                sqlInsertHistoricoAluDisc += "(0,'" + his.Alu_matricula.Alu_matricula + "'," + his.Cpi_codigo.Cpi_codigo + "," + his.His_nota + ",'" + his.His_usuario + "'),";
             }
             mediaPonderada = valorMultiplicacao / somaPeso;
             somaMediaPonderada += mediaPonderada;
             somaPeso = 0;
             valorMultiplicacao = 0;
         }
+        Historico_Aluno_Disciplina_DB.Insert(sqlInsertHistoricoAluDisc.Substring(0, sqlInsertHistoricoAluDisc.Length - 1));
 
         int qtdAlunos = colsCount - 1;
         mediaDisciplina = Math.Round((somaMediaPonderada / qtdAlunos),2);
