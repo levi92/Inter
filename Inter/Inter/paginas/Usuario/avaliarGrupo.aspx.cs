@@ -197,7 +197,8 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                     txbNotas.ID = "txtNotasRow_" + (rowIndex) + "_Col_" + colIndex;
                     txbNotas.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                     txbNotas.CssClass = "text";
-                    txbNotas.Attributes["type"] = "Number";
+                    txbNotas.MaxLength = 3;
+                    //txbNotas.Attributes["type"] = "Number";
                     txbNotas.Attributes["min"] = "0";
                     txbNotas.Attributes["max"] = "10";
                     txbNotas.Attributes["onkeyup"] = "funcaoImpedirValorAvaliar(this.id);";
@@ -272,6 +273,8 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         int cpiCodigo = 0;
         string[] codAlunos = (string[])Session["matriculasAlunos"];
 
+        string sqlInsertHistoricoAluDisc = "";
+
         for (int j = 1; j < colsCount; j++) //ALUNOS
         {
             Historico_Aluno_Disciplina his = new Historico_Aluno_Disciplina();
@@ -286,11 +289,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                 TextBox txtNota = (TextBox)Page.FindControl("ctl00$ctl00$cphConteudo$cphConteudoCentral$txtNotasRow_" + i.ToString() + "_Col_" + j.ToString());
                 if (!String.IsNullOrEmpty(txtNota.Text))
                 {
-                    valor = Convert.ToDouble(txtNota.Text);
-                    if (valor > 10)
-                    {
-                        valor = valor/10;
-                    }
+                    valor = Convert.ToDouble(txtNota.Text);                    
                     valorMultiplicacao += valor * Convert.ToInt32(todosPesos[i]);
                 }
 
@@ -303,14 +302,14 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                 his.His_nota = valor;
                 his.His_usuario = Session["nome"].ToString();
 
-                Historico_Aluno_Disciplina_DB.Insert(his);
-
+                sqlInsertHistoricoAluDisc += "(0,'" + his.Alu_matricula.Alu_matricula + "'," + his.Cpi_codigo.Cpi_codigo + "," + his.His_nota + ",'" + his.His_usuario + "'),";
             }
             mediaPonderada = valorMultiplicacao / somaPeso;
             somaMediaPonderada += mediaPonderada;
             somaPeso = 0;
             valorMultiplicacao = 0;
         }
+        Historico_Aluno_Disciplina_DB.Insert(sqlInsertHistoricoAluDisc.Substring(0, sqlInsertHistoricoAluDisc.Length - 1));
 
         int qtdAlunos = colsCount - 1;
         mediaDisciplina = Math.Round((somaMediaPonderada / qtdAlunos),2);
@@ -345,20 +344,34 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         {
             Session["GruposFinalizar"] = dsGruposFinalizar;
         }
+
         DataSet dsGruposAvaliar = new DataSet();
         dsGruposAvaliar = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
-        Session["GruposAvaliar"] = dsGruposAvaliar;
+        if (dsGruposAvaliar == null)
+        {
+            Session["GruposAvaliar"] = null;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalTodosAvaliados", "msgTodosAvaliados();", true);
+        }
+        else
+        {
+            Session["GruposAvaliar"] = dsGruposAvaliar;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalGrupoAvaliado", "msgGrupoAvaliado();", true);
+        }
     }
 
     protected void btnFinalizar_Click(object sender, EventArgs e)
     {
         PegarValoresNotas();
-        Response.Redirect("~/AvaliarGrupo");
     }
 
     protected void btnVoltarHome2_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/Home");
+    }
+
+    protected void btnGrupoAvaliado_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/AvaliarGrupo");
     }
 
 

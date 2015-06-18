@@ -325,13 +325,11 @@ $(document).ready(function () {
         var auxData = "";
         dadosDatas = "";
 
-        for (var index = 0; index < i; index++) {
-            auxData = "";
+        for (var index = 0; index < i; index++) {           
             auxData = $('#descData' + index).html();
-            var vetorData = $('#data' + index).html().split('/');
-            var dataInvertida = vetorData[2] + '-' + vetorData[1] + '-' + vetorData[0];
-
             if (typeof (auxData) != "undefined") {
+                var vetorData = $('#data' + index).html().split('/');
+                var dataInvertida = vetorData[2] + '-' + vetorData[1] + '-' + vetorData[0];
                 dadosDatas += $('#descData' + index).html() + "|" + dataInvertida + "|";
             }
 
@@ -366,9 +364,9 @@ $(document).ready(function () {
     funcaoImpedirValorAvaliar = function (id) {
 
         valor = document.getElementById(id).value;
-        if (!$.isNumeric(valor)) {
-            $("#" + id).val("");
-        }
+        //if (!$.isNumeric(valor)) {
+        //    $("#" + id).val("");
+        //}
         if (valor < 0 || valor > 10) {
             
             $("#" + id).val("");
@@ -396,8 +394,18 @@ $(document).ready(function () {
             var peso = parseFloat(TodosPesos[i]);
             somaPeso += peso;
 
+            var nome = $("#txtNotasRow_" + i + "_Col_" + coluna[3]).val();
+            var aux = "";
             //SE TEXTBOX NÃO ESTIVER VAZIO
-            if (!isNaN(valor)) {                
+            if (!isNaN(valor)) {
+                for (var j = 0; j < nome.length; j++) {
+                    if (nome.charAt(j) == ",") {
+                        aux += ".";
+                    } else {
+                        aux += nome.charAt(j);
+                    }
+                }
+                var valor = parseFloat(aux);
                 valorMultiplicacao += valor * peso;                               
             } else {
                 qtdValoresNulos++;
@@ -408,9 +416,9 @@ $(document).ready(function () {
         var linhaLblMedia = $("#tableAvaliar tr").length - 1;        
 
         if(qtdValoresNulos == countRow){
-            $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html("0.00");
+            $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html("0.0");
         } else {
-            mediaPonderada = (valorMultiplicacao / somaPeso).toFixed(2);
+            mediaPonderada = (valorMultiplicacao / somaPeso).toFixed(1);
             $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html(mediaPonderada);
         }        
 

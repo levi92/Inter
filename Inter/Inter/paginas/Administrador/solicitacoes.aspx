@@ -22,6 +22,9 @@
         }
         </script>
     <!--Início do modal de Msg-->
+    <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel3" UpdateMode="Conditional" runat="server">
+    <ContentTemplate>
     <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width: 60%;">
             <div class="modal-content">
@@ -30,12 +33,12 @@
                     <!--Arrumar o hover aqui-->
                     <button type="button" data-dismiss="modal" style="margin-top: -9px; float: left; border: none; background: none;"><span class="mdi mdi-chevron-left hoverAll" style="font-size: 33px; margin-top: 4.5px;"></span></button>
                     <!--ASSUNTO DO TICKET-->
-                    <h4 class="modal-title" id="myModalLabelT1" style="float: left;"></h4>
+                    <h4 class="modal-title" id="myModalLabelT1" style="float: left;"><asp:Label ID="lblMsgAssunto" runat="server"></asp:Label> - <asp:Label ID="lblMsgCategoria" runat="server"></asp:Label></h4>
                     <!--Arrumar  Hover aqui-->
                     <button type="button" id="butMostraMenu" name="subMenu" onclick="mostraDiv1('subMenu')" style="float: right; border: none; background: none; margin-top: -2px;"><span class="mdi mdi-dots-vertical hoverAll" style="font-size: 25px;"></span></button>
                     <!--NOME DO PROFESSOR QUE ABRIU O TICKET-->
                     
-                    <h4 style="float: right; margin-top: 0; padding-right: 10px;">--NOME_DO_PROFESSOR_AQUI--</h4>
+                    <h4 style="float: right; margin-top: 0; padding-right: 10px;"><asp:Label ID="lblMsgProfessor" runat="server"></asp:Label></h4>
                 </div>
                 <!--Início 3-dot menu-->
                 <!--Início do submenu-->
@@ -49,21 +52,19 @@
                 <!--Fim 3-dot menu-->
                 <!--Início do Corpo-->
                 <div class="modal-body" style="background-color: whitesmoke;">
-                    <div class="insideBox">
+                    <div id="msgInsideBox" runat="server" class="insideBox">
                         <!--Mensagem
                             Cada mensagem do banco deve ter seu bloco de mensagem.
-                            As mensagens do usuario sempre aparecem à direita e a dos outros à esquerda
-                        <div class="allMsg" style="float: left">
-                            <div class="txtCard" onclick="mostraInfo(1)">--MSG_AQUI--.</div>
-                            <div id="info1" class="infoMsg">Enviado por Jusjiscreudo - As 20:72</div>
-                        </div>-->
+                            As mensagens do usuario sempre aparecem à direita e a dos outros à esquerda -->
+                        <div class='allMsg' style='float: left'>
+                            <div class='txtCard' onclick='mostraInfo(1)'>--MSG_AQUI--.</div>
+                            <div id='info1' class='infoMsg'>Enviado por Jusjiscreudo - As 20:72</div>
+                        </div>
         
-                        <%--Grid com UpdatePanel para não atualizar a página inteira ao editar, inserir e desativar solicitacoes--%>
+                      
                       
                          
-                      
-                       
-                         
+                     
 
                        
                    
@@ -72,13 +73,18 @@
                 </div>
                 <!--Fim do corpo-->
                 <div class="modal-footer" style="text-align: left; background-color: whitesmoke; border-top: none">
+                     <asp:Label runat="server" ID="lblMsgId" Visible="false"></asp:Label>
                     <asp:TextBox runat="server" ID="txtResponder" TextMode="MultiLine" CssClass="minimalScrollbar"></asp:TextBox>
                     <!--Colocar hoover aqui-->
-                    <div style="float: right; width: 50px; text-align: center; height: 50px; border-radius: 100px; background-color: #960D10; box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.16);"><span class="mdi mdi-send" style="color: #fff; padding-top: 7px; padding-left: 5px; font-size: 35px;"></span></div>
+                    <div style="float: right; width: 50px; text-align: center; height: 50px; border-radius: 100px; background-color: #960D10; box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.16);"><asp:LinkButton ID="btnNovaMsg" runat="server" Text="Enviar" OnClick="btnNovaMsg_Click"></asp:LinkButton>
+                   <!--<spano style='color: #fff; padding-top: 7px; padding-left: 5px; font-size: 35px;'></span>--></div>
                 </div>
             </div>
         </div>
     </div>
+    </ContentTemplate>
+    </asp:UpdatePanel>
+                         
     <!--Fim do modal de Msg-->
     <!--Início do modal de novo ticket-->
 
@@ -133,7 +139,7 @@
                     <!-- SOLICITACAO EM ABERTO -->
                     <div role="tabpanel" class="tab-pane fade in active" id="geral"> 
                         <%--Grid com UpdatePanel para não atualizar a página inteira ao editar, inserir e desativar solicitacoes--%>
-                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+ 
                         <asp:UpdatePanel ID="UpdatePanelAtivados" UpdateMode="Conditional" runat="server">
                             <ContentTemplate>
                                 <asp:GridView ID="gdvRequerimentoAberto" runat="server" CssClass="gridView" DataKeyNames="req_codigo"
@@ -184,7 +190,7 @@
                                     </Columns>
 
                                 </asp:GridView>
-                               <asp:Label ID="lblMsgAssunto" runat="server"></asp:Label>
+                               
                                 <asp:Label ID="lblQtdRegistro" runat="server"></asp:Label>
                             </ContentTemplate>
 

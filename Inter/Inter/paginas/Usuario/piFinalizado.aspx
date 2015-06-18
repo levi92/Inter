@@ -105,13 +105,10 @@
                             <br />
                             <asp:Label ID="lblProjeto" Style="color: #525252" CssClass="labelProjeto" runat="server" Text="Projeto: "></asp:Label>
                             <asp:Label ID="lblNomeProjeto" Style="color: #960d10" CssClass="labelProjeto" runat="server"></asp:Label><br />
-                            <asp:GridView ID="gdvDetalhesProjeto" CssClass="tableFinalizar" runat="server" AutoGenerateColumns="false">
+                            <asp:GridView ID="gdvDetalhesProjeto"  CssClass="tableFinalizar" runat="server" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField HeaderText="Código" DataField="adi_codigo" />
-                                    <asp:TemplateField HeaderText="Disciplinas">
-                                        <ItemTemplate>
-                                            <asp:Label ID="lblNomeDisciplinas" runat="server"></asp:Label>
-                                        </ItemTemplate>
+                                    <asp:TemplateField HeaderText="Disciplinas">                                       
                                     </asp:TemplateField>
                                     <asp:BoundField HeaderText="Médias" DataField="mdd_media" />
                                 </Columns>

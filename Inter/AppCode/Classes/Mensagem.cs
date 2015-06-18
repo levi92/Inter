@@ -25,15 +25,17 @@ public class Mensagem
         get { return msg_usuario; }
         set { msg_usuario = value; }
     }
-
-    public Mensagem (int codrequerimento, string matricula, DateTime dataenvio, string conteudo)
+    
+    //CONSTRUTOR PARA INSERT
+    public Mensagem (int codrequerimento, string matricula, string conteudo)
     {
         CodigoReq = codrequerimento;
         MatriculaPro = matricula;
-        DataEnvio = dataenvio;
+        DataEnvio = DateTime.Now;
         Conteudo = conteudo;
     }
 
+    //CONSTRUTOR PARA SELECT
     public Mensagem(int codrequerimento, string matricula, DateTime dataenvio, string conteudo, int codigoMensagem)
     {
         CodigoReq = codrequerimento;

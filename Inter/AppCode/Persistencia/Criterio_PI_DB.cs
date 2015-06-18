@@ -32,6 +32,29 @@ public class Criterio_PI_DB{
         return retorno;
     }
 
+    public static int Insert(string sqlInsert)
+    {
+        int retorno = 0;
+        try
+        {
+            IDbConnection conexao;
+            IDbCommand objCommand;
+            string sql = "INSERT INTO cpi_criterio_pi(cpi_codigo, cge_codigo, pri_codigo, adi_codigo, cpi_peso, cpi_usuario) VALUES" + sqlInsert;
+            conexao = Mapped.Connection();
+            objCommand = Mapped.Command(sql, conexao);
+
+            objCommand.ExecuteNonQuery();
+            conexao.Close();
+            objCommand.Dispose();
+            conexao.Dispose();
+        }
+        catch (Exception e)
+        {
+            retorno = -2;
+        }
+        return retorno;
+    }
+
     //SELECIONA TODOS OS PESOS E CRITÉRIOS DO PI ATIVO E DA MATÉRIA SELECIONADA
     public static DataSet SelectCriteriosPesosByPI(int codPi, int codAtr)
     {
