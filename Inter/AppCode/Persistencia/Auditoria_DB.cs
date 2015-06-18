@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Web;
+using System.Globalization;
 
 namespace AppCode.Persistencia
 {
@@ -31,17 +32,32 @@ namespace AppCode.Persistencia
 
             string filtro = "";
             int campo = 0;
-            // monta o filtro...
+
             if (data != "")
             {
+                string[] converter = data.Split('/');
+                string formatada = "";
+            
+                for (int c = 2; c >= 0; c--)
+                {
+                    if (c == 0)
+                    {
+                        formatada = formatada + converter[c];
+                    }
+                    else
+                    {
+                        formatada = formatada + converter[c] + "-";
+                    }           
+                }
+             
                 if (campo == 0)
                 {
-                    filtro = "aud_data = " + data;
+                    filtro = "aud_data between '" + formatada + " 00:00:00' and '" + formatada + " 23:59:59'";
                     campo = campo + 1;
                 }
                 else
                 {
-                    filtro = filtro + "and aud_data = " + data;
+                    filtro = filtro + "and aud_data between '" + formatada + " 00:00:00' and '" + formatada + " 23:59:59'";
                 }
             }
 
@@ -49,12 +65,12 @@ namespace AppCode.Persistencia
             {
                 if (campo == 0)
                 {
-                    filtro = "aud_usuario = " + usuario;
+                    filtro = "aud_usuario = '" + usuario + "'";
                     campo = campo + 1;
                 }
                 else
                 {
-                    filtro = filtro + "and aud_usuario = " + usuario;
+                    filtro = filtro + "and aud_usuario = '" + usuario + "'";
                 }
             }
 
@@ -62,12 +78,12 @@ namespace AppCode.Persistencia
             {
                 if (campo == 0)
                 {
-                    filtro = "aud_acao = " + acao;
+                    filtro = "aud_acao = '" + acao + "'";
                     campo = campo + 1;
                 }
                 else
-                {
-                    filtro = filtro + "and aud_acao = " + acao;
+                {                  
+                    filtro = filtro + "and aud_acao = '" + acao + "'";
                 }
             }
 
@@ -75,12 +91,12 @@ namespace AppCode.Persistencia
             {
                 if (campo == 0)
                 {
-                    filtro = "aud_tabela = " + tabela;
+                    filtro = "aud_tabela = '" + tabela + "'";
                     campo = campo + 1;
                 }
                 else
                 {
-                    filtro = filtro + "and aud_tabela = " + tabela;
+                    filtro = filtro + "and aud_tabela = '" + tabela + "'";
                 }
             }
 
@@ -89,14 +105,8 @@ namespace AppCode.Persistencia
             IDbCommand objCommand;
             IDataAdapter objDataAdapter;
             objConnection = Mapped.Connection();
-
-            
-            /*AppendFilter(filter, objCommand, "aud_data", data);
-            AppendFilter(filter, objCommand, "aud_usuario", usuario);
-            AppendFilter(filter, objCommand, "aud_acao", acao);
-            AppendFilter(filter, objCommand, "aud_tabel", tabela);*/
-
-            objCommand = Mapped.Command("select * from aud_auditoria where '" + filtro + "';", objConnection);
+            string sql = "select a.aud_data, a.aud_usuario, a.aud_acao, a.aud_tabela, a.aud_dados_antes, a.aud_dados_depois from aud_auditoria a where " + filtro + ";";
+            objCommand = Mapped.Command(sql, objConnection);
             objDataAdapter = Mapped.Adapter(objCommand);
             objDataAdapter.Fill(ds);
             objConnection.Close();
@@ -104,23 +114,5 @@ namespace AppCode.Persistencia
             objConnection.Dispose();
             return ds;
         }
-
-
-
-        /*private static void AppendFilter(StringBuilder filter, System.Data.SqlClient.SqlCommand command,
-        string fieldName, object paramValue)
-        {
-            // verifica se preencheu o valor...
-            if (!string.IsNullOrEmpty(Convert.ToString(paramValue)))
-            {
-                // adiciona o filtro...
-                if (filter.Length > 0)
-                    filter.Append(" AND ");
-                filter.Append(string.Format("{0} = @{0}", fieldName));
-                // adiciona o parâmetro...
-                command.Parameters.AddWithValue(string.Format("@{0}", fieldName), paramValue);
-            }
-        }*/
-
     }
 }

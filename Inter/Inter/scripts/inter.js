@@ -18,6 +18,24 @@ $(document).ready(function () {
         $("#conteudo").slideDown(500);
 
     });
+
+    $('#txtData').datepicker({
+        dateFormat: 'dd/mm/yy',
+        dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+        dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        nextText: 'Próximo',
+        prevText: 'Anterior'
+        //showOn: "button",
+        //buttonImage: "../../App_Themes/images/Calendar-Add-128x128.png",
+        //buttonImageOnly: true,
+        
+        //buttonText: "Abrir Calendário"
+
+    });
+
 });
 
 //Function para exibir o subMenu ao clicar no botão

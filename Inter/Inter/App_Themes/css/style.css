@@ -254,7 +254,7 @@ select#listaGrupos {
 }
 
 
-#ddlGrupos option, #ddlFinalizarGrupos option, #ddlSemestreAno option {
+#ddlGrupos option, #ddlFinalizarGrupos option, #ddlSemestreAno option, #ddlAcao option, #ddlTabela option {
     margin: 5px auto;
     padding: 7px 5px;
     font-size: 14px;
