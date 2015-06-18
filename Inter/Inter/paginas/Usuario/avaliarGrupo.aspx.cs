@@ -344,20 +344,34 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         {
             Session["GruposFinalizar"] = dsGruposFinalizar;
         }
+
         DataSet dsGruposAvaliar = new DataSet();
         dsGruposAvaliar = Grupo_DB.SelectAllGruposAvaliar(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
-        Session["GruposAvaliar"] = dsGruposAvaliar;
+        if (dsGruposAvaliar == null)
+        {
+            Session["GruposAvaliar"] = null;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalTodosAvaliados", "msgTodosAvaliados();", true);
+        }
+        else
+        {
+            Session["GruposAvaliar"] = dsGruposAvaliar;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalGrupoAvaliado", "msgGrupoAvaliado();", true);
+        }
     }
 
     protected void btnFinalizar_Click(object sender, EventArgs e)
     {
         PegarValoresNotas();
-        Response.Redirect("~/AvaliarGrupo");
     }
 
     protected void btnVoltarHome2_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/Home");
+    }
+
+    protected void btnGrupoAvaliado_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/AvaliarGrupo");
     }
 
 
