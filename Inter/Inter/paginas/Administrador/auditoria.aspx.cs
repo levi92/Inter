@@ -99,22 +99,27 @@ public partial class paginas_Admin_auditoria : System.Web.UI.Page
                 tabela = ddlTabela.SelectedValue.ToString();
             }
 
-            DataSet ds = Auditoria_DB.SelectFiltro(data, usuario, acao, tabela);
-
-            int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
-
-            //se qtd for maior que zero, ou seja, se tiver dados no data set
-            if (qtd > 0)
+            if ((usuario == "") && (data == "") && (acao == "") && (tabela == ""))
             {
-                gdvAud.Visible = true;
-                gdvAud.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
-                gdvAud.DataBind(); //preenche o grid view com os dados
-                lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
+                gdvAud.Visible = false;
+                lblQtdRegistro.Text = "Preencha ao menos um campo para pesquisar!";
             }
             else
             {
-                gdvAud.Visible = false;
-                lblQtdRegistro.Text = "Nenhum registro foi encontrado";
+                DataSet ds = Auditoria_DB.SelectFiltro(data, usuario, acao, tabela);
+                int qtd = ds.Tables[0].Rows.Count; //qtd de linhas do ds
+
+                if (qtd > 0)
+                {
+                    gdvAud.Visible = true;
+                    gdvAud.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+                    gdvAud.DataBind(); //preenche o grid view com os dados
+                    lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
+                }
+                else
+                {
+                    lblQtdRegistro.Text = "Nenhum registro foi encontrado";
+                } 
             }
         }
 
