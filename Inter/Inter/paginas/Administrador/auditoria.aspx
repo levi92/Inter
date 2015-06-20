@@ -6,6 +6,13 @@
         $(document).ready(function () {
             $('#icone65').addClass('corIcone');
         });
+
+        
+            //showOn: "button",
+            //buttonImage: "../../App_Themes/images/Calendar-Add-128x128.png",
+            //buttonImageOnly: true,
+
+            //buttonText: "Abrir Calendário"
     </script>
 
     <div id="p1" class="first">
@@ -14,7 +21,10 @@
                 <h3 class="panel-title">Auditoria</h3>
             </div>
             <div class="panel-body">
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
                
+                   
                 <table class="table" style="margin-left: -8px">
                             <tr style="text-align: right; padding-left: 0; padding-right: 0;">
                                 <td style="text-align: right; padding-left: 0; padding-right: 0;">
@@ -53,9 +63,7 @@
                                     </asp:LinkButton>
                                 </td>
                             </tr>
-                        </table>
-
-                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                        </table>                      
 
                         <asp:UpdatePanel ID="UpdatePanelAuditoria" UpdateMode="Conditional" runat="server">
 

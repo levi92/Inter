@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using Interdisciplinar;
 using Inter.Funcoes;
+using AppCode.Persistencia;
 
 public partial class paginas_Admin_projetos : System.Web.UI.Page
 {
@@ -24,54 +25,111 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        ScriptManager1.RegisterAsyncPostBackControl(lkbBuscar);
         if (!IsPostBack)
         {
             CarregaGrid();
+            DataSet dsSem = Semestre_Ano_DB.SelectSemestreAno();
+            
+            ddlSemestreAno.DataSource = dsSem;
+            ddlSemestreAno.DataTextField = "concat(SAN_ANO,'-',SAN_SEMESTRE)";
+            ddlSemestreAno.DataValueField = "SAN_CODIGO";
+            ddlSemestreAno.DataBind();
+            ddlSemestreAno.Items.Insert(0, new ListItem("Selecione", "0"));
+
+            ddlStatus.Items.Insert(0, new ListItem("Selecione", "0"));
+            ddlStatus.Items.Insert(1, new ListItem("Finalizado", "1"));
+            ddlStatus.Items.Insert(2, new ListItem("Em andamento", "2"));
+            //ddlStatus.Items.Insert(3, new ListItem("Solicitado", "3"));
+
+           /*DataSet dsPIsFatec = (DataSet)Session["DS_AllPIsbyCalendarioAtual"];
+            int qtdPIs = dsPIsFatec.Tables[0].Rows.Count; //pega a quantidade total de linhas na tabela do dataset e armazena na variável qtdPIs
+            string[] cursos = new string[0]; //instancia um novo array cursos com tamanho indefinido
+            cursos = Funcoes.tratarDadosCursosComPI(dsPIsFatec, qtdPIs); //usa um método para tratar o nome dos cursos e trazer somente um de cada
+            ddlCurso.DataSource = cursos;
+            ddlCurso.DataBind();
+            ddlCurso.Items.Insert(0, new ListItem("Selecione", "0"));*/
         }
     }
 
     private void CarregaGrid()
 
     {    
-        string busca = txtBusca.Text;
-        DataSet dsPIsFatec = (DataSet)Session["DS_AllPIsbyCalendarioAtual"]; //instancia um dataset usando um dataset existente em uma varíavel de sessão(que é instanciada no login como null)
+        /*DataSet dsPIsFatec = (DataSet)Session["DS_AllPIsbyCalendarioAtual"]; //instancia um dataset usando um dataset existente em uma varíavel de sessão(que é instanciada no login como null)
         if (Session["DS_AllPIsbyCalendarioAtual"] == null) //se a variável de sessão estiver null(sem dataset nenhum), irá colocar um dataset dentro da varíavel de sessão
         {
             Calendario cal = Calendario.SelectbyAtual();           
             dsPIsFatec = Professor.SelectAllPIsbyCalendario(cal.Codigo, cal.AnoSemestreAtual);
             Session["DS_AllPIsbyCalendarioAtual"] = dsPIsFatec;
 
-        }
-        int qtdPIs = dsPIsFatec.Tables[0].Rows.Count; //pega a quantidade total de linhas na tabela do dataset e armazena na variável qtdPIs
-        string[] cursos = new string[0]; //instancia um novo array cursos com tamanho indefinido
-        cursos = Funcoes.tratarDadosCursosComPI(dsPIsFatec, qtdPIs); //usa um método para tratar o nome dos cursos e trazer somente um de cada
-        ddlCurso.DataSource = cursos;
-        ddlCurso.DataBind();
+        }*/
 
-        DataSet ds = Funcoes_DB.SelectAllPIs();
-        ds.Tables.Add();
-        
-        string[] anoSemestre = new string[0];
-        //for()
-        //anoSemestre = ds.Tables[0]
-     
+        /*DataSet ds = Funcoes_DB.SelectAllPIs();
 
-        //if (!String.IsNullOrEmpty(busca))
-        //{
-        //    ds.Tables[0].Select("where GRU_NOME_PROJETO like '%" + busca + "%'");
-        //}
         int qtd = ds.Tables[0].Rows.Count;
         if (qtd > 0)
         {
             gdvProjetos.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
             gdvProjetos.DataBind(); //preenche o grid view com os dados
-        }
+        }*/
 
+    }
+
+
+    public void CarregaPesquisaAvançada()
+    {
+        string pesquisa;
+
+        pesquisa = txtPesquisa.Text;
+
+        if (pesquisa == "")
+        {
+            gdvProjetos.Visible = false;
+            lblQtdRegistro.Text = "Preencha o campo pesquisa avançada!";
+        }
+        else
+        {
+            DataSet dsPesquisa = Funcoes_DB.SelectFiltroPI(pesquisa);
+
+            int qtd = dsPesquisa.Tables[0].Rows.Count;
+            if (qtd > 0)
+            {
+                gdvProjetos.Visible = true;
+                gdvProjetos.DataSource = dsPesquisa.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+                gdvProjetos.DataBind(); //preenche o grid view com os dados
+                lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
+
+                foreach (GridViewRow linha in gdvProjetos.Rows)//percorre cada linha da grid (obs: isso existe pelo campo de nome estar em outra tabela no BD da Fatec)
+                {
+                    Professor prof = new Professor(); //instancia um novo professor
+                    Label lblNome = (Label)linha.FindControl("lblNome");//acha o label de matrícula da grid e liga a outro label
+                    Label lblAno = (Label)linha.FindControl("lblAno"); //acha o label de Nome e liga a outro label
+                    Label lblStatus = (Label)linha.FindControl("lblStatus");
+
+                    if (lblStatus.Text == "True")
+                    {
+                        lblStatus.Text = "Finalizado";
+                    }
+                    else
+                    {
+                        lblStatus.Text = "Em andamento";
+                    }
+                    /*prof = Professor.SelectByCodigo(lblMatricula.Text); //o número de matrícula do label é usado para preencher o objeto professor usando o método de selecionar por código
+                    lblNome.Text = prof.Nome; //o label NomeAdmin da grid é preenchido utilizando o nome que está no objeto do professor (método get encapsulado)
+                    */
+                }
+            }
+            else
+            {
+                gdvProjetos.Visible = false;
+                lblQtdRegistro.Text = "Nenhum Registro foi encontrado";
+            }
+        }
     }
     int i;
     protected void gdvProjetos_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        DataSet ds = (DataSet)Session["DS_AllPIsbyCalendarioAtual"];
+        /*DataSet ds = (DataSet)Session["DS_AllPIsbyCalendarioAtual"];
         string[] vetorReturnFunction = new string[3];
 
         if (e.Row.RowType == DataControlRowType.DataRow)
@@ -89,9 +147,54 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
             {
                 e.Row.Cells[3].Text = "Aberto"; //se não for "false", troca por "finalizado"
             }
-        }
+        }*/
     }
-    
+
+    protected void gdvProjetos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gdvProjetos.PageIndex = e.NewPageIndex;
+        
+        if (txtPesquisa.Text == "")
+        {
+            CarregaPesquisaAvançada();
+            UpdatePanelAtivados.Update();
+        }
+        else
+        {
+            CarregaGrid();
+        }
+        
+    }
+
+    protected void gdvProjetos_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+
+    }
+
+    protected void lkbBuscar_Click(object sender, EventArgs e)
+    {
+        
+        CarregaPesquisaAvançada();
+        UpdatePanelAtivados.Update();
+        
+        
+    }
+
+    protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void ddlSemestreAno_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void ddlCurso_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
 
    
 

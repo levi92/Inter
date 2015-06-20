@@ -25,9 +25,13 @@ public partial class paginas_Admin_auditoria : System.Web.UI.Page
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScriptManager1.RegisterAsyncPostBackControl(lkbPesquisar);
+
             if (!IsPostBack)
             {
                 CarregarGridAuditoria();
+                //updFiltro.Update();
+                UpdatePanelAuditoria.Update();
                 //UpdatePanelAuditoria.Update();
 
                 ddlAcao.Items.Insert(0, new ListItem("Selecione", "SELECIONE"));
@@ -118,6 +122,7 @@ public partial class paginas_Admin_auditoria : System.Web.UI.Page
                 }
                 else
                 {
+                    gdvAud.Visible = false;
                     lblQtdRegistro.Text = "Nenhum registro foi encontrado";
                 } 
             }
@@ -153,6 +158,8 @@ public partial class paginas_Admin_auditoria : System.Web.UI.Page
         protected void lkbPesquisar_Click(object sender, EventArgs e)
         {
             CarregaFiltro();
+            //updFiltro.Update();
+            UpdatePanelAuditoria.Update();
             //UpdatePanelAuditoria.Update();
         }
 

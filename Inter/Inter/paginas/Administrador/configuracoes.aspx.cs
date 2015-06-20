@@ -112,8 +112,8 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
             lblBackup.Text = "Erro ao criar Backup!";
         }
 
-        
 
+       // ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
         
 
     }
@@ -122,6 +122,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
     {
         if (e.CommandName == "bkpDownload")
         {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
             HttpResponse response = HttpContext.Current.Response;
             string caminho = pegaDirBackup();
             GridViewRow gvr = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer); //pega a linha da grid pela fonte do comando
@@ -136,16 +137,49 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
             Response.ContentType = "text/plain";
             Response.Flush();
             Response.TransmitFile(file.FullName);
-            Response.End();         
+            Response.End();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+        }
+
+        if (e.CommandName == "bkpRestaurar")
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+            string constring = "server=localhost;user=root;password=123;database=inter;";
+            string caminho = pegaDirBackup();
+            GridViewRow gvr = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer); //pega a linha da grid pela fonte do comando
+            string arquivo = gdvBkp.Rows[gvr.RowIndex].Cells[0].Text; //pega nome do arquivo daquela linha do gridview
+            string caminhoDoArquivo = caminho + arquivo + ".sql"; //junta o diretório + nome do arquivo
+            using (MySqlConnection conn = new MySqlConnection(constring))
+            {
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    using (MySqlBackup mb = new MySqlBackup(cmd))
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
+                        mb.ImportFromFile(caminhoDoArquivo);
+                        conn.Close();
+                    }
+                }
+            }
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
         }
     }
 
     protected void gdvBkp_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         LinkButton lb = (LinkButton)e.Row.FindControl("lkbDownload"); //acha o botão download e coloca no controle lb
+        LinkButton lb1 = (LinkButton)e.Row.FindControl("lkbRestaurar"); //acha o botão download e coloca no controle lb
         if (lb != null)
         {
-            ScriptManager2.RegisterPostBackControl(lb); //usando o ScriptManager, registra todos os botões de download para fazer postback (o padrão é PostBack parcial por causa do UpdatePanel, o que não deixava fazer o download!)
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+            ScriptManager1.RegisterPostBackControl(lb); //usando o ScriptManager, registra todos os botões de download para fazer postback (o padrão é PostBack parcial por causa do UpdatePanel, o que não deixava fazer o download!)
+        }
+
+        if (lb1 != null)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+            ScriptManager1.RegisterPostBackControl(lb1); //usando o ScriptManager, registra todos os botões de download para fazer postback (o padrão é PostBack parcial por causa do UpdatePanel, o que não deixava fazer o download!)
         }
 
     }
@@ -154,5 +188,15 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
     {
         gdvBkp.PageIndex = e.NewPageIndex;
         CarregaGrid();
+    }
+
+    protected void btnCancelarNovoCriterio_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnCriarNovoCriterio_Click(object sender, EventArgs e)
+    {
+
     }
 }

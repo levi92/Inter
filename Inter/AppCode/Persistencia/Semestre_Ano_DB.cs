@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Data.OleDb;
 using System.Threading.Tasks;
 
 namespace AppCode.Persistencia
@@ -171,5 +172,35 @@ namespace AppCode.Persistencia
             objConnection.Dispose();
             return ds;
         }
+
+        public static DataSet SelectSemestreAno()
+        {
+            DataSet ds = new DataSet();
+            IDbConnection objConnection;
+            IDbCommand objCommand;
+            IDataAdapter objDataAdapter;
+            objConnection = Mapped.Connection();
+            objCommand = Mapped.Command("select SAN_CODIGO, concat(SAN_ANO,'-',SAN_SEMESTRE) from san_semestre_ano ORDER BY SAN_ANO, SAN_SEMESTRE;", objConnection);
+            objDataAdapter = Mapped.Adapter(objCommand);
+            objDataAdapter.Fill(ds);
+            objConnection.Close();
+            objCommand.Dispose();
+            objConnection.Dispose();
+            return ds;
+        }
+
+        /*public static DataTable Sem_Ano()
+        {
+            using (OleDbConnection con = new OleDbConnection("Database=inter;Data Source=localhost;User id=root; Password=123;pooling=false;"))
+            {
+                using (OleDbDataAdapter da = new
+            OleDbDataAdapter("select concat(s.SAN_ANO,'-',s.SAN_SEMESTRE) from san_semestre_ano s ORDER BY s.SAN_ANO, s.SAN_SEMESTRE", con))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            } 
+        }*/
     }
 }

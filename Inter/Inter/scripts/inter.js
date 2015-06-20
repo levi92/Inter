@@ -31,7 +31,7 @@ $(document).ready(function () {
         //showOn: "button",
         //buttonImage: "../../App_Themes/images/Calendar-Add-128x128.png",
         //buttonImageOnly: true,
-        
+
         //buttonText: "Abrir Calendário"
 
     });
@@ -74,8 +74,7 @@ function toggleDiv(idDiv) {
         subMenu = 1;
         document.getElementById(idDiv).style.display = "block";
     }
-    else
-    {
+    else {
         subMenu = 1;
         document.getElementById(idDiv).style.display = "none";
     }

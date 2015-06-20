@@ -12,6 +12,78 @@
 public partial class paginas_Admin_projetos {
     
     /// <summary>
+    /// lblCurso control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblCurso;
+    
+    /// <summary>
+    /// ddlCurso control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList ddlCurso;
+    
+    /// <summary>
+    /// lblSemestreAno control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblSemestreAno;
+    
+    /// <summary>
+    /// ddlSemestreAno control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList ddlSemestreAno;
+    
+    /// <summary>
+    /// lblStatus control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblStatus;
+    
+    /// <summary>
+    /// ddlStatus control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
+    
+    /// <summary>
+    /// txtPesquisa control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtPesquisa;
+    
+    /// <summary>
+    /// lkbBuscar control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton lkbBuscar;
+    
+    /// <summary>
     /// ScriptManager1 control.
     /// </summary>
     /// <remarks>
@@ -30,42 +102,6 @@ public partial class paginas_Admin_projetos {
     protected global::System.Web.UI.UpdatePanel UpdatePanelAtivados;
     
     /// <summary>
-    /// ddlCurso control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList ddlCurso;
-    
-    /// <summary>
-    /// ddlSemestreAno control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList ddlSemestreAno;
-    
-    /// <summary>
-    /// txtBusca control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtBusca;
-    
-    /// <summary>
-    /// lkbBuscar control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton lkbBuscar;
-    
-    /// <summary>
     /// gdvProjetos control.
     /// </summary>
     /// <remarks>
@@ -73,4 +109,13 @@ public partial class paginas_Admin_projetos {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.GridView gdvProjetos;
+    
+    /// <summary>
+    /// lblQtdRegistro control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblQtdRegistro;
 }
