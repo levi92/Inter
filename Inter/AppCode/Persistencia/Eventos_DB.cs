@@ -59,6 +59,23 @@ namespace AppCode.Persistencia
             return retorno;
         }
 
+        public static DataSet SelectEventosPI(int codPIAtivo)
+        {
+            DataSet ds = new DataSet();
+            IDbConnection objConnection;
+            IDbCommand objCommand;
+            IDataAdapter objDataAdapter;
+            objConnection = Mapped.Connection();
+            objCommand = Mapped.Command("SELECT * FROM EVE_EVENTOS WHERE pri_codigo = ?pri_codigo ", objConnection);
+            objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", codPIAtivo));
+            objDataAdapter = Mapped.Adapter(objCommand);
+            objDataAdapter.Fill(ds);
+            objConnection.Close();
+            objCommand.Dispose();
+            objConnection.Dispose();
+            return ds;
+        }
+
 
 
     }

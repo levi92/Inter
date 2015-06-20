@@ -10,6 +10,15 @@ using System.Web.UI.WebControls;
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["login"] == null)
+            {
+                Response.Redirect("~/BloqueioUrl");
+            }
+        }
+        protected void btnSair_Click(object sender, EventArgs e)
+        {
+            Session.RemoveAll();
 
+            Response.Redirect("~/Login");
         }
     }

@@ -22,46 +22,43 @@
 
                     <tr>
                         <td>
-                            <asp:Label ID="Label1" CssClass="label" runat="server" Text="Código PI: "></asp:Label>
+                            <asp:Label ID="lblCodigo" CssClass="label" runat="server" Text="Código PI: "></asp:Label>
                         </td>
 
                         <td>
-                            <asp:Label ID="Label2" runat="server" Text="01"></asp:Label>
+                            <asp:Label ID="lblCodigoPI" runat="server" Text=""></asp:Label>
                         </td>
 
                         <td>
-                            <asp:Label ID="Label3" CssClass="label" runat="server" Text="Curso: "></asp:Label>
+                            <asp:Label ID="lblCurso" CssClass="label" runat="server" Text="Curso: "></asp:Label>
                         </td>
 
                         <td>
-                            <asp:Label ID="Label4" runat="server" Text="ADS"></asp:Label>
+                            <asp:Label ID="lblCursoValor" runat="server" Text="" ></asp:Label>
                         </td>
 
                         <td>
-                            <asp:Label ID="Label5" CssClass="label" runat="server" Text="Semestre: "></asp:Label>                            
+                            <asp:Label ID="lblSemestre" CssClass="label" runat="server" Text="Semestre: "></asp:Label>                            
                         </td>
 
                         <td>
-                            <asp:Label ID="Label6" runat="server" Text="4"></asp:Label>
+                            <asp:Label ID="lblSemestreValor" runat="server" Text=""></asp:Label>
 
                         </td>
-
-
                     </tr>
-
                     <tr>
                         <td>
-                            <asp:Label ID="Label7" CssClass="label" runat="server" Text="Ano: "></asp:Label>
+                            <asp:Label ID="lblAno" CssClass="label" runat="server" Text="Ano: "></asp:Label>
                         </td>
 
                         <td>
-                            <asp:Label ID="Label8" runat="server" Text="2014 "></asp:Label>
+                            <asp:Label ID="lblAnoValor" runat="server" ></asp:Label>
                         </td>
                         <td>
-                            <asp:Label ID="Label9" CssClass="label" runat="server" Text="Semestre Ano: "></asp:Label>
+                            <asp:Label ID="lblSemestreAno" CssClass="label" runat="server" Text="Semestre Ano: "></asp:Label>
                         </td>
                         <td>
-                            <asp:Label ID="Label10" runat="server" Text="02"></asp:Label>
+                            <asp:Label ID="lblSemestreAnoValor" runat="server" ></asp:Label>
                         </td>
 
 
@@ -83,18 +80,16 @@
                             <h4>Datas de Eventos:</h4>
                         </td>
                         <td></td>
-
                     </tr>
-
                     <tr>
-                        <td>Prévia 1 - 12/10/2014
-                                        <br />
-                            Prévia 2 - 12/11/2014
-                                        <br />
-                            Apresentação Final - 12/12/2014 
-                                        <br />
+                        <td>
+                            <asp:GridView ID="gdvEventosConsultarPI" CssClass="tableEventos" AutoGenerateColumns="false" runat="server">
+                                <Columns>
+                                    <asp:BoundField  DataField="eve_tipo" />
+                                    <asp:BoundField  DataField="eve_data" DataFormatString="{0:D}" />
+                                </Columns>
+                            </asp:GridView>
                         </td>
-
                         <td>
                             <button type="button" class="btn btn-default" id="btnEditar" onclick="Mostra('p5');">
                                 <span class="glyphicon glyphicon-pencil"></span>&nbsp Editar Datas

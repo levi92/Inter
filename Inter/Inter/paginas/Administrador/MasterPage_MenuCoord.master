@@ -17,11 +17,11 @@
                     <asp:Label ID="dia" runat="server" ClientIDMode="Static"></asp:Label></h5>
                 <hr />
                  <ul>      
-                    <li><asp:HyperLink ID="icone2" runat="server" NavigateUrl="~/paginas/Administrador/solicitacoes.aspx" ClientIDMode="Static" Enabled="True">
+                    <li><asp:HyperLink ID="icone2" runat="server" NavigateUrl="~/Solicitacoes" ClientIDMode="Static" Enabled="True">
                         <span class="glyphicon glyphicon-bullhorn"></span>&nbsp Solicitações</asp:HyperLink></li>
-                    <li><asp:HyperLink ID="icone3" runat="server" NavigateUrl="~/paginas/Administrador/criterios.aspx" ClientIDMode="Static" Enabled="True">
+                    <li><asp:HyperLink ID="icone3" runat="server" NavigateUrl="~/Criterios" ClientIDMode="Static" Enabled="True">
                         <span class="glyphicon glyphicon-list"></span>&nbsp Critérios</asp:HyperLink></li>
-                    <li><asp:HyperLink ID="icone5" runat="server" NavigateUrl="~/paginas/Administrador/projetos.aspx" ClientIDMode="Static" Enabled="True">
+                    <li><asp:HyperLink ID="icone5" runat="server" NavigateUrl="~/Projetos" ClientIDMode="Static" Enabled="True">
                         <span class="glyphicon glyphicon-folder-open"></span>&nbsp Projetos</asp:HyperLink></li>  
                     
                        

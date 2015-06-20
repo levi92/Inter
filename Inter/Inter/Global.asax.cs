@@ -18,6 +18,7 @@ namespace Inter
 
         private static void RegisterRoutes()
         {
+            //Rotas Usuario
             System.Web.Routing.RouteTable.Routes.Add("Login",
                 new System.Web.Routing.Route("Login", new
                                   PageRouteHandler("~/paginas/Login/login.aspx")));
@@ -57,6 +58,38 @@ namespace Inter
             System.Web.Routing.RouteTable.Routes.Add("PIFinalizado",
                 new System.Web.Routing.Route("PIFinalizado", new
                                   PageRouteHandler("~/paginas/Usuario/piFinalizado.aspx")));
+            //Rotas Admin
+            System.Web.Routing.RouteTable.Routes.Add("Auditoria",
+               new System.Web.Routing.Route("Auditoria", new
+                                 PageRouteHandler("~/paginas/Administrador/auditoria.aspx")));
+
+            System.Web.Routing.RouteTable.Routes.Add("Solicitacoes",
+              new System.Web.Routing.Route("Solicitacoes", new
+                                PageRouteHandler("~/paginas/Administrador/solicitacoes.aspx")));
+
+            System.Web.Routing.RouteTable.Routes.Add("Criterios",
+              new System.Web.Routing.Route("Criterios", new
+                                PageRouteHandler("~/paginas/Administrador/criterios.aspx")));
+
+            System.Web.Routing.RouteTable.Routes.Add("Usuarios",
+              new System.Web.Routing.Route("Usuarios", new
+                                PageRouteHandler("~/paginas/Administrador/usuarios.aspx")));
+
+            System.Web.Routing.RouteTable.Routes.Add("Projetos",
+              new System.Web.Routing.Route("Projetos", new
+                                PageRouteHandler("~/paginas/Administrador/projetos.aspx")));
+
+            System.Web.Routing.RouteTable.Routes.Add("EscolherPerfil",
+             new System.Web.Routing.Route("EscolherPerfil", new
+                               PageRouteHandler("~/paginas/Administrador/alterar_perfil.aspx")));
+
+            System.Web.Routing.RouteTable.Routes.Add("Configuracoes",
+              new System.Web.Routing.Route("Configuracoes", new
+                                PageRouteHandler("~/paginas/Administrador/configuracoes.aspx")));
+
+            System.Web.Routing.RouteTable.Routes.Add("Ajuda",
+             new System.Web.Routing.Route("Ajuda", new
+                               PageRouteHandler("~/paginas/Administrador/ajuda.aspx")));
 
         }
     }
