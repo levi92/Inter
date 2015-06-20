@@ -53,7 +53,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                 {
                     //Coordenador e professor
                     //chama a página de escolher o perfil
-                    Response.Redirect("~/Paginas/Administrador/alterar_perfil.aspx");
+                    Response.Redirect("~/EscolherPerfil");
 
                 }
                 else
@@ -82,7 +82,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
 
         // pegar valor dos textbox do login
         string user = txtLoginM.Text; //.ToString() não precisa, o .Text já converte pra String
-        //string senha = Funcoes.Criptografar(txtSenha.Text.ToString(), "SHA1"); ->>> não lê a senha correta do banco por algum motivo
+        //string senha = Funcoes.Criptografar(txtSenha.Text.ToString(), "SHA1"); ->>> precisa trocar pelo SHA1 do Visual Studio para funcionar
         string senha = txtSenhaM.Text;
 
 
@@ -101,7 +101,7 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                 Session["menu"] = "master";
                 Session["matricula"] = perfil.Matricula;
                 Session["nome"] = "Master";
-                Response.Redirect("~/Paginas/Administrador/solicitacoes.aspx");
+                Response.Redirect("~/Auditoria");
             }
             else
             {
