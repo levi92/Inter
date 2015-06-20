@@ -24,6 +24,11 @@
                 });
             });
         }
+
+        function divAssociateRadio(id) {
+            var idDiv = id.substr(39, id.length);
+            $(this).attr("for", "cphConteudo_cphConteudoCentral_gdv_rb_" + idDiv);            
+        }
     </script>
     
     <!-- ESCOLHER DISCIPLINA -->
@@ -49,8 +54,11 @@
 
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:RadioButton runat="server" ID="rb" GroupName="Grupo"
-                                            OnCheckedChanged="rb_CheckedChanged" AutoPostBack="true"></asp:RadioButton>
+                                        <label id="label" onclick="labelAssociateRadio(this.id);" runat="server"
+                                            style="padding: 14px; text-align: center; cursor: pointer; ">
+                                            <asp:RadioButton runat="server" ID="rb" GroupName="Grupo"
+                                                OnCheckedChanged="rb_CheckedChanged" AutoPostBack="true"></asp:RadioButton>
+                                        </label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 

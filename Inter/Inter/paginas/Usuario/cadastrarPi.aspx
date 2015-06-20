@@ -8,7 +8,6 @@
         $(document).ready(function () {
             // ALTERAR COR DO ÍCONE NO MENU LATERAL 
             $('#cphConteudo_icone5').addClass('corIcone');
-
         });
 
         // LIMPAR TEXTBOXS MODAL CADASTRAR CRTITÉRIO 
@@ -52,6 +51,11 @@
         //CHAMAR MODAL COM MENSAGEM QUE JÁ POSSUI PI CADASTRADO
         function msgPossuiPI() {
             $("#possuiPI").click();
+        }
+
+        Sys.Application.add_load(BindEvents);
+        function BindEvents() {
+            $('[data-toggle=tooltip]').tooltip();
         }
 
     </script>

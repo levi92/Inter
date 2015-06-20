@@ -99,9 +99,9 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
             btnFinalizar.CssClass = "btn btn-default disabled";
             btnSalvar.CssClass = "btn btn-default disabled";
         }
-        
+
     }
-    
+
 
     private void CarregaTableAvaliar(int codGrupo, DataSet dsCriteriosPesos)
     {
@@ -166,7 +166,9 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
             th = new TableHeaderCell();
             lblCabecalho = new Label();
             lblCabecalho.Text = Funcoes.SplitNomes(nomeAlunos[i].ToString());
-            lblCabecalho.ToolTip = nomeAlunos[i].ToString();            
+            lblCabecalho.ToolTip = nomeAlunos[i].ToString();
+            lblCabecalho.Attributes["data-toggle"] = "tooltip";
+
             th.Style.Add("text-align", "center");
             th.Controls.Add(lblCabecalho);
             thr.Cells.Add(th);
@@ -273,7 +275,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
         int cpiCodigo = 0;
         string[] codAlunos = (string[])Session["matriculasAlunos"];
 
-        string sqlInsertHistoricoAluDisc = "";
+        string sqlInsertHistoricoAluDisc = "";        
 
         for (int j = 1; j < colsCount; j++) //ALUNOS
         {
@@ -287,12 +289,11 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
             {
                 //txtNotasRow_1_Col_1 = [0] = txtNotasRow - [1] = 1 - [2] = Col - [3] = 1
                 TextBox txtNota = (TextBox)Page.FindControl("ctl00$ctl00$cphConteudo$cphConteudoCentral$txtNotasRow_" + i.ToString() + "_Col_" + j.ToString());
-                if (!String.IsNullOrEmpty(txtNota.Text))
-                {
-                    valor = Convert.ToDouble(txtNota.Text);                    
-                    valorMultiplicacao += valor * Convert.ToInt32(todosPesos[i]);
-                }
-
+                                
+                valor = Convert.ToDouble(txtNota.Text);                    
+                valorMultiplicacao += valor * Convert.ToInt32(todosPesos[i]);
+                //ESTÁ COM ERRO QUADO USA NUMERO DECIMAL PESQUISAR valor.ToString("D", cultureInfo);
+               
                 somaPeso += Convert.ToInt32(todosPesos[i]);
 
                 cpiCodigo = Convert.ToInt32(dsCriteriosPesos.Tables[0].Rows[i]["CPI_CODIGO"]); //CÓDIGO DO CRITÉRIO PI

@@ -677,7 +677,7 @@ tabelaHome3 {
 }
 
     .tableEscolherDisciplina td {
-        padding: 8px;
+        /*padding: 8px;*/
         text-align: left;
         font-size: 14px;
         margin-left: 5px;
