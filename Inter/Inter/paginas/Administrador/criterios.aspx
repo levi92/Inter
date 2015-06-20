@@ -127,7 +127,7 @@
                                         <asp:TemplateField HeaderText="" ItemStyle-Width="15px">
                                             <ItemTemplate>
                                                 <span onclick="return confirm('Tem certeza que deseja desativar este critério?')">
-                                                    <asp:LinkButton ID="lkbExcluir" CssClass="glyphicon glyphicon-trash" Title="Desativar" runat="server" CommandName="Delete"></asp:LinkButton>
+                                                    <asp:LinkButton ID="lkbExcluir" CssClass="glyphicon glyphicon-remove-circle" Title="Desativar" runat="server" CommandName="Delete"></asp:LinkButton>
                                                 </span>
                                             </ItemTemplate>
 
@@ -219,7 +219,7 @@
                                             <%--Coluna do botão de Ativar --%>
                                             <asp:TemplateField HeaderText="" ItemStyle-Width="15px" ItemStyle-HorizontalAlign="Center">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="lkbAtivar" CssClass="mdi mdi-keyboard-return" title="Reativar" runat="server" CommandName="Update"></asp:LinkButton>
+                                                    <asp:LinkButton ID="lkbAtivar" CssClass="glyphicon glyphicon-repeat" title="Reativar" runat="server" CommandName="Update"></asp:LinkButton>
                                                 </ItemTemplate>
                                                 <EditItemTemplate>
                                                 </EditItemTemplate>

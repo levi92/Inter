@@ -82,17 +82,13 @@
                                             </ItemTemplate>
                                 </asp:TemplateField>
 
-                                <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="8%" HeaderText="Restaurar">
+                                <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="8%" HeaderText="">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="lkbHabilitar" CssClass="glyphicon glyphicon-pencil" Font-Size="1.5em" runat="server" CommandName="projHabilitar"></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
-                                <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="8%" HeaderText="Download">
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="lkbDesativar" CssClass="glyphicon glyphicon-trash" Font-Size="1.5em" runat="server" CommandName="projDesativar"></asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                                
                             </Columns>
 
                         </asp:GridView>
