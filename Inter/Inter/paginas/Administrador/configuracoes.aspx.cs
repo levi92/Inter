@@ -172,13 +172,11 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
         LinkButton lb1 = (LinkButton)e.Row.FindControl("lkbRestaurar"); //acha o botão download e coloca no controle lb
         if (lb != null)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
             ScriptManager1.RegisterPostBackControl(lb); //usando o ScriptManager, registra todos os botões de download para fazer postback (o padrão é PostBack parcial por causa do UpdatePanel, o que não deixava fazer o download!)
         }
 
         if (lb1 != null)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
             ScriptManager1.RegisterPostBackControl(lb1); //usando o ScriptManager, registra todos os botões de download para fazer postback (o padrão é PostBack parcial por causa do UpdatePanel, o que não deixava fazer o download!)
         }
 
@@ -198,5 +196,15 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
     protected void btnCriarNovoCriterio_Click(object sender, EventArgs e)
     {
 
+    }
+
+    protected void btnModal_Click(object sender, EventArgs e)
+    {
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+    }
+
+    protected void lkbModal_Click(object sender, EventArgs e)
+    {
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
     }
 }
