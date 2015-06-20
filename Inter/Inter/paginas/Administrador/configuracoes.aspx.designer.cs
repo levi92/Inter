@@ -66,6 +66,24 @@ public partial class paginas_Admin_configuracoes {
     protected global::System.Web.UI.WebControls.Button btnCriarBackup;
     
     /// <summary>
+    /// btnModal control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnModal;
+    
+    /// <summary>
+    /// lkbModal control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton lkbModal;
+    
+    /// <summary>
     /// UpdatePanelModalNovoCriterio control.
     /// </summary>
     /// <remarks>
