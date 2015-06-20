@@ -66,7 +66,10 @@
                             </asp:GridView>
                             <asp:Label ID="lblQtdRegistros" runat="server"></asp:Label><br />
                             <asp:Button ID="btnCriarBackup" runat="server" CssClass="btn btn-default btn-lg" Text="Criar Backup" OnClick="btnCriarBackup_Click" />
-
+                            
+                            
+                            <asp:Button ID="btnModal" runat="server" CssClass="btn btn-default btn-lg" Text="Modal" OnClick="btnModal_Click" />
+                            <asp:LinkButton ID="lkbModal" CssClass="glyphicon glyphicon-open" Font-Size="1.5em" runat="server" CommandName="bkpModal" OnClick="lkbModal_Click"></asp:LinkButton>
 
                         </ContentTemplate>
 
