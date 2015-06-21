@@ -147,6 +147,78 @@ public partial class paginas_Admin_projetos {
     protected global::System.Web.UI.WebControls.Label lblNomeGrupo;
     
     /// <summary>
+    /// lblCursoModal control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblCursoModal;
+    
+    /// <summary>
+    /// lblSemestre control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblSemestre;
+    
+    /// <summary>
+    /// lblDisciplinas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblDisciplinas;
+    
+    /// <summary>
+    /// lblProfessores control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblProfessores;
+    
+    /// <summary>
+    /// lblAlunos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblAlunos;
+    
+    /// <summary>
+    /// lstDisciplinas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ListBox lstDisciplinas;
+    
+    /// <summary>
+    /// lstProfessores control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ListBox lstProfessores;
+    
+    /// <summary>
+    /// lstAlunos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ListBox lstAlunos;
+    
+    /// <summary>
     /// vsNovoCriterio control.
     /// </summary>
     /// <remarks>
