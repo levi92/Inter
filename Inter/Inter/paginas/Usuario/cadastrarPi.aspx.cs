@@ -249,6 +249,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 if (li.Value == vetCod[j])
                 {
                     li.Attributes.Add("title", vetTip[j]);
+                    li.Attributes["data-toggle"] = "tooltip";
                 }
             }
 
@@ -261,6 +262,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 if (li.Value == vetCod[j])
                 {
                     li.Attributes.Add("title", vetTip[j]);
+                    li.Attributes["data-toggle"] = "tooltip";
                 }
             }
 
@@ -295,6 +297,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 li.Value = dr["cge_codigo"].ToString();
                 li.Text = dr["cge_nome"].ToString();
                 li.Attributes.Add("title", dr["cge_descricao"].ToString());
+                li.Attributes["data-toggle"] = "tooltip";
                 liCritTip.Add(dr["cge_descricao"].ToString());
                 liCritCod.Add(dr["cge_codigo"].ToString());
                 //ADICIONANDO CÓDIGO E NOME DO CRITÉRIO AOS CRITÉRIOS ENCONTRADOS NO DATASET
@@ -326,6 +329,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 li.Value = (UltCodCrit + 1).ToString();
                 li.Text = txtNomeCriterio.Text;
                 li.Attributes.Add("title", txtDescricaoCriterio.Text);
+                li.Attributes["data-toggle"] = "tooltip";
                 liCritTip.Add(txtDescricaoCriterio.Text);
                 liCritCod.Add(li.Value);
                 //ADICIONANDO CÓDIGO E NOME DO CRITÉRIO AOS CRITÉRIOS ENCONTRADOS NO DATASET
@@ -546,6 +550,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 if (li.Value == vetCod[j])
                 {
                     li.Attributes.Add("title", vetTip[j]);
+                    li.Attributes["data-toggle"] = "tooltip";
+
                 }
             }
 
@@ -558,6 +564,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 if (li.Value == vetCod[j])
                 {
                     li.Attributes.Add("title", vetTip[j]);
+                    li.Attributes["data-toggle"] = "tooltip";
+
                 }
             }
 
@@ -584,6 +592,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 li.Value = dr["Matricula"].ToString();
                 li.Text = Funcoes.SplitNomes(dr["Nome"].ToString());
                 li.Attributes.Add("title", dr["Nome"].ToString());
+                li.Attributes["data-toggle"] = "tooltip";
                 liNomeAlunoTip.Add(dr["Nome"].ToString());
                 liMatriculaAluno.Add(dr["Matricula"].ToString());
                 //ADICIONANDO CÓDIGO E NOME DO CRITÉRIO AOS CRITÉRIOS ENCONTRADOS NO DATASET
@@ -621,17 +630,13 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     protected void LkbVoltarEtapa3_Click(object sender, EventArgs e)
     {
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
-    }
-
-    //REDIRECIONA PARA A PÁGINA AVALIAR GRUPO
-    protected void btnVoltarAvaliar_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("~/AvaliarGrupo");
-    }
+    }    
 
     //REDIRECIONA PARA A PÁGINA HOME
     protected void btnVoltarHome2_Click(object sender, EventArgs e)
     {
+        Session.Remove("alunosGerais");
+        Session.Remove("CodAlunosGerais");
         Response.Redirect("~/Home");
     }
 

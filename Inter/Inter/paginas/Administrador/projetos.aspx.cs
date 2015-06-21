@@ -42,36 +42,38 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
             ddlStatus.Items.Insert(2, new ListItem("Em andamento", "2"));
             //ddlStatus.Items.Insert(3, new ListItem("Solicitado", "3"));
 
-           /*DataSet dsPIsFatec = (DataSet)Session["DS_AllPIsbyCalendarioAtual"];
+           DataSet dsPIsFatec = (DataSet)Session["DS_AllPIsbyCalendarioAtual"];
             int qtdPIs = dsPIsFatec.Tables[0].Rows.Count; //pega a quantidade total de linhas na tabela do dataset e armazena na variável qtdPIs
             string[] cursos = new string[0]; //instancia um novo array cursos com tamanho indefinido
             cursos = Funcoes.tratarDadosCursosComPI(dsPIsFatec, qtdPIs); //usa um método para tratar o nome dos cursos e trazer somente um de cada
             ddlCurso.DataSource = cursos;
             ddlCurso.DataBind();
-            ddlCurso.Items.Insert(0, new ListItem("Selecione", "0"));*/
+            ddlCurso.Items.Insert(0, new ListItem("Selecione", "0"));
         }
     }
 
     private void CarregaGrid()
 
     {    
-        /*DataSet dsPIsFatec = (DataSet)Session["DS_AllPIsbyCalendarioAtual"]; //instancia um dataset usando um dataset existente em uma varíavel de sessão(que é instanciada no login como null)
+        DataSet dsPIsFatec = (DataSet)Session["DS_AllPIsbyCalendarioAtual"]; //instancia um dataset usando um dataset existente em uma varíavel de sessão(que é instanciada no login como null)
         if (Session["DS_AllPIsbyCalendarioAtual"] == null) //se a variável de sessão estiver null(sem dataset nenhum), irá colocar um dataset dentro da varíavel de sessão
         {
             Calendario cal = Calendario.SelectbyAtual();           
             dsPIsFatec = Professor.SelectAllPIsbyCalendario(cal.Codigo, cal.AnoSemestreAtual);
             Session["DS_AllPIsbyCalendarioAtual"] = dsPIsFatec;
 
-        }*/
+        }
 
-        /*DataSet ds = Funcoes_DB.SelectAllPIs();
+        DataSet ds = Funcoes_DB.SelectAllPIs();
 
         int qtd = ds.Tables[0].Rows.Count;
+
+
         if (qtd > 0)
         {
             gdvProjetos.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
             gdvProjetos.DataBind(); //preenche o grid view com os dados
-        }*/
+        }
 
     }
 
@@ -129,25 +131,25 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
     int i;
     protected void gdvProjetos_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        /*DataSet ds = (DataSet)Session["DS_AllPIsbyCalendarioAtual"];
+        DataSet ds = (DataSet)Session["DS_AllPIsbyCalendarioAtual"];
         string[] vetorReturnFunction = new string[3];
 
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[i]["disciplina"].ToString()); //pega o dado da linha [i] da coluna "disciplina" e joga dentro do método tratarDados
-            e.Row.Cells[1].Text = vetorReturnFunction[0]; //pega o nome do curso e coloca na célula da coluna correspondente ao curso daquela linha
+            e.Row.Cells[2].Text = vetorReturnFunction[0]; //pega o nome do curso e coloca na célula da coluna correspondente ao curso daquela linha
 
             i++;
 
-            if (e.Row.Cells[3].Text == "False") //verifica se o valor da coluna GRU_FINALIZADO é "false"
+            /*if (e.Row.Cells[4].Text == "False") //verifica se o valor da coluna GRU_FINALIZADO é "false"
             {
-                e.Row.Cells[3].Text = "Finalizado"; //se for, troca o "false" por "aberto"
+                e.Row.Cells[4].Text = "Finalizado"; //se for, troca o "false" por "em andamento"
             }
             else
             {
-                e.Row.Cells[3].Text = "Aberto"; //se não for "false", troca por "finalizado"
-            }
-        }*/
+                e.Row.Cells[4].Text = "Em andamento"; //se não for "false", troca por "finalizado"
+            }*/
+        }
     }
 
     protected void gdvProjetos_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -168,7 +170,19 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
 
     protected void gdvProjetos_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        if(e.CommandName == "verDetalhes"){
+            GridViewRow gvr = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer); //pega a linha da grid pela fonte do comando
+            string cod_grupo = gdvProjetos.Rows[gvr.RowIndex].Cells[0].Text; //pega o codigo do grupo daquela linha do gridview
+            int codigo_grupo = Convert.ToInt32(e.CommandArgument);
 
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+        }
+
+        if (e.CommandName == "projHabilitar")
+        {
+            GridViewRow gvr = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer); //pega a linha da grid pela fonte do comando
+            string matricula = gdvProjetos.Rows[gvr.RowIndex].Cells[0].Text; //pega a matricula daquela linha do gridview
+        }
     }
 
     protected void lkbBuscar_Click(object sender, EventArgs e)
@@ -191,6 +205,21 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
     }
 
     protected void ddlCurso_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnCancelarNovoCriterio_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnCriarNovoCriterio_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void lblNome_Command(object sender, CommandEventArgs e)
     {
 
     }
