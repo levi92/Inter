@@ -126,7 +126,7 @@
                         <br />
                         <!--  AVISO -->
                         <section style="float: right; margin-right: 20px; border: 1px solid #CCC; padding: 15px; border-radius: 5px;">
-                            <h4 style="margin-top: -7px;"><span class="glyphicon glyphicon-"></span>&nbsp Aviso</h4>
+                            <h4 style="margin-top: -7px;"><span class="glyphicon glyphicon-info-sign"></span>&nbsp Aviso</h4>
                             &nbsp Para notas em decimal utilize vírgula(',') ao invés de ponto('.').                                               
                         </section>
 
