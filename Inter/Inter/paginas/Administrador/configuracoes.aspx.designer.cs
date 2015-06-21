@@ -66,24 +66,6 @@ public partial class paginas_Admin_configuracoes {
     protected global::System.Web.UI.WebControls.Button btnCriarBackup;
     
     /// <summary>
-    /// btnModal control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnModal;
-    
-    /// <summary>
-    /// lkbModal control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton lkbModal;
-    
-    /// <summary>
     /// UpdatePanelModalNovoCriterio control.
     /// </summary>
     /// <remarks>
@@ -93,58 +75,22 @@ public partial class paginas_Admin_configuracoes {
     protected global::System.Web.UI.UpdatePanel UpdatePanelModalNovoCriterio;
     
     /// <summary>
-    /// lblNomeNovoCriterio control.
+    /// lblSenha control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblNomeNovoCriterio;
+    protected global::System.Web.UI.WebControls.Label lblSenha;
     
     /// <summary>
-    /// txtNomeNovoCriterio control.
+    /// txtSenha control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtNomeNovoCriterio;
-    
-    /// <summary>
-    /// rfvNomeNovoCriterio control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNomeNovoCriterio;
-    
-    /// <summary>
-    /// lblDescricaoNovoCriterio control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblDescricaoNovoCriterio;
-    
-    /// <summary>
-    /// txtDescricaoNovoCriterio control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtDescricaoNovoCriterio;
-    
-    /// <summary>
-    /// rfvDescricaoNovoCriterio control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescricaoNovoCriterio;
+    protected global::System.Web.UI.WebControls.TextBox txtSenha;
     
     /// <summary>
     /// lblMsg control.
@@ -156,29 +102,20 @@ public partial class paginas_Admin_configuracoes {
     protected global::System.Web.UI.WebControls.Label lblMsg;
     
     /// <summary>
-    /// vsNovoCriterio control.
+    /// btnCancelarConfirmaSenha control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.ValidationSummary vsNovoCriterio;
+    protected global::System.Web.UI.WebControls.LinkButton btnCancelarConfirmaSenha;
     
     /// <summary>
-    /// btnCancelarNovoCriterio control.
+    /// lkbConfirmaSenha control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnCancelarNovoCriterio;
-    
-    /// <summary>
-    /// btnCriarNovoCriterio control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnCriarNovoCriterio;
+    protected global::System.Web.UI.WebControls.LinkButton lkbConfirmaSenha;
 }

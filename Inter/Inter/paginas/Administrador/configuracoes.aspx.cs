@@ -28,7 +28,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        ScriptManager1.RegisterPostBackControl(lkbConfirmaSenha);
         CarregaGrid();
 
     }
@@ -122,46 +122,27 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
     {
         if (e.CommandName == "bkpDownload")
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
-            HttpResponse response = HttpContext.Current.Response;
             string caminho = pegaDirBackup();
             GridViewRow gvr = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer); //pega a linha da grid pela fonte do comando
             string arquivo = gdvBkp.Rows[gvr.RowIndex].Cells[0].Text; //pega nome do arquivo daquela linha do gridview
-            string caminhoDoArquivo = caminho + arquivo + ".sql"; //junta o diretório + nome do arquivo
-            FileInfo file = new FileInfo(caminhoDoArquivo);
-            Response.Clear();
-            Response.ClearHeaders();
-            Response.ClearContent();
-            Response.AddHeader("Content-Disposition", "attachment;filename="+file.Name);
-            Response.AddHeader("Content-Length", file.Length.ToString());
-            Response.ContentType = "text/plain";
-            Response.Flush();
-            Response.TransmitFile(file.FullName);
-            Response.End();
+            string caminhoDoArquivo = caminho + arquivo + ".sql"; //junta o diretório + nome do arquivo         
+            Session["caminhoArquivo"] = caminhoDoArquivo;
+            Session["acaoBackup"] = "Download";
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+         
+            
+                    
         }
 
         if (e.CommandName == "bkpRestaurar")
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
-            string constring = "server=localhost;user=root;password=123;database=inter;";
+           
             string caminho = pegaDirBackup();
             GridViewRow gvr = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer); //pega a linha da grid pela fonte do comando
             string arquivo = gdvBkp.Rows[gvr.RowIndex].Cells[0].Text; //pega nome do arquivo daquela linha do gridview
             string caminhoDoArquivo = caminho + arquivo + ".sql"; //junta o diretório + nome do arquivo
-            using (MySqlConnection conn = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand())
-                {
-                    using (MySqlBackup mb = new MySqlBackup(cmd))
-                    {
-                        cmd.Connection = conn;
-                        conn.Open();
-                        mb.ImportFromFile(caminhoDoArquivo);
-                        conn.Close();
-                    }
-                }
-            }
+            Session["caminhoArquivo"] = caminhoDoArquivo;
+            Session["acaoBackup"] = "Restauracao";
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
         }
     }
@@ -198,13 +179,51 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 
     }
 
-    protected void btnModal_Click(object sender, EventArgs e)
+
+    protected void lkbConfirmaSenha_Click(object sender, EventArgs e)
     {
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+        string caminhoArquivo = Session["caminhoArquivo"].ToString();
+        string acao = Session["acaoBackup"].ToString();
+        if (acao == "Download")
+        {
+            FileInfo file = new FileInfo(caminhoArquivo);
+            HttpResponse response = HttpContext.Current.Response;
+            Response.Clear();
+            Response.ClearHeaders();
+            Response.ClearContent();
+            Response.AddHeader("Content-Disposition", "attachment;filename=" + file.Name);
+            Response.AddHeader("Content-Length", file.Length.ToString());
+            Response.ContentType = "text/plain";
+            Response.Flush();
+            Response.TransmitFile(file.FullName);
+            Response.End();
+        }
+        else if (acao == "Restauracao")
+        {          
+            string constring = "server=localhost;user=root;password=123;database=inter;";
+            using (MySqlConnection conn = new MySqlConnection(constring))
+            {
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    using (MySqlBackup mb = new MySqlBackup(cmd))
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
+                        mb.ImportFromFile(caminhoArquivo);
+                        conn.Close();
+                    }
+                }
+            }
+            lblMsg.Text = "Backup Restaurado com sucesso!";
+        }
+        Session.Remove("caminhoArquivo");
+        Session.Remove("acaoBackup");
+
     }
 
-    protected void lkbModal_Click(object sender, EventArgs e)
+
+    protected void btnCancelarConfirmaSenha_Click(object sender, EventArgs e)
     {
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+       
     }
 }

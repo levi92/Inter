@@ -6,7 +6,7 @@
     <script type="text/javascript" src="../../scripts/bootstrap.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#icone2').addClass('corIcone');
+            $('#icone6').addClass('corIcone');
         });
     </script>
 
@@ -16,7 +16,7 @@
         }
     </script>
 
-    
+
     <div id="p1" class="first">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -66,10 +66,7 @@
                             </asp:GridView>
                             <asp:Label ID="lblQtdRegistros" runat="server"></asp:Label><br />
                             <asp:Button ID="btnCriarBackup" runat="server" CssClass="btn btn-default btn-lg" Text="Criar Backup" OnClick="btnCriarBackup_Click" />
-                            
-                            
-                            <asp:Button ID="btnModal" runat="server" CssClass="btn btn-default btn-lg" Text="Modal" OnClick="btnModal_Click" />
-                            <asp:LinkButton ID="lkbModal" CssClass="glyphicon glyphicon-open" Font-Size="1.5em" runat="server" CommandName="bkpModal" OnClick="lkbModal_Click"></asp:LinkButton>
+
 
                         </ContentTemplate>
 
@@ -82,10 +79,10 @@
 
                 </div>
             </div>
-            <asp:UpdatePanel ID="UpdatePanelModalNovoCriterio" UpdateMode="Conditional" runat="server">
-                <ContentTemplate>
-                    <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
+            <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <asp:UpdatePanel ID="UpdatePanelModalNovoCriterio" UpdateMode="Conditional" runat="server">
+                    <ContentTemplate>
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -96,53 +93,38 @@
 
                                 <div class="form-group">
                                     <div class="controls-row">
-                                        <asp:Label ID="lblNomeNovoCriterio" runat="server" CssClass="control-label col-sm-2" Text="Nome: "></asp:Label>
-
-                                        <asp:TextBox ID="txtNomeNovoCriterio" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server" MaxLength="50"></asp:TextBox>
-                                        <%--Validação do Campo Nome (Verifica se está vazio e se está preenchido com uma string)--%>
-                                    &nbsp<asp:RequiredFieldValidator ID="rfvNomeNovoCriterio" runat="server" CssClass="col-sm1" ErrorMessage="O campo Nome deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtNomeNovoCriterio" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>
-
+                                        <asp:Label ID="lblSenha" runat="server" CssClass="control-label col-sm-2" Text="Nome: "></asp:Label>
+                                        <asp:TextBox ID="txtSenha" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server" MaxLength="50"></asp:TextBox>
 
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="controls-row">
-                                        <asp:Label ID="lblDescricaoNovoCriterio" runat="server" CssClass="control-label col-sm-2" Text="Descrição: "></asp:Label></td>
+                                <br />
+                                <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
+                            </div>
 
-                                        <asp:TextBox ID="txtDescricaoNovoCriterio" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server" MaxLength="200"></asp:TextBox></td>
-
-                                        <%--Validação do Campo Descrição (Verifica se está vazio e se está preenchido com uma string)--%>
-                                                 &nbsp<asp:RequiredFieldValidator ID="rfvDescricaoNovoCriterio" CssClass="col-sm1" runat="server" ErrorMessage="O campo Descrição deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtDescricaoNovoCriterio" ControlToCompare="txtNomeNovoCriterio" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>
-                                    </div>
-                                    <br />
-                                    <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
-                                </div>
-
-
-                                <asp:ValidationSummary ID="vsNovoCriterio" ValidationGroup="NovoCriterio" ForeColor="#960d10" runat="server" DisplayMode="List" Style="margin: 7px; padding: 7px;" />
+                           
 
 
 
 
-                                <div class="modal-footer">
-                                    <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarNovoCriterio" runat="server" title="Cancelar Inserção" OnClick="btnCancelarNovoCriterio_Click">
+                            <div class="modal-footer">
+                                <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarConfirmaSenha" runat="server" title="Cancelar Inserção" OnClick="btnCancelarConfirmaSenha_Click">
                                     <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</asp:LinkButton>
 
-                                    <asp:LinkButton ID="btnCriarNovoCriterio" runat="server" CssClass="btn btn-default"
-                                        OnClick="btnCriarNovoCriterio_Click" ToolTip="Confirmar Inserção" CausesValidation="true" ValidationGroup="NovoCriterio">
+                                <asp:LinkButton ID="lkbConfirmaSenha" runat="server" CssClass="btn btn-default"
+                                    OnClick="lkbConfirmaSenha_Click" OnClickToolTip="Confirmar">
                                    <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar </asp:LinkButton>
-                                </div>
-
                             </div>
+
                         </div>
-
-                    </div>
-                </ContentTemplate>
-
+                        </div>
+                    </ContentTemplate>
 
 
-            </asp:UpdatePanel>
+                </asp:UpdatePanel>
+            </div>
+
 
 
 
