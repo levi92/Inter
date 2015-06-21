@@ -9,7 +9,7 @@
         });
     </script>
 
-    <!-- Consultar PI (p6) -->
+    <!-- CONSULTAR PI (P6) -->
 
     <div id="p1" class="first">
         <div class="panel panel-default">
@@ -67,9 +67,7 @@
 
                 </table>
 
-
-
-                <table style="text-align: justify; width: 60%;">
+                <table id="tableEventos" style="text-align: justify; width: 60%;">
                     <tr>
                         <td colspan="2">
                             <hr />
@@ -96,24 +94,19 @@
                             </button>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td colspan="2">
-                            <br />
-                        </td>
-                    </tr>
-
                     <tr>
                         <td colspan="2">
                             <hr />
                         </td>
                     </tr>
+                </table>
 
+                <table id="tableDisciplinas Evolvidas" style="text-align: justify; width: 60%;">
                     <tr>
                         <td>
                             <h4>Disciplinas envolvidas:</h4>
                         </td>
-                        <td colspan="2"></td>
+                        <td></td>
                     </tr>
 
                     <tr>
@@ -137,7 +130,7 @@
 
                 </table>
 
-                <!-- Editar Critério-->
+                <!-- EDITAR CRITÉRIO-->
                 <table style="text-align: justify; width: 60%;">
                     <tr>
                         <td>
@@ -339,7 +332,7 @@
                 <br />--%>
 
 
-                <table style="width: 50%; margin: auto;" >
+                <table style="width: 50%; margin: auto;">
                     <tr>
                         <td>
                             <asp:Label ID="lblDatas" CssClass="label" runat="server" Text="Data de Eventos: "></asp:Label>
@@ -352,7 +345,7 @@
                 </table>
                 <br />
                 <%--DIV QUE RECEBE AS DATAS INSERIDAS PELO PROFESSOR MÃE--%>
-                <div id="containerDatas" style="width: 50%;margin: auto;">
+                <div id="containerDatas" style="width: 50%; margin: auto;">
                 </div>
 
 
@@ -370,6 +363,69 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- MODAL CADASTRAR DATAS DE EVENTOS -->
+    <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="font-size: 35px;">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel1">Cadastrar Datas de Eventos</h4>
+                </div>
+                <div class="modal-body">
+                    <table style="width: 95%;">
+                        <tr>
+                            <td>
+                                <asp:Label ID="lblDescricaoData" CssClass="label" runat="server" Text="Descrição da Data: "></asp:Label>
+                            </td>
+
+                            <td>
+                                <asp:TextBox ID="txtDescricaoData" CssClass="textData" runat="server" ClientIDMode="Static"></asp:TextBox>
+
+                            </td>
+                            <td>
+                                <asp:Label ID="lblDescDataMsgErro" runat="server" ClientIDMode="Static"></asp:Label></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3">
+                                <br />
+                            </td>
+                        </tr>
+
+                        <tr style="text-align: left;">
+                            <td>
+                                <asp:Label ID="lblData" runat="server" CssClass="label" Text="Data: "></asp:Label></td>
+                            <td>
+                                <asp:TextBox ID="txtData" runat="server" CssClass="textData" Enabled="false" ClientIDMode="Static" Style="width: 50%"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:Label ID="lblDataMsgErro" runat="server" ClientIDMode="Static"></asp:Label></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <span id="campoObrigatorio" style="font-size: 18px;"></span>
+                    <span id="textoCampObrig" style="font-size: 18px;"></span>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="btnCancelarData" data-dismiss="modal" title="Cancelar Inserção de Datas">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</button>
+
+                    <button type="button" class="btn btn-default" id="btnConfirmarData" title="Confirmar Inserção">
+                        <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- dialogs -->
+    <div id="boxDesejaExcluir" title="Excluir Evento!" style="display: none;">
+        <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>&nbsp Tem certeza que deseja excluir o evento? </p>
     </div>
 
 </asp:Content>

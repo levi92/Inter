@@ -58,8 +58,9 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
         for (int i = 0; i < qtd; i++)
         {
             descricaoDatas += ds.Tables[0].Rows[i]["eve_tipo"].ToString() + "|";
-            data += ds.Tables[0].Rows[i]["eve_data"].ToString().Substring(0, 10) + "|";
+            data += ds.Tables[0].Rows[i]["eve_data"].ToString().Substring(0, 10) + "|"; //formato originalda data: 00/00/00 00:00:00
         }
+      
         hdfDescricao.Value = descricaoDatas;
         hdfDatas.Value = data;
 
