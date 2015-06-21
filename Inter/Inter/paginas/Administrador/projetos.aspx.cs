@@ -30,7 +30,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
         {
             CarregaGrid();
             DataSet dsSem = Semestre_Ano_DB.SelectSemestreAno();
-            
+
             ddlSemestreAno.DataSource = dsSem;
             ddlSemestreAno.DataTextField = "concat(SAN_ANO,'-',SAN_SEMESTRE)";
             ddlSemestreAno.DataValueField = "SAN_CODIGO";
@@ -42,7 +42,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
             ddlStatus.Items.Insert(2, new ListItem("Em andamento", "2"));
             //ddlStatus.Items.Insert(3, new ListItem("Solicitado", "3"));
 
-           DataSet dsPIsFatec = (DataSet)Session["DS_AllPIsbyCalendarioAtual"];
+            DataSet dsPIsFatec = (DataSet)Session["DS_AllPIsbyCalendarioAtual"];
             int qtdPIs = dsPIsFatec.Tables[0].Rows.Count; //pega a quantidade total de linhas na tabela do dataset e armazena na variável qtdPIs
             string[] cursos = new string[0]; //instancia um novo array cursos com tamanho indefinido
             cursos = Funcoes.tratarDadosCursosComPI(dsPIsFatec, qtdPIs); //usa um método para tratar o nome dos cursos e trazer somente um de cada
@@ -53,12 +53,11 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
     }
 
     private void CarregaGrid()
-
-    {    
+    {
         DataSet dsPIsFatec = (DataSet)Session["DS_AllPIsbyCalendarioAtual"]; //instancia um dataset usando um dataset existente em uma varíavel de sessão(que é instanciada no login como null)
         if (Session["DS_AllPIsbyCalendarioAtual"] == null) //se a variável de sessão estiver null(sem dataset nenhum), irá colocar um dataset dentro da varíavel de sessão
         {
-            Calendario cal = Calendario.SelectbyAtual();           
+            Calendario cal = Calendario.SelectbyAtual();
             dsPIsFatec = Professor.SelectAllPIsbyCalendario(cal.Codigo, cal.AnoSemestreAtual);
             Session["DS_AllPIsbyCalendarioAtual"] = dsPIsFatec;
 
@@ -73,6 +72,34 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
         {
             gdvProjetos.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
             gdvProjetos.DataBind(); //preenche o grid view com os dados
+
+            foreach (GridViewRow linha in gdvProjetos.Rows)//percorre cada linha da grid (obs: isso existe pelo campo de nome estar em outra tabela no BD da Fatec)
+            {
+                //Professor prof = new Professor(); //instancia um novo professor
+                Label lblStatus = (Label)linha.FindControl("lblStatus");//acha o label de matrícula da grid e liga a outro label
+
+                bool valor = false;
+
+                if (lblStatus.Text == "False") //verifica se o valor da coluna GRU_FINALIZADO é "false"
+                {
+                    lblStatus.Text = "Em andamento"; //se for, troca o "false" por "em andamento"
+                }
+                else
+                {
+                    lblStatus.Text = "Finalizado"; //se não for "false", troca por "finalizado"
+                }
+
+                if (lblStatus.Text == "Em andamento")
+                {
+                    valor = true;
+                }
+                if (valor == true)
+                {
+                    LinkButton botao = (LinkButton)linha.FindControl("lkbHabilitar");
+                    botao.Visible = false;
+                }
+
+            }
         }
 
     }
@@ -108,14 +135,14 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
                     Label lblAno = (Label)linha.FindControl("lblAno"); //acha o label de Nome e liga a outro label
                     Label lblStatus = (Label)linha.FindControl("lblStatus");
 
-                    if (lblStatus.Text == "True")
+                    /*if (lblStatus.Text == "True")
                     {
                         lblStatus.Text = "Finalizado";
                     }
                     else
                     {
                         lblStatus.Text = "Em andamento";
-                    }
+                    }*/
                     /*prof = Professor.SelectByCodigo(lblMatricula.Text); //o número de matrícula do label é usado para preencher o objeto professor usando o método de selecionar por código
                     lblNome.Text = prof.Nome; //o label NomeAdmin da grid é preenchido utilizando o nome que está no objeto do professor (método get encapsulado)
                     */
@@ -141,21 +168,25 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
 
             i++;
 
-            /*if (e.Row.Cells[4].Text == "False") //verifica se o valor da coluna GRU_FINALIZADO é "false"
-            {
-                e.Row.Cells[4].Text = "Finalizado"; //se for, troca o "false" por "em andamento"
-            }
-            else
-            {
-                e.Row.Cells[4].Text = "Em andamento"; //se não for "false", troca por "finalizado"
-            }*/
         }
+        LinkButton hab = (LinkButton)e.Row.FindControl("lkbHabilitar"); //acha o botão download e coloca no controle lb
+        if (hab != null)
+        {
+            ScriptManager1.RegisterPostBackControl(hab); //usando o ScriptManager, registra todos os botões de download para fazer postback (o padrão é PostBack parcial por causa do UpdatePanel, o que não deixava fazer o download!)
+        }
+
+        LinkButton grupo = (LinkButton)e.Row.FindControl("lblNome"); //acha o botão download e coloca no controle lb
+        if (grupo != null)
+        {
+            ScriptManager1.RegisterPostBackControl(grupo); //usando o ScriptManager, registra todos os botões de download para fazer postback (o padrão é PostBack parcial por causa do UpdatePanel, o que não deixava fazer o download!)
+        }
+
     }
 
     protected void gdvProjetos_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         gdvProjetos.PageIndex = e.NewPageIndex;
-        
+
         if (txtPesquisa.Text == "")
         {
             CarregaPesquisaAvançada();
@@ -165,12 +196,13 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
         {
             CarregaGrid();
         }
-        
+
     }
 
     protected void gdvProjetos_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        if(e.CommandName == "verDetalhes"){
+        if (e.CommandName == "verDetalhes")
+        {
             GridViewRow gvr = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer); //pega a linha da grid pela fonte do comando
             string cod_grupo = gdvProjetos.Rows[gvr.RowIndex].Cells[0].Text; //pega o codigo do grupo daquela linha do gridview
             int codigo_grupo = Convert.ToInt32(e.CommandArgument);
@@ -181,17 +213,34 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
         if (e.CommandName == "projHabilitar")
         {
             GridViewRow gvr = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer); //pega a linha da grid pela fonte do comando
-            string matricula = gdvProjetos.Rows[gvr.RowIndex].Cells[0].Text; //pega a matricula daquela linha do gridview
+            Label lblCodigo = (Label)gdvProjetos.Rows[gvr.RowIndex].FindControl("lblCodigo");
+
+            //string lblCodigo = gdvProjetos.Rows[gvr.RowIndex].Cells[0].Text;
+            int cod = Convert.ToInt32(lblCodigo.Text);
+
+            if (Grupo_DB.Update(cod) == 0)
+            {
+                CarregaGrid();
+                UpdatePanelAtivados.Update();
+                lblMsg.Text = "Projeto habilitado com Sucesso!";
+            }
+            else
+            {
+                CarregaGrid();
+                UpdatePanelAtivados.Update();
+                lblMsg.Text = "Erro ao habilitar projeto!";
+            }
+
         }
     }
 
     protected void lkbBuscar_Click(object sender, EventArgs e)
     {
-        
+
         CarregaPesquisaAvançada();
         UpdatePanelAtivados.Update();
-        
-        
+
+
     }
 
     protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -224,7 +273,45 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
 
     }
 
+    protected void gdvProjetos_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        /*Label lblCodigo = (Label)gdvProjetos.Rows[e.RowIndex].FindControl("lblCodigo");
+        int cod = Convert.ToInt32(lblCodigo.Text);
 
-   
+        if (Grupo_DB.Update(cod) == 0)
+        {
+            CarregaGrid();
+            UpdatePanelAtivados.Update();
+            lblMsg.Text = "Projeto habilitado com Sucesso!";
+        }
+        else
+        {
+            CarregaGrid();
+            UpdatePanelAtivados.Update();
+            lblMsg.Text = "Erro ao habilitar projeto!";
+        }*/
+    }
+
+    protected void gdvProjetos_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        /*Label lblCodigo = (Label)gdvProjetos.Rows[e.RowIndex].FindControl("lblCodigo");
+        int cod = Convert.ToInt32(lblCodigo.Text);
+
+        if (Grupo_DB.Update(cod) == 0)
+        {
+            CarregaGrid();
+            UpdatePanelAtivados.Update();
+            lblMsg.Text = "Projeto habilitado com Sucesso!";
+        }
+        else
+        {
+            CarregaGrid();
+            UpdatePanelAtivados.Update();
+            lblMsg.Text = "Erro ao habilitar projeto!";
+        }*/
+    }
+
+
+
 
 }

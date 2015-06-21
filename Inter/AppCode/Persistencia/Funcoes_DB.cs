@@ -51,6 +51,49 @@ public class Funcoes_DB
         return verificacao; //retorna o valor do resultado da verificação feita acima
     }
 
+    public static int ValidaSenha(string senha)
+    {
+        int verificacao = 0;
+        IDbConnection objconexao;
+        IDbCommand objCommand;
+        IDataReader objDataReader;
+
+        string sql = "Select per_senha, per_descricao from per_perfil where per_senha=sha1(?senha) and per_descricao=1;";
+
+        objconexao = Mapped.Connection();
+        objCommand = Mapped.Command(sql, objconexao);
+
+        //string criptografada = Funcoes.Criptografar(senha, "SHA1");
+        objCommand.Parameters.Add(Mapped.Parameter("?SENHA", senha));
+        objDataReader = objCommand.ExecuteReader();
+
+        while (objDataReader.Read())
+        {
+
+            //if (objDataReader["per_descricao"].ToString() == "") se é nulo ele nem entra no while então isso era desnecessário
+            //{
+            //    verificacao = -2;
+            //}
+
+            if (Convert.ToInt32(objDataReader["per_descricao"]) == 1)
+            {
+                verificacao = 1;
+            }
+
+
+        }
+
+        objDataReader.Close();
+        objconexao.Close();
+        objconexao.Dispose();
+        objCommand.Dispose();
+        objDataReader.Dispose();
+
+        return verificacao; //retorna o valor do resultado da verificação feita acima
+    }
+
+
+
     public static int ValidarAdmCoord(Professor prof)
     {
         string matricula = prof.Matricula; //pega matrícula do objeto professor obtido do método Professor.Validar
@@ -149,12 +192,5 @@ public class Funcoes_DB
         objConnection.Dispose();
         return ds;
     }
-
-
-
-
-
-
-
 
 }

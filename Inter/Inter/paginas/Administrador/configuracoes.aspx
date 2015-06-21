@@ -87,26 +87,31 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" id="fecharModal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                    <h4 class="modal-title" id="myModalLabel3">Cadastrar Critérios</h4>
+                                    <h4 class="modal-title" id="myModalLabel3">Download</h4>
                                 </div>
                                 <br />
 
                                 <div class="form-group">
                                     <div class="controls-row">
-                                        <asp:Label ID="lblSenha" runat="server" CssClass="control-label col-sm-2" Text="Nome: "></asp:Label>
-                                        <asp:TextBox ID="txtSenha" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server" MaxLength="50"></asp:TextBox>
+                                        <asp:Label ID="lblSenha" runat="server" Width="400px" CssClass="control-label col-sm-2" Text="Confirme a senha do administrador:"></asp:Label>
+                                        <br />
+                                        <br />
+                                        <asp:TextBox ID="txtSenha" class="form-control" placeholder="Senha" style="width:250px; margin-left:15px" runat="server" TextMode="Password" MaxLength="63"></asp:TextBox>
 
                                     </div>
                                 </div>
 
-                                <br />
-                                <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
-                            </div>
+                                <div class="form-group">
+                                    <div class="controls-row">
 
-                           
+                                        <!--Grid -->
 
-
-
+                                    </div>
+                                    <br />
+                                     <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
+                                    <br />
+                                    <asp:Label ID="lblMsg2" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
+                                </div>
 
                             <div class="modal-footer">
                                 <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarConfirmaSenha" runat="server" title="Cancelar Inserção" OnClick="btnCancelarConfirmaSenha_Click">

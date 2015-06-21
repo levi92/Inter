@@ -160,5 +160,29 @@ namespace AppCode.Persistencia
         }
 
 
+        public static int Update(int cod)
+        {
+            int retorno = 0;
+            try
+            {
+                IDbConnection conexao;
+                IDbCommand objCommand;
+                string sql = "UPDATE gru_grupo SET gru_finalizado = 0 WHERE gru_codigo = ?codigo ";
+                conexao = Mapped.Connection();
+                objCommand = Mapped.Command(sql, conexao);
+                objCommand.Parameters.Add(Mapped.Parameter("?codigo", cod));
+                objCommand.ExecuteNonQuery();
+                conexao.Close();
+                objCommand.Dispose();
+                conexao.Dispose();
+            }
+            catch (Exception e)
+            {
+                string erro = e.Message;
+                retorno = -2;
+            }
+            return retorno;
+        }
+
     }
 }

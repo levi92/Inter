@@ -62,10 +62,12 @@
                     <ContentTemplate>
                         <div class="row" style="margin-top: 8px; margin-left: 2px;">
                         </div>
-
+                        <asp:Label ID="lblMsg" Text="" runat="server"></asp:Label>
                         <asp:GridView ID="gdvProjetos" runat="server" CssClass="gridView" AllowCustomPaging="true"
                             AutoGenerateColumns="false"
                             AutoGenerateEditButton="false"
+                            OnRowDeleting="gdvProjetos_RowDeleting"
+                            OnRowUpdating="gdvProjetos_RowUpdating"
                             OnRowDataBound="gdvProjetos_RowDataBound"
                             OnPageIndexChanging="gdvProjetos_PageIndexChanging"
                             OnRowCommand="gdvProjetos_RowCommand">
@@ -75,7 +77,7 @@
                             <Columns>
                                 <asp:TemplateField HeaderText="Codigo" Visible="false">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblCodigo" Text='<%#Eval ("GRU_CODIGO") %>' runat="server"></asp:Label>
+                                        <asp:Label ID="lblCodigo" Text='<%#Eval ("gru_codigo") %>' runat="server"></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Nome do Projeto">
