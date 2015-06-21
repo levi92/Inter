@@ -66,6 +66,33 @@ public partial class paginas_Admin_solicitacoes {
     protected global::System.Web.UI.WebControls.Label lblMsgProfessor;
     
     /// <summary>
+    /// subMenu control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl subMenu;
+    
+    /// <summary>
+    /// btnFinaliza control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnFinaliza;
+    
+    /// <summary>
+    /// btnLibera control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnLibera;
+    
+    /// <summary>
     /// msgInsideBox control.
     /// </summary>
     /// <remarks>

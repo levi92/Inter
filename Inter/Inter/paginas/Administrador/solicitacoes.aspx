@@ -36,18 +36,17 @@
                     <!--ASSUNTO DO TICKET-->
                     <h4 class="modal-title" id="myModalLabelT1" style="float: left;"><asp:Label ID="lblMsgAssunto" runat="server"></asp:Label> - <asp:Label ID="lblMsgCategoria" runat="server"></asp:Label></h4>
                     <!--Arrumar  Hover aqui-->
-                    <button type="button" id="butMostraMenu" name="subMenu" onclick="mostraDiv1('subMenu')" style="float: right; border: none; background: none; margin-top: -2px;"><span class="mdi mdi-dots-vertical hoverAll" style="font-size: 25px;"></span></button>
+                    <button type="button" id="butMostraMenu" name="subMenu" onclick="mostraDiv1('ConteudoMenu_ConteudoCentral_subMenu')" style="float: right; border: none; background: none; margin-top: -2px;"><span class="mdi mdi-dots-vertical hoverAll" style="font-size: 25px;"></span></button>
                     <!--NOME DO PROFESSOR QUE ABRIU O TICKET-->
                     
                     <h4 style="float: right; margin-top: 0; padding-right: 10px;"><asp:Label ID="lblMsgProfessor" runat="server"></asp:Label></h4>
                 </div>
                 <!--Início 3-dot menu-->
                 <!--Início do submenu-->
-                <div class="subMenu" id="subMenu">
+                <div class="subMenu" runat="server" id="subMenu">
                     <!--Clicar em um item fecha o menu | ESC fecha o menu sem fechar a modal-->
-                    <div onclick="butAcao()">Finalizar Favorável</div>
-                    <div onclick="butAcao()">Finalizar Desfavorável</div>
-                    <div onclick="butAcao()">PI Finalizado</div>
+                    <div><asp:LinkButton runat='server' ID='btnFinaliza' OnClick='btnFinaliza_Click' Text='Finaliza Solicitação'></asp:LinkButton></div>
+                    <div><asp:LinkButton runat='server' ID='btnLibera' OnClick="btnLibera_Click" Text='Liberar PI' Visible="false"></asp:LinkButton></div>
                 </div>
                 <!--Fim do submenu-->
                 <!--Fim 3-dot menu-->

@@ -65,7 +65,7 @@ $('body').click(function (e) {
     if (subMenu == 1) {
         subMenu = 0;
     } else {
-        document.getElementById("subMenu").style.display = "none";
+        document.getElementById("ConteudoMenu_ConteudoCentral_subMenu").style.display = "none";
     }
 });
 
