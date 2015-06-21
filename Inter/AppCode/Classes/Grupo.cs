@@ -10,17 +10,23 @@ using System.Web;
         private int gru_codigo;
         private string gru_nome_projeto;
         private double gru_media;
-        private bool gru_finalizado;
+        private int gru_finalizado;
         private Projeto_Inter pri_codigo;
         private string gru_usuario;
 
+        /*public Grupo(int codigo, string nome_projeto, int finalizado)
+        {
+            gru_codigo = codigo;
+            gru_nome_projeto = nome_projeto;
+            gru_finalizado = finalizado;
+        }*/
         public global::Projeto_Inter Pri_codigo
         {
             get { return pri_codigo; }
             set { pri_codigo = value; }
         }       
 
-        public bool Gru_finalizado
+        public int Gru_finalizado
         {
             get { return gru_finalizado; }
             set { gru_finalizado = value; }

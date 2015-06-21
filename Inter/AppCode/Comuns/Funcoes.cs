@@ -148,6 +148,8 @@ namespace Inter.Funcoes
             vetReturn[1] = semestre;
             vetReturn[2] = disciplina;
             vetReturn[3] = codDisc;
+            
+
 
             return vetReturn;
         }

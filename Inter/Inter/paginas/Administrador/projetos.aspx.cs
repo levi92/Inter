@@ -216,6 +216,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
             GridViewRow gvr = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer); //pega a linha da grid pela fonte do comando
             string cod_grupo = gdvProjetos.Rows[gvr.RowIndex].Cells[0].Text; //pega o codigo do grupo daquela linha do gridview
             int codigo_grupo = Convert.ToInt32(e.CommandArgument);
+            Session["linha"] = gvr.RowIndex;
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
         }
@@ -278,9 +279,36 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
 
     }
 
+
+
     protected void lblNome_Command(object sender, CommandEventArgs e)
     {
+        int linha = Convert.ToInt32(Session["linha"]);
+        int gru_codigo = Convert.ToInt32(e.CommandArgument);
+        Grupo gru = Grupo_DB.Select(gru_codigo);
+        string[] disciplina = new string[0];
+        string[] aluno = new string[0];
 
+        lblNomeGrupo.Text = gru.Gru_nome_projeto;
+        /*lblCursoModal.Text =;
+        lblSemestre.Text=;*/
+
+        DataSet ds = (DataSet)Session["DS_AllPIsbyCalendarioAtual"];
+        string[] vetorReturnFunction = new string[3];
+
+        vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[linha]["disciplina"].ToString()); //pega o dado da linha [i] da coluna "disciplina" e joga dentro do método tratarDados
+        lblCursoModal.Text = vetorReturnFunction[0]; //pega o nome do curso e coloca na célula da coluna correspondente ao curso daquela linha
+        lblSemestre.Text = vetorReturnFunction[1] + "º Semestre";
+
+        int qtdPIs = ds.Tables[0].Rows.Count; //pega a quantidade total de linhas na tabela do dataset e armazena na variável qtdPIs
+        //instancia um novo array cursos com tamanho indefinido
+        disciplina = Funcoes.tratarDadosCursosComPI(ds, qtdPIs); //usa um método para tratar o nome dos cursos e trazer somente um de cada
+        //aluno = Funcoes.NomeAlunosByMatricula();
+        for (int i = 0; i < qtdPIs; i++)
+        {
+            lstDisciplinas.DataSource = disciplina;
+            lstDisciplinas.DataBind();
+        }
     }
 
     protected void gdvProjetos_RowDeleting(object sender, GridViewDeleteEventArgs e)

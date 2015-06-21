@@ -184,5 +184,42 @@ namespace AppCode.Persistencia
             return retorno;
         }
 
+        public static Grupo Select(int codigo)
+        {
+            try
+            {
+                Grupo objGrupo = null;
+                IDbConnection objConnection;
+                IDbCommand objCommnad;
+                IDataReader objDataReader;
+                objConnection = Mapped.Connection();
+                objCommnad = Mapped.Command("SELECT * FROM gru_grupo WHERE gru_codigo = ?codigo", objConnection);
+                objCommnad.Parameters.Add(Mapped.Parameter("?codigo", codigo));
+                objDataReader = objCommnad.ExecuteReader();
+                while (objDataReader.Read())
+                {
+
+                    var gru_codigo = Convert.ToInt32(objDataReader["gru_codigo"]);
+                    var gru_nome_projeto = objDataReader["gru_nome_projeto"].ToString();
+                    var gru_finalizado = Convert.ToInt32(objDataReader["gru_finalizado"]);
+
+                    objGrupo = new Grupo();
+                    objGrupo.Gru_codigo = gru_codigo;
+                    objGrupo.Gru_nome_projeto = gru_nome_projeto;
+                    objGrupo.Gru_finalizado = gru_finalizado;
+                }
+                objDataReader.Close();
+                objConnection.Close();
+                objConnection.Dispose();
+                objCommnad.Dispose();
+                objDataReader.Dispose();
+                return objGrupo;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
     }
 }

@@ -137,7 +137,19 @@
 
                                 <div class="form-group">
                                     <div class="controls-row">
-                                        <asp:Label ID="lblNomeGrupo" runat="server" CssClass="control-label col-sm-2" Text="Nome: "></asp:Label>
+                                        <asp:Label ID="lblNomeGrupo" Style="width:auto" runat="server" CssClass="control-label col-sm-2"></asp:Label>
+                                        <asp:Label ID="lblCursoModal" Style="width:auto"  runat="server" CssClass="control-label col-sm-2"></asp:Label>
+                                        <asp:Label ID="lblSemestre" Style="width:auto" runat="server" CssClass="control-label col-sm-2"></asp:Label>
+                                        <br />
+                                        <br />
+                                        <asp:Label ID="lblDisciplinas" Style="width:auto" runat="server" CssClass="control-label col-sm-2" Text="Disciplinas"></asp:Label>
+                                        <asp:Label ID="lblProfessores" Style="width:auto" runat="server" CssClass="control-label col-sm-2" Text="Professores"></asp:Label>
+                                        <asp:Label ID="lblAlunos" Style="width:auto" runat="server" CssClass="control-label col-sm-2" Text="Alunos"></asp:Label>
+                                        <br />
+                                        <br />
+                                        <asp:ListBox ID="lstDisciplinas" runat="server" Style="margin-left:15px; width:auto;"></asp:ListBox>
+                                        <asp:ListBox ID="lstProfessores" runat="server" Style="margin-left:25px; width:auto;"></asp:ListBox>
+                                        <asp:ListBox ID="lstAlunos" runat="server" Style="margin-left:25px; width:auto;"></asp:ListBox>
                                     </div>
                                 </div>
 
