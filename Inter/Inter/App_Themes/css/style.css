@@ -677,13 +677,18 @@ tabelaHome3 {
 }
 
     .tableEscolherDisciplina td {
-        /*padding: 8px;*/
+        padding: 8px;
         text-align: left;
         font-size: 14px;
         margin-left: 5px;
         border-top: 1px solid #ddd;
         color: #525252;        
     }
+
+    .tableEscolherDisciplina td:first-child {
+        padding: 0;
+    }
+    
 
     .tableEscolherDisciplina th {
         padding: 8px;
@@ -751,6 +756,13 @@ img.ui-datepicker-trigger {
     width: 40px;
     margin-left: 7px;
     cursor: pointer;
+}
+
+#tabelaConsultarPi {
+    width: 90%;
+    max-width: 100%;
+    margin: auto;
+    margin-bottom: 20px;
 }
 
 /******** AVALIAR *********/

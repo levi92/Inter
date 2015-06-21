@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_consultarPi" Codebehind="consultarPi.aspx.cs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/paginas/Usuario/MasterPageMenuPadrao.master" AutoEventWireup="true" Inherits="paginas_Usuario_consultarPi" CodeBehind="consultarPi.aspx.cs" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphConteudoCentral" runat="Server">
 
@@ -18,7 +18,7 @@
             </div>
 
             <div class="panel-body-usuarios">
-                <table class="table">
+                <table id="tabelaConsultarPi" class="table">
 
                     <tr>
                         <td>
@@ -34,11 +34,11 @@
                         </td>
 
                         <td>
-                            <asp:Label ID="lblCursoValor" runat="server" Text="" ></asp:Label>
+                            <asp:Label ID="lblCursoValor" runat="server" Text=""></asp:Label>
                         </td>
 
                         <td>
-                            <asp:Label ID="lblSemestre" CssClass="label" runat="server" Text="Semestre: "></asp:Label>                            
+                            <asp:Label ID="lblSemestre" CssClass="label" runat="server" Text="Semestre: "></asp:Label>
                         </td>
 
                         <td>
@@ -52,13 +52,13 @@
                         </td>
 
                         <td>
-                            <asp:Label ID="lblAnoValor" runat="server" ></asp:Label>
+                            <asp:Label ID="lblAnoValor" runat="server"></asp:Label>
                         </td>
                         <td>
                             <asp:Label ID="lblSemestreAno" CssClass="label" runat="server" Text="Semestre Ano: "></asp:Label>
                         </td>
                         <td>
-                            <asp:Label ID="lblSemestreAnoValor" runat="server" ></asp:Label>
+                            <asp:Label ID="lblSemestreAnoValor" runat="server"></asp:Label>
                         </td>
 
 
@@ -85,13 +85,13 @@
                         <td>
                             <asp:GridView ID="gdvEventosConsultarPI" CssClass="tableEventos" AutoGenerateColumns="false" runat="server">
                                 <Columns>
-                                    <asp:BoundField  DataField="eve_tipo" />
-                                    <asp:BoundField  DataField="eve_data" DataFormatString="{0:D}" />
+                                    <asp:BoundField DataField="eve_tipo" />
+                                    <asp:BoundField DataField="eve_data" DataFormatString="{0:D}" />
                                 </Columns>
                             </asp:GridView>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-default" id="btnEditar" onclick="Mostra('p5');">
+                            <button type="button" class="btn btn-default" id="btnEditarDatas" onclick="Mostra('p2');">
                                 <span class="glyphicon glyphicon-pencil"></span>&nbsp Editar Datas
                             </button>
                         </td>
@@ -255,6 +255,121 @@
 
             </div>
         </div>
+    </div>
+
+
+    <!-- EDITAR CADASTRO PI -->
+    <asp:HiddenField ID="hdfDescricao" runat="server" ClientIDMode="Static" />
+    <asp:HiddenField ID="hdfDatas" runat="server" ClientIDMode="Static" />
+
+    <div id="p2" class="first">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Cadastrar PI</h3>
+            </div>
+            <div class="panel-body-usuarios">
+                <%--LABELS COM ID AUT RECEBERAM OS VALORES AUTOMÁTICO DO BANCO DE DADOS--%>
+                <%-- <table id="tabelaCadastrarPi" class="table">
+
+                    <tr>
+                        <td>
+                            <asp:Label ID="Label1" CssClass="label" runat="server" Text="Código PI: "></asp:Label>
+                        </td>
+
+                        <td>
+                            <asp:Label ID="lblCodigoPiAut" runat="server" Text=""></asp:Label>
+                        </td>
+
+                        <td>
+                            <asp:Label ID="Label2" CssClass="label" runat="server" Text="Curso: "></asp:Label>
+                        </td>
+
+                        <td>
+                            <asp:Label ID="lblCursoAut" runat="server" Text=""></asp:Label>
+                        </td>
+
+                        <td>
+                            <asp:Label ID="Label3" CssClass="label" runat="server" Text="Semestre: "></asp:Label>
+                        </td>
+
+                        <td>
+                            <asp:Label ID="lblSemestreAut" runat="server" Text=""></asp:Label>
+
+                        </td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <asp:Label ID="Label4" CssClass="label" runat="server" Text="Ano: "></asp:Label>
+                        </td>
+
+                        <td>
+                            <asp:Label ID="lblAnoAut" runat="server" Text=""></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Label ID="Label5" CssClass="label" runat="server" Text="Semestre Ano: "></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Label ID="lblSemestreAnoAut" runat="server" Text=""></asp:Label>
+                        </td>
+                        <td colspan="2"></td>
+                    </tr>
+
+                </table>
+
+
+                <table>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblDiscipEnvolvidas" CssClass="label" runat="server" Text="Disciplinas envolvidas: "></asp:Label>
+                        </td>
+                        <td colspan="2"></td>
+                    </tr>
+                    <tr>                        
+                        <td>
+                           <asp:Panel ID="PainelDisciplinas" runat="server">
+                               <asp:Table runat="server" ID="tblDisciplinasEnvolvidas"></asp:Table>
+                           </asp:Panel>
+                        </td>
+                    </tr>
+
+                </table>
+                <br />--%>
+
+
+                <table style="width: 50%; margin: auto;" >
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblDatas" CssClass="label" runat="server" Text="Data de Eventos: "></asp:Label>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-default" id="btnAdicionarDatas" data-toggle="modal" data-target="#myModal1" title="Adicionar evento ao PI">
+                                <span class="glyphicon glyphicon-plus"></span>&nbsp Datas</button>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <%--DIV QUE RECEBE AS DATAS INSERIDAS PELO PROFESSOR MÃE--%>
+                <div id="containerDatas" style="width: 50%;margin: auto;">
+                </div>
+
+
+                <table class="tableBotoes">
+                    <tr>
+                        <td class="colunaBotoes"></td>
+                        <td class="colunaBotoes"></td>
+                        <td class="colunaBotoes">
+                            <button id="btnContinuarEtapa2" onclick="Mostra('p10'); return false;" class="btn btn-default" title="Ir para adicionar critérios">Continuar</button>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <p style="text-align: right; font-weight: bold; margin-top: 5px;">Passo 1 de 4</p>
+            </div>
+        </div>
+
     </div>
 
 </asp:Content>
