@@ -55,6 +55,12 @@
                     </tr>
                 </table>
 
+                  <asp:GridView ID="gdvExemplo" runat="server" AutoGenerateColumns="true">
+                <Columns>
+                </Columns>
+            </asp:GridView>
+
+
                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
                 <asp:UpdatePanel ID="UpdatePanelAtivados" UpdateMode="Conditional" runat="server">
@@ -116,7 +122,8 @@
                 </asp:UpdatePanel>
 
             </div>
-
+            <br />
+          
             <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <asp:UpdatePanel ID="UpdatePanelModalNovoCriterio" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>

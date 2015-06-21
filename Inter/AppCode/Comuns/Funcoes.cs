@@ -11,6 +11,7 @@ using MySql.Data.MySqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Data;
+using System.Configuration;
 /// <summary>
 /// Summary description for funcoes
 /// </summary>
@@ -473,5 +474,10 @@ namespace Inter.Funcoes
             return ds;
         }
 
+        public static string getStrConexao()
+        {
+            string strConexao = ConfigurationManager.AppSettings["strConexao"];
+            return strConexao;
+        }
     }
 }
