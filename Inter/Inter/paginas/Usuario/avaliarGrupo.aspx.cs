@@ -290,7 +290,8 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                 //txtNotasRow_1_Col_1 = [0] = txtNotasRow - [1] = 1 - [2] = Col - [3] = 1
                 TextBox txtNota = (TextBox)Page.FindControl("ctl00$ctl00$cphConteudo$cphConteudoCentral$txtNotasRow_" + i.ToString() + "_Col_" + j.ToString());
                                 
-                valor = Convert.ToDouble(txtNota.Text);                    
+                valor = Convert.ToDouble(txtNota.Text);
+                string auxNota = txtNota.Text.Replace(',','.');
                 valorMultiplicacao += valor * Convert.ToInt32(todosPesos[i]);
                 //ESTÁ COM ERRO QUADO USA NUMERO DECIMAL PESQUISAR valor.ToString("D", cultureInfo);
                
@@ -300,10 +301,10 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                 Criterio_PI cpi = new Criterio_PI();
                 cpi.Cpi_codigo = cpiCodigo;
                 his.Cpi_codigo = cpi;
-                his.His_nota = valor;
+                //his.His_nota = valor;
                 his.His_usuario = Session["nome"].ToString();
 
-                sqlInsertHistoricoAluDisc += "(0,'" + his.Alu_matricula.Alu_matricula + "'," + his.Cpi_codigo.Cpi_codigo + "," + his.His_nota + ",'" + his.His_usuario + "'),";
+                sqlInsertHistoricoAluDisc += "(0,'" + his.Alu_matricula.Alu_matricula + "'," + his.Cpi_codigo.Cpi_codigo + "," + auxNota + ",'" + his.His_usuario + "'),";
             }
             mediaPonderada = valorMultiplicacao / somaPeso;
             somaMediaPonderada += mediaPonderada;
