@@ -91,7 +91,7 @@
 
                 <%-- LEGENDA --%>
                 <section style="float: right; margin-right: 20px; border: 1px solid #CCC; padding: 15px; border-radius: 5px;">
-                    <h4 style="margin-top: -7px;">Legenda</h4>
+                    <h4 style="margin-top: -7px;"><span class="glyphicon glyphicon-info-sign"></span>&nbsp Legenda</h4>
                     <span class="glyphicon glyphicon-star"></span>&nbsp- Disciplina Mãe
                             <br />
                     <span class="glyphicon glyphicon-minus"></span>&nbsp- Disciplina Filha                           
