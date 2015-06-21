@@ -161,6 +161,31 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
                 break;
 
         }
+
+        if (req.Categoria == "Alteração de notas")
+        {
+            subMenu.Attributes["style"] = "height: 84px";
+            btnLibera.Visible = true;
+        }
+        else
+        {
+            subMenu.Attributes["style"] = "height: 42px";
+            btnLibera.Visible = false;
+        }
+
+        if (req.Status == 3)
+        {
+            txtResponder.Attributes["style"] = "background-color: #ccc";
+            txtResponder.ReadOnly = true;
+            btnNovaMsg.Visible = false;
+        }
+        else
+        {
+            txtResponder.Attributes["style"] = "background-color: #fff";
+            txtResponder.ReadOnly = false;
+            btnNovaMsg.Visible = true;
+        }
+
         abrirMensagens(req.CodigoReq);  
 
         UpdatePanel3.Update();
@@ -209,7 +234,10 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
             {
                 Requerimento_DB.Update(cod, 2);
                 mdlHeader.Attributes["style"] = "background-color: #f9ae0e;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
-                abrirMensagens(cod);         
+                abrirMensagens(cod);
+
+                UpdatePanelAtivados.Update();
+                UpdatePanel1.Update();
             }
 
 
@@ -219,6 +247,31 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
 
 
         }
+    }
+
+    protected void btnFinaliza_Click(object sender, EventArgs e)
+    {
+        int cod = Convert.ToInt32(lblMsgId.Text);
+        Requerimento_DB.Update(cod, 3);
+        mdlHeader.Attributes["style"] = "background-color: #0D9643;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
+        txtResponder.Attributes["style"] = "background-color: #ccc";
+        txtResponder.ReadOnly = true;
+        btnNovaMsg.Visible = false;
+
+        abrirMensagens(cod);   
+
+        txtResponder.Text = "";
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+
+        UpdatePanel3.Update(); 
+        UpdatePanelAtivados.Update();
+        UpdatePanel2.Update();
+    }
+
+    protected void btnLibera_Click(object sender, EventArgs e)
+    {
+
     }
 
 
