@@ -2,10 +2,17 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ConteudoCentral" runat="server">
 
+    <script type="text/javascript" src="../../scripts/bootstrap.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#icone5').addClass('corIcone');
         });
+    </script>
+
+    <script type="text/javascript">
+        function openModal() {
+            $('#myModal1').modal('show');
+        }
     </script>
 
     <div id="p1" class="first">
@@ -66,20 +73,28 @@
                             <AlternatingRowStyle CssClass="alt" />
 
                             <Columns>
+                                <asp:TemplateField HeaderText="Codigo" Visible="false">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblCodigo" Text='<%#Eval ("GRU_CODIGO") %>' runat="server"></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Nome do Projeto">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblNome" Text='<%#Eval ("GRU_NOME_PROJETO") %>' runat="server"></asp:Label>
-                                            </ItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="lblNome" Text='<%#Eval ("GRU_NOME_PROJETO") %>' runat="server" CommandName="verDetalhes" CommandArgument='<%#Eval ("GRU_CODIGO") %>' OnCommand="lblNome_Command"></asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Curso/Turno"><%--esse campo curso é pego no método RowDataBound no code behind--%>
+
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Ano/Semestre">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblAno" Text='<%#Eval ("SAN") %>' runat="server"></asp:Label>
-                                            </ItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblAno" Text='<%#Eval ("SAN") %>' runat="server"></asp:Label>
+                                    </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Status">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblStatus" Text='<%#Eval ("GRU_FINALIZADO") %>' runat="server"></asp:Label>
-                                            </ItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblStatus" Text='<%#Eval ("GRU_FINALIZADO") %>' runat="server"></asp:Label>
+                                    </ItemTemplate>
                                 </asp:TemplateField>
 
                                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="8%" HeaderText="">
@@ -88,7 +103,7 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
-                                
+
                             </Columns>
 
                         </asp:GridView>
@@ -100,7 +115,60 @@
 
             </div>
 
+            <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <asp:UpdatePanel ID="UpdatePanelModalNovoCriterio" UpdateMode="Conditional" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" id="fecharModal" onclick="fechaModalCri();" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title" id="myModalLabel3">Detalhes do Grupo</h4>
+                                </div>
+                                <br />
 
+                                <div class="form-group">
+                                    <div class="controls-row">
+                                        <asp:Label ID="lblNomeGrupo" runat="server" CssClass="control-label col-sm-2" Text="Nome: "></asp:Label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="controls-row">
+
+                                        <!--Grid -->
+
+                                    </div>
+                                    <br />
+
+                                </div>
+
+
+                                <asp:ValidationSummary ID="vsNovoCriterio" ValidationGroup="NovoCriterio" ForeColor="#960d10" runat="server" DisplayMode="List" Style="margin: 7px; padding: 7px;" />
+
+
+
+
+                                <div class="modal-footer">
+                                    <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarNovoCriterio" runat="server" title="Cancelar Inserção" OnClick="btnCancelarNovoCriterio_Click">
+                                    <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</asp:LinkButton>
+
+                                    <asp:LinkButton ID="btnCriarNovoCriterio" runat="server" CssClass="btn btn-default"
+                                        OnClick="btnCriarNovoCriterio_Click" ToolTip="Confirmar Inserção" CausesValidation="true" ValidationGroup="NovoCriterio">
+                                   <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar </asp:LinkButton>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </ContentTemplate>
+
+
+
+                </asp:UpdatePanel>
+
+
+            </div>
 
 
 
