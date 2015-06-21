@@ -727,6 +727,28 @@ tabelaHome3 {
       border:none;
   }
 
+  .tableCriterios{
+      width:300px;
+      font-size:14px;      
+      text-align:left;
+      margin:0px 5px 7px 7px;
+      border:none;
+      margin-right:55px;
+  }
+  .tableCriterios th {
+      font-size:18px;
+      font-family: inherit;
+      font-weight: 500;
+      line-height: 1.1;
+      color: inherit;
+      border:none;
+  }
+  .tableCriterios td{
+      width:100px;
+      padding:10px;
+       border:none;
+  }
+
  .TextAlign{
      text-align:center;
  }

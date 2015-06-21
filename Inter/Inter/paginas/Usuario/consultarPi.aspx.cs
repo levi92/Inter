@@ -26,6 +26,11 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
             Response.Redirect("~/EscolherDisciplina");
         }
 
+        if (Session["CodPIAtivo"] == null)
+        {
+            Response.Redirect("~/Home");
+        }
+
         if (!IsPostBack)
         {
 
@@ -40,7 +45,9 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
             lblSemestreAnoValor.Text = san.San_semestre.ToString();
 
             CarregarEventos();
-          
+            CarregarDisciplinas();
+            CarregarCriterios();
+            CarregarGrupos();
         }
         
     }
@@ -66,5 +73,64 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
 
     }
 
+    public void CarregarDisciplinas()
+    {
+        string[] codigosDisc = (string[])Session["codEnvolvidas"];
+        string[] nomeDisc;
+        nomeDisc = Funcoes.MateriasByCodigo(codigosDisc);
+
+        //for (int i = 0; i < nomeDisc.Length; i++)
+        //{
+        //    gdvDisciplinasEnvolvidas.Rows[i].Cells[0].Text = nomeDisc[i];
+        //}
+
+    }
+
+    public void CarregarCriterios()
+    {
+        DataSet ds = Criterio_PI_DB.SelectCriteriosPesosByPI(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
+        gdvCriterios.DataSource = ds;
+        gdvCriterios.DataBind();
+    }
+
+    public void CarregarGrupos()
+    {
+        DataSet dsGruposAtual = new DataSet();
+        dsGruposAtual = Grupo_DB.SelectAllGruposAtual(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
+
+        int qtdGrupos = dsGruposAtual.Tables[0].Rows.Count;
+
+        int qtdGrids = 0;
+
+        if (qtdGrupos <= 4)
+        {
+            qtdGrids = 1;
+        }
+        else
+        {
+            qtdGrids = qtdGrupos % 4;
+        }
+
+
+        
+        for (int i = 0; i < qtdGrids; i++)
+        {
+            GridView gdv = new GridView();
+            gdv.ID = "gdvGrupos"+i;
+            gdv.AutoGenerateColumns = false;
+            gdv.CssClass = "tableEventos";
+
+            for (int j = 0; j < qtdGrupos; j++)
+            {
+                TemplateField temp = new TemplateField();
+                temp.HeaderText = dsGruposAtual.Tables[0].Rows[j]["GRU_NOME_PROJETO"].ToString();
+                gdv.Columns.Add(temp);
+            }
+
+            this.pnlGrupos.Controls.Add(gdv);
+            this.pnlGrupos.DataBind();
+        }
+
+    }
 
 }

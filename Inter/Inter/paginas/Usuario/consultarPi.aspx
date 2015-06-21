@@ -106,22 +106,15 @@
                         <td>
                             <h4>Disciplinas envolvidas:</h4>
                         </td>
-                        <td></td>
+                        <td colspan="2"></td>
                     </tr>
-
                     <tr>
-                        <td>Banco de Dados
-                                        <br />
-                            Engenharia de Software 3
-                                        <br />
-                            Interação Humano-Computador
-                                        <br />
-                            Programação em Scripts
-                                        <br />
-                        </td>
-                        <td></td>
+                        <td><asp:GridView ID="gdvDisciplinasEnvolvidas" CssClass="tableEventos"  AutoGenerateColumns="false" runat="server">
+                            <Columns>
+                                <asp:TemplateField HeaderText="Disciplinas"></asp:TemplateField>
+                            </Columns>
+                            </asp:GridView></td>
                     </tr>
-
                     <tr>
                         <td colspan="2">
                             <hr />
@@ -130,33 +123,17 @@
 
                 </table>
 
-                <!-- EDITAR CRITÉRIO-->
-                <table style="text-align: justify; width: 60%;">
+                <!-- Editar Critério-->
+                <table style="text-align: justify; width: 30%;">
                     <tr>
                         <td>
-                            <h4>Critérios</h4>
-                        </td>
-                        <td>
-                            <h4>Pesos</h4>
-                        </td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td>Postura<br />
-                            Vestimenta<br />
-                            Fala<br />
-                            Sistema<br />
-                            Conhecimento<br />
-                        </td>
-
-                        <td>2<br />
-                            3<br />
-                            3<br />
-                            1<br />
-                            1<br />
-                        </td>
-
+                       <asp:GridView ID="gdvCriterios" AutoGenerateColumns="false" CssClass="tableCriterios" runat="server" >
+                           <Columns>
+                               <asp:BoundField HeaderText="Critérios" DataField="cge_nome" />
+                               <asp:BoundField HeaderText="Pesos"   DataField="cpi_peso" />
+                           </Columns>
+                       </asp:GridView>  
+                        </td>                  
                         <td>
                             <button type="button" class="btn btn-default" id="btnCriterio" onclick="Mostra('p10');">
                                 <span class="glyphicon glyphicon-pencil"></span>&nbsp Editar Critérios
@@ -179,6 +156,17 @@
                     </tr>
 
                     <tr>
+                        <td colspan="4">   
+                            <asp:ScriptManager runat="server" />
+                            <asp:UpdatePanel runat="server">
+                                <ContentTemplate>                                     
+                                    <asp:Panel runat="server" ID="pnlGrupos"> </asp:Panel>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>                         
+                        </td>
+                    </tr>
+
+                  <%--  <tr>
                         <td>
                             <label>Inter - Adiministrador</label></td>
                         <td>
@@ -228,7 +216,7 @@
                                 Aluno5<br />
                             </div>
                         </td>
-                    </tr>
+                    </tr>--%>
 
                     <tr>
                         <td colspan="4" style="padding-left: 10px;">
