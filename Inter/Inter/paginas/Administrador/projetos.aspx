@@ -147,9 +147,9 @@
                                         <asp:Label ID="lblAlunos" Style="width:auto" runat="server" CssClass="control-label col-sm-2" Text="Alunos"></asp:Label>
                                         <br />
                                         <br />
-                                        <asp:ListBox ID="lstDisciplinas" runat="server" Style="margin-left:15px; width:auto;"></asp:ListBox>
-                                        <asp:ListBox ID="lstProfessores" runat="server" Style="margin-left:25px; width:auto;"></asp:ListBox>
-                                        <asp:ListBox ID="lstAlunos" runat="server" Style="margin-left:25px; width:auto;"></asp:ListBox>
+                                        <asp:ListBox ID="lstDisciplinas" runat="server" Style="margin-left:15px; width:65px;"></asp:ListBox>
+                                        <asp:ListBox ID="lstProfessores" runat="server" Style="margin-left:25px; width:70px;"></asp:ListBox>
+                                        <asp:ListBox ID="lstAlunos" runat="server" Style="margin-left:25px; width:65px;"></asp:ListBox>
                                     </div>
                                 </div>
 

@@ -36,7 +36,7 @@ namespace AppCode.Persistencia
             if (data != "")
             {
                 string[] converter = data.Split('/');
-                string formatada = "";
+                string formatada = ""; // irá receber a data atual
             
                 for (int c = 2; c >= 0; c--)
                 {
@@ -65,12 +65,12 @@ namespace AppCode.Persistencia
             {
                 if (campo == 0)
                 {
-                    filtro = "aud_usuario = '" + usuario + "'";
+                    filtro = "aud_usuario like '%" + usuario + "%'";
                     campo = campo + 1;
                 }
                 else
                 {
-                    filtro = filtro + "and aud_usuario = '" + usuario + "'";
+                    filtro = filtro + "and aud_usuario like '%" + usuario + "%'";
                 }
             }
 

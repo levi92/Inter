@@ -9,6 +9,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Data;
 using System.Net;
+using System.Security.Principal;
+using System.Security.AccessControl;
 
 
 public partial class paginas_Admin_configuracoes : System.Web.UI.Page
@@ -59,10 +61,30 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
     private string pegaDirBackup()
     {
         string directory = (Request.PhysicalApplicationPath + "Backup"); //armazena em uma string o caminho da aplicação + a pasta Backup
-
+        //string caminho1 = (Request.PhysicalApplicationPath + "Backup\\");
         if (!Directory.Exists(directory)) //se o diretório não existe
         {
             Directory.CreateDirectory(directory); //cria o diretório
+            // Pega a segurança atual da pasta
+
+           /* DirectorySecurity oDirSec = Directory.GetAccessControl(sTmpPath);
+
+            // Define o usuário Everyone (Todos)
+            SecurityIdentifier sid = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+            //SecurityIdentifier sid = new SecurityIdentifier(WellKnownSidType.AuthenticatedUserSid, null);
+            NTAccount oAccount = sid.Translate(typeof(NTAccount)) as NTAccount;
+
+            oDirSec.PurgeAccessRules(oAccount);
+
+            FileSystemAccessRule fsAR = new FileSystemAccessRule(oAccount,
+                                                                 FileSystemRights.Modify,
+                                                                 InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit,
+                                                                 PropagationFlags.None,
+                                                                 AccessControlType.Allow);
+
+            // Atribui a regra de acesso alterada
+            oDirSec.SetAccessRule(fsAR);
+            Directory.SetAccessControl(sTmpPath, oDirSec);*/
         }
 
         string caminho = (Request.PhysicalApplicationPath + "Backup\\"); //pega o caminho do diretório (com \\ pois estamos pegando o diretório "aberto") ->>>> tirar dúvida sobre isso, é isso mesmo?
@@ -85,6 +107,8 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 
         string constring = ("server=" + server + ";user=" + user + ";database=" + database + ";password=" + password);
         string file = (directory + "\\" + nome_arquivo);
+
+
         using (MySqlConnection conn = new MySqlConnection(constring))
         {
             using (MySqlCommand cmd = new MySqlCommand())
