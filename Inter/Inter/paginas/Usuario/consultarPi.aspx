@@ -165,7 +165,7 @@
                           
                            <%-- <asp:UpdatePanel runat="server">--%>
                                 <%--<ContentTemplate>   --%>                                  
-                                    <asp:Panel runat="server" ID="pnlGrupos"> </asp:Panel>
+                                    <asp:Panel ID="pnlGrupos" runat="server" > </asp:Panel>
                                <%-- </ContentTemplate>
                             </asp:UpdatePanel>       --%>                  
                         </td>
@@ -415,6 +415,25 @@
         </div>
     </div>
 
+    <!-- MODAL NÃO POSSUI GRUPO PARA AVALIAR -->
+
+    <div class="modal fade" data-backdrop="static" id="myModalNaoPossuiPi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    <h1 style="font-size: 30px; font-weight: bolder; text-align: center; color: #1f1f1f">
+                        <span style="color: #960d10;" class="glyphicon glyphicon-remove"></span>&nbsp Sua disciplina não possui um PI cadastrado!</h1>
+                </div>
+
+                <div class="modal-footer">
+                    <asp:LinkButton CssClass="btn btn-default" ID="btnVoltarHome" runat="server" OnClick="btnVoltarHome_Click" ToolTip="Voltar para a home do sistema">
+                        <span class="glyphicon glyphicon-home"></span>&nbsp Voltar para a home</asp:LinkButton>                    
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- dialogs -->
     <div id="boxDesejaExcluir" title="Excluir Evento!" style="display: none;">

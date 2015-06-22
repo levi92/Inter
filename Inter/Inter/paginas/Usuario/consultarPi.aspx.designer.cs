@@ -226,4 +226,13 @@ public partial class paginas_Usuario_consultarPi {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblDataMsgErro;
+    
+    /// <summary>
+    /// btnVoltarHome control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnVoltarHome;
 }

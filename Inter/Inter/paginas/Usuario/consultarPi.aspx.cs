@@ -28,28 +28,30 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
 
         if (Session["CodPIAtivo"] == null)
         {
-            Response.Redirect("~/Home");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalNaoPossuiPi", "myModalNaoPossuiPi();", true);
         }
-
-        if (!IsPostBack)
+        else
         {
+            if (!IsPostBack)
+            {
 
-            lblCodigoPI.Text = Session["CodPIAtivo"].ToString();
-            lblCursoValor.Text = Session["curso"].ToString();
-            lblSemestreValor.Text = Session["semestre"].ToString();
+                lblCodigoPI.Text = Session["CodPIAtivo"].ToString();
+                lblCursoValor.Text = Session["curso"].ToString();
+                lblSemestreValor.Text = Session["semestre"].ToString();
 
-            Semestre_Ano san = new Semestre_Ano();
-            san = Semestre_Ano_DB.Select();
+                Semestre_Ano san = new Semestre_Ano();
+                san = Semestre_Ano_DB.Select();
 
-            lblAnoValor.Text = san.San_ano.ToString();
-            lblSemestreAnoValor.Text = san.San_semestre.ToString();
+                lblAnoValor.Text = san.San_ano.ToString();
+                lblSemestreAnoValor.Text = san.San_semestre.ToString();
 
-            CarregarEventos();
-            CarregarDisciplinas();
-            CarregarCriterios();
-            CarregarGrupos();
+                CarregarEventos();
+                CarregarDisciplinas();
+                CarregarCriterios();
+                CarregarGrupos();
+            }
         }
-        
+
     }
 
     public void CarregarEventos()
@@ -67,7 +69,7 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
             descricaoDatas += ds.Tables[0].Rows[i]["eve_tipo"].ToString() + "|";
             data += ds.Tables[0].Rows[i]["eve_data"].ToString().Substring(0, 10) + "|"; //FORMATO ORIGINAL DA DATA: 00/00/00 00:00:00
         }
-      
+
         hdfDescricao.Value = descricaoDatas;
         hdfDatas.Value = data;
 
@@ -82,7 +84,7 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
 
         DataTable dt = new DataTable();
         dt.Columns.Add("Disciplinas", typeof(string));
-        
+
         for (int i = 0; i < nomeDisc.Length; i++)
         {
             DataRow dr = dt.NewRow();
@@ -112,41 +114,67 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
     {
         DataSet dsGruposAtual = new DataSet();
         dsGruposAtual = Grupo_DB.SelectAllGruposAtual(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
-
-        int qtdGrupos = dsGruposAtual.Tables[0].Rows.Count;
-
-        int qtdGrids = 0;
-
-        if (qtdGrupos <= 4)
-        {
-            qtdGrids = 1;
-        }
-        else
-        {
-            qtdGrids = qtdGrupos % 4;
-        }
-
-
         
-        for (int i = 0; i < qtdGrids; i++)
-        {
-            GridView gdv = new GridView();
-            gdv.ID = "gdvGrupos"+i;
-            gdv.AutoGenerateColumns = false;
-            gdv.CssClass = "tableEventos";
+        int qtdGrupos = dsGruposAtual.Tables[0].Rows.Count;
+        int contTblPorLinha = 0;
 
-            for (int j = 0; j < qtdGrupos; j++)
+        //if (qtdGrupos <= 4)
+        //{
+        //    qtdGrids = 1;
+        //}
+        //else
+        //{
+        //    qtdGrids = qtdGrupos % 4;
+        //}
+
+        for (int i = 0; i < qtdGrupos; i++)
+        {
+            int codGrupo = Convert.ToInt32(dsGruposAtual.Tables[0].Rows[i]["gru_codigo"]);
+            string[]matriculasAlunos = Grupo_Aluno_DB.SelectAllMatriculaByGrupo(codGrupo);
+
+            Table table = new Table();
+            table.ID = "tabelaGrupo" + i;
+            table.CssClass = "tableEventos";
+
+            TableHeaderRow thr = new TableHeaderRow();
+            TableHeaderCell th = new TableHeaderCell();
+            th.Text = dsGruposAtual.Tables[0].Rows[i]["GRU_NOME_PROJETO"].ToString();
+            thr.Cells.Add(th);
+            table.Rows.Add(thr);
+
+            TableRow row;
+            TableCell cell;
+
+            for (int j = 0; j < 4; j++)
             {
-                TemplateField temp = new TemplateField();
-                temp.HeaderText = dsGruposAtual.Tables[0].Rows[j]["GRU_NOME_PROJETO"].ToString();
-                gdv.Columns.Add(temp);
+                row = new TableRow();
+                cell = new TableCell();
+                cell.Text = matriculasAlunos[j];
+                row.Cells.Add(cell);
+                table.Rows.Add(row);
             }
 
+            //ADICIONANDO OS COMPONENTES PARA O PAINEL 
+            pnlGrupos.Controls.Add(table);
+            contTblPorLinha++;
 
-            this.pnlGrupos.Controls.Add(gdv);
-            this.pnlGrupos.DataBind();
+            if (contTblPorLinha == 3)
+            {
+                Label lblLinha = new Label();
+                lblLinha.ID = "lblL" + (i);
+                lblLinha.Text = String.Format("<br/><br/>");
+                pnlGrupos.Controls.Add(lblLinha); //ADICIONANDO OS COMPONENTES PARA O PAINEL
+                contTblPorLinha = 0;
+            }
+            
+
         }
 
+    }
+
+    protected void btnVoltarHome_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Home");
     }
 
 }
