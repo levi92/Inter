@@ -9,6 +9,8 @@
         });
     </script>
 
+      <asp:ScriptManager ID="ScriptManager1" runat="server" />
+
     <!-- CONSULTAR PI (P6) -->
 
     <div id="p1" class="first">
@@ -106,22 +108,18 @@
                         <td>
                             <h4>Disciplinas envolvidas:</h4>
                         </td>
-                        <td></td>
+                        <td colspan="2"></td>
                     </tr>
-
                     <tr>
-                        <td>Banco de Dados
-                                        <br />
-                            Engenharia de Software 3
-                                        <br />
-                            Interação Humano-Computador
-                                        <br />
-                            Programação em Scripts
-                                        <br />
-                        </td>
-                        <td></td>
-                    </tr>
+                        <td>
+                            <asp:GridView ID="gdvDisciplinasEnvolvidas" CssClass="tableEventos" style="text-transform: capitalize;"  AutoGenerateColumns="false" runat="server">
+                                <Columns>
+                                    <asp:BoundField HeaderText="" DataField="Disciplinas" />
+                                </Columns>
+                            </asp:GridView>
 
+                        </td>
+                    </tr>
                     <tr>
                         <td colspan="2">
                             <hr />
@@ -130,33 +128,17 @@
 
                 </table>
 
-                <!-- EDITAR CRITÉRIO-->
-                <table style="text-align: justify; width: 60%;">
+                <!-- Editar Critério-->
+                <table style="text-align: justify; width: 30%;">
                     <tr>
                         <td>
-                            <h4>Critérios</h4>
-                        </td>
-                        <td>
-                            <h4>Pesos</h4>
-                        </td>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td>Postura<br />
-                            Vestimenta<br />
-                            Fala<br />
-                            Sistema<br />
-                            Conhecimento<br />
-                        </td>
-
-                        <td>2<br />
-                            3<br />
-                            3<br />
-                            1<br />
-                            1<br />
-                        </td>
-
+                       <asp:GridView ID="gdvCriterios" AutoGenerateColumns="false" CssClass="tableCriterios" runat="server" >
+                           <Columns>
+                               <asp:BoundField HeaderText="Critérios" DataField="cge_nome" />
+                               <asp:BoundField HeaderText="Pesos"   DataField="cpi_peso" />
+                           </Columns>
+                       </asp:GridView>  
+                        </td>                  
                         <td>
                             <button type="button" class="btn btn-default" id="btnCriterio" onclick="Mostra('p10');">
                                 <span class="glyphicon glyphicon-pencil"></span>&nbsp Editar Critérios
@@ -179,6 +161,17 @@
                     </tr>
 
                     <tr>
+                        <td colspan="4">   
+                          
+                           <%-- <asp:UpdatePanel runat="server">--%>
+                                <%--<ContentTemplate>   --%>                                  
+                                    <asp:Panel ID="pnlGrupos" runat="server" > </asp:Panel>
+                               <%-- </ContentTemplate>
+                            </asp:UpdatePanel>       --%>                  
+                        </td>
+                    </tr>
+
+                  <%--  <tr>
                         <td>
                             <label>Inter - Adiministrador</label></td>
                         <td>
@@ -228,7 +221,7 @@
                                 Aluno5<br />
                             </div>
                         </td>
-                    </tr>
+                    </tr>--%>
 
                     <tr>
                         <td colspan="4" style="padding-left: 10px;">
@@ -422,6 +415,25 @@
         </div>
     </div>
 
+    <!-- MODAL NÃO POSSUI GRUPO PARA AVALIAR -->
+
+    <div class="modal fade" data-backdrop="static" id="myModalNaoPossuiPi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    <h1 style="font-size: 30px; font-weight: bolder; text-align: center; color: #1f1f1f">
+                        <span style="color: #960d10;" class="glyphicon glyphicon-remove"></span>&nbsp Sua disciplina não possui um PI cadastrado!</h1>
+                </div>
+
+                <div class="modal-footer">
+                    <asp:LinkButton CssClass="btn btn-default" ID="btnVoltarHome" runat="server" OnClick="btnVoltarHome_Click" ToolTip="Voltar para a home do sistema">
+                        <span class="glyphicon glyphicon-home"></span>&nbsp Voltar para a home</asp:LinkButton>                    
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- dialogs -->
     <div id="boxDesejaExcluir" title="Excluir Evento!" style="display: none;">

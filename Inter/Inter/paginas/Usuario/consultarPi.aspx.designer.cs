@@ -12,6 +12,15 @@
 public partial class paginas_Usuario_consultarPi {
     
     /// <summary>
+    /// ScriptManager1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.ScriptManager ScriptManager1;
+    
+    /// <summary>
     /// lblCodigo control.
     /// </summary>
     /// <remarks>
@@ -111,6 +120,33 @@ public partial class paginas_Usuario_consultarPi {
     protected global::System.Web.UI.WebControls.GridView gdvEventosConsultarPI;
     
     /// <summary>
+    /// gdvDisciplinasEnvolvidas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvDisciplinasEnvolvidas;
+    
+    /// <summary>
+    /// gdvCriterios control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvCriterios;
+    
+    /// <summary>
+    /// pnlGrupos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Panel pnlGrupos;
+    
+    /// <summary>
     /// hdfDescricao control.
     /// </summary>
     /// <remarks>
@@ -190,4 +226,13 @@ public partial class paginas_Usuario_consultarPi {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblDataMsgErro;
+    
+    /// <summary>
+    /// btnVoltarHome control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnVoltarHome;
 }
