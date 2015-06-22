@@ -9,6 +9,8 @@
         });
     </script>
 
+      <asp:ScriptManager ID="ScriptManager1" runat="server" />
+
     <!-- CONSULTAR PI (P6) -->
 
     <div id="p1" class="first">
@@ -109,11 +111,14 @@
                         <td colspan="2"></td>
                     </tr>
                     <tr>
-                        <td><asp:GridView ID="gdvDisciplinasEnvolvidas" CssClass="tableEventos"  AutoGenerateColumns="false" runat="server">
-                            <Columns>
-                                <asp:TemplateField HeaderText="Disciplinas"></asp:TemplateField>
-                            </Columns>
-                            </asp:GridView></td>
+                        <td>
+                            <asp:GridView ID="gdvDisciplinasEnvolvidas" CssClass="tableEventos" style="text-transform: capitalize;"  AutoGenerateColumns="false" runat="server">
+                                <Columns>
+                                    <asp:BoundField HeaderText="" DataField="Disciplinas" />
+                                </Columns>
+                            </asp:GridView>
+
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -157,12 +162,12 @@
 
                     <tr>
                         <td colspan="4">   
-                            <asp:ScriptManager runat="server" />
-                            <asp:UpdatePanel runat="server">
-                                <ContentTemplate>                                     
+                          
+                           <%-- <asp:UpdatePanel runat="server">--%>
+                                <%--<ContentTemplate>   --%>                                  
                                     <asp:Panel runat="server" ID="pnlGrupos"> </asp:Panel>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>                         
+                               <%-- </ContentTemplate>
+                            </asp:UpdatePanel>       --%>                  
                         </td>
                     </tr>
 

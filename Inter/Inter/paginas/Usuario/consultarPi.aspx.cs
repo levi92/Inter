@@ -65,7 +65,7 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
         for (int i = 0; i < qtd; i++)
         {
             descricaoDatas += ds.Tables[0].Rows[i]["eve_tipo"].ToString() + "|";
-            data += ds.Tables[0].Rows[i]["eve_data"].ToString().Substring(0, 10) + "|"; //formato originalda data: 00/00/00 00:00:00
+            data += ds.Tables[0].Rows[i]["eve_data"].ToString().Substring(0, 10) + "|"; //FORMATO ORIGINAL DA DATA: 00/00/00 00:00:00
         }
       
         hdfDescricao.Value = descricaoDatas;
@@ -77,12 +77,27 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
     {
         string[] codigosDisc = (string[])Session["codEnvolvidas"];
         string[] nomeDisc;
+        string nomeDisFormatada = ""; //PARA DEIXAR A PRIMEIRA LETRA MAIÚSCULA
         nomeDisc = Funcoes.MateriasByCodigo(codigosDisc);
 
-        //for (int i = 0; i < nomeDisc.Length; i++)
-        //{
-        //    gdvDisciplinasEnvolvidas.Rows[i].Cells[0].Text = nomeDisc[i];
-        //}
+        DataTable dt = new DataTable();
+        dt.Columns.Add("Disciplinas", typeof(string));
+        
+        for (int i = 0; i < nomeDisc.Length; i++)
+        {
+            DataRow dr = dt.NewRow();
+
+            nomeDisFormatada += nomeDisc[i].Substring(0, 1).ToUpper();
+            nomeDisFormatada += nomeDisc[i].Substring(1, nomeDisc[i].Length - 1).ToLower();
+
+            dr["Disciplinas"] = nomeDisFormatada;
+            dt.Rows.Add(dr);
+
+            nomeDisFormatada = "";
+        }
+
+        gdvDisciplinasEnvolvidas.DataSource = dt;
+        gdvDisciplinasEnvolvidas.DataBind();
 
     }
 
@@ -126,6 +141,7 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
                 temp.HeaderText = dsGruposAtual.Tables[0].Rows[j]["GRU_NOME_PROJETO"].ToString();
                 gdv.Columns.Add(temp);
             }
+
 
             this.pnlGrupos.Controls.Add(gdv);
             this.pnlGrupos.DataBind();
