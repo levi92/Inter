@@ -128,7 +128,7 @@
 
                 </table>
 
-                <!-- Editar Critério-->
+                <!-- EDITAR CRITÉRIO-->
                 <table style="text-align: justify; width: 30%;">
                     <tr>
                         <td>
@@ -165,63 +165,11 @@
                           
                            <%-- <asp:UpdatePanel runat="server">--%>
                                 <%--<ContentTemplate>   --%>                                  
-                                    <asp:Panel ID="pnlGrupos" runat="server" > </asp:Panel>
+                                    <asp:Panel ID="pnlGrupos" runat="server" style="width: 90%; margin: auto;" > </asp:Panel>
                                <%-- </ContentTemplate>
                             </asp:UpdatePanel>       --%>                  
                         </td>
                     </tr>
-
-                  <%--  <tr>
-                        <td>
-                            <label>Inter - Adiministrador</label></td>
-                        <td>
-                            <label>Inter - Usuário</label></td>
-                        <td>
-                            <label>Sam - Adiministrador</label></td>
-                        <td>
-                            <label>Sam - Usuário</label></td>
-                    </tr>
-
-                    <tr>
-                        <td style="width: 20%;">
-                            <div style="width: 80%; border: 1px solid gray; padding-left: 10px; border-radius: 5px">
-                                Aluno1<br />
-                                Aluno2<br />
-                                Aluno3<br />
-                                Aluno4<br />
-                                Aluno5<br />
-                            </div>
-                        </td>
-
-                        <td style="width: 20%;">
-                            <div style="width: 80%; border: 1px solid gray; padding-left: 10px; border-radius: 5px">
-                                Aluno1<br />
-                                Aluno2<br />
-                                Aluno3<br />
-                                Aluno4<br />
-                                Aluno5<br />
-                            </div>
-                        </td>
-
-                        <td style="width: 20%;">
-                            <div style="width: 80%; border: 1px solid gray; padding-left: 10px; border-radius: 5px">
-                                Aluno1<br />
-                                Aluno2<br />
-                                Aluno3<br />
-                                Aluno4<br />
-                                Aluno5<br />
-                            </div>
-                        </td>
-                        <td style="width: 20%;">
-                            <div style="width: 80%; border: 1px solid gray; padding-left: 10px; border-radius: 5px">
-                                Aluno1<br />
-                                Aluno2<br />
-                                Aluno3<br />
-                                Aluno4<br />
-                                Aluno5<br />
-                            </div>
-                        </td>
-                    </tr>--%>
 
                     <tr>
                         <td colspan="4" style="padding-left: 10px;">

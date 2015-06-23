@@ -68,32 +68,30 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
         DataSet ds = new DataSet();
         ds = (DataSet)Session["DataSetCalendarioAndProfessor"];
         string[] vetorReturnFunction = new string[3];
-
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[i]["disciplina"].ToString());
-            e.Row.Cells[1].Text = vetorReturnFunction[0];
-            e.Row.Cells[2].Text = vetorReturnFunction[1];
-            e.Row.Cells[3].Text = vetorReturnFunction[2];
-            i++;
-        }
-
+        
         //e = tdos eventos relacionados a um componente, pega a linha e verifica se é do tipo dados
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            //se for mãe
+            vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[i]["disciplina"].ToString());
+            e.Row.Cells[1].Text = vetorReturnFunction[0]; //vetorReturnFunction = cursoTurno
+            e.Row.Cells[2].Text = vetorReturnFunction[1]; //vetorReturnFunction = semestre
+            e.Row.Cells[3].Text = vetorReturnFunction[2]; //vetorReturnFunction = disciplina
+            i++;
+
+            //SE FOR MÃE
             if (e.Row.Cells[4].Text.Equals("MAE"))
             {
-                //ícone da estrelinha
+                //ÍCONE DA ESTRELINHA
                 e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-star'></span>";
             }
             else
             {
-                //ícone de tracinho
+                //ÍCONE DE TRACINHO
                 e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-minus'></span>";
             }
+        }   
 
-        }
+        
     }
 
     //EVENTO DO BOTÃO CONFIRMAR: PEGA LINHA SELECIONADA E ARMAZENA OS DADOS DA MESMA

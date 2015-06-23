@@ -40,7 +40,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         {
             if (!IsPostBack)
             {
-                ddlFinalizarGrupos.DataSource = Session["GruposFinalizar"];
+                ddlFinalizarGrupos.DataSource = Session["GruposFinalizar"]; //(DataSet) conversão
                 ddlFinalizarGrupos.DataTextField = "GRU_NOME_PROJETO";
                 ddlFinalizarGrupos.DataValueField = "GRU_CODIGO";
                 ddlFinalizarGrupos.DataBind();
