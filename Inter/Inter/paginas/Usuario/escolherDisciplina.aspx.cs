@@ -42,16 +42,18 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     {
         Professor prof = new Professor();
         prof = (Professor)Session["Professor"];
+        //DATASET VAI RECEBER VALORES QUE JA FORAM CARREGADOS OU NÃO
         DataSet ds = (DataSet)Session["DataSetCalendarioAndProfessor"];
         if (Session["DataSetCalendarioAndProfessor"] == null)
         {
             Calendario cal = new Calendario();
             cal = Calendario.SelectbyAtual();
+            // DATASET VAI RECEBER TODAS AS DISCIPLINAS DO PROFESSOR
             ds = Professor.SelectAllPIsbyCalendarioAndProfessor(cal.AnoSemestreAtual, cal.Codigo, prof.Matricula);
             Session["DataSetCalendarioAndProfessor"] = ds;
         }
 
-        int qtd = ds.Tables[0].Rows.Count; //QTD DE LINHAS DO DS
+        int qtd = ds.Tables[0].Rows.Count; //QTD DE LINHAS DO DATASET
         //SE QTD FOR MAIOR QUE ZERO, OU SEJA, SE TIVER DADOS NO DATA SET
         if (qtd > 0)
         {
@@ -68,14 +70,14 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
         DataSet ds = new DataSet();
         ds = (DataSet)Session["DataSetCalendarioAndProfessor"];
         string[] vetorReturnFunction = new string[3];
-        
+
         //e = tdos eventos relacionados a um componente, pega a linha e verifica se é do tipo dados
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[i]["disciplina"].ToString());
-            e.Row.Cells[1].Text = vetorReturnFunction[0]; //vetorReturnFunction = cursoTurno
-            e.Row.Cells[2].Text = vetorReturnFunction[1]; //vetorReturnFunction = semestre
-            e.Row.Cells[3].Text = vetorReturnFunction[2]; //vetorReturnFunction = disciplina
+            e.Row.Cells[1].Text = vetorReturnFunction[0];
+            e.Row.Cells[2].Text = vetorReturnFunction[1];
+            e.Row.Cells[3].Text = vetorReturnFunction[2];
             i++;
 
             //SE FOR MÃE
@@ -92,7 +94,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
         }   
 
         
-    }
+        }
 
     //EVENTO DO BOTÃO CONFIRMAR: PEGA LINHA SELECIONADA E ARMAZENA OS DADOS DA MESMA
     protected void btnConfirmar_Click(object sender, EventArgs e)
@@ -151,12 +153,12 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
                 {
                     if (!dadosDisc[2].Contains(projeto))
                     {
-                        codEnvolvidas.Add(dadosDisc[3]);
-                        atrEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][0].ToString());
-                        nomeEnvolvidas.Add(dadosDisc[2]);
-                        maeEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][2].ToString());
-                    }                    
+                    codEnvolvidas.Add(dadosDisc[3]);
+                    atrEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][0].ToString());
+                    nomeEnvolvidas.Add(dadosDisc[2]);
+                    maeEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][2].ToString());
                 }
+            }
             }
 
             string[] vetCodEnvolvidas = codEnvolvidas.ToArray();

@@ -43,9 +43,9 @@ public partial class Paginas_Login_login : System.Web.UI.Page
                 Session["Professor"] = prof;
                 Session["matricula"] = prof.Matricula;
                 Session["nome"] = prof.Nome;
-                Session["menu"] = "coordenador";
-                Session["perfil"] = null;
-                Session["login"] = user;
+                Session["menu"] = "coordenador"; //ADM
+                Session["perfil"] = null; //ADM
+                Session["login"] = user;// E-MAIL DO PROFESSOR
                 Session["DataSetCalendarioAndProfessor"] = null;
                 Session["DS_AllPIsbyCalendarioAtual"] = null;
 

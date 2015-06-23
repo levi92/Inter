@@ -152,8 +152,6 @@ namespace Inter.Funcoes
             vetReturn[3] = codDisc;
             vetReturn[4] = nome_professor;
             
-
-
             return vetReturn;
         }
 
