@@ -151,12 +151,15 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         switch (req.Status)
         {
             case 1:
+                lblMsgStatus.Text = "Aberto";
                 mdlHeader.Attributes["style"] = "background-color: #960d10;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
                 break;
             case 2:
+                lblMsgStatus.Text = "Em Andamento";
                 mdlHeader.Attributes["style"] = "background-color: #f9ae0e;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
                 break;
             case 3:
+                lblMsgStatus.Text = "Finalizado";
                 mdlHeader.Attributes["style"] = "background-color: #0D9643;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);;";
                 break;
 
@@ -186,8 +189,7 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
             btnNovaMsg.Visible = true;
         }
 
-        abrirMensagens(req.CodigoReq);  
-
+        abrirMensagens(req.CodigoReq); 
         UpdatePanel3.Update();
         
 

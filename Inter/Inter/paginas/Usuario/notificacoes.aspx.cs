@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Inter.Funcoes;
 using System.Data;
-
+using Interdisciplinar;
 
 //Se usar um namespace aqui ele não reconhece o Funcoes por algum motivo...
 
@@ -105,7 +105,12 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         if (!String.IsNullOrEmpty(txtAssunto.Text) && !String.IsNullOrEmpty(txtCategoria.Text))
         {
 
-            string usuario = Session["nome"].ToString();
+            Professor prof = new Professor();
+            prof = (Professor)Session["Professor"];
+            string[] nomeProf = prof.Nome.Split(' ');            
+            string usuario = nomeProf[0] + " " + nomeProf[1];
+
+            
             string assunto = txtAssunto.Text;
             string categoria = txtCategoria.Text;
 
@@ -157,12 +162,15 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         switch (req.Status)
         {
             case 1:
+                lblMsgStatus.Text = "Aberto";
                 mdlHeader.Attributes["style"] = "background-color: #960d10;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
                 break;
             case 2:
+                lblMsgStatus.Text = "Em Andamento";
                 mdlHeader.Attributes["style"] = "background-color: #f9ae0e;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
                 break;
             case 3:
+                lblMsgStatus.Text = "Finalizado";
                 mdlHeader.Attributes["style"] = "background-color: #0D9643;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);;";
                 break;
 
