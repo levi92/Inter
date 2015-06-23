@@ -182,6 +182,13 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
+                                        <%--Coluna da descrição do Critério Geral--%>
+                                        <asp:TemplateField HeaderText="Ultima Modificação">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblDescricao2" runat="server" Text='<%#Eval ("req_dt_modificado")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
                                     </Columns>
 
                                 </asp:GridView>
@@ -237,6 +244,13 @@
                                         <asp:TemplateField HeaderText="Data">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblData2" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <%--Coluna da descrição do Critério Geral--%>
+                                        <asp:TemplateField HeaderText="Ultima Modificação">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lbldata2" runat="server" Text='<%#Eval ("req_dt_modificado")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
@@ -297,6 +311,13 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
+                                        <%--Coluna da descrição do Critério Geral--%>
+                                        <asp:TemplateField HeaderText="Ultima Modificação">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblDescricao32" runat="server" Text='<%#Eval ("req_dt_modificado")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
                                     </Columns>
 
                                 </asp:GridView>
@@ -337,7 +358,7 @@
                                      &nbsp<asp:RequiredFieldValidator ID="rfvCategoriaNovoRequerimento" CssClass="col-sm1" runat="server" ErrorMessage="O campo Categoria deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtCategoria" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>
                                    
                                 </div>
-                                   <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px;padding-left:30px;"></asp:Label>
+                                   
                             </div>
 
                             <div class="form-group">
@@ -349,6 +370,7 @@
                                     &nbsp<asp:RequiredFieldValidator ID="rfvAssuntoNovoRequerimento" runat="server" CssClass="col-sm1" ErrorMessage="O campo Assunto deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtAssunto" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>
                                     
                                 </div>
+                                <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px;padding-left:30px;"></asp:Label>
                             </div>
                              
                             <asp:ValidationSummary ID="vsNovoRequerimento" ValidationGroup="NovoRequerimento" ForeColor="#960d10" runat="server" DisplayMode="List" Style="margin: 7px; padding: 7px;" />

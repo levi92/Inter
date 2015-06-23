@@ -40,11 +40,11 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         DataSet ds = Requerimento_DB.SelectS(1); //criando um data set com as solicitações abertas
         int qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
         //se qtd for maior que zero, ou seja, se tiver dados no data set
-        if (qtd > 0)
-        {
 
-            gdvRequerimentoAberto.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
-            gdvRequerimentoAberto.DataBind(); //preenche o grid view com os dados
+        gdvRequerimentoAberto.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+        gdvRequerimentoAberto.DataBind(); //preenche o grid view com os dados
+        if (qtd > 0)
+        {           
             lblQtdRegistro.Text = "Foram encontrados " + qtd + " Solicitações";
         }
         else
@@ -208,7 +208,7 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         {
             b = i + 1;
             if (usuario == msgDt.Tables[0].Rows[i][2].ToString()) {
-                msgBox = msgBox + "<div class='allMsg' style='float: right'><div class='txtCard' style='background-color: rgb(247, 247, 228);' onclick='mostraInfo(" + b + ")'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info" + b + "' class='infoMsg'>Enviado por " + msgDt.Tables[0].Rows[i][2].ToString() + " - " + msgDt.Tables[0].Rows[i][4].ToString() + "</div></div>";
+                msgBox = msgBox + "<div class='allMsg' style='float: right'><div class='txtCard' style='background-color: rgb(247, 247, 228);' onclick='mostraInfo(" + b + ")'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info" + b + "' class='infoMsg'>Enviado as " + msgDt.Tables[0].Rows[i][4].ToString() + "</div></div>";
             } else {
                 msgBox = msgBox + "<div class='allMsg' style='float: left'> <div class='txtCard' onclick='mostraInfo(" + b + ")'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info" + b + "' class='infoMsg'>Enviado por " + msgDt.Tables[0].Rows[i][2].ToString() + " - " + msgDt.Tables[0].Rows[i][4].ToString() + "</div></div>";
             }
@@ -234,18 +234,24 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
 
             if (Mensagem_DB.Insert(men) == 0)
             {
+                Requerimento_DB.UpdateTime(cod);
                 Requerimento_DB.Update(cod, 2);
                 mdlHeader.Attributes["style"] = "background-color: #f9ae0e;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
                 abrirMensagens(cod);
 
-                UpdatePanelAtivados.Update();
-                UpdatePanel1.Update();
+                CarregarGridAtivos();
+                
             }
 
 
             txtResponder.Text = "";
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+
+            UpdatePanelAtivados.Update();
+            UpdatePanel1.Update();
             UpdatePanel3.Update();
+
+            UpdatePanelAtivados.Update();
 
 
         }
