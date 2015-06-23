@@ -93,22 +93,22 @@ public partial class paginas_Admin_configuracoes {
     protected global::System.Web.UI.WebControls.TextBox txtSenha;
     
     /// <summary>
-    /// lblMsg control.
+    /// lblMsgModal control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMsg;
+    protected global::System.Web.UI.WebControls.Label lblMsgModal;
     
     /// <summary>
-    /// lblMsg2 control.
+    /// lblMsgModal2 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMsg2;
+    protected global::System.Web.UI.WebControls.Label lblMsgModal2;
     
     /// <summary>
     /// btnCancelarConfirmaSenha control.

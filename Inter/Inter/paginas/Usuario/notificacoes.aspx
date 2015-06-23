@@ -33,9 +33,9 @@
                 <!--A cor do Header muda de acordo com o status-->
                 <div class="modal-header" runat="server" id="mdlHeader" style="background-color: #960d10; color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);">
                     <!--Arrumar o hover aqui-->
-                    <button type="button" data-dismiss="modal" style="margin-top: -9px; float: left; border: none; background: none;"><span class="mdi mdi-chevron-left hoverAll" style="font-size: 33px; margin-top: 4.5px;"></span></button>
+                    <button type="button" data-dismiss="modal" style="margin-right: 10px;margin-top: -9px; float: left; border: none; background: none;"><span class="mdi mdi-close" style="font-size: 33px; margin-top: 4.5px;"></span></button>
                     <!--ASSUNTO DO TICKET-->
-                    <h4 class="modal-title" id="myModalLabelT1" style="float: left;"><asp:Label ID="lblMsgAssunto" runat="server"></asp:Label> - <asp:Label ID="lblMsgCategoria" runat="server"></asp:Label></h4>
+                    <h4 class="modal-title" id="myModalLabelT1" style="float: left;"><asp:Label ID="lblMsgAssunto" runat="server"></asp:Label> - <asp:Label ID="lblMsgCategoria" runat="server"></asp:Label> (  <asp:Label ID="lblMsgStatus" runat="server"></asp:Label> )</h4>
                     <!--Arrumar  Hover aqui-->
                     <button type="button" id="butMostraMenu" name="subMenu" onclick="mostraDiv1('subMenu')" style="float: right; border: none; background: none; margin-top: -2px;"><span class="mdi mdi-dots-vertical hoverAll" style="font-size: 25px;"></span></button>
                     <!--NOME DO PROFESSOR QUE ABRIU O TICKET-->
@@ -167,6 +167,13 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
+                                        <%--Coluna da descrição do Critério Geral--%>
+                                        <asp:TemplateField HeaderText="Ultima Modificação">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblDescr4icao2" runat="server" Text='<%#Eval ("req_dt_modificado")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
                                     </Columns>
 
                                 </asp:GridView>
@@ -222,6 +229,13 @@
                                         <asp:TemplateField HeaderText="Data">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblData2" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <%--Coluna da descrição do Critério Geral--%>
+                                        <asp:TemplateField HeaderText="Ultima Modificação">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblDes2cricao2" runat="server" Text='<%#Eval ("req_dt_modificado")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
@@ -282,6 +296,13 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
+                                        <%--Coluna da descrição do Critério Geral--%>
+                                        <asp:TemplateField HeaderText="Ultima Modificação">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblDesscricao2" runat="server" Text='<%#Eval ("req_dt_modificado")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
                                     </Columns>
 
                                 </asp:GridView>
@@ -309,17 +330,6 @@
 
                             <div class="form-group">
                                 <div class="controls-row">
-                                    <asp:Label ID="lblAssuntoNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Assunto: "></asp:Label>                                    
-                                    <asp:TextBox ID="txtAssunto" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox>
-                                    
-                                    <%--Validação do Campo Assunto (Verifica se está vazio e se está preenchido com uma string)--%>
-                                    &nbsp<asp:RequiredFieldValidator ID="rfvAssuntoNovoRequerimento" runat="server" CssClass="col-sm1" ErrorMessage="O campo Assunto deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtAssunto" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>
-                                    
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="controls-row">
 
                                     <asp:Label ID="lblCategoriaNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Categoria: "></asp:Label></td>    
                                     <asp:DropDownList ID="txtCategoria" ClientIDMode="Static" CssClass="form-control col-sm-9"  Width="50%" runat="server">
@@ -333,9 +343,20 @@
                                      &nbsp<asp:RequiredFieldValidator ID="rfvCategoriaNovoRequerimento" CssClass="col-sm1" runat="server" ErrorMessage="O campo Categoria deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtCategoria" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>
                                    
                                 </div>
-                                   <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px;padding-left:30px;"></asp:Label>
+                                   
                             </div>
-                          
+
+                            <div class="form-group">
+                                <div class="controls-row">
+                                    <asp:Label ID="lblAssuntoNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Assunto: "></asp:Label>                                    
+                                    <asp:TextBox ID="txtAssunto" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox>
+                                    
+                                    <%--Validação do Campo Assunto (Verifica se está vazio e se está preenchido com uma string)--%>
+                                    &nbsp<asp:RequiredFieldValidator ID="rfvAssuntoNovoRequerimento" runat="server" CssClass="col-sm1" ErrorMessage="O campo Assunto deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtAssunto" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>
+                                    
+                                </div>
+                                <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px;padding-left:30px;"></asp:Label>
+                            </div>  
                              
                             <asp:ValidationSummary ID="vsNovoRequerimento" ValidationGroup="NovoRequerimento" ForeColor="#960d10" runat="server" DisplayMode="List" Style="margin: 7px; padding: 7px;" />
 

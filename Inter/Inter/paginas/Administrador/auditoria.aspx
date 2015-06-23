@@ -4,9 +4,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#icone65').addClass('corIcone');
+            $('#icone1').addClass('corIcone');
         });
-
         
             //showOn: "button",
             //buttonImage: "../../App_Themes/images/Calendar-Add-128x128.png",

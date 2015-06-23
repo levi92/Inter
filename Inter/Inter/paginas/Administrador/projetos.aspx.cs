@@ -28,7 +28,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
         ScriptManager1.RegisterAsyncPostBackControl(lkbBuscar);
         if (!IsPostBack)
         {
-            CarregaGridEx();
+            //CarregaGridEx();
             CarregaGrid();
             DataSet dsSem = Semestre_Ano_DB.SelectSemestreAno();
 
@@ -61,7 +61,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
         gdvExemplo.DataBind();
         
 
-    }
+    //}
     private void CarregaGrid()
     {
         DataSet dsPIsFatec = (DataSet)Session["DS_AllPIsbyCalendarioAtual"]; //instancia um dataset usando um dataset existente em uma varíavel de sessão(que é instanciada no login como null)
@@ -338,7 +338,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
 
     protected void lblNome_Command(object sender, CommandEventArgs e)
     {
-        
+
     }
 
     protected void gdvProjetos_RowDeleting(object sender, GridViewDeleteEventArgs e)

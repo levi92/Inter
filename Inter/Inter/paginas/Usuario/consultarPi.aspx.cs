@@ -116,7 +116,6 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
         dsGruposAtual = Grupo_DB.SelectAllGruposAtual(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
         
         int qtdGrupos = dsGruposAtual.Tables[0].Rows.Count;
-        int contTblPorLinha = 0;
 
         //if (qtdGrupos <= 4)
         //{
@@ -131,10 +130,13 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
         {
             int codGrupo = Convert.ToInt32(dsGruposAtual.Tables[0].Rows[i]["gru_codigo"]);
             string[]matriculasAlunos = Grupo_Aluno_DB.SelectAllMatriculaByGrupo(codGrupo);
+            string[] nomesAlunos = Funcoes.NomeAlunosByMatricula(matriculasAlunos);
 
             Table table = new Table();
             table.ID = "tabelaGrupo" + i;
             table.CssClass = "tableEventos";
+            table.Style.Add("float", "left");
+            table.Style.Add("width", "45%");
 
             TableHeaderRow thr = new TableHeaderRow();
             TableHeaderCell th = new TableHeaderCell();
@@ -145,28 +147,17 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
             TableRow row;
             TableCell cell;
 
-            for (int j = 0; j < 4; j++)
+            for (int j = 0; j < nomesAlunos.Length; j++)
             {
                 row = new TableRow();
                 cell = new TableCell();
-                cell.Text = matriculasAlunos[j];
+                cell.Text = nomesAlunos[j];
                 row.Cells.Add(cell);
                 table.Rows.Add(row);
             }
 
             //ADICIONANDO OS COMPONENTES PARA O PAINEL 
             pnlGrupos.Controls.Add(table);
-            contTblPorLinha++;
-
-            if (contTblPorLinha == 3)
-            {
-                Label lblLinha = new Label();
-                lblLinha.ID = "lblL" + (i);
-                lblLinha.Text = String.Format("<br/><br/>");
-                pnlGrupos.Controls.Add(lblLinha); //ADICIONANDO OS COMPONENTES PARA O PAINEL
-                contTblPorLinha = 0;
-            }
-            
 
         }
 

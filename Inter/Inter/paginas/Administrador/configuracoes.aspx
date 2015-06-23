@@ -8,14 +8,27 @@
         $(document).ready(function () {
             $('#icone6').addClass('corIcone');
         });
-    </script>
-
-    <script type="text/javascript">
+ 
         function openModal() {
             $('#myModal1').modal('show');
         }
-    </script>
 
+        function fechaModalClick() {
+            $('#fecharModal').click();
+        }
+
+        function mudaTituloDownload() {
+            $('#TituloModal').text('Baixar Backup');
+        }
+
+        function mudaTituloRestaurar() {
+            $('#TituloModal').text('Restaurar Backup');
+        }
+
+        function alert() {
+            this.window.alert('Você errou a senha muitas vezes e será redirecionado para a página de Login.');
+        }
+        </script>
 
     <div id="p1" class="first">
         <div class="panel panel-default">
@@ -35,7 +48,6 @@
                             <asp:Label ID="lblBackup" runat="server"></asp:Label>
                             <asp:GridView ID="gdvBkp" runat="server" CellPadding="4" GridLines="None" CssClass="gridView" AllowPaging="true" PageSize="10"
                                 OnRowCommand="gdvBkp_RowCommand"
-                                OnRowDataBound="gdvBkp_RowDataBound"
                                 OnPageIndexChanging="gdvBkp_PageIndexChanging"
                                 AutoGenerateColumns="false"
                                 Visible="true">
@@ -64,7 +76,8 @@
 
 
                             </asp:GridView>
-                            <asp:Label ID="lblQtdRegistros" runat="server"></asp:Label><br />
+                            
+                            <asp:Label ID="lblQtdRegistros" runat="server"></asp:Label><br /><br />
                             <asp:Button ID="btnCriarBackup" runat="server" CssClass="btn btn-default btn-lg" Text="Criar Backup" OnClick="btnCriarBackup_Click" />
 
 
@@ -87,7 +100,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" id="fecharModal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                    <h4 class="modal-title" id="myModalLabel3">Download</h4>
+                                    <h4 class="modal-title" id="TituloModal">Confirmação de Senha</h4>
                                 </div>
                                 <br />
 
@@ -104,13 +117,11 @@
                                 <div class="form-group">
                                     <div class="controls-row">
 
-                                        <!--Grid -->
-
                                     </div>
                                     <br />
-                                     <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
+                                     <asp:Label ID="lblMsgModal" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
                                     <br />
-                                    <asp:Label ID="lblMsg2" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
+                                    <asp:Label ID="lblMsgModal2" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
                                 </div>
 
                             <div class="modal-footer">
