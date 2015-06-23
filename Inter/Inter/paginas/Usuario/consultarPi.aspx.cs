@@ -117,14 +117,7 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
         
         int qtdGrupos = dsGruposAtual.Tables[0].Rows.Count;
 
-        //if (qtdGrupos <= 4)
-        //{
-        //    qtdGrids = 1;
-        //}
-        //else
-        //{
-        //    qtdGrids = qtdGrupos % 4;
-        //}
+        Label lbl = new Label();
 
         for (int i = 0; i < qtdGrupos; i++)
         {
@@ -134,9 +127,11 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
 
             Table table = new Table();
             table.ID = "tabelaGrupo" + i;
-            table.CssClass = "tableEventos";
-            table.Style.Add("float", "left");
+            table.CssClass = "tableGrupos";
             table.Style.Add("width", "45%");
+            lbl = new Label();
+            lbl.Text = "<br/> <hr width:'80%' color:'#000' >";
+            pnlGrupos.Controls.Add(lbl);
 
             TableHeaderRow thr = new TableHeaderRow();
             TableHeaderCell th = new TableHeaderCell();

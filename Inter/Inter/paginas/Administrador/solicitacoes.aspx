@@ -243,14 +243,14 @@
                                         <%--Coluna da descrição do Critério Geral--%>
                                         <asp:TemplateField HeaderText="Data">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblData2" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
+                                                <asp:Label ID="lblDa2ta2" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
                                         <%--Coluna da descrição do Critério Geral--%>
                                         <asp:TemplateField HeaderText="Ultima Modificação">
                                             <ItemTemplate>
-                                                <asp:Label ID="lbldata2" runat="server" Text='<%#Eval ("req_dt_modificado")%>'></asp:Label>
+                                                <asp:Label ID="lbld3ata2" runat="server" Text='<%#Eval ("req_dt_modificado")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 

@@ -232,7 +232,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         }
         if (cont == codEnvolvidas.Length)
         {
-            Session["MediaGrupo"] = (somaMedia / cont); 
+            Session["MediaGrupo"] = Math.Round((somaMedia / cont),1); 
             lblMediaGrupos.Text = Session["MediaGrupo"].ToString();
             lblMediaGrupos.Style.Add("color", "#960d10");
             lblMediaGrupos.Style.Add("font-size", "18px");

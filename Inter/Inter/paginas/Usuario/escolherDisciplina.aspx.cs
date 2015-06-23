@@ -142,6 +142,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             List<string> atrEnvolvidas = new List<string>();
             List<string> nomeEnvolvidas = new List<string>();
             List<string> maeEnvolvidas = new List<string>(); // MÃE OU FILHA
+            List<string> nomeProf = new List<string>();
 
             string projeto = "PROJETO";
 
@@ -157,6 +158,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
                     atrEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][0].ToString());
                     nomeEnvolvidas.Add(dadosDisc[2]);
                     maeEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][2].ToString());
+                    nomeProf.Add(dadosDisc[4]);
                 }
             }
             }
@@ -169,6 +171,8 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             Session["nomeEnvolvidas"] = vetNomeEnvolvidas;
             string[] vetMaeEnvolvidas = maeEnvolvidas.ToArray();
             Session["maeEnvolvidas"] = vetMaeEnvolvidas;
+            string[] vetNomeProf = nomeProf.ToArray();
+            Session["nomeProfEnvolvidos"] = vetNomeProf;
 
             // CARREGAR SESSOES
             Session["codPIAtivo"] = Funcoes.SelectCodPIAtivoByAtr(codAtr);

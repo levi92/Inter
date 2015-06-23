@@ -279,7 +279,7 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
 
     protected void btnLibera_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/Projetos");
     }
 
 

@@ -228,7 +228,7 @@
                                         <%--Coluna da descrição do Critério Geral--%>
                                         <asp:TemplateField HeaderText="Data">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblData2" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
+                                                <asp:Label ID="lblDa3ta2" runat="server" Text='<%#Eval ("req_dt_requisicao")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
