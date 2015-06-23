@@ -54,16 +54,15 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 updPanelGrupos.Update();
                 PegarAnoeSemestreAno();
                 PegarUltimoCodPI();
-                lblCursoAut.Text = Session["curso"].ToString();
-                lblSemestreAut.Text = Session["semestre"].ToString();
-                index = 1;
+                lblCursoAut.Text = Session["curso"].ToString(); // LABEL DA PRIMEIRA ETAPA
+                lblSemestreAut.Text = Session["semestre"].ToString(); // LABEL DA PRIMEIRA ETAPA
+                index = 1; // INDEX DO GRUPO
                 btnConfirmarEdicao.Style.Add("opacity", "0.4");
                 btnExcluirGrupo.Style.Add("opacity", "0.4");
                 btnCancelarEdicao.Style.Add("opacity", "0.4");
                 btnConfirmarEdicao.Style.Add("pointer-events", "none");
                 btnCancelarEdicao.Style.Add("pointer-events", "none");
                 btnExcluirGrupo.Style.Add("pointer-events", "none");
-
             }
 
             CriarCriterio();
@@ -379,6 +378,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     protected void btnContinuarEtapa3_Click(object sender, EventArgs e)
     {
         CarregaTip();
+        // VERIFICA SE EXISTE PELO MENOS UM CRITÉRIO NO PROJETO PARA PROSSEGUIR
         if (listaCritPi.Items.Count >= 1)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
@@ -453,7 +453,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     protected int verificarPesoVazio()
     {
         int peso = 0;
-        int ret = 0;
+        int ret = 0; // SUCESSO
         foreach (Control txt in PanelCriterios.Controls)
         {
             if (txt is TextBox)
@@ -462,14 +462,14 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 txtCri.Style.Clear();
                 if (String.IsNullOrEmpty(txtCri.Text))
                 {
-                    return 1;
+                    return 1; // PARA CHAMAR MODAL QUE ADICIONA PESO 1 AOS CRITÉRIOS
                 }
 
                 peso = Convert.ToInt32(txtCri.Text);
                 if ((peso < 1) || (peso > 10))
                 {
                     txtCri.Style.Add("border", "1px solid red");
-                    ret = 2;
+                    ret = 2; // QUANDO PESO É INVÁLIDO
                     lblMsgPesosCriterios.Visible = true;
                 }
 
@@ -512,7 +512,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
         }
-        else // SECESSO 
+        else // SUCESSO 
         {
             lblMsgPesosCriterios.Visible = false;
             CarregaTipAluno();
@@ -909,6 +909,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         CarregaTipAluno();
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
     }
+    
 
     protected void btnFinalizarCriarPi_Click(object sender, EventArgs e)
     {
@@ -931,8 +932,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 eve.Pri_codigo = pi;
                 eve.Eve_tipo = desc[i];
                 eve.Eve_usuario = Session["nome"].ToString();
-                sqlInsertEventos += "(0," + eve.Pri_codigo.Pri_codigo + ",'" + dat[i] + "','" + eve.Eve_tipo + "','"+eve.Eve_usuario+"'),";
-               
+                sqlInsertEventos += "(0," + eve.Pri_codigo.Pri_codigo + ",'" + dat[i] + "','" + eve.Eve_tipo + "','"+eve.Eve_usuario+"'),";               
             }
             
             Eventos_DB.Insert(sqlInsertEventos.Substring(0,sqlInsertEventos.Length-1));
