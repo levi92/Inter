@@ -135,14 +135,18 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             cal = Calendario.SelectbyAtual();
             dsEnvolvidas = Professor.SelectAllPIsbyCalendario(cal.Codigo, cal.AnoSemestreAtual);
 
+            // CRIA LISTAS REFERENTE AOS CÓDIGOS, ATRIBUIÇÕES, NOMES E MÃES DE DISCIPLINAS ENVOLVIDAS PARA POSTERIORMENTE
+            // SEREM COLOCADAS EM SESSÕES
             string[] dadosDisc = new string[4];
             List<string> codEnvolvidas = new List<string>();
             List<string> atrEnvolvidas = new List<string>();
             List<string> nomeEnvolvidas = new List<string>();
-            List<string> maeEnvolvidas = new List<string>();
+            List<string> maeEnvolvidas = new List<string>(); // MÃE OU FILHA
+
             for (int i = 0; i < dsEnvolvidas.Tables[0].Rows.Count; i++)
             {
                 dadosDisc = Funcoes.tratarDadosProfessor(dsEnvolvidas.Tables[0].Rows[i][1].ToString());
+                // VERIFICA TODAS AS MATÉRIAS QUE PERTENCEM A ESSE PI
                 if ((dadosDisc[0] == Session["Curso"].ToString()) && (dadosDisc[1] == Session["Semestre"].ToString()))
                 {
                     codEnvolvidas.Add(dadosDisc[3]);
@@ -161,10 +165,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             string[] vetMaeEnvolvidas = maeEnvolvidas.ToArray();
             Session["maeEnvolvidas"] = vetMaeEnvolvidas;
 
-
-
             // CARREGAR SESSOES
-
             Session["codPIAtivo"] = Funcoes.SelectCodPIAtivoByAtr(codAtr);
             if (Convert.ToInt32(Session["codPIAtivo"]) != -2 && Convert.ToInt32(Session["codPIAtivo"]) != 0)
             {

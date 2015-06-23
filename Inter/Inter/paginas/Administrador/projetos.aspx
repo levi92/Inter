@@ -55,6 +55,12 @@
                     </tr>
                 </table>
 
+                  <asp:GridView ID="gdvExemplo" runat="server" AutoGenerateColumns="true">
+                <Columns>
+                </Columns>
+            </asp:GridView>
+
+
                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
                 <asp:UpdatePanel ID="UpdatePanelAtivados" UpdateMode="Conditional" runat="server">
@@ -116,7 +122,8 @@
                 </asp:UpdatePanel>
 
             </div>
-
+            <br />
+          
             <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <asp:UpdatePanel ID="UpdatePanelModalNovoCriterio" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>
@@ -130,7 +137,19 @@
 
                                 <div class="form-group">
                                     <div class="controls-row">
-                                        <asp:Label ID="lblNomeGrupo" runat="server" CssClass="control-label col-sm-2" Text="Nome: "></asp:Label>
+                                        <asp:Label ID="lblNomeGrupo" Style="width:auto" runat="server" CssClass="control-label col-sm-2"></asp:Label>
+                                        <asp:Label ID="lblCursoModal" Style="width:auto"  runat="server" CssClass="control-label col-sm-2"></asp:Label>
+                                        <asp:Label ID="lblSemestre" Style="width:auto" runat="server" CssClass="control-label col-sm-2"></asp:Label>
+                                        <br />
+                                        <br />
+                                        <asp:Label ID="lblDisciplinas" Style="width:auto" runat="server" CssClass="control-label col-sm-2" Text="Disciplinas"></asp:Label>
+                                        <asp:Label ID="lblProfessores" Style="width:auto" runat="server" CssClass="control-label col-sm-2" Text="Professores"></asp:Label>
+                                        <asp:Label ID="lblAlunos" Style="width:auto" runat="server" CssClass="control-label col-sm-2" Text="Alunos"></asp:Label>
+                                        <br />
+                                        <br />
+                                        <asp:ListBox ID="lstDisciplinas" runat="server" Style="margin-left:15px; width:65px;"></asp:ListBox>
+                                        <asp:ListBox ID="lstProfessores" runat="server" Style="margin-left:25px; width:70px;"></asp:ListBox>
+                                        <asp:ListBox ID="lstAlunos" runat="server" Style="margin-left:25px; width:65px;"></asp:ListBox>
                                     </div>
                                 </div>
 

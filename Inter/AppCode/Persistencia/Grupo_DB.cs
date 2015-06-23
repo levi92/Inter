@@ -134,6 +134,29 @@ namespace AppCode.Persistencia
             return ds;
         }
 
+        //SELECT GRUPOS PARA A PAGINA DE CONSULTAR PI
+        public static DataSet SelectAllGruposAtual(int codPi, int atrCod)
+        {
+            DataSet ds = new DataSet();
+            IDbConnection objConnection;
+            IDbCommand objCommand;
+            IDataAdapter objDataAdapter;
+            objConnection = Mapped.Connection();
+            objCommand = Mapped.Command("SELECT GR.GRU_CODIGO, GR.GRU_NOME_PROJETO FROM GRU_GRUPO GR INNER JOIN PRI_PROJETO_INTER PR USING(PRI_CODIGO) INNER JOIN API_ATRIBUICAO_PI AP USING(PRI_CODIGO) WHERE PR.PRI_CODIGO = ?pri_codigo AND AP.ADI_CODIGO = ?adi_codigo;", objConnection);
+            objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", codPi));
+            objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", atrCod));
+            objDataAdapter = Mapped.Adapter(objCommand);
+            objDataAdapter.Fill(ds);
+            objConnection.Close();
+            objCommand.Dispose();
+            objConnection.Dispose();
+            if (ds.Tables[0].Rows.Count == 0)
+            {
+                ds = null;
+            }
+            return ds;
+        }
+
         public static int UpdateGrupoAvaliado(Grupo gru)
         {
             int retorno = 0;
@@ -182,6 +205,43 @@ namespace AppCode.Persistencia
                 retorno = -2;
             }
             return retorno;
+        }
+
+        public static Grupo Select(int codigo)
+        {
+            try
+            {
+                Grupo objGrupo = null;
+                IDbConnection objConnection;
+                IDbCommand objCommnad;
+                IDataReader objDataReader;
+                objConnection = Mapped.Connection();
+                objCommnad = Mapped.Command("SELECT * FROM gru_grupo WHERE gru_codigo = ?codigo", objConnection);
+                objCommnad.Parameters.Add(Mapped.Parameter("?codigo", codigo));
+                objDataReader = objCommnad.ExecuteReader();
+                while (objDataReader.Read())
+                {
+
+                    var gru_codigo = Convert.ToInt32(objDataReader["gru_codigo"]);
+                    var gru_nome_projeto = objDataReader["gru_nome_projeto"].ToString();
+                    var gru_finalizado = Convert.ToInt32(objDataReader["gru_finalizado"]);
+
+                    objGrupo = new Grupo();
+                    objGrupo.Gru_codigo = gru_codigo;
+                    objGrupo.Gru_nome_projeto = gru_nome_projeto;
+                    objGrupo.Gru_finalizado = gru_finalizado;
+                }
+                objDataReader.Close();
+                objConnection.Close();
+                objConnection.Dispose();
+                objCommnad.Dispose();
+                objDataReader.Dispose();
+                return objGrupo;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
     }
