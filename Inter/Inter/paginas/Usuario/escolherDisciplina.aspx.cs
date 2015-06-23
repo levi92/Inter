@@ -143,16 +143,21 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             List<string> nomeEnvolvidas = new List<string>();
             List<string> maeEnvolvidas = new List<string>(); // MÃE OU FILHA
 
+            string projeto = "PROJETO";
+
             for (int i = 0; i < dsEnvolvidas.Tables[0].Rows.Count; i++)
             {
                 dadosDisc = Funcoes.tratarDadosProfessor(dsEnvolvidas.Tables[0].Rows[i][1].ToString());
                 // VERIFICA TODAS AS MATÉRIAS QUE PERTENCEM A ESSE PI
                 if ((dadosDisc[0] == Session["Curso"].ToString()) && (dadosDisc[1] == Session["Semestre"].ToString()))
                 {
-                    codEnvolvidas.Add(dadosDisc[3]);
-                    atrEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][0].ToString());
-                    nomeEnvolvidas.Add(dadosDisc[2]);
-                    maeEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][2].ToString());
+                    if (!dadosDisc[2].Contains(projeto))
+                    {
+                        codEnvolvidas.Add(dadosDisc[3]);
+                        atrEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][0].ToString());
+                        nomeEnvolvidas.Add(dadosDisc[2]);
+                        maeEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][2].ToString());
+                    }                    
                 }
             }
 
