@@ -55,10 +55,10 @@
                     </tr>
                 </table>
 
-                  <asp:GridView ID="gdvExemplo" runat="server" AutoGenerateColumns="true">
+                <%--  <asp:GridView ID="gdvExemplo" runat="server" AutoGenerateColumns="true">
                 <Columns>
                 </Columns>
-            </asp:GridView>
+            </asp:GridView>--%>
 
 
                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>

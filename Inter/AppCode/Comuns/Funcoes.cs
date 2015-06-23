@@ -328,8 +328,7 @@ namespace Inter.Funcoes
 
         public static string[] tratarArquivosBackup(string caminho)
         {
-
-            string[] arquivos = Directory.GetFiles(caminho, "*");
+            string[] arquivos = Directory.GetFiles(caminho, "*.sql");
 
             int i, j, min;
             string varAux;
