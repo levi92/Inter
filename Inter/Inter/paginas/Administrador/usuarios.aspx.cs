@@ -13,10 +13,12 @@ public partial class paginas_Admin_usuarios : System.Web.UI.Page
     protected void Page_PreInit(object sender, EventArgs e)
     {
         // Se sessão estiver nula redireciona para o bloqueio Url
-        if (Session["login"] == null)
+        if ((Session["login"] == null) || (Session["menu"].ToString() != "master"))
         {
+            Session.RemoveAll();
             Response.Redirect("~/BloqueioUrl");
         }
+
 
         // CHAMAR A MASTER PAGE CORRESPONDENTE MASTER ou COORD   
         this.Page.MasterPageFile = Funcoes.chamarMasterPage_Admin(Session["menu"].ToString());

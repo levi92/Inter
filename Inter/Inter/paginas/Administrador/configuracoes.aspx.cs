@@ -16,7 +16,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
     protected void Page_PreInit(object sender, EventArgs e)
     {
         // Se sessão estiver nula redireciona para o bloqueio Url
-        if (Session["login"] == null)
+        if ((Session["login"] == null) || (Session["menu"].ToString() != "master"))
         {
             Response.Redirect("~/BloqueioUrl");
         }
