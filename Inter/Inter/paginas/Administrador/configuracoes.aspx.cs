@@ -231,7 +231,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                                 conn.Open();
                                 try
                                 {
-                                mb.ExportToFile(file);
+                                    mb.ExportToFile(file);
                                     lblMsgModal.Style.Add("color", "green");
                                     lblMsgModal.Text = "Backup de segurança efetuado com sucesso!";
                                 }
@@ -239,13 +239,13 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                                 {
                                     lblMsgModal.Style.Add("color", "#960d10");
                                     lblMsgModal.Text = "Erro ao criar Backup de Segurança! Cancelando a Restauração;";
-                                conn.Close();
+                                    conn.Close();
                                     System.Threading.Thread.Sleep(1000);
                                     Response.Redirect("~/Configuracoes");
-                            }
+                                }
                                 conn.Close();
+                            }
                         }
-                    }
                     }
                     CarregaGrid();
                     UpdatePanelBkp.Update();
@@ -257,65 +257,69 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                     {
 
 
-                        lblMsg.Text = "Backup de segurança efetuado com sucesso!";
+                        lblMsgModal2.Text = "Backup de segurança efetuado com sucesso!";
 
-
-                    using (MySqlConnection conn = new MySqlConnection(constring))
+                        if(Funcoes_DB.DropDatabase() == 0)
                         {
-                            using (MySqlCommand cmd = new MySqlCommand())
+                            using (MySqlConnection conn = new MySqlConnection(constring))
                             {
-                                using (MySqlBackup mb = new MySqlBackup(cmd))
+                                using (MySqlCommand cmd = new MySqlCommand())
                                 {
-                                    cmd.Connection = conn;
-                                    conn.Open();
-                                try
-                                {
+                                    using (MySqlBackup mb = new MySqlBackup(cmd))
+                                    {
+                                        cmd.Connection = conn;
+                                        conn.Open();
+                                        try
+                                        {
 
-                                    mb.ImportFromFile(caminhoArquivo);
-                                    lblMsgModal2.Style.Add("color", "green");
-                                    lblMsgModal2.Text = "Sistema Restaurado com sucesso!";
-                                }
-                                catch (Exception ex)
-                                {
-                                    lblMsgModal2.Style.Add("color", "#960d10");
-                                    lblMsgModal2.Text = "Erro ao restaurar Backup";
-                                }
-                                    conn.Close();
+                                            mb.ImportFromFile(caminhoArquivo);
+                                            lblMsgModal2.Style.Add("color", "green");
+                                            lblMsgModal2.Text = "Sistema Restaurado com sucesso!";
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            lblMsgModal2.Style.Add("color", "#960d10");
+                                            lblMsgModal2.Text = "Erro ao restaurar Backup";
+                                        }
+                                        conn.Close();
+                                    }
                                 }
                             }
-                    }
+                        }
+
+                        
 
                     }
                 }
 
-            else
-            {
-                if (c == 3)
-                {
-                    c = 1;
-                    //lblMsgModal2.Style.Add("color", "#960d10");
-                    //lblMsgModal2.Text = "Você errou a senha muitas vezes. Faça login novamente!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alerta", "alert()", true);
-                    Session.RemoveAll();
-                    Response.Redirect("~/Login");
-                }
                 else
                 {
-                    lblMsgModal.Style.Add("color", "#960d10");
-                    lblMsgModal.Text = "Senha incorreta!";
-                    c++;
+                    if (c == 3)
+                    {
+                        c = 1;
+                        //lblMsgModal2.Style.Add("color", "#960d10");
+                        //lblMsgModal2.Text = "Você errou a senha muitas vezes. Faça login novamente!";
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alerta", "alert()", true);
+                        Session.RemoveAll();
+                        Response.Redirect("~/Login");
+                    }
+                    else
+                    {
+                        lblMsgModal.Style.Add("color", "#960d10");
+                        lblMsgModal.Text = "Senha incorreta!";
+                        c++;
+                    }
                 }
+
+
+            }
+            else
+            {
+                lblMsgModal.Style.Add("color", "#960d10");
+                lblMsgModal.Text = "O campo senha deve ser preenchido!";
             }
 
-
         }
-        else
-        {
-            lblMsgModal.Style.Add("color", "#960d10");
-            lblMsgModal.Text = "O campo senha deve ser preenchido!";
-        }
-
-
     }
     protected void btnCancelarConfirmaSenha_Click(object sender, EventArgs e)
     {

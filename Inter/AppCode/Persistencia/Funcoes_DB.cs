@@ -193,4 +193,26 @@ public class Funcoes_DB
         return ds;
     }
 
+    public static int DropDatabase()
+    {
+        int retorno = 0;
+        try
+        {
+            IDbConnection conexao;
+            IDbCommand objComando;
+            string sql = "DROP DATABASE INTER; CREATE DATABASE INTER;";
+            conexao = Mapped.Connection();
+            objComando = Mapped.Command(sql, conexao);
+            objComando.ExecuteNonQuery();
+            conexao.Close();
+            objComando.Dispose();
+            conexao.Dispose();
+        }
+        catch (Exception e)
+        {
+            retorno = -2;
+        }
+        return retorno;
+    }
+
 }

@@ -59,9 +59,8 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
         DataSet dsPIsFatec = Curso.SelecionarTodos();
         gdvExemplo.DataSource = dsPIsFatec.Tables[0].DefaultView;
         gdvExemplo.DataBind();
-        
 
-    //}
+    }
     private void CarregaGrid()
     {
         DataSet dsPIsFatec = (DataSet)Session["DS_AllPIsbyCalendarioAtual"]; //instancia um dataset usando um dataset existente em uma varíavel de sessão(que é instanciada no login como null)
