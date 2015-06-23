@@ -40,7 +40,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         {
             if (!IsPostBack)
             {
-                ddlFinalizarGrupos.DataSource = Session["GruposFinalizar"];
+                ddlFinalizarGrupos.DataSource = Session["GruposFinalizar"]; //(DataSet) conversão
                 ddlFinalizarGrupos.DataTextField = "GRU_NOME_PROJETO";
                 ddlFinalizarGrupos.DataValueField = "GRU_CODIGO";
                 ddlFinalizarGrupos.DataBind();
@@ -230,7 +230,6 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
             }
             dt.Rows.Add(dr);
         }
-        cont++;
         if (cont == codEnvolvidas.Length)
         {
             Session["MediaGrupo"] = (somaMedia / cont); 
@@ -251,8 +250,8 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         if (Session["MediaGrupo"] != null)
         {
             btnFinalizarGrupos.Enabled = true;
-            //btnFinalizarGrupos.Style.Add("opacity", "1");
-            //btnFinalizarGrupos.Style.Add("pointer-events", "focus");
+            btnFinalizarGrupos.Style.Add("opacity", "1");
+            btnFinalizarGrupos.Style.Add("pointer-events", "focus");
         }
         else
         {

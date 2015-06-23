@@ -42,7 +42,7 @@ namespace Inter.paginas.Administrador
         protected void Btn_Admin(object sender, EventArgs e)
         {
             Session["perfil"] = "coordenador";   
-            Response.Redirect("~/paginas/Administrador/solicitacoes.aspx");
+            Response.Redirect("~/Solicitacoes");
         }
 
         protected void Btn_Prof(object sender, EventArgs e)

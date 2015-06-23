@@ -4,6 +4,12 @@ var globalCor = "";
 
 //Function inicia após caregar a página
 $(document).ready(function () {
+    //function voltarPagina() {
+    //    if (window.history.length>0) {
+    //        window.history.back();
+    //    }
+    //}
+
     Atualiza();
     Dia();
 

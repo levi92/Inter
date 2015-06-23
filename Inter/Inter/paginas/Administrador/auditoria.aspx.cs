@@ -14,10 +14,11 @@ public partial class paginas_Admin_auditoria : System.Web.UI.Page
         protected void Page_PreInit(object sender, EventArgs e)
         {
             // Se sessão estiver nula redireciona para o bloqueio Url
-            if (Session["login"] == null)
+            if ((Session["login"] == null)||(Session["menu"].ToString() != "master"))
             {
                 Response.Redirect("~/BloqueioUrl");
             }
+                 
 
             // CHAMAR A MASTER PAGE CORRESPONDENTE MASTER ou COORD   
             this.Page.MasterPageFile = Funcoes.chamarMasterPage_Admin(Session["menu"].ToString());
@@ -26,6 +27,8 @@ public partial class paginas_Admin_auditoria : System.Web.UI.Page
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager1.RegisterAsyncPostBackControl(lkbPesquisar);
+
+           
 
             if (!IsPostBack)
             {

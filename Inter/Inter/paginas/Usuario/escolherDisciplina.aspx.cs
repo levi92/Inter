@@ -71,32 +71,30 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
         ds = (DataSet)Session["DataSetCalendarioAndProfessor"];
         string[] vetorReturnFunction = new string[3];
 
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[i]["disciplina"].ToString());
-            e.Row.Cells[1].Text = vetorReturnFunction[0]; //POSIÇÃO 0 RECEBE CURSO/TURNO
-            e.Row.Cells[2].Text = vetorReturnFunction[1]; // POSIÇÃO 1 RECEBE SEMESTRE
-            e.Row.Cells[3].Text = vetorReturnFunction[2]; // POSIÇÃO 2 RECEBE DISCIPLINA
-            i++;
-        }
-
         //e = tdos eventos relacionados a um componente, pega a linha e verifica se é do tipo dados
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            //se for mãe
+            vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[i]["disciplina"].ToString());
+            e.Row.Cells[1].Text = vetorReturnFunction[0];
+            e.Row.Cells[2].Text = vetorReturnFunction[1];
+            e.Row.Cells[3].Text = vetorReturnFunction[2];
+            i++;
+
+            //SE FOR MÃE
             if (e.Row.Cells[4].Text.Equals("MAE"))
             {
-                //ícone da estrelinha
+                //ÍCONE DA ESTRELINHA
                 e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-star'></span>";
             }
             else
             {
-                //ícone de tracinho
+                //ÍCONE DE TRACINHO
                 e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-minus'></span>";
             }
+        }   
 
+        
         }
-    }
 
     //EVENTO DO BOTÃO CONFIRMAR: PEGA LINHA SELECIONADA E ARMAZENA OS DADOS DA MESMA
     protected void btnConfirmar_Click(object sender, EventArgs e)
@@ -137,21 +135,30 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             cal = Calendario.SelectbyAtual();
             dsEnvolvidas = Professor.SelectAllPIsbyCalendario(cal.Codigo, cal.AnoSemestreAtual);
 
+            // CRIA LISTAS REFERENTE AOS CÓDIGOS, ATRIBUIÇÕES, NOMES E MÃES DE DISCIPLINAS ENVOLVIDAS PARA POSTERIORMENTE
+            // SEREM COLOCADAS EM SESSÕES
             string[] dadosDisc = new string[4];
             List<string> codEnvolvidas = new List<string>();
             List<string> atrEnvolvidas = new List<string>();
             List<string> nomeEnvolvidas = new List<string>();
-            List<string> maeEnvolvidas = new List<string>();
+            List<string> maeEnvolvidas = new List<string>(); // MÃE OU FILHA
+
+            string projeto = "PROJETO";
+
             for (int i = 0; i < dsEnvolvidas.Tables[0].Rows.Count; i++)
             {
                 dadosDisc = Funcoes.tratarDadosProfessor(dsEnvolvidas.Tables[0].Rows[i][1].ToString());
+                // VERIFICA TODAS AS MATÉRIAS QUE PERTENCEM A ESSE PI
                 if ((dadosDisc[0] == Session["Curso"].ToString()) && (dadosDisc[1] == Session["Semestre"].ToString()))
                 {
+                    if (!dadosDisc[2].Contains(projeto))
+                    {
                     codEnvolvidas.Add(dadosDisc[3]);
                     atrEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][0].ToString());
                     nomeEnvolvidas.Add(dadosDisc[2]);
                     maeEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][2].ToString());
                 }
+            }
             }
 
             string[] vetCodEnvolvidas = codEnvolvidas.ToArray();
@@ -163,10 +170,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             string[] vetMaeEnvolvidas = maeEnvolvidas.ToArray();
             Session["maeEnvolvidas"] = vetMaeEnvolvidas;
 
-
-
             // CARREGAR SESSOES
-
             Session["codPIAtivo"] = Funcoes.SelectCodPIAtivoByAtr(codAtr);
             if (Convert.ToInt32(Session["codPIAtivo"]) != -2 && Convert.ToInt32(Session["codPIAtivo"]) != 0)
             {
