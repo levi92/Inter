@@ -10,6 +10,13 @@ using System.Web;
         private int pri_codigo;
         private Semestre_Ano san_codigo;
         private int pri_semestre;
+        private string cur_nome;
+
+        public string Cur_nome
+        {
+            get { return cur_nome; }
+            set { cur_nome = value; }
+        }
 
         public int Pri_semestre
         {
