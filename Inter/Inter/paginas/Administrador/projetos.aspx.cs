@@ -288,6 +288,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
         Grupo gru = Grupo_DB.Select(gru_codigo);
         string[] disciplina = new string[0];
         string[] aluno = new string[0];
+        string[] professor = new string[0];
 
         lblNomeGrupo.Text = gru.Gru_nome_projeto;
         /*lblCursoModal.Text =;
@@ -301,14 +302,21 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
         lblSemestre.Text = vetorReturnFunction[1] + "º Semestre";
 
         int qtdPIs = ds.Tables[0].Rows.Count; //pega a quantidade total de linhas na tabela do dataset e armazena na variável qtdPIs
+        string[] cursos = new string[0]; //instancia um novo array cursos com tamanho indefinido
+        cursos = Funcoes.tratarDadosCursosComPI(ds, qtdPIs);
+
         //instancia um novo array cursos com tamanho indefinido
-        disciplina = Funcoes.tratarDadosCursosComPI(ds, qtdPIs); //usa um método para tratar o nome dos cursos e trazer somente um de cada
+        //disciplina = Funcoes.tratarDadosCursosComPI(ds, qtdPIs); //usa um método para tratar o nome dos cursos e trazer somente um de cada
+        //professor = Funcoes.tratarDadosNomeProfessores(ds, qtdPIs);
         //aluno = Funcoes.NomeAlunosByMatricula();
-        for (int i = 0; i < qtdPIs; i++)
+        /*for (int i = 0; i < qtdPIs; i++)
         {
             lstDisciplinas.DataSource = disciplina;
             lstDisciplinas.DataBind();
-        }
+
+            lstProfessores.DataSource = professor;
+            lstProfessores.DataBind();
+        }*/
     }
 
     protected void gdvProjetos_RowDeleting(object sender, GridViewDeleteEventArgs e)

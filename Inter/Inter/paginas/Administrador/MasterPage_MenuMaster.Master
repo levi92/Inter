@@ -18,7 +18,7 @@
             <hr />
             <ul>
                  <li>
-                    <asp:HyperLink ID="icone65" runat="server" NavigateUrl="~/Auditoria" ClientIDMode="Static" Enabled="True">
+                    <asp:HyperLink ID="icone1" runat="server" NavigateUrl="~/Auditoria" ClientIDMode="Static" Enabled="True">
                         <span class="glyphicon glyphicon-list-alt"></span>&nbsp Auditoria</asp:HyperLink></li>
                 <li>
                     <asp:HyperLink ID="icone2" runat="server" NavigateUrl="~/Solicitacoes" ClientIDMode="Static" Enabled="True">

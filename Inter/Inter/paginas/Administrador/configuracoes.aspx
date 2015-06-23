@@ -76,7 +76,8 @@
 
 
                             </asp:GridView>
-                            <asp:Label ID="lblQtdRegistros" runat="server"></asp:Label><br />
+                            
+                            <asp:Label ID="lblQtdRegistros" runat="server"></asp:Label><br /><br />
                             <asp:Button ID="btnCriarBackup" runat="server" CssClass="btn btn-default btn-lg" Text="Criar Backup" OnClick="btnCriarBackup_Click" />
 
 

@@ -9,6 +9,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Data;
 using System.Net;
+using System.Security.Principal;
+using System.Security.AccessControl;
 using System.Configuration;
 
 public partial class paginas_Admin_configuracoes : System.Web.UI.Page
@@ -16,7 +18,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
     protected void Page_PreInit(object sender, EventArgs e)
     {
         // Se sessão estiver nula redireciona para o bloqueio Url
-        if (Session["login"] == null)
+        if ((Session["login"] == null) || (Session["menu"].ToString() != "master"))
         {
             Response.Redirect("~/BloqueioUrl");
         }
@@ -28,7 +30,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        
 
         //ScriptManager1.RegisterPostBackControl(lkbConfirmaSenha);
         //ScriptManager1.RegisterAsyncPostBackControl(lkbConfirmaSenha);
@@ -42,6 +44,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 
     protected void CarregaGrid()
     {
+        lblQtdRegistros.Style.Remove("color");
         string caminho = pegaDirBackup();
         string[] arquivos = Funcoes.tratarArquivosBackup(caminho);
         int qtd = arquivos.Length;
@@ -53,7 +56,8 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
         }
         else
         {
-            lblQtdRegistros.Text = "Nenhum backup foi encontrado! Seu sistema está em risco! Crie um backup AGORA!";
+            lblQtdRegistros.Style.Add("color", "red");
+            lblQtdRegistros.Text = "<span class='glyphicon glyphicon-warning-sign'></span>&nbsp" + "Nenhum backup foi encontrado! Seu sistema está em risco! Crie um backup AGORA!";
         }
 
     }
@@ -71,6 +75,26 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
         if (!Directory.Exists(directory)) //se o diretório não existe
         {
             Directory.CreateDirectory(directory); //cria o diretório
+            // Pega a segurança atual da pasta
+
+           /* DirectorySecurity oDirSec = Directory.GetAccessControl(sTmpPath);
+
+            // Define o usuário Everyone (Todos)
+            SecurityIdentifier sid = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+            //SecurityIdentifier sid = new SecurityIdentifier(WellKnownSidType.AuthenticatedUserSid, null);
+            NTAccount oAccount = sid.Translate(typeof(NTAccount)) as NTAccount;
+
+            oDirSec.PurgeAccessRules(oAccount);
+
+            FileSystemAccessRule fsAR = new FileSystemAccessRule(oAccount,
+                                                                 FileSystemRights.Modify,
+                                                                 InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit,
+                                                                 PropagationFlags.None,
+                                                                 AccessControlType.Allow);
+
+            // Atribui a regra de acesso alterada
+            oDirSec.SetAccessRule(fsAR);
+            Directory.SetAccessControl(sTmpPath, oDirSec);*/
         }
 
         string caminho = (Request.PhysicalApplicationPath + "Backup\\"); //pega o caminho do diretório (com \\ pois estamos pegando o diretório "aberto") ->>>> tirar dúvida sobre isso, é isso mesmo?
@@ -82,11 +106,13 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
     {
 
         //string database = "inter";
-        string constring = ConfigurationManager.AppSettings["strConexao"];
-        string database = constring.Substring(9, 5);
-        string nome_arquivo = "bkp_" + database + "_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".sql";
+        string constring = ConfigurationManager.AppSettings["strConexao"]; //pega os dados do banco do Web.config
+        string database = constring.Substring(9, 5); //corta a string dos dados do banco e pega somente o nome do banco (posicao 9, inter = 5 letras)
+        string nome_arquivo = "bkp_" + database + "_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".sql"; //faz o nome do arquivo baseado no nome do banco e data local
         string directory = (Request.PhysicalApplicationPath + "Backup");
         string file = (directory + "\\" + nome_arquivo);
+
+
         using (MySqlConnection conn = new MySqlConnection(constring))
         {
             using (MySqlCommand cmd = new MySqlCommand())
@@ -97,7 +123,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                     conn.Open();
                     try
                     {
-                        mb.ExportToFile(file);
+                    mb.ExportToFile(file);
 
                         lblBackup.Text = "Backup efetuado com sucesso!";
                     }
@@ -191,7 +217,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                 }
                 else if (acao == "Restauracao")
                 {
-                    string constring = ConfigurationManager.AppSettings["strConexao"];
+                    string constring = ConfigurationManager.AppSettings["strConexao"]; //pega os dados do banco do Web.config
                     string database = constring.Substring(9, 5);
                     string nome_arquivo = "bkpSec_" + database + "_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".sql";
                     string directory = (Request.PhysicalApplicationPath + "Backup");
@@ -207,7 +233,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                                 conn.Open();
                                 try
                                 {
-                                    mb.ExportToFile(file);
+                                mb.ExportToFile(file);
                                     lblMsgModal.Style.Add("color", "green");
                                     lblMsgModal.Text = "Backup de segurança efetuado com sucesso!";
                                 }
@@ -215,13 +241,13 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                                 {
                                     lblMsgModal.Style.Add("color", "#960d10");
                                     lblMsgModal.Text = "Erro ao criar Backup de Segurança! Cancelando a Restauração;";
-                                    conn.Close();
+                                conn.Close();
                                     System.Threading.Thread.Sleep(1000);
                                     Response.Redirect("~/Configuracoes");
-                                }
-                                conn.Close();
                             }
+                                conn.Close();
                         }
+                    }
                     }
                     CarregaGrid();
                     UpdatePanelBkp.Update();
@@ -232,13 +258,13 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 
 
                     using (MySqlConnection conn = new MySqlConnection(constring))
-                    {
-                        using (MySqlCommand cmd = new MySqlCommand())
                         {
-                            using (MySqlBackup mb = new MySqlBackup(cmd))
+                            using (MySqlCommand cmd = new MySqlCommand())
                             {
-                                cmd.Connection = conn;
-                                conn.Open();
+                                using (MySqlBackup mb = new MySqlBackup(cmd))
+                                {
+                                    cmd.Connection = conn;
+                                    conn.Open();
                                 try
                                 {
 
@@ -251,13 +277,13 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                                     lblMsgModal2.Style.Add("color", "#960d10");
                                     lblMsgModal2.Text = "Erro ao restaurar Backup";
                                 }
-                                conn.Close();
+                                    conn.Close();
+                                }
                             }
-                        }
                     }
 
+                    }
                 }
-            }
 
             else
             {

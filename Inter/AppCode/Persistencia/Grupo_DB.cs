@@ -134,6 +134,29 @@ namespace AppCode.Persistencia
             return ds;
         }
 
+        //SELECT GRUPOS PARA A PAGINA DE CONSULTAR PI
+        public static DataSet SelectAllGruposAtual(int codPi, int atrCod)
+        {
+            DataSet ds = new DataSet();
+            IDbConnection objConnection;
+            IDbCommand objCommand;
+            IDataAdapter objDataAdapter;
+            objConnection = Mapped.Connection();
+            objCommand = Mapped.Command("SELECT GR.GRU_CODIGO, GR.GRU_NOME_PROJETO FROM GRU_GRUPO GR INNER JOIN PRI_PROJETO_INTER PR USING(PRI_CODIGO) INNER JOIN API_ATRIBUICAO_PI AP USING(PRI_CODIGO) WHERE PR.PRI_CODIGO = ?pri_codigo AND AP.ADI_CODIGO = ?adi_codigo;", objConnection);
+            objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", codPi));
+            objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", atrCod));
+            objDataAdapter = Mapped.Adapter(objCommand);
+            objDataAdapter.Fill(ds);
+            objConnection.Close();
+            objCommand.Dispose();
+            objConnection.Dispose();
+            if (ds.Tables[0].Rows.Count == 0)
+            {
+                ds = null;
+            }
+            return ds;
+        }
+
         public static int UpdateGrupoAvaliado(Grupo gru)
         {
             int retorno = 0;
