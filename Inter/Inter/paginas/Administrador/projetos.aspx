@@ -81,9 +81,14 @@
                             <AlternatingRowStyle CssClass="alt" />
 
                             <Columns>
-                                <asp:TemplateField HeaderText="Codigo" Visible="false">
+                                <asp:TemplateField HeaderText="Codigo do Grupo">
                                     <ItemTemplate>
                                         <asp:Label ID="lblCodigo" Text='<%#Eval ("gru_codigo") %>' runat="server"></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Codigo do PI">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblCodigoPI" Text='<%#Eval ("PRI_CODIGO") %>' runat="server"></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Nome do Projeto">
@@ -110,6 +115,7 @@
                                         <asp:LinkButton ID="lkbHabilitar" CssClass="glyphicon glyphicon-pencil" Font-Size="1.5em" runat="server" CommandName="projHabilitar"></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                
 
 
                             </Columns>
@@ -147,9 +153,9 @@
                                         <asp:Label ID="lblAlunos" Style="width:auto" runat="server" CssClass="control-label col-sm-2" Text="Alunos"></asp:Label>
                                         <br />
                                         <br />
-                                        <asp:ListBox ID="lstDisciplinas" runat="server" Style="margin-left:15px; width:65px;"></asp:ListBox>
+                                        <asp:ListBox ID="lstDisciplinas" runat="server" Style="margin-left:15px; width:auto;"></asp:ListBox>
                                         <asp:ListBox ID="lstProfessores" runat="server" Style="margin-left:25px; width:70px;"></asp:ListBox>
-                                        <asp:ListBox ID="lstAlunos" runat="server" Style="margin-left:25px; width:65px;"></asp:ListBox>
+                                        <asp:ListBox ID="lstAlunos" runat="server" Style="margin-left:25px; width:200px;"></asp:ListBox>
                                     </div>
                                 </div>
 

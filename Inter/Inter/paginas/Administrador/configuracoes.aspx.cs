@@ -211,8 +211,8 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
     static int c = 1;
     protected void lkbConfirmaSenha_Click(object sender, EventArgs e)
     {
-        string senha = txtSenha.Text.ToString();
-        Perfil perfil = new Perfil();
+        string senha = txtSenha.Text;
+        //Perfil perfil = new Perfil();
 
         if (!String.IsNullOrEmpty(senha))
         {
@@ -253,7 +253,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                             {
                                 cmd.Connection = conn;
                                 conn.Open();
-                                mb.ExportToFile(file);
+                                mb.ExportToFile(file); //cria o backup de segurança
                                 conn.Close();
                             }
                         }
@@ -270,6 +270,8 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 
                     if (arquivos[0] == nome_arquivo.Replace(".sql", "")) // Verifica se o Backup foi realmente criado
                     {
+
+
                         lblMsg.Text = "Backup de segurança efetuado com sucesso!";
 
                         using (MySqlConnection conn = new MySqlConnection(constring1))

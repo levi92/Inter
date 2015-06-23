@@ -156,7 +156,7 @@ public class Funcoes_DB
         IDbCommand objCommand;
         IDataAdapter objDataAdapter;
         objConnection = Mapped.Connection();
-        objCommand = Mapped.Command("SELECT G.GRU_CODIGO, G.GRU_NOME_PROJETO, CONCAT(S.SAN_ANO, '-', S.SAN_SEMESTRE) AS SAN, G.GRU_FINALIZADO FROM SAN_SEMESTRE_ANO S INNER JOIN PRI_PROJETO_INTER P ON (S.SAN_CODIGO = P.SAN_CODIGO)" + 
+        objCommand = Mapped.Command("SELECT G.GRU_CODIGO, P.PRI_CODIGO, G.GRU_NOME_PROJETO, CONCAT(S.SAN_ANO, '-', S.SAN_SEMESTRE) AS SAN, G.GRU_FINALIZADO FROM SAN_SEMESTRE_ANO S INNER JOIN PRI_PROJETO_INTER P ON (S.SAN_CODIGO = P.SAN_CODIGO)" + 
         "INNER JOIN GRU_GRUPO G ON (P.PRI_CODIGO = G.PRI_CODIGO);", objConnection);
         objDataAdapter = Mapped.Adapter(objCommand);
         objDataAdapter.Fill(ds);
@@ -174,7 +174,7 @@ public class Funcoes_DB
         IDbCommand objCommand;
         IDataAdapter objDataAdapter;
         objConnection = Mapped.Connection();
-        objCommand = Mapped.Command("select gru.GRU_NOME_PROJETO, concat(s.san_ano, '-', s.san_semestre) as SAN, gru.GRU_FINALIZADO from gru_grupo gru"+ 
+        objCommand = Mapped.Command("select gru.GRU_NOME_PROJETO, concat(s.san_ano, '-', s.san_semestre) as SAN, gru.GRU_FINALIZADO, pri1.pri_codigo from gru_grupo gru" + 
         " inner join pri_projeto_inter pri1 on pri1.pri_codigo = gru.pri_codigo"+
         " inner join san_semestre_ano s on s.san_codigo = pri1.san_codigo"+
         " inner join pri_projeto_inter pri2 on pri2.san_codigo = s.san_codigo"+

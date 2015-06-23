@@ -58,7 +58,26 @@ namespace AppCode.Persistencia
             return retorno;
         }
 
-
+        public static DataSet SelectDisciplinaByCod(int codigo)
+        {
+            DataSet ds = new DataSet();
+                IDbConnection objConnection;
+                IDbCommand objCommand;
+                IDataAdapter objDataAdapter;
+                objConnection = Mapped.Connection();
+                objCommand = Mapped.Command("select api.DIS_CODIGO from pri_projeto_inter pri inner join api_atribuicao_pi api using(pri_codigo) where pri_codigo = ?pri_codigo;", objConnection);
+                objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", codigo));
+                objDataAdapter = Mapped.Adapter(objCommand);
+                objDataAdapter.Fill(ds);
+                objConnection.Close();
+                objCommand.Dispose();
+                objConnection.Dispose();
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    ds = null;
+                }
+                return ds;
+        }
 
     }
 }
