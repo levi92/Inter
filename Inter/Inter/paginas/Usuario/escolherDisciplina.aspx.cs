@@ -42,16 +42,18 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     {
         Professor prof = new Professor();
         prof = (Professor)Session["Professor"];
+        //DATASET VAI RECEBER VALORES QUE JA FORAM CARREGADOS OU NÃO
         DataSet ds = (DataSet)Session["DataSetCalendarioAndProfessor"];
         if (Session["DataSetCalendarioAndProfessor"] == null)
         {
             Calendario cal = new Calendario();
             cal = Calendario.SelectbyAtual();
+            // DATASET VAI RECEBER TODAS AS DISCIPLINAS DO PROFESSOR
             ds = Professor.SelectAllPIsbyCalendarioAndProfessor(cal.AnoSemestreAtual, cal.Codigo, prof.Matricula);
             Session["DataSetCalendarioAndProfessor"] = ds;
         }
 
-        int qtd = ds.Tables[0].Rows.Count; //QTD DE LINHAS DO DS
+        int qtd = ds.Tables[0].Rows.Count; //QTD DE LINHAS DO DATASET
         //SE QTD FOR MAIOR QUE ZERO, OU SEJA, SE TIVER DADOS NO DATA SET
         if (qtd > 0)
         {
@@ -72,9 +74,9 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[i]["disciplina"].ToString());
-            e.Row.Cells[1].Text = vetorReturnFunction[0];
-            e.Row.Cells[2].Text = vetorReturnFunction[1];
-            e.Row.Cells[3].Text = vetorReturnFunction[2];
+            e.Row.Cells[1].Text = vetorReturnFunction[0]; //POSIÇÃO 0 RECEBE CURSO/TURNO
+            e.Row.Cells[2].Text = vetorReturnFunction[1]; // POSIÇÃO 1 RECEBE SEMESTRE
+            e.Row.Cells[3].Text = vetorReturnFunction[2]; // POSIÇÃO 2 RECEBE DISCIPLINA
             i++;
         }
 

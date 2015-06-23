@@ -18,7 +18,6 @@ namespace Inter.paginas.Usuario
         protected void btnSair_Click(object sender, EventArgs e)
         {
             Session.RemoveAll();
-
             Response.Redirect("~/Login");
         }
 
