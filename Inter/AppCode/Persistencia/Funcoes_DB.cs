@@ -178,7 +178,7 @@ public class Funcoes_DB
         IDbCommand objCommand;
         IDataAdapter objDataAdapter;
         objConnection = Mapped.Connection();
-        objCommand = Mapped.Command("select gru.GRU_NOME_PROJETO, concat(s.san_ano, '-', s.san_semestre) as SAN, gru.GRU_FINALIZADO, pri1.pri_codigo from gru_grupo gru" + 
+        objCommand = Mapped.Command("select gru.gru_codigo, pri1.pri_codigo, gru.GRU_NOME_PROJETO, pri1.cur_nome, pri1.pri_semestre, concat(s.san_ano, '-', s.san_semestre) as SAN, gru.GRU_FINALIZADO from gru_grupo gru" + 
         " inner join pri_projeto_inter pri1 on pri1.pri_codigo = gru.pri_codigo"+
         " inner join san_semestre_ano s on s.san_codigo = pri1.san_codigo"+
         " inner join pri_projeto_inter pri2 on pri2.san_codigo = s.san_codigo"+
