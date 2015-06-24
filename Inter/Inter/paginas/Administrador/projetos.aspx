@@ -83,7 +83,7 @@
                             <Columns>
                                 <asp:TemplateField HeaderText="Codigo do Grupo" Visible="false">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblCodigo" Text='<%#Eval ("gru_codigo") %>' runat="server"></asp:Label>
+                                        <asp:Label ID="lblCodigo" Text='<%#Eval ("GRU_CODIGO") %>' runat="server"></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Codigo do PI" Visible="false">
@@ -93,7 +93,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Nome do Projeto">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lblNome" Text='<%#Eval ("GRU_NOME_PROJETO") %>' runat="server" CommandName="verDetalhes" CommandArgument='<%#Eval ("GRU_CODIGO") %>' OnCommand="lblNome_Command"></asp:LinkButton>
+                                        <asp:LinkButton ID="lblNome" Text='<%#Eval ("GRU_NOME_PROJETO") %>' runat="server" CommandName="verDetalhes"></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Curso/Turno"><%--esse campo curso é pego no método RowDataBound no code behind--%>
@@ -156,15 +156,15 @@
                                         <asp:Label ID="lblStatusModal" Style="width:auto" runat="server" CssClass="control-label col-sm-2"></asp:Label>
                                         <br />
                                         <br />
-                                        <div id="Detalhes" Style="width:100%; text-align:center; ">
-                                        <asp:Label ID="lblDisciplinas" runat="server" Text="Disciplinas"></asp:Label>
-                                        <asp:Label ID="lblProfessores" runat="server" Text="Professores"></asp:Label>
+                                        <div id="Detalhes" Style="width:100%; text-align:center; margin-top:20px;">
+                                        <asp:Label ID="lblDisciplinas" Style="padding-right:100px" runat="server" Text="Disciplinas"></asp:Label>
+                                        <asp:Label ID="lblProfessores" Style="padding-right:100px" runat="server" Text="Professores"></asp:Label>
                                         <asp:Label ID="lblAlunos" runat="server" Text="Alunos"></asp:Label>
                                         <br />
                                         <br />
-                                        <asp:ListBox ID="lstDisciplinas" runat="server" Style="margin-left:15px; width:65px; "></asp:ListBox>
-                                        <asp:ListBox ID="lstProfessores" runat="server" Style="margin-left:25px; width:70px;"></asp:ListBox>
-                                        <asp:ListBox ID="lstAlunos" runat="server" Style="margin-left:25px; width:65px;"></asp:ListBox>
+                                        <asp:ListBox ID="lstDisciplinas" runat="server" Style="margin-left:10px; width:120px; height:150px;"></asp:ListBox>
+                                        <asp:ListBox ID="lstProfessores" runat="server" Style="margin-left:45px; width:120px; height:150px;"></asp:ListBox>
+                                        <asp:ListBox ID="lstAlunos" runat="server" Style="margin-left:45px; width:120px; height:150px;"></asp:ListBox>
                                         </div>
                                     </div>
                                 </div>

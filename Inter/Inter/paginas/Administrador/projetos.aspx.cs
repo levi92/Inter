@@ -31,6 +31,13 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
             //CarregaGridEx();
             CarregaGrid();
             DataSet dsSem = Semestre_Ano_DB.SelectSemestreAno();
+            DataSet dsPIsFatec = Curso.SelecionarTodos();
+
+            ddlCurso.DataSource = dsPIsFatec.Tables[0];
+            ddlCurso.DataTextField = "Sigla";
+            ddlCurso.DataValueField = "Codigo";
+            ddlCurso.DataBind();
+            ddlCurso.Items.Insert(0, new ListItem("Selecione", "0"));
 
             ddlSemestreAno.DataSource = dsSem;
             ddlSemestreAno.DataTextField = "concat(SAN_ANO,'-',SAN_SEMESTRE)";
@@ -59,7 +66,6 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
         DataSet dsPIsFatec = Curso.SelecionarTodos();
         gdvExemplo.DataSource = dsPIsFatec.Tables[0].DefaultView;
         gdvExemplo.DataBind();
-
     }
     private void CarregaGrid()
     {
@@ -143,22 +149,36 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
                 foreach (GridViewRow linha in gdvProjetos.Rows)//percorre cada linha da grid (obs: isso existe pelo campo de nome estar em outra tabela no BD da Fatec)
                 {
                     Professor prof = new Professor(); //instancia um novo professor
-                    Label lblNome = (Label)linha.FindControl("lblNome");//acha o label de matrícula da grid e liga a outro label
+                    Label lblCodigo = (Label)linha.FindControl("lblCodigo");
+                    LinkButton lblNome = (LinkButton)linha.FindControl("lblNome");//acha o label de matrícula da grid e liga a outro label
                     Label lblAno = (Label)linha.FindControl("lblAno"); //acha o label de Nome e liga a outro label
                     Label lblStatus = (Label)linha.FindControl("lblStatus");
                     Label lblCodigoPI = (Label)linha.FindControl("lblCodigoPI");
                     Label lblCurso = (Label)linha.FindControl("lblCurso");
-                    /*if (lblStatus.Text == "True")
+                    Label lblSemestreCurso = (Label)linha.FindControl("lblSemestreCurso");
+
+                    lblSemestreCurso.Text = lblSemestreCurso.Text + "º Semestre";
+
+                    bool valor = false;
+
+                    if (lblStatus.Text == "False") //verifica se o valor da coluna GRU_FINALIZADO é "false"
                     {
-                        lblStatus.Text = "Finalizado";
+                        lblStatus.Text = "Em andamento"; //se for, troca o "false" por "em andamento"
                     }
                     else
                     {
-                        lblStatus.Text = "Em andamento";
-                    }*/
-                    /*prof = Professor.SelectByCodigo(lblMatricula.Text); //o número de matrícula do label é usado para preencher o objeto professor usando o método de selecionar por código
-                    lblNome.Text = prof.Nome; //o label NomeAdmin da grid é preenchido utilizando o nome que está no objeto do professor (método get encapsulado)
-                    */
+                        lblStatus.Text = "Finalizado"; //se não for "false", troca por "finalizado"
+                    }
+
+                    if (lblStatus.Text == "Em andamento")
+                    {
+                        valor = true;
+                    }
+                    if (valor == true)
+                    {
+                        LinkButton botao = (LinkButton)linha.FindControl("lkbHabilitar");
+                        botao.Visible = false;
+                    }
                 }
             }
             else
@@ -346,13 +366,6 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
     }
 
     protected void btnCriarNovoCriterio_Click(object sender, EventArgs e)
-    {
-
-    }
-
-
-
-    protected void lblNome_Command(object sender, CommandEventArgs e)
     {
 
     }
