@@ -130,7 +130,7 @@ public partial class paginas_Usuario_consultarPi : System.Web.UI.Page
             table.CssClass = "tableGrupos";
             table.Style.Add("width", "45%");
             lbl = new Label();
-            lbl.Text = "<br/> <hr width:'80%' color:'#000' >";
+            lbl.Text = "<br/> <hr>";
             pnlGrupos.Controls.Add(lbl);
 
             TableHeaderRow thr = new TableHeaderRow();
