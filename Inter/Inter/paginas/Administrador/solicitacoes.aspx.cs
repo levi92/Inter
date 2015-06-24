@@ -58,10 +58,10 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
 
         //se qtd for maior que zero, ou seja, se tiver dados no data set
+        gdvRequerimentoAndamento.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+        gdvRequerimentoAndamento.DataBind(); //preenche o grid view com os dados
         if (qtd > 0)
         {
-            gdvRequerimentoAndamento.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
-            gdvRequerimentoAndamento.DataBind(); //preenche o grid view com os dados
             lblQtdRegistroAnd.Text = "Foram encontrados " + qtd + " Solicitações";
         }
         else
@@ -75,10 +75,10 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
 
         //se qtd for maior que zero, ou seja, se tiver dados no data set
+        gdvRequerimentoFinalizado.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+        gdvRequerimentoFinalizado.DataBind(); //preenche o grid view com os dados
         if (qtd > 0)
         {
-            gdvRequerimentoFinalizado.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
-            gdvRequerimentoFinalizado.DataBind(); //preenche o grid view com os dados
             lblQtdRegistroFin.Text = "Foram encontrados " + qtd + " Solicitações";
         }
         else

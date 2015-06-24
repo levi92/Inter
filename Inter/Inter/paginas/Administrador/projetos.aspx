@@ -77,12 +77,12 @@
                             <AlternatingRowStyle CssClass="alt" />
 
                             <Columns>
-                                <asp:TemplateField HeaderText="Codigo do Grupo" Visible="false"> <!--Esta coluna fica invisivel, pois exibe apenas o codigo do grupo -->
+                                <asp:TemplateField HeaderText="Codigo do Grupo" Visible="false"> 
                                     <ItemTemplate>
                                         <asp:Label ID="lblCodigo" Text='<%#Eval ("GRU_CODIGO") %>' runat="server"></asp:Label> <!--EVAL pega o valor da coluna especificada no datasource-->
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Codigo do PI" Visible="false"> <!--Esta coluna fica invisivel, pois exibe apenas o codigo do PI -->
+                                <asp:TemplateField HeaderText="Codigo do PI" Visible="false"> 
                                     <ItemTemplate>
                                         <asp:Label ID="lblCodigoPI" Text='<%#Eval ("PRI_CODIGO") %>' runat="server"></asp:Label> <!--EVAL pega o valor da coluna especificada no datasource-->
                                     </ItemTemplate>
