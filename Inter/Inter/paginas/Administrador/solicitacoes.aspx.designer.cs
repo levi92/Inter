@@ -57,6 +57,15 @@ public partial class paginas_Admin_solicitacoes {
     protected global::System.Web.UI.WebControls.Label lblMsgCategoria;
     
     /// <summary>
+    /// lblMsgStatus control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgStatus;
+    
+    /// <summary>
     /// lblMsgProfessor control.
     /// </summary>
     /// <remarks>
@@ -127,42 +136,6 @@ public partial class paginas_Admin_solicitacoes {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.LinkButton btnNovaMsg;
-    
-    /// <summary>
-    /// dropDownListTipoTicket control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlSelect dropDownListTipoTicket;
-    
-    /// <summary>
-    /// New control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label New;
-    
-    /// <summary>
-    /// vsNovoTicket control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ValidationSummary vsNovoTicket;
-    
-    /// <summary>
-    /// btnCriarNovoTicket control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnCriarNovoTicket;
     
     /// <summary>
     /// UpdatePanelAtivados control.
@@ -244,103 +217,4 @@ public partial class paginas_Admin_solicitacoes {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblQtdRegistroFin;
-    
-    /// <summary>
-    /// UpdatePanelModalNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.UpdatePanel UpdatePanelModalNovoRequerimento;
-    
-    /// <summary>
-    /// lblAssuntoNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblAssuntoNovoRequerimento;
-    
-    /// <summary>
-    /// txtAssunto control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtAssunto;
-    
-    /// <summary>
-    /// rfvAssuntoNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAssuntoNovoRequerimento;
-    
-    /// <summary>
-    /// lblCategoriaNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblCategoriaNovoRequerimento;
-    
-    /// <summary>
-    /// txtCategoria control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList txtCategoria;
-    
-    /// <summary>
-    /// rfvCategoriaNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCategoriaNovoRequerimento;
-    
-    /// <summary>
-    /// lblMsg control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMsg;
-    
-    /// <summary>
-    /// vsNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ValidationSummary vsNovoRequerimento;
-    
-    /// <summary>
-    /// btnCancelarNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnCancelarNovoRequerimento;
-    
-    /// <summary>
-    /// btnCriarNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnCriarNovoRequerimento;
 }

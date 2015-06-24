@@ -79,13 +79,14 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     // *******************************************************************************
     public static List<int> listAtrDisciplinas = new List<int>();
     public static List<int> listCodDisciplinas = new List<int>();
+    public static List<string> listNomeProfEnvolvidos = new List<string>();
     private void CarregarDisciplinasEnvolvidas(){    
 
         string[] nomeEnvolvidas = (string[])Session["nomeEnvolvidas"];
         string[] maeEnvolvidas = (string[])Session["maeEnvolvidas"];
         string[] atrEnvolvidas = (string[])Session["atrEnvolvidas"];
         string[] codEnvolvidas = (string[])Session["codEnvolvidas"];
-
+        string[] nomeProfEnvolvidos = (string[])Session["nomeProfEnvolvidos"];
 
         Table tableDisciplina = new Table();
         tableDisciplina.CssClass = "tableDisciplinasEnvolvidas";
@@ -149,6 +150,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                         cell.Controls.Add(lblCodigoDisciplina);
                         listAtrDisciplinas.Add(Convert.ToInt32(lblCodigoDisciplina.Text));
                         listCodDisciplinas.Add(Convert.ToInt32(codEnvolvidas[i]));
+                        listNomeProfEnvolvidos.Add(nomeProfEnvolvidos[i]);
                     }
                     rows.Cells.Add(cell);                
             }
@@ -917,6 +919,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         Projeto_Inter pi = new Projeto_Inter();
         pi.Pri_codigo = Convert.ToInt32(lblCodigoPiAut.Text);
         pi.Pri_semestre = Convert.ToInt32(Session["semestre"]);
+        pi.Cur_nome = Session["curso"].ToString();
         Semestre_Ano san = new Semestre_Ano();
         san = Semestre_Ano_DB.Select();
         pi.San_codigo = san;
@@ -942,6 +945,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
         int[] atrDisciplina = listAtrDisciplinas.ToArray();
         int[] codDisciplina = listCodDisciplinas.ToArray();
+        string[] nomeProf = listNomeProfEnvolvidos.ToArray();
         string sqlInsertAtribuicaoPI = "";
         for (int i = 0; i < atrDisciplina.Length; i++)
         {
@@ -949,7 +953,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
             atr.Adi_codigo = atrDisciplina[i];
             atr.Pri_codigo = pi;
             atr.Dis_codigo = codDisciplina[i];
-            sqlInsertAtribuicaoPI += "("+atr.Pri_codigo.Pri_codigo+","+atr.Adi_codigo+","+atr.Dis_codigo+"),";
+            atr.Pro_nome = nomeProf[i];
+            sqlInsertAtribuicaoPI += "("+atr.Pri_codigo.Pri_codigo+","+atr.Adi_codigo+","+atr.Dis_codigo+",'"+atr.Pro_nome+"'),";
         }
         Atribuicao_PI_DB.Insert(sqlInsertAtribuicaoPI.Substring(0,sqlInsertAtribuicaoPI.Length-1));
 

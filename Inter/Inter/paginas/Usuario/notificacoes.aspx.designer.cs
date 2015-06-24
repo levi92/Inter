@@ -57,6 +57,15 @@ public partial class paginas_Usuario_notificacoes {
     protected global::System.Web.UI.WebControls.Label lblMsgCategoria;
     
     /// <summary>
+    /// lblMsgStatus control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgStatus;
+    
+    /// <summary>
     /// lblMsgProfessor control.
     /// </summary>
     /// <remarks>
@@ -228,33 +237,6 @@ public partial class paginas_Usuario_notificacoes {
     protected global::System.Web.UI.UpdatePanel UpdatePanelModalNovoRequerimento;
     
     /// <summary>
-    /// lblAssuntoNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblAssuntoNovoRequerimento;
-    
-    /// <summary>
-    /// txtAssunto control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtAssunto;
-    
-    /// <summary>
-    /// rfvAssuntoNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAssuntoNovoRequerimento;
-    
-    /// <summary>
     /// lblCategoriaNovoRequerimento control.
     /// </summary>
     /// <remarks>
@@ -280,6 +262,33 @@ public partial class paginas_Usuario_notificacoes {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCategoriaNovoRequerimento;
+    
+    /// <summary>
+    /// lblAssuntoNovoRequerimento control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblAssuntoNovoRequerimento;
+    
+    /// <summary>
+    /// txtAssunto control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtAssunto;
+    
+    /// <summary>
+    /// rfvAssuntoNovoRequerimento control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAssuntoNovoRequerimento;
     
     /// <summary>
     /// lblMsg control.

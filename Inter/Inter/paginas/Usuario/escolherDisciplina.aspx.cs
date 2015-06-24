@@ -42,16 +42,18 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
     {
         Professor prof = new Professor();
         prof = (Professor)Session["Professor"];
+        //DATASET VAI RECEBER VALORES QUE JA FORAM CARREGADOS OU NÃO
         DataSet ds = (DataSet)Session["DataSetCalendarioAndProfessor"];
         if (Session["DataSetCalendarioAndProfessor"] == null)
         {
             Calendario cal = new Calendario();
             cal = Calendario.SelectbyAtual();
+            // DATASET VAI RECEBER TODAS AS DISCIPLINAS DO PROFESSOR
             ds = Professor.SelectAllPIsbyCalendarioAndProfessor(cal.AnoSemestreAtual, cal.Codigo, prof.Matricula);
             Session["DataSetCalendarioAndProfessor"] = ds;
         }
 
-        int qtd = ds.Tables[0].Rows.Count; //QTD DE LINHAS DO DS
+        int qtd = ds.Tables[0].Rows.Count; //QTD DE LINHAS DO DATASET
         //SE QTD FOR MAIOR QUE ZERO, OU SEJA, SE TIVER DADOS NO DATA SET
         if (qtd > 0)
         {
@@ -69,6 +71,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
         ds = (DataSet)Session["DataSetCalendarioAndProfessor"];
         string[] vetorReturnFunction = new string[3];
 
+        //e = tdos eventos relacionados a um componente, pega a linha e verifica se é do tipo dados
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[i]["disciplina"].ToString());
@@ -76,25 +79,22 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             e.Row.Cells[2].Text = vetorReturnFunction[1];
             e.Row.Cells[3].Text = vetorReturnFunction[2];
             i++;
-        }
 
-        //e = tdos eventos relacionados a um componente, pega a linha e verifica se é do tipo dados
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            //se for mãe
+            //SE FOR MÃE
             if (e.Row.Cells[4].Text.Equals("MAE"))
             {
-                //ícone da estrelinha
+                //ÍCONE DA ESTRELINHA
                 e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-star'></span>";
             }
             else
             {
-                //ícone de tracinho
+                //ÍCONE DE TRACINHO
                 e.Row.Cells[4].Text = "<span class='glyphicon glyphicon-minus'></span>";
             }
+        }   
 
+        
         }
-    }
 
     //EVENTO DO BOTÃO CONFIRMAR: PEGA LINHA SELECIONADA E ARMAZENA OS DADOS DA MESMA
     protected void btnConfirmar_Click(object sender, EventArgs e)
@@ -142,6 +142,7 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             List<string> atrEnvolvidas = new List<string>();
             List<string> nomeEnvolvidas = new List<string>();
             List<string> maeEnvolvidas = new List<string>(); // MÃE OU FILHA
+            List<string> nomeProf = new List<string>();
 
             string projeto = "PROJETO";
 
@@ -153,12 +154,13 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
                 {
                     if (!dadosDisc[2].Contains(projeto))
                     {
-                        codEnvolvidas.Add(dadosDisc[3]);
-                        atrEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][0].ToString());
-                        nomeEnvolvidas.Add(dadosDisc[2]);
-                        maeEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][2].ToString());
-                    }                    
+                    codEnvolvidas.Add(dadosDisc[3]);
+                    atrEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][0].ToString());
+                    nomeEnvolvidas.Add(dadosDisc[2]);
+                    maeEnvolvidas.Add(dsEnvolvidas.Tables[0].Rows[i][2].ToString());
+                    nomeProf.Add(dadosDisc[4]);
                 }
+            }
             }
 
             string[] vetCodEnvolvidas = codEnvolvidas.ToArray();
@@ -169,6 +171,8 @@ public partial class paginas_Usuario_escolherDisciplina : System.Web.UI.Page
             Session["nomeEnvolvidas"] = vetNomeEnvolvidas;
             string[] vetMaeEnvolvidas = maeEnvolvidas.ToArray();
             Session["maeEnvolvidas"] = vetMaeEnvolvidas;
+            string[] vetNomeProf = nomeProf.ToArray();
+            Session["nomeProfEnvolvidos"] = vetNomeProf;
 
             // CARREGAR SESSOES
             Session["codPIAtivo"] = Funcoes.SelectCodPIAtivoByAtr(codAtr);

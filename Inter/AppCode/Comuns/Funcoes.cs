@@ -152,8 +152,6 @@ namespace Inter.Funcoes
             vetReturn[3] = codDisc;
             vetReturn[4] = nome_professor;
             
-
-
             return vetReturn;
         }
 
@@ -185,6 +183,19 @@ namespace Inter.Funcoes
             {
                 Disciplina dis = new Disciplina();
                 dis = Disciplina.SelectByCodigo(adiMatricula[i]);
+                materias[i] = dis.Nome;
+            }
+            return materias;
+        }
+
+        public static string[] DisciplinasByCodigo(DataSet codDisciplina) // Consulta projetos ADM
+        {
+            string[] materias = new string[codDisciplina.Tables[0].Rows.Count];
+            for (int i = 0; i < codDisciplina.Tables[0].Rows.Count; i++)
+            {
+                Disciplina dis = new Disciplina();
+                
+                dis = Disciplina.SelectByCodigo(codDisciplina.Tables[0].Rows[i]["dis_codigo"].ToString());
                 materias[i] = dis.Nome;
             }
             return materias;
@@ -339,7 +350,7 @@ namespace Inter.Funcoes
                 {
                     // Utilizando o CompareTo para comparar as string do vetor
                     // resultado -1 significa que arquivos[j] < arquivos[min]
-                    if (arquivos[j].CompareTo(arquivos[min]) != -1)
+                    if (arquivos[j].Replace("Sec","").CompareTo(arquivos[min].Replace("Sec","")) != -1)
                     {
                         min = j;
                     }

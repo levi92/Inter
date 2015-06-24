@@ -40,7 +40,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         {
             if (!IsPostBack)
             {
-                ddlFinalizarGrupos.DataSource = Session["GruposFinalizar"];
+                ddlFinalizarGrupos.DataSource = Session["GruposFinalizar"]; //(DataSet) conversão
                 ddlFinalizarGrupos.DataTextField = "GRU_NOME_PROJETO";
                 ddlFinalizarGrupos.DataValueField = "GRU_CODIGO";
                 ddlFinalizarGrupos.DataBind();
@@ -52,8 +52,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
                 {
                     Session["MediaGrupo"] = null;
                     CarregarGruposFinalizar(Convert.ToInt32(ddlFinalizarGrupos.SelectedValue));
-                    CriarTabelaMediasDisciplinas();
-                    
+                    CriarTabelaMediasDisciplinas();                    
 
                 }
             }
@@ -103,11 +102,8 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
                 if (i == 0) //COLUNA FOR IGUAL A 0
                 {
                     dr["Integrantes"] = nomesAlunos[j].ToString();
-                }
-                //else
-                //{
-                //    dr[nomesMaterias[i]] = Funcoes.CalcularMediaPonderadaAlunoDisciplinas(Convert.ToInt32(Session["codPIAtivo"]), codAlunos[j], Convert.ToInt32(atrDisciplinas[i]));
-                //}
+                    break;
+                }                
             }
             dt.Rows.Add(dr);
         }
@@ -124,9 +120,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
 
         int rowsCount = dt.Rows.Count;
         int colsCount = dt.Columns.Count;
-        Session["rowsCountFinalizar"] = rowsCount;
-        Session["colsCountFinalizar"] = colsCount;
-
+       
         TableHeaderRow thr = new TableHeaderRow();
         TableHeaderCell th = new TableHeaderCell();
         Label lblCabecalho = new Label();
@@ -232,7 +226,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         }
         if (cont == codEnvolvidas.Length)
         {
-            Session["MediaGrupo"] = (somaMedia / cont); 
+            Session["MediaGrupo"] = Math.Round((somaMedia / cont),1); 
             lblMediaGrupos.Text = Session["MediaGrupo"].ToString();
             lblMediaGrupos.Style.Add("color", "#960d10");
             lblMediaGrupos.Style.Add("font-size", "18px");

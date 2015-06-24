@@ -76,7 +76,7 @@
 
                             <ContentTemplate>
 
-                                <asp:GridView ID="gdvCriteriosAtivos" runat="server" CssClass="gridView" DataKeyNames="cge_codigo"
+                                <asp:GridView ID="gdvCriteriosAtivos" runat="server" CssClass="tableFinalizar" DataKeyNames="cge_codigo"
                                     AutoGenerateColumns="false" AllowSorting="true"
                                     AutoGenerateEditButton="false"
                                     OnRowUpdating="gdvCriterios_RowUpdating"
@@ -183,7 +183,7 @@
                                 <ContentTemplate>
 
 
-                                    <asp:GridView ID="gdvCriteriosDesativados" ClientIDMode="Static" runat="server" CssClass="gridView" DataKeyNames="cge_codigo"
+                                    <asp:GridView ID="gdvCriteriosDesativados" ClientIDMode="Static" runat="server" CssClass="tableFinalizar" DataKeyNames="cge_codigo"
                                         AutoGenerateColumns="false"
                                         AutoGenerateEditButton="false"
                                         OnRowUpdating="gdvCriteriosDesativados_RowUpdating">

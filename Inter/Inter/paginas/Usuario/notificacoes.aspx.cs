@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Inter.Funcoes;
 using System.Data;
-
+using Interdisciplinar;
 
 //Se usar um namespace aqui ele não reconhece o Funcoes por algum motivo...
 
@@ -105,11 +105,17 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         if (!String.IsNullOrEmpty(txtAssunto.Text) && !String.IsNullOrEmpty(txtCategoria.Text))
         {
 
+            Professor prof = new Professor();
+            prof = (Professor)Session["Professor"];
+            string[] nomeProf = prof.Nome.Split(' ');            
+            string usuario1 = nomeProf[0] + " " + nomeProf[nomeProf.Length-1];
             string usuario = Session["nome"].ToString();
+
+            
             string assunto = txtAssunto.Text;
             string categoria = txtCategoria.Text;
 
-            Requerimento req = new Requerimento(usuario, assunto, categoria, usuario);
+            Requerimento req = new Requerimento(usuario1, assunto, categoria, usuario);
 
             if (Requerimento_DB.Insert(req) == 0)
             {
@@ -119,13 +125,25 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
                 CarregarGridAtivos();
                 UpdatePanelAtivados.Update();
 
-
+                req = Requerimento_DB.SelectLast();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalCriacaoCriterio", "FechaModalCriacaoCriterio();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+                lblMsgAssunto.Text = req.Assunto;
+                lblMsgProfessor.Text = req.MatriculaPro;
+                lblMsgCategoria.Text = req.Categoria;
+                lblMsgId.Text = req.CodigoReq.ToString();
+                abrirMensagens(req.CodigoReq);
+                lblMsgStatus.Text = "Aberto";
+                mdlHeader.Attributes["style"] = "background-color: #960d10;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
+                UpdatePanel3.Update();
             }
             else
             {
                 lblMsg.Text = "Erro ao inserir solicitação!";
             }
+            
         }
+       
     }
 
 
@@ -139,11 +157,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
 
     }
 
-    protected void gdvRequerimentoAberto_RowCommand(object sender, GridViewCommandEventArgs e)
-    {
-
-    }
-
+    
     protected void btnModal_Command(object sender, CommandEventArgs e)
     {
         int ID = Convert.ToInt32(e.CommandArgument);
@@ -154,15 +168,19 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         lblMsgProfessor.Text = req.MatriculaPro;
         lblMsgCategoria.Text = req.Categoria;
         lblMsgId.Text = req.CodigoReq.ToString();
+        
         switch (req.Status)
         {
             case 1:
+                lblMsgStatus.Text = "Aberto";
                 mdlHeader.Attributes["style"] = "background-color: #960d10;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
                 break;
             case 2:
+                lblMsgStatus.Text = "Em Andamento";
                 mdlHeader.Attributes["style"] = "background-color: #f9ae0e;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
                 break;
             case 3:
+                lblMsgStatus.Text = "Finalizado";
                 mdlHeader.Attributes["style"] = "background-color: #0D9643;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);;";
                 break;
 
@@ -180,7 +198,12 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         DataSet msgDt = Mensagem_DB.SelectAll(cod);
 
         int qtd = msgDt.Tables[0].Rows.Count;
-        string usuario = Session["nome"].ToString();
+
+        Professor prof = new Professor();
+        prof = (Professor)Session["Professor"];
+        string[] nomeProf = prof.Nome.Split(' ');
+        string usuario = nomeProf[0] + " " + nomeProf[nomeProf.Length - 1];
+
         string msgBox = " ";
         int b = 0;
         for (int i = 0; i < qtd; i++)
@@ -188,7 +211,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
             b = i + 1;
             if (usuario == msgDt.Tables[0].Rows[i][2].ToString())
             {
-                msgBox = msgBox + "<div class='allMsg' style='float: right'><div class='txtCard' style='background-color: rgb(247, 247, 228);' onclick='mostraInfo(" + b + ")'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info" + b + "' class='infoMsg'>Enviado por " + msgDt.Tables[0].Rows[i][2].ToString() + " - " + msgDt.Tables[0].Rows[i][4].ToString() + "</div></div>";
+                msgBox = msgBox + "<div class='allMsg' style='float: right'><div class='txtCard' style='background-color: rgb(247, 247, 228);' onclick='mostraInfo(" + b + ")'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info" + b + "' class='infoMsg'>Enviado as " + msgDt.Tables[0].Rows[i][4].ToString() + "</div></div>";
             }
             else
             {
@@ -202,20 +225,23 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
 
     protected void btnNovaMsg_Click(object sender, EventArgs e)
     {
-
-
-
+        
         if (!String.IsNullOrEmpty(txtResponder.Text))
         {
 
-            string usuario = Session["nome"].ToString();
+            Professor prof = new Professor();
+            prof = (Professor)Session["Professor"];
+            string[] nomeProf = prof.Nome.Split(' ');
+            string usuario = nomeProf[0] + " " + nomeProf[nomeProf.Length - 1]; 
+
             string msg = txtResponder.Text;
             int cod = Convert.ToInt32(lblMsgId.Text);
 
             Mensagem men = new Mensagem(cod, usuario, msg);
 
             if (Mensagem_DB.Insert(men) == 0)
-            {                
+            {
+                Requerimento_DB.UpdateTime(cod);
                 abrirMensagens(cod);
             }
 
@@ -224,6 +250,8 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
             UpdatePanel3.Update();
 
+            CarregarGridAtivos();
+            UpdatePanelAtivados.Update();
 
         }
     }

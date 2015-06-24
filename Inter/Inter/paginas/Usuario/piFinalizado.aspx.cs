@@ -74,12 +74,12 @@ public partial class paginas_Usuario_piFinalizado : System.Web.UI.Page
 
         if (qtd > 0)
         {
-            foreach (GridViewRow grid in gdvPisFinalizados.Rows)//PERCORRER TODA A GRID
-            {
-                LinkButton lb = (LinkButton)grid.FindControl("lbDetalhesProjeto");//procurando lb detalhes
+            //foreach (GridViewRow grid in gdvPisFinalizados.Rows)//PERCORRER TODA A GRID
+            //{
+            //    LinkButton lb = (LinkButton)grid.FindControl("lbDetalhesProjeto");//procurando lb detalhes
 
-            }
-            lblQtdRegistro.Text = "Foram encontados " + qtd + " registros";
+            //}
+            lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
         }
         else
         {
@@ -100,8 +100,6 @@ public partial class paginas_Usuario_piFinalizado : System.Web.UI.Page
 
     protected void lbDetalhesProjeto_Click(object sender, EventArgs e)
     {
-
-
         DataSet ds = new DataSet();
         LinkButton lb = new LinkButton();
         lb = (LinkButton)sender;
@@ -126,8 +124,6 @@ public partial class paginas_Usuario_piFinalizado : System.Web.UI.Page
         UpdDetalhesProjeto.Update();
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "MostraVizualizar()", "Mostra('p2');", true);
-
-
     }
     
 

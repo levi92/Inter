@@ -44,7 +44,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
             lblMsgModal2.Text = ""; //limpa o texto da modal
             lblMsgModal2.Style.Remove("color"); //remove a cor do texto da modal
             
-        }
+    }
 
     }
 
@@ -83,24 +83,24 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
             Directory.CreateDirectory(directory); //cria o diretório
             // Pega a segurança atual da pasta
 
-            /* DirectorySecurity oDirSec = Directory.GetAccessControl(sTmpPath);
+           /* DirectorySecurity oDirSec = Directory.GetAccessControl(sTmpPath);
 
-             // Define o usuário Everyone (Todos)
-             SecurityIdentifier sid = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
-             //SecurityIdentifier sid = new SecurityIdentifier(WellKnownSidType.AuthenticatedUserSid, null);
-             NTAccount oAccount = sid.Translate(typeof(NTAccount)) as NTAccount;
+            // Define o usuário Everyone (Todos)
+            SecurityIdentifier sid = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+            //SecurityIdentifier sid = new SecurityIdentifier(WellKnownSidType.AuthenticatedUserSid, null);
+            NTAccount oAccount = sid.Translate(typeof(NTAccount)) as NTAccount;
 
-             oDirSec.PurgeAccessRules(oAccount);
+            oDirSec.PurgeAccessRules(oAccount);
 
-             FileSystemAccessRule fsAR = new FileSystemAccessRule(oAccount,
-                                                                  FileSystemRights.Modify,
-                                                                  InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit,
-                                                                  PropagationFlags.None,
-                                                                  AccessControlType.Allow);
+            FileSystemAccessRule fsAR = new FileSystemAccessRule(oAccount,
+                                                                 FileSystemRights.Modify,
+                                                                 InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit,
+                                                                 PropagationFlags.None,
+                                                                 AccessControlType.Allow);
 
-             // Atribui a regra de acesso alterada
-             oDirSec.SetAccessRule(fsAR);
-             Directory.SetAccessControl(sTmpPath, oDirSec);*/
+            // Atribui a regra de acesso alterada
+            oDirSec.SetAccessRule(fsAR);
+            Directory.SetAccessControl(sTmpPath, oDirSec);*/
         }
 
         string caminho = (Request.PhysicalApplicationPath + "Backup\\"); //pega o caminho do diretório (com \\ pois estamos pegando o diretório "aberto") ->>>> tirar dúvida sobre isso, é isso mesmo?
@@ -240,20 +240,20 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                                 {
                                     mb.ExportToFile(file); //CRIAR O BACKUP
                                     lblMsgModal.Style.Add("color", "green");
-                                    lblMsgModal.Text = "Backup de segurança efetuado com sucesso!"; 
+                                    lblMsgModal.Text = "Backup de segurança efetuado com sucesso!";
                                 }
                                 catch (Exception ex) //CASO NÃO CONSIGA CRIAR O BACKUP DE SEGURANÇA
                                 {
                                     UpdatePanelBkp.Update();
                                     lblMsgModal.Style.Add("color", "#960d10");
                                     lblMsgModal.Text = "Erro ao criar Backup de Segurança! Cancelando a Restauração;"; //MENSAGEM DE ERRO
-                                    conn.Close();
+                                conn.Close();
                                     System.Threading.Thread.Sleep(1000);
                                     Response.Redirect("~/Configuracoes"); //RECARREGA A PÁGINA
-                                }
-                                conn.Close(); //FECHA A CONEXÃO COM O BANCO, NÃO É NECESSÁRIO O DISPOSE(LIMPAR DA MEMÓRIA) POR USAR USING LÁ EM CIMA
                             }
+                                conn.Close(); //FECHA A CONEXÃO COM O BANCO, NÃO É NECESSÁRIO O DISPOSE(LIMPAR DA MEMÓRIA) POR USAR USING LÁ EM CIMA
                         }
+                    }
                     }
                     CarregaGrid();
                     UpdatePanelBkp.Update();
@@ -262,13 +262,20 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                     string[] arquivos = Funcoes.tratarArquivosBackup(caminho);
 
                     //<---------------- TERMINA O BACKUP DE SEGURANÇA
-
-                    using (MySqlConnection conn = new MySqlConnection(constring)) //instancia um novo objeto MySqlConnection usando os dados do banco contidos em constring
+                    if (arquivos[0] == nome_arquivo.Replace(".sql", "")) // Verifica se o Backup foi realmente criado
                     {
-                        using (MySqlCommand cmd = new MySqlCommand()) //instancia um novo MySqlCommand
+
+
+                        lblMsgModal2.Text = "Backup de segurança efetuado com sucesso!";
+
+                        if(Funcoes_DB.DropDatabase() == 0)
                         {
-                            using (MySqlBackup mb = new MySqlBackup(cmd)) //abre a conexão com o banco
+                            using (MySqlConnection conn = new MySqlConnection(constring)) //instancia um novo objeto MySqlConnection usando os dados do banco contidos em constring
+                        {
+                        using (MySqlCommand cmd = new MySqlCommand()) //instancia um novo MySqlCommand
                             {
+                            using (MySqlBackup mb = new MySqlBackup(cmd)) //abre a conexão com o banco
+                                {
                                 cmd.Connection = conn; //define o comando Conection
                                 conn.Open(); //abre a conexão com o banco
                                 try //TENTA
@@ -284,12 +291,15 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                                     lblMsgModal2.Text = "Erro ao restaurar Backup";
                                 }
                                 conn.Close();  //FECHA A CONEXÃO COM O BANCO, NÃO É NECESSÁRIO O DISPOSE(LIMPAR DA MEMÓRIA) POR USAR USING LÁ EM CIMA
+                                }
                             }
-                        }
                     }
+                        }
 
+                        
+
+                    }
                 }
-            }
 
             else
             {
@@ -314,7 +324,6 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
             lblMsgModal.Style.Add("color", "#960d10");
             lblMsgModal.Text = "O campo senha deve ser preenchido!";
         }
-
 
     }
 
@@ -348,7 +357,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
     protected void btnCancelarConfirmaSenha_Click(object sender, EventArgs e) //FECHA A MODAL
     {
         //LIMPANDO OS TEXTOS E REMOVENDO AS CORES 
-        txtSenha.Text = ""; 
+        txtSenha.Text = "";
         lblMsgModal.Text = "";
         lblMsgModal2.Text = "";
         lblMsgModal2.Style.Remove("color");

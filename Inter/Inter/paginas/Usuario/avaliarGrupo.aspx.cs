@@ -137,7 +137,7 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
             dt.Rows.Add(dr);
         }
 
-        valorPeso.Value = pesos.ToString();
+        valorPeso.Value = pesos.ToString(); //VARIAVEL USADO PARA CALCULAR MÉDIA NO SCRIPT
 
         Table table = new Table();
         TextBox txbNotas;
@@ -307,19 +307,18 @@ public partial class paginas_Usuario_avaliarGrupo : System.Web.UI.Page
                 sqlInsertHistoricoAluDisc += "(0,'" + his.Alu_matricula.Alu_matricula + "'," + his.Cpi_codigo.Cpi_codigo + "," + auxNota + ",'" + his.His_usuario + "'),";
             }
             mediaPonderada = valorMultiplicacao / somaPeso;
-            somaMediaPonderada += mediaPonderada;
+            somaMediaPonderada += mediaPonderada; //SOMA DAS MEDIAS PONDERADAS DE CADA ALUNO
             somaPeso = 0;
             valorMultiplicacao = 0;
         }
         Historico_Aluno_Disciplina_DB.Insert(sqlInsertHistoricoAluDisc.Substring(0, sqlInsertHistoricoAluDisc.Length - 1));
 
-        int qtdAlunos = colsCount - 1;
-        mediaDisciplina = Math.Round((somaMediaPonderada / qtdAlunos),2);
+        int qtdAlunos = colsCount - 1; // QUANTIDADE DE COLUNAS MENOS 1 POR CAUSA DA COLUNA QUE TEM CRITÉRIOS
+        mediaDisciplina = Math.Round((somaMediaPonderada / qtdAlunos),1);
 
         Grupo gru = new Grupo();
         gru.Gru_codigo = Convert.ToInt32(ddlGrupos.SelectedValue);
-        //Grupo_DB.UpdateGrupoAvaliado(gru);
-
+        
         Projeto_Inter pri = new Projeto_Inter();
         pri.Pri_codigo = Convert.ToInt32(Session["CodigoPIAtivoMateria"]);
 
