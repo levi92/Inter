@@ -89,55 +89,6 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
 
     }
 
-
-    //Método para confirmar a inserção de uma nova Requerimento
-    protected void btnCriarNovoTicket_Click(object sender, EventArgs e)
-    {
-        txtAssunto.Style.Clear();
-        txtCategoria.Style.Clear();
-
-        if (!String.IsNullOrEmpty(txtAssunto.Text) && !String.IsNullOrEmpty(txtCategoria.Text))
-        {
-
-            string usuario = Session["nome"].ToString();
-            string assunto = txtAssunto.Text;
-            string categoria = txtCategoria.Text;
-
-            Requerimento req = new Requerimento(usuario, assunto, categoria, usuario);
-
-            if (Requerimento_DB.Insert(req) == 0)
-            {
-                lblMsg.Text = "<span class='glyphicon glyphicon-ok-circle'></span> &nbsp Cadastrado com sucesso.";
-                lblMsg.Style.Add("color", "green");
-                gdvRequerimentoAberto.EditIndex = -1;
-                CarregarGridAtivos();
-                UpdatePanelAtivados.Update();
-
-
-            }
-            else
-            {
-                lblMsg.Text = "Erro ao inserir solicitação!";
-            }
-        }
-    }
-
-
-    protected void btnCancelarNovoCriterio_Click(object sender, EventArgs e)
-    {
-
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalCriacaoCriterio", "FechaModalCriacaoCriterio();", true);
-        lblMsg.Text = "";
-        txtAssunto.Text = "";
-        txtCategoria.Text = "";
-
-    }
-
-    protected void gdvRequerimentoAberto_RowCommand(object sender, GridViewCommandEventArgs e)
-    {
-
-    }
-
     protected void btnModal_Command(object sender, CommandEventArgs e)
     {
         int ID=Convert.ToInt32(e.CommandArgument);

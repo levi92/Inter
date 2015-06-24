@@ -156,14 +156,16 @@
                                         <asp:Label ID="lblStatusModal" Style="width:auto" runat="server" CssClass="control-label col-sm-2"></asp:Label>
                                         <br />
                                         <br />
-                                        <asp:Label ID="lblDisciplinas" Style="width:auto;" runat="server" CssClass="control-label col-sm-2" Text="Disciplinas"></asp:Label>
-                                        <asp:Label ID="lblProfessores" Style="width:auto;" runat="server" CssClass="control-label col-sm-2" Text="Professores"></asp:Label>
-                                        <asp:Label ID="lblAlunos" Style="width:auto;" runat="server" CssClass="control-label col-sm-2" Text="Alunos"></asp:Label>
+                                        <div id="Detalhes" Style="width:100%; text-align:center; ">
+                                        <asp:Label ID="lblDisciplinas" runat="server" Text="Disciplinas"></asp:Label>
+                                        <asp:Label ID="lblProfessores" runat="server" Text="Professores"></asp:Label>
+                                        <asp:Label ID="lblAlunos" runat="server" Text="Alunos"></asp:Label>
                                         <br />
                                         <br />
                                         <asp:ListBox ID="lstDisciplinas" runat="server" Style="margin-left:15px; width:65px; "></asp:ListBox>
                                         <asp:ListBox ID="lstProfessores" runat="server" Style="margin-left:25px; width:70px;"></asp:ListBox>
                                         <asp:ListBox ID="lstAlunos" runat="server" Style="margin-left:25px; width:65px;"></asp:ListBox>
+                                        </div>
                                     </div>
                                 </div>
 

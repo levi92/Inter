@@ -138,42 +138,6 @@ public partial class paginas_Admin_solicitacoes {
     protected global::System.Web.UI.WebControls.LinkButton btnNovaMsg;
     
     /// <summary>
-    /// dropDownListTipoTicket control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlSelect dropDownListTipoTicket;
-    
-    /// <summary>
-    /// New control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label New;
-    
-    /// <summary>
-    /// vsNovoTicket control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ValidationSummary vsNovoTicket;
-    
-    /// <summary>
-    /// btnCriarNovoTicket control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnCriarNovoTicket;
-    
-    /// <summary>
     /// UpdatePanelAtivados control.
     /// </summary>
     /// <remarks>

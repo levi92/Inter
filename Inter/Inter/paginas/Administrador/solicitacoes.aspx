@@ -83,40 +83,7 @@
     <!--Fim do modal de Msg-->
     <!--Início do modal de novo ticket-->
 
-    
-
-
-    <div class="modal fade" data-backdrop="static" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="width: 30%;">
-            <div class="modal-focontent">
-                <div class="modal-header" style="background-color: #960d10; color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);">
-                    <!--Arrumar o hover aqui-->
-                    <button type="button" data-dismiss="modal" style="margin-top: -9px; float: left; border: none; background: none;"><span class="mdi mdi-chevron-left hoverAll" style="font-size: 33px; margin-top: 4.5px;"></span></button>
-                    <h4 class="modal-title" id="myModalLabel1" style="float: left;">Novo Ticket</h4>
-                </div>
-                <!--Início do Corpo-->
-                <div class="modal-body" style="background-color: whitesmoke; padding-top: 100px;">
-                    <select id="dropDownListTipoTicket" runat="server" style="border-top: none; border-left: none; border-right: none; border-bottom-color: #2196f3; border-bottom-width: 2px; height: 30px; background-color: whitesmoke;">
-                        <option disabled="disabled" selected="selected" value="Tipo"></option>
-                        <option value="Alteração de nota" style="background-color: whitesmoke"></option>
-                        <option value="Problema com cadastro" style="background-color: whitesmoke"></option>
-                        <option value="Problema com avaliações" style="background-color: whitesmoke"></option>
-                        <option value="Sugestão" style="background-color: whitesmoke"></option>
-                        <option value="Outros" style="background-color: whitesmoke"></option>
-                    </select>
-                    <asp:Label ID="New" runat="server" placeholder="Assunto" Style="border-top: none; border-left: none; border-right: none; border-bottom-color: #2196f3; background-color: whitesmoke; height: 30px;" ></asp:Label>
-                    <asp:ValidationSummary ID="vsNovoTicket" ValidationGroup="NovoTicket" ForeColor="#960d10" runat="server" DisplayMode="List" Style="margin: 7px; padding: 7px;" />
-                </div>
-                <!--Fim do corpo-->
-                <div class="modal-footer" style="text-align: left; background-color: whitesmoke; border-top: none">
-                    <asp:LinkButton runat="server" ID="btnCriarNovoTicket" OnClick="btnCriarNovoTicket_Click" data-dismiss="modal"  ToolTip="Confirmar Inserção" CausesValidation="true" ValidationGroup="NovoTicket" data-toggle='modal' data-target='#myModal1' style="float: right; float: right; height: 30px; width: 90px; box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.26); color: white; background-color: #2196F3; border: none;">
-                        Confirmar</asp:LinkButton>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Fim do modal de novo Ticket-->
-    <!--Início das Tabs-->
+   
     <div id="p1" class="first">
         <div class="panel panel-default">
             <div class="panel-heading">
