@@ -150,14 +150,14 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
         string caminho = pegaDirBackup(); //PEGA O DIRETORIO DOS BACKUPS
         string[] arquivos = Funcoes.tratarArquivosBackup(caminho); //TRATA O NOME DOS BACKUPS
 
-        if (arquivos[0] == nome_arquivo.Replace(".sql", "")) // Verifica se o Backup foi realmente criado
-        {
-            //lblBackup.Text = "Backup efetuado com sucesso!";
-        }
-        else
-        {
-            //lblBackup.Text = "Erro ao criar Backup!";
-        }
+        //if (arquivos[0] == nome_arquivo.Replace(".sql", "")) // Verifica se o Backup foi realmente criado
+        //{
+        //    //lblBackup.Text = "Backup efetuado com sucesso!";
+        //}
+        //else
+        //{
+        //    //lblBackup.Text = "Erro ao criar Backup!";
+        //}
 
 
         // ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);

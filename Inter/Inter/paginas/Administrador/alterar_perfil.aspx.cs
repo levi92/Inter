@@ -33,7 +33,7 @@ namespace Inter.paginas.Administrador
             if ((String)Session["perfil"] == "coordenador")
             {
 
-                btnCoord.Enabled = false;
+                btnCoord.Enabled = false; //desabilita o botao  de entrar como coordenador caso já tenha escolhido
             }
 
          
