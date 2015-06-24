@@ -138,6 +138,43 @@ public class Requerimento_DB
         }
     }
 
+
+    public static Requerimento SelectLast()
+    {
+        try
+        {
+            Requerimento objRequerimento = null;
+            IDbConnection objConnection;
+            IDbCommand objCommnad;
+            IDataReader objDataReader;
+            objConnection = Mapped.Connection();
+            objCommnad = Mapped.Command("SELECT MAX(REQ_CODIGO) FROM req_requerimento", objConnection);            
+            objDataReader = objCommnad.ExecuteReader();
+            while (objDataReader.Read())
+            {
+
+                var CodigoReq = Convert.ToInt32(objDataReader["req_codigo"]);
+                var Assunto = objDataReader["req_assunto"].ToString();
+                var DataReq = Convert.ToDateTime(objDataReader["req_dt_requisicao"]);
+                var MatriculaPro = objDataReader["pro_matricula"].ToString();
+                var Status = Convert.ToInt32(objDataReader["req_status"]);
+                var Categoria = objDataReader["req_categoria"].ToString();
+
+                objRequerimento = new Requerimento(CodigoReq, MatriculaPro, Assunto, DataReq, Status, Categoria);
+            }
+            objDataReader.Close();
+            objConnection.Close();
+            objConnection.Dispose();
+            objCommnad.Dispose();
+            objDataReader.Dispose();
+            return objRequerimento;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
+
     //SELECT ALL
     public static DataSet SelectAll()
     {
