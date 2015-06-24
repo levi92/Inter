@@ -531,34 +531,36 @@ $(document).ready(function () {
 
 }); //FECHAMENTO $(document).ready
 
-function funcaoAtualizarMediaAll() {
+//================================= NÃO APAGUE ===================================================
 
-    var countRow = $("#tableAvaliar tr").length - 2; // - 2 POR CAUSA DO CABEÇALHO E RODAPÉ 
-    var qtdTotalCol = $('#tableAvaliar tr td').length; //QTD TOTAL DE COLUNAS
-    var qtdColuna = $('#tableAvaliar tr td').length / (countRow + 1); //QTD COLUNA POR LINHA
+//function funcaoAtualizarMediaAll() {
 
-    var valor = 0;
-    var valorMultiplicacao = 0;
-    var TodosPesos = ($('#valorPeso').val()).split('|');
-    var somaPeso = 0;
+//    var countRow = $("#tableAvaliar tr").length - 2; // - 2 POR CAUSA DO CABEÇALHO E RODAPÉ 
+//    var qtdTotalCol = $('#tableAvaliar tr td').length; //QTD TOTAL DE COLUNAS
+//    var qtdColuna = $('#tableAvaliar tr td').length / (countRow + 1); //QTD COLUNA POR LINHA
 
-    for (var j = 1; j < qtdColuna; j++) {
-        for (var i = 0; i < countRow; i++) {
+//    var valor = 0;
+//    var valorMultiplicacao = 0;
+//    var TodosPesos = ($('#valorPeso').val()).split('|');
+//    var somaPeso = 0;
 
-            valor = parseFloat($("#txtNotasRow_" + i + "_Col_" + j).val());
-            var peso = parseFloat(TodosPesos);
-            if (!isNaN(valor)) {
-                valorMultiplicacao += valor * peso;
-                somaPeso += peso;
-            }
-        }
+//    for (var j = 1; j < qtdColuna; j++) {
+//        for (var i = 0; i < countRow; i++) {
 
-        var linhaLblMedia = $("#tableAvaliar tr").length - 1; //ULTIMA LINHA DA TABELA
-        $('#lblMediaRow_' + linhaLblMedia + '_Col_' + j).html((valorMultiplicacao / somaPeso).toFixed(2));
-        valorMultiplicacao = 0;
-    }
+//            valor = parseFloat($("#txtNotasRow_" + i + "_Col_" + j).val());
+//            var peso = parseFloat(TodosPesos);
+//            if (!isNaN(valor)) {
+//                valorMultiplicacao += valor * peso;
+//                somaPeso += peso;
+//            }
+//        }
 
-}
+//        var linhaLblMedia = $("#tableAvaliar tr").length - 1; //ULTIMA LINHA DA TABELA
+//        $('#lblMediaRow_' + linhaLblMedia + '_Col_' + j).html((valorMultiplicacao / somaPeso).toFixed(2));
+//        valorMultiplicacao = 0;
+//    }
+
+//}
 
 
 function ImprimirGrupo(id) {

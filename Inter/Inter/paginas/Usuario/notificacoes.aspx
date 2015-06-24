@@ -21,6 +21,16 @@
         function openModal() {
             $('#myModal1').modal('show');
         }
+        function fechaModalCri() {
+            $('#txtAssunto').val(" ");
+            $('#lblMsg').html(" ");
+        }
+
+        function FechaModalCriacaoCriterio() {
+            $('#fecharModal').click();
+        }
+
+
         </script>
     <!--Início do modal de Msg-->
     <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>

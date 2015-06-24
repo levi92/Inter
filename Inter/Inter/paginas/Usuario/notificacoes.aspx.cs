@@ -108,7 +108,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
             Professor prof = new Professor();
             prof = (Professor)Session["Professor"];
             string[] nomeProf = prof.Nome.Split(' ');            
-            string usuario1 = nomeProf[0] + " " + nomeProf[1];
+            string usuario1 = nomeProf[0] + " " + nomeProf[nomeProf.Length-1];
             string usuario = Session["nome"].ToString();
 
             
@@ -124,14 +124,23 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
                 gdvRequerimentoAberto.EditIndex = -1;
                 CarregarGridAtivos();
                 UpdatePanelAtivados.Update();
-
-
+                req = Requerimento_DB.SelectLast();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalCriacaoCriterio", "FechaModalCriacaoCriterio();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+                lblMsgAssunto.Text = req.Assunto;
+                lblMsgProfessor.Text = req.MatriculaPro;
+                lblMsgCategoria.Text = req.Categoria;
+                lblMsgId.Text = req.CodigoReq.ToString();
+                lblMsgStatus.Text = "Aberto";
+                mdlHeader.Attributes["style"] = "background-color: #960d10;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
             }
             else
             {
                 lblMsg.Text = "Erro ao inserir solicitação!";
             }
+            
         }
+       
     }
 
 
@@ -145,11 +154,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
 
     }
 
-    protected void gdvRequerimentoAberto_RowCommand(object sender, GridViewCommandEventArgs e)
-    {
-
-    }
-
+    
     protected void btnModal_Command(object sender, CommandEventArgs e)
     {
         int ID = Convert.ToInt32(e.CommandArgument);
@@ -160,6 +165,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         lblMsgProfessor.Text = req.MatriculaPro;
         lblMsgCategoria.Text = req.Categoria;
         lblMsgId.Text = req.CodigoReq.ToString();
+        
         switch (req.Status)
         {
             case 1:
@@ -211,9 +217,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
 
     protected void btnNovaMsg_Click(object sender, EventArgs e)
     {
-
-
-
+        
         if (!String.IsNullOrEmpty(txtResponder.Text))
         {
             

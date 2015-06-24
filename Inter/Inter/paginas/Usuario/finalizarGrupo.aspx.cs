@@ -52,8 +52,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
                 {
                     Session["MediaGrupo"] = null;
                     CarregarGruposFinalizar(Convert.ToInt32(ddlFinalizarGrupos.SelectedValue));
-                    CriarTabelaMediasDisciplinas();
-                    
+                    CriarTabelaMediasDisciplinas();                    
 
                 }
             }
@@ -103,11 +102,8 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
                 if (i == 0) //COLUNA FOR IGUAL A 0
                 {
                     dr["Integrantes"] = nomesAlunos[j].ToString();
-                }
-                //else
-                //{
-                //    dr[nomesMaterias[i]] = Funcoes.CalcularMediaPonderadaAlunoDisciplinas(Convert.ToInt32(Session["codPIAtivo"]), codAlunos[j], Convert.ToInt32(atrDisciplinas[i]));
-                //}
+                    break;
+                }                
             }
             dt.Rows.Add(dr);
         }
@@ -124,9 +120,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
 
         int rowsCount = dt.Rows.Count;
         int colsCount = dt.Columns.Count;
-        Session["rowsCountFinalizar"] = rowsCount;
-        Session["colsCountFinalizar"] = colsCount;
-
+       
         TableHeaderRow thr = new TableHeaderRow();
         TableHeaderCell th = new TableHeaderCell();
         Label lblCabecalho = new Label();
