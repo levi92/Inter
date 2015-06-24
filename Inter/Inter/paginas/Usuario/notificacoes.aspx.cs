@@ -124,6 +124,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
                 gdvRequerimentoAberto.EditIndex = -1;
                 CarregarGridAtivos();
                 UpdatePanelAtivados.Update();
+
                 req = Requerimento_DB.SelectLast();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalCriacaoCriterio", "FechaModalCriacaoCriterio();", true);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
@@ -131,8 +132,10 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
                 lblMsgProfessor.Text = req.MatriculaPro;
                 lblMsgCategoria.Text = req.Categoria;
                 lblMsgId.Text = req.CodigoReq.ToString();
+                abrirMensagens(req.CodigoReq);
                 lblMsgStatus.Text = "Aberto";
                 mdlHeader.Attributes["style"] = "background-color: #960d10;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
+                UpdatePanel3.Update();
             }
             else
             {
@@ -195,7 +198,12 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         DataSet msgDt = Mensagem_DB.SelectAll(cod);
 
         int qtd = msgDt.Tables[0].Rows.Count;
-        string usuario = Session["nome"].ToString();
+
+        Professor prof = new Professor();
+        prof = (Professor)Session["Professor"];
+        string[] nomeProf = prof.Nome.Split(' ');
+        string usuario = nomeProf[0] + " " + nomeProf[nomeProf.Length - 1];
+
         string msgBox = " ";
         int b = 0;
         for (int i = 0; i < qtd; i++)
@@ -220,8 +228,12 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         
         if (!String.IsNullOrEmpty(txtResponder.Text))
         {
-            
-            string usuario = Session["nome"].ToString();
+
+            Professor prof = new Professor();
+            prof = (Professor)Session["Professor"];
+            string[] nomeProf = prof.Nome.Split(' ');
+            string usuario = nomeProf[0] + " " + nomeProf[nomeProf.Length - 1]; 
+
             string msg = txtResponder.Text;
             int cod = Convert.ToInt32(lblMsgId.Text);
 
@@ -238,6 +250,8 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
             UpdatePanel3.Update();
 
+            CarregarGridAtivos();
+            UpdatePanelAtivados.Update();
 
         }
     }
