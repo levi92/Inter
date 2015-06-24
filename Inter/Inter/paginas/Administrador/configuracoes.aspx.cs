@@ -247,13 +247,13 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                                     UpdatePanelBkp.Update();
                                     lblMsgModal.Style.Add("color", "#960d10");
                                     lblMsgModal.Text = "Erro ao criar Backup de Segurança! Cancelando a Restauração;"; //MENSAGEM DE ERRO
-                                conn.Close();
+                                    conn.Close();
                                     System.Threading.Thread.Sleep(1000);
                                     Response.Redirect("~/Configuracoes"); //RECARREGA A PÁGINA
-                            }
+                                }
                                 conn.Close(); //FECHA A CONEXÃO COM O BANCO, NÃO É NECESSÁRIO O DISPOSE(LIMPAR DA MEMÓRIA) POR USAR USING LÁ EM CIMA
+                            }
                         }
-                    }
                     }
                     CarregaGrid();
                     UpdatePanelBkp.Update();
@@ -268,39 +268,39 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
 
                         lblMsgModal2.Text = "Backup de segurança efetuado com sucesso!";
 
-                        if(Funcoes_DB.DropDatabase() == 0)
+                        if (Funcoes_DB.DropDatabase() == 0)
                         {
                             using (MySqlConnection conn = new MySqlConnection(constring)) //instancia um novo objeto MySqlConnection usando os dados do banco contidos em constring
-                        {
-                        using (MySqlCommand cmd = new MySqlCommand()) //instancia um novo MySqlCommand
                             {
-                            using (MySqlBackup mb = new MySqlBackup(cmd)) //abre a conexão com o banco
+                                using (MySqlCommand cmd = new MySqlCommand()) //instancia um novo MySqlCommand
                                 {
-                                cmd.Connection = conn; //define o comando Conection
-                                conn.Open(); //abre a conexão com o banco
-                                try //TENTA
-                                {
+                                    using (MySqlBackup mb = new MySqlBackup(cmd)) //abre a conexão com o banco
+                                    {
+                                        cmd.Connection = conn; //define o comando Conection
+                                        conn.Open(); //abre a conexão com o banco
+                                        try //TENTA
+                                        {
 
-                                    mb.ImportFromFile(caminhoArquivo); //RESTAURA O SISTEMA USANDO O BACKUP CLICADO
-                                    lblMsgModal2.Style.Add("color", "green");
-                                    lblMsgModal2.Text = "Sistema Restaurado com sucesso!";
-                                }
-                                catch (Exception ex)
-                                {
-                                    lblMsgModal2.Style.Add("color", "#960d10");
-                                    lblMsgModal2.Text = "Erro ao restaurar Backup";
-                                }
-                                conn.Close();  //FECHA A CONEXÃO COM O BANCO, NÃO É NECESSÁRIO O DISPOSE(LIMPAR DA MEMÓRIA) POR USAR USING LÁ EM CIMA
+                                            mb.ImportFromFile(caminhoArquivo); //RESTAURA O SISTEMA USANDO O BACKUP CLICADO
+                                            lblMsgModal2.Style.Add("color", "green");
+                                            lblMsgModal2.Text = "Sistema Restaurado com sucesso!";
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            lblMsgModal2.Style.Add("color", "#960d10");
+                                            lblMsgModal2.Text = "Erro ao restaurar Backup";
+                                        }
+                                        conn.Close();  //FECHA A CONEXÃO COM O BANCO, NÃO É NECESSÁRIO O DISPOSE(LIMPAR DA MEMÓRIA) POR USAR USING LÁ EM CIMA
+                                    }
                                 }
                             }
-                    }
                         }
 
-                        
+
 
                     }
                 }
-
+            }
             else
             {
                 if (c == 3) //SE HOUVE MAIS DE 3 TENTATIVAS DE CONFIRMAÇÃO DE SENHA
@@ -318,6 +318,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
             }
 
 
+            
         }
         else
         {
@@ -325,6 +326,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
             lblMsgModal.Text = "O campo senha deve ser preenchido!";
         }
 
+        
     }
 
     protected void timerDownload_Tick(object sender, EventArgs e) //ESSE MÉTODO INICIA O DOWNLOAD E FAZ O RECARREGAMENTO DA PÁGINA NECESSÁRIO PARA O DOWNLOAD
