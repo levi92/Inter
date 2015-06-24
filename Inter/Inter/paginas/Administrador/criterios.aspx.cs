@@ -199,7 +199,7 @@ using System.Data;
         protected void btnCancelarNovoCriterio_Click(object sender, EventArgs e)
         {
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalCriacaoCriterio", "FechaModalCriacaoCriterio();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModal()", "FechaModal();", true);
             lblMsg.Text = "";
             txtNomeNovoCriterio.Text = "";
             txtDescricaoNovoCriterio.Text = "";

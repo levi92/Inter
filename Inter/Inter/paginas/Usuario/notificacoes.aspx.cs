@@ -150,7 +150,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
     protected void btnCancelarNovoCriterio_Click(object sender, EventArgs e)
     {
 
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalCriacaoCriterio", "FechaModalCriacaoCriterio();", true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModal", "FechaModal();", true);
         lblMsg.Text = "";
         txtAssunto.Text = "";
         txtCategoria.Text = "";

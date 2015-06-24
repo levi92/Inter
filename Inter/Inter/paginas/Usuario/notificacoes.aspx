@@ -26,7 +26,7 @@
             $('#lblMsg').html(" ");
         }
 
-        function FechaModalCriacaoCriterio() {
+        function FechaModal() {
             $('#fecharModal').click();
         }
 
