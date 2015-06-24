@@ -205,6 +205,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
         {
             if (Funcoes_DB.ValidaSenha(senha) == 1) //VERIFICA SE A FUNÇÃO DE VALIDAR RETORNOU 1
             {
+                c = 1;
                 string caminhoArquivo = Session["caminhoArquivo"].ToString(); //PEGA O CAMINHO DO ARQUIVO DA VARÍAVEL DE SESSÃO
                 string acao = Session["acaoBackup"].ToString(); //PEGA A AÇÃO DO USUÁRIO (DOWNLOAD OU BACKUP) E COLOCA NUMA STRING acao
                 if (acao == "Download") //SE A ACAO FOR DOWNLOAD (SE CLICOU NO BOTÃO DOWNLOAD)

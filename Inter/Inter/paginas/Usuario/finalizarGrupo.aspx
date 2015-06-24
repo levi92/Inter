@@ -16,6 +16,16 @@
             $("#naoPossuiGrupo").click();
         }
 
+        //CHAMAR MODAL COM MENSAGEM DE GRUPO FINALIZADO
+        function msgGrupoFinalizado() {
+            $("#grupoFinalizado").click();
+        }
+
+        //CHAMAR MODAL COM MENSAGEM DE TODOS OS GRUPOS FINALIZADOS
+        function msgTodosFinalizados() {
+            $("#todosFinalizados").click();
+        }
+
         //FUNÇÃO ZEBRADO NO GRIDVIEW AVALIAR GRUPOS
         function ZebradoGridAvaliar() {
             var countRow = $("#tableFinalizarGrupos tr").length - 1;
@@ -33,7 +43,9 @@
         }
 
     </script>
-
+    
+    <button type="button" style="display: none;" id="grupoFinalizado" data-toggle="modal" data-target="#myModalGrupoFinalizado"></button>
+    <button type="button" style="display: none;" id="todosFinalizados" data-toggle="modal" data-target="#myModalTodosFinalizados"></button>
     <asp:UpdateProgress ID="upgAvaliar" runat="server" AssociatedUpdatePanelID="updFinalizar">
         <ProgressTemplate>
             <div class="modalLoader">
@@ -224,35 +236,7 @@
             </div>
         </div>
     </div>
-
-    <!-- MODAL FINALIZADO COM SUCESSO -->
-
-    <div class="modal fade" data-backdrop="static" id="myModalFinalizadoSucesso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <!--   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
-
-                </div>
-                <div class="modal-body">
-                    <h1 style="font-size: 30px; font-weight: bolder; text-align: center; color: #1f1f1f">
-                        <span style="color: #09a01c;" class="glyphicon glyphicon-ok-sign"></span>&nbsp Grupo Finalizado com Sucesso!</h1>
-
-
-
-                </div>
-
-                <div class="modal-footer">
-
-                    <button type="button" class="btn btn-default" id="btnVoltarHome" data-dismiss="modal" onclick="Mostra('p2');" title="Voltar para a Home do sistema ">Voltar para Home</button>
-
-                    <button type="button" class="btn btn-default" id="" data-dismiss="modal" onclick="Mostra('p9');" title="Voltar para a finalização dos grupos do PI">Finalizar outro Grupo</button>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
+   
 
     <!-- MODAL NÃO POSSUI GRUPO PARA FINALIZAR -->
 
@@ -269,6 +253,46 @@
                 <div class="modal-footer">
                     <asp:LinkButton CssClass="btn btn-default" ID="btnVoltarHome2" runat="server" OnClick="btnVoltarHome2_Click" ToolTip="Voltar para a home do sistema">
                         <span class="glyphicon glyphicon-home"></span>&nbsp Voltar para a home</asp:LinkButton>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- MODAL GRUPO FINALIZADO -->
+
+    <div class="modal fade" data-backdrop="static" id="myModalGrupoFinalizado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    <h1 style="font-size: 30px; font-weight: bolder; text-align: center; color: #1f1f1f">
+                        <span style="color: #09a01c;" class="glyphicon glyphicon-ok-sign"></span>&nbsp Grupo Finalizado com Sucesso!</h1>
+                </div>
+
+                <div class="modal-footer">
+                    <asp:LinkButton CssClass="btn btn-default" ID="btnGrupoFinalizado" runat="server" OnClick="btnGrupoFinalizado_Click">
+                        <span class="glyphicon glyphicon-ok"></span>&nbsp OK</asp:LinkButton>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TODOS OS GRUPOS FINALIZADOS -->
+
+    <div class="modal fade" data-backdrop="static" id="myModalTodosFinalizados" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    <h1 style="font-size: 30px; font-weight: bolder; text-align: center; color: #1f1f1f">
+                        <span style="color: #09a01c;" class="glyphicon glyphicon-ok-sign"></span>&nbsp Todos os grupos foram finalizados com sucesso!</h1>
+                </div>
+
+                <div class="modal-footer">
+                    <asp:LinkButton CssClass="btn btn-default" ID="btnVoltarHome3" runat="server" OnClick="btnVoltarHome2_Click" ToolTip="Voltar para a home do sistema">
+                        <span class="glyphicon glyphicon-home"></span>&nbsp Voltar para a home</asp:LinkButton>                    
                 </div>
             </div>
         </div>
