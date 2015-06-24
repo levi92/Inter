@@ -108,7 +108,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
             Professor prof = new Professor();
             prof = (Professor)Session["Professor"];
             string[] nomeProf = prof.Nome.Split(' ');            
-            string usuario1 = nomeProf[0] + " " + nomeProf[1];
+            string usuario1 = nomeProf[0] + " " + nomeProf[nomeProf.Length-1];
             string usuario = Session["nome"].ToString();
 
             

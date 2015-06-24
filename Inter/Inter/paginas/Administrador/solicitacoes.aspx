@@ -127,7 +127,7 @@
                     <li class="active"><a href="#geral" role="tab" data-toggle="tab">Aberto</a></li>
                     <li><a href="#andamento" role="tab" data-toggle="tab">Em Andamento</a></li>
                     <li><a href="#finalizado" role="tab" data-toggle="tab">Finalizado</a></li>
-                    <!--Placeholder, isso vai no usuário--><li><a data-toggle='modal' data-target='#myModal2'>Nova Solicitação</a></li>
+                    
                 </ul>
                 <div class="tab-content">
 
@@ -332,60 +332,5 @@
     </div>
     <!--Fim das tabs-->
 
-    <div class="modal fade" data-backdrop="static" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <asp:UpdatePanel ID="UpdatePanelModalNovoRequerimento" UpdateMode="Conditional" runat="server">
-                <ContentTemplate>             
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" id="fecharModal" onclick="fechaModalCri();" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title" id="myModalLabel3">Cadastrar Solicitações</h4>
-                            </div>
-                            <br />
-
-                            <div class="form-group">
-                                <div class="controls-row">
-
-                                    <asp:Label ID="lblCategoriaNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Categoria: "></asp:Label></td>    
-                                    <asp:DropDownList ID="txtCategoria" ClientIDMode="Static" CssClass="form-control col-sm-9"  Width="50%" runat="server">
-                                        <asp:ListItem>Alteração de notas</asp:ListItem>
-                                        <asp:ListItem>Problema com cadastros</asp:ListItem>
-                                        <asp:ListItem>Problema com avaliações</asp:ListItem>
-                                        <asp:ListItem>Sugestão</asp:ListItem>
-                                    </asp:DropDownList></td>
-                                   
-                                     <%--Validação do Campo Categoria (Verifica se está vazio e se está preenchido com uma string)--%>
-                                     &nbsp<asp:RequiredFieldValidator ID="rfvCategoriaNovoRequerimento" CssClass="col-sm1" runat="server" ErrorMessage="O campo Categoria deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtCategoria" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>
-                                   
-                                </div>
-                                   
-                            </div>
-
-                            <div class="form-group">
-                                <div class="controls-row">
-                                    <asp:Label ID="lblAssuntoNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Assunto: "></asp:Label>                                    
-                                    <asp:TextBox ID="txtAssunto" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox>
-                                    
-                                    <%--Validação do Campo Assunto (Verifica se está vazio e se está preenchido com uma string)--%>
-                                    &nbsp<asp:RequiredFieldValidator ID="rfvAssuntoNovoRequerimento" runat="server" CssClass="col-sm1" ErrorMessage="O campo Assunto deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtAssunto" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>
-                                    
-                                </div>
-                                <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px;padding-left:30px;"></asp:Label>
-                            </div>
-                             
-                            <asp:ValidationSummary ID="vsNovoRequerimento" ValidationGroup="NovoRequerimento" ForeColor="#960d10" runat="server" DisplayMode="List" Style="margin: 7px; padding: 7px;" />
-
-                            <div class="modal-footer">
-                                <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarNovoRequerimento" runat="server" title="Cancelar Inserção" OnClick="btnCancelarNovoCriterio_Click">
-                                    <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</asp:LinkButton>
-
-                                <asp:LinkButton ID="btnCriarNovoRequerimento" OnClick="btnCriarNovoTicket_Click" runat="server" CssClass="btn btn-default" ToolTip="Confirmar Inserção" CausesValidation="true" ValidationGroup="NovoRequerimento">
-                                   <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar </asp:LinkButton>
-                            </div>
-
-                        </div>
-                    </div>
-                  </ContentTemplate>
-              </asp:UpdatePanel>
-        </div>
+    
 </asp:Content>
