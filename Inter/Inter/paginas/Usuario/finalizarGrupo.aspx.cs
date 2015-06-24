@@ -274,11 +274,23 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
 
             DataSet dsGruposFinalizar = new DataSet();
             dsGruposFinalizar = Grupo_DB.SelectAllGruposFinalizar(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
-            Session["GruposFinalizar"] = dsGruposFinalizar;
-
-            Response.Redirect("~/FinalizarGrupo");
+            if (dsGruposFinalizar == null)
+            {
+                Session["GruposFinalizar"] = null;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalTodosFinalizados", "msgTodosFinalizados();", true);
+            }
+            else
+            {
+                Session["GruposFinalizar"] = dsGruposFinalizar;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalGrupoFinalizado", "msgGrupoFinalizado();", true);
+            }
         }
         
+    }
+
+    protected void btnGrupoFinalizado_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/FinalizarGrupo");
     }
 
 }
