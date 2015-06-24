@@ -148,7 +148,7 @@ public class Requerimento_DB
             IDbCommand objCommnad;
             IDataReader objDataReader;
             objConnection = Mapped.Connection();
-            objCommnad = Mapped.Command("SELECT MAX(REQ_CODIGO) FROM req_requerimento", objConnection);            
+            objCommnad = Mapped.Command("SELECT * FROM req_requerimento ORDER by req_codigo DESC LIMIT 1", objConnection);            
             objDataReader = objCommnad.ExecuteReader();
             while (objDataReader.Read())
             {

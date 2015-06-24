@@ -212,6 +212,7 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
     {
         int cod = Convert.ToInt32(lblMsgId.Text);
         Requerimento_DB.Update(cod, 3);
+        Requerimento_DB.UpdateTime(cod);
         mdlHeader.Attributes["style"] = "background-color: #0D9643;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
         txtResponder.Attributes["style"] = "background-color: #ccc";
         txtResponder.ReadOnly = true;
@@ -219,13 +220,15 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
 
         abrirMensagens(cod);   
 
-        txtResponder.Text = "";
+        txtResponder.Text = "";        
 
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+        CarregarGridAtivos();
 
         UpdatePanel3.Update(); 
-        UpdatePanelAtivados.Update();
+        UpdatePanel1.Update();
         UpdatePanel2.Update();
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
     }
 
     protected void btnLibera_Click(object sender, EventArgs e)
