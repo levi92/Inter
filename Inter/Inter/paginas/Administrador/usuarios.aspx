@@ -61,7 +61,7 @@
                         <asp:UpdatePanel ID="UpdatePanelAdmin" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <asp:Label ID="lblMsgAdmin" Text="" runat="server"></asp:Label>
-                                <asp:GridView ID="gdvAdmin" runat="server" CssClass="gridView" AllowPaging="true" DataKeyNames="per_matricula" PageSize="10"
+                                <asp:GridView ID="gdvAdmin" runat="server" CssClass="tableFinalizar" AllowPaging="true" DataKeyNames="per_matricula" PageSize="10"
                                     OnRowUpdating="gdvAdmin_RowUpdating"
                                     AutoGenerateColumns="false">
 
@@ -107,7 +107,7 @@
                         <asp:UpdatePanel ID="UpdatePanelProf" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <asp:Label ID="lblMsgProf" Text="" runat="server"></asp:Label>
-                                <asp:GridView ID="gdvProf" runat="server" CellPadding="4" GridLines="None" DataKeyNames="pro_matricula" CssClass="gridView" AllowPaging="true" PageSize="10"
+                                <asp:GridView ID="gdvProf" runat="server" CellPadding="4" GridLines="None" DataKeyNames="pro_matricula" CssClass="tableFinalizar" AllowPaging="true" PageSize="10"
                                     OnRowCommand="gdvProf_RowCommand"
                                     OnRowDataBound="gdvProf_RowDataBound"
                                     OnPageIndexChanging="gdvProf_PageIndexChanging"

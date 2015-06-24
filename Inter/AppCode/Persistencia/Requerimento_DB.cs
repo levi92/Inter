@@ -22,7 +22,7 @@ public class Requerimento_DB
             if (requerimento.CodigoGrupo != 0) {
                sql = "INSERT INTO req_requerimento(REQ_CODIGO, PRO_MATRICULA, GRU_CODIGO, REQ_ASSUNTO, REQ_DT_REQUISICAO, REQ_STATUS, REQ_CATEGORIA, REQ_USUARIO, REQ_DT_MODIFICADO) VALUES (?req_codigo, ?pro_matricula, ?gru_codigo, ?req_assunto, ?req_dt_requisicao, ?req_status, ?req_categoria, ?req_usuario, ?data)";
             } else {
-                sql = "INSERT INTO req_requerimento(REQ_CODIGO, PRO_MATRICULA, REQ_ASSUNTO, REQ_DT_REQUISICAO, REQ_STATUS, REQ_CATEGORIA, REQ_USUARIO, REQ_DT_MODIFICADO) VALUES (?req_codigo, ?pro_matricula, ?req_assunto, ?req_dt_requisicao, ?req_status, ?req_categoria, ?req_usuario, ?data)";
+               sql = "INSERT INTO req_requerimento(REQ_CODIGO, PRO_MATRICULA, REQ_ASSUNTO, REQ_DT_REQUISICAO, REQ_STATUS, REQ_CATEGORIA, REQ_USUARIO, REQ_DT_MODIFICADO) VALUES (?req_codigo, ?pro_matricula, ?req_assunto, ?req_dt_requisicao, ?req_status, ?req_categoria, ?req_usuario, ?data)";
             }
             
             conexao = Mapped.Connection();

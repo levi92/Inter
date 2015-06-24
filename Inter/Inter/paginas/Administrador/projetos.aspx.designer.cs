@@ -147,13 +147,13 @@ public partial class paginas_Admin_projetos {
     protected global::System.Web.UI.UpdatePanel UpdatePanelModalNovoCriterio;
     
     /// <summary>
-    /// lblNomeGrupo control.
+    /// lblNomeGrupoModal control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblNomeGrupo;
+    protected global::System.Web.UI.WebControls.Label lblNomeGrupoModal;
     
     /// <summary>
     /// lblCursoModal control.
@@ -165,13 +165,22 @@ public partial class paginas_Admin_projetos {
     protected global::System.Web.UI.WebControls.Label lblCursoModal;
     
     /// <summary>
-    /// lblSemestre control.
+    /// lblSemestreModal control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblSemestre;
+    protected global::System.Web.UI.WebControls.Label lblSemestreModal;
+    
+    /// <summary>
+    /// lblStatusModal control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblStatusModal;
     
     /// <summary>
     /// lblDisciplinas control.

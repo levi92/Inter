@@ -156,13 +156,17 @@ public class Funcoes_DB
         IDbCommand objCommand;
         IDataAdapter objDataAdapter;
         objConnection = Mapped.Connection();
-        objCommand = Mapped.Command("SELECT G.GRU_CODIGO, P.PRI_CODIGO, G.GRU_NOME_PROJETO, CONCAT(S.SAN_ANO, '-', S.SAN_SEMESTRE) AS SAN, G.GRU_FINALIZADO FROM SAN_SEMESTRE_ANO S INNER JOIN PRI_PROJETO_INTER P ON (S.SAN_CODIGO = P.SAN_CODIGO)" + 
+        objCommand = Mapped.Command("SELECT G.GRU_CODIGO, P.PRI_CODIGO, G.GRU_NOME_PROJETO, P.CUR_NOME, P.PRI_SEMESTRE, CONCAT(S.SAN_ANO, '-', S.SAN_SEMESTRE) AS SAN, G.GRU_FINALIZADO FROM SAN_SEMESTRE_ANO S INNER JOIN PRI_PROJETO_INTER P ON (S.SAN_CODIGO = P.SAN_CODIGO)" + 
         "INNER JOIN GRU_GRUPO G ON (P.PRI_CODIGO = G.PRI_CODIGO);", objConnection);
         objDataAdapter = Mapped.Adapter(objCommand);
         objDataAdapter.Fill(ds);
         objConnection.Close();
         objCommand.Dispose();
         objConnection.Dispose();
+        /*if (ds.Tables[0].Rows.Count == 0)
+        {
+            ds = null;
+        }*/
         return ds;
     }
 
