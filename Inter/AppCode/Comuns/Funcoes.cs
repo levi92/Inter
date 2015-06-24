@@ -495,7 +495,7 @@ namespace Inter.Funcoes
             return strConexao;
         }
 
-        public static string XuxaMeneguel(string sValue)
+        public static string XuxaMeneghel(string sValue)
         {
             //Valores a serem substituidos
             sValue = sValue.Replace("'", "''");
