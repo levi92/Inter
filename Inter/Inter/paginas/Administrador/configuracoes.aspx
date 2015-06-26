@@ -29,6 +29,27 @@
 
     </script>
 
+        <asp:UpdateProgress ID="upgConfig" runat="server" AssociatedUpdatePanelID="UpdatePanelBkp" DisplayAfter="1000">
+        <ProgressTemplate>
+            <div class="modalLoader">
+                <div class="modalCenter">
+                    <img alt="Carregando" src="../../App_Themes/images/ajax-loader.gif" /><br />
+
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
+    <asp:UpdateProgress ID="upgModal" runat="server" AssociatedUpdatePanelID="UpdatePanelModal" DisplayAfter="1000">
+        <ProgressTemplate>
+            <div class="modalLoader">
+                <div class="modalCenter">
+                    <img alt="Carregando" src="../../App_Themes/images/ajax-loader.gif" /><br />
+
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
 
 
     <div id="p1" class="first">
@@ -97,7 +118,7 @@
 
             <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-                <asp:UpdatePanel ID="UpdatePanelModalNovoCriterio" UpdateMode="Conditional" runat="server">
+                <asp:UpdatePanel ID="UpdatePanelModal" UpdateMode="Conditional" runat="server">
                     
                     <ContentTemplate>
                         
@@ -125,7 +146,7 @@
                                     <br />
                                     <asp:Label ID="lblMsgModal" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
                                     <br />
-                                    <asp:Label ID="lblMsgModal2" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
+                                    <asp:Label ID="lblMsgModal2" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;padding-bottom:10px;"></asp:Label>
                                 </div>
 
                                 <div class="modal-footer">

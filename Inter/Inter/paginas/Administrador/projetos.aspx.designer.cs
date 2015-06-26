@@ -12,6 +12,15 @@
 public partial class paginas_Admin_projetos {
     
     /// <summary>
+    /// upgProjetos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdateProgress upgProjetos;
+    
+    /// <summary>
     /// lblCurso control.
     /// </summary>
     /// <remarks>

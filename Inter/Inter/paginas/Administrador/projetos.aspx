@@ -15,6 +15,18 @@
         }
     </script>
 
+    
+        <asp:UpdateProgress ID="upgProjetos" runat="server" AssociatedUpdatePanelID="UpdatePanelAtivados" DisplayAfter="1000">
+        <ProgressTemplate>
+            <div class="modalLoader">
+                <div class="modalCenter">
+                    <img alt="Carregando" src="../../App_Themes/images/ajax-loader.gif" /><br />
+
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
     <div id="p1" class="first">
         <div class="panel panel-default">
             <div class="panel-heading">

@@ -212,7 +212,7 @@ public partial class paginas_Admin_configuracoes : System.Web.UI.Page
                 {
                     PostBackTrigger trigger = new PostBackTrigger(); //INSTANCIA UMA NOVA TRIGGER QUE RECARREGARÁ A PÁGINA (NECESSÁRIO PARA FAZER O DOWNLOAD)
                     trigger.ControlID = timerDownload.UniqueID; //DEFINE QUE O CONTROLE timerDownload IRÁ FAZER O POSTABACK(RECARREGAMENTO) DA PÁGINA
-                    UpdatePanelModalNovoCriterio.Triggers.Add(trigger); //ADICIONA A TRIGGER AO UPDATEPANEL DA MODAL
+                    UpdatePanelModal.Triggers.Add(trigger); //ADICIONA A TRIGGER AO UPDATEPANEL DA MODAL
                     lblMsgModal.Style.Add("color", "green"); //DEIXA O TEXTO DA MODAL VERDE
                     lblMsgModal.Text = "Seu download iniciará em breve..."; //COLOCA A MENSAGEM DE INICANDO DOWNLAOD
                     timerDownload.Enabled = true; /*HABILITA O CONTADOR DO DOWNLOAD: QUANDO O TEMPO ESGOTAR, SERÁ DISPARADO O MÉTODO timerDownload_Tick 

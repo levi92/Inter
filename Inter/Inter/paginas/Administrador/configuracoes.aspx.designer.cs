@@ -12,6 +12,24 @@
 public partial class paginas_Admin_configuracoes {
     
     /// <summary>
+    /// upgConfig control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdateProgress upgConfig;
+    
+    /// <summary>
+    /// upgModal control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdateProgress upgModal;
+    
+    /// <summary>
     /// ScriptManager1 control.
     /// </summary>
     /// <remarks>
@@ -75,13 +93,13 @@ public partial class paginas_Admin_configuracoes {
     protected global::System.Web.UI.WebControls.Button btnCriarBackup;
     
     /// <summary>
-    /// UpdatePanelModalNovoCriterio control.
+    /// UpdatePanelModal control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.UpdatePanel UpdatePanelModalNovoCriterio;
+    protected global::System.Web.UI.UpdatePanel UpdatePanelModal;
     
     /// <summary>
     /// lblSenha control.

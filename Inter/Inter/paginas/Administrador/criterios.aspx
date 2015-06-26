@@ -98,7 +98,16 @@
                                         </asp:TemplateField>
 
                                         <%--Coluna do nome do Critério Geral--%>
-                                        <asp:BoundField DataField="cge_nome" HeaderText="Nome"/>
+
+                                        <asp:TemplateField HeaderText="Nome">
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtNome" runat="server" Text='<%#Eval ("cge_nome")%>' Width="50%"> </asp:TextBox>
+                                                <%--Essa textbox existe para quando for editar aparecer a descrição do critério(O width = 100% deixa a caixa no tamanho máximo até a coluna seguinte--%>
+                                            </EditItemTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("cge_nome")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
 
                                         <%--Coluna da descrição do Critério Geral--%>
                                         <asp:TemplateField HeaderText="Descrição">
