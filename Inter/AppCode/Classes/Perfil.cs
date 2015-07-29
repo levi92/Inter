@@ -8,6 +8,7 @@ public class Perfil
     private int per_descricao;
     private string per_login;
     private string per_senha;
+    private string per_usuario;
 
     public string Matricula
     {
@@ -31,6 +32,12 @@ public class Perfil
     {
         get { return per_senha; }
         set { per_senha = value; }
+    }
+
+    public string Per_usuario
+    {
+        get { return per_usuario; }
+        set { per_usuario = value; }
     }
 
     public Perfil(string acesso)

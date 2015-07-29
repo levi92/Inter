@@ -11,6 +11,7 @@ using MySql.Data.MySqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Data;
+using System.Configuration;
 /// <summary>
 /// Summary description for funcoes
 /// </summary>
@@ -141,13 +142,16 @@ namespace Inter.Funcoes
             string semestre = cursoTurno[1].Substring(1, 1);
             string[] disciplinaGrande = cursoTurnoSemestre[2].Split('(');
             string disciplina = disciplinaGrande[0];
-            string[] vetReturn = new string[4];
+            string[] professor = dados.Split('(');
+            string nome_professor = professor[2].Replace(")", "");
+            string[] vetReturn = new string[5];
 
             vetReturn[0] = curso_turno;
             vetReturn[1] = semestre;
             vetReturn[2] = disciplina;
             vetReturn[3] = codDisc;
-
+            vetReturn[4] = nome_professor;
+            
             return vetReturn;
         }
 
@@ -179,6 +183,19 @@ namespace Inter.Funcoes
             {
                 Disciplina dis = new Disciplina();
                 dis = Disciplina.SelectByCodigo(adiMatricula[i]);
+                materias[i] = dis.Nome;
+            }
+            return materias;
+        }
+
+        public static string[] DisciplinasByCodigo(DataSet codDisciplina) // Consulta projetos ADM
+        {
+            string[] materias = new string[codDisciplina.Tables[0].Rows.Count];
+            for (int i = 0; i < codDisciplina.Tables[0].Rows.Count; i++)
+            {
+                Disciplina dis = new Disciplina();
+                
+                dis = Disciplina.SelectByCodigo(codDisciplina.Tables[0].Rows[i]["dis_codigo"].ToString());
                 materias[i] = dis.Nome;
             }
             return materias;
@@ -322,8 +339,7 @@ namespace Inter.Funcoes
 
         public static string[] tratarArquivosBackup(string caminho)
         {
-
-            string[] arquivos = Directory.GetFiles(caminho, "*");
+            string[] arquivos = Directory.GetFiles(caminho, "*.sql");
 
             int i, j, min;
             string varAux;
@@ -334,7 +350,7 @@ namespace Inter.Funcoes
                 {
                     // Utilizando o CompareTo para comparar as string do vetor
                     // resultado -1 significa que arquivos[j] < arquivos[min]
-                    if (arquivos[j].CompareTo(arquivos[min]) != -1)
+                    if (arquivos[j].Replace("Sec","").CompareTo(arquivos[min].Replace("Sec","")) != -1)
                     {
                         min = j;
                     }
@@ -473,5 +489,33 @@ namespace Inter.Funcoes
             return ds;
         }
 
+        public static string getStrConexao()
+        {
+            string strConexao = ConfigurationManager.AppSettings["strConexao"];
+            return strConexao;
+        }
+
+        public static string XuxaMeneghel(string sValue)
+        {
+            //Valores a serem substituidos
+            sValue = sValue.Replace("'", "''");
+            sValue = sValue.Replace("--", "");
+            sValue = sValue.Replace("/*", "");
+            sValue = sValue.Replace("*/", "");
+            sValue = sValue.Replace(" or ", "");
+            sValue = sValue.Replace(" and ", "");
+            sValue = sValue.Replace("update", "");
+            sValue = sValue.Replace("-shutdown", "");
+            sValue = sValue.Replace("'or'1'='1'", "");
+            sValue = sValue.Replace("insert", "");
+            sValue = sValue.Replace("drop", "");
+            sValue = sValue.Replace("delete", "");
+            sValue = sValue.Replace("xp_", "");
+            sValue = sValue.Replace("sp_", "");
+            sValue = sValue.Replace("select", "");
+            sValue = sValue.Replace("1 union select", "");
+
+            return sValue;
+        }
     }
 }

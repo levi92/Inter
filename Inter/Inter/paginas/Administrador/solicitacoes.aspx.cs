@@ -33,104 +33,207 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
     }
 
 
+
     public void CarregarGridAtivos()
     {
         //ABERTO
-        DataSet ds = Requerimento_DB.SelectS(0); //criando um data set com as solicitações abertas
+        DataSet ds = Requerimento_DB.SelectS(1); //criando um data set com as solicitações abertas
         int qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
-
         //se qtd for maior que zero, ou seja, se tiver dados no data set
+
+        gdvRequerimentoAberto.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+        gdvRequerimentoAberto.DataBind(); //preenche o grid view com os dados
         if (qtd > 0)
-        {
-            gdvRequerimentoAberto.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
-            gdvRequerimentoAberto.DataBind(); //preenche o grid view com os dados
-            lblQtdRegistro.Text = "Foram encontrados " + qtd + " Requerimentos";
+        {           
+            lblQtdRegistro.Text = "Foram encontrados " + qtd + " Solicitações";
         }
         else
         {
-            lblQtdRegistro.Text = "Nenhum Requerimento foi encontrado.";
+            lblQtdRegistro.Text = "Nenhuma Solicitação foi encontrada.";
         }
 
 
         //EM ANDAMENTO
-        ds = Requerimento_DB.SelectS(1); //criando um data set com as solicitações abertas
-        qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
-
-        //se qtd for maior que zero, ou seja, se tiver dados no data set
-        if (qtd > 0)
-        {
-            gdvRequerimentoAndamento.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
-            gdvRequerimentoAndamento.DataBind(); //preenche o grid view com os dados
-            lblQtdRegistroAnd.Text = "Foram encontrados " + qtd + " Requerimentos";
-        }
-        else
-        {
-            lblQtdRegistroAnd.Text = "Nenhum Requerimento foi encontrado.";
-        }
-
-
-        //FINALIZADO
         ds = Requerimento_DB.SelectS(2); //criando um data set com as solicitações abertas
         qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
 
         //se qtd for maior que zero, ou seja, se tiver dados no data set
+        gdvRequerimentoAndamento.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+        gdvRequerimentoAndamento.DataBind(); //preenche o grid view com os dados
         if (qtd > 0)
         {
-            gdvRequerimentoFinalizado.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
-            gdvRequerimentoFinalizado.DataBind(); //preenche o grid view com os dados
-            lblQtdRegistroFin.Text = "Foram encontrados " + qtd + " Requerimentos";
+            lblQtdRegistroAnd.Text = "Foram encontrados " + qtd + " Solicitações";
         }
         else
         {
-            lblQtdRegistroFin.Text = "Nenhum Requerimento foi encontrado.";
+            lblQtdRegistroAnd.Text = "Nenhuma Solicitação foi encontrada.";
+        }
+
+
+        //FINALIZADO
+        ds = Requerimento_DB.SelectS(3); //criando um data set com as solicitações abertas
+        qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
+
+        //se qtd for maior que zero, ou seja, se tiver dados no data set
+        gdvRequerimentoFinalizado.DataSource = ds.Tables[0].DefaultView; //fonte de dados do grid view recebe o ds criado anteriormente
+        gdvRequerimentoFinalizado.DataBind(); //preenche o grid view com os dados
+        if (qtd > 0)
+        {
+            lblQtdRegistroFin.Text = "Foram encontrados " + qtd + " Solicitações";
+        }
+        else
+        {
+            lblQtdRegistroFin.Text = "Nenhuma Solicitação foi encontrada.";
         }
 
 
     }
 
-
-    //Método para confirmar a inserção de uma nova Requerimento
-    protected void btnCriarNovoTicket_Click(object sender, EventArgs e)
+    protected void btnModal_Command(object sender, CommandEventArgs e)
     {
-        txtAssunto.Style.Clear();
-        txtCategoria.Style.Clear();
+        int ID=Convert.ToInt32(e.CommandArgument);
+        Requerimento req = Requerimento_DB.Select(ID);
 
-        if (!String.IsNullOrEmpty(txtAssunto.Text) && !String.IsNullOrEmpty(txtCategoria.Text))
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+        lblMsgAssunto.Text = req.Assunto;
+        lblMsgProfessor.Text = req.MatriculaPro;
+        lblMsgCategoria.Text = req.Categoria;
+        lblMsgId.Text = req.CodigoReq.ToString();
+        switch (req.Status)
+        {
+            case 1:
+                lblMsgStatus.Text = "Aberto";
+                mdlHeader.Attributes["style"] = "background-color: #960d10;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
+                break;
+            case 2:
+                lblMsgStatus.Text = "Em Andamento";
+                mdlHeader.Attributes["style"] = "background-color: #f9ae0e;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
+                break;
+            case 3:
+                lblMsgStatus.Text = "Finalizado";
+                mdlHeader.Attributes["style"] = "background-color: #0D9643;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);;";
+                break;
+
+        }
+
+        if (req.Categoria == "Alteração de notas")
+        {
+            subMenu.Attributes["style"] = "height: 84px";
+            btnLibera.Visible = true;
+        }
+        else
+        {
+            subMenu.Attributes["style"] = "height: 42px";
+            btnLibera.Visible = false;
+        }
+
+        if (req.Status == 3)
+        {
+            txtResponder.Attributes["style"] = "background-color: #ccc";
+            txtResponder.ReadOnly = true;
+            btnNovaMsg.Visible = false;
+        }
+        else
+        {
+            txtResponder.Attributes["style"] = "background-color: #fff";
+            txtResponder.ReadOnly = false;
+            btnNovaMsg.Visible = true;
+        }
+
+        abrirMensagens(req.CodigoReq); 
+        UpdatePanel3.Update();
+        
+
+        
+    }
+
+    public void abrirMensagens(int cod)
+    {
+        DataSet msgDt = Mensagem_DB.SelectAll(cod);
+
+        int qtd = msgDt.Tables[0].Rows.Count;
+        string usuario = Session["nome"].ToString();
+        string msgBox = " ";
+        int b = 0;
+        for (int i = 0; i < qtd; i++)
+        {
+            b = i + 1;
+            if (usuario == msgDt.Tables[0].Rows[i][2].ToString()) {
+                msgBox = msgBox + "<div class='allMsg' style='float: right'><div class='txtCard' style='background-color: rgb(247, 247, 228);' onclick='mostraInfo(" + b + ")'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info" + b + "' class='infoMsg'>Enviado as " + msgDt.Tables[0].Rows[i][4].ToString() + "</div></div>";
+            } else {
+                msgBox = msgBox + "<div class='allMsg' style='float: left'> <div class='txtCard' onclick='mostraInfo(" + b + ")'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info" + b + "' class='infoMsg'>Enviado por " + msgDt.Tables[0].Rows[i][2].ToString() + " - " + msgDt.Tables[0].Rows[i][4].ToString() + "</div></div>";
+            }
+            
+        }
+
+        msgInsideBox.InnerHtml = msgBox;  
+    }
+
+    protected void btnNovaMsg_Click(object sender, EventArgs e)
+    {
+
+        
+
+        if (!String.IsNullOrEmpty(txtResponder.Text))
         {
 
-            var assunto = txtAssunto.Text;
-            var categoria = txtCategoria.Text;
-            var grupo = 0;
+            string usuario = Session["nome"].ToString();
+            string msg = txtResponder.Text;
+            int cod = Convert.ToInt32(lblMsgId.Text);
 
-            Requerimento req = new Requerimento("0", grupo, assunto, categoria);
+            Mensagem men = new Mensagem(cod, usuario, msg);
 
-
-            if (Requerimento_DB.Insert(req) == 0)
+            if (Mensagem_DB.Insert(men) == 0)
             {
-                lblMsg.Text = "<span class='glyphicon glyphicon-ok-circle'></span> &nbsp Cadastrado com sucesso.";
-                lblMsg.Style.Add("color", "green");
-                gdvRequerimentoAberto.EditIndex = -1;
+                Requerimento_DB.UpdateTime(cod);
+                Requerimento_DB.Update(cod, 2);
+                mdlHeader.Attributes["style"] = "background-color: #f9ae0e;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
+                abrirMensagens(cod);
+
                 CarregarGridAtivos();
-                UpdatePanelAtivados.Update();
+                
+            }
 
 
-            }
-            else
-            {
-                lblMsg.Text = "Erro ao inserir solicitação!";
-            }
+            txtResponder.Text = "";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+
+            UpdatePanelAtivados.Update();
+            UpdatePanel1.Update();
+            UpdatePanel3.Update();
+
+            UpdatePanelAtivados.Update();
+
+
         }
     }
 
-
-    protected void btnCancelarNovoCriterio_Click(object sender, EventArgs e)
+    protected void btnFinaliza_Click(object sender, EventArgs e)
     {
+        int cod = Convert.ToInt32(lblMsgId.Text);
+        Requerimento_DB.Update(cod, 3);
+        Requerimento_DB.UpdateTime(cod);
+        mdlHeader.Attributes["style"] = "background-color: #0D9643;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
+        txtResponder.Attributes["style"] = "background-color: #ccc";
+        txtResponder.ReadOnly = true;
+        btnNovaMsg.Visible = false;
 
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalCriacaoCriterio", "FechaModalCriacaoCriterio();", true);
-        lblMsg.Text = "";
-        txtAssunto.Text = "";
-        txtCategoria.Text = "";
+        abrirMensagens(cod);   
 
+        txtResponder.Text = "";        
+
+        CarregarGridAtivos();
+
+        UpdatePanel3.Update(); 
+        UpdatePanel1.Update();
+        UpdatePanel2.Update();
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+    }
+
+    protected void btnLibera_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Projetos");
     }
 
 

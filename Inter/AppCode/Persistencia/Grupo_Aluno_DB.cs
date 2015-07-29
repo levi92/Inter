@@ -16,11 +16,35 @@ namespace AppCode.Persistencia
             {
                 IDbConnection conexao;
                 IDbCommand objCommand;
-                string sql = "INSERT INTO gal_grupo_aluno(alu_matricula, gru_codigo) VALUES(?alu_matricula, ?gru_codigo)";
+                string sql = "INSERT INTO gal_grupo_aluno(alu_matricula, gru_codigo, gal_usuario) VALUES(?alu_matricula, ?gru_codigo, ?gal_usuario)";
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
                 objCommand.Parameters.Add(Mapped.Parameter("?alu_matricula", gal.Alu_matricula));
-                objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo",gal.Gru_codigo.Gru_codigo));              
+                objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo",gal.Gru_codigo.Gru_codigo));
+                objCommand.Parameters.Add(Mapped.Parameter("?gal_usuario", gal.Gal_usuario));
+                objCommand.ExecuteNonQuery();
+                conexao.Close();
+                objCommand.Dispose();
+                conexao.Dispose();
+            }
+            catch (Exception e)
+            {
+                retorno = -2;
+            }
+            return retorno;
+        }
+
+        public static int Insert(string sqlInsert)
+        {
+            int retorno = 0;
+            try
+            {
+                IDbConnection conexao;
+                IDbCommand objCommand;
+                string sql = "INSERT INTO gal_grupo_aluno(alu_matricula, gru_codigo, gal_usuario) VALUES" + sqlInsert;
+                conexao = Mapped.Connection();
+                objCommand = Mapped.Command(sql, conexao);
+
                 objCommand.ExecuteNonQuery();
                 conexao.Close();
                 objCommand.Dispose();

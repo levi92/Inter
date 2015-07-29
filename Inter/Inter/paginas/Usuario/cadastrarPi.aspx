@@ -8,7 +8,6 @@
         $(document).ready(function () {
             // ALTERAR COR DO ÍCONE NO MENU LATERAL 
             $('#cphConteudo_icone5').addClass('corIcone');
-
         });
 
         // LIMPAR TEXTBOXS MODAL CADASTRAR CRTITÉRIO 
@@ -52,6 +51,11 @@
         //CHAMAR MODAL COM MENSAGEM QUE JÁ POSSUI PI CADASTRADO
         function msgPossuiPI() {
             $("#possuiPI").click();
+        }
+
+        Sys.Application.add_load(BindEvents);
+        function BindEvents() {
+            $('[data-toggle=tooltip]').tooltip();
         }
 
     </script>
@@ -171,8 +175,7 @@
                         <td class="colunaBotoes"></td>
                         <td class="colunaBotoes"></td>
                         <td class="colunaBotoes">
-                            <asp:Button ID="btnContinuarEtapa2" OnClientClick="Mostra('p10'); return false;" ClientIDMode="Static"
-                                CssClass="btn btn-default" runat="server" Text="Continuar" ToolTip="Ir para adicionar critérios" />
+                            <button ID="btnContinuarEtapa2" OnClick="Mostra('p10'); return false;" Class="btn btn-default" Title="Ir para adicionar critérios">Continuar</button>
                         </td>
                     </tr>
                 </table>

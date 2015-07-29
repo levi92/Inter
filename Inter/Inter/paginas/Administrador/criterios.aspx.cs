@@ -86,6 +86,8 @@ using System.Data;
             cri.Cge_codigo = Convert.ToInt32(lblCodigo.Text);
             cri.Cge_nome = lblNome.Text;
             cri.Cge_descricao = txtDescricao.Text;
+            cri.Cge_usuario = Session["nome"].ToString();
+
             if (Criterios_Gerais_DB.Update(cri) == 0)
             {
                 lblMsg.Text = "Critério "+lblNome.Text+" atualizado com sucesso!";
@@ -127,6 +129,7 @@ using System.Data;
                 cri.Cge_codigo = 0;
                 cri.Cge_nome = txtNomeNovoCriterio.Text;
                 cri.Cge_descricao = txtDescricaoNovoCriterio.Text;
+                cri.Cge_usuario = Session["nome"].ToString();
                
 
                 if (Criterios_Gerais_DB.Insert(cri) == 0)
@@ -151,7 +154,10 @@ using System.Data;
         {
             
             Label lblCodigo = (Label)gdvCriteriosAtivos.Rows[e.RowIndex].FindControl("lblCodigo");
-            if (Criterios_Gerais_DB.Desativar(Convert.ToInt32(lblCodigo.Text)) == 0)
+            Criterios_Gerais criterio = new Criterios_Gerais();
+            criterio.Cge_usuario = Session["nome"].ToString();
+
+            if (Criterios_Gerais_DB.Desativar(Convert.ToInt32(lblCodigo.Text), criterio) == 0)
             {
                 lblMsg.Text = "Critério desativado com sucesso!";
                 gdvCriteriosAtivos.EditIndex = -1;
@@ -170,7 +176,10 @@ using System.Data;
         {
             
             Label lblCodigo = (Label)gdvCriteriosDesativados.Rows[e.RowIndex].FindControl("lblCodigo");
-                if (Criterios_Gerais_DB.Ativar(Convert.ToInt32(lblCodigo.Text)) == 0)
+            Criterios_Gerais criterio = new Criterios_Gerais();
+            criterio.Cge_usuario = Session["nome"].ToString();
+
+                if (Criterios_Gerais_DB.Ativar(Convert.ToInt32(lblCodigo.Text), criterio) == 0)
                 {                    
                     lblMsg2.Text = "Critério ativado com sucesso!";                 
                     CarregarGridAtivos();
@@ -190,7 +199,7 @@ using System.Data;
         protected void btnCancelarNovoCriterio_Click(object sender, EventArgs e)
         {
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalCriacaoCriterio", "FechaModalCriacaoCriterio();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModal()", "FechaModal();", true);
             lblMsg.Text = "";
             txtNomeNovoCriterio.Text = "";
             txtDescricaoNovoCriterio.Text = "";

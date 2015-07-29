@@ -9,21 +9,20 @@ using System.Web;
 
         private Projeto_Inter pri_codigo;
         private int adi_codigo;
-        private bool adi_mae;
         private int dis_codigo;
+        private string pro_nome;
+
+        public string Pro_nome
+        {
+            get { return pro_nome; }
+            set { pro_nome = value; }
+        }
 
         public int Dis_codigo
         {
             get { return dis_codigo; }
             set { dis_codigo = value; }
         }
-
-        public bool Adi_mae
-        {
-            get { return adi_mae; }
-            set { adi_mae = value; }
-        }
-
 
         public global::Projeto_Inter Pri_codigo
         {

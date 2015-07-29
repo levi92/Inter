@@ -12,6 +12,114 @@
 public partial class paginas_Admin_solicitacoes {
     
     /// <summary>
+    /// ScriptManager2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.ScriptManager ScriptManager2;
+    
+    /// <summary>
+    /// UpdatePanel3 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+    
+    /// <summary>
+    /// mdlHeader control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl mdlHeader;
+    
+    /// <summary>
+    /// lblMsgAssunto control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgAssunto;
+    
+    /// <summary>
+    /// lblMsgCategoria control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgCategoria;
+    
+    /// <summary>
+    /// lblMsgStatus control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgStatus;
+    
+    /// <summary>
+    /// lblMsgProfessor control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgProfessor;
+    
+    /// <summary>
+    /// subMenu control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl subMenu;
+    
+    /// <summary>
+    /// btnFinaliza control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnFinaliza;
+    
+    /// <summary>
+    /// btnLibera control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnLibera;
+    
+    /// <summary>
+    /// msgInsideBox control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl msgInsideBox;
+    
+    /// <summary>
+    /// lblMsgId control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsgId;
+    
+    /// <summary>
     /// txtResponder control.
     /// </summary>
     /// <remarks>
@@ -21,49 +129,13 @@ public partial class paginas_Admin_solicitacoes {
     protected global::System.Web.UI.WebControls.TextBox txtResponder;
     
     /// <summary>
-    /// dropDownListTipoTicket control.
+    /// btnNovaMsg control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlSelect dropDownListTipoTicket;
-    
-    /// <summary>
-    /// New control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label New;
-    
-    /// <summary>
-    /// vsNovoTicket control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ValidationSummary vsNovoTicket;
-    
-    /// <summary>
-    /// btnCriarNovoTicket control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnCriarNovoTicket;
-    
-    /// <summary>
-    /// ScriptManager1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.ScriptManager ScriptManager1;
+    protected global::System.Web.UI.WebControls.LinkButton btnNovaMsg;
     
     /// <summary>
     /// UpdatePanelAtivados control.
@@ -145,103 +217,4 @@ public partial class paginas_Admin_solicitacoes {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblQtdRegistroFin;
-    
-    /// <summary>
-    /// UpdatePanelModalNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.UpdatePanel UpdatePanelModalNovoRequerimento;
-    
-    /// <summary>
-    /// lblAssuntoNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblAssuntoNovoRequerimento;
-    
-    /// <summary>
-    /// txtAssunto control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList txtAssunto;
-    
-    /// <summary>
-    /// rfvAssuntoNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAssuntoNovoRequerimento;
-    
-    /// <summary>
-    /// lblCategoriaNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblCategoriaNovoRequerimento;
-    
-    /// <summary>
-    /// txtCategoria control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtCategoria;
-    
-    /// <summary>
-    /// rfvCategoriaNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCategoriaNovoRequerimento;
-    
-    /// <summary>
-    /// lblMsg control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMsg;
-    
-    /// <summary>
-    /// vsNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ValidationSummary vsNovoRequerimento;
-    
-    /// <summary>
-    /// btnCancelarNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnCancelarNovoRequerimento;
-    
-    /// <summary>
-    /// btnCriarNovoRequerimento control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnCriarNovoRequerimento;
 }

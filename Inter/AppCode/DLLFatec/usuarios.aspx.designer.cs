@@ -9,16 +9,25 @@
 
 
 
-public partial class paginas_Usuario_finalizarGrupo {
+public partial class paginas_Admin_usuarios {
     
     /// <summary>
-    /// upgAvaliar control.
+    /// upgAdmin control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.UpdateProgress upgAvaliar;
+    protected global::System.Web.UI.UpdateProgress upgAdmin;
+    
+    /// <summary>
+    /// upgProf control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdateProgress upgProf;
     
     /// <summary>
     /// ScriptManager1 control.
@@ -30,101 +39,74 @@ public partial class paginas_Usuario_finalizarGrupo {
     protected global::System.Web.UI.ScriptManager ScriptManager1;
     
     /// <summary>
-    /// updFinalizar control.
+    /// UpdatePanelAdmin control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.UpdatePanel updFinalizar;
+    protected global::System.Web.UI.UpdatePanel UpdatePanelAdmin;
     
     /// <summary>
-    /// lblGrupo control.
+    /// lblMsgAdmin control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblGrupo;
+    protected global::System.Web.UI.WebControls.Label lblMsgAdmin;
     
     /// <summary>
-    /// ddlFinalizarGrupos control.
+    /// gdvAdmin control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList ddlFinalizarGrupos;
+    protected global::System.Web.UI.WebControls.GridView gdvAdmin;
     
     /// <summary>
-    /// PanelFinalizarGrupo control.
+    /// lblQtdRegistroAdm control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Panel PanelFinalizarGrupo;
+    protected global::System.Web.UI.WebControls.Label lblQtdRegistroAdm;
     
     /// <summary>
-    /// gdvMediasDisciplinas control.
+    /// UpdatePanelProf control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.GridView gdvMediasDisciplinas;
+    protected global::System.Web.UI.UpdatePanel UpdatePanelProf;
     
     /// <summary>
-    /// lblMediaGrupos control.
+    /// lblMsgProf control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMediaGrupos;
+    protected global::System.Web.UI.WebControls.Label lblMsgProf;
     
     /// <summary>
-    /// btnFinalizarGrupos control.
+    /// gdvProf control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnFinalizarGrupos;
+    protected global::System.Web.UI.WebControls.GridView gdvProf;
     
     /// <summary>
-    /// cblLiberarDisciplinas control.
+    /// lblQtdRegistroProf control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.CheckBoxList cblLiberarDisciplinas;
-    
-    /// <summary>
-    /// btnVoltarHome2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnVoltarHome2;
-    
-    /// <summary>
-    /// btnGrupoFinalizado control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnGrupoFinalizado;
-    
-    /// <summary>
-    /// btnVoltarHome3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnVoltarHome3;
+    protected global::System.Web.UI.WebControls.Label lblQtdRegistroProf;
 }

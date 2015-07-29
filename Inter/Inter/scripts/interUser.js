@@ -160,18 +160,18 @@ $(document).ready(function () {
     // DATAS DE EVENTOS
     $("#btnAdicionarDatas").click(function () { //QUANDO CLICAR NO ADICIONAR DATAS
         // ZERAR VALORES DATAS DE EVENTOS
-        $("#txtDescricaoData").val(""); 
+        $("#txtDescricaoData").val("");
         $("#txtData").val("");
         contr = false; //PARA SABER SE IRÁ ATUALIZAR OU CRIAR UMA DATA, USADA NO BTN_EDITAR PARA ATUALIZAR O VALOR
 
         $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
-        $("#campoObrigatorio").css('visibility', 'hidden');        
+        $("#campoObrigatorio").css('visibility', 'hidden');
         $("#textoCampObrig").css('visibility', 'hidden');
-        
+
         $("#lblDataMsgErro").html("&nbsp &nbsp");
         $("#lblDescDataMsgErro").html("&nbsp &nbsp");
     });
-    
+
     var i = 0;
     var dadosDatas = "";
     var contr = false; //PARA SABER SE IRÁ ATUALIZAR OU CRIAR UMA DATA
@@ -185,10 +185,10 @@ $(document).ready(function () {
 
         //MENSAGENS DE ERRO
         if (descricaoData == "" && data == "") {
-            
+
             $("#lblDescDataMsgErro").html("&nbsp &nbsp  *");
             $("#lblDataMsgErro").html("&nbsp &nbsp  *");
-            $("#campoObrigatorio").css({'visibility': 'visible', 'color': 'red'});
+            $("#campoObrigatorio").css({ 'visibility': 'visible', 'color': 'red' });
             $("#campoObrigatorio").attr('class', 'glyphicon glyphicon-remove-circle');
             $("#textoCampObrig").html("&nbsp Campo obrigatório.");
             $("#textoCampObrig").css({ 'visibility': 'visible', 'color': 'red' });
@@ -197,7 +197,7 @@ $(document).ready(function () {
 
         } else
             if (descricaoData == "") {  //MENSAGEM DE ERRO
-                
+
                 $("#lblDescDataMsgErro").html("&nbsp &nbsp *");
                 $("#lblDataMsgErro").html("");
                 $("#campoObrigatorio").css({ 'visibility': 'visible', 'color': 'red' });
@@ -208,7 +208,7 @@ $(document).ready(function () {
                 $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
             } else
                 if (data == "") { //MENSAGEM DE ERRO
-                    
+
                     $("#lblDataMsgErro").html("&nbsp &nbsp *");
                     $("#lblDescDataMsgErro").html("");
                     $("#campoObrigatorio").css({ 'visibility': 'visible', 'color': 'red' });
@@ -218,7 +218,7 @@ $(document).ready(function () {
 
                     $("#btnConfirmarData").removeAttr("data-dismiss"); //DATA-DISMISS É PARA FECHAR A MODAL
                 } else { //SE ESTIVER TUDO CERTO 
-                    
+
                     //CRIANDO BOTÃO EXCLUIR
                     var btnExcluir = $('<button/>', {
                         type: 'button',
@@ -283,13 +283,13 @@ $(document).ready(function () {
                         }
                     });
 
-                    btnEditar.attr({ 'data-toggle': 'modal', 'data-target': '#myModal1' }); 
+                    btnEditar.attr({ 'data-toggle': 'modal', 'data-target': '#myModal1' });
                     //RECEBE O ATRIBUTO PARA PODER ABRIR A MODAL CADASTRAR DATAS
 
                     if (contr == false) { //QUER DIZER QUE VAI CRIAR UMA NOVA DATA DE EVENTO
 
                         $("#containerDatas").append(div); //DIV COM AS DATAS DE EVENTOS
-                        $("#div" + i).append(btnExcluir); 
+                        $("#div" + i).append(btnExcluir);
                         $("#div" + i).append(btnEditar);
 
                         var ed = document.getElementById('btnEditar-' + i); //PARA COLOCAR O ICONE NOS BOTÕES
@@ -301,8 +301,8 @@ $(document).ready(function () {
                         i++; //INDICE DOS COMPONENTES
                     } else { //SOMENTE EDITAR
                         //ATUALZANDO OS VALORES NA DIV QUE CONTÉM AS DATAS DE EVENTOS
-                        $('#descData' + indiceId[1]).html($("#txtDescricaoData").val()); 
-                        data = $("#txtData").val();                        
+                        $('#descData' + indiceId[1]).html($("#txtDescricaoData").val());
+                        data = $("#txtData").val();
                         $('#data' + indiceId[1]).html(data);
                         $("#btnConfirmarData").attr("data-dismiss", "modal");
                     }
@@ -311,7 +311,7 @@ $(document).ready(function () {
                     $("#lblDataMsgErro").html("");
                     $("#txtDescricaoData").val("");
                     $("#txtData").val("");
-                    $("#campoObrigatorio").css({ 'visibility': 'visible', 'color': 'green' });                  
+                    $("#campoObrigatorio").css({ 'visibility': 'visible', 'color': 'green' });
                     $("#campoObrigatorio").attr('class', 'glyphicon glyphicon-ok-circle');
                     $("#textoCampObrig").html("&nbsp Cadastrado com sucesso.");
                     $("#textoCampObrig").css({ 'visibility': 'visible', 'color': 'green' });
@@ -326,18 +326,18 @@ $(document).ready(function () {
         dadosDatas = "";
 
         for (var index = 0; index < i; index++) {
-            auxData = "";
             auxData = $('#descData' + index).html();
-
             if (typeof (auxData) != "undefined") {
-                dadosDatas += $('#descData' + index).html() + "|" + $('#data' + index).html() + "|";
+                var vetorData = $('#data' + index).html().split('/');
+                var dataInvertida = vetorData[2] + '-' + vetorData[1] + '-' + vetorData[0];
+                dadosDatas += $('#descData' + index).html() + "|" + dataInvertida + "|";
             }
 
         }
 
         $.ajax({
             type: 'POST',
-            url: 'cadastrarPi.aspx/GetEventos',
+            url: 'paginas/Usuario/cadastrarPi.aspx/GetEventos',
             data: "{dadosEventos:" + JSON.stringify(dadosDatas) + "}",
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
@@ -348,7 +348,7 @@ $(document).ready(function () {
                 }
             }
         });
-        
+
 
     });
 
@@ -364,13 +364,13 @@ $(document).ready(function () {
     funcaoImpedirValorAvaliar = function (id) {
 
         valor = document.getElementById(id).value;
-        if (!$.isNumeric(valor)) {
+        //if (!$.isNumeric(valor)) {
+        //    $("#" + id).val("");
+        //}
+        if (valor < 0 || valor > 10) {
+
             $("#" + id).val("");
         }
-        if (valor < 0 || valor > 10) {
-            
-            $("#" + id).val("");
-        }       
 
     }
 
@@ -383,7 +383,7 @@ $(document).ready(function () {
         var countRow = $("#tableAvaliar tr").length - 2; //POR CAUSA DO CABEÇALHO E RODAPÉ        
         var valor = 0;
         var valorMultiplicacao = 0;
-        var TodosPesos = ($('#valorPeso').val()).split('|');      
+        var TodosPesos = ($('#valorPeso').val()).split('|');
 
         var somaPeso = 0;
 
@@ -394,57 +394,173 @@ $(document).ready(function () {
             var peso = parseFloat(TodosPesos[i]);
             somaPeso += peso;
 
+            var nome = $("#txtNotasRow_" + i + "_Col_" + coluna[3]).val();
+            var aux = "";
             //SE TEXTBOX NÃO ESTIVER VAZIO
-            if (!isNaN(valor)) {                
-                valorMultiplicacao += valor * peso;                               
+            if (!isNaN(valor)) {
+                for (var j = 0; j < nome.length; j++) {
+                    if (nome.charAt(j) == ",") {
+                        aux += ".";
+                    } else {
+                        aux += nome.charAt(j);
+                    }
+                }
+                var valor = parseFloat(aux);
+                valorMultiplicacao += valor * peso;
             } else {
                 qtdValoresNulos++;
             }
-            
-        }
-        
-        var linhaLblMedia = $("#tableAvaliar tr").length - 1;        
 
-        if(qtdValoresNulos == countRow){
-            $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html("0.00");
+        }
+
+        var linhaLblMedia = $("#tableAvaliar tr").length - 1;
+
+        if (qtdValoresNulos == countRow) {
+            $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html("0.0");
         } else {
-            mediaPonderada = (valorMultiplicacao / somaPeso).toFixed(2);
+            mediaPonderada = (valorMultiplicacao / somaPeso).toFixed(1);
             $('#lblMediaRow_' + linhaLblMedia + '_Col_' + coluna[3]).html(mediaPonderada);
-        }        
+        }
 
         qtdValoresNulos = 0;
     }
 
-}); //FECHAMENTO $(document).ready
 
-function funcaoAtualizarMediaAll() {
+    //*********** CONSULTAR PI  ************
+    // DATAS DE EVENTOS
+    
+    i = 0;
+    dadosDatas = "";
+    contr = false; //PARA SABER SE IRÁ ATUALIZAR OU CRIAR UMA DATA
+    indiceId; //PARA SABER O INDICE DA LINHA DOS COMPONENTES QUE FOI CLICADO, EX: descData1, data1. USADO NO EDITAR 
 
-    var countRow = $("#tableAvaliar tr").length - 2; // - 2 POR CAUSA DO CABEÇALHO E RODAPÉ 
-    var qtdTotalCol = $('#tableAvaliar tr td').length; //QTD TOTAL DE COLUNAS
-    var qtdColuna = $('#tableAvaliar tr td').length / (countRow + 1); //QTD COLUNA POR LINHA
 
-    var valor = 0;
-    var valorMultiplicacao = 0;
-    var TodosPesos = ($('#valorPeso').val()).split('|');
-    var somaPeso = 0;
+    $("#btnEditarDatas").click(function () {
+        var DescricaoDatas = ($('#hdfDescricao').val()).split('|');
+        var datas = ($('#hdfDatas').val()).split('|');
+        var descricaoData = "";
+        var data = "";
 
-    for (var j = 1; j < qtdColuna; j++) {
-        for (var i = 0; i < countRow; i++) {
+        //CRIAR TODAS AS DATAS JÁ CADASTRADAS
+        for (var contador = 0; contador < DescricaoDatas.length - 1; contador++) {
+            descricaoData = DescricaoDatas[contador];
+            data = datas[contador];
 
-            valor = parseFloat($("#txtNotasRow_" + i + "_Col_" + j).val());
-            var peso = parseFloat(TodosPesos);
-            if (!isNaN(valor)) {
-                valorMultiplicacao += valor * peso;
-                somaPeso += peso;
-            }
+            //CRIANDO BOTÃO EXCLUIR
+            var btnExcluir = $('<button/>', {
+                type: 'button',
+                id: 'btnExcluir' + i,
+                value: 'Excluir',
+                title: 'Excluir',
+                class: 'btn btn-default btnExcluir',
+                click: function () {
+                    var parentBotao = $(this).parent(); //PEGA A DIV DA LINHA QUE FOI CLICADA
+
+                    //CHAMA A MODAL EXCLUIR
+                    $(function () {
+                        $("#boxDesejaExcluir").dialog({
+                            width: 400,
+                            height: 200,
+                            modal: true,
+                            resizable: false,
+                            draggable: false,
+                            buttons: {
+                                "Sim": function () {
+                                    parentBotao.remove(); //REMOVE A DIV QUE CONTÉM O EVENTO
+                                    $(this).dialog("close");
+                                },
+                                "Não": function () {
+                                    $(this).dialog("close");
+                                }
+                            }
+
+                        });
+                    });
+
+                }
+            });
+
+            //CRIANDO A DIV COM O EVENTO: LABEL DESCRICAO DATA E LABEL DATA
+            var div = '<div class="data" id="div' + i + '"> <b> <label id="descData' + i + '">' + descricaoData + '</label></b>' +
+                ': <label id="data' + i + '">' + data + '</label>  </div> ';
+
+            //CRIANDO BOTÃO EDITAR 
+            var btnEditar = $('<button/>', {
+                type: 'button',
+                id: 'btnEditar-' + i,
+                value: 'Editar',
+                title: 'Editar',
+                class: 'btn btn-default btnEditar',
+                click: function () {
+                    //REMOVE AS MENSAGENS DE ERRO 
+                    $("#lblDataMsgErro").html("&nbsp &nbsp");
+                    $("#lblDescDataMsgErro").html("");
+                    $("#campoObrigatorio").css('visibility', 'hidden');
+                    $("#textoCampObrig").css('visibility', 'hidden');
+
+                    $("#txtData").val("");
+                    indiceId = $(this).attr('id').split('-'); //PEGA O ID DO BTN_EDITAR E CORTA ONDE ACHAR O "-" 
+                    //EX: btnEditar1 - indiceId[0] = "btnEditar";  indiceId[1] = "1"; 
+
+                    $("#txtDescricaoData").val($('#descData' + indiceId[1]).html());//RECEBE O QUE ESTÁ NA DIV COM OS EVENTOS   
+                    //ex: data + indiceId[1] =  "data" + "1" = data1                            
+                    $("#txtData").val($('#data' + indiceId[1]).html());
+                    contr = true; //QUER DIZER QUE VAI SOMENTE ATUALIZAR
+                    $("#btnConfirmarData").attr("data-dismiss", "modal");
+                }
+            });
+
+            btnEditar.attr({ 'data-toggle': 'modal', 'data-target': '#myModal1' });
+            //RECEBE O ATRIBUTO PARA PODER ABRIR A MODAL CADASTRAR DATAS
+
+            $("#containerDatas").append(div); //DIV COM AS DATAS DE EVENTOS
+            $("#div" + i).append(btnExcluir);
+            $("#div" + i).append(btnEditar);
+
+            var ed = document.getElementById('btnEditar-' + i); //PARA COLOCAR O ICONE NOS BOTÕES
+            ed.insertAdjacentHTML('afterbegin', '<span class="glyphicon glyphicon-pencil"></span>');
+
+            var ex = document.getElementById('btnExcluir' + i);
+            ex.insertAdjacentHTML('afterbegin', '<span class="glyphicon glyphicon-trash"></span>');
+
+            i++; //INDICE DOS COMPONENTES
         }
 
-        var linhaLblMedia = $("#tableAvaliar tr").length - 1; //ULTIMA LINHA DA TABELA
-        $('#lblMediaRow_' + linhaLblMedia + '_Col_' + j).html((valorMultiplicacao / somaPeso).toFixed(2));
-        valorMultiplicacao = 0;
-    }
 
-}
+    });
+
+}); //FECHAMENTO $(document).ready
+
+//================================= NÃO APAGUE ===================================================
+
+//function funcaoAtualizarMediaAll() {
+
+//    var countRow = $("#tableAvaliar tr").length - 2; // - 2 POR CAUSA DO CABEÇALHO E RODAPÉ 
+//    var qtdTotalCol = $('#tableAvaliar tr td').length; //QTD TOTAL DE COLUNAS
+//    var qtdColuna = $('#tableAvaliar tr td').length / (countRow + 1); //QTD COLUNA POR LINHA
+
+//    var valor = 0;
+//    var valorMultiplicacao = 0;
+//    var TodosPesos = ($('#valorPeso').val()).split('|');
+//    var somaPeso = 0;
+
+//    for (var j = 1; j < qtdColuna; j++) {
+//        for (var i = 0; i < countRow; i++) {
+
+//            valor = parseFloat($("#txtNotasRow_" + i + "_Col_" + j).val());
+//            var peso = parseFloat(TodosPesos);
+//            if (!isNaN(valor)) {
+//                valorMultiplicacao += valor * peso;
+//                somaPeso += peso;
+//            }
+//        }
+
+//        var linhaLblMedia = $("#tableAvaliar tr").length - 1; //ULTIMA LINHA DA TABELA
+//        $('#lblMediaRow_' + linhaLblMedia + '_Col_' + j).html((valorMultiplicacao / somaPeso).toFixed(2));
+//        valorMultiplicacao = 0;
+//    }
+
+//}
 
 
 function ImprimirGrupo(id) {

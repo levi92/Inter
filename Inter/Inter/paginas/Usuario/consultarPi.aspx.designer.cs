@@ -12,92 +12,227 @@
 public partial class paginas_Usuario_consultarPi {
     
     /// <summary>
-    /// Label1 control.
+    /// ScriptManager1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label1;
+    protected global::System.Web.UI.ScriptManager ScriptManager1;
     
     /// <summary>
-    /// Label2 control.
+    /// lblCodigo control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label2;
+    protected global::System.Web.UI.WebControls.Label lblCodigo;
     
     /// <summary>
-    /// Label3 control.
+    /// lblCodigoPI control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label3;
+    protected global::System.Web.UI.WebControls.Label lblCodigoPI;
     
     /// <summary>
-    /// Label4 control.
+    /// lblCurso control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label4;
+    protected global::System.Web.UI.WebControls.Label lblCurso;
     
     /// <summary>
-    /// Label5 control.
+    /// lblCursoValor control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label5;
+    protected global::System.Web.UI.WebControls.Label lblCursoValor;
     
     /// <summary>
-    /// Label6 control.
+    /// lblSemestre control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label6;
+    protected global::System.Web.UI.WebControls.Label lblSemestre;
     
     /// <summary>
-    /// Label7 control.
+    /// lblSemestreValor control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label7;
+    protected global::System.Web.UI.WebControls.Label lblSemestreValor;
     
     /// <summary>
-    /// Label8 control.
+    /// lblAno control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label8;
+    protected global::System.Web.UI.WebControls.Label lblAno;
     
     /// <summary>
-    /// Label9 control.
+    /// lblAnoValor control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label9;
+    protected global::System.Web.UI.WebControls.Label lblAnoValor;
     
     /// <summary>
-    /// Label10 control.
+    /// lblSemestreAno control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label10;
+    protected global::System.Web.UI.WebControls.Label lblSemestreAno;
+    
+    /// <summary>
+    /// lblSemestreAnoValor control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblSemestreAnoValor;
+    
+    /// <summary>
+    /// gdvEventosConsultarPI control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvEventosConsultarPI;
+    
+    /// <summary>
+    /// gdvDisciplinasEnvolvidas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvDisciplinasEnvolvidas;
+    
+    /// <summary>
+    /// gdvCriterios control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView gdvCriterios;
+    
+    /// <summary>
+    /// pnlGrupos control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Panel pnlGrupos;
+    
+    /// <summary>
+    /// hdfDescricao control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField hdfDescricao;
+    
+    /// <summary>
+    /// hdfDatas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField hdfDatas;
+    
+    /// <summary>
+    /// lblDatas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblDatas;
+    
+    /// <summary>
+    /// lblDescricaoData control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblDescricaoData;
+    
+    /// <summary>
+    /// txtDescricaoData control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtDescricaoData;
+    
+    /// <summary>
+    /// lblDescDataMsgErro control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblDescDataMsgErro;
+    
+    /// <summary>
+    /// lblData control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblData;
+    
+    /// <summary>
+    /// txtData control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtData;
+    
+    /// <summary>
+    /// lblDataMsgErro control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblDataMsgErro;
+    
+    /// <summary>
+    /// btnVoltarHome control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.LinkButton btnVoltarHome;
 }

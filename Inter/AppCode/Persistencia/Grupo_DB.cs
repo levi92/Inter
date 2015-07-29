@@ -17,12 +17,36 @@ namespace AppCode.Persistencia
             {
                 IDbConnection conexao;
                 IDbCommand objCommand;
-                string sql = "INSERT INTO gru_grupo(gru_codigo, pri_codigo, gru_nome_projeto, gru_media, gru_finalizado) VALUES(?gru_codigo, ?pri_codigo, ?gru_nome_projeto, null, 0)";
+                string sql = "INSERT INTO gru_grupo(gru_codigo, pri_codigo, gru_nome_projeto, gru_media, gru_finalizado, gru_usuario) VALUES(?gru_codigo, ?pri_codigo, ?gru_nome_projeto, null, 0, ?gru_usuario)";
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
                 objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", gru.Gru_codigo));
                 objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", gru.Pri_codigo.Pri_codigo));
                 objCommand.Parameters.Add(Mapped.Parameter("?gru_nome_projeto", gru.Gru_nome_projeto));
+                objCommand.Parameters.Add(Mapped.Parameter("?gru_usuario", gru.Gru_usuario));
+                objCommand.ExecuteNonQuery();
+                conexao.Close();
+                objCommand.Dispose();
+                conexao.Dispose();
+            }
+            catch (Exception e)
+            {
+                retorno = -2;
+            }
+            return retorno;
+        }
+
+        public static int Insert(string sqlInsert)
+        {
+            int retorno = 0;
+            try
+            {
+                IDbConnection conexao;
+                IDbCommand objCommand;
+                string sql = "INSERT INTO gru_grupo(gru_codigo, pri_codigo, gru_nome_projeto, gru_media, gru_finalizado, gru_usuario) VALUES" + sqlInsert;
+                conexao = Mapped.Connection();
+                objCommand = Mapped.Command(sql, conexao);
+
                 objCommand.ExecuteNonQuery();
                 conexao.Close();
                 objCommand.Dispose();
@@ -110,6 +134,29 @@ namespace AppCode.Persistencia
             return ds;
         }
 
+        //SELECT GRUPOS PARA A PAGINA DE CONSULTAR PI
+        public static DataSet SelectAllGruposAtual(int codPi, int atrCod)
+        {
+            DataSet ds = new DataSet();
+            IDbConnection objConnection;
+            IDbCommand objCommand;
+            IDataAdapter objDataAdapter;
+            objConnection = Mapped.Connection();
+            objCommand = Mapped.Command("SELECT GR.GRU_CODIGO, GR.GRU_NOME_PROJETO FROM GRU_GRUPO GR INNER JOIN PRI_PROJETO_INTER PR USING(PRI_CODIGO) INNER JOIN API_ATRIBUICAO_PI AP USING(PRI_CODIGO) WHERE PR.PRI_CODIGO = ?pri_codigo AND AP.ADI_CODIGO = ?adi_codigo;", objConnection);
+            objCommand.Parameters.Add(Mapped.Parameter("?pri_codigo", codPi));
+            objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", atrCod));
+            objDataAdapter = Mapped.Adapter(objCommand);
+            objDataAdapter.Fill(ds);
+            objConnection.Close();
+            objCommand.Dispose();
+            objConnection.Dispose();
+            if (ds.Tables[0].Rows.Count == 0)
+            {
+                ds = null;
+            }
+            return ds;
+        }
+
         public static int UpdateGrupoAvaliado(Grupo gru)
         {
             int retorno = 0;
@@ -117,11 +164,12 @@ namespace AppCode.Persistencia
             {
                 IDbConnection conexao;
                 IDbCommand objCommand;
-                string sql = "UPDATE gru_grupo SET gru_finalizado = 1, gru_media = ?gru_media WHERE gru_codigo = ?gru_codigo";
+                string sql = "UPDATE gru_grupo SET gru_finalizado = 1, gru_media = ?gru_media, gru_usuario = ?gru_usuario WHERE gru_codigo = ?gru_codigo";
                 conexao = Mapped.Connection();
                 objCommand = Mapped.Command(sql, conexao);
                 objCommand.Parameters.Add(Mapped.Parameter("?gru_codigo", gru.Gru_codigo));
                 objCommand.Parameters.Add(Mapped.Parameter("?gru_media", gru.Gru_media));
+                objCommand.Parameters.Add(Mapped.Parameter("?gru_usuario", gru.Gru_usuario));
                 objCommand.ExecuteNonQuery();
                 conexao.Close();
                 objCommand.Dispose();
@@ -134,6 +182,67 @@ namespace AppCode.Persistencia
             return retorno;
         }
 
+
+        public static int Update(int cod)
+        {
+            int retorno = 0;
+            try
+            {
+                IDbConnection conexao;
+                IDbCommand objCommand;
+                string sql = "UPDATE gru_grupo SET gru_finalizado = 0 WHERE gru_codigo = ?codigo ";
+                conexao = Mapped.Connection();
+                objCommand = Mapped.Command(sql, conexao);
+                objCommand.Parameters.Add(Mapped.Parameter("?codigo", cod));
+                objCommand.ExecuteNonQuery();
+                conexao.Close();
+                objCommand.Dispose();
+                conexao.Dispose();
+            }
+            catch (Exception e)
+            {
+                string erro = e.Message;
+                retorno = -2;
+            }
+            return retorno;
+        }
+
+        public static Grupo Select(int codigo)
+        {
+            try
+            {
+                Grupo objGrupo = null;
+                IDbConnection objConnection;
+                IDbCommand objCommnad;
+                IDataReader objDataReader;
+                objConnection = Mapped.Connection();
+                objCommnad = Mapped.Command("SELECT * FROM gru_grupo WHERE gru_codigo = ?codigo", objConnection);
+                objCommnad.Parameters.Add(Mapped.Parameter("?codigo", codigo));
+                objDataReader = objCommnad.ExecuteReader();
+                while (objDataReader.Read())
+                {
+
+                    var gru_codigo = Convert.ToInt32(objDataReader["gru_codigo"]);
+                    var gru_nome_projeto = objDataReader["gru_nome_projeto"].ToString();
+                    var gru_finalizado = Convert.ToInt32(objDataReader["gru_finalizado"]);
+
+                    objGrupo = new Grupo();
+                    objGrupo.Gru_codigo = gru_codigo;
+                    objGrupo.Gru_nome_projeto = gru_nome_projeto;
+                    objGrupo.Gru_finalizado = gru_finalizado;
+                }
+                objDataReader.Close();
+                objConnection.Close();
+                objConnection.Dispose();
+                objCommnad.Dispose();
+                objDataReader.Dispose();
+                return objGrupo;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
 
     }
 }

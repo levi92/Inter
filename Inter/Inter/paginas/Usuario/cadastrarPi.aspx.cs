@@ -54,16 +54,15 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 updPanelGrupos.Update();
                 PegarAnoeSemestreAno();
                 PegarUltimoCodPI();
-                lblCursoAut.Text = Session["curso"].ToString();
-                lblSemestreAut.Text = Session["semestre"].ToString();
-                index = 1;
+                lblCursoAut.Text = Session["curso"].ToString(); // LABEL DA PRIMEIRA ETAPA
+                lblSemestreAut.Text = Session["semestre"].ToString(); // LABEL DA PRIMEIRA ETAPA
+                index = 1; // INDEX DO GRUPO
                 btnConfirmarEdicao.Style.Add("opacity", "0.4");
                 btnExcluirGrupo.Style.Add("opacity", "0.4");
                 btnCancelarEdicao.Style.Add("opacity", "0.4");
                 btnConfirmarEdicao.Style.Add("pointer-events", "none");
                 btnCancelarEdicao.Style.Add("pointer-events", "none");
                 btnExcluirGrupo.Style.Add("pointer-events", "none");
-
             }
 
             CriarCriterio();
@@ -80,13 +79,14 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     // *******************************************************************************
     public static List<int> listAtrDisciplinas = new List<int>();
     public static List<int> listCodDisciplinas = new List<int>();
+    public static List<string> listNomeProfEnvolvidos = new List<string>();
     private void CarregarDisciplinasEnvolvidas(){    
 
         string[] nomeEnvolvidas = (string[])Session["nomeEnvolvidas"];
         string[] maeEnvolvidas = (string[])Session["maeEnvolvidas"];
         string[] atrEnvolvidas = (string[])Session["atrEnvolvidas"];
         string[] codEnvolvidas = (string[])Session["codEnvolvidas"];
-
+        string[] nomeProfEnvolvidos = (string[])Session["nomeProfEnvolvidos"];
 
         Table tableDisciplina = new Table();
         tableDisciplina.CssClass = "tableDisciplinasEnvolvidas";
@@ -150,6 +150,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                         cell.Controls.Add(lblCodigoDisciplina);
                         listAtrDisciplinas.Add(Convert.ToInt32(lblCodigoDisciplina.Text));
                         listCodDisciplinas.Add(Convert.ToInt32(codEnvolvidas[i]));
+                        listNomeProfEnvolvidos.Add(nomeProfEnvolvidos[i]);
                     }
                     rows.Cells.Add(cell);                
             }
@@ -249,6 +250,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 if (li.Value == vetCod[j])
                 {
                     li.Attributes.Add("title", vetTip[j]);
+                    li.Attributes["data-toggle"] = "tooltip";
                 }
             }
 
@@ -261,6 +263,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 if (li.Value == vetCod[j])
                 {
                     li.Attributes.Add("title", vetTip[j]);
+                    li.Attributes["data-toggle"] = "tooltip";
                 }
             }
 
@@ -295,6 +298,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 li.Value = dr["cge_codigo"].ToString();
                 li.Text = dr["cge_nome"].ToString();
                 li.Attributes.Add("title", dr["cge_descricao"].ToString());
+                li.Attributes["data-toggle"] = "tooltip";
                 liCritTip.Add(dr["cge_descricao"].ToString());
                 liCritCod.Add(dr["cge_codigo"].ToString());
                 //ADICIONANDO CÓDIGO E NOME DO CRITÉRIO AOS CRITÉRIOS ENCONTRADOS NO DATASET
@@ -312,26 +316,29 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         txtDescricaoCriterio.Style.Clear();
 
         if (!String.IsNullOrEmpty(txtNomeCriterio.Text.Trim()) && !String.IsNullOrEmpty(txtDescricaoCriterio.Text.Trim()))
-        {
-            //ADICIONA OS NOVOS CRITÉRIOS NAS LISTAS
-            ListItem li = new ListItem();
-
-            li.Value = (UltCodCrit + 1).ToString();
-            li.Text = txtNomeCriterio.Text;
-            li.Attributes.Add("title", txtDescricaoCriterio.Text);
-            liCritTip.Add(txtDescricaoCriterio.Text);
-            liCritCod.Add(li.Value);
-            //ADICIONANDO CÓDIGO E NOME DO CRITÉRIO AOS CRITÉRIOS ENCONTRADOS NO DATASET
-            listaCritPi.Items.Add(li);
-            updPanelCriterio.Update();
-            UltCodCrit += 1;
-            CarregaTip();
+        {            
             Criterios_Gerais cge = new Criterios_Gerais();
-            cge.Cge_codigo = Convert.ToInt32(li.Value);
-            cge.Cge_nome = li.Text;
+            cge.Cge_codigo = (UltCodCrit + 1);
+            cge.Cge_nome = txtNomeCriterio.Text;
             cge.Cge_descricao = txtDescricaoCriterio.Text;
+            cge.Cge_usuario = Session["nome"].ToString();
             if (Criterios_Gerais_DB.Insert(cge) != -2)
             {
+                //ADICIONA OS NOVOS CRITÉRIOS NAS LISTAS
+                ListItem li = new ListItem();
+
+                li.Value = (UltCodCrit + 1).ToString();
+                li.Text = txtNomeCriterio.Text;
+                li.Attributes.Add("title", txtDescricaoCriterio.Text);
+                li.Attributes["data-toggle"] = "tooltip";
+                liCritTip.Add(txtDescricaoCriterio.Text);
+                liCritCod.Add(li.Value);
+                //ADICIONANDO CÓDIGO E NOME DO CRITÉRIO AOS CRITÉRIOS ENCONTRADOS NO DATASET
+                listaCritPi.Items.Add(li);
+                updPanelCriterio.Update();
+                UltCodCrit += 1;
+                CarregaTip();
+                
                 lblMsgCriterio.Text = "<span class='glyphicon glyphicon-ok-circle'></span> &nbsp Cadastrado com sucesso.";
                 lblMsgCriterio.Style.Add("color", "green");
                 txtNomeCriterio.Text = "";
@@ -373,6 +380,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     protected void btnContinuarEtapa3_Click(object sender, EventArgs e)
     {
         CarregaTip();
+        // VERIFICA SE EXISTE PELO MENOS UM CRITÉRIO NO PROJETO PARA PROSSEGUIR
         if (listaCritPi.Items.Count >= 1)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
@@ -447,7 +455,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     protected int verificarPesoVazio()
     {
         int peso = 0;
-        int ret = 0;
+        int ret = 0; // SUCESSO
         foreach (Control txt in PanelCriterios.Controls)
         {
             if (txt is TextBox)
@@ -456,14 +464,14 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 txtCri.Style.Clear();
                 if (String.IsNullOrEmpty(txtCri.Text))
                 {
-                    return 1;
+                    return 1; // PARA CHAMAR MODAL QUE ADICIONA PESO 1 AOS CRITÉRIOS
                 }
 
                 peso = Convert.ToInt32(txtCri.Text);
                 if ((peso < 1) || (peso > 10))
                 {
                     txtCri.Style.Add("border", "1px solid red");
-                    ret = 2;
+                    ret = 2; // QUANDO PESO É INVÁLIDO
                     lblMsgPesosCriterios.Visible = true;
                 }
 
@@ -506,7 +514,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
         }
-        else // SECESSO 
+        else // SUCESSO 
         {
             lblMsgPesosCriterios.Visible = false;
             CarregaTipAluno();
@@ -544,6 +552,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 if (li.Value == vetCod[j])
                 {
                     li.Attributes.Add("title", vetTip[j]);
+                    li.Attributes["data-toggle"] = "tooltip";
+
                 }
             }
 
@@ -556,6 +566,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 if (li.Value == vetCod[j])
                 {
                     li.Attributes.Add("title", vetTip[j]);
+                    li.Attributes["data-toggle"] = "tooltip";
+
                 }
             }
 
@@ -582,6 +594,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 li.Value = dr["Matricula"].ToString();
                 li.Text = Funcoes.SplitNomes(dr["Nome"].ToString());
                 li.Attributes.Add("title", dr["Nome"].ToString());
+                li.Attributes["data-toggle"] = "tooltip";
                 liNomeAlunoTip.Add(dr["Nome"].ToString());
                 liMatriculaAluno.Add(dr["Matricula"].ToString());
                 //ADICIONANDO CÓDIGO E NOME DO CRITÉRIO AOS CRITÉRIOS ENCONTRADOS NO DATASET
@@ -619,17 +632,13 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
     protected void LkbVoltarEtapa3_Click(object sender, EventArgs e)
     {
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa3", "etapa3();", true);
-    }
-
-    //REDIRECIONA PARA A PÁGINA AVALIAR GRUPO
-    protected void btnVoltarAvaliar_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("~/AvaliarGrupo");
-    }
+    }    
 
     //REDIRECIONA PARA A PÁGINA HOME
     protected void btnVoltarHome2_Click(object sender, EventArgs e)
     {
+        Session.Remove("alunosGerais");
+        Session.Remove("CodAlunosGerais");
         Response.Redirect("~/Home");
     }
 
@@ -902,6 +911,7 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         CarregaTipAluno();
         ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEtapa4", "etapa4();", true);
     }
+    
 
     protected void btnFinalizarCriarPi_Click(object sender, EventArgs e)
     {
@@ -909,47 +919,48 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         Projeto_Inter pi = new Projeto_Inter();
         pi.Pri_codigo = Convert.ToInt32(lblCodigoPiAut.Text);
         pi.Pri_semestre = Convert.ToInt32(Session["semestre"]);
+        pi.Cur_nome = Session["curso"].ToString();
         Semestre_Ano san = new Semestre_Ano();
         san = Semestre_Ano_DB.Select();
         pi.San_codigo = san;
         Projeto_Inter_DB.Insert(pi);
 
+        string sqlInsertEventos = "";
         //INSERINDO NA TABELA EVENTOS
-        if (desc != null)
+        if (desc[0] != "")
         {
             for (int i = 0; i < desc.Length; i++)
             {
                 Eventos eve = new Eventos();
                 eve.Pri_codigo = pi;
                 eve.Eve_tipo = desc[i];
-                eve.Eve_data = Convert.ToDateTime(dat[i]);
-                Eventos_DB.Insert(eve);
+                eve.Eve_usuario = Session["nome"].ToString();
+                sqlInsertEventos += "(0," + eve.Pri_codigo.Pri_codigo + ",'" + dat[i] + "','" + eve.Eve_tipo + "','"+eve.Eve_usuario+"'),";               
             }
+            
+            Eventos_DB.Insert(sqlInsertEventos.Substring(0,sqlInsertEventos.Length-1));
         }
 
         //INSERINDO NA TABELA ATRIBUICAO_PI
 
         int[] atrDisciplina = listAtrDisciplinas.ToArray();
         int[] codDisciplina = listCodDisciplinas.ToArray();
-
+        string[] nomeProf = listNomeProfEnvolvidos.ToArray();
+        string sqlInsertAtribuicaoPI = "";
         for (int i = 0; i < atrDisciplina.Length; i++)
         {
             Atribuicao_PI atr = new Atribuicao_PI();
             atr.Adi_codigo = atrDisciplina[i];
             atr.Pri_codigo = pi;
             atr.Dis_codigo = codDisciplina[i];
-            if (Convert.ToInt32(Session["codAtr"]) == atrDisciplina[i])
-            {
-                atr.Adi_mae = true;
-            }
-            else
-            {
-                atr.Adi_mae = false;
-            }            
-            Atribuicao_PI_DB.Insert(atr);
+            atr.Pro_nome = nomeProf[i];
+            sqlInsertAtribuicaoPI += "("+atr.Pri_codigo.Pri_codigo+","+atr.Adi_codigo+","+atr.Dis_codigo+",'"+atr.Pro_nome+"'),";
         }
+        Atribuicao_PI_DB.Insert(sqlInsertAtribuicaoPI.Substring(0,sqlInsertAtribuicaoPI.Length-1));
+
             
         //INSERINDO NA TABELA CRITERIO_PI
+        string sqlInsertCriterioPI = "";
         int indiceCrit = 0;
         foreach(ListItem li in listaCritPi.Items){            
             TextBox txtPeso = (TextBox) PanelCriterios.FindControl("txtCriterio"+(indiceCrit));
@@ -964,10 +975,12 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 critPi.Adi_codigo = atr;
                 critPi.Pri_codigo = pi;
                 critPi.Cpi_peso = Convert.ToInt32(txtPeso.Text);
-                Criterio_PI_DB.Insert(critPi);
+                critPi.Cpi_usuario = Session["nome"].ToString();
+                sqlInsertCriterioPI += "(0," + critPi.Cge_codigo.Cge_codigo + "," + critPi.Pri_codigo.Pri_codigo + "," + critPi.Adi_codigo.Adi_codigo + "," + critPi.Cpi_peso + ",'" + critPi.Cpi_usuario + "'),";
             }
             indiceCrit++;
         }
+        Criterio_PI_DB.Insert(sqlInsertCriterioPI.Substring(0, sqlInsertCriterioPI.Length - 1));
 
         //INSERINDO NA TABELA GRUPO
         int ultCodGrupo = Grupo_DB.SelectUltimoCod();
@@ -979,6 +992,8 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
         {
             ultCodGrupo++;
         }
+        string sqlInsertGrupo = "";
+        string sqlInsertGrupoAluno = "";
         for (int i = 1; i < index; i++)
         {
             if (ViewState["NomeGrupo" + i.ToString()] != null)
@@ -988,10 +1003,12 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                 gru.Gru_codigo = ultCodGrupo;
                 gru.Gru_nome_projeto = nomeGrupo;
                 gru.Pri_codigo = pi;
-                Grupo_DB.Insert(gru);
+                gru.Gru_usuario = Session["nome"].ToString();
+                sqlInsertGrupo += "(" + gru.Gru_codigo + "," + gru.Pri_codigo.Pri_codigo + ",'" + gru.Gru_nome_projeto + "',null,0,'" + gru.Gru_usuario + "'),";
                 
                 Grupo_Aluno gal = new Grupo_Aluno();
                 gal.Gru_codigo = gru;
+                gal.Gal_usuario = Session["nome"].ToString();
 
                 string[] codAlunos = ViewState["CodAlunos"+i.ToString()].ToString().Split('|');
                 for (int j = 0; j < codAlunos.Length-1; j++)
@@ -999,12 +1016,14 @@ public partial class paginas_Usuario_cadastrarPi : System.Web.UI.Page
                     if (codAlunos[j] != null)
                     {
                         gal.Alu_matricula = codAlunos[j];
-                        Grupo_Aluno_DB.Insert(gal);
+                        sqlInsertGrupoAluno += "('" + gal.Alu_matricula + "'," + gal.Gru_codigo.Gru_codigo + ",'" + gal.Gal_usuario + "'),";
                     }
                 }
             }
             ultCodGrupo++;
         }
+        Grupo_DB.Insert(sqlInsertGrupo.Substring(0, sqlInsertGrupo.Length - 1));
+        Grupo_Aluno_DB.Insert(sqlInsertGrupoAluno.Substring(0, sqlInsertGrupoAluno.Length - 1));
 
         Session["codPIAtivo"] = Funcoes.SelectCodPIAtivoByAtr(Convert.ToInt32(Session["codAtr"]));
         DataSet dsGruposAvaliar = new DataSet();

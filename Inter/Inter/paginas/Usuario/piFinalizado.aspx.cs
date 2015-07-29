@@ -53,7 +53,7 @@ public partial class paginas_Usuario_piFinalizado : System.Web.UI.Page
                 lb.ID = ds.Tables[0].Rows[grid.RowIndex]["gru_codigo"].ToString();
             }
         }
-            
+
 
     }
 
@@ -63,7 +63,7 @@ public partial class paginas_Usuario_piFinalizado : System.Web.UI.Page
         dsNomeProjeto = Funcoes.SelectByNomeProjeto(Convert.ToInt32(Session["codAtr"]), txtPesquisar.Text);
         PiFinalizados(dsNomeProjeto);
     }
-    
+
     public void PiFinalizados(DataSet ds)
     {
         Session["DsDetalhes"] = ds;
@@ -71,15 +71,15 @@ public partial class paginas_Usuario_piFinalizado : System.Web.UI.Page
         gdvPisFinalizados.DataSource = ds;
         gdvPisFinalizados.DataBind();
         int qtd = ds.Tables[0].Rows.Count;
-        
-        if (qtd > 0)
-        {            
-            foreach (GridViewRow grid in gdvPisFinalizados.Rows)//PERCORRER TODA A GRID
-            {
-                LinkButton lb = (LinkButton)grid.FindControl("lbDetalhesProjeto");//procurando lb detalhes
 
-            }
-            lblQtdRegistro.Text = "Foram encontados " + qtd + " registros";
+        if (qtd > 0)
+        {
+            //foreach (GridViewRow grid in gdvPisFinalizados.Rows)//PERCORRER TODA A GRID
+            //{
+            //    LinkButton lb = (LinkButton)grid.FindControl("lbDetalhesProjeto");//procurando lb detalhes
+
+            //}
+            lblQtdRegistro.Text = "Foram encontrados " + qtd + " registros";
         }
         else
         {
@@ -100,8 +100,6 @@ public partial class paginas_Usuario_piFinalizado : System.Web.UI.Page
 
     protected void lbDetalhesProjeto_Click(object sender, EventArgs e)
     {
-        
-
         DataSet ds = new DataSet();
         LinkButton lb = new LinkButton();
         lb = (LinkButton)sender;
@@ -113,17 +111,25 @@ public partial class paginas_Usuario_piFinalizado : System.Web.UI.Page
         lblNomeProjeto.Text = ds.Tables[0].Rows[1]["gru_nome_projeto"].ToString();
         lblMediaProjeto.Text = ds.Tables[0].Rows[1]["gru_media"].ToString();
 
-        //Label lblDisciplinas = (Label)gdvDetalhesProjeto.FindControl("lblNomeDisciplinas");
+        
+        string[] vetCod = (string[])Session["codEnvolvidas"];
+        string[] nomeDisc;
+        nomeDisc = Funcoes.MateriasByCodigo(vetCod);
 
+        for (int i = 0; i < nomeDisc.Length; i++)
+        {
+            gdvDetalhesProjeto.Rows[i].Cells[1].Text = nomeDisc[i];
+        }
 
         UpdDetalhesProjeto.Update();
-        
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "MostraVizualizar()", "Mostra('p2');", true);
-        
 
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "MostraVizualizar()", "Mostra('p2');", true);
     }
+    
 
     
+
+
 
 
 }

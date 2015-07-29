@@ -10,6 +10,7 @@ using System.Web;
         private double his_nota;
         private Criterio_PI cpi_codigo;
         private Grupo_Aluno alu_matricula;
+        private string his_usuario;
 
         public global::Grupo_Aluno Alu_matricula
         {
@@ -33,6 +34,12 @@ using System.Web;
         {
             get { return his_codigo; }
             set { his_codigo = value; }
+        }
+
+        public string His_usuario
+        {
+            get { return his_usuario; }
+            set { his_usuario = value; }
         }
 
     }

@@ -9,6 +9,7 @@ using System.Web;
 
         private Grupo gru_codigo;
         private string alu_matricula;
+        private string gal_usuario;
 
         public global::Grupo Gru_codigo
         {
@@ -20,6 +21,12 @@ using System.Web;
         {
             get { return alu_matricula; }
             set { alu_matricula = value; }
+        }
+
+        public string Gal_usuario
+        {
+            get { return gal_usuario; }
+            set { gal_usuario = value; }
         }
 
     }

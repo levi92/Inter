@@ -11,6 +11,7 @@ using System.Web;
         private Projeto_Inter pri_codigo;
         private Atribuicao_PI adi_codigo;
         private Criterios_Gerais cge_codigo;
+        private string cpi_usuario;
 
         public global::Criterios_Gerais Cge_codigo
         {
@@ -40,6 +41,12 @@ using System.Web;
         {
             get { return cpi_codigo; }
             set { cpi_codigo = value; }
+        }
+
+        public string Cpi_usuario
+        {
+            get { return cpi_usuario; }
+            set { cpi_usuario = value; }
         }
 
     }

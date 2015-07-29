@@ -16,7 +16,7 @@
             $('#lblMsg').html(" ");
         }
 
-        function FechaModalCriacaoCriterio() {
+        function FechaModal() {
             $('#fecharModal').click();
         }
 
@@ -76,7 +76,7 @@
 
                             <ContentTemplate>
 
-                                <asp:GridView ID="gdvCriteriosAtivos" runat="server" CssClass="gridView" DataKeyNames="cge_codigo"
+                                <asp:GridView ID="gdvCriteriosAtivos" runat="server" CssClass="tableFinalizar" DataKeyNames="cge_codigo"
                                     AutoGenerateColumns="false" AllowSorting="true"
                                     AutoGenerateEditButton="false"
                                     OnRowUpdating="gdvCriterios_RowUpdating"
@@ -98,7 +98,16 @@
                                         </asp:TemplateField>
 
                                         <%--Coluna do nome do Critério Geral--%>
-                                        <asp:BoundField DataField="cge_nome" HeaderText="Nome"/>
+
+                                        <asp:TemplateField HeaderText="Nome">
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtNome" runat="server" Text='<%#Eval ("cge_nome")%>' Width="50%"> </asp:TextBox>
+                                                <%--Essa textbox existe para quando for editar aparecer a descrição do critério(O width = 100% deixa a caixa no tamanho máximo até a coluna seguinte--%>
+                                            </EditItemTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblNome" runat="server" Text='<%#Eval ("cge_nome")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
 
                                         <%--Coluna da descrição do Critério Geral--%>
                                         <asp:TemplateField HeaderText="Descrição">
@@ -127,7 +136,7 @@
                                         <asp:TemplateField HeaderText="" ItemStyle-Width="15px">
                                             <ItemTemplate>
                                                 <span onclick="return confirm('Tem certeza que deseja desativar este critério?')">
-                                                    <asp:LinkButton ID="lkbExcluir" CssClass="glyphicon glyphicon-trash" Title="Desativar" runat="server" CommandName="Delete"></asp:LinkButton>
+                                                    <asp:LinkButton ID="lkbExcluir" CssClass="glyphicon glyphicon-remove-circle" Title="Desativar" runat="server" CommandName="Delete"></asp:LinkButton>
                                                 </span>
                                             </ItemTemplate>
 
@@ -183,7 +192,7 @@
                                 <ContentTemplate>
 
 
-                                    <asp:GridView ID="gdvCriteriosDesativados" ClientIDMode="Static" runat="server" CssClass="gridView" DataKeyNames="cge_codigo"
+                                    <asp:GridView ID="gdvCriteriosDesativados" ClientIDMode="Static" runat="server" CssClass="tableFinalizar" DataKeyNames="cge_codigo"
                                         AutoGenerateColumns="false"
                                         AutoGenerateEditButton="false"
                                         OnRowUpdating="gdvCriteriosDesativados_RowUpdating">
@@ -219,7 +228,7 @@
                                             <%--Coluna do botão de Ativar --%>
                                             <asp:TemplateField HeaderText="" ItemStyle-Width="15px" ItemStyle-HorizontalAlign="Center">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="lkbAtivar" CssClass="mdi mdi-keyboard-return" title="Reativar" runat="server" CommandName="Update"></asp:LinkButton>
+                                                    <asp:LinkButton ID="lkbAtivar" CssClass="glyphicon glyphicon-repeat" title="Reativar" runat="server" CommandName="Update"></asp:LinkButton>
                                                 </ItemTemplate>
                                                 <EditItemTemplate>
                                                 </EditItemTemplate>
@@ -263,7 +272,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" id="fecharModal" onclick="fechaModalCri();" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <button type="button" id="fecharModal" onclick="fechaModal();" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                     <h4 class="modal-title" id="myModalLabel3">Cadastrar Critérios</h4>
                                 </div>
                                 <br />

@@ -40,15 +40,16 @@
   <ItemGroup>
     <Reference Include="Interdisciplinar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\AppCode\DLLFatec\Interdisciplinar.dll</HintPath>
+      <HintPath>Banco\Fatec\Interdisciplinar.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+    <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\AppCode\DLLFatec\ddl mysql 6 6 5\MySql.Data.dll</HintPath>
+      <HintPath>Banco\Fatec\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="MySqlBackup">
-      <HintPath>..\AppCode\DLLFatec\MySqlBackup.dll</HintPath>
+    <Reference Include="MySqlBackup, Version=2.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Banco\Fatec\MySqlBackup.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -78,8 +79,9 @@
     <Content Include="App_Themes\images\ajax-loader.gif" />
     <Content Include="App_Themes\images\Calendar-Add-128x128.png" />
     <Content Include="Banco\BANCO RESUMIDO.txt" />
-    <Content Include="Banco\Fatec\Interdisciplinar.pdb" />
+    <Content Include="Banco\Fatec\Interdisciplinar.dll" />
     <Content Include="Banco\Fatec\MySql.Data.dll" />
+    <Content Include="Banco\Fatec\MySqlBackup.dll" />
     <Content Include="Banco\Fatec\Retornos Metodos Obj.txt" />
     <Content Include="Banco\inter.sql" />
     <Content Include="Banco\Modelo Banco PI - Correto.png" />
@@ -91,6 +93,7 @@
     <Content Include="paginas\Administrador\ajuda.aspx" />
     <Content Include="paginas\Administrador\ajuda_alterar_perfil.aspx" />
     <Content Include="paginas\Administrador\alterar_perfil.aspx" />
+    <Content Include="paginas\Administrador\auditoria.aspx" />
     <Content Include="paginas\Administrador\configuracoes.aspx" />
     <Content Include="paginas\Administrador\criterios.aspx" />
     <Content Include="paginas\Administrador\projetos.aspx" />
@@ -211,6 +214,13 @@
     </Compile>
     <Compile Include="paginas\Administrador\alterar_perfil.aspx.designer.cs">
       <DependentUpon>alterar_perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\Administrador\auditoria.aspx.cs">
+      <DependentUpon>auditoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\Administrador\auditoria.aspx.designer.cs">
+      <DependentUpon>auditoria.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\Administrador\configuracoes.aspx.cs">
       <DependentUpon>configuracoes.aspx</DependentUpon>

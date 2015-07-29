@@ -40,7 +40,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         {
             if (!IsPostBack)
             {
-                ddlFinalizarGrupos.DataSource = Session["GruposFinalizar"];
+                ddlFinalizarGrupos.DataSource = Session["GruposFinalizar"]; //(DataSet) conversão
                 ddlFinalizarGrupos.DataTextField = "GRU_NOME_PROJETO";
                 ddlFinalizarGrupos.DataValueField = "GRU_CODIGO";
                 ddlFinalizarGrupos.DataBind();
@@ -52,8 +52,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
                 {
                     Session["MediaGrupo"] = null;
                     CarregarGruposFinalizar(Convert.ToInt32(ddlFinalizarGrupos.SelectedValue));
-                    CriarTabelaMediasDisciplinas();
-                    
+                    CriarTabelaMediasDisciplinas();                    
 
                 }
             }
@@ -103,11 +102,8 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
                 if (i == 0) //COLUNA FOR IGUAL A 0
                 {
                     dr["Integrantes"] = nomesAlunos[j].ToString();
-                }
-                //else
-                //{
-                //    dr[nomesMaterias[i]] = Funcoes.CalcularMediaPonderadaAlunoDisciplinas(Convert.ToInt32(Session["codPIAtivo"]), codAlunos[j], Convert.ToInt32(atrDisciplinas[i]));
-                //}
+                    break;
+                }                
             }
             dt.Rows.Add(dr);
         }
@@ -124,9 +120,7 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
 
         int rowsCount = dt.Rows.Count;
         int colsCount = dt.Columns.Count;
-        Session["rowsCountFinalizar"] = rowsCount;
-        Session["colsCountFinalizar"] = colsCount;
-
+       
         TableHeaderRow thr = new TableHeaderRow();
         TableHeaderCell th = new TableHeaderCell();
         Label lblCabecalho = new Label();
@@ -230,10 +224,9 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
             }
             dt.Rows.Add(dr);
         }
-        cont++;
         if (cont == codEnvolvidas.Length)
         {
-            Session["MediaGrupo"] = (somaMedia / cont); 
+            Session["MediaGrupo"] = Math.Round((somaMedia / cont),1); 
             lblMediaGrupos.Text = Session["MediaGrupo"].ToString();
             lblMediaGrupos.Style.Add("color", "#960d10");
             lblMediaGrupos.Style.Add("font-size", "18px");
@@ -251,8 +244,8 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
         if (Session["MediaGrupo"] != null)
         {
             btnFinalizarGrupos.Enabled = true;
-            //btnFinalizarGrupos.Style.Add("opacity", "1");
-            //btnFinalizarGrupos.Style.Add("pointer-events", "focus");
+            btnFinalizarGrupos.Style.Add("opacity", "1");
+            btnFinalizarGrupos.Style.Add("pointer-events", "focus");
         }
         else
         {
@@ -276,15 +269,28 @@ public partial class paginas_Usuario_finalizarGrupo : System.Web.UI.Page
             Grupo gru = new Grupo();
             gru.Gru_codigo = Convert.ToInt32(ddlFinalizarGrupos.SelectedValue);
             gru.Gru_media = Convert.ToDouble(Session["MediaGrupo"]);
+            gru.Gru_usuario = Session["nome"].ToString();
             Grupo_DB.UpdateGrupoAvaliado(gru);
 
             DataSet dsGruposFinalizar = new DataSet();
             dsGruposFinalizar = Grupo_DB.SelectAllGruposFinalizar(Convert.ToInt32(Session["codPIAtivo"]), Convert.ToInt32(Session["codAtr"]));
-            Session["GruposFinalizar"] = dsGruposFinalizar;
-
-            Response.Redirect("~/FinalizarGrupo");
+            if (dsGruposFinalizar == null)
+            {
+                Session["GruposFinalizar"] = null;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalTodosFinalizados", "msgTodosFinalizados();", true);
+            }
+            else
+            {
+                Session["GruposFinalizar"] = dsGruposFinalizar;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "myModalGrupoFinalizado", "msgGrupoFinalizado();", true);
+            }
         }
         
+    }
+
+    protected void btnGrupoFinalizado_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/FinalizarGrupo");
     }
 
 }

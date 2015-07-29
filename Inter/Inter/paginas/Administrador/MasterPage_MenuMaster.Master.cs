@@ -8,8 +8,31 @@ using System.Web.UI.WebControls;
 
     public partial class paginas_Admin_MenuMaster : System.Web.UI.MasterPage
     {
-        protected void Page_Load(object sender, EventArgs e)
+
+        protected void Page_PreInit(object sender, EventArgs e)
         {
 
+            if (Session["menu"].ToString() != "master")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "voltar", "voltarPagina()", true);
+
+            }
+        }
+
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (Session["login"] == null)
+            {
+                Response.Redirect("~/BloqueioUrl");
+            }
+
+       
+        }
+        protected void btnSair_Click(object sender, EventArgs e)
+        {
+            Session.RemoveAll();
+
+            Response.Redirect("~/Login");
         }
     }

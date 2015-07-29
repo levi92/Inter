@@ -15,11 +15,13 @@ public class Perfil_DB
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "INSERT INTO per_perfil(per_matricula, per_descricao) " +
-                "VALUES (?per_matricula, 2)"; 
+            string sql = "INSERT INTO per_perfil(per_matricula, per_descricao, per_usuario) " +
+                "VALUES (?per_matricula, ?per_descricao, ?per_usuario)"; 
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
             objCommand.Parameters.Add(Mapped.Parameter("?Per_matricula", perfil.Matricula));
+            objCommand.Parameters.Add(Mapped.Parameter("?Per_descricao", perfil.Descricao));
+            objCommand.Parameters.Add(Mapped.Parameter("?per_usuario", perfil.Per_usuario));
             //objCommand.Parameters.Add(Mapped.Parameter("?Per_descricao", perfil.Descricao));
             objCommand.ExecuteNonQuery();
             conexao.Close();
@@ -69,7 +71,7 @@ public class Perfil_DB
         {
             IDbConnection conexao;
             IDbCommand objCommand;
-            string sql = "UPDATE Per_perfil SET Per_matricula = ?Per_matricula, Per_descricao = ?Per_descricao, Per_login = ?Per_login " +
+            string sql = "UPDATE Per_perfil SET Per_matricula = ?Per_matricula, Per_descricao = ?Per_descricao, Per_login = ?Per_login, per_usuario = ?per_usuario " +
             " Per_senha = ?Per_senha WHERE Per_matricula = ?Per_matricula";
             conexao = Mapped.Connection();
             objCommand = Mapped.Command(sql, conexao);
@@ -77,6 +79,7 @@ public class Perfil_DB
             objCommand.Parameters.Add(Mapped.Parameter("?Per_descricao", perfil.Descricao));
             objCommand.Parameters.Add(Mapped.Parameter("?Per_login", perfil.Login));
             objCommand.Parameters.Add(Mapped.Parameter("?Per_senha", perfil.Senha));
+            objCommand.Parameters.Add(Mapped.Parameter("?per_usuario", perfil.Per_usuario));
             objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
