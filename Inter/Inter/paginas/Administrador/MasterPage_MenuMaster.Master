@@ -8,7 +8,7 @@
 
     <!-- Menu Lateral  -->
 
-    <div id="lateral">
+    <div id="lateral" class="visible-md-inline visible-lg-inline hidden-sm hidden-xs">
 
         <div id="menu">
             <h1>
@@ -45,6 +45,21 @@
 
             </ul>
         </div>
+        <!-- /#menu -->
+
+    </div>
+    <!-- /#lateral -->
+
+    <!-- Menu Lateral  -->
+
+    <div id="lateralMenor" class="hidden-lg hidden-md">
+        <div>
+            <a href="#"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+       </div>
+            
+           
+
+      
         <!-- /#menu -->
 
     </div>
