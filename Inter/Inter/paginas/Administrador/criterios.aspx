@@ -158,7 +158,7 @@
 
 
                         <%--Botão de novo critério--%>
-                        <button type="button" class="btn btn-default" id="" data-toggle="modal" data-target="#myModalCadastrarCri" title="Ir para cadastro de critérios">
+                        <button type="button" class="btn btn-default" id="btNovoCriterio" data-toggle="modal" data-target="#myModalCadastrarCri" title="Ir para cadastro de critérios">
                             <span class="glyphicon glyphicon-plus"></span>&nbsp Novo Critério
                        
                        

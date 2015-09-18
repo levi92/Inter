@@ -122,7 +122,7 @@
                     <li class="active"><a href="#geral" role="tab" data-toggle="tab">Aberto</a></li>
                     <li><a href="#andamento" role="tab" data-toggle="tab">Em Andamento</a></li>
                     <li><a href="#finalizado" role="tab" data-toggle="tab">Finalizado</a></li>
-                    <!--Placeholder, isso vai no usuário--><li><a data-toggle='modal' data-target='#myModal2'>Nova Solicitação</a></li>
+                    
                 </ul>
                 <div class="tab-content">
 
@@ -194,6 +194,12 @@
                         </asp:UpdatePanel>
                         <%--Fim do Grid--%>
                     </div>
+                    <br/>
+                         <%--Botão de nova solicitação--%>
+                        <button type="button" class="btn btn-default" id="btNovaSolicitacao" data-toggle="modal" data-target="#myModal2" title="Cadastrar Nova Solicitação">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp Nova Solicitação
+                         </button>
+                       
                     <!-- TICKETS EM ANDAMENTO -->
                     <div role="tabpanel" class="tab-pane fade in" id="andamento">
                         <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server">
@@ -334,7 +340,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" id="fecharModal" onclick="fechaModalCri();" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title" id="myModalLabel3">Cadastrar Solicitações</h4>
+                                <h4 class="modal-title" id="myModalLabel3">Nova Solicitação</h4>
                             </div>
                             <br />
 
