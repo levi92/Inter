@@ -101,17 +101,53 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
 
     public void CarregaPesquisaAvançada() //Carrega a grid com todos os PIs relacionados a pesquisa
     {
-        string pesquisa; //cria uma variavel para receber o valor digitado no campo pesquisa
-        pesquisa = txtPesquisa.Text; //recebe o valor digitado no campo pesquisa 
+        string curso;
+        string semestre_ano;
+        string status;
+        string pesquisa = txtPesquisa.Text; //cria uma variavel para receber o valor digitado no campo pesquisa
 
-        if (pesquisa == "") //se o campo pesquisa estiver vazio
+        if (ddlCurso.SelectedValue == "0")
         {
-            gdvProjetos.Visible = false; //grid fica invisivel
-            lblQtdRegistro.Text = "Preencha o campo pesquisa avançada!"; //exibe uma mensagem para que ele preencha o campo pesquisa
+            curso = "";
+        }
+        else
+        {
+            curso = ddlCurso.SelectedItem.ToString();
+        }
+
+        if (ddlSemestreAno.SelectedValue == "0")
+        {
+            semestre_ano = "";
+        }
+        else
+        {
+            semestre_ano = ddlSemestreAno.SelectedItem.ToString();
+        }
+
+        if (ddlStatus.SelectedValue == "0")
+        {
+            status = "";
+        }
+        else
+        {
+            if (ddlStatus.SelectedItem.ToString() == "Em andamento")
+            {
+                status = "0";
+            }
+            else
+            {
+                status = "1";
+            }
+        }
+
+        if ((curso == "") && (semestre_ano == "") && (status == "") && (pesquisa == ""))
+        {
+            gdvProjetos.Visible = false;
+            lblQtdRegistro.Text = "Preencha ao menos um campo para pesquisar!";
         }
         else //se o campo pesquisa nao estiver vazio
         {
-            DataSet dsPesquisa = Funcoes_DB.SelectFiltroPI(pesquisa); //dataset recebe o retorno do método que faz a pesquisa pelo filtro q o usuario digitou
+            DataSet dsPesquisa = Funcoes_DB.SelectFiltroPI(curso, semestre_ano, status, pesquisa); //dataset recebe o retorno do método que faz a pesquisa pelo filtro q o usuario digitou
 
             int qtd = dsPesquisa.Tables[0].Rows.Count;// conta quantas linhas o dataset retornou
             if (qtd > 0)// verifica se a quantidade de linhas form maior que 0
