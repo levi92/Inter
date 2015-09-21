@@ -87,7 +87,7 @@ namespace AppCode.Persistencia
             IDbCommand objCommand;
             IDataAdapter objDataAdapter;
             objConnection = Mapped.Connection();
-            objCommand = Mapped.Command("SELECT PRI_CODIGO, PRO_NOME FROM API_ATRIBUICAO_PI API WHERE PRI_CODIGO = ?PRI_CODIGO", objConnection);
+            objCommand = Mapped.Command("SELECT PRO_NOME FROM API_ATRIBUICAO_PI API WHERE PRI_CODIGO = ?PRI_CODIGO", objConnection);
             objCommand.Parameters.Add(Mapped.Parameter("?PRI_CODIGO", codPI));
             objDataAdapter = Mapped.Adapter(objCommand);
             objDataAdapter.Fill(ds);

@@ -259,11 +259,11 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
 
             int qtd = nome_professor.Tables[0].Rows.Count;
 
-            /*ddlSemestreAno.DataSource = nome_professor;
-            ddlSemestreAno.DataTextField = "PRO_NOME";
-            ddlSemestreAno.DataValueField = "PRI_CODIGO";
-            ddlSemestreAno.DataBind();
-            ddlSemestreAno.Items.Insert(0, new ListItem("Selecione", "0"));*/
+            string[] professores = new string[qtd];
+            for (int i = 0; i < qtd; i++)
+            {
+                professores[i] = nome_professor.Tables[0].Rows[i]["pro_nome"].ToString();
+            }
 
             string[] matriculas_alunos = Grupo_Aluno_DB.SelectAllMatriculaByGrupo(gru_codigo);
             string[] nome_alunos = Funcoes.NomeAlunosByMatricula(matriculas_alunos);
@@ -281,11 +281,11 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
                 lstDisciplinas.DataBind();
             }
 
-            /*for (int i = 0; i < qtd; i++) //Lista com professores
+            for (int i = 0; i < qtd; i++) //Lista com professores
             {
-                lstProfessores.DataSource = nome_professor;
+                lstProfessores.DataSource = professores;
                 lstProfessores.DataBind();
-            }*/
+            }
 
             UpdatePanelModalNovoCriterio.Update();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);

@@ -233,8 +233,8 @@ public class Funcoes_DB
         " inner join eve_eventos eve on pri2.pri_codigo = eve.pri_codigo"+
         " inner join pri_projeto_inter pri3 on pri3.pri_codigo = eve.pri_codigo"+
         " inner join api_atribuicao_pi api on pri3.pri_codigo = api.pri_codigo"+
-        " inner join cpi_criterio_pi cpi on api.adi_codigo = cpi.adi_codigo and api.pri_codigo = cpi.cpi_codigo"+
-        " inner join cge_criterios_gerais cge on cpi.cge_codigo = cge.cge_codigo " + filtro + ";";
+        " inner join cpi_criterio_pi cpi on api.adi_codigo = cpi.adi_codigo and api.pri_codigo = cpi.pri_codigo"+
+        " inner join cge_criterios_gerais cge on cpi.cge_codigo = cge.cge_codigo " + filtro + " group by gru.gru_codigo;";
         objCommand = Mapped.Command(sql, objConnection);
         objDataAdapter = Mapped.Adapter(objCommand);
         objDataAdapter.Fill(ds);
