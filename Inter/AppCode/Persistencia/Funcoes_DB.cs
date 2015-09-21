@@ -170,7 +170,7 @@ public class Funcoes_DB
         return ds;
     }
 
-    public static DataSet SelectFiltroPI(string pesquisa)
+    /*public static DataSet SelectFiltroPI(string pesquisa)
     {
 
         DataSet ds = new DataSet();
@@ -194,6 +194,54 @@ public class Funcoes_DB
         objConnection.Close();
         objCommand.Dispose();
         objConnection.Dispose();
+        return ds;
+    }*/
+
+    public static DataSet SelectFiltroPI(string curso, string semestre_ano, string status, string pesquisa)
+    {
+        string filtro = "";
+
+        if (curso != "")
+        {
+                filtro = filtro + "and pri3.cur_nome like '%" + curso + "%'";
+        }
+
+        if (semestre_ano != "")
+        {
+                filtro = filtro + "and pri3.pri_semestre = '" + semestre_ano + "'";
+        }
+
+        if (status != "")
+        {
+                filtro = filtro + "and gru.GRU_FINALIZADO = '" + status + "'";
+        }
+
+        if (pesquisa != "")
+        {
+                filtro = filtro + "and concat(gru.gru_nome_projeto, ' ', s.san_ano, ' ', eve.eve_data,' ', eve.eve_tipo, ' ', cge.cge_descricao, ' ', cge.cge_nome) like '%" + pesquisa + "%'";
+        }
+
+        DataSet ds = new DataSet();
+        IDbConnection objConnection;
+        IDbCommand objCommand;
+        IDataAdapter objDataAdapter;
+        objConnection = Mapped.Connection();
+        string sql = "select gru.gru_codigo, pri1.pri_codigo, gru.GRU_NOME_PROJETO, pri1.cur_nome, pri1.pri_semestre, concat(s.san_ano, '-', s.san_semestre) as SAN, gru.GRU_FINALIZADO from gru_grupo gru" + 
+        " inner join pri_projeto_inter pri1 on pri1.pri_codigo = gru.pri_codigo"+
+        " inner join san_semestre_ano s on s.san_codigo = pri1.san_codigo"+
+        " inner join pri_projeto_inter pri2 on pri2.san_codigo = s.san_codigo"+
+        " inner join eve_eventos eve on pri2.pri_codigo = eve.pri_codigo"+
+        " inner join pri_projeto_inter pri3 on pri3.pri_codigo = eve.pri_codigo"+
+        " inner join api_atribuicao_pi api on pri3.pri_codigo = api.pri_codigo"+
+        " inner join cpi_criterio_pi cpi on api.adi_codigo = cpi.adi_codigo and api.pri_codigo = cpi.pri_codigo"+
+        " inner join cge_criterios_gerais cge on cpi.cge_codigo = cge.cge_codigo " + filtro + " group by gru.gru_codigo;";
+        objCommand = Mapped.Command(sql, objConnection);
+        objDataAdapter = Mapped.Adapter(objCommand);
+        objDataAdapter.Fill(ds);
+        objConnection.Close();
+        objCommand.Dispose();
+        objConnection.Dispose();
+
         return ds;
     }
 

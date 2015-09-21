@@ -101,17 +101,53 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
 
     public void CarregaPesquisaAvançada() //Carrega a grid com todos os PIs relacionados a pesquisa
     {
-        string pesquisa; //cria uma variavel para receber o valor digitado no campo pesquisa
-        pesquisa = txtPesquisa.Text; //recebe o valor digitado no campo pesquisa 
+        string curso;
+        string semestre_ano;
+        string status;
+        string pesquisa = txtPesquisa.Text; //cria uma variavel para receber o valor digitado no campo pesquisa
 
-        if (pesquisa == "") //se o campo pesquisa estiver vazio
+        if (ddlCurso.SelectedValue == "0")
         {
-            gdvProjetos.Visible = false; //grid fica invisivel
-            lblQtdRegistro.Text = "Preencha o campo pesquisa avançada!"; //exibe uma mensagem para que ele preencha o campo pesquisa
+            curso = "";
+        }
+        else
+        {
+            curso = ddlCurso.SelectedItem.ToString();
+        }
+
+        if (ddlSemestreAno.SelectedValue == "0")
+        {
+            semestre_ano = "";
+        }
+        else
+        {
+            semestre_ano = ddlSemestreAno.SelectedItem.ToString();
+        }
+
+        if (ddlStatus.SelectedValue == "0")
+        {
+            status = "";
+        }
+        else
+        {
+            if (ddlStatus.SelectedItem.ToString() == "Em andamento")
+            {
+                status = "0";
+            }
+            else
+            {
+                status = "1";
+            }
+        }
+
+        if ((curso == "") && (semestre_ano == "") && (status == "") && (pesquisa == ""))
+        {
+            gdvProjetos.Visible = false;
+            lblQtdRegistro.Text = "Preencha ao menos um campo para pesquisar!";
         }
         else //se o campo pesquisa nao estiver vazio
         {
-            DataSet dsPesquisa = Funcoes_DB.SelectFiltroPI(pesquisa); //dataset recebe o retorno do método que faz a pesquisa pelo filtro q o usuario digitou
+            DataSet dsPesquisa = Funcoes_DB.SelectFiltroPI(curso, semestre_ano, status, pesquisa); //dataset recebe o retorno do método que faz a pesquisa pelo filtro q o usuario digitou
 
             int qtd = dsPesquisa.Tables[0].Rows.Count;// conta quantas linhas o dataset retornou
             if (qtd > 0)// verifica se a quantidade de linhas form maior que 0
@@ -193,7 +229,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
         if (e.CommandName == "verDetalhes")
         {
             GridViewRow gvr = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer); //pega a linha da grid pela fonte do comando
-           
+
             Label lblCodigoGrupo = (Label)gdvProjetos.Rows[gvr.RowIndex].FindControl("lblCodigo");
             int gru_codigo = Convert.ToInt32(lblCodigoGrupo.Text);
 
@@ -217,53 +253,40 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
             lblCursoModal.Text = nome_curso; //pega o nome do curso e coloca na célula da coluna correspondente ao curso daquela linha
             lblSemestreModal.Text = semestre_curso;
             lblStatusModal.Text = status;
-            
-            
-            /*DataSet cod_disciplina = Atribuicao_PI_DB.SelectDisciplinaByCod(CodigoPI);
+
+            DataSet cod_disciplina = Atribuicao_PI_DB.SelectDisciplinaByCod(CodigoPI);
+            DataSet nome_professor = Atribuicao_PI_DB.SelectNomeProfessor(CodigoPI);
+
+            int qtd = nome_professor.Tables[0].Rows.Count;
+
+            string[] professores = new string[qtd];
+            for (int i = 0; i < qtd; i++)
+            {
+                professores[i] = nome_professor.Tables[0].Rows[i]["pro_nome"].ToString();
+            }
 
             string[] matriculas_alunos = Grupo_Aluno_DB.SelectAllMatriculaByGrupo(gru_codigo);
             string[] nome_alunos = Funcoes.NomeAlunosByMatricula(matriculas_alunos);
             string[] nome_disciplina = Funcoes.DisciplinasByCodigo(cod_disciplina);
-            string[] aluno = new string[0];
-            string[] professor = new string[0];
 
-            lblNomeGrupoModal.Text = gru_nome;
-
-            DataSet ds = (DataSet)Session["DS_AllPIsbyCalendarioAtual"];
-            string[] vetorReturnFunction = new string[3];
-            vetorReturnFunction = Funcoes.tratarDadosProfessor(ds.Tables[0].Rows[gvr.RowIndex]["disciplina"].ToString()); //pega o dado da linha [i] da coluna "disciplina" e joga dentro do método tratarDados
-            
-
-
-            int qtdPIs = ds.Tables[0].Rows.Count; //pega a quantidade total de linhas na tabela do dataset e armazena na variável qtdPIs
-            string[] cursos = new string[0]; //instancia um novo array cursos com tamanho indefinido
-            cursos = Funcoes.tratarDadosCursosComPI(ds, qtdPIs);
-
-            //instancia um novo array cursos com tamanho indefinido
-            //disciplina = Funcoes.tratarDadosCursosComPI(ds, qtdPIs); //usa um método para tratar o nome dos cursos e trazer somente um de cada
-            //professor = Funcoes.tratarDadosNomeProfessores(ds, qtdPIs);
-            //aluno = Funcoes.NomeAlunosByMatricula();
-            for (int i = 0; i < matriculas_alunos.Length; i++)
+            for (int i = 0; i < matriculas_alunos.Length; i++) //Lista com alunos
             {
                 lstAlunos.DataSource = nome_alunos;
                 lstAlunos.DataBind();
-                lstDisciplinas.DataSource = disciplina;
-                lstDisciplinas.DataBind();
-
-                lstProfessores.DataSource = professor;
-                lstProfessores.DataBind();
             }
 
-            for (int i = 0; i < nome_disciplina.Length; i++)
+            for (int i = 0; i < nome_disciplina.Length; i++) //Lista com disciplina
             {
                 lstDisciplinas.DataSource = nome_disciplina;
                 lstDisciplinas.DataBind();
-                lstDisciplinas.DataSource = disciplina;
-                lstDisciplinas.DataBind();
+            }
 
-                lstProfessores.DataSource = professor;
+            for (int i = 0; i < qtd; i++) //Lista com professores
+            {
+                lstProfessores.DataSource = professores;
                 lstProfessores.DataBind();
-            }*/
+            }
+
             UpdatePanelModalNovoCriterio.Update();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
         }
