@@ -291,6 +291,33 @@ public partial class paginas_Usuario_notificacoes {
     protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAssuntoNovoRequerimento;
     
     /// <summary>
+    /// rfvDescricaoNovoRequerimento control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescricaoNovoRequerimento;
+    
+    /// <summary>
+    /// lblDescricao control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblDescricao;
+    
+    /// <summary>
+    /// txtaMsg control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlTextArea txtaMsg;
+    
+    /// <summary>
     /// lblMsg control.
     /// </summary>
     /// <remarks>

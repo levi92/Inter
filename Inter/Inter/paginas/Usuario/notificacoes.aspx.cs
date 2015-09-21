@@ -102,34 +102,49 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         txtAssunto.Style.Clear();
         txtCategoria.Style.Clear();
 
-        if (!String.IsNullOrEmpty(txtAssunto.Text) && !String.IsNullOrEmpty(txtCategoria.Text))
+        if (!String.IsNullOrEmpty(txtAssunto.Text) && !String.IsNullOrEmpty(txtCategoria.Text) && !String.IsNullOrEmpty(txtaMsg.Value))
         {
 
-            Professor prof = new Professor();
-            prof = (Professor)Session["Professor"];
-            string[] nomeProf = prof.Nome.Split(' ');            
-            string usuario1 = nomeProf[0] + " " + nomeProf[nomeProf.Length-1];
-            string usuario = Session["nome"].ToString();
+            string prof = Session["nome"].ToString();
+            string[] nomeProf = prof.Split(' ');
+            string usuario = nomeProf[0] + " " + nomeProf[nomeProf.Length - 1];
+            string matricula = Session["matricula"].ToString();
+            string conteudo = txtaMsg.Value;
 
-            
+
+
+            txtResponder.Text = "";
             string assunto = txtAssunto.Text;
             string categoria = txtCategoria.Text;
 
-            Requerimento req = new Requerimento(usuario1, assunto, categoria, usuario);
+            Requerimento req = new Requerimento(matricula, assunto, categoria, usuario);
 
             if (Requerimento_DB.Insert(req) == 0)
             {
-                lblMsg.Text = "<span class='glyphicon glyphicon-ok-circle'></span> &nbsp Cadastrado com sucesso.";
+
+                lblMsg.Text = "<span class='glyphicon glyphicon-ok-circle'></span> &nbsp Solicitação enviada com sucesso.";
                 lblMsg.Style.Add("color", "green");
                 gdvRequerimentoAberto.EditIndex = -1;
                 CarregarGridAtivos();
                 UpdatePanelAtivados.Update();
-
                 req = Requerimento_DB.SelectLast();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalCriacaoCriterio", "FechaModalCriacaoCriterio();", true);
+                int cod = req.CodigoReq;
+                Mensagem men = new Mensagem(cod, matricula, conteudo, usuario);
+
+                if (Mensagem_DB.Insert(men) == 0)
+                {
+                    Requerimento_DB.UpdateTime(cod);
+                    abrirMensagens(cod);
+                }
+                else
+                {
+                    lblMsg.Text = "Erro ao enviar mensagem";
+                }
+                txtaMsg.Value = "";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModalDepoisdeCriar", "fechaModalClick();", true);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
                 lblMsgAssunto.Text = req.Assunto;
-                lblMsgProfessor.Text = req.MatriculaPro;
+                lblMsgProfessor.Text = req.Usuario;
                 lblMsgCategoria.Text = req.Categoria;
                 lblMsgId.Text = req.CodigoReq.ToString();
                 abrirMensagens(req.CodigoReq);
@@ -139,25 +154,26 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
             }
             else
             {
-                lblMsg.Text = "Erro ao inserir solicitação!";
+                lblMsg.Text = "Erro ao enviar solicitação!";
             }
-            
+
         }
-       
+
     }
 
 
-    protected void btnCancelarNovoCriterio_Click(object sender, EventArgs e)
+    protected void btnCancelarNovaSolicitacao_Click(object sender, EventArgs e)
     {
-
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "FechaModal", "FechaModal();", true);
         lblMsg.Text = "";
         txtAssunto.Text = "";
         txtCategoria.Text = "";
+        txtaMsg.Value = "";
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Close", "fechaModalClick();", true);
+        
 
     }
 
-    
+
     protected void btnModal_Command(object sender, CommandEventArgs e)
     {
         int ID = Convert.ToInt32(e.CommandArgument);
@@ -165,10 +181,10 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
         lblMsgAssunto.Text = req.Assunto;
-        lblMsgProfessor.Text = req.MatriculaPro;
+        lblMsgProfessor.Text = req.Usuario;
         lblMsgCategoria.Text = req.Categoria;
         lblMsgId.Text = req.CodigoReq.ToString();
-        
+
         switch (req.Status)
         {
             case 1:
@@ -209,13 +225,13 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         for (int i = 0; i < qtd; i++)
         {
             b = i + 1;
-            if (usuario == msgDt.Tables[0].Rows[i][2].ToString())
+            if (usuario == msgDt.Tables[0].Rows[i][6].ToString())
             {
-                msgBox = msgBox + "<div class='allMsg' style='float: right'><div class='txtCard' style='background-color: rgb(247, 247, 228);' onclick='mostraInfo(" + b + ")'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info" + b + "' class='infoMsg'>Enviado as " + msgDt.Tables[0].Rows[i][4].ToString() + "</div></div>";
+                msgBox = msgBox + "<div class='allMsg' style='float: right'><div class='txtCard' style='background-color: rgb(220, 248, 198);' onclick='mostraInfo(" + b + ")'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info" + b + "' class='infoMsg'>Enviado por você as " + msgDt.Tables[0].Rows[i][4].ToString() + "</div></div>";
             }
             else
             {
-                msgBox = msgBox + "<div class='allMsg' style='float: left'> <div class='txtCard' onclick='mostraInfo(" + b + ")'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info" + b + "' class='infoMsg'>Enviado por " + msgDt.Tables[0].Rows[i][2].ToString() + " - " + msgDt.Tables[0].Rows[i][4].ToString() + "</div></div>";
+                msgBox = msgBox + "<div class='allMsg' style='float: left'> <div class='txtCard' onclick='mostraInfo(" + b + ")'>" + msgDt.Tables[0].Rows[i][5].ToString() + "</div><div id='info" + b + "' class='infoMsg'>Enviado por " + msgDt.Tables[0].Rows[i][6].ToString() + " - " + msgDt.Tables[0].Rows[i][4].ToString() + "</div></div>";
             }
 
         }
@@ -225,38 +241,37 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
 
     protected void btnNovaMsg_Click(object sender, EventArgs e)
     {
-        
+
         if (!String.IsNullOrEmpty(txtResponder.Text))
         {
-
-            Professor prof = new Professor();
-            prof = (Professor)Session["Professor"];
-            string[] nomeProf = prof.Nome.Split(' ');
-            string usuario = nomeProf[0] + " " + nomeProf[nomeProf.Length - 1]; 
-
+            string prof = Session["nome"].ToString();
+            string[] nomeProf = prof.Split(' ');
+            string usuario = nomeProf[0] + " " + nomeProf[nomeProf.Length - 1];
+            string matricula = Session["matricula"].ToString();
             string msg = txtResponder.Text;
             int cod = Convert.ToInt32(lblMsgId.Text);
 
-            Mensagem men = new Mensagem(cod, usuario, msg);
+            Mensagem men = new Mensagem(cod, matricula, msg, usuario);
 
             if (Mensagem_DB.Insert(men) == 0)
             {
                 Requerimento_DB.UpdateTime(cod);
                 abrirMensagens(cod);
             }
-
-
-            txtResponder.Text = "";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
-            UpdatePanel3.Update();
-
-            CarregarGridAtivos();
-            UpdatePanelAtivados.Update();
-
         }
+
+        txtResponder.Text = "";
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+        UpdatePanel3.Update();
+
+        CarregarGridAtivos();
+        UpdatePanelAtivados.Update();
+
     }
 
-
 }
+
+
+
 
 

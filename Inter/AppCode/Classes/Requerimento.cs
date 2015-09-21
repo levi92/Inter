@@ -27,7 +27,7 @@ public class Requerimento{
 
     public string Usuario { get; set; }
 
-    public Requerimento(string matricula, int grupo, string assunto, DateTime data, int status, string categoria)
+    public Requerimento(string matricula, int grupo, string assunto, DateTime data, int status, string categoria, string usuario)
     {
         MatriculaPro = matricula;
         CodigoGrupo = grupo;
@@ -35,9 +35,10 @@ public class Requerimento{
         DataReq = data;
         Status = status;
         Categoria = categoria;
+        Usuario = usuario;
     }
-    //Constructor do select
-    public Requerimento(int codigo, string matricula, int grupo, string assunto, DateTime data, int status, string categoria)
+    //Constructor do select com grupo
+    public Requerimento(int codigo, string matricula, int grupo, string assunto, DateTime data, int status, string categoria, string usuario)
     {
         CodigoReq = codigo;
         MatriculaPro = matricula;
@@ -46,10 +47,11 @@ public class Requerimento{
         DataReq = data;
         Status = status;
         Categoria = categoria;
+        Usuario = usuario;
     }
 
-    //Constructor do select
-    public Requerimento(int codigo, string matricula, string assunto, DateTime data, int status, string categoria)
+    //Constructor do select sem grupo
+    public Requerimento(int codigo, string matricula, string assunto, DateTime data, int status, string categoria, string usuario)
     {
         CodigoReq = codigo;
         MatriculaPro = matricula;
@@ -57,6 +59,7 @@ public class Requerimento{
         DataReq = data;
         Status = status;
         Categoria = categoria;
+        Usuario = usuario;
     }
     //Constructor do Insert
     public Requerimento(string matricula, int grupo, string assunto, string categoria, string usuario)

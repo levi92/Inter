@@ -15,9 +15,9 @@
         $(document).ready(function () {
             $('#cphConteudo_icone3').addClass('corIcone');
         });
-    </script>
-
-    <script type="text/javascript">
+        function fechaModalClick() {
+            $('#fecharModal').click();
+        }
         function openModal() {
             $('#myModal1').modal('show');
         }
@@ -26,9 +26,6 @@
             $('#lblMsg').html(" ");
         }
 
-        function FechaModal() {
-            $('#fecharModal').click();
-        }
 
 
         </script>
@@ -100,6 +97,7 @@
                         <option value="Outros" style="background-color: whitesmoke"></option>
                     </select>
                     <asp:Label ID="New" runat="server" placeholder="Assunto" Style="border-top: none; border-left: none; border-right: none; border-bottom-color: #2196f3; background-color: whitesmoke; height: 30px;" ></asp:Label>
+                   
                     <asp:ValidationSummary ID="vsNovoTicket" ValidationGroup="NovoTicket" ForeColor="#960d10" runat="server" DisplayMode="List" Style="margin: 7px; padding: 7px;" />
                 </div>
                 <!--Fim do corpo-->
@@ -166,7 +164,7 @@
                                         <%--Coluna do usuario do Requerimento--%>
                                         <asp:TemplateField HeaderText="Usuario">                                   
                                             <ItemTemplate>
-                                                <asp:Label ID="lblUsuario1" runat="server" Text='<%#Eval ("pro_matricula")%>'></asp:Label>
+                                                <asp:Label ID="lblUsuario1" runat="server" Text='<%#Eval ("req_usuario")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
@@ -193,13 +191,12 @@
 
                         </asp:UpdatePanel>
                         <%--Fim do Grid--%>
+                      
+                       
+
                     </div>
                     <br/>
-                         <%--Botão de nova solicitação--%>
-                        <button type="button" class="btn btn-default" id="btNovaSolicitacao" data-toggle="modal" data-target="#myModal2" title="Cadastrar Nova Solicitação">
-                            <span class="glyphicon glyphicon-plus"></span>&nbsp Nova Solicitação
-                         </button>
-                       
+                         
                     <!-- TICKETS EM ANDAMENTO -->
                     <div role="tabpanel" class="tab-pane fade in" id="andamento">
                         <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server">
@@ -260,9 +257,11 @@
 
                                 </asp:GridView>
                                 <asp:Label ID="lblQtdRegistroAnd" runat="server"></asp:Label>
+                                
                             </ContentTemplate>
 
                         </asp:UpdatePanel>
+ 
                     </div>
                     <!-- TICKETS FINALIZADOS -->
                     <div role="tabpanel" class="tab-pane fade in" id="finalizado">
@@ -323,10 +322,21 @@
 
                                 </asp:GridView>
                                 <asp:Label ID="lblQtdRegistroFin" runat="server"></asp:Label>
+                                
                             </ContentTemplate>
 
                         </asp:UpdatePanel>
+                      
+
                     </div>
+
+                    
+                        <%--Botão de nova solicitação--%>
+                    <div>
+                        <button type="button" class="btn btn-default" id="btNovaSolicitacao" data-toggle="modal" data-target="#myModal2" title="Cadastrar Nova Solicitação">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp Nova Solicitação
+                         </button>
+                        </div>
                 </div>
             </div>
         </div>
@@ -339,7 +349,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" id="fecharModal" onclick="fechaModalCri();" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <button type="button" id="fecharModal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                 <h4 class="modal-title" id="myModalLabel3">Nova Solicitação</h4>
                             </div>
                             <br />
@@ -366,18 +376,24 @@
                                 <div class="controls-row">
                                     <asp:Label ID="lblAssuntoNovoRequerimento" runat="server" CssClass="control-label col-sm-2" Text="Assunto: "></asp:Label>                                    
                                     <asp:TextBox ID="txtAssunto" ClientIDMode="Static" CssClass="form-control col-sm-9" Width="50%" runat="server"></asp:TextBox>
-                                    
+                                     
                                     <%--Validação do Campo Assunto (Verifica se está vazio e se está preenchido com uma string)--%>
                                     &nbsp<asp:RequiredFieldValidator ID="rfvAssuntoNovoRequerimento" runat="server" CssClass="col-sm1" ErrorMessage="O campo Assunto deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtAssunto" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>
-                                    
+                                    &nbsp<asp:RequiredFieldValidator ID="rfvDescricaoNovoRequerimento" runat="server" CssClass="col-sm1" ErrorMessage="O campo Descrição deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtaMsg" ValidationGroup="NovoRequerimento"></asp:RequiredFieldValidator>
+                           
                                 </div>
+                                </br>
+                                 <div class="input-group">
+                                <asp:Label ID="lblDescricao" runat="server" CssClass="control-label col-sm-9" Text="Descrição: "></asp:Label>
+                                <textarea id="txtaMsg" cols="20" rows="2" runat="server" CssClass="form-control-sm-2" placeholder="Descreva seu problema aqui..." Style="border-top: none; border-left: none; border-right: none; background-color: whitesmoke; width: 120%;height: 150px; margin-left:40%"></textarea>
+                                 </div>
                                 <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px;padding-left:30px;"></asp:Label>
                             </div>  
                              
                             <asp:ValidationSummary ID="vsNovoRequerimento" ValidationGroup="NovoRequerimento" ForeColor="#960d10" runat="server" DisplayMode="List" Style="margin: 7px; padding: 7px;" />
 
                             <div class="modal-footer">
-                                <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarNovoRequerimento" runat="server" title="Cancelar Inserção" OnClick="btnCancelarNovoCriterio_Click">
+                                <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarNovoRequerimento" runat="server" title="Cancelar Inserção" OnClick="btnCancelarNovaSolicitacao_Click">
                                     <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</asp:LinkButton>
 
                                 <asp:LinkButton ID="btnCriarNovoRequerimento" OnClick="btnCriarNovoTicket_Click" runat="server" CssClass="btn btn-default" ToolTip="Confirmar Inserção" CausesValidation="true" ValidationGroup="NovoRequerimento">

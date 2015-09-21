@@ -9,39 +9,35 @@ public class Mensagem
 
     //CHAVE PRIMÁRIA.Identificador da Mensagem. Set privado porque o ID é autoincrementado no BD
     public int CodigoMensagem { get; set; }
-    //Identificador do usuario que enviou a mensagem
-    public int CodigoReq { get; set; }
     //Identificador do ticket ao qual a mensagem pertence
-    public string MatriculaPro { get; set; }
+    public int CodigoReq { get; set; }
+    //Matricula do Professor que enviou a mensagem
+    public string MatriculaPer { get; set; }
     //Data e hora de envio da mensagem
     public DateTime DataEnvio { get; set; }
     //Conteúdo da mensagem 
     public string Conteudo { get; set; }
-
-    private string msg_usuario;
-
-    public string Msg_usuario
-    {
-        get { return msg_usuario; }
-        set { msg_usuario = value; }
-    }
+    //Identificador do usuario que enviou a mensagem
+    public string Usuario { get; set; }
     
     //CONSTRUTOR PARA INSERT
-    public Mensagem (int codrequerimento, string matricula, string conteudo)
+    public Mensagem (int codrequerimento, string matricula, string conteudo, string usuario)
     {
         CodigoReq = codrequerimento;
-        MatriculaPro = matricula;
+        MatriculaPer = matricula;
         DataEnvio = DateTime.Now;
         Conteudo = conteudo;
+        Usuario = usuario;
     }
 
     //CONSTRUTOR PARA SELECT
-    public Mensagem(int codrequerimento, string matricula, DateTime dataenvio, string conteudo, int codigoMensagem)
+    public Mensagem(int codrequerimento, string matricula, DateTime dataenvio, string conteudo, int codigoMensagem, string usuario)
     {
         CodigoReq = codrequerimento;
-        MatriculaPro = matricula;
+        MatriculaPer = matricula;
         DataEnvio = dataenvio;
         Conteudo = conteudo;
         CodigoMensagem = codigoMensagem;
+        Usuario = usuario;
     }
 }

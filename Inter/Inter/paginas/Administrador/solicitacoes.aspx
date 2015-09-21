@@ -138,7 +138,7 @@
                                         <%--Coluna do usuario do Requerimento--%>
                                         <asp:TemplateField HeaderText="Usuario">                                   
                                             <ItemTemplate>
-                                                <asp:Label ID="lblUsuario1" runat="server" Text='<%#Eval ("pro_matricula")%>'></asp:Label>
+                                                <asp:Label ID="lblUsuario1" runat="server" Text='<%#Eval ("req_usuario")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
