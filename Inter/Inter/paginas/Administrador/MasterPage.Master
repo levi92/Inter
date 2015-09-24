@@ -65,6 +65,16 @@
 
                     </ul>
 
+                    <table style="float: right; margin-right: 80px; text-align: center;">
+                        <tr class="tabelaEscolherDis">
+
+                            <%--Perfil Logado--%>
+
+                            <td>
+                                <asp:Label ID="lblPerfilLogado" runat="server" Width="100px"></asp:Label></td>
+                            </tr>
+                            </table>
+
                 </div>
 
                 <!-- /.navbar-collapse -->
