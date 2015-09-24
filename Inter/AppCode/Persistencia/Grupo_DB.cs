@@ -157,6 +157,23 @@ namespace AppCode.Persistencia
             return ds;
         }
 
+        public static DataSet SelectAllGruposFinalizadosAtual(int atrCod)
+        {
+            DataSet ds = new DataSet();
+            IDbConnection objConnection;
+            IDbCommand objCommand;
+            IDataAdapter objDataAdapter;
+            objConnection = Mapped.Connection();
+            objCommand = Mapped.Command("select gru.gru_codigo, gru.gru_nome_projeto from gru_grupo gru inner join gru_grupo gru2 inner join pri_projeto_inter pri on gru.pri_codigo = pri.pri_codigo inner join api_atribuicao_pi api on pri.pri_codigo = api.pri_codigo and api.adi_codigo = ?adi_codigo and gru.gru_finalizado = 1 group by gru.gru_codigo;", objConnection);            
+            objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", atrCod));
+            objDataAdapter = Mapped.Adapter(objCommand);
+            objDataAdapter.Fill(ds);
+            objConnection.Close();
+            objCommand.Dispose();
+            objConnection.Dispose();
+            return ds;
+        }
+
         public static int UpdateGrupoAvaliado(Grupo gru)
         {
             int retorno = 0;

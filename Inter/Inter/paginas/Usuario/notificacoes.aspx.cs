@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using Inter.Funcoes;
 using System.Data;
 using Interdisciplinar;
-
+using AppCode.Persistencia;
 //Se usar um namespace aqui ele não reconhece o Funcoes por algum motivo...
 
 public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
@@ -35,15 +35,44 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         if (!IsPostBack)
         {
             CarregarGridAtivos();
+            txtCategoria.Items.Insert(0, new ListItem("Selecione", "Selecione"));
+            txtCategoria.Items.Insert(1, new ListItem("Alteração de notas", "1"));
+            txtCategoria.Items.Insert(2, new ListItem("Problema com cadastros", "2"));
+            txtCategoria.Items.Insert(3, new ListItem("Problema com avaliações", "3"));
+            txtCategoria.Items.Insert(4, new ListItem("Sugestão", "4"));
+
+            int codAtr = Convert.ToInt32(Session["codAtr"]);
+            DataSet dsGrupos = Grupo_DB.SelectAllGruposFinalizadosAtual(codAtr);
+            int qtd = dsGrupos.Tables[0].Rows.Count;
+            if (qtd > 0)
+            {
+                ddlGrupo.Items.Insert(0, new ListItem("Selecione", "Selecione"));
+                ddlGrupo.DataSource = dsGrupos.Tables[0];
+                ddlGrupo.DataTextField = "gru_nome_projeto";
+                ddlGrupo.DataValueField = "gru_codigo";
+                ddlGrupo.DataBind();
+
+            }
+            else
+            {
+                ddlGrupo.Enabled = false;
+                ddlGrupo.Items.Insert(0, new ListItem("Nenhum grupo finalizado encontrado.", "Selecione"));
+            }
         }
+        
+
+       
+
     }
+
 
 
 
     public void CarregarGridAtivos()
     {
         //ABERTO
-        DataSet ds = Requerimento_DB.SelectS(1); //criando um data set com as solicitações abertas
+        string matricula = Session["matricula"].ToString();
+        DataSet ds = Requerimento_DB.SelectS(1, matricula); //criando um data set com as solicitações abertas
         int qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
         //se qtd for maior que zero, ou seja, se tiver dados no data set
         if (qtd > 0)
@@ -60,7 +89,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
 
 
         //EM ANDAMENTO
-        ds = Requerimento_DB.SelectS(2); //criando um data set com as solicitações abertas
+        ds = Requerimento_DB.SelectS(2, matricula); //criando um data set com as solicitações abertas
         qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
 
         //se qtd for maior que zero, ou seja, se tiver dados no data set
@@ -77,7 +106,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
 
 
         //FINALIZADO
-        ds = Requerimento_DB.SelectS(3); //criando um data set com as solicitações abertas
+        ds = Requerimento_DB.SelectS(3, matricula); //criando um data set com as solicitações abertas
         qtd = ds.Tables[0].Rows.Count;      //qtd de linhas do ds
 
         //se qtd for maior que zero, ou seja, se tiver dados no data set
@@ -100,9 +129,8 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
     protected void btnCriarNovoTicket_Click(object sender, EventArgs e)
     {
         txtAssunto.Style.Clear();
-        txtCategoria.Style.Clear();
 
-        if (!String.IsNullOrEmpty(txtAssunto.Text) && !String.IsNullOrEmpty(txtCategoria.Text) && !String.IsNullOrEmpty(txtaMsg.Value))
+        if (!String.IsNullOrEmpty(txtAssunto.Text) && !String.IsNullOrEmpty(txtCategoria.Text) && !String.IsNullOrEmpty(txtaMsg.Value) && !txtCategoria.SelectedValue.Equals("Selecione") && !ddlGrupo.SelectedValue.Equals("Selecione"))  
         {
 
             string prof = Session["nome"].ToString();
@@ -110,14 +138,17 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
             string usuario = nomeProf[0] + " " + nomeProf[nomeProf.Length - 1];
             string matricula = Session["matricula"].ToString();
             string conteudo = txtaMsg.Value;
-
+            int grupo = Convert.ToInt32(ddlGrupo.SelectedValue);
 
 
             txtResponder.Text = "";
             string assunto = txtAssunto.Text;
-            string categoria = txtCategoria.Text;
-
+            string categoria = txtCategoria.SelectedItem.Text;
             Requerimento req = new Requerimento(matricula, assunto, categoria, usuario);
+            if (txtCategoria.SelectedValue.Equals("1"))
+            { // se o requerimento for para alteração de nota{
+                req = new Requerimento(matricula, grupo, assunto, categoria, usuario);
+            }
 
             if (Requerimento_DB.Insert(req) == 0)
             {
@@ -155,21 +186,24 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
             else
             {
                 lblMsg.Text = "Erro ao enviar solicitação!";
+
             }
 
         }
+        txtCategoria.SelectedIndex = 0;
+        ddlGrupo.SelectedIndex = 0;
+
 
     }
-
-
+        
     protected void btnCancelarNovaSolicitacao_Click(object sender, EventArgs e)
     {
         lblMsg.Text = "";
         txtAssunto.Text = "";
-        txtCategoria.Text = "";
+        txtCategoria.SelectedValue = "Selecione";
         txtaMsg.Value = "";
         ScriptManager.RegisterStartupScript(this, this.GetType(), "Close", "fechaModalClick();", true);
-        
+
 
     }
 
@@ -267,6 +301,36 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         CarregarGridAtivos();
         UpdatePanelAtivados.Update();
 
+    }
+
+    protected void txtCategoria_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (txtCategoria.SelectedValue.Equals("1"))
+        {
+            txtAssunto.Enabled = false;
+            txtAssunto.Text = "Alteração de notas - " + ddlGrupo.SelectedValue + " - " + ddlGrupo.SelectedItem;
+            lblGrupo.Visible = true;
+            ddlGrupo.Visible = true;
+            UpdatePanelModalNovoRequerimento.Update();
+            UpdatePanelGrupos.Update();
+        }
+        else
+        {
+            txtAssunto.Text = "";
+            txtAssunto.Enabled = true;
+            lblGrupo.Visible = false;
+            ddlGrupo.Visible = false;
+        }
+
+    }
+
+    protected void ddlGrupo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if(!ddlGrupo.SelectedValue.Equals("Selecione")){
+        txtAssunto.Text = "Alteração de notas - " + ddlGrupo.SelectedValue + " - " + ddlGrupo.SelectedItem;
+        UpdatePanelModalNovoRequerimento.Update();
+        UpdatePanelGrupos.Update();
+        }
     }
 
 }

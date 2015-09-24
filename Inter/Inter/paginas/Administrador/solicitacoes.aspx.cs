@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Inter.Funcoes;
 using System.Data;
 using Interdisciplinar;
+using AppCode.Persistencia;
 
 //Se usar um namespace aqui ele não reconhece o Funcoes por algum motivo...
 
@@ -142,7 +143,7 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         }
 
         abrirMensagens(req.CodigoReq);
-
+        CarregarGridAtivos();
         UpdatePanel3.Update();
 
 
@@ -214,7 +215,7 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
     protected void btnFinaliza_Click(object sender, EventArgs e)
     {
         int cod = Convert.ToInt32(lblMsgId.Text);
-        Requerimento_DB.Update(cod, 3);
+        if(Requerimento_DB.Update(cod, 3)==0){
         Requerimento_DB.UpdateTime(cod);
         mdlHeader.Attributes["style"] = "background-color: #0D9643;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
         txtResponder.Attributes["style"] = "background-color: #ccc";
@@ -224,7 +225,10 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
         abrirMensagens(cod);
 
         txtResponder.Text = "";
+        }
+        else{
 
+        }
         CarregarGridAtivos();
 
         UpdatePanel3.Update();
@@ -236,7 +240,31 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
 
     protected void btnLibera_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/Projetos");
+        string[] assuntoGrupo = lblMsgAssunto.Text.Split('-'); //separa a string de assunto automática - Ex: "Alteração de Nota - 1 - Grupo 1" vira [0]:"Alteração de nota",  [1]:"1", [2]:Grupo1
+        int codGrupo = Convert.ToInt32(assuntoGrupo[1]);
+        int codReq = Convert.ToInt32(lblMsgId.Text);
+        if (Requerimento_DB.Update(codReq, 2, codGrupo) == 0)
+        {
+            Grupo_DB.Update(codGrupo);
+            Requerimento_DB.UpdateTime(codReq);
+            lblMsgStatus.Text = "Em Andamento";
+            mdlHeader.Attributes["style"] = "background-color: #f9ae0e;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
+
+            abrirMensagens(codReq);
+
+            txtResponder.Text = "";
+        }
+        else{
+
+        }
+        CarregarGridAtivos();
+
+        UpdatePanel3.Update();
+        UpdatePanel1.Update();
+        UpdatePanel2.Update();
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+
     }
 
 

@@ -25,7 +25,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        ScriptManager1.RegisterAsyncPostBackControl(lkbBuscar); // Da um postback asyc ao clicar no botao pesquisar para nao atualizar a pagina inteira
+        ScriptManager1.RegisterAsyncPostBackControl(lkbBuscar); // Da um postback async ao clicar no botao pesquisar para nao atualizar a pagina inteira
         if (!IsPostBack) //Se nao for postback, ou seja, se estiver carregando a pagina pela primeira vez
         {
             CarregaGrid(); //chama o método carregaGrid();
@@ -71,7 +71,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
                 Label lblStatus = (Label)linha.FindControl("lblStatus");//acha o label status da grid e liga a outro label
                 Label lblSemestreCurso = (Label)linha.FindControl("lblSemestreCurso");//acha o label semestre da grid e liga a outro label
 
-                lblSemestreCurso.Text = lblSemestreCurso.Text + "º Semestre"; //acrestenta na label Curso ºSemestre
+                lblSemestreCurso.Text = lblSemestreCurso.Text + "º Semestre"; //acrescenta na label Curso ºSemestre
 
                 bool valor = false; //variavel criada para verificar se o status do PI esta em andamento ou finalizado e habilitar o linkbutton
 
@@ -303,7 +303,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
             {
                 CarregaGrid();
                 UpdatePanelAtivados.Update();
-                lblMsg.Text = "Projeto habilitado com Sucesso!";
+                lblMsg.Text = "Projeto habilitado para alterações de nota com Sucesso!";
             }
             else
             {

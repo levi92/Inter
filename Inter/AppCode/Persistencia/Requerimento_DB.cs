@@ -63,7 +63,34 @@ public class Requerimento_DB
             objCommand = Mapped.Command(sql, conexao);
             objCommand.Parameters.Add(Mapped.Parameter("?codigo", cod));
             objCommand.Parameters.Add(Mapped.Parameter("?status", status));
-            objCommand.Parameters.Add(Mapped.Parameter("?data", date));
+            objCommand.ExecuteNonQuery();
+            conexao.Close();
+            objCommand.Dispose();
+            conexao.Dispose();
+        }
+        catch (Exception e)
+        {
+            string erro = e.Message;
+            retorno = -2;
+        }
+        return retorno;
+    }
+
+    //UPDATE PARA ALTERAÇÃO DE NOTAS (COM COD GRUPO)
+    public static int Update(int cod, int status, int codGrupo)
+    {
+        int retorno = 0;
+        DateTime date = DateTime.Now;
+        try
+        {
+            IDbConnection conexao;
+            IDbCommand objCommand;
+            string sql = "UPDATE req_requerimento SET req_status = ?status WHERE req_codigo = ?codigo and gru_codigo = ?gruCodigo ";
+            conexao = Mapped.Connection();
+            objCommand = Mapped.Command(sql, conexao);
+            objCommand.Parameters.Add(Mapped.Parameter("?codigo", cod));
+            objCommand.Parameters.Add(Mapped.Parameter("?status", status));
+            objCommand.Parameters.Add(Mapped.Parameter("?gruCodigo", codGrupo));
             objCommand.ExecuteNonQuery();
             conexao.Close();
             objCommand.Dispose();
@@ -202,6 +229,24 @@ public class Requerimento_DB
         objConnection = Mapped.Connection();
         objCommand = Mapped.Command("SELECT * FROM req_requerimento WHERE req_status=?codigo ORDER BY req_dt_modificado DESC", objConnection);
         objCommand.Parameters.Add(Mapped.Parameter("?codigo", codigo));
+        objDataAdapter = Mapped.Adapter(objCommand);
+        objDataAdapter.Fill(ds);
+        objConnection.Close();
+        objCommand.Dispose();
+        objConnection.Dispose();
+        return ds;
+    }
+    //SELECT COM CÓDIGO DE STATUS E CÓDIGO DE MATRÍCULA PARA RECEBER SÓ SOLICITAÇÕES DE UM PROFESSOR ESPECÍFICO
+    public static DataSet SelectS(int codigo, string matricula)
+    {
+        DataSet ds = new DataSet();
+        IDbConnection objConnection;
+        IDbCommand objCommand;
+        IDataAdapter objDataAdapter;
+        objConnection = Mapped.Connection();
+        objCommand = Mapped.Command("SELECT * FROM req_requerimento WHERE req_status=?codigo and pro_matricula=?matricula ORDER BY req_dt_modificado DESC", objConnection);
+        objCommand.Parameters.Add(Mapped.Parameter("?codigo", codigo));
+        objCommand.Parameters.Add(Mapped.Parameter("?matricula", matricula));
         objDataAdapter = Mapped.Adapter(objCommand);
         objDataAdapter.Fill(ds);
         objConnection.Close();
