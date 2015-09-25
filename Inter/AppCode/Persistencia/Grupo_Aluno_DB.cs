@@ -63,6 +63,7 @@ namespace AppCode.Persistencia
             try
             {
                 string[] codAlunos;
+                string[] codAlunos2;
                 string codAlunosTemp = "";
                 IDbConnection objConnection;
                 IDbCommand objCommand;
@@ -76,12 +77,17 @@ namespace AppCode.Persistencia
                     codAlunosTemp += objDataReader["ALU_MATRICULA"].ToString()+"|";
                 }
                 codAlunos = codAlunosTemp.Split('|');
+                codAlunos2 = new string[codAlunos.Length - 1];
+                for(int i = 0; i < codAlunos.Length - 1; i++)
+                {
+                    codAlunos2[i] = codAlunos[i];
+                }
                 objDataReader.Close();
                 objConnection.Close();
                 objConnection.Dispose();
                 objCommand.Dispose();
                 objDataReader.Dispose();
-                return codAlunos;
+                return codAlunos2;
             }
             catch (Exception e)
             {
