@@ -249,10 +249,10 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
             Label lblStatus = (Label)gdvProjetos.Rows[gvr.RowIndex].FindControl("lblStatus");
             string status = lblStatus.Text;
 
-            lblNomeGrupoModal.Text = gru_nome;
+            /*lblNomeGrupoModal.Text = gru_nome;
             lblCursoModal.Text = nome_curso; //pega o nome do curso e coloca na célula da coluna correspondente ao curso daquela linha
             lblSemestreModal.Text = semestre_curso;
-            lblStatusModal.Text = status;
+            lblStatusModal.Text = status;*/
 
             DataSet cod_disciplina = Atribuicao_PI_DB.SelectDisciplinaByCod(CodigoPI);
             DataSet nome_professor = Atribuicao_PI_DB.SelectNomeProfessor(CodigoPI);
@@ -269,23 +269,37 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
             string[] nome_alunos = Funcoes.NomeAlunosByMatricula(matriculas_alunos);
             string[] nome_disciplina = Funcoes.DisciplinasByCodigo(cod_disciplina);
 
-            for (int i = 0; i < matriculas_alunos.Length; i++) //Lista com alunos
-            {
-                lstAlunos.DataSource = nome_alunos;
-                lstAlunos.DataBind();
-            }
+            DataTable dt = new DataTable();
+            dt.Columns.Add(" ", typeof(string));
+            dt.Columns.Add("Detalhes", typeof(string));
 
+            DataRow dr = dt.NewRow();
+            for (int i = 0; i < matriculas_alunos.Length; i++) //Lista com alunos
+            {           
+                dr[" "] = "Alunos";
+                dr["Detalhes"] = dr["Detalhes"] + nome_alunos[i] + ", ";
+            }
+            dt.Rows.Add(dr);
+
+            dr = dt.NewRow();
             for (int i = 0; i < nome_disciplina.Length; i++) //Lista com disciplina
             {
-                lstDisciplinas.DataSource = nome_disciplina;
-                lstDisciplinas.DataBind();
+                dr[" "] = "Disciplinas";
+                dr["Detalhes"] = dr["Detalhes"] + nome_disciplina[i] + ", ";
             }
+            dt.Rows.Add(dr);
 
+            dr = dt.NewRow();
             for (int i = 0; i < qtd; i++) //Lista com professores
             {
-                lstProfessores.DataSource = professores;
-                lstProfessores.DataBind();
+                dr[" "] = "Professores";
+                dr["Detalhes"] = dr["Detalhes"] + professores[i] + ", ";
             }
+            dt.Rows.Add(dr);
+
+            gdvDetalhes.DataSource = dt;
+            gdvDetalhes.DataBind();
+            
 
             UpdatePanelModalNovoCriterio.Update();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
