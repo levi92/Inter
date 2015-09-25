@@ -249,6 +249,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
             Label lblStatus = (Label)gdvProjetos.Rows[gvr.RowIndex].FindControl("lblStatus");
             string status = lblStatus.Text;
 
+            lblInformacoes.Text = "<pre>Grupo: " + gru_nome + " / Curso: " + nome_curso + "</br>Semestre: " + semestre_curso + " / Status: " + status + "</pre>";
             /*lblNomeGrupoModal.Text = gru_nome;
             lblCursoModal.Text = nome_curso; //pega o nome do curso e coloca na célula da coluna correspondente ao curso daquela linha
             lblSemestreModal.Text = semestre_curso;
@@ -270,13 +271,13 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
             string[] nome_disciplina = Funcoes.DisciplinasByCodigo(cod_disciplina);
 
             DataTable dt = new DataTable();
-            dt.Columns.Add(" ", typeof(string));
+            dt.Columns.Add("T", typeof(string));
             dt.Columns.Add("Detalhes", typeof(string));
 
             DataRow dr = dt.NewRow();
             for (int i = 0; i < matriculas_alunos.Length; i++) //Lista com alunos
             {           
-                dr[" "] = "Alunos";
+                dr["T"] = "Alunos";
                 dr["Detalhes"] = dr["Detalhes"] + nome_alunos[i] + ", ";
             }
             dt.Rows.Add(dr);
@@ -284,7 +285,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
             dr = dt.NewRow();
             for (int i = 0; i < nome_disciplina.Length; i++) //Lista com disciplina
             {
-                dr[" "] = "Disciplinas";
+                dr["T"] = "Disciplinas";
                 dr["Detalhes"] = dr["Detalhes"] + nome_disciplina[i] + ", ";
             }
             dt.Rows.Add(dr);
@@ -292,14 +293,25 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
             dr = dt.NewRow();
             for (int i = 0; i < qtd; i++) //Lista com professores
             {
-                dr[" "] = "Professores";
+                dr["T"] = "Professores";
                 dr["Detalhes"] = dr["Detalhes"] + professores[i] + ", ";
             }
             dt.Rows.Add(dr);
 
             gdvDetalhes.DataSource = dt;
             gdvDetalhes.DataBind();
-            
+
+            foreach (GridViewRow linha in gdvDetalhes.Rows)//percorre cada linha da grid 
+            {
+                Label lblDetalhes = (Label)linha.FindControl("lblDetalhes"); //acha o label de Nome e liga a outro label
+                string[] split = lblDetalhes.Text.Split(',');
+                lblDetalhes.Text = "";
+
+                for(int i = 0; i < split.Length-1; i++)
+                {
+                    lblDetalhes.Text = lblDetalhes.Text + split[i] + "</br>";
+                }
+            }
 
             UpdatePanelModalNovoCriterio.Update();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);

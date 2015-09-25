@@ -147,6 +147,15 @@ public partial class paginas_Admin_projetos {
     protected global::System.Web.UI.UpdatePanel UpdatePanelModalNovoCriterio;
     
     /// <summary>
+    /// lblInformacoes control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblInformacoes;
+    
+    /// <summary>
     /// gdvDetalhes control.
     /// </summary>
     /// <remarks>

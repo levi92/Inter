@@ -165,9 +165,13 @@
                                 </div>
                                 <br />
 
-                                <div id="GridDetalhes" style="margin-left:15px; margin-right:15px;">
+                                <div id="info" style="margin-left:15px; margin-right:15px;">
+                                    <asp:Label ID="lblInformacoes" runat="server">
+                                    </asp:Label>
+                                </div>
+                                <div id="GridDetalhes" style="margin-left: 15px; margin-right: 15px;">
                                     <asp:GridView ID="gdvDetalhes" runat="server" CssClass="tableFinalizar" AllowCustomPaging="true"
-                                        AutoGenerateColumns="true"
+                                        AutoGenerateColumns="false"
                                         AutoGenerateEditButton="false"
                                         OnRowDataBound="gdvProjetos_RowDataBound"
                                         OnPageIndexChanging="gdvProjetos_PageIndexChanging"
@@ -176,6 +180,18 @@
                                         <AlternatingRowStyle CssClass="alt" />
 
                                         <Columns>
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblT" Text='<%#Eval ("T") %>' runat="server"></asp:Label>
+                                                    <!--EVAL pega o valor da coluna especificada no datasource-->
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Nomes"><%--esse campo curso é pego no método RowDataBound no code behind--%>
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblDetalhes" Text='<%#Eval ("Detalhes") %>' runat="server"></asp:Label>
+                                                    <!--EVAL pega o valor da coluna especificada no datasource-->
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                         </Columns>
 
                                     </asp:GridView>
