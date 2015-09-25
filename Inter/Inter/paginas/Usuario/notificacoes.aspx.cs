@@ -92,7 +92,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
             else
             {
                 ddlGrupo.Enabled = false;
-                ddlGrupo.Items.Insert(0, new ListItem("Nenhum grupo finalizado encontrado.", "Selecione"));
+                ddlGrupo.Items.Insert(0, new ListItem("Nenhum grupo finalizado encontrado.", "0"));
             }
         }
     }
@@ -159,7 +159,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
     {
         txtAssunto.Style.Clear();
 
-        if (!String.IsNullOrEmpty(txtAssunto.Text) && !String.IsNullOrEmpty(txtCategoria.Text) && !String.IsNullOrEmpty(txtaMsg.Value) && !txtCategoria.SelectedValue.Equals("Selecione") && !ddlGrupo.SelectedValue.Equals("Selecione"))  
+        if (!String.IsNullOrEmpty(txtAssunto.Text) && !String.IsNullOrEmpty(txtCategoria.Text) && !String.IsNullOrEmpty(txtaMsg.Value) && !txtCategoria.SelectedValue.Equals("Selecione"))  
         {
 
             string prof = Session["nome"].ToString();
@@ -175,7 +175,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
             string categoria = txtCategoria.SelectedItem.Text;
             Requerimento req = new Requerimento(matricula, assunto, categoria, usuario);
             if (txtCategoria.SelectedValue.Equals("1"))
-            { // se o requerimento for para alteração de nota{
+            { // se o requerimento for para alteração de nota, já manda o código do grupo
                 req = new Requerimento(matricula, grupo, assunto, categoria, usuario);
             }
 
@@ -219,8 +219,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
             }
 
         }
-        txtCategoria.SelectedIndex = 0;
-        ddlGrupo.SelectedIndex = 0;
+
 
 
     }
@@ -230,6 +229,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         lblMsg.Text = "";
         txtAssunto.Text = "";
         txtCategoria.SelectedValue = "Selecione";
+        ddlGrupo.SelectedValue = "Selecione";
         txtaMsg.Value = "";
         ScriptManager.RegisterStartupScript(this, this.GetType(), "Close", "fechaModalClick();", true);
 

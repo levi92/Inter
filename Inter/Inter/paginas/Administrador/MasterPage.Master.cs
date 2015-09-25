@@ -16,7 +16,12 @@ using System.Web.UI.WebControls;
             }
             if (!IsPostBack)
             {
-                lblPerfilLogado.Text = "Olá&nbsp"+Session["menu"].ToString().ToUpper()+"&nbsp" + Session["nome"].ToString().ToUpper();
+                string perfil = Session["menu"].ToString().ToUpper();
+                if (perfil.Equals("COORDENADOR"))
+                {
+                    perfil = "COORD.";
+                }
+                lblPerfilLogado.Text = "Entrou como " + perfil + "&nbsp" + Inter.Funcoes.Funcoes.SplitNomes(Session["nome"].ToString().ToUpper())+".";
             }
         }
         protected void btnSair_Click(object sender, EventArgs e)

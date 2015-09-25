@@ -191,11 +191,16 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
             {
                 Requerimento_DB.UpdateTime(cod);
                 Requerimento_DB.Update(cod, 2);
+                lblMsgStatus.Text = "Em andamento";
                 mdlHeader.Attributes["style"] = "background-color: #f9ae0e;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
                 abrirMensagens(cod);
 
                 CarregarGridAtivos();
 
+            }
+            else
+            {
+                
             }
 
 
@@ -215,18 +220,33 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
     protected void btnFinaliza_Click(object sender, EventArgs e)
     {
         int cod = Convert.ToInt32(lblMsgId.Text);
-        if(Requerimento_DB.Update(cod, 3)==0){
-        Requerimento_DB.UpdateTime(cod);
-        mdlHeader.Attributes["style"] = "background-color: #0D9643;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
-        txtResponder.Attributes["style"] = "background-color: #ccc";
-        txtResponder.ReadOnly = true;
-        btnNovaMsg.Visible = false;
+        if (Requerimento_DB.Update(cod, 3) == 0)
+        {
+            Requerimento_DB.UpdateTime(cod);
+            lblMsgStatus.Text = "Finalizado";
+            mdlHeader.Attributes["style"] = "background-color: #0D9643;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
+            txtResponder.Attributes["style"] = "background-color: #ccc";
+            txtResponder.ReadOnly = true;
+            btnNovaMsg.Visible = false;
 
-        abrirMensagens(cod);
+            string usuario = Session["nome"].ToString();
+            string matricula = Session["matricula"].ToString();
+            string msg = "Esta solicitação foi finalizada por " + usuario;
+            
 
-        txtResponder.Text = "";
+            Mensagem men = new Mensagem(cod, matricula, msg, usuario);
+
+            if (Mensagem_DB.Insert(men) == 0)
+            {
+            
+
+            }
+            abrirMensagens(cod);
+
+            txtResponder.Text = "";
         }
-        else{
+        else
+        {
 
         }
         CarregarGridAtivos();
@@ -249,12 +269,28 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
             Requerimento_DB.UpdateTime(codReq);
             lblMsgStatus.Text = "Em Andamento";
             mdlHeader.Attributes["style"] = "background-color: #f9ae0e;color: #fff; border-bottom: none; height: 54px; position: absolute; z-index: 999; width: 100%; box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.26);";
-
             abrirMensagens(codReq);
-
             txtResponder.Text = "";
+            UpdatePanel3.Update();
+
+
+            string usuario = Session["nome"].ToString();
+            string matricula = Session["matricula"].ToString();
+            string msg = "O grupo " + assuntoGrupo[3] + "foi liberado para edição de nota por" + usuario;
+
+
+            Mensagem men = new Mensagem(codGrupo, matricula, msg, usuario);
+
+            if (Mensagem_DB.Insert(men) == 0)
+            {
+
+
+            }
+
+
         }
-        else{
+        else
+        {
 
         }
         CarregarGridAtivos();
