@@ -176,8 +176,8 @@ namespace Inter.Funcoes
         //JOGA O NOMES DOS ALUNOS EM UM VETOR DEPENDENDO DE SUA MATRICULA
         public static string[] NomeAlunosByMatricula(string[] codAlunos)
         {
-            string[] nomeAlunos = new string[codAlunos.Length - 1];
-            for (int i = 0; i < codAlunos.Length - 1; i++)
+            string[] nomeAlunos = new string[codAlunos.Length];
+            for (int i = 0; i < codAlunos.Length; i++)
             {
                 Aluno alu = new Aluno();
                 alu = Aluno.SelecionarAluno(codAlunos[i]);
