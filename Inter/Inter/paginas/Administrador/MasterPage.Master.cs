@@ -14,6 +14,10 @@ using System.Web.UI.WebControls;
             {
                 Response.Redirect("~/BloqueioUrl");
             }
+            if (!IsPostBack)
+            {
+                lblPerfilLogado.Text = "Olá&nbsp"+Session["menu"].ToString().ToUpper()+"&nbsp" + Session["nome"].ToString().ToUpper();
+            }
         }
         protected void btnSair_Click(object sender, EventArgs e)
         {
