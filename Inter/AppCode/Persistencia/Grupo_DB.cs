@@ -164,7 +164,11 @@ namespace AppCode.Persistencia
             IDbCommand objCommand;
             IDataAdapter objDataAdapter;
             objConnection = Mapped.Connection();
-            objCommand = Mapped.Command("select gru.gru_codigo, gru.gru_nome_projeto from gru_grupo gru inner join gru_grupo gru2 inner join pri_projeto_inter pri on gru.pri_codigo = pri.pri_codigo inner join api_atribuicao_pi api on pri.pri_codigo = api.pri_codigo and api.adi_codigo = ?adi_codigo and gru.gru_finalizado = 1 group by gru.gru_codigo;", objConnection);            
+            objCommand = Mapped.Command("select gru.gru_codigo, gru.gru_nome_projeto, group_concat(distinct gal.alu_matricula order by gal.alu_matricula separator '-') as Alunos from gru_grupo gru" +
+                " inner join gal_grupo_aluno gal on gru.gru_codigo = gal.gru_codigo" +
+                " inner join gru_grupo gru2" +
+                " inner join pri_projeto_inter pri on gru.pri_codigo = pri.pri_codigo" + 
+                " inner join api_atribuicao_pi api on pri.pri_codigo = api.pri_codigo and api.adi_codigo = ?adi_codigo and gru.gru_finalizado = 1 group by gru.gru_codigo; ", objConnection);            
             objCommand.Parameters.Add(Mapped.Parameter("?adi_codigo", atrCod));
             objDataAdapter = Mapped.Adapter(objCommand);
             objDataAdapter.Fill(ds);

@@ -44,14 +44,50 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
             int codAtr = Convert.ToInt32(Session["codAtr"]);
             DataSet dsGrupos = Grupo_DB.SelectAllGruposFinalizadosAtual(codAtr);
             int qtd = dsGrupos.Tables[0].Rows.Count;
+
+            string[] alunos_matricula1;
+            string[][] alunos_matricula2 = new string [qtd][];
+            string[] alunos_nome;
+            string[] alunos_primeiro_nome;
+            string[] grupos = new string[qtd];
+            string[] codigo_grupo = new string[qtd];
+
+            for (int i = 0; i < qtd; i++)
+            {
+                alunos_matricula1 = dsGrupos.Tables[0].Rows[i]["Alunos"].ToString().Split('-');
+                alunos_nome = Funcoes.NomeAlunosByMatricula(alunos_matricula1);
+                alunos_primeiro_nome = Funcoes.SplitNomes(alunos_nome);
+                alunos_matricula2[i] = new string [alunos_matricula1.Length + 1];
+                codigo_grupo[i] = dsGrupos.Tables[0].Rows[i]["gru_codigo"].ToString();
+
+                for (int j = 0; j < alunos_matricula1.Length + 1; j++)
+                {
+                    if(j == 0)
+                    {
+                        alunos_matricula2[i][j] = dsGrupos.Tables[0].Rows[i]["gru_nome_projeto"].ToString();
+                    }
+                    else
+                    {
+                        alunos_matricula2[i][j] = alunos_primeiro_nome[j - 1];
+                    }
+
+                    if(j == alunos_matricula1.Length)
+                    {
+                        grupos[i] = grupos[i] + "" + alunos_matricula2[i][j];
+                    }
+                    else
+                    {
+                        grupos[i] = grupos[i] + "" + alunos_matricula2[i][j] + " - ";
+                    }   
+                }
+            }
+
             if (qtd > 0)
             {
-                ddlGrupo.Items.Insert(0, new ListItem("Selecione", "Selecione"));
-                ddlGrupo.DataSource = dsGrupos.Tables[0];
-                ddlGrupo.DataTextField = "gru_nome_projeto";
-                ddlGrupo.DataValueField = "gru_codigo";
-                ddlGrupo.DataBind();
-
+                for(int i = 0; i < qtd; i++)
+                {
+                    ddlGrupo.Items.Insert(i, new ListItem(grupos[i], codigo_grupo[i]));
+                }    
             }
             else
             {
@@ -59,14 +95,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
                 ddlGrupo.Items.Insert(0, new ListItem("Nenhum grupo finalizado encontrado.", "Selecione"));
             }
         }
-        
-
-       
-
     }
-
-
-
 
     public void CarregarGridAtivos()
     {
