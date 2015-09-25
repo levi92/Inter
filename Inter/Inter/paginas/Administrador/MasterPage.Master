@@ -62,18 +62,18 @@
 
                             </span>
                         </li>
-
+                                    
                     </ul>
 
-                    <table style="float: right; margin-right: 80px; text-align: center;">
-                        <tr class="tabelaEscolherDis">
+                       <%--Perfil Logado--%>
+                                        <table style="float: right; margin-right: 100px; text-align: center;">
+                                            <tr class="tableEscolherDisciplina"><td><asp:Label ID="lblPerfilLogado" runat="server" Width="100px"></asp:Label></td></tr>
+                                        </table>
 
-                            <%--Perfil Logado--%>
-
-                            <td>
-                                <asp:Label ID="lblPerfilLogado" runat="server" Width="100px"></asp:Label></td>
-                            </tr>
-                            </table>
+                          
+                    
+                    
+                          
 
                 </div>
 
