@@ -105,7 +105,7 @@
  
                         <asp:UpdatePanel ID="UpdatePanelAtivados" UpdateMode="Conditional" runat="server">
                             <ContentTemplate>
-                                <asp:GridView ID="gdvRequerimentoAberto" runat="server" CssClass="gridView" DataKeyNames="req_codigo"
+                                <asp:GridView ID="gdvRequerimentoAberto" runat="server" CssClass="tableFinalizar" DataKeyNames="req_codigo"
                                     AutoGenerateColumns="false"
                                     
                                     AutoGenerateEditButton="false">

@@ -75,6 +75,15 @@ public partial class paginas_Admin_criterios {
     protected global::System.Web.UI.UpdatePanel UpdatePanelDesativados;
     
     /// <summary>
+    /// Label1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label Label1;
+    
+    /// <summary>
     /// gdvCriteriosDesativados control.
     /// </summary>
     /// <remarks>
@@ -109,6 +118,15 @@ public partial class paginas_Admin_criterios {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.UpdateProgress UpdateProgress;
+    
+    /// <summary>
+    /// lblMsg control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMsg;
     
     /// <summary>
     /// UpdatePanelModalNovoCriterio control.
@@ -172,15 +190,6 @@ public partial class paginas_Admin_criterios {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescricaoNovoCriterio;
-    
-    /// <summary>
-    /// lblMsg control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMsg;
     
     /// <summary>
     /// vsNovoCriterio control.

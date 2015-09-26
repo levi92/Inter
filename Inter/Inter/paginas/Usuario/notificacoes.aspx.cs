@@ -335,10 +335,13 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
 
     protected void txtCategoria_SelectedIndexChanged(object sender, EventArgs e)
     {
+        string[] grupo = ddlGrupo.SelectedItem.Text.Split('-');
+        string ddl_grupo = grupo[0];
+
         if (txtCategoria.SelectedValue.Equals("1"))
         {
             txtAssunto.Enabled = false;
-            txtAssunto.Text = "Alteração de notas - " + ddlGrupo.SelectedValue + " - " + ddlGrupo.SelectedItem;
+            txtAssunto.Text = "Alteração de notas - " + ddlGrupo.SelectedValue + " - " + ddl_grupo;
             lblGrupo.Visible = true;
             ddlGrupo.Visible = true;
             UpdatePanelModalNovoRequerimento.Update();

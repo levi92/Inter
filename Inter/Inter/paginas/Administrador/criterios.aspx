@@ -190,7 +190,7 @@
 
                             <asp:UpdatePanel ID="UpdatePanelDesativados" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-
+                                     <asp:Label ID="Label1" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
 
                                     <asp:GridView ID="gdvCriteriosDesativados" ClientIDMode="Static" runat="server" CssClass="tableFinalizar" DataKeyNames="cge_codigo"
                                         AutoGenerateColumns="false"
@@ -263,7 +263,7 @@
                 </ProgressTemplate>
             </asp:UpdateProgress>
 
-
+             <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
             <!-- Modal Cadastrar Critérios -->
 
             <div class="modal fade" data-backdrop="static" id="myModalCadastrarCri" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -299,7 +299,7 @@
                                                  &nbsp<asp:RequiredFieldValidator ID="rfvDescricaoNovoCriterio" CssClass="col-sm1" runat="server" ErrorMessage="O campo Descrição deve ser preenchido." ForeColor="#960d10" Text="*" Display="Dynamic" ControlToValidate="txtDescricaoNovoCriterio" ControlToCompare="txtNomeNovoCriterio" ValidationGroup="NovoCriterio"></asp:RequiredFieldValidator>
                                     </div>
                                     <br />
-                                    <asp:Label ID="lblMsg" ClientIDMode="Static" CssClass="col-sm-12" runat="server" Text="" Style="font-size: 18px; padding-left: 30px;"></asp:Label>
+                                   
                                 </div>
 
 

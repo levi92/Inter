@@ -82,15 +82,17 @@ using System.Data;
             Label lblCodigo = (Label)gdvCriteriosAtivos.Rows[e.RowIndex].FindControl("lblCodigo");
             Label lblNome = (Label)gdvCriteriosAtivos.Rows[e.RowIndex].FindControl("lblNome");
             TextBox txtDescricao = (TextBox)gdvCriteriosAtivos.Rows[e.RowIndex].FindControl("txtDescricao");
+            TextBox txtNome = (TextBox)gdvCriteriosAtivos.Rows[e.RowIndex].FindControl("txtNome");
             Criterios_Gerais cri = new Criterios_Gerais();
             cri.Cge_codigo = Convert.ToInt32(lblCodigo.Text);
-            cri.Cge_nome = lblNome.Text;
+            cri.Cge_nome = txtNome.Text;
             cri.Cge_descricao = txtDescricao.Text;
             cri.Cge_usuario = Session["nome"].ToString();
 
             if (Criterios_Gerais_DB.Update(cri) == 0)
             {
-                lblMsg.Text = "Critério "+lblNome.Text+" atualizado com sucesso!";
+            
+            lblMsg.Text = "Critério "+txtNome.Text+" atualizado com sucesso!";
                 gdvCriteriosAtivos.EditIndex = -1;
                 CarregarGridAtivos();
                 UpdatePanelAtivados.Update();
@@ -98,7 +100,7 @@ using System.Data;
             }
             else
             {
-                lblMsg.Text = "Erro ao atualizar "+lblNome.Text+"!";
+                lblMsg.Text = "Erro ao atualizar " +txtNome.Text+"!";
             }
         }
 
