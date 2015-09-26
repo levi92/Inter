@@ -341,11 +341,7 @@ public partial class paginas_Admin_projetos : System.Web.UI.Page
 
     protected void btnCancelarNovoCriterio_Click(object sender, EventArgs e)
     {
-
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Close", "fechaModalClick();", true);
     }
 
-    protected void btnCriarNovoCriterio_Click(object sender, EventArgs e)
-    {
-
-    }
 }

@@ -10,6 +10,7 @@
         * Encerrado, favorável: Verde (#4CAF50)
         -->
     <script type="text/javascript" src="../../scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="../../scripts/mostraDiv.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#icone2').addClass('corIcone');

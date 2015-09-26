@@ -13,6 +13,10 @@
         function openModal() { //Função para abrir a modal
             $('#myModal1').modal('show');
         }
+
+        function fechaModalClick() {
+            $('#fecharModal').click();
+        }
     </script>
 
     
@@ -127,7 +131,7 @@
                                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="8%" HeaderText="">
                                     <ItemTemplate>
                                         <!--Linkbutton usado para habilitar o projeto para edição de nota-->
-                                        <asp:LinkButton ID="lkbHabilitar" CssClass="glyphicon glyphicon-pencil" Font-Size="1.5em" runat="server" CommandName="projHabilitar"></asp:LinkButton> 
+                                        <asp:LinkButton ID="lkbHabilitar" CssClass="glyphicon glyphicon-pencil" Title="Liberar para edição de notas" Font-Size="1.5em" runat="server" CommandName="projHabilitar"></asp:LinkButton> 
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -149,7 +153,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" id="fecharModal" onclick="fechaModalCri();" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <button type="button" id="fecharModal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                     <h4 class="modal-title" id="myModalLabel3">Detalhes do Grupo</h4>
                                 </div>
                                 <br />
@@ -184,9 +188,6 @@
                                     <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarNovoCriterio" runat="server" title="Cancelar Inserção" OnClick="btnCancelarNovoCriterio_Click">
                                     <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</asp:LinkButton>
 
-                                    <asp:LinkButton ID="btnCriarNovoCriterio" runat="server" CssClass="btn btn-default"
-                                        OnClick="btnCriarNovoCriterio_Click" ToolTip="Confirmar Inserção" CausesValidation="true" ValidationGroup="NovoCriterio">
-                                   <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar </asp:LinkButton>
                                 </div>
 
                             </div>

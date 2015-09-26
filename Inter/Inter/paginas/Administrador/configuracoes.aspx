@@ -83,13 +83,13 @@
 
                                     <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="8%">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="lkbDownload" CssClass="glyphicon glyphicon-download" Font-Size="1.5em" runat="server" CommandName="bkpDownload"></asp:LinkButton>
+                                            <asp:LinkButton ID="lkbDownload" CssClass="glyphicon glyphicon-download" Title="Baixar Backup" Font-Size="1.5em" runat="server" CommandName="bkpDownload"></asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
                                     <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="8%">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="lkbRestaurar" CssClass="glyphicon glyphicon-open" Font-Size="1.5em" runat="server" CommandName="bkpRestaurar"></asp:LinkButton>
+                                            <asp:LinkButton ID="lkbRestaurar" CssClass="glyphicon glyphicon-open" Title="Restaurar Sistema usando este Backup" Font-Size="1.5em" runat="server" CommandName="bkpRestaurar"></asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 

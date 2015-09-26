@@ -27,6 +27,10 @@ public class Requerimento{
 
     public string Usuario { get; set; }
 
+    public Requerimento()
+    {
+
+    }
     public Requerimento(string matricula, int grupo, string assunto, DateTime data, int status, string categoria, string usuario)
     {
         MatriculaPro = matricula;

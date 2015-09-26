@@ -226,12 +226,13 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         
     protected void btnCancelarNovaSolicitacao_Click(object sender, EventArgs e)
     {
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Close", "fechaModalClick();", true);
         lblMsg.Text = "";
         txtAssunto.Text = "";
         txtCategoria.SelectedValue = "Selecione";
-        ddlGrupo.SelectedValue = "Selecione";
+        ddlGrupo.SelectedValue = "0";
         txtaMsg.Value = "";
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "Close", "fechaModalClick();", true);
+
 
 
     }

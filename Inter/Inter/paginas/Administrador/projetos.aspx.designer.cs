@@ -253,13 +253,4 @@ public partial class paginas_Admin_projetos {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.LinkButton btnCancelarNovoCriterio;
-    
-    /// <summary>
-    /// btnCriarNovoCriterio control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnCriarNovoCriterio;
 }

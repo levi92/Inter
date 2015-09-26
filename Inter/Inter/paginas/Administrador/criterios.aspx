@@ -16,7 +16,7 @@
             $('#lblMsg').html(" ");
         }
 
-        function FechaModal() {
+        function fechaModalClick() {
             $('#fecharModal').click();
         }
 
@@ -272,7 +272,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" id="fecharModal" onclick="fechaModal();" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <button type="button" id="fecharModal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                     <h4 class="modal-title" id="myModalLabel3">Cadastrar Critérios</h4>
                                 </div>
                                 <br />

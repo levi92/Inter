@@ -148,10 +148,14 @@ public class Requerimento_DB
                 var Assunto = objDataReader["req_assunto"].ToString();
                 var DataReq = Convert.ToDateTime(objDataReader["req_dt_requisicao"]);
                 var MatriculaPro = objDataReader["pro_matricula"].ToString();
+                int CodigoGrup = new int();
+                if(!(objDataReader["gru_codigo"] is DBNull)){
+                   CodigoGrup = Convert.ToInt32(objDataReader["gru_codigo"]);
+                }
                 var Status = Convert.ToInt32(objDataReader["req_status"]);
                 var Categoria = objDataReader["req_categoria"].ToString();
                 var Usuario = objDataReader["req_usuario"].ToString();
-                objRequerimento = new Requerimento(CodigoReq, MatriculaPro, Assunto, DataReq, Status, Categoria, Usuario);
+                objRequerimento = new Requerimento(CodigoReq, MatriculaPro, CodigoGrup, Assunto, DataReq, Status, Categoria, Usuario);
             }
             objDataReader.Close();
             objConnection.Close();
@@ -161,6 +165,7 @@ public class Requerimento_DB
             return objRequerimento;
         }
         catch (Exception e){
+            string erro = e.Message;
             return null;
         }
     }

@@ -183,6 +183,7 @@
     <Content Include="scripts\jquery.fullPage.js" />
     <Content Include="scripts\jquery.skitter.js" />
     <Content Include="scripts\jquery.skitter.min.js" />
+    <Content Include="scripts\mostraDiv.js" />
     <Content Include="scripts\Sortable\jquery-1.10.2.js" />
     <Content Include="scripts\Sortable\jquery-ui.js" />
     <Content Include="scripts\Sortable\jquery-ui.min.js" />
