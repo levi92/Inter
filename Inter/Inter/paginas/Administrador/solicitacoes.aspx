@@ -11,6 +11,7 @@
         -->
     <script type="text/javascript" src="../../scripts/bootstrap.js"></script>
     <script type="text/javascript" src="../../scripts/mostraDiv.js"></script>
+    <script type="text/javascript" src="../../scripts/inter.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#icone2').addClass('corIcone');
