@@ -147,94 +147,22 @@ public partial class paginas_Admin_projetos {
     protected global::System.Web.UI.UpdatePanel UpdatePanelModalNovoCriterio;
     
     /// <summary>
-    /// lblNomeGrupoModal control.
+    /// lblInformacoes control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblNomeGrupoModal;
+    protected global::System.Web.UI.WebControls.Label lblInformacoes;
     
     /// <summary>
-    /// lblCursoModal control.
+    /// gdvDetalhes control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblCursoModal;
-    
-    /// <summary>
-    /// lblSemestreModal control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblSemestreModal;
-    
-    /// <summary>
-    /// lblStatusModal control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblStatusModal;
-    
-    /// <summary>
-    /// lblDisciplinas control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblDisciplinas;
-    
-    /// <summary>
-    /// lblProfessores control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblProfessores;
-    
-    /// <summary>
-    /// lblAlunos control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblAlunos;
-    
-    /// <summary>
-    /// lstDisciplinas control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ListBox lstDisciplinas;
-    
-    /// <summary>
-    /// lstProfessores control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ListBox lstProfessores;
-    
-    /// <summary>
-    /// lstAlunos control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ListBox lstAlunos;
+    protected global::System.Web.UI.WebControls.GridView gdvDetalhes;
     
     /// <summary>
     /// vsNovoCriterio control.

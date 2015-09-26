@@ -13,14 +13,10 @@
         function openModal() { //Função para abrir a modal
             $('#myModal1').modal('show');
         }
-
-        function fechaModalClick() {
-            $('#fecharModal').click();
-        }
     </script>
 
-    
-        <asp:UpdateProgress ID="upgProjetos" runat="server" AssociatedUpdatePanelID="UpdatePanelAtivados" DisplayAfter="1000">
+
+    <asp:UpdateProgress ID="upgProjetos" runat="server" AssociatedUpdatePanelID="UpdatePanelAtivados" DisplayAfter="1000">
         <ProgressTemplate>
             <div class="modalLoader">
                 <div class="modalCenter">
@@ -38,7 +34,8 @@
             </div>
             <div class="panel-body">
                 <!--Inicio da tabela onde fica os campos para pesquisa -->
-                <table class="table" style="margin-left: -10px"> <!--OBS: nao precisava necessariamente estar dentro de uma tabela -->
+                <table class="table" style="margin-left: -10px">
+                    <!--OBS: nao precisava necessariamente estar dentro de uma tabela -->
                     <tr style="text-align: right; padding-left: 0; padding-right: 0;">
                         <td style="text-align: right; padding-left: 0; padding-right: 0;">
                             <asp:Label ID="lblCurso" Style="line-height: 2.3; vertical-align: middle" runat="server" CssClass="label" Text="Curso:"></asp:Label></td>
@@ -72,16 +69,18 @@
                     </tr>
                 </table>
                 <!--Fim da tabela -->
-     
-                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager><!--Usado para gerenciar códigos javascript, Exemplo: abrir a modal -->
-                
+
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                <!--Usado para gerenciar códigos javascript, Exemplo: abrir a modal -->
+
                 <!--Usado para atualizar a grid sem precisar atualizar toda a pagina -->
                 <asp:UpdatePanel ID="UpdatePanelAtivados" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>
                         <div class="row" style="margin-top: 8px; margin-left: 2px;">
                         </div>
-                        <asp:Label ID="lblMsg" Text="" runat="server"></asp:Label> <!--Label para exibir se o projeto foi habilitado com sucesso -->
-                        
+                        <asp:Label ID="lblMsg" Text="" runat="server"></asp:Label>
+                        <!--Label para exibir se o projeto foi habilitado com sucesso -->
+
                         <!--Inicio da grid -->
                         <asp:GridView ID="gdvProjetos" runat="server" CssClass="tableFinalizar" AllowCustomPaging="true"
                             AutoGenerateColumns="false"
@@ -93,58 +92,66 @@
                             <AlternatingRowStyle CssClass="alt" />
 
                             <Columns>
-                                <asp:TemplateField HeaderText="Codigo do Grupo" Visible="false"> 
+                                <asp:TemplateField HeaderText="Codigo do Grupo" Visible="false">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblCodigo" Text='<%#Eval ("GRU_CODIGO") %>' runat="server"></asp:Label> <!--EVAL pega o valor da coluna especificada no datasource-->
+                                        <asp:Label ID="lblCodigo" Text='<%#Eval ("GRU_CODIGO") %>' runat="server"></asp:Label>
+                                        <!--EVAL pega o valor da coluna especificada no datasource-->
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Codigo do PI" Visible="false"> 
+                                <asp:TemplateField HeaderText="Codigo do PI" Visible="false">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblCodigoPI" Text='<%#Eval ("PRI_CODIGO") %>' runat="server"></asp:Label> <!--EVAL pega o valor da coluna especificada no datasource-->
+                                        <asp:Label ID="lblCodigoPI" Text='<%#Eval ("PRI_CODIGO") %>' runat="server"></asp:Label>
+                                        <!--EVAL pega o valor da coluna especificada no datasource-->
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Nome do Projeto">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lblNome" Text='<%#Eval ("GRU_NOME_PROJETO") %>' runat="server" CommandName="verDetalhes"></asp:LinkButton> <!--EVAL pega o valor da coluna especificada no datasource-->
+                                        <asp:LinkButton ID="lblNome" Text='<%#Eval ("GRU_NOME_PROJETO") %>' runat="server" CommandName="verDetalhes"></asp:LinkButton>
+                                        <!--EVAL pega o valor da coluna especificada no datasource-->
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Curso/Turno"><%--esse campo curso é pego no método RowDataBound no code behind--%>
                                     <ItemTemplate>
-                                        <asp:Label ID="lblCurso" Text='<%#Eval ("CUR_NOME") %>' runat="server"></asp:Label> <!--EVAL pega o valor da coluna especificada no datasource-->
+                                        <asp:Label ID="lblCurso" Text='<%#Eval ("CUR_NOME") %>' runat="server"></asp:Label>
+                                        <!--EVAL pega o valor da coluna especificada no datasource-->
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Semestre Curso">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblSemestreCurso" Text='<%#Eval ("PRI_SEMESTRE") %>' runat="server"></asp:Label> <!--EVAL pega o valor da coluna especificada no datasource-->
+                                        <asp:Label ID="lblSemestreCurso" Text='<%#Eval ("PRI_SEMESTRE") %>' runat="server"></asp:Label>
+                                        <!--EVAL pega o valor da coluna especificada no datasource-->
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Ano/Semestre">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblAno" Text='<%#Eval ("SAN") %>' runat="server"></asp:Label> <!--EVAL pega o valor da coluna especificada no datasource-->
+                                        <asp:Label ID="lblAno" Text='<%#Eval ("SAN") %>' runat="server"></asp:Label>
+                                        <!--EVAL pega o valor da coluna especificada no datasource-->
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Status">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblStatus" Text='<%#Eval ("GRU_FINALIZADO") %>' runat="server"></asp:Label> <!--EVAL pega o valor da coluna especificada no datasource-->
+                                        <asp:Label ID="lblStatus" Text='<%#Eval ("GRU_FINALIZADO") %>' runat="server"></asp:Label>
+                                        <!--EVAL pega o valor da coluna especificada no datasource-->
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="8%" HeaderText="">
                                     <ItemTemplate>
                                         <!--Linkbutton usado para habilitar o projeto para edição de nota-->
-                                        <asp:LinkButton ID="lkbHabilitar" CssClass="glyphicon glyphicon-pencil" Title="Liberar para edição de notas" Font-Size="1.5em" runat="server" CommandName="projHabilitar"></asp:LinkButton> 
+                                        <asp:LinkButton ID="lkbHabilitar" CssClass="glyphicon glyphicon-pencil" Font-Size="1.5em" runat="server" CommandName="projHabilitar"></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
 
                         </asp:GridView>
                         <!--Fim da grid -->
-                        <asp:Label ID="lblQtdRegistro" runat="server"></asp:Label> <!--Exibe a quantidade de registros ou linhas retornadas do dataset -->
+                        <asp:Label ID="lblQtdRegistro" runat="server"></asp:Label>
+                        <!--Exibe a quantidade de registros ou linhas retornadas do dataset -->
                     </ContentTemplate>
                 </asp:UpdatePanel>
 
             </div>
             <br />
-          
+
             <!--Inicio da modal para ver detalhes do projeto ao clicar em um grupo específico-->
             <!--Em protótipo ainda -->
             <div class="modal fade" data-backdrop="static" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -153,31 +160,43 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" id="fecharModal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <button type="button" id="fecharModal" onclick="fechaModalCri();" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                     <h4 class="modal-title" id="myModalLabel3">Detalhes do Grupo</h4>
                                 </div>
                                 <br />
 
-                                <div class="form-group">
-                                    <div class="controls-row">
-                                        <asp:Label ID="lblNomeGrupoModal" Style="width:auto" runat="server" CssClass="control-label col-sm-2"></asp:Label>
-                                        <asp:Label ID="lblCursoModal" Style="width:auto"  runat="server" CssClass="control-label col-sm-2"></asp:Label>
-                                        <asp:Label ID="lblSemestreModal" Style="width:auto" runat="server" CssClass="control-label col-sm-2"></asp:Label>
-                                        <asp:Label ID="lblStatusModal" Style="width:auto" runat="server" CssClass="control-label col-sm-2"></asp:Label>
-                                        <br />
-                                        <br />
-                                        <div id="Detalhes" Style="width:100%; text-align:center; margin-top:20px;">
-                                        <asp:Label ID="lblDisciplinas" Style="padding-right:100px" runat="server" Text="Disciplinas"></asp:Label>
-                                        <asp:Label ID="lblProfessores" Style="padding-right:100px" runat="server" Text="Professores"></asp:Label>
-                                        <asp:Label ID="lblAlunos" runat="server" Text="Alunos"></asp:Label>
-                                        <br />
-                                        <br />
-                                        <asp:ListBox ID="lstDisciplinas" runat="server" Style="margin-left:10px; width:120px; height:150px;"></asp:ListBox>
-                                        <asp:ListBox ID="lstProfessores" runat="server" Style="margin-left:45px; width:120px; height:150px;"></asp:ListBox>
-                                        <asp:ListBox ID="lstAlunos" runat="server" Style="margin-left:45px; width:120px; height:150px;"></asp:ListBox>
-                                        </div>
-                                    </div>
+                                <div id="info" style="margin-left:15px; margin-right:15px;">
+                                    <asp:Label ID="lblInformacoes" runat="server">
+                                    </asp:Label>
                                 </div>
+                                <div id="GridDetalhes" style="margin-left: 15px; margin-right: 15px;">
+                                    <asp:GridView ID="gdvDetalhes" runat="server" CssClass="tableFinalizar" AllowCustomPaging="true"
+                                        AutoGenerateColumns="false"
+                                        AutoGenerateEditButton="false"
+                                        OnRowDataBound="gdvProjetos_RowDataBound"
+                                        OnPageIndexChanging="gdvProjetos_PageIndexChanging"
+                                        OnRowCommand="gdvProjetos_RowCommand">
+
+                                        <AlternatingRowStyle CssClass="alt" />
+
+                                        <Columns>
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblT" Text='<%#Eval ("T") %>' runat="server"></asp:Label>
+                                                    <!--EVAL pega o valor da coluna especificada no datasource-->
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Nomes"><%--esse campo curso é pego no método RowDataBound no code behind--%>
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblDetalhes" Text='<%#Eval ("Detalhes") %>' runat="server"></asp:Label>
+                                                    <!--EVAL pega o valor da coluna especificada no datasource-->
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+
+                                    </asp:GridView>
+                                </div>
+
                                 <div class="form-group">
                                     <div class="controls-row">
                                     </div>
@@ -188,6 +207,9 @@
                                     <asp:LinkButton type="button" class="btn btn-default" ID="btnCancelarNovoCriterio" runat="server" title="Cancelar Inserção" OnClick="btnCancelarNovoCriterio_Click">
                                     <span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</asp:LinkButton>
 
+                                    <asp:LinkButton ID="btnCriarNovoCriterio" runat="server" CssClass="btn btn-default"
+                                        OnClick="btnCriarNovoCriterio_Click" ToolTip="Confirmar Inserção" CausesValidation="true" ValidationGroup="NovoCriterio">
+                                   <span class="glyphicon glyphicon-ok"></span>&nbsp Confirmar </asp:LinkButton>
                                 </div>
 
                             </div>
