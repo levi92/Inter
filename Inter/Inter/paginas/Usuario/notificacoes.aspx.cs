@@ -205,7 +205,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
                 lblMsgAssunto.Text = req.Assunto;
                 lblMsgProfessor.Text = req.Usuario;
-                lblMsgCategoria.Text = req.Categoria;
+                //lblMsgCategoria.Text = req.Categoria;
                 lblMsgId.Text = req.CodigoReq.ToString();
                 abrirMensagens(req.CodigoReq);
                 lblMsgStatus.Text = "Aberto";
@@ -246,7 +246,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
         lblMsgAssunto.Text = req.Assunto;
         lblMsgProfessor.Text = req.Usuario;
-        lblMsgCategoria.Text = req.Categoria;
+        //lblMsgCategoria.Text = req.Categoria;
         lblMsgId.Text = req.CodigoReq.ToString();
 
         switch (req.Status)
@@ -341,7 +341,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
         if (txtCategoria.SelectedValue.Equals("1"))
         {
             txtAssunto.Enabled = false;
-            txtAssunto.Text = "Alteração de notas - " + ddlGrupo.SelectedValue + " - " + ddl_grupo;
+            txtAssunto.Text = "Alteração de notas - " + ddl_grupo;
             lblGrupo.Visible = true;
             ddlGrupo.Visible = true;
             UpdatePanelModalNovoRequerimento.Update();
@@ -360,7 +360,7 @@ public partial class paginas_Usuario_notificacoes : System.Web.UI.Page
     protected void ddlGrupo_SelectedIndexChanged(object sender, EventArgs e)
     {
         if(!ddlGrupo.SelectedValue.Equals("Selecione")){
-        txtAssunto.Text = "Alteração de notas - " + ddlGrupo.SelectedValue + " - " + ddlGrupo.SelectedItem;
+        txtAssunto.Text = "Alteração de notas - " + ddlGrupo.SelectedItem;
         UpdatePanelModalNovoRequerimento.Update();
         UpdatePanelGrupos.Update();
         }

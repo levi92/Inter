@@ -43,7 +43,7 @@
                     <!--Arrumar o hover aqui-->
                     <button type="button" data-dismiss="modal" style="margin-right: 10px;margin-top: -9px; float: left; border: none; background: none;"><span class="mdi mdi-close" style="font-size: 33px; margin-top: 4.5px;"></span></button>
                     <!--ASSUNTO DO TICKET-->
-                    <h4 class="modal-title" id="myModalLabelT1" style="float: left;"><asp:Label ID="lblMsgAssunto" runat="server"></asp:Label> - <asp:Label ID="lblMsgCategoria" runat="server"></asp:Label> (  <asp:Label ID="lblMsgStatus" runat="server"></asp:Label> )</h4>
+                    <h5 class="modal-title" id="myModalLabelT1" style="float: left;"><asp:Label ID="lblMsgAssunto" runat="server"></asp:Label> (  <asp:Label ID="lblMsgStatus" runat="server"></asp:Label> )</h5>
                     <!--Arrumar  Hover aqui-->
                     <button type="button" id="butMostraMenu" name="subMenu" onclick="mostraDiv1('ConteudoMenu_ConteudoCentral_subMenu')" style="float: right; border: none; background: none; margin-top: -2px;"><span class="mdi mdi-dots-vertical hoverAll" style="font-size: 25px;"></span></button>
                     <!--NOME DO PROFESSOR QUE ABRIU O TICKET-->

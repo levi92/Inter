@@ -48,15 +48,6 @@ public partial class paginas_Admin_solicitacoes {
     protected global::System.Web.UI.WebControls.Label lblMsgAssunto;
     
     /// <summary>
-    /// lblMsgCategoria control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblMsgCategoria;
-    
-    /// <summary>
     /// lblMsgStatus control.
     /// </summary>
     /// <remarks>

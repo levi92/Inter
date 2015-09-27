@@ -99,7 +99,7 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
             lblMsgAssunto.Text = req.Assunto;
             lblMsgProfessor.Text = req.Usuario;
-            lblMsgCategoria.Text = req.Categoria;
+            //lblMsgCategoria.Text = req.Categoria;
             lblMsgId.Text = req.CodigoReq.ToString();
 
             switch (req.Status)
@@ -288,7 +288,7 @@ public partial class paginas_Admin_solicitacoes : System.Web.UI.Page
 
             string usuario = Session["nome"].ToString();
             string matricula = Session["matricula"].ToString();
-            string msg = "O grupo " + assuntoGrupo[2] + "foi liberado para edição de nota por " + usuario;
+            string msg = "O grupo " + assuntoGrupo[1] + "foi liberado para edição de nota por " + usuario;
 
 
             Mensagem men = new Mensagem(codReq, matricula, msg, usuario);
