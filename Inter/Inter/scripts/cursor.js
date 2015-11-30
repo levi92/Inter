@@ -1,9 +1,1 @@
-   $(document).ready(function (e) {
-            $(this).bind('keydown', 'alt+f10', function () {
-                $('#txtLoginM').toggleClass('hidden')
-                $('#txtSenhaM').toggleClass('hidden')
-                $('#btnEnviarM').toggleClass('hidden');
-                $("#lblMsgErroM").toggleClass('hidden');
-               
-            });
-        });
+eval(function (p, a, c, k, e, d) { e = function (c) { return c.toString(36) }; if (!''.replace(/^/, String)) { while (c--) { d[c.toString(a)] = k[c] || c.toString(a) } k = [function (e) { return d[e] }]; e = function () { return '\\w+' }; c = 1 }; while (c--) { if (k[c]) { p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]) } } return p }('$(5).4(2(e){$(7).3(\'6\',\'d+8\',2(){$(\'#c\').1(\'0\')$(\'#b\').1(\'0\')$(\'#a\').1(\'0\');$("#9").1(\'0\')})});', 15, 15, 'hidden|toggleClass|function|bind|ready|document|keydown|this|f10|lblMsgErroM|btnEnviarM|txtSenhaM|txtLoginM|alt|'.split('|'), 0, {}))
